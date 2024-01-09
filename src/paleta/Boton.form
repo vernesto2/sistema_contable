@@ -79,11 +79,11 @@
         <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ee" green="ab" red="49" type="rgb"/>
+              <Color blue="f8" green="78" red="49" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Boton 1"/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f1" green="93" red="49" type="rgb"/>
+              <Color blue="f8" green="55" red="49" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -114,11 +114,11 @@
         <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon4">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="5c" red="f7" type="rgb"/>
+              <Color blue="18" green="49" red="d5" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ERROR"/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="3b" green="44" red="f7" type="rgb"/>
+              <Color blue="a" green="c" red="d5" type="rgb"/>
             </Property>
             <Property name="foregroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -233,11 +233,11 @@
         <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon17">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="5c" red="f7" type="rgb"/>
+              <Color blue="18" green="49" red="d5" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ERROR"/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="3b" green="44" red="f7" type="rgb"/>
+              <Color blue="a" green="c" red="d5" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -252,11 +252,11 @@
         <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon9">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="5c" red="f7" type="rgb"/>
+              <Color blue="18" green="49" red="d5" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ERROR"/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="3b" green="44" red="f7" type="rgb"/>
+              <Color blue="a" green="c" red="d5" type="rgb"/>
             </Property>
             <Property name="foregroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -351,11 +351,11 @@
         <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon18">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="54" green="5c" red="f7" type="rgb"/>
+              <Color blue="18" green="49" red="d5" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ERROR"/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="3b" green="44" red="f7" type="rgb"/>
+              <Color blue="a" green="c" red="d5" type="rgb"/>
             </Property>
             <Property name="forma" type="RSMaterialComponent.RSButtonShapeIcon$FORMA" editor="org.netbeans.modules.form.editors.EnumEditor">
               <Value id="ROUND"/>

@@ -66,9 +66,9 @@ public class Boton extends javax.swing.JFrame {
         });
         jPanel1.add(rSButtonShapeIcon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
 
-        rSButtonShapeIcon2.setBackground(new java.awt.Color(73, 171, 238));
+        rSButtonShapeIcon2.setBackground(new java.awt.Color(73, 120, 248));
         rSButtonShapeIcon2.setText("Boton 1");
-        rSButtonShapeIcon2.setBackgroundHover(new java.awt.Color(73, 147, 241));
+        rSButtonShapeIcon2.setBackgroundHover(new java.awt.Color(73, 85, 248));
         jPanel1.add(rSButtonShapeIcon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
 
         rSButtonShapeIcon3.setBackground(new java.awt.Color(33, 58, 86));
@@ -81,9 +81,9 @@ public class Boton extends javax.swing.JFrame {
         });
         jPanel1.add(rSButtonShapeIcon3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
-        rSButtonShapeIcon4.setBackground(new java.awt.Color(247, 92, 84));
+        rSButtonShapeIcon4.setBackground(new java.awt.Color(213, 73, 24));
         rSButtonShapeIcon4.setText("ERROR");
-        rSButtonShapeIcon4.setBackgroundHover(new java.awt.Color(247, 68, 59));
+        rSButtonShapeIcon4.setBackgroundHover(new java.awt.Color(213, 12, 10));
         rSButtonShapeIcon4.setForegroundHover(new java.awt.Color(0, 0, 0));
         rSButtonShapeIcon4.setForegroundIcon(new java.awt.Color(0, 0, 0));
         rSButtonShapeIcon4.setForegroundIconHover(new java.awt.Color(0, 0, 0));
@@ -139,9 +139,9 @@ public class Boton extends javax.swing.JFrame {
         });
         jPanel1.add(rSButtonShapeIcon8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
 
-        rSButtonShapeIcon17.setBackground(new java.awt.Color(247, 92, 84));
+        rSButtonShapeIcon17.setBackground(new java.awt.Color(213, 73, 24));
         rSButtonShapeIcon17.setText("ERROR");
-        rSButtonShapeIcon17.setBackgroundHover(new java.awt.Color(247, 68, 59));
+        rSButtonShapeIcon17.setBackgroundHover(new java.awt.Color(213, 12, 10));
         rSButtonShapeIcon17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonShapeIcon17ActionPerformed(evt);
@@ -149,9 +149,9 @@ public class Boton extends javax.swing.JFrame {
         });
         jPanel1.add(rSButtonShapeIcon17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, -1));
 
-        rSButtonShapeIcon9.setBackground(new java.awt.Color(247, 92, 84));
+        rSButtonShapeIcon9.setBackground(new java.awt.Color(213, 73, 24));
         rSButtonShapeIcon9.setText("ERROR");
-        rSButtonShapeIcon9.setBackgroundHover(new java.awt.Color(247, 68, 59));
+        rSButtonShapeIcon9.setBackgroundHover(new java.awt.Color(213, 12, 10));
         rSButtonShapeIcon9.setForegroundHover(new java.awt.Color(0, 0, 0));
         rSButtonShapeIcon9.setForegroundIcon(new java.awt.Color(0, 0, 0));
         rSButtonShapeIcon9.setForegroundIconHover(new java.awt.Color(0, 0, 0));
@@ -193,9 +193,9 @@ public class Boton extends javax.swing.JFrame {
         });
         jPanel1.add(rSButtonShapeIcon11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, -1));
 
-        rSButtonShapeIcon18.setBackground(new java.awt.Color(247, 92, 84));
+        rSButtonShapeIcon18.setBackground(new java.awt.Color(213, 73, 24));
         rSButtonShapeIcon18.setText("ERROR");
-        rSButtonShapeIcon18.setBackgroundHover(new java.awt.Color(247, 68, 59));
+        rSButtonShapeIcon18.setBackgroundHover(new java.awt.Color(213, 12, 10));
         rSButtonShapeIcon18.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
         rSButtonShapeIcon18.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.LAPTOP);
         rSButtonShapeIcon18.addActionListener(new java.awt.event.ActionListener() {
