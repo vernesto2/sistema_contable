@@ -83,7 +83,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Boton 1"/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f8" green="55" red="49" type="rgb"/>
+              <Color blue="f8" green="41" red="49" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>

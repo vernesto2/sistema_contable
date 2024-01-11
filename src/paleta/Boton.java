@@ -68,7 +68,7 @@ public class Boton extends javax.swing.JFrame {
 
         rSButtonShapeIcon2.setBackground(new java.awt.Color(73, 120, 248));
         rSButtonShapeIcon2.setText("Boton 1");
-        rSButtonShapeIcon2.setBackgroundHover(new java.awt.Color(73, 85, 248));
+        rSButtonShapeIcon2.setBackgroundHover(new java.awt.Color(73, 65, 248));
         jPanel1.add(rSButtonShapeIcon2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
 
         rSButtonShapeIcon3.setBackground(new java.awt.Color(33, 58, 86));
