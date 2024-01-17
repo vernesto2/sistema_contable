@@ -264,6 +264,8 @@ public class vPrincipal extends javax.swing.JFrame {
         int salida = JOptionPane.showConfirmDialog(null, "¿Esta seguro de continuar?", "¡CERRAR SESIÓN!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         //System.out.println(salida);
         if (salida == 0) {
+            vLogin login = new vLogin();
+            login.setVisible(true);
             this.dispose();
         }
         /**/
