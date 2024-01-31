@@ -4,6 +4,9 @@
  */
 package vista;
 
+import java.awt.Toolkit;
+import javax.swing.JFrame;
+
 /**
  *
  * @author vacev
@@ -15,6 +18,13 @@ public class vConfigInicial extends javax.swing.JFrame {
      */
     public vConfigInicial() {
         initComponents();
+        this.iniciarVista();
+    }
+    
+    public void iniciarVista() {
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/utils/icon/user.png")));
     }
 
     /**
@@ -36,6 +46,7 @@ public class vConfigInicial extends javax.swing.JFrame {
         rSButtonShapeIcon9 = new RSMaterialComponent.RSButtonShapeIcon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         rSPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         rSPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,7 +134,6 @@ public class vConfigInicial extends javax.swing.JFrame {
                                 .addComponent(preguntaSeguridad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1)
                                 .addGap(55, 55, 55))))
                     .addGroup(rSPanel1Layout.createSequentialGroup()

@@ -14,12 +14,15 @@ import java.sql.SQLException;
  */
 public class Conexion {
     
+    public String rutaDbGlobalDefecto = "db/horas_sociales_db.db";
+    public String rutaDbGlobal = rutaDbGlobalDefecto;
+    
     Connection cx = null;
     
     public Connection conectar() {
         try {
             Class.forName("org.sqlite.JDBC");
-            cx = DriverManager.getConnection("jdbc:sqlite:db/horas_sociales_db.db");
+            cx = DriverManager.getConnection("jdbc:sqlite:"+rutaDbGlobal);
             System.out.println("CONECTADO!");
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
@@ -30,6 +33,7 @@ public class Conexion {
     public void desconectar() {
         try {
             cx.close();
+            System.out.println("NO CONECTADO!");
         } catch (SQLException e) {
             e.printStackTrace();
         }

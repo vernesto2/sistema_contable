@@ -4,9 +4,17 @@
  */
 package vista;
 
+import conexion.Conexion;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.CambiaPanel;
+import necesario.RSFileChooser;
 
 /**
  *
@@ -17,9 +25,12 @@ public class vInicio extends javax.swing.JFrame {
     /**
      * Creates new form vInicio
      */
+    Conexion cx = new Conexion();
+    
     public vInicio() {
         initComponents();
-    this.iniciarVista();
+        this.iniciarVista();
+        this.lblRutaGlobal.setText(this.cx.rutaDbGlobal);
     }
     
     public void iniciarVista() {
@@ -40,6 +51,8 @@ public class vInicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        rSButtonShapeIcon16 = new RSMaterialComponent.RSButtonShapeIcon();
+        lblRutaGlobal = new javax.swing.JLabel();
         rSButtonShapeIcon15 = new RSMaterialComponent.RSButtonShapeIcon();
         rSButtonShapeIcon10 = new RSMaterialComponent.RSButtonShapeIcon();
         rSButtonShapeIcon9 = new RSMaterialComponent.RSButtonShapeIcon();
@@ -62,6 +75,26 @@ public class vInicio extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("¿Que desea hacer hoy?");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        rSButtonShapeIcon16.setBackground(new java.awt.Color(33, 58, 86));
+        rSButtonShapeIcon16.setToolTipText("SELECCIONAR RUTA DE CONFIGURACIÓN");
+        rSButtonShapeIcon16.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        rSButtonShapeIcon16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        rSButtonShapeIcon16.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        rSButtonShapeIcon16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rSButtonShapeIcon16.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.STORAGE);
+        rSButtonShapeIcon16.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        rSButtonShapeIcon16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonShapeIcon16ActionPerformed(evt);
+            }
+        });
+
+        lblRutaGlobal.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblRutaGlobal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRutaGlobal.setText("Prueba Ruta");
+        lblRutaGlobal.setToolTipText(lblRutaGlobal.getText());
+        lblRutaGlobal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         rSButtonShapeIcon15.setBackground(new java.awt.Color(73, 120, 248));
         rSButtonShapeIcon15.setText("INICIAR SESION");
@@ -144,7 +177,7 @@ public class vInicio extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -153,25 +186,26 @@ public class vInicio extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                        .addGap(0, 94, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rSButtonShapeIcon9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(rSButtonShapeIcon10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(rSButtonShapeIcon15, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(83, 83, 83))))))
+                                    .addComponent(rSButtonShapeIcon15, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lblRutaGlobal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rSButtonShapeIcon16, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(85, 85, 85))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,11 +215,15 @@ public class vInicio extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(53, 53, 53)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblRutaGlobal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rSButtonShapeIcon16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rSButtonShapeIcon15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rSButtonShapeIcon10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -219,6 +257,29 @@ public class vInicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_rSButtonShapeIcon9ActionPerformed
+
+    private void rSButtonShapeIcon16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon16ActionPerformed
+        //JFileChooser selectorArchivos = new JFileChooser("./");
+        RSFileChooser selector = new RSFileChooser();
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("Arhivos de configuración", "sqlite", "db");
+        //selectorArchivos.setFileFilter(fnef);
+        //selectorArchivos.setMultiSelectionEnabled(false);
+        selector.setFileFilter(fnef);
+        selector.setMultiSelectionEnabled(false);
+        
+        if (selector.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File archivo = selector.getSelectedFile();
+            String ruta = "";
+            try {
+                ruta = archivo.getCanonicalPath();
+            } catch (IOException ex) {
+                Logger.getLogger(vInicio.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(ruta);
+            this.cx.rutaDbGlobal = ruta;
+            this.lblRutaGlobal.setText(ruta);
+        }
+    }//GEN-LAST:event_rSButtonShapeIcon16ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,8 +322,10 @@ public class vInicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblRutaGlobal;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon10;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon15;
+    private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon16;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon9;
     private rspanelgradiente.RSPanelGradiente rSPanelGradiente1;
     // End of variables declaration//GEN-END:variables
