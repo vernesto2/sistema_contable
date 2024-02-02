@@ -1,0 +1,187 @@
+codigo,cuenta,Tipo,tipo_catalogo
+1112,inventario,,6
+111201,insumos y materiales,,6
+11120101,pesticidas,,6
+11120102,insecticidas,,6
+11120103,fertilizantes,,6
+11120104,herbicidas,,6
+11120105,fungicidas,,6
+11120106,caña de azúcar,,6
+11120107,otros,,6
+111202,productos agrícolas,,6
+11120201,caña de azúcar,,6
+1113,costos de caña de azúcar cosecha futura,,6
+111301,mantenimiento,,6
+11130101,insumos y materiales,,6
+1113010101,fertilizantes,,6
+1113010102,fungicidas,,6
+1113010103,insecticidas,,6
+1113010104,herbicidas,,6
+1113010105,otros,,6
+11130102,mano de obra,,6
+1113010201,control de plagas y enfermedades,,6
+1113010202,control de malezas,,6
+1113010203,aplicación de fertilizantes,,6
+1113010204,aparcado,,6
+1113010205,aplicación de herbicidas,,6
+1113010206,aplicación de insecticidas,,6
+1113010207,aplicación de fungicidas,,6
+1113010208,mantenimiento de drenajes,,6
+1113010209,otros,,6
+11130103,costos indirectos,,6
+1113010301,vigilancia,,6
+1113010302,supervisión,,6
+1113010303,materiales indirectos,,6
+1113010304,combustibles y lubricantes,,6
+1113010305,servicio de transporte,,6
+1113010306,alquileres,,6
+1113010307,depreciación,,6
+1113010308,agotamiento,,6
+1113010309,intereses,,6
+1113010310,otros,,6
+111302,recolección,,6
+11130201,insmos y materiales,,6
+1113020101,madurantes,,6
+1113020102,otros,,6
+11130202,mano de obra,,6
+1113020201,carrileo,,6
+1113020202,carga de caña,,6
+1113020203,flete de caña,,6
+1113020204,roza de caña,,6
+1113020205,aplicacion de madurantes,,6
+1113020206,otros,,6
+11130203,costos indirectos,,6
+1113020301,vigilancia,,6
+1113020302,supervision,,6
+1113020303,combustibles,,6
+1113020304,servicio de transporte,,6
+1113020305,asesoria tecnica,,6
+1113020306,alquileres,,6
+1113020307,agotamiento,,6
+1113020308,intereses,,6
+1113020309,otros,,6
+1203,activos biologicos,,6
+120301,cañales en produccion,,6
+1204,agotamiento acumulado activos biologicos,R,6
+120401,cañales en produccion,R,6
+1205,activo biologico caña de azucar,,6
+120501,iniciacion del cultivo,,6
+12050101,insumos y materiales,,6
+1205010101,caña de azucar-semilla,,6
+1205010102,fertilizantes foliares,,6
+1205010103,fertilizantes al suelo,,6
+1205010104,fungicidas,,6
+1205010105,insecticidas,,6
+1205010106,pesticidas,,6
+1205010107,herbicidas,,6
+1205010108,insumos diversos,,6
+1205010109,otros,,6
+12050102,mano de obra,,6
+1205010201,control de plagas y enfermedades,,6
+1205010202,control de malezas,,6
+1205010203,aradura,,6
+1205010204,rastreo,,6
+1205010205,subsuelado,,6
+1205010206,surqueado,,6
+1205010207,aplicacion de fertilizantes,,6
+1205010208,siembra,,6
+1205010209,carrileo,,6
+1205010210,aplicacion de fungicidas,,6
+1205010211,aplicacion de insecticidas,,6
+1205010212,aplicacion de pesticidas,,6
+1205010213,aplicacion de herbicidas,,6
+1205010214,otros,,6
+12050103,costos indirectos,,6
+1205010301,vigilancia,,6
+1205010302,supervision,,6
+1205010303,combustibles y lubricantes,,6
+1205010304,servicio de transporte,,6
+1205010305,alquileres,,6
+1205010306,depreciacion,,6
+1205010307,intereses,,6
+1205010308,otros,,6
+120502,crecimiento,,6
+12050201,insumos y materiales,,6
+1205020101,fertilizantes,,6
+1205020102,fungicidas,,6
+1205020103,insecticidas,,6
+1205020104,herbicidas,,6
+1205020105,otros,,6
+12050202,mano de obra,,6
+1205020201,control de plagas y enfermedades,,6
+1205020202,control de malezas,,6
+1205020203,aplicacion de fertilizantes,,6
+1205020204,aporcado,,6
+1205020205,resiembra,,6
+1205020206,aplicacion de herbicidas,,6
+1205020207,aplicacion de insecticidas,,6
+1205020208,aplicacion de fungicidas,,6
+1205020209,mantenimiento de drenajes,,6
+1205020210,mantenimiento de calles y cercas,,6
+12050203,costos indirectos,,6
+1205020301,vigilancia,,6
+1205020302,supervision,,6
+1205020303,materiales indirectos,,6
+1205020304,combustibles y lubricantes,,6
+1205020305,servicio de transporte,,6
+1205020306,alquileres,,6
+1205020307,depreciacion,,6
+1205020308,intereses,,6
+1205020309,otros,,6
+4101,costos de explotacion-caña de azucar,,6
+410101,mantenimiento,,6
+41010101,insumos y materiales,,6
+4101010101,fertilizantes,,6
+4101010102,fungicidas,,6
+4101010103,insecticidas,,6
+4101010104,herbicidas,,6
+4101010105,otros,,6
+41010102,mano de obra,,6
+4101010201,control de plagas y enfermedades,,6
+4101010202,control de malezas,,6
+4101010203,aplicacion de fertilizantes,,6
+4101010204,aporcado,,6
+4101010205,aplicacion de herbicidas,,6
+4101010206,aplicacion de insecticidas,,6
+4101010207,aplicacion de pesticidas,,6
+4101010208,mantenimiento de drenajes,,6
+4101010209,otros,,6
+41010103,costos indirectos,,6
+4101010301,vigilancia,,6
+4101010302,supervision,,6
+4101010303,material indirecto,,6
+4101010304,combustibles y lubricantes,,6
+4101010305,servicios de transporte,,6
+4101010306,alquiler,,6
+4101010307,depreciacion,,6
+4101010308,intereses,,6
+4101010309,otros,,6
+410102,recoleccion,,6
+41010201,insumos y materiales,,6
+4101020101,madurantes,,6
+4101020102,otros,,6
+41010202,mano de obra,,6
+4101020201,carrileo,,6
+4101020202,carga de caña,,6
+4101020203,flete de caña,,6
+4101020204,roza de caña,,6
+4101020205,aplicacion de madurantes,,6
+4101020206,otros,,6
+41010203,costos indirectos,,6
+4101020301,vigilancia,,6
+4101020302,supervisor,,6
+4101020303,combustible,,6
+4101020304,servicios de transporte,,6
+4101020305,asesoria tecnica,,6
+4101020306,alquileres,,6
+4101020307,agotamiento,,6
+4101020308,intereses,,6
+4101020309,otros,,6
+4102,costos de produccion,,6
+4103,costo de venta,,6
+410301,caña de azucar,,6
+410302,otros,,6
+5101,ventas,,6
+510101,productos agricolas-caña de azucar,,6
+510102,otros,,6
+5102,ingresos por produccion de caña de azucar,,6

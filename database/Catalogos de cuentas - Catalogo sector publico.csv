@@ -1,0 +1,1680 @@
+Codigo,Tipo,Concepto,Ingresos,Egresos,tipo_catalogo
+21,,FONDOS,,,7
+211,,DISPONIBILIDADES,,,7
+21101,,Caja General,,,7
+21103,,Caja Chica,,,7
+21105,,Banco Central de Reserva M/D,,,7
+21107,,Banco Central de Reserva M/E,,,7
+21109,,Bancos Comerciales M/D,,,7
+21111,,Bancos Comerciales M/E,,,7
+21113,,Banco Central de Reserva Fondos Restringidos M/D,,,7
+21115,,Banco Central de Reserva Fondos Restringidos M/E,,,7
+21117,,Bancos Comerciales Fondos Restringidos M/D,,,7
+21119,,Bancos Comerciales Fondos Restringidos M/E,,,7
+21121,,Banco Central de Reserva Convenios de Recaudación,,,7
+21123,,Bancos Comerciales Convenios de Recaudación,,,7
+21125,,Instituciones Financieras Diversas Convenios de Recaudación,,,7
+21151,,Fondos Depósitos en Tesoro Público,,,7
+21153,,Fondos Depósitos en Dependencias Institucionales,,,7
+21191,,Fondos en Tránsito,,,7
+212,,ANTICIPOS DE FONDOS,,,7
+21201,,Anticipos a Empleados,,,7
+21203,,Anticipos por Servicios,,,7
+21205,,Anticipos por Intereses,,,7
+21207,,Anticipos a Contratistas,,,7
+21209,,Anticipos a Proveedores,,,7
+21211,,Anticipos para Apertura de Cartas de Crédito,,,7
+21213,,Anticipos de Fondos a Dependencias Institucionales,,,7
+21215,,Anticipo Pago IVA por Retención,,,7
+21291,,Anticipos de Fondos al Banco Central de Reserva,,,7
+21293,,Anticipos de Fondos de Convenios a Instituciones Públicas,,,7
+21295,,Anticipos de Fondos a Instituciones Públicas,,,7
+213,,DEUDORES MONETARIOS,,,7
+21301,,D. M. x Impuesto Sobre la Renta,,11,7
+21303,,D. M. x Impuesto Sobre Transferencia de Bienes Raíces,,11,7
+21305,,D. M. x Impuesto Sobre el Comercio Exterior,,11,7
+21307,,D. M. x Impuesto a la Transferencia de Bienes Muebles y a la Prestación de Servicios,,,7
+21308,,D. M. x Anticipos de Impuestos,,11,7
+21309,,D. M. x Impuesto a Productos Específicos,,11,7
+21310,,D. M. x Impuestos Municipales,,11,7
+21311,,D. M. x Impuestos Diversos,,11,7
+21312,,D. M. x Tasas y Derechos,,12,7
+21313,,D. M. x Contribuciones a la Seguridad Social,,13,7
+21314,,D. M. x Venta de Bienes y Servicios,,14,7
+21315,,D. M. x Ingresos Financieros y Otros,,15,7
+21316,,D. M. x Transferencias Corrientes Recibidas,,16,7
+21317,,D. M x Transferencias Corrientes de Aporte Fiscal,,,7
+21321,,D. M. x Ventas de Activos Fijos,,21,7
+21322,,D. M. x Transferencias de Capital Recibidas,,22,7
+21323,,D. M. x Recuperación de Inversiones Financieras,,23,7
+21324,,D. M. x Transferencias de Capital de Aporte Fiscal,,,7
+21325,,D. M. x Reintegros de Fondos,,,7
+21331,,D. M. x Endeudamiento Público,,31,7
+21333,,D.M. x Colocación de Títulosvalores,,,7
+21341,,D. M. x Contribuciones Especiales,,41,7
+21343,,D. M. x Transferencias de Contribuciones Especiales de Aporte Fiscal,,,7
+21347,,D. M. x Derechos Especiales de Giro,,,7
+21383,,D. M. x Recuperación de Inversiones Financieras Temporales,,,7
+21385,,D. M. x Transferencias entre Dependencias Institucionales,,,7
+21387,,D. M. x Renegociación de Obligaciones Financieras,,,7
+21389,,D. M. x Operaciones de Ejercicios Anteriores,,,7
+22,,INVERSIONES FINANCIERAS,,,7
+221,,INVERSIONES TEMPORALES,,,7
+22101,,Inversión en Títulosvalores en el Interior,631,231,7
+22101001,,Bonos,63101,23101,7
+22101002,,Letras del Tesoro,63102,23102,7
+22101003,,Notas de Crédito del Tesoro Público,63103,23103,7
+22101004,,Cédulas Hipotecarias,63104,23104,7
+22101099,,Otros Títulosvalores,63199,23199,7
+22103,,Depósitos a Plazo en el Sector Financiero en el Interior,631,231,7
+22103001,,Depósitos a Plazo,63105,23105,7
+22105,,Inversión en Acciones y Participaciones de Capital en el Interior,631,231,7
+22105001,,Acciones,63106,23106,7
+22105002,,Participación de Capital,63107,23107,7
+22105099,,Otras Inversiones y Participaciones de Capital,63199,23199,7
+22107,,Inversión en Títulosvalores en el Exterior,631,231,7
+22107001,,Bonos M/E,63108,23108,7
+22107002,,Letras del Tesoro M/E,63108,23108,7
+22107004,,Cédulas Hipotecarias M/E,63108,23108,7
+22107005,,Depósitos a Plazo M/E,63108,23108,7
+22107099,,Otros Títulosvalores M/E,63199,23199,7
+22109,,Inversión en Acciones y Participaciones de Capital en el Exterior,631,231,7
+22109001,,Acciones M/E,63109,23109,7
+22109002,,Participación de Capital M/E,63109,23109,7
+22197,,Derechos Especiales de Giro,,,7
+22198,,Descuento Sobre Compra de Títulosvalores,,,7
+22199,,Provisión de Inversiones Temporales,,,7
+222,,INVERSIONES PERMANENTES,,,7
+22201,,Inversión en Títulosvalores en el Interior,631,231,7
+22201001,,Bonos,63101,23101,7
+22201004,,Cédulas Hipotecarias,63104,23104,7
+22201099,,Otros Títulosvalores,63199,23199,7
+22203,,Depósitos a Plazo en el Sector Financiero en el Interior,631,231,7
+22203001,,Depósitos a Plazo,63105,23105,7
+22205,,Inversión en Acciones y Participaciones de Capital en el Interior,631,231,7
+22205001,,Acciones,63106,23106,7
+22205002,,Participación de Capital,63107,23107,7
+22205099,,Otras Inversiones y Participaciones de Capital,63199,23199,7
+22207,,Inversión en Títulosvalores en el Exterior,631,231,7
+22207001,,Bonos M/E,63108,23108,7
+22207004,,Cédulas Hipotecarias M/E,63108,23108,7
+22207005,,Depósitos a Plazo M/E,63108,23108,7
+22207099,,Otros Títulosvalores M/E,63199,23199,7
+22209,,Inversión en Acciones y Participaciones de Capital en el Exterior,631,231,7
+22209001,,Acciones M/E,63109,23109,7
+22209002,,Participación de Capital M/E,63109,23109,7
+22298,,Descuento Sobre Compra de Títulosvalores,,,7
+22299,,Provisión de Inversiones Permanentes,,,7
+223,,"INVERSIONES EN PRESTAMOS, CORTO PLAZO",,,7
+22301,,Préstamos para Viviendas,632,232,7
+22301002,,A Empresas Privadas no Financieras,63207,23207,7
+22301003,,A Empresas Privadas Financieras,63208,23208,7
+22301004,,A Organismos sin Fines de Lucro,63209,23209,7
+22301005,,A Personas Naturales,63210,23210,7
+22303,,Préstamos Personales,632,232,7
+22303001,,A Personas Naturales,63210,23210,7
+22305,,Préstamos a Contratistas,632,232,7
+22305001,,A Empresas Privadas no Financieras,63207,23207,7
+22307,,Préstamos en Fideicomisos,632,232,7
+22307001,,A Empresas Privadas no Financieras,63207,23207,7
+22307002,,A Organismos sin Fines de Lucro,63209,23209,7
+22309,,Préstamos de Fomento Industrial,632,232,7
+22309001,,A Empresas Privadas no Financieras,63207,23207,7
+22309002,,A Organismos sin Fines de Lucro,63209,23209,7
+22309003,,A Personas Naturales,63210,23210,7
+22311,,Préstamos de Fomento Agropecuario,632,232,7
+22311001,,A Empresas Privadas no Financieras,63207,23207,7
+22311002,,A Organismos sin Fines de Lucro,63209,23209,7
+22311003,,A Personas Naturales,63210,23210,7
+22313,,Préstamos de Consumo,632,232,7
+22313001,,A Empresas Privadas no Financieras,63207,23207,7
+22313002,,A Organismos sin Fines de Lucro,63209,23209,7
+22313003,,A Personas Naturales,63210,23210,7
+22315,,Préstamos al Sector Comercio,632,232,7
+22315001,,A Empresas Privadas no Financieras,63207,23207,7
+22315002,,A Organismos sin Fines de Lucro,63209,23209,7
+22315003,,A Personas Naturales,63210,23210,7
+22317,,Préstamos al Sector Transporte,632,232,7
+22317001,,A Empresas Privadas no Financieras,63207,23207,7
+22317002,,A Personas Naturales,63210,23210,7
+22319,,Préstamos al Sector Servicio,632,232,7
+22319001,,A Empresas Privadas no Financieras,63207,23207,7
+22319002,,A Empresas Privadas Financieras,63208,23208,7
+22319003,,A Personas Naturales,63210,23210,7
+22331,,Préstamos a Gobierno Central,632,232,7
+22351,,Préstamos a Instituciones Descentralizadas,632,232,7
+22353,,Préstamos a Instituciones de Seguridad Social,632,232,7
+22355,,Préstamos a Empresas Públicas,632,232,7
+22361,,Préstamos a Gobiernos Locales,632,232,7
+22399,,Provisión de Inversiones en Préstamos,,,7
+224,,"INVERSIONES EN PRESTAMOS, LARGO PLAZO",,,7
+22401,,Préstamos para Viviendas,632,232,7
+22401001,,A Instituciones Descentralizadas no Empresariales,63202,23202,7
+22401002,,A Empresas Privadas no Financieras,63207,23207,7
+22401003,,A Empresas Privadas Financieras,63208,23208,7
+22401004,,A Organismos sin Fines de Lucro,63209,23209,7
+22401005,,A Personas Naturales,63210,23210,7
+22403,,Préstamos Personales,632,232,7
+22403001,,A Personas Naturales,63210,23210,7
+22405,,Préstamos a Contratistas,632,232,7
+22405001,,A Empresas Privadas no Financieras,63207,23207,7
+22407,,Préstamos en Fideicomisos,632,232,7
+22407001,,A Empresas Privadas no Financieras,63207,23207,7
+22407002,,A Organismos sin Fines de Lucro,63209,23209,7
+22407003,,A Empresas Privadas Financieras,63208,23208,7
+22409,,Préstamos de Fomento Industrial,632,232,7
+22409001,,A Empresas Privadas no Financieras,63207,23207,7
+22409002,,A Organismos sin Fines de Lucro,63209,23209,7
+22409003,,A Personas Naturales,63210,23210,7
+22411,,Préstamos de Fomento Agropecuario,632,232,7
+22411001,,A Empresas Privadas no Financieras,63207,23207,7
+22411002,,A Organismos sin Fines de Lucro,63209,23209,7
+22411003,,A Personas Naturales,63210,23210,7
+22413,,Préstamos de Consumo,632,232,7
+22413001,,A Empresas Privadas no Financieras,63207,23207,7
+22413002,,A Organismos sin Fines de Lucro,63209,23209,7
+22413003,,A Personas Naturales,63210,23210,7
+22415,,Préstamos al Sector Comercio,632,232,7
+22415001,,A Empresas Privadas no Financieras,63207,23207,7
+22415002,,A Organismos sin Fines de Lucro,63209,23209,7
+22415003,,A Personas Naturales,63210,23210,7
+22417,,Préstamos al Sector Transporte,632,232,7
+22417001,,A Empresas Privadas no Financieras,63207,23207,7
+22417002,,A Personas Naturales,63210,23210,7
+22419,,Préstamos al Sector Servicio,632,232,7
+22419001,,A Empresas Privadas no Financieras,63207,23207,7
+22419002,,A Empresas Privadas Financieras,63208,23208,7
+22419003,,A Personas Naturales,63210,23210,7
+22431,,Préstamos a Gobierno Central,632,232,7
+22451,,Préstamos a Instituciones Descentralizadas,632,232,7
+22453,,Préstamos a Instituciones de Seguridad Social,632,232,7
+22455,,Préstamos a Empresas Públicas,632,232,7
+22461,,Préstamos a Gobiernos Locales,632,232,7
+22499,,Provisión de Inversiones en Préstamos,,,7
+225,,DEUDORES FINANCIEROS,,,7
+22501,,Deudores por Convenios Pago Impuestos,,,7
+22503,,Deudores por Convenios Pago Servicios,,,7
+22505,,Deudores por Reintegros,,,7
+22507,,Crédito Fiscal por Adquisiciones de Bienes y Servicios,549,,7
+22507001,,Crédito Fiscal,54901,,7
+22509,,Crédito Fiscal por Gastos Financieros y Otros,559,,7
+22509001,,Crédito Fiscal,55901,,7
+22511,,Crédito Fiscal por Inversiones en Activos Fijos,619,,7
+22511001,,Crédito Fiscal,61901,,7
+22513,,Crédito Fiscal por Remanente de IVA,,,7
+22515,,Deudores Financieros por Administración de Cartera,,,7
+22531,,Deudores por Emisión de Certificados de Traspaso,,,7
+22533,,Bienes Muebles e Inmuebles Entregados a Terceros,,,7
+22533001,,En Comodato,,,7
+22533002,,En Administración,,,7
+22535,,Deudores por Préstamos de Existencias Institucionales,,,7
+22535001,,Productos Farmacéuticos y Medicinales,,,7
+22537,,Derechos por Titulosvalores del Tesoro Público,,,7
+22551,,Deudores Monetarios por Percibir,,,7
+226,,INVERSIONES INTANGIBLES,,,7
+22601,,Estudios de Investigación y Desarrollo,,,7
+22603,,Gastos de Organización y Puesta en Marcha,,,7
+22605,,Seguros Pagados por Anticipado,556,,7
+22605001,,Primas y Gastos de Seguros de Personas,55601,,7
+22605002,,Primas y Gastos de Seguros de Bienes,55602,,7
+22605003,,Comisiones y Gastos Bancarios,55603,,7
+22607,,Arrendamientos y Derechos Pagados por Anticipado,543,,7
+22607001,,De Bienes Muebles,54316,,7
+22607002,,De Bienes Inmuebles,54317,,7
+22607003,,De Bienes Intangibles,54318,,7
+22609,,Mantenimiento y Reparación Pagados por Anticipado,543,,7
+22609001,,Mantenimiento y Reparaciones de Bienes Muebles,54301,,7
+22609002,,Mantenimiento y Reparaciones de Vehículos,54302,,7
+22609003,,Mantenimiento y Reparaciones de Bienes Inmuebles,54303,,7
+22611,,Servicios Comerciales Pagados por Anticipado,543,,7
+22611001,,"Transportes, Fletes y Almacenamientos",54304,,7
+22611002,,Servicios de Publicidad,54305,,7
+22611003,,Servicios de Limpiezas y Fumigaciones,54307,,7
+22613,,Servicios Profesionales Pagados por Anticipado,545,,7
+22613001,,Servicios Médicos,54501,,7
+22613002,,Servicios de Contabilidad y Auditoría,54504,,7
+22613003,,Servicios de Capacitación,54505,,7
+22613004,,Desarrollos Informáticos,54507,,7
+22613005,,Estudios e Investigaciones,54508,,7
+22613099,,"Consultorías, Estudios e Investigaciones Diversas",54599,,7
+22615,,Derechos de Propiedad Intangible,614,,7
+22615001,,Derechos de Propiedad Industrial,61401,,7
+22615002,,Derechos de Propiedad Comercial,61402,,7
+22615003,,Derechos de Propiedad Intelectual,61403,,7
+22615099,,Derechos Intangibles Diversos,61499,,7
+22617,,Derechos por Servicios Diversos a Proyectos de inversión,,,7
+22619,,Descuentos en Ventas de Títulosvalores,,,7
+22621,,Cargos por Devolución de Impuestos Pagados en Exceso,,,7
+22623,,Cargos por Convenios en Subsidios,,,7
+22625,,Derechos por Convenios en Subsidios,,,7
+22627,,Cargos Temporales por Reserva Técnica,,,7
+22629,,Cargos por Contribuciones Legales,,,7
+22698,,Cargos por Contribuciones Estatales a Instituciones de Seguridad Social,,,7
+22699,,Amortizaciones Acumuladas,,,7
+229,,DEUDORES E INVERSIONES NO RECUPERABLES,,,7
+22901,,Inversiones Financieras en Cobranza Judicial,,,7
+22903,,Inversiones Temporales no Recuperables,,,7
+22905,,Inversiones Permanentes no Recuperables,,,7
+22907,,Inversiones en Préstamos no Recuperables,,,7
+22909,,Deudores Financieros no Recuperables,,,7
+22999,,Estimaciones de Deudores e Inversiones no Recuperables,,,7
+23,,INVERSIONES EN EXISTENCIAS,,,7
+231,,EXISTENCIAS INSTITUCIONALES,,,7
+23101,,"Productos Alimenticios, Agropecuarios y Forestales",541,,7
+23101001,,Productos Alimenticios para Personas,54101,,7
+23101002,,Productos Alimenticios para Animales,54102,,7
+23101003,,Productos Agropecuarios y Forestales,54103,,7
+23103,,Productos Textiles y Vestuarios,541,,7
+23103001,,Productos Textiles y Vestuarios,54104,,7
+23105,,"Materiales de Oficina, Productos de Papel e Impresos",541,,7
+23105001,,Productos de Papel y Cartón,54105,,7
+23105002,,Materiales de Oficina,54114,,7
+23105003,,"Libros, Textos, Útiles de Enseñanza y Publicaciones",54116,,7
+23107,,Productos de Cuero y Caucho,541,,7
+23107001,,Productos de Cuero y Caucho,54106,,7
+23107003,,Llantas y Neumáticos,54109,,7
+23109,,"Productos Químicos, Combustibles y Lubricantes",541,,7
+23109001,,Productos Químicos,54107,,7
+23109002,,Productos Farmacéuticos y Medicinales,54108,,7
+23109003,,Combustibles y Lubricantes,54110,,7
+23111,,Minerales y Productos Derivados,541,,7
+23111001,,Minerales no Metálicos y Productos Derivados,54111,,7
+23111002,,Minerales Metálicos y Productos Derivados,54112,,7
+23113,,Materiales de Uso o Consumo,541,,7
+23113001,,Materiales e Instrumental de Laboratorios y Uso Médico,54113,,7
+23113002,,Materiales Informáticos,54115,,7
+23113003,,Materiales de Defensa y Seguridad Pública,54117,,7
+23113004,,Materiales Eléctricos,54119,,7
+23115,,Bienes de Uso y Consumo Diverso,541,,7
+23115001,,"Herramientas, Repuestos y Accesorios",54118,,7
+23115099,,Bienes de Uso y Consumo Diverso,54199,,7
+23117,,Bienes Muebles,611,,7
+23117001,,Mobiliarios,61101,,7
+23117002,,Maquinarias y Equipos,61102,,7
+23117003,,Equipos Médicos y de Laboratorios,61103,,7
+23117004,,Equipos Informáticos,61104,,7
+23117005,,Herramientas y Repuestos Principales,61108,,7
+23117099,,Bienes Muebles Diversos,61199,,7
+23121,,Inmuebles para la Venta,612,,7
+23121001,,Terrenos,61201,,7
+23121002,,Edificios e Instalaciones,61202,,7
+23121099,,Inmuebles Diversos,61299,,7
+23123,,Especies Municipales,541,,7
+23123001,,Especies Municipales Diversas,54121,,7
+23125,,Semovientes,613,,7
+23125001,,Ganado Vacuno,61301,,7
+23125002,,Ganado Caballar,61302,,7
+23125003,,Ganado Porcino,61303,,7
+23125099,,Semovientes Diversos,61399,,7
+23127,,Bienes y Mercaderías Entregadas en Consignación,,,7
+23141,,Productos en Proceso,,,7
+23143,,Productos Terminados,,,7
+23195,,Desechos y Residuos,,,7
+23196,,Activos Extraordinarios,,,7
+23198,,Existencias por Liquidar,,,7
+23199,,"Provisión por Pérdida, Obsolescencia, Mermas y Deterioros",,,7
+233,,EXISTENCIAS DE PRODUCCION EN PROCESO,,,7
+23301,,Remuneraciones Personal Permanente,511,,7
+23301001,,Sueldos,51101,,7
+23301002,,Salarios por Jornal,51102,,7
+23301003,,Aguinaldos,51103,,7
+23301004,,Sobresueldos,51104,,7
+23301005,,Dietas,51105,,7
+23301006,,Complementos,51106,,7
+23301007,,Beneficios Adicionales,51107,,7
+23303,,Remuneraciones Personal Eventual,512,,7
+23303001,,Sueldos,51201,,7
+23303002,,Salarios por Jornal,51202,,7
+23303003,,Aguinaldos,51203,,7
+23303004,,Sobresueldos,51204,,7
+23303005,,Complementos,51206,,7
+23303006,,Beneficios Adicionales,51207,,7
+23305,,Remuneraciones por Servicios Extraordinarios,513,,7
+23305001,,Horas Extraordinarias,51301,,7
+23305002,,Beneficios Extraordinarios,51302,,7
+23307,,Contribuciones Patronales a Instituciones de Seguridad Social Públicas,514,,7
+23307001,,Por Remuneraciones Permanentes,51401,,7
+23307002,,Por Remuneraciones Eventuales,51402,,7
+23307003,,Por Remuneraciones Extraordinarias,51403,,7
+23309,,Contribuciones Patronales a Instituciones de Seguridad Social Privadas,515,,7
+23309001,,Por Remuneraciones Permanentes,51501,,7
+23309002,,Por Remuneraciones Eventuales,51502,,7
+23309003,,Por Remuneraciones Extraordinarias,51503,,7
+23311,,Gastos de Representación,516,,7
+23311001,,Por Prestación de Servicios en el País,51601,,7
+23311002,,Por Prestación de Servicios en el Exterior,51602,,7
+23313,,Indemnizaciones,517,,7
+23313001,,Al Personal de Servicios Permanentes,51701,,7
+23313002,,Al Personal de Servicios Eventuales,51702,,7
+23315,,Otras Remuneraciones,519,,7
+23315001,,Honorarios,51901,,7
+23315002,,Remuneraciones por Servicios Especiales,51902,,7
+23315003,,Prestaciones Sociales al Personal,51903,,7
+23315099,,Remuneraciones Diversas,51999,,7
+23317,,"Productos Alimenticios, Agropecuarios y Forestales",541,,7
+23317001,,Productos Alimenticios para Personas,54101,,7
+23317002,,Productos Alimenticios para Animales,54102,,7
+23317003,,Productos Agropecuarios y Forestales,54103,,7
+23319,,Productos Textiles y Vestuarios,541,,7
+23319001,,Productos Textiles y Vestuarios,54104,,7
+23321,,"Materiales de Oficina, Productos de Papel e Impresos",541,,7
+23321001,,Productos de Papel y Cartón,54105,,7
+23321002,,Materiales de Oficina,54114,,7
+23321003,,"Libros, Textos, Útiles de Enseñanza y Publicaciones",54116,,7
+23323,,Productos de Cuero y Caucho,541,,7
+23323001,,Productos de Cuero y Caucho,54106,,7
+23323003,,Llantas y Neumáticos,54109,,7
+23325,,"Productos Químicos, Combustibles y Lubricantes",541,,7
+23325001,,Productos Químicos,54107,,7
+23325002,,Productos Farmacéuticos y Medicinales,54108,,7
+23325003,,Combustibles y Lubricantes,54110,,7
+23327,,Minerales y Productos Derivados,541,,7
+23327001,,Minerales no Metálicos y Productos Derivados,54111,,7
+23327002,,Minerales Metálicos y Productos Derivados,54112,,7
+23329,,Materiales de Uso o Consumo,541,,7
+23329001,,Materiales e Instrumental de Laboratorios y Uso Médico,54113,,7
+23329002,,Materiales Informáticos,54115,,7
+23329003,,Materiales de Defensa y Seguridad Pública,54117,,7
+23329004,,Materiales Eléctricos,54119,,7
+23331,,Bienes de Uso y Consumo Diverso,541,,7
+23331001,,"Herramientas, Repuestos y Accesorios",54118,,7
+23331099,,Bienes de Uso y Consumo Diverso,54199,,7
+23333,,Servicios Básicos,542,,7
+23333001,,Servicios de Energía Eléctrica,54201,,7
+23333002,,Servicios de Agua,54202,,7
+23333003,,Servicios de Telecomunicaciones,54203,,7
+23333004,,Servicios de Correos,54204,,7
+23335,,Mantenimiento y Reparación,543,,7
+23335001,,Mantenimiento y Reparaciones de Bienes Muebles,54301,,7
+23335002,,Mantenimiento y Reparaciones de Vehículos,54302,,7
+23335003,,Mantenimiento y Reparaciones de Bienes Inmuebles,54303,,7
+23337,,Servicios Comerciales,543,,7
+23337001,,"Transportes, Fletes y Almacenamientos",54304,,7
+23337002,,Servicios de Publicidad,54305,,7
+23337003,,Servicios de Vigilancia,54306,,7
+23337004,,Servicios de Limpieza y Fumigaciones,54307,,7
+23337005,,Servicios de Lavanderías y Planchado,54308,,7
+23337006,,Servicios de Laboratorios,54309,,7
+23337007,,Servicios de Alimentación,54310,,7
+23337008,,Servicios Educativos,54311,,7
+23337009,,Servicios Portuarios Aeroportuarios y Ferroviarios,54312,,7
+23337010,,Impresiones Publicaciones y Reproducciones,54313,,7
+23339,,Otros Servicios y Arrendamientos,543,,7
+23339001,,Atenciones Oficiales,54314,,7
+23339099,,Servicios Generales y Arrendamientos Diversos,54399,,7
+23341,,Arrendamientos y Derechos,543,,7
+23341001,,De Bienes Muebles,54316,,7
+23341002,,De Bienes Inmuebles,54317,,7
+23341003,,De Bienes Intangibles,54318,,7
+23343,,Pasajes y Viáticos,544,,7
+23343001,,Pasajes al Interior,54401,,7
+23343002,,Pasajes al Exterior,54402,,7
+23343003,,Viáticos por Comisión Interna,54403,,7
+23343004,,Viáticos por Comisión Externa,54404,,7
+23345,,Servicios Técnicos y Profesionales,545,,7
+23345001,,Servicios Médicos,54501,,7
+23345002,,Servicios del Medio Ambiente y Recursos Naturales,54502,,7
+23345003,,Servicios Jurídicos,54503,,7
+23345004,,Servicios de Contabilidad y Auditoría,54504,,7
+23345005,,Servicios de Capacitación,54505,,7
+23345006,,Servicios de Fiscalización,54506,,7
+23345007,,Desarrollos Informáticos,54507,,7
+23345008,,Estudios e Investigaciones,54508,,7
+23345099,,"Consultorías, Estudios e Investigaciones Diversas",54599,,7
+23347,,Intereses por Empréstitos Internos Recibidos,553,,7
+23347001,,De Gobierno Central,55301,,7
+23347002,,De Empresas Privadas Financieras,55308,,7
+23347003,,De Empresas Públicas no Financieras,55303,,7
+23349,,"Primas, Gastos por Seguros y Comisiones Bancarias",556,,7
+23349001,,Primas y Gastos de Seguros de Personas,55601,,7
+23349002,,Primas y Gastos de Seguros de Bienes,55602,,7
+23349003,,Comisiones y Gastos Bancarios,55603,,7
+23351,,Transferencias Corrientes al Sector Privado,563,,7
+23351001,,A Personas Naturales,56304,,7
+23351002,,Becas,56305,,7
+23353,,Semovientes,613,,7
+23353001,,Ganado Vacuno,61301,,7
+23353002,,Ganado Caballar,61302,,7
+23353003,,Ganado Porcino,61303,,7
+23353099,,Semovientes Diversos,61399,,7
+23390,,Depreciación,,,7
+23391,,Costos Acumulados de Productos en Proceso,,,7
+23392,,Costos Acumulados de Productos Terminados,,,7
+24,,INVERSIONES EN BIENES DE USO,,,7
+241,,BIENES DEPRECIABLES,,,7
+24101,,Bienes Inmuebles,612,,7
+24101001,,Edificios e Instalaciones,61202,,7
+24101099,,Inmuebles Diversos,61299,,7
+24103,,Obras para Servicios de Salud y Saneamiento Ambiental,616,,7
+24103001,,De Salud y Saneamiento Ambiental,61602,,7
+24105,,Infraestructura para Educación y Recreación,616,,7
+24105001,,De Educación y Recreación,61603,,7
+24107,,"Adiciones, Reparaciones y Mejoras de Bienes",616,,7
+24107001,,Viales,61601,,7
+24107002,,De Salud y Saneamiento Ambiental,61602,,7
+24107003,,De Educación y Recreación,61603,,7
+24107004,,De Vivienda y Oficinas,61604,,7
+24107005,,"Portuarias, Aeroportuarias y Ferroviarias",61605,,7
+24107006,,De Producción de Bienes y Servicios,61607,,7
+24107099,,Obras de Infraestructura Diversas,61699,,7
+24109,,Instalaciones Eléctricas y Comunicaciones,616,,7
+24109001,,Eléctricas y Comunicaciones,61606,,7
+24111,,Infraestructura para la Producción de Bienes y Servicios,616,,7
+24111001,,"Portuarias, Aeroportuarias y Ferroviarias",61605,,7
+24111002,,De Producción de Bienes y Servicios,61607,,7
+24113,,Maquinaria y Equipo de Producción,611,,7
+24113001,,Maquinarias y Equipos de Producción,61102,,7
+24115,,Equipos Médicos y de Laboratorios,611,,7
+24115001,,Equipos Médicos y de Laboratorios,61103,,7
+24117,,"Equipos de Transporte, Tracción y Elevación",611,,7
+24117001,,Vehículos de Transporte,61105,,7
+24119,,"Maquinaria, Equipo y Mobiliario Diverso",611,,7
+24119001,,Mobiliarios,61101,,7
+24119002,,Maquinarias y Equipos,61102,,7
+24119003,,Maquinaria y Equipo de Producción para Apoyo Institucional,61102,,7
+24119004,,Equipos Informáticos,61104,,7
+24119005,,Herramientas y Repuestos Principales,61108,,7
+24119099,,Bienes Muebles Diversos,61199,,7
+24121,,Semovientes,613,,7
+24121001,,Ganado Vacuno,61301,,7
+24121002,,Ganado Caballar,61302,,7
+24121003,,Ganado Porcino,61303,,7
+24121099,,Semovientes Diversos,61399,,7
+24123,,Equipo de Defensa y Seguridad Pública,541,,7
+24123001,,Equipo de Defensa y Seguridad Pública,54117,,7
+24199,,Depreciación Acumulada,,,7
+24199001,,Bienes Inmuebles,,,7
+24199003,,Obras para Servicios de Salud y Saneamiento Ambiental,,,7
+24199005,,Infraestructura para Educación y Recreación,,,7
+24199007,,"Adiciones, Reparaciones y Mejoras de Bienes",,,7
+24199009,,Instalaciones Eléctricas y Comunicaciones,,,7
+24199011,,Infraestructura para la Producción de Bienes y Servicios,,,7
+24199013,,Maquinaria y Equipo de Producción,,,7
+24199015,,Equipos Médicos y de Laboratorios,,,7
+24199017,,"Equipos de Transporte, Tracción y Elevación",,,7
+24199019,,"Maquinaria, Equipo y Mobiliario Diverso",,,7
+24199021,,Semovientes (Agotamiento),,,7
+24199023,,Equipo de Defensa y Seguridad Pública,,,7
+243,,BIENES NO DEPRECIABLES,,,7
+24301,,Bienes Inmuebles,612,,7
+24301001,,Terrenos,61201,,7
+24305,,"Obras de Arte, Libros y Colecciones",611,,7
+24305001,,Obras de Arte y Culturales,61106,,7
+24305002,,Libros y Colecciones,61107,,7
+25,,INVERSIONES EN PROYECTOS Y PROGRAMAS,,,7
+251,,INVERSIONES EN BIENES PRIVATIVOS,,,7
+25101,,Remuneraciones Personal Permanente,511,,7
+25101001,,Sueldos,51101,,7
+25101002,,Salarios por Jornal,51102,,7
+25101003,,Aguinaldos,51103,,7
+25101004,,Sobresueldos,51104,,7
+25101005,,Dietas,51105,,7
+25101006,,Complementos,51106,,7
+25101007,,Beneficios Adicionales,51107,,7
+25103,,Remuneraciones Personal Eventual,512,,7
+25103001,,Sueldos,51201,,7
+25103002,,Salarios por Jornal,51202,,7
+25103003,,Aguinaldos,51203,,7
+25103004,,Sobresueldos,51204,,7
+25103005,,Complementos,51206,,7
+25103006,,Beneficios Adicionales,51207,,7
+25105,,Remuneraciones por Servicios Extraordinarios,513,,7
+25105001,,Horas Extraordinarias,51301,,7
+25105002,,Beneficios Extraordinarios,51302,,7
+25107,,Contribuciones Patronales a Instituciones de Seguridad Social Públicas,514,,7
+25107001,,Por Remuneraciones Permanentes,51401,,7
+25107002,,Por Remuneraciones Eventuales,51402,,7
+25107003,,Por Remuneraciones Extraordinarias,51403,,7
+25109,,Contribuciones Patronales a Instituciones de Seguridad Social Privadas,515,,7
+25109001,,Por Remuneraciones Permanentes,51501,,7
+25109002,,Por Remuneraciones Eventuales,51502,,7
+25109003,,Por Remuneraciones Extraordinarias,51503,,7
+25111,,Gastos de Representación,516,,7
+25111001,,Por Prestación de Servicios en el País,51601,,7
+25111002,,Por Prestación de Servicios en el Exterior,51602,,7
+25113,,Indemnizaciones,517,,7
+25113001,,Al Personal de Servicios Permanentes,51701,,7
+25113002,,Al Personal de Servicios Eventuales,51702,,7
+25115,,Otras Remuneraciones,519,,7
+25115001,,Honorarios,51901,,7
+25115002,,Remuneraciones por Servicios Especiales,51902,,7
+25115003,,Prestaciones Sociales al Personal,51903,,7
+25115099,,Remuneraciones Diversas,51999,,7
+25121,,"Productos Alimenticios, Agropecuarios y Forestales",541,,7
+25121001,,Productos Alimenticios para Personas,54101,,7
+25121002,,Productos Alimenticios para Animales,54102,,7
+25121003,,Productos Agropecuarios y Forestales,54103,,7
+25123,,Productos Textiles y Vestuarios,541,,7
+25123001,,Productos Textiles y Vestuarios,54104,,7
+25125,,"Materiales de Oficina, Productos de Papel e Impresos",541,,7
+25125001,,Productos de Papel y Cartón,54105,,7
+25125002,,Materiales de Oficina,54114,,7
+25125003,,"Libros, Textos, Útiles de Enseñanza y Publicaciones",54116,,7
+25127,,Productos de Cuero y Caucho,541,,7
+25127001,,Productos de Cuero y Caucho,54106,,7
+25127003,,Llantas y Neumáticos,54109,,7
+25129,,"Productos Químicos, Combustibles y Lubricantes",541,,7
+25129001,,Productos Químicos,54107,,7
+25129002,,Productos Farmacéuticos y Medicinales,54108,,7
+25129003,,Combustibles y Lubricantes,54110,,7
+25131,,Minerales y Productos Derivados,541,,7
+25131001,,Minerales no Metálicos y Productos Derivados,54111,,7
+25131002,,Minerales Metálicos y Productos Derivados,54112,,7
+25133,,Materiales de Uso o Consumo,541,,7
+25133001,,Materiales e Instrumental de Laboratorios y Uso Médico,54113,,7
+25133002,,Materiales Informáticos,54115,,7
+25133003,,Materiales de Defensa y Seguridad Pública,54117,,7
+25133004,,Materiales Eléctricos,54119,,7
+25135,,Bienes de Uso y Consumo Diverso,541,,7
+25135001,,"Herramientas, Repuestos y Accesorios",54118,,7
+25135099,,Bienes de Uso y Consumo Diverso,54199,,7
+25137,,Servicios Básicos,542,,7
+25137001,,Servicios de Energía Eléctrica,54201,,7
+25137002,,Servicios de Agua,54202,,7
+25137003,,Servicios de Telecomunicaciones,54203,,7
+25137004,,Servicios de Correos,54204,,7
+25139,,Mantenimiento y Reparación,543,,7
+25139001,,Mantenimientos y Reparaciones de Bienes Muebles,54301,,7
+25139002,,Mantenimientos y Reparaciones de Vehículos,54302,,7
+25139003,,Mantenimientos y Reparaciones de Bienes Inmuebles,54303,,7
+25141,,Servicios Comerciales,543,,7
+25141001,,"Transportes, Fletes y Almacenamientos",54304,,7
+25141002,,Servicios de Publicidad,54305,,7
+25141003,,Servicios de Vigilancia,54306,,7
+25141004,,Servicios de Limpieza y Fumigaciones,54307,,7
+25141005,,Servicios de Lavanderías y Planchado,54308,,7
+25141006,,Servicios de Laboratorios,54309,,7
+25141007,,Servicios de Alimentación,54310,,7
+25141008,,Servicios Educativos,54311,,7
+25141009,,"Servicios Portuarios, Aeroportuarios y Ferroviarios",54312,,7
+25141010,,"Impresiones, Publicaciones y Reproducciones",54313,,7
+25143,,Otros Servicios y Arrendamientos,543,,7
+25143001,,Atenciones Oficiales,54314,,7
+25143002,,Gastos Reservados,54315,,7
+25143099,,Servicios Generales y Arrendamientos Diversos,54399,,7
+25145,,Arrendamientos y Derechos,543,,7
+25145001,,De Bienes Muebles,54316,,7
+25145002,,De Bienes Inmuebles,54317,,7
+25145003,,De Bienes Intangibles,54318,,7
+25147,,Pasajes y Viáticos,544,,7
+25147001,,Pasajes al Interior,54401,,7
+25147002,,Pasajes al Exterior,54402,,7
+25147003,,Viáticos por Comisión Interna,54403,,7
+25147004,,Viáticos por Comisión Externa,54404,,7
+25149,,Servicios Técnicos y Profesionales,545,,7
+25149001,,Servicios Médicos,54501,,7
+25149002,,Servicios del Medio Ambiente y Recursos Naturales,54502,,7
+25149003,,Servicios Jurídicos,54503,,7
+25149004,,Servicios de Contabilidad y Auditoría,54504,,7
+25149005,,Servicios de Capacitación,54505,,7
+25149006,,Servicios de Fiscalización,54506,,7
+25149007,,Desarrollos Informáticos,54507,,7
+25149008,,Estudios e Investigaciones,54508,,7
+25149099,,"Consultorías, Estudios e Investigaciones Diversas",54599,,7
+25151,,Intereses y Comisiones de la Deuda Interna,553,,7
+25151001,,De Gobierno Central,55301,,7
+25151002,,De Instituciones Descentralizadas no Empresariales,55302,,7
+25151003,,De Empresas Públicas no Financieras,55303,,7
+25151004,,De Empresas Públicas Financieras,55304,,7
+25151005,,De Instituciones de Seguridad Social,55305,,7
+25151006,,De Municipalidades,55306,,7
+25151007,,De Empresas Privadas no Financieras,55307,,7
+25151008,,De Empresas Privadas Financieras,55308,,7
+25151009,,De Organismos sin Fines de Lucro,55309,,7
+25151010,,De Personas Naturales,55310,,7
+25153,,Intereses y Comisiones de la Deuda Externa,554,,7
+25153001,,De Empresas Privadas no Financieras,55401,,7
+25153002,,De Empresas Privadas Financieras,55402,,7
+25153003,,De Gobiernos y Organismos Gubernamentales,55403,,7
+25153004,,De Organismos Multilaterales,55404,,7
+25153005,,De Organismos sin Fines de Lucro,55405,,7
+25153006,,De Personas Naturales,55406,,7
+25155,,"Impuestos, Tasas y Derechos",555,,7
+25155001,,Impuesto Sobre la Renta,55501,,7
+25155002,,Impuesto Sobre la Transferencia de Bienes Raíces,55502,,7
+25155003,,Impuesto Sobre el Comercio Exterior,55503,,7
+25155004,,Impuesto a la Transferencia de Bienes Muebles y a la Prestación de Servicios,55504,,7
+25155005,,Anticipo de Impuesto Sobre la Renta,55505,,7
+25155007,,Tasas,55507,,7
+25155008,,Derechos,55508,,7
+25155099,,"Impuestos, Tasas y Derechos Diversos",55599,,7
+25157,,"Primas, Gastos por Seguros y Comisiones Bancarias",556,,7
+25157001,,Primas y Gastos de Seguros de Personas,55601,,7
+25157002,,Primas y Gastos de Seguros de Bienes,55602,,7
+25157003,,Comisiones y Gastos Bancarios,55603,,7
+25159,,Cargos Corrientes Diversos,557,,7
+25159002,,Sentencias Judiciales,55702,,7
+25159003,,Multas y Costas Judiciales,55703,,7
+25159099,,Gastos Diversos,55799,,7
+25161,,Transferencias Corrientes al Sector Privado,563,,7
+25161001,,A Personas Naturales,56304,,7
+25161002,,Becas,56305,,7
+25161003,,A Organismos sin Fines de Lucro,56303,,7
+25163,,Bienes Inmuebles,612,,7
+25163001,,Terrenos,61201,,7
+25163002,,Edificios e Instalaciones,61202,,7
+25163099,,Inmuebles Diversos,61299,,7
+25165,,"Construcciones, Mejoras y Ampliaciones",616,,7
+25165001,,Viales,61601,,7
+25165002,,De Salud y Saneamiento Ambiental,61602,,7
+25165003,,De Educación y Recreación,61603,,7
+25165004,,De Vivienda y Oficinas,61604,,7
+25165005,,"Portuarias, Aeroportuarias y Ferroviarias",61605,,7
+25165006,,Eléctricas y Comunicaciones,61606,,7
+25165007,,De Producción de Bienes y Servicios,61607,,7
+25165008,,Supervisión de Infraestructuras,61608,,7
+25165099,,Obras de Infraestructura Diversas,61699,,7
+25167,,Maquinaria y Equipo de Producción,611,,7
+25167001,,Maquinaria y Equipos,61102,,7
+25169,,Equipos Médicos y de Laboratorios,611,,7
+25169001,,Equipos Médicos y de Laboratorios,61103,,7
+25171,,"Equipos de Transporte, Tracción y Elevación",611,,7
+25171001,,Vehículos de Transporte,61105,,7
+25173,,"Maquinaria, Equipo y Mobiliario Diverso",611,,7
+25173001,,Mobiliarios,61101,,7
+25173002,,Equipos Informáticos,61104,,7
+25173003,,Herramientas y Repuestos Principales,61108,,7
+25173099,,Bienes Muebles Diversos,61199,,7
+25175,,Libros y Colecciones,611,,7
+25175001,,Libros y Colecciones,61107,,7
+25177,,Semovientes,613,,7
+25177001,,Ganado Vacuno,61301,,7
+25177002,,Ganado Caballar,61302,,7
+25177003,,Ganado Porcino,61303,,7
+25177099,,Semovientes Diversos,61399,,7
+25179,,Estudios de Preinversión,615,,7
+25179001,,Proyectos de Construcciones,61501,,7
+25179002,,Proyectos de Ampliaciones,61502,,7
+25179003,,Programas de Inversión Social,61503,,7
+25179099,,Proyectos y Programas de Inversión Diversos,61599,,7
+25180,,Transferencias de Capital al Sector Público,622,,7
+25180001,,Transferencias de Capital al Sector Público,62201,,7
+25181,,Transferencias de Capital al Sector Privado,623,,7
+25181001,,A Empresas Privadas no Financieras,62301,,7
+25181002,,A Empresas Privadas Financieras,62302,,7
+25181003,,A Organismos sin Fines de Lucro,62303,,7
+25181004,,A Personas Naturales,62304,,7
+25183,,Derechos de Propiedad Intangibles,614,,7
+25183003,,Derechos de Propiedad Intelectual,61403,,7
+25183099,,Derechos de Intangibles Diversos,61499,,7
+25190,,Depreciación,,,7
+25191,,Costos Acumulados de la Inversión,,,7
+25198,,Depreciación Acumulada,,,7
+25198063,,Bienes Inmuebles,,,7
+25198065,,"Construcciones, Mejoras y Ampliaciones",,,7
+25198067,,Maquinaria y Equipo de Producción,,,7
+25198069,,"Equipos Médicos y de Laboratorios
+ 
+ 
+",,,7
+25198071,,"Equipos de Transporte, Tracción y Elevación",,,7
+25198073,,"Maquinaria, Equipo y Mobiliario Diverso ",,,7
+25198077,,Semovientes (Agotamiento),,,7
+25199,,Aplicación a Gastos de Gestión,,,7
+252,,INVERSIONES EN BIENES DE USO PUBLICO Y DESARROLLO SOCIAL,,,7
+25201,,Remuneraciones Personal Permanente,,,7
+25201001,,Sueldos,,,7
+25201002,,Salarios por Jornal,,,7
+25201003,,Aguinaldos,,,7
+25201004,,Sobresueldos,,,7
+25201005,,Dietas,,,7
+25201006,,Complementos ,,,7
+25201007,,Beneficios Adicionales,,,7
+25203,,Remuneraciones Personal Eventual,,,7
+25203001,,Sueldos,,,7
+25203002,,Salarios por Jornal,,,7
+25203003,,Aguinaldos,,,7
+25203004,,Sobresueldos,,,7
+25203005,,Complementos,,,7
+25203006,,Beneficios Adicionales,,,7
+25205,,Remuneraciones por Servicios Extraordinarios,,,7
+25205001,,Horas Extraordinarias,,,7
+25205002,,Beneficios Extraordinarios,,,7
+25207,,Contribuciones Patronales a Instituciones de Seguridad Social Públicas ,,,7
+25207001,,Por Remuneraciones Permanentes,,,7
+25207002,,Por Remuneraciones Eventuales,,,7
+25207003,,Por Remuneraciones Extraordinarias,,,7
+25209,,Contribuciones Patronales a Instituciones de Seguridad Social Privadas ,,,7
+25209001,,Por Remuneraciones Permanentes,,,7
+25209002,,Por Remuneraciones Eventuales,,,7
+25209003,,Por Remuneraciones Extraordinarias,,,7
+25211,,Gastos de Representación,,,7
+25211001,,Por Prestación de Servicios en el País,,,7
+25211002,,Por Prestación de Servicios en el Exterior ,,,7
+25213,,Indemnizaciones,,,7
+25213001,,Al Personal de Servicios Permanentes,,,7
+25213002,,Al Personal de Servicios Eventuales,,,7
+25215,,Otras Remuneraciones,,,7
+25215001,,Honorarios,,,7
+25215002,,Remuneraciones por Servicios Especiales,,,7
+25215099,,Remuneraciones Diversas,,,7
+25221,,"Productos Alimenticios, Agropecuarios y Forestales",,,7
+25221001,,Productos Alimenticios para Personas,,,7
+25221002,,Productos Alimenticios para Animales ,,,7
+25221003,,Productos Agropecuarios y Forestales,,,7
+25223,,Productos Textiles y Vestuarios,,,7
+25223001,,Productos Textiles y Vestuarios,,,7
+25225,,"Materiales de Oficina, Productos de Papel e Impresos",,,7
+25225001,,Productos de Papel y Cartón,,,7
+25225002,,Materiales de Oficina,,,7
+25225003,,"Libros, Textos, Útiles de Enseñanza y Publicaciones",,,7
+25227,,Productos de Cuero y Caucho,,,7
+25227001,,Productos de Cuero y Caucho,,,7
+25227003,,Llantas y Neumáticos,,,7
+25229,,"Productos Químicos, Combustibles y Lubricantes",,,7
+25229001,,Productos Químicos,,,7
+25229002,,Productos Farmacéuticos y Medicinales,,,7
+25229003,,Combustibles y Lubricantes,,,7
+25231,,Minerales y Productos Derivados,,,7
+25231001,,Minerales no Metálicos y Productos Derivados,,,7
+25231002,,Minerales Metálicos y Productos Derivados,,,7
+25233,,Materiales de Uso o Consumo,,,7
+25233001,,Materiales e Instrumental de Laboratorios y Uso Médico,,,7
+25233002,,Materiales Informáticos,,,7
+25233003,,Materiales de Defensa y Seguridad Pública ,,,7
+25233004,,Materiales Eléctricos,,,7
+25235,,Bienes de Uso y Consumo Diverso,,,7
+25235001,,"Herramientas, Repuestos y Accesorios",,,7
+25235099,,Bienes de Uso y Consumo Diverso,,,7
+25237,,Servicios Básicos,,,7
+25237001,,Servicios de Energía Eléctrica,,,7
+25237002,,Servicios de Agua,,,7
+25237003,,Servicios de Telecomunicaciones,,,7
+25237004,,Servicios de Correos,,,7
+25239,,Mantenimiento y Reparación,,,7
+25239001,,Mantenimientos y Reparaciones de Bienes Muebles,,,7
+25239002,,Mantenimientos y Reparaciones de Vehículos,,,7
+25239003,,Mantenimientos y Reparaciones de Bienes Inmuebles,,,7
+25241,,Servicios Comerciales,,,7
+25241001,,"Transportes, Fletes y Almacenamientos",,,7
+25241002,, Servicios de Publicidad,,,7
+25241003,,Servicios de Vigilancia,,,7
+25241004,,Servicios de Limpieza y Fumigaciones,,,7
+25241005,,Servicios de Lavanderías y Planchado,,,7
+25241006,,Servicios de Laboratorios,,,7
+25241007,,Servicios de Alimentación,,,7
+25241008,,Servicios Educativos,,,7
+25241009,,"Servicios Portuarios, Aeroportuarios y Ferroviarios",,,7
+25241010,,"Impresiones, Publicaciones y Reproducciones",,,7
+25243,,Otros Servicios y Arrendamientos,,,7
+25243001,,Atenciones Oficiales,,,7
+25243002,,Gastos Reservados,,,7
+25243099,,Servicios Generales y Arrendamientos Diversos,,,7
+25245,,Arrendamientos y Derechos,,,7
+25245001,,De Bienes Muebles,,,7
+25245002,,De Bienes Inmuebles,,,7
+25245003,,De Bienes Intangibles,,,7
+25247,,Pasajes y Viáticos,,,7
+25247001,,Pasajes al Interior,,,7
+25247002,,Pasajes al Exterior,,,7
+25247003,,Viáticos por Comisión Interna,,,7
+25247004,,Viáticos por Comisión Externa,,,7
+25249,,Servicios Técnicos y Profesionales,,,7
+25249001,,Servicios Médicos,,,7
+25249002,,Servicios del Medio Ambiente y Recursos Naturales,,,7
+25249003,,Servicios Jurídicos,,,7
+25249004,,Servicios de Contabilidad y Auditoría,,,7
+25249005,,Servicios de Capacitación,,,7
+25249006,,Servicios de Fiscalización,,,7
+25249007,,Desarrollos Informáticos,,,7
+25249008,,Estudios e Investigaciones,,,7
+25249099,,"Consultorías, Estudios e Investigaciones Diversa",,,7
+25251,,Intereses y Comisiones de la Deuda Interna,,,7
+25251001,,De Gobierno Central,,,7
+25251002,,De Instituciones Descentralizadas No Empresariales,,,7
+25251003,,De Empresas Públicas no Financieras,,,7
+25251004,,De Empresas Públicas Financieras,,,7
+25251005,,De Instituciones de Seguridad Social,,,7
+25251006,,De Municipalidades,,,7
+25251007,,De Empresas Privadas no Financieras,,,7
+25251008,,De Empresas Privadas Financieras,,,7
+25251009,,De Organismos sin Fines de Lucro,,,7
+25251010,,De Personas Naturales,,,7
+25253,,Intereses y Comisiones de la Deuda Externa,,,7
+25253001,,De Empresas Privadas no Financieras,,,7
+25253002,,De Empresas Privadas Financieras,,,7
+25253003,,De Gobiernos y Organismos Gubernamentales,,,7
+25253004,,De Organismos Multilaterales,,,7
+25253005,,De Organismos sin Fines de Lucro,,,7
+25253006,,De Personas Naturales,,,7
+25255,,"Impuestos, Tasas y Derechos",,,7
+25255001,,Impuesto Sobre la Renta,,,7
+25255002,,Impuesto Sobre la Transferencia de Bienes Raíces,,,7
+25255003,,Impuesto Sobre el Comercio Exterior,,,7
+25255004,,Impuesto a la Transferencia de Bienes Muebles y a la Prestación de Servicios,,,7
+25255005,,Anticipos de Impuestos Sobre la Renta,,,7
+25255007,,Tasas,,,7
+25255008,,Derechos,,,7
+25255099,,"Impuestos, Tasas y Derechos Diversos",,,7
+25257,,"Primas, Gastos por Seguros y Comisiones Bancarias",,,7
+25257001,,Primas y Gastos de Seguros de Personas,,,7
+25257002,,Primas y Gastos de Seguros de Bienes,,,7
+25257003,,Comisiones y Gastos Bancarios,,,7
+25259,,Cargos Corrientes Diversos,,,7
+25259002,,Sentencias Judiciales,,,7
+25259003,,Multas y Costas Judiciales,,,7
+25259099,,Gastos Diversos,,,7
+25261,,Transferencias Corrientes al Sector Privado,,,7
+25261001,,A Personas Naturales,,,7
+25261002,,Becas,,,7
+25261003,,A Organismos sin Fines de Lucro,,,7
+25263,,Bienes Inmuebles,,,7
+25263001,,Terrenos,,,7
+25263002,,Edificios e Instalaciones,,,7
+25263099,,Inmuebles Diversos,,,7
+25265,,"Construcciones, Mejoras y Ampliaciones",,,7
+25265001,,Viales,,,7
+25265002,,De Salud y Saneamiento Ambiental,,,7
+25265003,,De Educación y Recreación,,,7
+25265004,,De Vivienda y Oficinas,,,7
+25265005,,"Portuarias, Aeroportuarias y Ferroviarias",,,7
+25265006,,Eléctricas y Comunicaciones,,,7
+25265007,,De Producción de Bienes y Servicios,,,7
+25265008,,Supervisión de Infraestructuras,,,7
+25265099,,Obras de Infraestructura Diversas,,,7
+25267,,Maquinaria y Equipo de Producción,,,7
+25267001,,Maquinarias y Equipos,,,7
+25269,,Equipos Médicos y de Laboratorios,,,7
+25269001,,Equipos Médicos y de Laboratorios,,,7
+25271,,"Equipos de Transporte, Tracción y Elevación",,,7
+25271001,,Vehículos de Transporte,,,7
+25273,,"Maquinaria, Equipo y Mobiliario Diverso",,,7
+25273001,,Mobiliarios,,,7
+25273002,,Equipos Informáticos,,,7
+25273003,,Herramientas y Repuestos Principales,,,7
+25273099,,Bienes Muebles Diversos,,,7
+25275,,Libros y Colecciones,,,7
+25275001,,Libros y Colecciones,,,7
+25277,,Semovientes,,,7
+25277001,,Ganado Vacuno,,,7
+25277002,,Ganado Caballar,,,7
+25277003,,Ganado Porcino,,,7
+25277099,,Semovientes Diversos,,,7
+25279,,Estudios de Preinversión,,,7
+25279001,,Proyectos de Construcciones,,,7
+25279002,,Proyectos de Ampliaciones,,,7
+25279003,,Programas de Inversión Social,,,7
+25279099,,Proyectos y Programas de Inversión Diversos,,,7
+25280,,Transferencias de Capital al Sector Público,,,7
+25280001,,Transferencias de Capital al Sector Público,,,7
+25281,,Transferencias de Capital al Sector Privado,,,7
+25281001,,A Empresas Privadas no Financieras,,,7
+25281002,,A Empresas Privadas Financieras,,,7
+25281003,,A Organismos sin Fines de Lucro,,,7
+25281004,,A Personas Naturales,,,7
+25283,,Derechos de Propiedad Intangibles,,,7
+25283003,,Derechos de Propiedad Intelectual,,,7
+25283099,,Derechos de Intangibles Diversos,,,7
+25290,,Depreciación,,,7
+25291,,Costos Acumulados de la Inversión,,,7
+25298,,Depreciación Acumulada,,,7
+25298063,,Bienes Inmuebles,,,7
+25298065,,"Construcciones, Mejoras y Ampliaciones",,,7
+25298067,,Maquinaria y Equipo de Producción,,,7
+25298069,,Equipos Médicos y de Laboratorios,,,7
+25298071,,"Equipos de Transporte, Tracción y Elevación",,,7
+25298073,,"Maquinaria, Equipo y Mobiliario Diverso",,,7
+25298077,,Semovientes (Agotamiento),,,7
+25299,,Aplicación Inversiones Públicas,,,7
+41,,DEUDA CORRIENTE,,,7
+412,,DEPOSITOS DE TERCEROS,,,7
+41201,,Depósitos Ajenos,,,7
+41203,,Anticipos por Servicios,,,7
+41205,,Anticipos por Intereses,,,7
+41207,,Depósitos en Garantía,,,7
+41209,,Anticipos por Ventas de Bienes,,,7
+41213,,Anticipos de Fondos por Instituciones Públicas,,,7
+41250,,Depósitos Fondos de Actividades Especiales,,,7
+41251,,Depósitos de Retenciones Fiscales,,,7
+41252,,Depósitos de Recaudaciones por Liquidar,,,7
+41253,,Depósitos Fondos Dependencias Institucionales,,,7
+41254,,Anticipo de Impuesto Retenido IVA,,,7
+41293,,Anticipos Fondos de Convenios por Tesoro Público,,,7
+41295,,Anticipos Fondos por Tesoro Público,,,7
+413,,ACREEDORES MONETARIOS,,,7
+41351,,A. M. x Remuneraciones,,,7
+41353,,A. M x Prestaciones de la Seguridad Social,,,7
+41354,,A. M. x Adquisiciones de Bienes y Servicios,,,7
+41355,,A. M. x Gastos Financieros y Otros,,,7
+41356,,A. M. x Transferencias Corrientes Otorgadas,,,7
+41357,,A. M. x Transferencias Corrientes por Aporte Fiscal,,,7
+41361,,A. M. x Inversiones en Activos Fijos,,,7
+41362,,A. M. x Transferencias de Capital Otorgadas,,,7
+41363,,A. M. x Inversiones Financieras,,,7
+41364,,A. M. x Transferencias de Capital por Aporte Fiscal,,,7
+41371,,A. M. x Amortización de Endeudamiento Público,,,7
+41373,,A. M. x Rescate de Títulosvalores,,,7
+41375,,A. M. x Derechos Especiales de Giro,,,7
+41381,,A. M. x Transferencias de Contribuciones Especiales,,,7
+41382,,A. M. x Transferencias por Contribuciones Especiales de Aporte Fiscal,,,7
+41383,,A. M. x Inversiones Financieras Temporales,,,7
+41384,,A. M. x Remanente de IVA,,,7
+41385,,A. M. x Transferencias entre Dependencias Institucionales,,,7
+41387,,A. M. x Renegociación de Obligaciones Financieras,,,7
+41389,,A. M. x Operaciones de Ejercicios Anteriores,,,7
+42,,FINANCIAMIENTO DE TERCEROS,,,7
+422,,ENDEUDAMIENTO INTERNO,,,7
+42201,,Títulosvalores en el Mercado Nacional,,,7
+42201001,,Bonos del Estado,,,7
+42201003,,Notas de Crédito Tesoro Público,,,7
+42201099,,Títulosvalores Diversos,,,7
+42203,,Letras del Tesoro Público,,,7
+42205,,Empréstitos del Gobierno Central,,,7
+42207,,Empréstitos de Instituciones Descentralizadas no Empresariales,,,7
+42209,,Empréstitos de Empresas Públicas no Financieras,,,7
+42211,,Empréstitos de Empresas Públicas Financieras,,,7
+42213,,Empréstitos de Instituciones de Seguridad Social,,,7
+42215,,Empréstitos de Municipalidades,,,7
+42217,,Empréstitos de Empresas Privadas no Financieras,,,7
+42219,,Empréstitos de Empresas Privadas Financieras,,,7
+42221,,Empréstitos de Organismos sin Fines de Lucro,,,7
+42223,,Empréstitos de Personas Naturales,,,7
+42251,,Renegociación de Deuda Interna,,,7
+42253,,Obligaciones por Operaciones de Titularización,,,7
+42298,,Descuento Sobre Venta de Títulosvalores,,,7
+423,,ENDEUDAMIENTO EXTERNO,,,7
+42301,,Títulos valores en el Mercado Externo,,,7
+42301001,,Bonos del Estado,,,7
+42301002,,Derechos Especiales de Giro – Países Extranjeros,,,7
+42301099,,Títulos valores Diversos,,,7
+42303,,Letras del Tesoro Público,,,7
+42305,,Empréstitos de Empresas Privadas no Financieras,,,7
+42307,,Empréstitos de Empresas Privadas Financieras,,,7
+42309,,Empréstitos de Gobiernos y Organismos Gubernamentales,,,7
+42311,,Empréstitos de Organismos Multilaterales,,,7
+42313,,Empréstitos de Organismos sin Fines de Lucro,,,7
+42315,,Empréstitos de Personas Naturales,,,7
+42351,,Renegociación de Deuda Externa,,,7
+42398,,Descuento Sobre Venta de Títulos valores,,,7
+424,,ACREEDORES FINANCIEROS,,,7
+42401,,Provisión para Inscripción Legal de Documentos,,,7
+42401001,,Mutuo Hipotecario,,,7
+42403,,Depósitos de Afiliados por Contribuciones,,,7
+42403001,,De Empresas Privadas no Financieras,,,7
+42403002,,De Empresas Privadas Financieras,,,7
+42403003,,De Organismos sin Fines de Lucro,,,7
+42403004,,De Personas Naturales,,,7
+42405,,Débito Fiscal por Venta de Bienes y Servicios,,,7
+42405001,,Débito Fiscal,,,7
+42407,,Débito Fiscal por Ingresos Financieros y Otros,,,7
+42407001,,Débito Fiscal,,,7
+42409,,Débito Fiscal por Venta de Activos Fijos,,,7
+42409001,,Débito Fiscal,,,7
+42411,,Débito Fiscal por Pago de Impuestos,,,7
+42411001,,Impuesto a la Transferencia de Bienes Muebles y a la Prestación de Servicios,,,7
+42413,,Acreedores por Anticipo de Impuesto,,,7
+42413001,,Sobre la Renta de Personas Naturales Asalariadas,,,7
+42413002,,Sobre la Renta de Personas Naturales no Asalariadas,,,7
+42413003,,Sobre la Renta de Personas Jurídicas,,,7
+42413004,,Sobre la Renta de Personas Naturales,,,7
+42415,,Acreedores Financieros por Administración de Cartera,,,7
+42417,,Indemnizaciones Laborales,,,7
+42419,,Provisiones para Prestaciones Laborales,,,7
+42421,,Provisiones para Infraestructura,,,7
+42423,,Provisión por Notas de Crédito del Tesoro Público Otorgadas,,,7
+42431,,Provisión por Emisión de Certificados de Traspaso,,,7
+42440,,Renegociación de Otras Obligaciones Financieras,,,7
+42450,,Provisiones por Acreedores Monetarios,,,7
+42451,,Acreedores Monetarios por Pagar,,,7
+42452,,Provisión por Obligaciones de Convenios en Subsidios,,,7
+42454,,Obligaciones por Bienes Muebles e Inmuebles Recibidos de Terceros,,,7
+42454001,,En Comodato,,,7
+42454002,,En Administración,,,7
+42455,,Obligaciones por Préstamos de Existencias Institucionales,,,7
+42455001,,Productos Farmacéuticos Medicinales,,,7
+42457,,Asignaciones por Derechos Especiales de Giro - GOES,,,7
+42498,,Provisión para Financiamiento de Terceros por Aplicar,,,7
+81,,PATRIMONIO ESTATAL,,,7
+811,,PATRIMONIO,,,7
+81101,,Patrimonio Gobierno Central,,,7
+81103,,Patrimonio Instituciones Descentralizadas,,,7
+81105,,Patrimonio Municipalidades,,,7
+81107,,Donaciones y Legados Bienes Corporales,,,7
+81109,,Resultado Ejercicios Anteriores,,,7
+81111,,Resultado Ejercicio Corriente,,,7
+81113,,Superávit por Revaluaciones,,,7
+812,,RESERVAS,,,7
+81201,,Reserva para Emergencias,,,7
+81203,,Reserva Técnica,,,7
+81205,,Reserva para Infraestructura,,,7
+81207,,Reserva Laboral,,,7
+81209,,Reserva para Obligaciones con Terceros,,,7
+819,,DETRIMENTO PATRIMONIAL,,,7
+81901,,Detrimentos de Fondos,,,7
+81903,,Detrimentos de Inversiones Financieras,,,7
+81905,,Detrimentos de Inversiones en Existencias,,,7
+81907,,Detrimentos de Inversiones en Bienes de Uso,,,7
+83,,GASTOS DE GESTION,,,7
+831,,GASTOS DE INVERSIONES PÚBLICAS,,,7
+83101,,Proyectos de Construcción de Infraestructura Vial,,,7
+83103,,Proyectos de Construcción de Lugares de Recreación,,,7
+83105,,Proyectos de Construcción de Obras Hidráulicas,,,7
+83107,,Proyectos de Construcción de Obras Geotérmicas,,,7
+83109,,Proyectos de Construcción de Obras Sanitarias,,,7
+83111,,Proyectos de Instalaciones Eléctricas y Comunicaciones,,,7
+83139,,Proyectos Privativos y Uso Público Diversos,,,7
+83141,,Proyectos y Programas Educacionales,,,7
+83143,,Proyectos y Programas de Salud Pública,,,7
+83145,,Proyectos y Programas de Viviendas Básicas,,,7
+83169,,Proyectos y Programas de Desarrollo Social Diversos,,,7
+83171,,Proyectos y Programas de Fomento Agropecuario,,,7
+83173,,Proyectos y Programas de Fomento Forestal,,,7
+83175,,Proyectos y Programas de Fomento Pesquero,,,7
+83177,,Proyectos y Programas de Fomento Industrial,,,7
+83179,,Proyectos y Programas de Fomento Comercial,,,7
+83199,,Proyectos y Programas de Fomento Diversos,,,7
+832,,GASTOS PREVISIONALES,,,7
+83201,,Pensiones,531,,7
+83201001,,Pensiones por Vejez,53101,,7
+83201002,,Pensiones por Invalidez,53102,,7
+83201003,,Pensiones por Viudez,53103,,7
+83201004,,Pensiones por Orfandad,53104,,7
+83203,,Otros Gastos Previsionales,531,,7
+83203001,,Beneficios por Incapacidad Temporal,53105,,7
+83203002,,Beneficios Adicionales,53106,,7
+83203099,,Pensiones y Jubilaciones Diversas,53199,,7
+833,,GASTOS EN PERSONAL,,,7
+83301,,Remuneraciones Personal Permanente,511,,7
+83301001,,Sueldos,51101,,7
+83301002,,Salarios por Jornal,51102,,7
+83301003,,Aguinaldos,51103,,7
+83301004,,Sobresueldos,51104,,7
+83301005,,Dietas,51105,,7
+83301006,,Complementos,51106,,7
+83301007,,Beneficios Adicionales,51107,,7
+83303,,Remuneraciones Personal Eventual,512,,7
+83303001,,Sueldos,51201,,7
+83303002,,Salarios por Jornal,51202,,7
+83303003,,Aguinaldos,51203,,7
+83303004,,Sobresueldos,51204,,7
+83303005,,Complementos,51206,,7
+83303006,,Beneficios Adicionales,51207,,7
+83305,,Remuneraciones por Servicios Extraordinarios,513,,7
+83305001,,Horas Extraordinarias,51301,,7
+83305002,,Beneficios Extraordinarios,51302,,7
+83307,,Contribuciones Patronales a Instituciones de Seguridad Social Públicas,514,,7
+83307001,,Por Remuneraciones Permanentes,51401,,7
+83307002,,Por Remuneraciones Eventuales,51402,,7
+83307003,,Por Remuneraciones Extraordinarias,51403,,7
+83309,,Contribuciones Patronales a Instituciones de Seguridad Social Privadas,515,,7
+83309001,,Por Remuneraciones Permanentes,51501,,7
+83309002,,Por Remuneraciones Eventuales,51502,,7
+83309003,,Por Remuneraciones Extraordinarias,51503,,7
+83311,,Gastos de Representación,516,,7
+83311001,,Por Prestación de Servicios en el País,51601,,7
+83311002,,Por Prestación de Servicios en el Exterior,51602,,7
+83313,,Indemnizaciones,517,,7
+83313001,,Al Personal de Servicios Permanentes,51701,,7
+83313002,,Al Personal de Servicios Eventuales,51702,,7
+83315,,Comisiones,518,,7
+83315001,,Comisiones por Ventas,51801,,7
+83315002,,Comisiones por Recaudaciones,51802,,7
+83315003,,Comisiones por Recuperación de Carteras,51803,,7
+83315099,,Comisiones por Procedencia Diversas,51899,,7
+83317,,Otras Remuneraciones,519,,7
+83317001,,Honorarios,51901,,7
+83317002,,Remuneraciones por Servicios Especiales,51902,,7
+83317003,,Prestaciones Sociales al Personal,51903,,7
+83317099,,Remuneraciones Diversas,51999,,7
+834,,GASTOS EN BIENES DE CONSUMO Y SERVICIOS,,,7
+83401,,"Productos Alimenticios, Agropecuarios y Forestales",541,,7
+83401001,,Productos Alimenticios para Personas,54101,,7
+83401002,,Productos Alimenticios para Animales,54102,,7
+83401003,,Productos Agropecuarios y Forestales,54103,,7
+83403,,Productos Textiles y Vestuarios,541,,7
+83403001,,Productos Textiles y Vestuarios,54104,,7
+83405,,"Materiales de Oficina, Productos de Papel e Impresos",541,,7
+83405001,,Productos de Papel y Cartón,54105,,7
+83405002,,Materiales de Oficina,54114,,7
+83405003,,"Libros, Textos, Útiles de Enseñanza y Publicaciones",54116,,7
+83407,,Productos de Cuero y Caucho,541,,7
+83407001,,Productos de Cuero y Caucho,54106,,7
+83407003,,Llantas y Neumáticos,54109,,7
+83409,,"Productos Químicos, Combustibles y Lubricantes",541,,7
+83409001,,Productos Químicos,54107,,7
+83409002,,Productos Farmacéuticos y Medicinales,54108,,7
+83409003,,Combustibles y Lubricantes,54110,,7
+83411,,Minerales y Productos Derivados,541,,7
+83411001,,Minerales no Metálicos y Productos Derivados,54111,,7
+83411002,,Minerales Metálicos y Productos Derivados,54112,,7
+83413,,Materiales de Uso o Consumo,541,,7
+83413001,,Materiales e Instrumental de Laboratorios y Uso Médico,54113,,7
+83413002,,Materiales Informáticos,54115,,7
+83413003,,Materiales de Defensa y Seguridad Pública,54117,,7
+83413004,,Materiales Eléctricos,54119,,7
+83415,,Bienes de Uso y Consumo Diverso,541,,7
+83415001,,"Herramientas, Repuestos y Accesorios",54118,,7
+83415099,,Bienes de Uso y Consumo Diverso,54199,,7
+83417,,Servicios Básicos,542,,7
+83417001,,Servicios de Energía Eléctrica,54201,,7
+83417002,,Servicios de Agua,54202,,7
+83417003,,Servicios de Telecomunicaciones,54203,,7
+83417004,,Servicios de Correos,54204,,7
+83417005,,Alumbrado Público,54205,,7
+83419,,Mantenimiento y Reparación,543,,7
+83419001,,Mantenimientos y Reparaciones de Bienes Muebles,54301,,7
+83419002,,Mantenimientos y Reparaciones de Vehículos,54302,,7
+83419003,,Mantenimientos y Reparaciones de Bienes Inmuebles,54303,,7
+83421,,Servicios Comerciales,543,,7
+83421001,,"Transportes, Fletes y Almacenamientos",54304,,7
+83421002,,Servicios de Publicidad,54305,,7
+83421003,,Servicios de Vigilancia,54306,,7
+83421004,,Servicios de Limpieza y Fumigaciones,54307,,7
+83421005,,Servicios de Lavanderías y Planchado,54308,,7
+83421006,,Servicios de Laboratorios,54309,,7
+83421007,,Servicios de Alimentación,54310,,7
+83421008,,Servicios Educativos,54311,,7
+83421009,,"Servicios Portuarios, Aeroportuarios y Ferroviarios",54312,,7
+83421010,,"Impresiones, Publicaciones y Reproducciones",54313,,7
+83423,,Otros Servicios y Arrendamientos Diversos,543,,7
+83423001,,Atenciones Oficiales,54314,,7
+83423002,,Gastos Reservados,54315,,7
+83423099,,Servicios Generales y Arrendamientos Diversos,54399,,7
+83425,,Arrendamientos y Derechos,543,,7
+83425001,,De Bienes Muebles,54316,,7
+83425002,,De Bienes Inmuebles,54317,,7
+83425003,,De Bienes Intangibles,54318,,7
+83427,,Pasajes y Viáticos,544,,7
+83427001,,Pasajes al Interior,54401,,7
+83427002,,Pasajes al Exterior,54402,,7
+83427003,,Viáticos por Comisión Interna,54403,,7
+83427004,,Viáticos por Comisión Externa,54404,,7
+83429,,Servicios Técnicos y Profesionales,545,,7
+83429001,,Servicios Médicos,54501,,7
+83429002,,Servicios del Medio Ambiente y Recursos Naturales,54502,,7
+83429003,,Servicios Jurídicos,54503,,7
+83429004,,Servicios de Contabilidad y Auditoría,54504,,7
+83429005,,Servicios de Capacitación,54505,,7
+83429006,,Servicios de Fiscalización,54506,,7
+83429007,,Desarrollos Informáticos,54507,,7
+83429008,,Estudios e Investigaciones,54508,,7
+83429099,,"Consultorías, Estudios e Investigaciones Diversas",54599,,7
+83431,,Tratamiento de Desechos,546,,7
+83431001,,Limpieza de Calles,54601,,7
+83431002,,Depósito Desechos,54602,,7
+83431003,,Recolección Desechos,54603,,7
+83431099,,Servicios Diversos,54699,,7
+83433,,Especies Municipales,541,,7
+83433001,,Especies Municipales Diversas,54121,,7
+835,,GASTOS EN BIENES CAPITALIZABLES,,,7
+83501,,Maquinarias y Equipos,611,,7
+83501001,,Maquinarias y Equipos,61102,,7
+83503,,Equipos Médicos y de Laboratorios,611,,7
+83503001,,Equipos Médicos y de Laboratorios,61103,,7
+83505,,Equipo de Transporte,611,,7
+83505001,,Vehículos de Transporte,61105,,7
+83507,,Equipo y Mobiliario Diversos,611,,7
+83507001,,Mobiliarios,61101,,7
+83507002,,Equipos Informáticos,61104,,7
+83507004,,Herramientas y Repuestos Principales,61108,,7
+83507099,,Bienes Muebles Diversos,61199,,7
+83509,,Libros y Colecciones,611,,7
+83509001,,Libros y Colecciones,61107,,7
+83509002,,Obras de Arte y Culturales,61106,,7
+83511,,Semovientes,613,,7
+83511001,,Ganado Vacuno,61301,,7
+83511002,,Ganado Caballar,61302,,7
+83511003,,Ganado Porcino,61303,,7
+83511099,,Semovientes Diversos,61399,,7
+83513,,Gastos en Activos Intangibles,614,,7
+83513001,,Derechos de Propiedad Industrial,61401,,7
+83513002,,Derechos de Propiedad Comercial,61402,,7
+83513003,,Derechos de Propiedad Intelectual,61403,,7
+83513099,,Derechos Intangibles Diversos,61499,,7
+836,,GASTOS FINANCIEROS Y OTROS,,,7
+83601,,"Primas, Gastos por Seguros y Comisiones Bancarias",556,,7
+83601001,,Primas y Gastos de Seguros de Personas,55601,,7
+83601002,,Primas y Gastos de Seguros de Bienes,55602,,7
+83601003,,Comisiones y Gastos Bancarios,55603,,7
+83603,,"Impuestos, Tasas y Derechos",555,,7
+83603001,,Impuesto Sobre la Renta,55501,,7
+83603002,,Impuesto Sobre la Transferencia de Bienes Raíces,55502,,7
+83603003,,Impuesto Sobre el Comercio Exterior,55503,,7
+83603004,,Impuesto a la Transferencia de Bienes Muebles y a la Prestación de Servicios,55504,,7
+83603007,,Tasas,55507,,7
+83603008,,Derechos,55508,,7
+83603009,,Devolución de Impuestos Percibidos en Exceso,55509,,7
+83603010,,Devolución por Liquidación del Impuesto Sobre la Renta,55510,,7
+83603011,,Devolución a Exportadores del Impuesto a la Transferencia de Bienes Muebles y la Prestación de Servicios,,,7
+83603099,,"Impuestos, Tasas y Derechos Diversos",55599,,7
+83605,,Intereses y Comisiones de Títulosvalores en el Mercado Nacional,551,,7
+83605001,,Intereses y Comisiones de Bonos del Estado,55101,,7
+83605002,,Intereses y Comisiones de Letras del Tesoro,55102,,7
+83605099,,Intereses y Comisiones de Títulosvalores Diversos,55199,,7
+83607,,Intereses y Comisiones de Títulosvalores en el Mercado Externo,552,,7
+83607001,,Intereses y Comisiones de Bonos del Estado,55201,,7
+83607002,,Intereses y Comisiones de Letras del Tesoro,55202,,7
+83607099,,Intereses y Comisiones de Títulosvalores Diversos,55299,,7
+83609,,Intereses y Comisiones de la Deuda Interna,553,,7
+83609001,,De Gobierno Central,55301,,7
+83609002,,De Instituciones Descentralizadas no Empresariales,55302,,7
+83609003,,De Empresas Públicas no Financieras,55303,,7
+83609004,,De Empresas Públicas Financieras,55304,,7
+83609005,,De Instituciones de Seguridad Social,55305,,7
+83609006,,De Municipalidades,55306,,7
+83609007,,De Empresas Privadas no Financieras,55307,,7
+83609008,,De Empresas Privadas Financieras,55308,,7
+83609009,,De Organismos sin Fines de Lucro,55309,,7
+83609010,,De Personas Naturales,55310,,7
+83609011,,Por Operaciones de Titularización,55307,,7
+83611,,Intereses y Comisiones de la Deuda Externa,554,,7
+83611001,,De Empresas Privadas no Financieras,55401,,7
+83611002,,De Empresas Privadas Financieras,55402,,7
+83611003,,De Gobiernos y Organismos Gubernamentales,55403,,7
+83611004,,De Organismos Multilaterales,55404,,7
+83611005,,De Organismos sin Fines de Lucro,55405,,7
+83611006,,De Personas Naturales,55406,,7
+83613,,Gastos Corrientes Diversos,557,,7
+83613002,,Sentencias Judiciales,55702,,7
+83613003,,Multas y Costas Judiciales,55703,,7
+83613099,,Gastos Diversos,55799,,7
+837,,GASTOS EN TRANSFERENCIAS OTORGADAS,,,7
+83701,,Transferencias Corrientes por Aporte Fiscal,,,7
+83701818,,Presidencia de la República 1/,,,7
+83703,,Transferencias de Capital por Aporte Fiscal,,,7
+83703818,,Presidencia de la República 1/,,,7
+83705,,Transferencias Corrientes al Sector Público,562,,7
+83705819,,Instituto Nacional de los Deportes de El Salvador (INDES) 1/,5620501,,7
+83707,,Transferencias de Capital al Sector Público,622,,7
+83707819,,Instituto Nacional de los Deportes de El Salvador (INDES) 1/,6220501,,7
+83709,,Transferencias Corrientes al Sector Privado,563,,7
+83709001,,A Empresas Privadas no Financieras,56301,,7
+83709002,,A Empresas Privadas Financieras,56302,,7
+83709003,,A Organismos sin Fines de Lucro,56303,,7
+83709004,,A Personas Naturales,56304,,7
+83709005,,Becas,56305,,7
+83711,,Transferencias de Capital al Sector Privado,623,,7
+83711001,,A Empresas Privadas no Financieras,62301,,7
+83711002,,A Empresas Privadas Financieras,62302,,7
+83711003,,A Organismos sin Fines de Lucro,62303,,7
+83711004,,A Personas Naturales,62304,,7
+83713,,Transferencias Corrientes al Sector Externo,,,7
+83713001,,A Gobiernos y Organismos Gubernamentales,56403,,7
+83713002,,A Organismos Multilaterales,56404,,7
+83713003,,A Organismos sin Fines de Lucro,56405,,7
+83713004,,A Personas Naturales,56406,,7
+83741,,Transferencias por Contribuciones Especiales al Sector Público,811,,7
+83741927,,Fondo de Conservación Vial,81101,,7
+83741002,,Contribución para Estabilizar Tarifa del Transporte Público,81105,,7
+83741888,,Fondo Solidario para la Salud,81103,,7
+83741904,,Corporación Salvadoreña de Turismo,81104,,7
+83741936,,Consejo Salvadoreño de la Agroindustria Azucarera (CONSAA),81102,,7
+83743,,Transferencias de Contribuciones Especiales de Aporte Fiscal,,,7
+83743896,,Ministerio de Economía 1/,,,7
+83799,,Transferencias entre Dependencias Institucionales,,,7
+838,,COSTOS DE VENTAS Y CARGOS CALCULADOS,,,7
+83801,,Costo de Venta de Productos y Materiales,,,7
+83803,,Costo de Venta de Servicios,,,7
+83805,,Costo de Venta de Bienes de Uso,,,7
+83806,,Gastos por Descargo de Bienes de Larga Duración,,,7
+83807,,Costo de Venta de Artículos Estancados,,,7
+83809,,Costo por Descargo de Materiales y Suministros,,,7
+83811,,Amortización de Inversiones Intangibles,,,7
+83813,,Gastos por Deudores e Inversiones no Recuperables,,,7
+83815,,Depreciación de Bienes de Uso,,,7
+83816,,Amortización de Inversiones en Bienes Privativos,,,7
+83817,,"Gastos por Obsolescencia, Mermas y Deterioro de Existencias",,,7
+83819,,Costo de Venta de Activos Extraordinarios,,,7
+83821,,Gastos por Descuentos y Bonificaciones,557,,7
+83821001,,Comisiones y Descuentos Sobre Ventas,55704,,7
+83823,,Costo de Venta y Descargo de Semovientes,,,7
+83825,,Costo por Mantenimiento de Reservas Técnicas,,,7
+839,,GASTOS DE ACTUALIZACIONES Y AJUSTES,,,7
+83901,,Gastos por Pérdidas de Fondos,,,7
+83903,,Gastos por Pérdidas de Inversiones Financieras,,,7
+83905,,Gastos por Pérdidas o Daños de Bienes Corporales,,,7
+83950,,Diferencias por Tipo de Cambio M/E,,,7
+83950001,,M/E Diferenciales Cambiarios,,,7
+83951,,Corrección de Obligaciones con Terceros,,,7
+83952,,Corrección del Patrimonio,,,7
+83955,,Ajustes de Ejercicios Anteriores,,,7
+85,,INGRESOS DE GESTION,,,7
+851,,INGRESOS TRIBUTARIOS,,,7
+85101,,Impuesto Sobre la Renta,,,7
+85101001,,De Personas Naturales Asalariadas,,,7
+85101002,,De Personas Naturales no Asalariadas,,,7
+85101003,,De Personas Jurídicas,,,7
+85101004,,Por Retenciones a personas Naturales o Jurídicas,,,7
+85103,,Impuesto Sobre Transferencia de Bienes Raíces,,,7
+85103001,,Transferencia de Bienes Raíces,,,7
+85105,,Impuesto Sobre el Comercio Exterior,,,7
+85105001,,Aranceles a la Importación,,,7
+85107,,Impuesto a la Transferencia de Bienes Muebles y a la Prestación de Servicios,,,7
+85107001,,Sobre Transacciones Internas,,,7
+85107002,,Sobre Transacciones con el Exterior,,,7
+85107003,,Sobre Transacciones Internas vía Retención y Percepción,,,7
+85109,,Impuesto a Productos Específicos,,,7
+85109001,,Sobre Alcohol y Bebidas Alcohólicas,,,7
+85109002,,Sobre Cerveza,,,7
+85109003,,Sobre Productos de Tabaco,,,7
+85109005,,Sobre Gasolina,,,7
+85109008,,Sobre Bebidas Energizantes o Estimulantes,,,7
+85109009,,Ad- valorem sobre Alcohol y Bebidas Alcohólicas,,,7
+85109010,,Ad- valorem sobre Cerveza,,,7
+85109011,,Ad- valorem sobre Productos de Tabaco,,,7
+85109012,,Ad- valorem sobre Bebidas Carbonatadas o Gaseosas,,,7
+85109013,,Ad- valorem sobre Bebidas Energizantes e Estimulantes,,,7
+85109014,,"Ad- valorem sobre Bebidas Deportivas, Fortificantes, Jugos, Néctares y Refrescos Diversos.",,,7
+85109015,,Ad- valorem sobre Combustibles,,,7
+85109016,,"Ad- valorem sobre Armas de Fuegos, Municiones, Explosivos y Similares",,,7
+85109017,,Sobre Alcohol Etílico Potable,,,7
+85111,,Otros Impuestos,,,7
+85111001,,De Migración y Turismo,,,7
+85111002,,Sobre Llamadas Telefónicas Provenientes del Exterior,,,7
+85111003,,Impuesto Especial a la Primera Matrícula de Bienes,,,7
+85119,,Impuestos Municipales,,,7
+85119001,,De Comercio,,,7
+85119002,,De Industria,,,7
+85119003,,Financieros,,,7
+85119004,,De Servicios,,,7
+85119005,,Agropecuarios,,,7
+85119006,,Bares y Restaurantes,,,7
+85119007,,Cementerios Particulares,,,7
+85119008,,Centros de Enseñanza,,,7
+85119009,,Estudios Fotográficos,,,7
+85119010,,"Hoteles, Moteles y Similares",,,7
+85119011,,Loterías de Cartón,,,7
+85119012,,Máquinas Traganíquel,,,7
+85119013,,Médicos Hospitalarios,,,7
+85119014,,Servicios Profesionales,,,7
+85119016,,Transporte,,,7
+85119017,,Vallas Publicitarias,,,7
+85119018,,Vialidad,,,7
+85119099,,Impuestos Municipales Diversos,,,7
+852,,INGRESOS SEGURIDAD SOCIAL,,,7
+85201,,Contribuciones del Sector Privado,,,7
+85201001,,Contribuciones Patronales,,,7
+85201002,,Contribuciones Laborales,,,7
+85203,,Contribuciones del Sector Público,,,7
+85203001,,Contribuciones Patronales,,,7
+85203002,,Contribuciones Laborales,,,7
+85203003,,Contribuciones Estatales,,,7
+855,,INGRESOS FINANCIEROS Y OTROS,,,7
+85501,,Primas de Seguros,,,7
+85501001,,Primas de Seguros,,,7
+85503,,Rentabilidad de Inversiones Financieras,,,7
+85503001,,Rentabilidad Financiera de Bonos,,,7
+85503002,,Rentabilidad de Letras del Tesoro,,,7
+85503003,,Rentabilidad Financiera de Cédulas Hipotecarias,,,7
+85503004,,Rentabilidad de Depósitos a Plazos,,,7
+85503005,,Rentabilidad de Inversiones en el Exterior,,,7
+85503099,,Otras Rentabilidades Financieras,,,7
+85505,,Dividendos de Inversiones Financieras,,,7
+85505001,,Dividendos de Acciones,,,7
+85505002,,Dividendos de Participación de Capital,,,7
+85505003,,Dividendos de Inversiones en el Exterior,,,7
+85507,,Intereses de Préstamos Otorgados,,,7
+85507001,,Al Gobierno Central,,,7
+85507002,,A Instituciones Descentralizadas no Empresariales,,,7
+85507003,,A Empresas Públicas no Financieras,,,7
+85507004,,A Empresas Públicas Financieras,,,7
+85507005,,A Instituciones de Seguridad Social,,,7
+85507006,,A Municipalidades,,,7
+85507007,,A Empresas Privadas no Financieras,,,7
+85507008,,A Empresas Privadas Financieras,,,7
+85507009,,A Organismos sin Fines de Lucro,,,7
+85507010,,A Personas Naturales,,,7
+85509,,Arrendamiento de Bienes,,,7
+85509001,,Arrendamientos de Bienes Muebles,,,7
+85509002,,Arrendamientos de Bienes Inmuebles,,,7
+85509099,,Arrendamientos de Bienes Diversos,,,7
+856,,INGRESOS POR TRANSFERENCIAS CORRIENTES RECIBIDAS,,,7
+85601,,Multas e Intereses por Mora,,,7
+85601001,,Multas por Mora de Impuestos,,,7
+85601002,,Intereses por Mora de Impuestos,,,7
+85601003,,Multas por Mora de Seguridad Social,,,7
+85601004,,Intereses por Mora de Seguridad Social,,,7
+85601005,,Intereses por Mora en Amortización de Préstamos,,,7
+85601006,,Multas por Infracciones de Tránsito,,,7
+85601007,,Intereses por Mora en Infracciones de Tránsito,,,7
+85601008,,Multas por Acera sin Construir,,,7
+85601009,,Multas por Predio sin Edificar,,,7
+85601010,,Multas por Declaración Extemporánea,,,7
+85601011,,Multas de Parquímetros,,,7
+85601012,,Multas por Registro Civil,,,7
+85601013,,Multas al Comercio,,,7
+85601014,,Otras Multas Municipales,,,7
+85601015,,Intereses por Venta de Inmuebles,,,7
+85601016,,Intereses por Cementerios,,,7
+85601099,,Multas e Intereses Diversos,,,7
+85603,,Transferencias Corrientes de Aporte Fiscal,,,7
+85603935,,Tesoro Público (DGT) 1/,,,7
+85605,,Transferencias Corrientes del Sector Público,,,7
+85605818,,Presidencia de la República 1/,,,7
+85606,,Otras Transferencias Corrientes del Sector Público,,,7
+85606099,,Transferencias Corrientes Diversas del Sector Público,,,7
+85607,,Transferencias Corrientes del Sector Privado,,,7
+85607001,,De Empresas Privadas no Financieras,,,7
+85607002,,De Empresas Privadas Financieras,,,7
+85607003,,De Organismos sin Fines de Lucro,,,7
+85607004,,De Personas Naturales,,,7
+85609,,Transferencias Corrientes del Sector Externo,,,7
+85609001,,De Empresas Privadas no Financieras,,,7
+85609002,,De Empresas Privadas Financieras,,,7
+85609003,,De Gobiernos y Organismos Gubernamentales,,,7
+85609004,,De Organismos Multilaterales,,,7
+85609005,,De Organismos sin Fines de Lucro,,,7
+85609006,,De Personas Naturales,,,7
+85697,,Ingresos por Aportes no Monetarios,,,7
+85699,,Transferencias entre Dependencias Institucionales,,,7
+857,,INGRESOS POR TRANSFERENCIAS DE CAPITAL RECIBIDAS Y CONTRIBUCIONES ESPECIALES,,,7
+85701,,Transferencias de Capital de Aporte Fiscal,,,7
+85701935,,Tesoro Público (DGT) 1/,,,7
+8570,,Transferencias de Capital del Sector Público,,,7
+85703818,,Presidencia de la República 1/,,,7
+85704,,Otras Transferencias de Capital del Sector Público,,,7
+85704099,,Transferencias de Capital Diversas del Sector Público,,,7
+85705,,Transferencias de Capital del Sector Privado,,,7
+85705001,,De Empresas Privadas no Financieras,,,7
+85705002,,De Empresas Privadas Financieras,,,7
+85705003,,De Organismos sin Fines de Lucro,,,7
+85705004,,De Personas Naturales,,,7
+85707,,Transferencias de Capital del Sector Externo,,,7
+85707001,,De Empresas Privadas no Financieras,,,7
+85707002,,De Empresas Privadas Financieras,,,7
+85707003,,De Gobiernos y Organismos Gubernamentales,,,7
+85707004,,De Organismos Multilaterales,,,7
+85707005,,De Organismos sin Fines de Lucro,,,7
+85707006,,De Personas Naturales,,,7
+85741,,Contribuciones a Productos Especiales,,,7
+85741001,,Contribuciones Especiales sobre Diesel y Gasolina,,,7
+85741002,,Contribución por Libra de Azúcar Extraída,,,7
+85741003,,"Contribuciones sobre Bebidas Alcohólicas, Tabaco y Armas",,,7
+85741004,,Contribución Especial para la Promoción Turística,,,7
+85741005,,Contribución para Estabilizar Tarifa del Transporte Público,,,7
+85742,,Contribuciones Especiales Municipales,,,7
+85742001,,Contribución Especial a Parques y Análogos,,,7
+85742002,,Contribuciones Especiales para Fiestas,,,7
+85743,,Transferencias de Contribuciones Especiales de Aporte Fiscal,,,7
+85743935,,Tesoro Público (DGT) 1/,,,7
+85797,,Ingresos no Monetarios por Aportes de Contrapartida,,,7
+858,,INGRESOS POR VENTAS DE BIENES Y SERVICIOS,,,7
+85801,,Tasas de Servicios Públicos,,,7
+85801001,,Por Uso de Infraestructura Aeroportuaria,,,7
+85801002,,Por Uso de Centros Destinados a Almacenajes,,,7
+85801003,,Por Intermediación o Supervisión en la Internación de Bienes y Servicios,,,7
+85801004,,Por Servicios de Asistencia Técnica y Uso de Laboratorios,,,7
+85801005,,Por Servicios de Certificación o Visado de Documentos,,,7
+85801006,,Por Expedición de Documentos de Identificación,,,7
+85801007,,Por Acceso a Lugares Públicos,,,7
+85801008,,Alumbrado Público,,,7
+85801009,,Aseo Público,,,7
+85801010,,Casetas Telefónicas,,,7
+85801011,,Cementerios Municipales,,,7
+85801012,,Desechos,,,7
+85801013,,Estacionamientos y Parquímetros,,,7
+85801014,,Fiestas,,,7
+85801015,,Mercados,,,7
+85801016,,Nomenclatura,,,7
+85801017,,Pavimentación,,,7
+85801018,,"Postes, Torres y Antenas",,,7
+85801019,,Rastro y Tiangue,,,7
+85801020,,Revisión de Planos,,,7
+85801021,,Sombras Paradas de Buses,,,7
+85801022,,Terminal de Buses,,,7
+85801023,,Baños y Lavaderos Públicos,,,7
+85801024,,Mantenimiento y Reconstrucción de Parques,,,7
+85801099,,Tasas Diversas,,,7
+85803,,Derechos,,,7
+85803001,,Por Registro de Comercio,,,7
+85803002,,Por Inscripción en el Registro de Bienes Raíces e Hipotecas,,,7
+85803003,,Por Permisos y Matriculas de Armas,,,7
+85803004,,Por Examen y Matricula de Estudiantes,,,7
+85803005,,Por Permisos de Circulación de Vehículos,,,7
+85803006,,Por Licencias para Conducir o Similares,,,7
+85803007,,"Por Patentes, Marcas de Fábrica y Otros",,,7
+85803008,,Por Regalías,,,7
+85803009,,Consulares,,,7
+85803010,,Permisos y Licencias Municipales,,,7
+85803011,,Cotejo de Fierros,,,7
+85803099,,Derechos Diversos,,,7
+85805,,Venta de Bienes,,,7
+85805001,,Venta de Bienes Comerciales,,,7
+85805002,,Venta de Bienes Industriales,,,7
+85805099,,Venta de Bienes Diversos,,,7
+85807,,Venta de Servicios Públicos,,,7
+85807001,,Servicios Básicos,,,7
+85807002,,Servicios de Educación y Salud,,,7
+85807003,,Servicios Turísticos y Ecológicos,,,7
+85807004,,Servicios de Transporte y Correos,,,7
+85807005,,Servicios Portuarios,,,7
+85807006,,Servicios Aeroportuarios,,,7
+85807007,,Servicios Ferroviarios,,,7
+85807008,,Servicios de Fiscalización,,,7
+85807099,,Servicios Diversos,,,7
+85809,,Venta de Desechos y Residuos,,,7
+85809001,,De Bienes Comerciales,,,7
+85809002,,De Bienes Industriales,,,7
+85809099,,De Bienes Diversos,,,7
+85811,,Venta de Bienes Muebles,,,7
+85811001,,Venta de Mobiliarios,,,7
+85811002,,Ventas de Maquinarias y Equipos,,,7
+85811003,,Ventas de Equipos Médicos y de Laboratorios,,,7
+85811004,,Venta de Equipos Informáticos,,,7
+85811005,,Venta de Vehículos de Transporte,,,7
+85811006,,Venta de Obras de Arte y Culturales,,,7
+85811007,,Venta de Libros y Colecciones,,,7
+85811099,,Venta de Otros Bienes Muebles,,,7
+85813,,Venta de Bienes Inmuebles,,,7
+85813001,,Venta de Terrenos,,,7
+85813002,,Venta de Edificios e Instalaciones,,,7
+85813099,,Venta de Otros Bienes Inmuebles,,,7
+85815,,Venta de Semovientes,,,7
+85815001,,Venta de Ganado Vacuno,,,7
+85815002,,Venta de Ganado Caballar,,,7
+85815003,,Venta de Ganado Porcino,,,7
+85815099,,Venta de Otros Semovientes,,,7
+85817,,Venta de Intangibles,,,7
+85817001,,Venta de Derechos de Propiedad Industrial,,,7
+85817002,,Venta de Derechos de Propiedad Comercial,,,7
+85817003,,Venta de Derechos de Propiedad Intelectual,,,7
+85817099,,Venta de Otros Derechos Intangibles,,,7
+859,,INGRESOS POR ACTUALIZACIONES Y AJUSTES,,,7
+85901,,Ingresos por Garantías y Fianzas Ejecutadas,,,7
+85901001,,Garantías de Contratos de Obras,,,7
+85901002,,Garantías de Contratos Generales,,,7
+85901003,,Fianzas,,,7
+85903,,Indemnizaciones y Valores no Reclamados,,,7
+85903001,,Excedentes de Mercaderías Decomisadas o Abandonadas,,,7
+85903002,,Compensaciones por Pérdidas o Daños de Bienes Muebles,,,7
+85903003,,Compensaciones por Daños de Bienes Inmuebles,,,7
+85903099,,Compensaciones por Pérdidas de Daños de Bienes Diversos,,,7
+85907,,Diferencias por Tipo de Cambio M/E,,,7
+85907001,,Diferenciales Cambiarios,,,7
+85909,,Ingresos Diversos,,,7
+85909001,,Rentabilidad de Cuentas Bancarias,,,7
+85909099,,Ingresos Diversos,,,7
+85947,,Ingresos por Donaciones en Especie,,,7
+85949,,Ingresos por Donaciones de Bienes,,,7
+85951,,Corrección de Recursos,,,7
+85953,,Ingresos por Excedentes en Inversiones Financieras,,,7
+85955,,Ajustes de Ejercicios Anteriores,,,7
+9,,CUENTAS DE ORDEN,,,7
+91,,De Control Deudora,,,7
+911,,Inversión Pública Proyectada,,,7
+91101,,Inversión Pública Contratada,,,7
+912,,Activos Castigados,,,7
+91201,,Intereses de Préstamos Vencidos más de 90 dias,,,7
+91202,,Intereses de Préstamos Vencidos más de un año,,,7
+91203,,Cartera de Préstamos Vencidos,,,7
+913,,Bienes Depreciados e Inservibles,,,7
+91301,,Bienes Depreciados e Inservibles,,,7
+91301001,,Bienes Ferrosos,,,7
+91301002,,Equipo Informático,,,7
+91301003,,Mobiliario y Equipo Diverso,,,7
+92,,Derechos Contingentes,,,7
+921,,Contratos de Seguros,,,7
+92101,,Pólizas de Seguros para Personas,,,7
+92102,,Pólizas de Seguros para Bienes,,,7
+922,,Demandas Realizadas por el Estado,,,7
+92201,,Demandas por Incumplimiento de Contratos,,,7
+92202,,Demandas por Cartera de Activos Castigados,,,7
+923,,Bienes Incautados,,,7
+92301,,Bienes y Prendas en Custodia,,,7
+92302,,Dinero y Valores,,,7
+924,,Fianzas o Garantías Recibidas,,,7
+92401,,Garantía por Buena Inversión de Anticipo,,,7
+92402,,Garantía por Cumplimiento de Contrato,,,7
+92403,,Garantía por Buena Obra,,,7
+92404,,Otras Garantías a Favor,,,7
+95,,Acreedoras por Contra,,,7
+951,,De Control Acreedoras por Contra,,,7
+95101,,Títulosvalores no Colocados por Contra,,,7
+95102,,Empréstitos Autorizados por Contra,,,7
+95103,,Empréstitos Contratados por Contra,,,7
+95104,,Pensiones por Contra,,,7
+95105,,Prestaciones y Beneficios por Contra,,,7
+95106,,Bienes Muebles y Materiales por Contra,,,7
+95107,,Bienes Inmuebles por Contra,,,7
+95108,,Cargos Previstos por Operaciones de Titularización por Contra,,,7
+952,,Obligaciones Contingentes por Contra,,,7
+95201,,Garantías por Préstamos Internos por Contra,,,7
+95202,,Garantías por Préstamos Externos por Contra,,,7
+95203,,Demandas Laborales por Contra,,,7
+95204,,Demandas por Incumplimiento de Contratos por Contra,,,7
+95205,,Demandas Patrimoniales por Contra,,,7
+95206,,Seguro de Vida por Contra,,,7
+96,,De Control Acreedora,,,7
+961,,Emisión de Obligaciones,,,7
+96101,,Títulos valores no Colocados,,,7
+96102,,Empréstitos Autorizados,,,7
+96103,,Empréstitos Contratados,,,7
+962,,Obligaciones Previsionales,,,7
+96201,,Pensiones,,,7
+96202,,Prestaciones y Beneficios,,,7
+963,,Donaciones de Bienes Recibidos para Terceros,,,7
+96301,,Bienes Muebles y Materiales,,,7
+96302,,Bienes Inmuebles,,,7
+964,,Operaciones de Titularización,,,7
+96401,,Cargos Previstos por Operaciones de Titularización,,,7
+97,,Obligaciones Contingentes,,,7
+971,,Préstamos Garantizados,,,7
+97101,,Garantías por Préstamos Internos,,,7
+97102,,Garantías por Préstamos Externos,,,7
+972,,Demandas Contra el Estado,,,7
+97201,,Demandas Laborales,,,7
+97202,,Demandas por Incumplimiento de Contratos,,,7
+97203,,Demandas Patrimoniales,,,7
+973,,Contratos de Seguros,,,7
+97301,,Seguros de Vida,,,7
+99,,Deudoras por Contra,,,7
+991,,Deudoras de Control por Contra,,,7
+99101,,Inversión Pública Contratada por Contra,,,7
+99102,,Intereses de Préstamos Vencidos más de 90 dias por Contra,,,7
+99103,,Intereses de Préstamos Vencidos más de un año por Contra,,,7
+99104,,Cartera de Préstamos Vencidos por Contra,,,7
+99105,,Bienes Depreciados e Inservibles por Contra,,,7
+99105001,,Bienes Ferrosos por Contra,,,7
+99105002,,Equipo Informático por Contra,,,7
+99105003,,Mobiliario y Equipo Diverso por Contra,,,7
+992,,Derechos Contingentes por Contra,,,7
+99201,,Pólizas de Seguros para Personas por Contra,,,7
+99202,,Pólizas de Seguros para Bienes por Contra,,,7
+99203,,Demandas por Incumplimiento de Contratos por Contra,,,7
+99204,,Demandas por Cartera de Activos Castigados por Contra,,,7
+99205,,Bienes y Prendas en Custodia por Contra,,,7
+99206,,Dinero y Valores por Contra,,,7
+99207,,Garantía por Buena Inversión de Anticipo por Contra,,,7
+99208,,Garantía por Cumplimiento de Contrato por Contra,,,7
+99209,,Garantía por Buena Obra por Contra,,,7
+99210,,Otras Garantías a Favor por Contra,,,7

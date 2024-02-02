@@ -1,0 +1,407 @@
+Codigo,Tipo,Cuenta,tipo_catalogo
+1112,,Inventario,8
+111201,,Plantia y arboles de sombra,8
+111202,,Productos Agricolas-Cafe,8
+11120201,,Cafe Uva,8
+1112020101,,Bajio,8
+1112020102,,Media Altura,8
+1112020103,,Estricta Altura,8
+11120202,,Cafe Verde,8
+1112020201,,Bajio,8
+1112020202,,Media Altura,8
+1112020203,,Estricta Altura,8
+11120203,,Otros,8
+111203,,Insumos y Materiales,8
+11120301,,Semilla de Cafe,8
+11120302,,Fertilizantes,8
+11120303,,Insecticidas,8
+11120304,,Fungicidas,8
+11120305,,Herbicidas,8
+11120306,,Plaguicidas,8
+11120307,,Nameticidas,8
+11120308,,Otros,8
+1113,,Costos de cafe cosecha futura,8
+111301,,Mantenimiento,8
+11130101,,Insumos y Materiales,8
+1113010101,,Fertilizantes Quimicos,8
+1113010102,,Fertilizantes Organicos,8
+1113010103,,Fungicidas,8
+1113010104,,Herbicidas,8
+1113010105,,Plaguicidas,8
+1113010106,,Nameticidas,8
+1113010107,,Insecticidas,8
+1113010108,,Otros,8
+11130102,,Mano de obra directa,8
+1113010201,,Fertilizacion de cafe,8
+1113010202,,Fertilizacion de arboles de sombra,8
+1113010203,,Fertilizacion de cortinas rompevientos,8
+1113010204,,Poda de cafe,8
+1113010205,,Agobio,8
+1113010206,,Poda de arboles de sombra,8
+1113010207,,Poda de cortinas de rompevientos,8
+1113010208,,Deshije,8
+1113010209,,Aplicacion de insecticidas,8
+1113010210,,Aplicacion de fungicidas,8
+1113010211,,Aplicacion de herbicidas,8
+1113010212,,Aplicacion de plaguicidas,8
+1113010213,,Mantenimiento de calles,8
+1113010214,,Conservacion de suelos,8
+1113010215,,Peina blanca o chapoda,8
+1113010216,,Peina negra,8
+1113010217,,Placeado,8
+1113010218,,Otros,8
+11130103,,Costos indirectos de explotacion,8
+1113010301,,Vigilancia,8
+1113010302,,Supervision,8
+1113010303,,Depreciacion,8
+111301030301,,Maquinaria agricola,8
+111301030302,,Edificios,8
+111301030303,,Implementos agricolas,8
+111301030304,,Utensilios de cocina,8
+1113010304,,Agotamiento de cultivos permanentes,8
+1113010305,,Intereses por credito de avio,8
+1113010306,,Comisiones por credito de avio,8
+1113010307,,Combustibles y lubricantes,8
+111301030701,,Gasolina corriente,8
+111301030702,,Gasolina especial,8
+111301030703,,Diesel,8
+111301030704,,Aceites,8
+111301030705,,Grasas,8
+111301030706,,Otros,8
+1113010308,,Analisis quimico del suelo,8
+1113010309,,Analisis foliar,8
+1113010310,,Alimentacion basica,8
+1113010311,,Mantenimiento de maquinaria agricola,8
+1113010312,,Cocineras,8
+1113010313,,Otros,8
+111302,,Recoleccion,8
+11130201,,Mano de obra directa,8
+1113020101,,Corte de cafe,8
+1113020102,,Pepena,8
+1113020103,,Repela,8
+1113020104,,Pesado de cafe,8
+11130202,,Costos indirectos de explotacion,8
+1113020201,,Alimentacion basica,8
+1113020202,,Vigilancia,8
+1113020203,,Supervision,8
+1113020204,,Basculas,8
+1113020205,,Canastos,8
+1113020206,,Sacos,8
+1113020207,,Depreciacion,8
+111302020701,,Maquinaria agricola,8
+111302020702,,Edificios,8
+111302020703,,Implementos agricolas,8
+111302020704,,Utensilios de cocina,8
+1113020208,,Intereses por credito de avio,8
+1113020209,,Agotamiento de cultivos permanentes,8
+1203,,Activos biologicos,8
+10301,,Cafetales en produccion,8
+1204,-,Agotamiento de activos biologicos,8
+120401,,Cafetales en produccion,8
+1205,,Activos biologicos en desarrollo-cafe,8
+120501,,Semillero,8
+12050101,,Preparacion de eras,8
+1205010101,,Insumos y Materiales,8
+120501010101,,Fertilizantes Quimicos,8
+120501010102,,Fertilizantes Organicos,8
+120501010103,,Nematicidas,8
+120501010104,,Arena,8
+120501010105,,Otros,8
+1205010102,,Mano de obra,8
+120501010201,,Tratamiento de arena,8
+120501010202,,Aplicacion de nematicidas,8
+120501010203,,Fertilizacion quimica,8
+120501010204,,Fertilizacion organica,8
+120501010205,,Conservacion de eras,8
+120501010206,,Otros,8
+1205010103,,Costos indirectos de explotacion,8
+120501010301,,Implementos agricolas,8
+120501010302,,Supervision,8
+120501010303,,Vigilancia,8
+120501010304,,Servicio de agua,8
+120501010305,,Energia electrica,8
+120501010306,,Otros,8
+12050102,,Siembra de semilla,8
+1205010201,,Insumos y Materiales,8
+120501020101,,Semillas de cafe,8
+1205010202,,Mano de obra,8
+120501020201,,Siembra de semilla,8
+120501020202,,Riego de agua,8
+120501020203,,Otros,8
+1205010203,,Costos indirectos de explotacion,8
+120501020301,,Implementos agricolas,8
+120501020302,,Supervision,8
+120501020303,,Vigilancia,8
+120501020304,,Servicio de agua,8
+120501020305,,Energia electrica,8
+120501020306,,Otros,8
+12050103,,Mantenimiento de eras,8
+1205010301,,Insumos y Materiales,8
+120501030101,,Fertilizantes Quimicos,8
+120501030102,,Insecticidas,8
+120501030103,,Funguicidas,8
+120501030104,,Plaguicidas,8
+120501030105,,Nematicidas,8
+120501030106,,Otros,8
+1205010302,,Mano de obra,8
+120501030201,,Riego de agua,8
+120501030202,,Establecimiento de sombra,8
+120501030203,,Aplicacion de fertilizantes,8
+120501030204,,Aplicacion de nematicidas,8
+120501030205,,Aplicacion de funguicidas,8
+120501030206,,Aplicacion de plaguicidas,8
+120501030207,,Aplicacion de insecticidas,8
+120501030208,,Otros,8
+1205010303,,Costos indirectos de explotacion,8
+120501030301,,Implementos agricolas,8
+120501030302,,Supervision,8
+120501030303,,Vigilancia,8
+120501030304,,Servicio de agua,8
+120501030305,,Energia electrica,8
+120501030306,,Otros,8
+120502,,Viveros,8
+12050201,,Preparacion de la tierra,8
+1205020101,,Insumos y Materiales,8
+120502010101,,Fertilizantes Quimicos,8
+120502010102,,Fertilizantes Organicos,8
+120502010103,,Nematicidas,8
+120502010104,,Otros,8
+1205020102,,Mano de obra,8
+120502010201,,Tratamiento de la tierra,8
+120502010202,,Fertilizacion quimica,8
+120502010203,,Aplicacion de nematicidas,8
+120502010204,,Fertilizacion organica,8
+120502010205,,Llenado y traslado de bolsas,8
+120502010206,,Otros,8
+1205020103,,Costos indirectos de explotacion,8
+120502010301,,Implementos agricolas,8
+120502010302,,Supervision,8
+120502010303,,Vigilancia,8
+120502010304,,Servicio de agua,8
+120502010305,,Energia electrica,8
+120502010306,,Otros,8
+12050202,,Siembra,8
+1205020201,,Insumos y Materiales,8
+120502020101,,Conchas,8
+1205020202,,Mano de obra directa,8
+120502020201,,Arranque y trasplante de concha,8
+120502020202,,Otros,8
+1205020203,,Costos indirectos de explotacion,8
+120502020301,,Implementos agricolas,8
+120502020302,,Supervision,8
+120502020303,,Vigilancia,8
+120502020304,,Servicio de agua,8
+120502020305,,Energia electrica,8
+120502020306,,Otros,8
+12050203,,Mantenimiento,8
+1205020301,,Insumos y Materiales,8
+120502030101,,Fertilizantes Quimicos,8
+120502030102,,Plaguicidas,8
+120502030103,,Nematicidas,8
+120502030104,,Insecticidas,8
+120502030105,,Otros,8
+1205020302,,Mano de obra directa,8
+120502030201,,Aplicacion de fertilizantes quimicos,8
+120502030202,,Establecimiento de sombra,8
+120502030203,,Riego de agua,8
+120502030204,,Aplicacion de plaguicidas,8
+120502030205,,Aplicacion de nematicidas,8
+120502030206,,Aplicacion de insecticidas,8
+120502030207,,Otros,8
+1205020303,,Costos indirectos de explotacion,8
+120502030301,,Implementos agricolas,8
+120502030302,,Supervision,8
+120502030303,,Vigilancia,8
+120502030304,,Servicio de agua,8
+120502030305,,Energia electrica,8
+120502030306,,Otros,8
+120503,,Plantaciones en desarrollo,8
+12050301,,Preparacion de la tierra,8
+1205030101,,Insumos y Materiales,8
+120503010101,,Fertilizantes,8
+120503010102,,Insecticidas,8
+120503010103,,Funguicidas,8
+120503010104,,Herbicidas,8
+120503010105,,Plaguicidas,8
+120503010106,,Nematicidas,8
+120503010107,,Otros,8
+1205030102,,Mano de obra directa,8
+120503010201,,Aplicacion de fertilizantes,8
+120503010202,,Aplicacion de insecticidas,8
+120503010203,,Aplicacion de funguicidas,8
+120503010204,,Aplicacion de herbicidas,8
+120503010205,,Aplicacion de plaguicidas,8
+120503010206,,Aplicacion de nematicidas,8
+120503010207,,Trazado y estaquillado,8
+120503010208,,Ahoyado,8
+120503010209,,Tratamiento de hoyos,8
+120503010210,,Abonado de hoyos,8
+120503010211,,Chapoda,8
+120503010212,,Peina negra,8
+120503010213,,Placeado,8
+120503010214,,Otros,8
+1205030103,,Costos indirectos de explotacion,8
+120503010301,,Implementos agricolas,8
+120503010302,,Supervision,8
+120503010303,,Vigilancia,8
+120503010304,,Servicio de agua,8
+120503010305,,Energia electrica,8
+120503010306,,Honorarios,8
+120503010307,,Intereses por credito de avio,8
+120503010308,,Otros,8
+12050302,,Siembra,8
+1205030201,,Insumos y Materiales,8
+120503020101,,Plantias,8
+120503020102,,Arboles de sombra temporal,8
+120503020103,,Arboles de sombra semipermanente,8
+120503020104,,Arboles de sombra permanentes,8
+120503020105,,Arboles para cortinas rompevientos,8
+120503020106,,Otros,8
+1205030202,,Mano de obra directa,8
+120503020201,,Siembra de plantias,8
+120503020202,,Siembra de arboles de sombra temporal,8
+120503020203,,Siembra de arboles de sombra semipermanentes,8
+120503020204,,Siembra de arboles de sombra permanente,8
+120503020205,,Siembra de arboles para cortinas rompevientos,8
+120503020206,,Otros,8
+1205030203,,Costos indirectos de explotacion,8
+120503020301,,Implementos agricolas,8
+120503020302,,Supervision,8
+120503020303,,Vigilancia,8
+120503020304,,Servicio de agua,8
+120503020305,,Energia electrica,8
+120503020306,,Transporte,8
+120503020307,,Acarreo de arbolitos,8
+120503020308,,Intereses por credito de avio,8
+120503020309,,Otros,8
+12050303,,Mantenimiento para el cultivo en desarrollo,8
+1205030301,,Insumos y Materiales,8
+120503030101,,Plantias,8
+120503030102,,Arboles de sombra temporal,8
+120503030103,,Arboles de sombra semipermanente,8
+120503030104,,Arboles de sombra permanentes,8
+120503030105,,Arboles para cortinas rompevientos,8
+120503030106,,Fertilizantes Quimicos,8
+120503030107,,Fertilizantes Organicos,8
+120503030108,,Insecticidas,8
+120503030109,,Funguicidas,8
+120503030110,,Plaguicidas,8
+120503030111,,Nematicidas,8
+120503030112,,Herbicidas,8
+120503030113,,Otros,8
+1205030302,,Mano de obra directa,8
+120503030201,,Deshije,8
+120503030202,,Poda de cafetos,8
+120503030203,,Poda de arboles de sombra semipermanentes,8
+120503030204,,Poda de arboles de sombre permanente,8
+120503030205,,Agobio,8
+120503030206,,Peina blanca o chapoda,8
+120503030207,,Peina negra,8
+120503030208,,Placeado,8
+120503030209,,Tratamiento de hoyos,8
+120503030210,,Aplicacion de fertilizantes quimicos,8
+120503030211,,Aplicacion de fertilizantes organicos,8
+120503030212,,Aplicacion de insecticidas,8
+120503030213,,Aplicacion de funguicidas,8
+120503030214,,Aplicacion de plaguicidas,8
+120503030215,,Aplicacion de nematicidas,8
+120503030216,,Aplicacion de herbicidas,8
+120503030217,,Otros,8
+1205030303,,Costos indirectos de explotacion,8
+120503030301,,Implementos agricolas,8
+120503030302,,Supervision,8
+120503030303,,Vigilancia,8
+120503030304,,Servicio de agua,8
+120503030305,,Energia electrica,8
+120503030306,,Intereses por credito de avio,8
+120503030307,,Otros,8
+4,,Cuentas de resultado deudoras,8
+41,,Costos,8
+4101,,Costos de explotacion-cafe,8
+410101,,Mantenimiento,8
+41010101,,Insumos y Materiales,8
+4101010101,,Fertilizantes Quimicos,8
+4101010102,,Fertilizantes Organicos,8
+4101010103,,Funguicidas,8
+4101010104,,Herbicidas,8
+4101010105,,Plaguicidas,8
+4101010106,,Nematicidas,8
+4101010107,,Insecticidas,8
+4101010108,,Otros,8
+41010102,,Mano de obra directa,8
+4101010201,,Fertilizacion de cafe,8
+4101010202,,Fertilizacion de arboles de sombra,8
+4101010203,,Fertilizacion de cortinas rompevientos,8
+4101010204,,Poda de cafe,8
+4101010205,,Agobio,8
+4101010206,,Poda de arboles de sombra,8
+4101010207,,Poda de cortinas rompevientos,8
+4101010208,,Deshije,8
+4101010209,,Aplicacion de insecticidas,8
+4101010210,,Aplicacion de funguicidas,8
+4101010211,,Aplicacion de herbicidas,8
+4101010212,,Aplicacion de plaguicidas,8
+4101010213,,Mantenimiento de calles,8
+4101010214,,Corservacion de suelos,8
+4101010215,,Peina blanca o chapoda,8
+4101010216,,Peina negra,8
+4101010217,,Placeado,8
+4101010218,,Otros,8
+41010103,,Costos indirectos de explotacion,8
+4101010301,,Vigilancia,8
+4101010302,,Supervision,8
+4101010303,,Depreciacion,8
+410101030301,,Maquinaria agricola,8
+410101030302,,Edificios,8
+410101030303,,Implementos agricolas,8
+410101030304,,Utensilios de cocina,8
+4101010304,,Agotamiento de activo biologico-cafe,8
+4101010305,,Intereses por credito de avio,8
+4101010306,,Comisiones por credito de avio,8
+4101010307,,Combustibles y lubricantes,8
+410101030701,,Gasolina corriente,8
+410101030702,,Gasolina especial,8
+410101030703,,Diesel,8
+410101030704,,Aceites,8
+410101030705,,Grasas,8
+410101030706,,Otros,8
+4101010308,,Analisis quimico del suelo,8
+4101010309,,Analisis foliar,8
+4101010310,,Alimentacion basica,8
+4101010311,,Mantenimiento de maquinaria agricola,8
+4101010312,,Cocineras,8
+4101010313,,Otros,8
+410102,,Recoleccion,8
+41010201,,Mano de obra,8
+4101020101,,Corte de cafe,8
+4101020102,,Pepena,8
+4101020103,,Repela,8
+4101020104,,Pesado de cafe,8
+41010202,,Costos indirectos de explotacion,8
+4101020201,,Alimentacion basica,8
+4101020202,,Vigilancia,8
+4101020203,,Supervision,8
+4101020204,,Basculas,8
+4101020205,,Canastos,8
+4101020206,,Sacos,8
+4101020207,,Depreciacion,8
+410102020701,,Maquinaria agricola,8
+410102020702,,Edificios,8
+410102020703,,Implementos agricolas,8
+410102020704,,Utensilios de cocina,8
+4101020208,,Intereses por credito de avio,8
+4101020209,,Agotamiento de cultivos permanentes,8
+4102,,Costos de produccion de cafe,8
+4103,,Costo de venta,8
+410301,,Cafe Uva,8
+410302,,Cafe verde,8
+5,,Cuentas de resultado Acreedoras,8
+51,,Ingresos de operacion,8
+5101,,Ventas,8
+510101,,Cafe Uva,8
+51010101,,Bajio,8
+51010102,,Media Altura,8
+51010103,,Estricta Altura,8
+510102,,Cafe Verde,8
+51010201,,Bajio,8
+51010202,,Media Altura,8

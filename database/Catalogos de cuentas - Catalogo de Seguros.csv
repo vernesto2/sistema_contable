@@ -1,0 +1,3054 @@
+CODIGO,TIPO,CONCEPTO,tipo_catalogo
+1,,ACTIVO,5
+11,,DISPONIBLE,5
+1101,,CAJA,5
+110101,,Oficina principal,5
+1101011,,Oficina principal - Moneda Nacional,5
+1101012,,Oficina principal - Moneda Extranjera,5
+110102,,Sucursales,5
+1101021,,Sucursales - Moneda Nacional,5
+1101022,,Sucursales - Moneda Extranjera,5
+110103,,Agencias,5
+1101031,,Agencias - Moneda Nacional,5
+1101032,,Agencias - Moneda Extranjera,5
+110104,,Fondos fijos,5
+1101041,,Fondos Fijos - Moneda Nacional,5
+1101042,,Fondos Fijos - Moneda Extranjera,5
+1102,,EFECTOS DE COBRO INMEDIATO,5
+110201,,Cheques locales,5
+1102011,,Cheques Locales - Moneda Nacional,5
+1102012,,Cheques Locales - Moneda Extranjera,5
+110202,,Cheques sobre el exterior,5
+1102021,,Cheques sobre el exterior - Moneda Nacional,5
+1102022,,Cheques sobre el exterior - Moneda Extranjera,5
+110209,,Otros efectos de cobro inmediato,5
+1102091,,Otros efectos de cobro inmediato - Moneda Nacional,5
+1102092,,Otros efectos de cobro inmediato - Moneda Extranjera,5
+1103,,BANCOS LOCALES,5
+110301,,Cuenta corriente,5
+1103011,,Cuenta corriente - Moneda Nacional,5
+1103012,,Cuenta Corriente - Moneda Extranjera,5
+110302,,Cuenta de ahorro,5
+1103021,,Cuenta de ahorro - Moneda Nacional,5
+1103022,,Cuenta de ahorro - Moneda Extranjera,5
+1104,,BANCOS EXTRANJEROS,5
+110401,,Cuenta corriente,5
+1104012,,Moneda Extranjera,5
+110402,,Cuentas de Ahorro,5
+1104022,,Moneda Extranjera,5
+12,,INVERSIONES FINANCIERAS,5
+1201,,VALORES,5
+120101,,Emitidos por el Estado a través de la Dirección General de Tesorería,5
+1201011,,Emitidos por el Estado a través de la Dirección General de Tesorería Moneda Nacional,5
+1201012,,Emitidos por el Estado a través de la Dirección General de Tesorería Moneda Extranjera,5
+120102,,Emitidos por el Banco Central de Reserva,5
+1201021,,Emitidos por el Banco Central de Reserva - Moneda Nacional,5
+1201022,,Emitidos por el Banco Central de Reserva - Moneda Extranjera,5
+120103,,Emitidos o garantizados por empresas estatales e instituciones oficiales autónomas,5
+1201031,,Emitidos o garantizados por empresas estatales e instituciones oficiales autónomas - Moneda Nacional,5
+1201032,,Emitidos o garantizados por empresas estatales e instituciones oficiales autónomas - Moneda Extranjera,5
+120104,,Emitidos por el Banco Multisectorial de Inversiones,5
+1201041,,Emitidos por el Banco Multisectorial de Inversiones - Moneda Nacional,5
+1201042,,Emitidos por el Banco Multisectorial de Inversiones - Moneda Extranjera,5
+120105,,Emitidos con garantía real para financiar la adquisición de vivienda,5
+1201051,,Emitidos con garantía real para financiar la adquisición de vivienda - Moneda Nacional,5
+1201052,,Emitidos con garantía real para financiar la adquisición de vivienda - Moneda Extranjera,5
+1202,,INSTRUMENTOS EMITIDOS O GARANTIZADOS POR ENTIDADES EXTRANJERAS,5
+120201,,Valores emitidos o garantizados por estados y bancos centrales,5
+1202011,,Valores emitidos o garantizados por estados y bancos centrales Moneda Nacional,5
+1202012,,Valores emitidos o garantizados por estados y bancos centrales Moneda Extranjera,5
+120202,,Cuotas de fondos de inversión,5
+1202021,,Cuotas de fondos de inversión - Moneda Nacional,5
+1202022,,Cuotas de fondos de inversión - Moneda Extranjera,5
+120203,,Depósitos y valores de bancos de primer orden,5
+1202031,,Depósitos y valores de bancos de primer orden - Moneda Nacional,5
+1202032,,Depósitos y valores de bancos de primer orden - Moneda Extranjera,5
+120204,,Valores representativos de deuda emitidos o garantizados por financieras,5
+1202041,,Valores representativos de deuda emitidos o garantizados por financieras - Moneda Nacional,5
+1202042,,Valores representativos de deuda emitidos o garantizados por financieras - Moneda Extranjera,5
+120205,,Valores representativos de deuda emitidos o garantizados por sociedades,5
+1202051,,Valores representativos de deuda emitidos o garantizados por sociedades - Moneda Nacional,5
+1202052,,Valores representativos de deuda emitidos o garantizados por sociedades - Moneda Extranjera,5
+120206,,Acciones de sociedades,5
+1202061,,Acciones de sociedades - Moneda Nacional,5
+1202062,,Acciones de sociedades - Moneda Extranjera,5
+1203,,DIVERSOS INSTRUMENTOS FINANCIEROS,5
+120301,,Obligaciones negociables emitidas por sociedades salvadoreñas a más de un año,5
+1203011,,Obligaciones negociables emitidas por sociedades salvadoreñas a a más de un año - Moneda Nacional,5
+1203012,,Obligaciones negociables emitidas por sociedades salvadoreñas a a más de un año - Moneda Extranjera,5
+1203021,,Acciones de sociedades salvadoreñas - Moneda Nacional,5
+1203022,,Acciones de sociedades salvadoreñas - Moneda Extranjera,5
+120303,,Certificados de participación en fondos de inversión salvadoreños,5
+1203031,,Certificados de participación en fondos de inversión salvadoreños Moneda Nacional,5
+1203032,,Certificados de participación en fondos de inversión salvadoreños Moneda Extranjera,5
+120304,,Depósitos y valores emitidos o garantizados por bancos salvadoreños,5
+1203041,,Depósitos y valores emitidos o garantizados por bancos salvadoreños Moneda Nacional,5
+1203042,,Depósitos y valores emitidos o garantizados por bancos salvadoreños Moneda Extranjera,5
+1204,,INVERSIONES EN MONEDA EXTRANJERA,5
+120401,,Valores de renta fija,5
+1204012,,Valores de renta fija - Moneda Extranjera,5
+120402,,Acciones de sociedades,5
+1204022,,Acciones de sociedades - Moneda Extranjera,5
+120403,,Depósitos bancarios,5
+1204032,,Depósitos bancarios - Moneda Extranjera,5
+120404,,Certificados de participación,5
+1204042,,Certificados de participación - Moneda Extranjera,5
+1205,,INVERSIONES TRANSFERIDAS,5
+120501,,Valores,5
+1205011,,Valores - Moneda Nacional,5
+1205012,,Valores - Moneda Extranjera,5
+120502,,Instrumentos emitidos o garantizados por entidades extranjeras,5
+1205021,,Instrumentos emitidos o garantizados por entidades extranjeras Moneda Nacional,5
+1205022,,Instrumentos emitidos o garantizados por entidades extranjeras Moneda Extranjera,5
+120503,,Diversos instrumentos financieros,5
+1205031,,Diversos instrumentos financieros - Moneda Nacional,5
+1205032,,Diversos instrumentos financieros - Moneda Extranjera,5
+120504,,Inversiones en moneda extranjera,5
+1205041,,Inversiones en moneda extranjera - Moneda Nacional,5
+1205042,,Inversiones en moneda extranjera - Moneda Extranjera,5
+1298,,RENDIMIENTOS POR INVERSIONES,5
+129801,,Valores,5
+1298011,,Valores - Moneda Nacional,5
+1298012,,Valores - Moneda Extranjera,5
+129802,,Instrumentos emitidos o garantizados por entidades extranjeras,5
+1298021,,Instrumentos emitidos o garantizados por entidades extranjeras Moneda Nacional,5
+1298022,,Instrumentos emitidos o garantizados por entidades extranjeras Moneda Extranjera,5
+129803,,Diversos instrumentos financieros,5
+1298031,,Diversos instrumentos financieros - Moneda Nacional,5
+1298032,,Diversos instrumentos financieros - Moneda Extranjera,5
+129804,,Inversiones por pólizas en moneda extranjera,5
+1298042,,Moneda Extranjera,5
+1299,,PROVISIONES POR DESVALORIZACION DE INVERSIONES (Cr),5
+129901,,Valores,5
+1299011,,Valores - Moneda Nacional,5
+1299012,,Valores - Moneda Extranjera,5
+129902,,Instrumentos emitidos o garantizados por entidades extranjeras,5
+1299021,,Instrumentos emitidos o garantizados por entidades extranjeras Moneda Nacional,5
+1299022,,Instrumentos emitidos o garantizados por entidades extranjeras Moneda Extranjera,5
+129903,,Diversos instrumentos financieros,5
+1299031,,Diversos instrumentos financieros - Moneda Nacional,5
+1299032,,Diversos instrumentos financieros - Moneda Extranjera,5
+129904,,Inversiones por pólizas en moneda extranjera,5
+1299042,,Inversiones por pólizas en moneda extranjera - Moneda Extranjera,5
+13,,PRESTAMOS,5
+1301,,HASTA UN AÑO PLAZO,5
+130101,,A entidades del Estado (Ver Anexo No.1),5
+1301011,,A entidades del Estado - Moneda Nacional,5
+130101101,,Otorgamientos originales,5
+130101102,,Refinanciados (2),5
+130101103,,Reestructurados (2),5
+1301012,,A entidades del Estado - Moneda Extranjera,5
+130102,,A empresas privadas (Ver Anexo No.1),5
+1301021,,A empresas privadas - Moneda Nacional,5
+1301022,,A empresas privadas - Moneda Extranjera,5
+130103,,A Particulares (Ver Anexo No.1),5
+1301031,,A Particulares - Moneda Nacional,5
+1301032,,A Particulares - Moneda Extranjera,5
+130104,,Otras entidades del sistema financiero (Ver Anexo No. 1),5
+1301041,,Otras entidades del sistema financiero - Moneda Nacional,5
+1301042,,Otras entidades del sistema financiero - Moneda Extranjera,5
+130105,,A filiales,5
+1301051,,A filiales - Moneda Nacional,5
+1301052,,A filiales - Moneda Extranjera,5
+130106,,A empresas extranjeras no domiciliadas,5
+1301061,,A empresas extranjeras no domiciliadas - Moneda Nacional,5
+1301062,,A empresas extranjeras no domiciliadas - Moneda Extranjera,5
+130108,,Operaciones bursátiles,5
+1301081,,Operaciones bursátiles - Moneda Nacional,5
+1301082,,Operaciones bursátiles - Moneda Extranjera,5
+1302,,A MAS DE UN AÑO PLAZO,5
+130201,,A entidades del Estado (Ver Anexo No.1),5
+1302011,,A entidades del Estado - Moneda Nacional,5
+130201101,,Otorgamientos originales,5
+130201102,,Refinanciados (2),5
+130201103,,Reestructurados (2),5
+1302012,,A entidades del Estado - Moneda Extranjera,5
+130202,,A empresas privadas (Ver Anexo No.1),5
+1302021,,A empresas privadas - Moneda Nacional,5
+1302022,,A empresas privadas - Moneda Extranjera,5
+130203,,A Particulares (Ver Anexo No.1),5
+1302031,,A Particulares - Moneda Nacional,5
+1302032,,A Particulares - Moneda Extranjera,5
+130204,,Otras entidades del sistema financiero (Ver Anexo No. 1),5
+1302041,,Otras entidades del sistema financiero - Moneda Nacional,5
+1302042,,Otras entidades del sistema financiero - Moneda Extranjera,5
+130205,,A filiales,5
+1302051,,A filiales - Moneda Nacional,5
+1302052,,A filiales - Moneda Extranjera,5
+130206,,A empresas extranjeras no domiciliadas,5
+1302061,,A empresas extranjeras no domiciliadas - Moneda Nacional,5
+1302062,,A empresas extranjeras no domiciliadas - Moneda Extranjera,5
+130207,,Con garantía de pólizas,5
+1302071,,Con garantía de pólizas - Moneda Nacional,5
+130207101,,Directos,5
+130207102,,Automáticos,5
+1302072,,Con garantía de pólizas - Moneda Nacional,5
+130207201,,Directos,5
+130207202,,Automáticos,5
+1303,,VENCIDOS,5
+130301,,A entidades del Estado (Ver Anexo No.1),5
+1303011,,A entidades del Estado - Moneda Nacional,5
+130301101,,Otorgamientos originales,5
+130301102,,Refinanciados (2),5
+130301103,,Reestructurados (2),5
+1303012,,A entidades del Estado - Moneda Extranjera,5
+130302,,A empresas privadas (Ver Anexo No.1),5
+1303021,,A empresas privadas - Moneda Nacional,5
+1303022,,A empresas privadas - Moneda Extranjera,5
+130303,,A Particulares (Ver Anexo No.1),5
+1303031,,A Particulares - Moneda Nacional,5
+1303032,,A Particulares - Moneda Extranjera,5
+130304,,Otras entidades del sistema financiero (Ver Anexo No. 1),5
+1303041,,Otras entidades del sistema financiero - Moneda Nacional,5
+1303042,,Otras entidades del sistema financiero - Moneda Extranjera,5
+130305,,A filiales,5
+1303051,,A filiales - Moneda Nacional,5
+1303052,,A filiales - Moneda Extranjera,5
+130306,,A empresas extranjeras no domiciliadas,5
+1303061,,A empresas extranjeras no domiciliadas - Moneda Nacional,5
+1303062,,A empresas extranjeras no domiciliadas - Moneda Extranjera,5
+130308,,Operaciones bursátiles,5
+1303081,,Operaciones bursátiles - Moneda Nacional,5
+1303082,,Operaciones bursátiles - Moneda Extranjera,5
+1398,,RENDIMIENTOS POR PRESTAMOS,5
+139801,,A entidades del Estado,5
+1398011,,A entidades del Estado - Moneda Nacional,5
+1398012,,A entidades del Estado - Moneda Extranjera,5
+139802,,A empresas privadas,5
+1398021,,A empresas privadas - Moneda Nacional,5
+1398022,,A empresas privadas - Moneda Extranjera,5
+139803,,A particulares,5
+1398031,,A particulares - Moneda Nacional,5
+1398032,,A particulares - Moneda Extranjera,5
+139804,,A otras entidades del sistema financiero,5
+1398041,,A otras entidades del sistema financiero - Moneda Nacional,5
+1398042,,A otras entidades del sistema financiero - Moneda Extranjera,5
+139805,,A filiales,5
+1398051,,A filiales - Moneda Nacional,5
+1398052,,A filiales - Moneda Extranjera,5
+139806,,A empresas extranjeras no domiciliadas,5
+1398061,,A empresas extranjeras no domiciliadas - Moneda Nacional,5
+1398062,,A empresas extranjeras no domiciliadas - Moneda Extranjera,5
+139807,,Préstamos con garantía de pólizas,5
+1398071,,Préstamos con garantía de pólizas - Moneda Nacional,5
+1398072,,Préstamos con garantía de pólizas - Moneda Extranjera,5
+139808,,Operaciones bursátiles,5
+1398081,,Operaciones bursátiles - Moneda Nacional,5
+1398082,,Operaciones bursátiles - Moneda Extranjera,5
+1399,,PROVISIONES POR PRESTAMOS ( Cr ),5
+139901,,A entidades del Estado,5
+1399011,,A entidades del Estado - Moneda Nacional,5
+1399012,,A entidades del Estado - Moneda Extranjera,5
+139902,,A empresas privadas,5
+1399021,,A empresas privadas - Moneda Nacional,5
+1399022,,A empresas privadas - Moneda Extranjera,5
+139903,,A particulares,5
+1399031,,A particulares - Moneda Nacional,5
+1399032,,A particulares - Moneda Extranjera,5
+139904,,A otras entidades del sistema financiero,5
+1399041,,A otras entidades del sistema financiero - Moneda Nacional,5
+1399042,,A otras entidades del sistema financiero - Moneda Extranjera,5
+139905,,A filiales,5
+1399051,,A filiales - Moneda Nacional,5
+1399052,,A filiales - Moneda Extranjera,5
+139906,,A empresas extranjeras no domiciliadas,5
+1399061,,A empresas extranjeras no domiciliadas - Moneda Nacional,5
+1399062,,A empresas extranjeras no domiciliadas - Moneda Extranjera,5
+139908,,Operaciones bursátiles,5
+1399081,,Operaciones bursátiles - Moneda Nacional,5
+1399082,,Operaciones bursátiles - Moneda Extranjera,5
+14,,PRIMAS POR COBRAR,5
+1401,,PRIMAS DE SEGUROS DE VIDA,5
+140101,,De vida individual de largo plazo,5
+1401011,,De vida individual de largo plazo - Moneda Nacional,5
+140101101,,Seguros directos,5
+140101109,,Seguros de filiales,5
+1401012,,De vida individual de largo plazo - Moneda Extranjera,5
+140102,,De vida individual de corto plazo,5
+1401021,,De vida individual de corto plazo - Moneda Nacional,5
+1401022,,De vida individual de corto plazo - Moneda Extranjera,5
+140103,,Colectivo,5
+1401031,,Colectivo - Moneda Nacional,5
+1401032,,Colectivo - Moneda Extranjera,5
+140104,,Otros planes,5
+1401041,,Otros planes - Moneda Nacional,5
+1401042,,Otros planes - Moneda Extranjera,5
+1402,,PRIMAS DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+140201,,Rentas de invalidez y sobrevivencia,5
+1402011,,Rentas de invalidez y sobrevivencia - Moneda Nacional,5
+1402012,,Rentas de invalidez y sobrevivencia - Moneda Extranjera,5
+140202,,Sepelio,5
+1402021,,Sepelio - Moneda Nacional,5
+1402022,,Sepelio - Moneda Extranjera,5
+140203,,Otras rentas,5
+1402031,,Otras Rentas - Moneda Nacional,5
+1402032,,Otras Rentas - Moneda Extranjera,5
+140204,,Pensiones,5
+1402041,,Pensiones - Moneda Nacional,5
+1402042,,Pensiones - Moneda Extranjera,5
+1403,,PRIMAS DE SEGUROS DE ACCIDENTES Y ENFERMEDADES,5
+140301,,Salud y hospitalización,5
+1403011,,Salud y hospitalización - Moneda Nacional,5
+1403012,,Salud y hospitalización - Moneda Extranjera,5
+140302,,Accidentes personales,5
+1403021,,Accidentes personales - Moneda Nacional,5
+1403022,,Accidentes personales - moneda Extranjera,5
+140303,,Accidentes viajes aéreos,5
+1403031,,Accidentes viajes aéreos - Moneda Nacional,5
+1403032,,Accidentes viajes aéreos - Moneda Extranjera,5
+140304,,Escolares,5
+1403041,,Escolares - Moneda Nacional,5
+1403042,,Escolares - Moneda Extranjera,5
+1404,,PRIMAS DE SEGUROS DE INCENDIOS Y LINEAS ALIADAS,5
+140401,,Incendios,5
+1404011,,Incendios - Moneda Nacional,5
+1404012,,Incendios - Moneda Extranjera,5
+1405,,PRIMAS DE SEGUROS DE AUTOMOTORES,5
+140501,,Automotores,5
+1405011,,Automotores - Moneda Nacional,5
+1405012,,Automotores - Moneda Extranjera,5
+1406,,PRIMAS DE OTROS SEGUROS GENERALES,5
+140601,,Rotura de Cristales,5
+1406011,,Rotura de Cristales - Moneda Nacional,5
+1406012,,Rotura de Cristales - Moneda Extranjera,5
+140602,,Transporte marítimo,5
+1406021,,Transporte Marítimo - Moneda Nacional,5
+1406022,,Transporte Marítimo - Moneda Extranjera,5
+140603,,Transporte aéreo,5
+1406031,,Transporte aéreo - Moneda Nacional,5
+1406032,,Transporte aéreo - Moneda Extranjera,5
+140604,,Transporte terrestre,5
+1406041,,Transporte terrestre - Moneda Nacional,5
+1406042,,Transporte terrestre - Moneda Extranjera,5
+140605,,Marítimos casco,5
+1406051,,Marítimos casco - Moneda Nacional,5
+1406052,,Marítimos casco - Moneda Extranjera,5
+140606,,Aviación,5
+1406061,,Aviación - Moneda Nacional,5
+1406062,,Aviación - Moneda Extranjera,5
+140607,,Robo y hurto,5
+1406071,,Robo y Hurto - Moneda Nacional,5
+1406072,,Robo y Hurto - Moneda Extranjera,5
+140608,,Fidelidad,5
+1406081,,Fidelidad - Moneda Nacional,5
+1406082,,Fidelidad - Moneda Extranjera,5
+140609,,Seguro de bancos,5
+1406091,,Seguro de bancos - Moneda Nacional,5
+1406092,,Seguro de bancos - Moneda Nacional,5
+140610,,Todo riesgo para contratista,5
+1406101,,Todo Riesgo para Contratista - Moneda Nacional,5
+1406102,,Todo Riesgo para Contratista - Moneda Extranjera,5
+140611,,Todo riesgo equipo para contratistas,5
+1406111,,Todo riesgo equipo para contratistas - Moneda Nacional,5
+1406112,,Todo riesgo equipo para contratistas - Moneda Extranjera,5
+140612,,Rotura de maquinaria,5
+1406121,,Rotura de maquinaria - Moneda Nacional,5
+1406122,,Rotura de maquinaria - Moneda Extranjera,5
+140613,,Montaje contra todo riesgo,5
+1406131,,Montaje contra todo riesgo - Moneda Nacional,5
+1406132,,Montaje contra todo riesgo - Moneda Extranjera,5
+140614,,Todo riesgo equipo electrónico,5
+1406141,,Todo riesgo equipo electrónico - Moneda Nacional,5
+1406142,,Todo riesgo equipo electrónico - Moneda Extranjera,5
+140615,,Calderas,5
+1406151,,Calderas - Moneda Nacional,5
+1406152,,Calderas - Moneda Extranjera,5
+140616,,Lucro cesante por interrupción de negocios,5
+1406161,,Lucro cesante por interrupción de negocios - Moneda Nacional,5
+1406162,,Lucro cesante por interrupción de negocios - Moneda Extranjera,5
+140617,,Lucro cesante rotura de maquinaria,5
+1406171,,Lucro cesante rotura de maquinaria - Moneda Nacional,5
+1406172,,Lucro cesante rotura de maquinaria - Moneda Extranjera,5
+140618,,Responsabilidad civil,5
+1406181,,Responsabilidad civil - Moneda Nacional,5
+1406182,,Responsabilidad civil - Moneda Extranjera,5
+140619,,Riesgos profesionales,5
+1406191,,Riesgos profesionales - Moneda Nacional,5
+1406192,,Riesgos profesionales - Moneda Extranjera,5
+140620,,Ganadero,5
+1406201,,Ganadero - Moneda Nacional,5
+1406202,,Ganadero - Moneda Extranjera,5
+140621,,Agrícola,5
+1406211,,Agrícola - Moneda Nacional,5
+1406212,,Agrícola - Moneda Extranjera,5
+140622,,Domiciliario,5
+1406221,,Domiciliario - Moneda Nacional,5
+1406222,,Domiciliario - Moneda Extranjera,5
+140623,,Crédito interno,5
+1406231,,Crédito interno - Moneda Nacional,5
+1406232,,Crédito interno - Moneda Extranjera,5
+140624,,Crédito a la exportación,5
+1406241,,Crédito a la exportación - Moneda Nacional,5
+1406242,,Crédito a la exportación - Moneda Extranjera,5
+140625,,Misceláneos,5
+1406251,,Misceláneos - Moneda Nacional,5
+1406252,,Misceláneos - Moneda Extranjera,5
+1407,,PRIMAS DE FIANZAS,5
+140701,,Fidelidad,5
+1407011,,Fidelidad - Moneda Nacional,5
+140701101,,Fianzas directas,5
+140701109,,Fianzas de filiales,5
+1407012,,Fidelidad - Moneda Extranjera,5
+140702,,Garantía,5
+1407021,,Garantía - Moneda Nacional,5
+1407022,,Garantía - Moneda Extranjera,5
+140703,,Motoristas,5
+1407031,,Motoristas - Moneda Nacional,5
+1407032,,Motoristas - Moneda Extranjeras,5
+1408,,PRIMAS VENCIDAS (1),5
+140801,,De seguros de vida,5
+1408011,,De seguros de vida - Moneda nacional,5
+1408012,,De seguros de vida - Moneda extranjera,5
+140802,,Previsionales rentas y pensiones,5
+1408021,,Previsionales rentas y pensiones - Moneda nacional,5
+1408022,,Previsionales rentas y pensiones - Moneda extranjera,5
+140803,,Accidentes y enfermedad,5
+1408031,,Accidentes y enfermedad -Moneda nacional,5
+1408032,,Accidentes y enfermedad -Moneda extranjera,5
+140804,,Incendios y líneas aliadas,5
+1408041,,Incendios y líneas aliadas - Moneda nacional,5
+1408042,,Incendios y líneas aliadas - Moneda extranjera,5
+140805,,Automotores,5
+1408051,,Automotores - Moneda nacional,5
+1408052,,Automotores - Moneda extranjera,5
+140806,,Otros seguros generales,5
+1408061,,Otros seguros generales - Moneda nacional,5
+1408062,,Otros seguros generales - Moneda extranjera,5
+140807,,Fianzas,5
+1408071,,Fianzas - Moneda nacional,5
+1408072,,Fianzas - Moneda extranjera,5
+1499,,PROVISIÓN POR PRIMAS POR COBRAR (cr) (1),5
+149901,,De seguros de vida,5
+1499011,,De seguros de vida - Moneda nacional,5
+1499012,,De seguros de vida - Moneda extranjera,5
+149902,,Previsionales rentas y pensiones,5
+1499021,,Previsionales rentas y pensiones - Moneda nacional,5
+1499022,,Previsionales rentas y pensiones - Moneda extranjera,5
+149903,,Accidentes y enfermedad,5
+1499031,,Accidentes y enfermedad -Moneda nacional,5
+1499032,,Accidentes y enfermedad -Moneda extranjera,5
+149904,,Incendios y líneas aliadas,5
+1499041,,Incendios y líneas aliadas - Moneda nacional,5
+1499042,,Incendios y líneas aliadas - Moneda extranjera,5
+149905,,Automotores,5
+1499051,,Automotores - Moneda nacional,5
+1499052,,Automotores - Moneda extranjera,5
+149906,,Otros seguros generales,5
+1499061,,Otros seguros generales - Moneda nacional,5
+1499062,,Otros seguros generales - Moneda extranjera,5
+149907,,Fianzas,5
+1499071,,Fianzas - Moneda nacional,5
+1499072,,Fianzas - Moneda extranjera,5
+16,,SOCIEDADES DEUDORAS DE SEGUROS Y FIANZAS,5
+1601,,CUENTA CORRIENTE POR SEGUROS Y FIANZAS,5
+160101,,Con reaseguradas,5
+1601011,,Con reaseguradas - Moneda Nacional,5
+1601012,,Con reaseguradas - moneda Extranjera,5
+160102,,Coaseguradoras,5
+1601021,,Coaseguradoras - Moneda Nacional,5
+1601022,,Coaseguradpras - Moneda Extranjera,5
+160103,,Con reafianzadas,5
+1601031,,Con Reafianzadas - Moneda Nacional,5
+1601032,,Con Reafianzadas - Moneda Extranjera,5
+160104,,Con coafianzadoras,5
+1601041,,Con coafianzadoras - Moneda Nacional,5
+1601042,,Con coafianzadoras - Moneda Extranjera,5
+160109,,Con filiales,5
+1601091,,Con filiales - Moneda Nacional,5
+160109101,,Reaseguradas,5
+160109102,,Reafianzadas,5
+160109103,,Coaseguradoras,5
+1601092,,Con filiales - Moneda Extranjera,5
+160109201,,Reaseguradas,5
+160109202,,Reafianzadas,5
+160109203,,Coaseguradoras,5
+1602,,PRIMAS RETENIDAS POR SEGUROS Y FIANZAS,5
+160201,,Por reaseguros tomados,5
+1602011,,Por reaseguros tomados - Moneda Nacional,5
+1602012,,Por reaseguros tomados - Moneda Extranjera,5
+160202,,Por reafianzamientos tomados,5
+1602021,,Por reafianzamientos tomados - Moneda Nacional,5
+1602022,,Por reafianzamientos tomados - Moneda Extranjera,5
+160209,,Por filiales,5
+1602091,,Por filiales - Moneda Nacional,5
+160209101,,Reaseguradas,5
+160209102,,Reafianzadas,5
+160209103,,Coaseguradoras,5
+1602092,,Por filiales - Moneda Extranjera,5
+160209201,,Reaseguradas,5
+160209202,,Reafianzadas,5
+160209203,,Coaseguradoras,5
+1603,,CUENTA CORRIENTE POR REASEGUROS Y REAFIANZAMIENTOS,5
+160301,,Con reaseguradoras,5
+1603011,,Con reaseguradoras - Moneda Nacional,5
+1603012,,Con reaseguradoras - Moneda Extranjera,5
+160302,,Con reafianzadoras,5
+1603021,,Con reafianzadoras - Moneda Nacional,5
+1603022,,Con reafianzadoras - Moneda Extranjera,5
+160303,,Con coaseguradoras (1),5
+1603031,,Con coaseguradoras - Moneda Nacional,5
+163032,,Con coaseguradoras - Moneda Extranjera,5
+160309,,Con filiales,5
+1603091,,Con filiales - Moneda Nacional,5
+160309101,,Reaseguradas,5
+160309102,,Reafianzadas,5
+160309103,,Coaseguradoras,5
+1603092,,Con filiales - Moneda Extranjera,5
+160309201,,Reaseguradas,5
+160309202,,Reafianzadas,5
+160309203,,Coaseguradoras,5
+17,,INVERSIONES PERMANENTES,5
+1701,,INVERSIONES EN BIENES RAICES NO HABITACIONALES,5
+1701010,,Terrenos,5
+1701020,,Edificaciones,5
+1702,,PARTICIPACION PATRIMONIAL EN SOCIEDADES NACIONALES,5
+1702011,,En sociedades de seguros filiales,5
+1702021,,En otras sociedades de seguros,5
+1702031,,En sociedades complementarias filiales,5
+1702041,,En otras sociedades complementarias,5
+1702051,,En sociedades de seguros nacionales en proceso de regularización,5
+1703,,PARTICIPACION PATRIMONIAL EN SOCIEDADES DEL,5
+1703012,,En sociedades de seguros filiales,5
+1703022,,En otras sociedades de seguros,5
+1703032,,En sociedades complementarias filiales,5
+1703042,,En otras sociedades complementarias,5
+1799,,PROVISIONES POR DESVALORIZACION DE INVERSIONES PERMANENTES (Cr),5
+1799010,,De bienes raíces no habitacionales,5
+1799021,,De participación patrimonial en sociedades de nacionales,5
+1799032,,De participación patrimonial en sociedades del exterior,5
+18,,"INMUEBLES, MOBILIARIO Y EQUIPO",5
+1801,,INMUEBLES,5
+1801010,,Terrenos,5
+1801020,,Terrenos en arrendamiento financiero,5
+1801030,,Edificios,5
+1801040,,Edificios en arrendamiento financiero,5
+1801050,,Instalaciones,5
+1803,,MOBILIARIO Y EQUIPO,5
+1803010,,Mobiliario de oficina,5
+1803020,,Equipos de oficina,5
+1803030,,Equipos de computación,5
+1803090,,Otros mobiliarios y equipos,5
+1804,,EQUIPOS DE TRANSPORTE,5
+1804010,,Vehículos,5
+1804020,,Vehículos en arrendamiento financiero,5
+1804030,,Otros equipos de transporte,5
+1804040,,Otros equipos de transporte en arrendamiento financiero,5
+1806,,OTROS BIENES,5
+1806010,,Obras en ejecución,5
+1806020,,Bienes por recibir,5
+1899,,DEPRECIACION ACUMULADA DE INMUEBLES MOBILIARIO Y EQUIPO (Cr),5
+1899020,,De inmuebles,5
+1899030,,De mobiliario y equipo,5
+1899040,,De equipos de transporte,5
+19,,OTROS ACTIVOS,5
+1901,,PAGOS ANTICIPADOS Y CARGOS DIFERIDOS,5
+1901010,,Alquileres pagados por anticipado,5
+1901020,,Primas de seguros pagadas por anticipado,5
+1901030,,Primas de reaseguros cedidos pagadas por anticipado,5
+1901040,,Instalaciones y mejoras en propiedades arrendadas,5
+1901050,,Utiles de oficina y papelería pagados por anticipado,5
+1901060,,Publicidad y mercadeo pagados por anticipado,5
+1901070,,Gastos de organización e instalación,5
+1901080,,Gastos de reorganización administrativa,5
+1901090,,Diversos,5
+1902,,CUENTAS POR COBRAR DIVERSAS,5
+1902010,,Depósitos en garantía,5
+1902020,,Alquileres,5
+1902030,,Comisiones de préstamos y servicios,5
+1902040,,Anticipos al personal,5
+1902050,,Anticipos de comisiones a intermediarios y agentes,5
+1902060,,Adelantos por cuenta de asegurados,5
+1902090,,Otras,5
+1903,,IMPUESTO SOBRE LA RENTA POR LIQUIDAR,5
+1903010,,Pago a cuenta,5
+1903020,,Impuesto retenido,5
+1903030,,Remanente de impuesto,5
+1904,,CREDITO FISCAL - IVA,5
+1904010,,Crédito fiscal - IVA,5
+1905,,ACTIVOS EXTRAORDINARIOS,5
+190501,,Títulos valores recibidos en pago,5
+1905011,,Títulos valores recibidos en pago - Moneda nacional,5
+1905012,,Títulos valores recibidos en pago - Moneda Extranjera,5
+1905020,,Bienes muebles recibidos en pago,5
+1905030,,Inmuebles recibidos en pago,5
+1999,,PROVISIONES DE OTROS ACTIVOS (Cr),5
+1999010,,Cuentas por cobrar diversas,5
+1999020,,Activos extraordinarios,5
+2,,PASIVO,5
+21,,OBLIGACIONES CON ASEGURADOS,5
+2101,,OBLIGACIONES POR SINIESTROS,5
+210101,,De seguros de vida,5
+2101011,,Moneda nacional,5
+2101012,,Moneda extranjera,5
+210102,,De seguros previsionales rentas y pensiones,5
+2101021,,Moneda nacional,5
+2101022,,Moneda extranjera,5
+210103,,De seguros de accidentes y enfermedades,5
+2101031,,Moneda nacional,5
+2101032,,Moneda extranjera,5
+210104,,De seguros de incendios y líneas aliadas,5
+2101041,,Moneda nacional,5
+2101042,,Moneda extranjera,5
+210105,,De seguros de automotores,5
+2101051,,Moneda nacional,5
+2101052,,Moneda extranjera,5
+210106,,De otros seguros generales,5
+2101061,,Moneda nacional,5
+2101062,,Moneda extranjera,5
+210107,,De fianzas,5
+2101071,,=+,5
+2101072,,Moneda extranjera,5
+2102,,DEPOSITOS POR OPERACIONES DE SEGURO,5
+210201,,Depósitos para primas de seguros,5
+2102011,,Moneda nacional,5
+2102012,,Moneda extranjera,5
+210202,,Depósitos para primas de fianzas,5
+2102021,,Moneda nacional,5
+2102022,,Moneda extranjera,5
+210209,,Otros depósitos,5
+2102091,,Moneda nacional,5
+2102092,,Moneda extranjera,5
+2109,,OTRAS OBLIGACIONES CON ASEGURADOS,5
+210901,,Dividendos por pagar sobre pólizas,5
+2109011,,Moneda nacional,5
+2109012,,Moneda extranjera,5
+210902,,Cupones y bonos por pagar,5
+2109021,,Moneda nacional,5
+2109022,,Moneda extranjera,5
+210903,,Premios por pagar,5
+2109031,,Moneda nacional,5
+2109032,,Moneda extranjera,5
+210904,,Dotales por pagar,5
+2109041,,Moneda nacional,5
+2109042,,Moneda extranjera,5
+210909,,Otras obligaciones,5
+2109091,,Moneda nacional,5
+2109092,,Moneda extranjera,5
+22,,RESERVAS TECNICAS Y CONTINGENCIAL DE FIANZAS (3),5
+2201,,RESERVAS TECNICAS DE SEGUROS DE VIDA,5
+220101,,Matemática de vida individual de largo plazo,5
+2201011,,Moneda nacional,5
+2201012,,Moneda extranjera,5
+220102,,De riesgo en curso de vida individual de corto plazo,5
+2201021,,Moneda nacional,5
+2201022,,Moneda extranjera,5
+220103,,De riesgo en curso de vida colectivo,5
+2201031,,Moneda nacional,5
+2201032,,Moneda extranjera,5
+220104,,De riesgos en curso de otros planes,5
+2201041,,Moneda nacional,5
+2201042,,Moneda extranjera,5
+220109,,Adicionales de seguro de vida,5
+2201091,,Moneda nacional,5
+220109101,,Seguro directo,5
+22010910101,,De accidentes,5
+22010910102,,De exoneración del pago de primas,5
+22010910103,,De extraprimas de riesgos anormales,5
+22010910104,,"De dividendos, cupones y bonos sobre pólizas",5
+22010910105,,Capitales complementarios,5
+22010910109,,Diversas,5
+220109102,,Reaseguros tomados,5
+22010910201,,De accidentes,5
+22010910202,,De exoneración del pago de primas,5
+22010910203,,De extraprimas de riesgos anormales,5
+22010910204,,"De dividendos, cupones y bonos sobre pólizas",5
+22010910205,,Capitales complementarios,5
+22010910209,,Diversas,5
+220109103,,Coaseguros,5
+22010910301,,De accidentes,5
+22010910302,,De exoneración del pago de primas,5
+22010910303,,De extraprimas de riesgos anormales,5
+22010910304,,"De dividendos, cupones y bonos sobre pólizas",5
+22010910305,,Capitales complementarios,5
+22010910309,,Diversas,5
+220109109,,Por seguros con filiales,5
+22010910901,,Seguro directo,5
+22010910902,,Reaseguros tomados,5
+22010910903,,Coaseguros,5
+2201092,,Moneda extranjera,5
+2202,,RESERVAS MATEMATICAS DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+220201,,Rentas de invalidez y sobrevivencia,5
+2202011,,Moneda nacional,5
+2202012,,Moneda extranjera,5
+220202,,Sepelio,5
+2202021,,Moneda nacional,5
+2202022,,Moneda extranjera,5
+220203,,Otras rentas,5
+2202031,,Moneda nacional,5
+2202032,,Moneda extranjera,5
+220204,,Pensiones,5
+2202041,,Moneda nacional,5
+2202042,,Moneda extranjera,5
+2203,,RESERVAS POR RIESGOS EN CURSO DE ACCIDENTES Y ENFERMEDADES,5
+220301,,Salud y hospitalización,5
+2203011,,Moneda nacional,5
+2203012,,Moneda extranjera,5
+220302,,Accidentes personales,5
+2203021,,Moneda nacional,5
+2203022,,Moneda extranjera,5
+220303,,Accidentes viajes aéreos,5
+2203031,,Moneda nacional,5
+2203032,,Moneda extranjera,5
+220304,,Escolares,5
+2203041,,Moneda nacional,5
+2203042,,Moneda extranjera,5
+2204,,RESERVAS POR RIESGOS EN CURSO DE INCENDIO Y LINEAS ALIADAS,5
+220401,,Incendios,5
+2204011,,Moneda nacional,5
+2204012,,Moneda extranjera,5
+220402,,Líneas aliadas,5
+2204021,,Moneda nacional,5
+2204022,,Moneda extranjera,5
+2205,,RESERVAS POR RIESGOS EN CURSO DE AUTOMOTORES,5
+220501,,Automotores,5
+2205011,,Moneda nacional,5
+2205012,,Moneda extranjera,5
+2206,,RESERVAS POR RIESGOS EN CURSO DE OTROS SEGUROS GENERALES,5
+220601,,Rotura de Cristales,5
+2206011,,Moneda nacional,5
+2206012,,Moneda extranjera,5
+220602,,Transporte marítimo,5
+2206021,,Moneda nacional,5
+2206022,,Moneda extranjera,5
+220603,,Transporte aéreo,5
+2206031,,Moneda nacional,5
+2206032,,Moneda extanjera,5
+220604,,Transporte terrestre,5
+2206041,,Moneda nacional,5
+2206042,,Moneda extranjera,5
+220605,,Marítimos casco,5
+2206051,,Moneda nacional,5
+2206052,,Moneda extranjera,5
+220606,,Aviación,5
+2206061,,Moneda nacional,5
+2206062,,Moneda extranjera,5
+220607,,Robo y hurto,5
+2206071,,Moneda nacional,5
+2206072,,Moneda extranjera,5
+220608,,Fidelidad,5
+2206081,,Moneda nacional,5
+2206082,,Moneda extranjera,5
+220609,,Seguro de bancos,5
+2206091,,Moneda nacional,5
+2206092,,Moneda extranjera,5
+220610,,Todo riesgo para contratistas,5
+2206101,,Moneda nacional,5
+2206102,,Moneda extranjera,5
+220611,,Todo riesgo equipo para contratistas,5
+2206111,,Moneda nacional,5
+2206112,,Moneda extranjera,5
+220612,,Rotura de maquinaria,5
+2206121,,Moneda nacional,5
+2206122,,Moneda extranjera,5
+220613,,Montaje contra todo riesgo,5
+2206131,,Moneda nacional,5
+2206132,,Moneda extranjera,5
+220614,,Todo riesgo equipo electrónico,5
+2206141,,Moneda nacional,5
+2206142,,Moneda extranjera,5
+220615,,Calderos,5
+2206151,,Moneda nacional,5
+2206152,,Moneda extranjera,5
+220616,,Lucro cesante por interrupción de negocios,5
+2206161,,Moneda nacional,5
+2206162,,Moneda extranjera,5
+220617,,Lucro cesante rotura de maquinaria,5
+2206171,,Moneda nacional,5
+2206172,,Moneda extranjera,5
+220618,,Responsabilidad civil,5
+2206181,,Moneda nacional,5
+2206182,,Moneda extranjera,5
+220619,,Riesgos profesionales,5
+2206191,,Moneda nacional,5
+2206192,,Moneda extranjera,5
+220620,,Ganadero,5
+2206201,,Moneda nacional,5
+2206202,,Moneda extranjera,5
+220621,,Agrícola,5
+2206211,,Moneda nacional,5
+2206212,,Moneda extranjera,5
+220622,,Domiciliario,5
+2206221,,Moneda nacional,5
+2206222,,Moneda extranjera,5
+220623,,Crédito interno,5
+2206231,,Moneda nacional,5
+2206232,,Moneda extranjera,5
+220624,,Crédito a la exportación,5
+2206241,,Moneda nacional,5
+2206242,,Moneda extranjera,5
+220625,,Misceláneos,5
+2206251,,Moneda nacional,5
+2206252,,Moneda extranjera,5
+2207,,RESERVAS POR RIESGOS EN CURSO DE FIANZAS,5
+220701,,Fidelidad,5
+2207011,,Moneda nacional,5
+2207012,,Moneda extranjera,5
+220702,,Garantía,5
+2207021,,Moneda nacional,5
+2207022,,Moneda extranjera,5
+220703,,Motorista,5
+2207031,,Moneda nacional,5
+2207032,,Moneda extranjera,5
+2208,,RESERVAS DE PREVISION Y CONTINGENCIAL DE FIANZAS,5
+220801,,Contingencial de terremotos,5
+2208011,,Moneda nacional,5
+2208012,,Moneda extranjera,5
+220802,,Para riesgos de seguros especiales,5
+2208021,,Moneda nacional,5
+2208022,,Moneda extranjera,5
+220803,,Extraordinaria para otros riesgos cíclicos o fluctuantes,5
+2208031,,Moneda nacional,5
+2208032,,Moneda extranjera,5
+220804,,Reserva Contingencial de Fianzas (3),5
+2208041,,Moneda nacional,5
+2208042,,Moneda extranjera,5
+220809,,Reservas de previsión pendientes de liquidación,5
+2208091,,Moneda nacional,5
+2208092,,Moneda extranjera,5
+23,,RESERVAS POR SINIESTROS,5
+2301,,RESERVAS POR SINIESTROS REPORTADOS,5
+230101,,De seguros de vida,5
+2301011,,Moneda nacional,5
+2301012,,Moneda extranjera,5
+230102,,De seguros previsionales rentas y pensiones,5
+2301021,,Moneda nacional,5
+2301022,,Moneda extranjera,5
+230103,,De seguros de accidentes y enfermedades,5
+2301031,,Moneda nacional,5
+2301032,,Moneda extranjera,5
+230104,,De seguros de incendios,5
+2301041,,Moneda nacional,5
+2301042,,Moneda extranjera,5
+230105,,De seguros de automotores,5
+2301051,,Moneda nacional,5
+2301052,,Moneda extranjera,5
+230106,,De otros seguros generales,5
+2301061,,Moneda nacional,5
+2301062,,Moneda extranjera,5
+230107,,De fianzas,5
+2301071,,Moneda nacional,5
+2301072,,Moneda extranjera,5
+2302,,RESERVA POR SINIESTROS NO REPORTADOS,5
+230201,,De seguros de vida,5
+2302011,,Moneda nacional,5
+2302012,,Moneda extranjera,5
+230202,,De seguros previsionales rentas y pensiones,5
+2302021,,Moneda nacional,5
+2302022,,Moneda extranjera,5
+230203,,De seguros de accidentes y enfermedades,5
+2302031,,Moneda nacional,5
+2302032,,Moneda extranjera,5
+230204,,De seguros de incendios,5
+2302041,,Moneda nacional,5
+2302042,,Moneda extranjera,5
+230205,,De seguros de automotores,5
+2302051,,Moneda nacional,5
+2302052,,Moneda extranjera,5
+230206,,De otros seguros generales,5
+2302061,,Moneda nacional,5
+2302062,,Moneda extranjera,5
+230207,,De fianzas,5
+2302071,,Moneda nacional,5
+2302072,,Moneda extranjera,5
+24,,SOCIEDADES ACREEDORAS DE SEGUROS Y FIANZAS,5
+2401,,OBLIGACIONES EN CUENTA CORRIENTE CON SOCIEDADES DE REASEGURO Y REAFIANZAMIENTO,5
+240101,,Con reaseguradoras,5
+2401011,,Moneda nacional,5
+2401012,,Moneda extranjera,5
+240102,,Con reafianzadoras,5
+2401021,,Moneda nacional,5
+2401022,,Moneda extranjera,5
+240103,,Con coaseguradoras(1),5
+2401031,,Moneda nacional(1),5
+2401032,,Moneda extranjera(1),5
+240104,,Con coafianzadoras (1),5
+2401041,,Moneda nacional (1),5
+2401042,,Moneda extranjera (1),5
+240109,,Con filiales,5
+2401091,,Monera nacional,5
+240109101,,Reaseguradoras,5
+240109102,,Reafianzadoras,5
+2401092,,Moneda extranjera,5
+240109201,,Reaseguradoras,5
+240109202,,Reafianzadoras,5
+2402,,PRIMAS RETENIDAS A SOCIEDADES DE REASEGURO Y REAFIANZAMIENTO,5
+240205,,Por reaseguros cedidos,5
+2402051,,Moneda nacional,5
+2402052,,Moneda extranjera,5
+240206,,Por reafianzamientos cedidos,5
+2402061,,Moneda nacional,5
+2402062,,Moneda extranjera,5
+240209,,Por filiales,5
+2402091,,Moneda nacional,5
+240209101,,Reaseguro cedido,5
+240209102,,Reafianzamiento cedido,5
+2402092,,Moneda extranjera,5
+240209201,,Reaseguro cedido,5
+240209202,,Reafianzamiento cedido,5
+2403,,OBLIGACIONES EN CUENTA CORRIENTE CON SOCIEDADES POR SEGUROS Y FIANZAS,5
+240301,,Con reaseguradas,5
+2403011,,Moneda nacional,5
+2403012,,Moneda extranjera,5
+240302,,Con coaseguradas,5
+2403021,,Moneda nacional,5
+2403022,,Moneda extranjera,5
+240303,,Con reafianzadas,5
+2403031,,Moneda nacional,5
+2403032,,Moneda extranjera,5
+240304,,Coafianzadas,5
+2403041,,Moneda nacional,5
+2403042,,Moneda extranjera,5
+240309,,Con filiales,5
+2403091,,Moneda nacional,5
+240309101,,Reaseguradas,5
+240309102,,Reafianzadas,5
+240309103,,Coaseguradas,5
+2403092,,Moneda extranjera,5
+240309201,,Reaseguradas,5
+240309202,,Reafianzadas,5
+240309203,,Coaseguradas,5
+25,,OBLIGACIONES FINANCIERAS,5
+2501,,OBLIGACIONES CON INSTITUCIONES FINANCIERAS,5
+250101,,Sobregiros en cuenta corriente,5
+2501011,,Moneda nacional,5
+2501012,,Moneda extranjera,5
+250102,,Adeudos por préstamos,5
+2501021,,Moneda nacional,5
+2501022,,Moneda extranjera,5
+250109,,Otras obligaciones,5
+2501091,,Moneda nacional,5
+2501092,,Moneda extranjera,5
+2502,,OBLIGACIONES CON INSTITUCIONES FINANCERAS EXTRANJERAS,5
+250201,,Sobregiros en cuenta corriente,5
+2502012,,Moneda extranjera,5
+250202,,Adeudos por préstamos,5
+2502022,,Moneda extranjera,5
+250209,,Otras obligaciones,5
+2502092,,Moneda extranjera,5
+2503,,OBLIGACIONES CON INSTITUCIONES NO FINANCIERAS,5
+250301,,Adeudos por préstamos,5
+2503011,,Moneda nacional,5
+2503012,,Moneda extranjera,5
+250309,,Otras obligaciones,5
+2503091,,Moneda nacional,5
+2503092,,Moneda extranjera,5
+2504,,OBLIGACIONES POR VALORES TRANSADOS,5
+250401,,Obligaciones por valores transados,5
+2504011,,Moneda nacional,5
+2504012,,Moneda extranjera,5
+2506,,OTRAS OBLIGACIONES FINANCIERAS,5
+250601,,Cuotas de arrendamiento financiero,5
+2506011,,Moneda nacional,5
+2506012,,Moneda extranjera,5
+250609,,Otras obligaciones financieras,5
+2506091,,Moneda nacional,5
+2506092,,Moneda extranjera,5
+2507,,OBLIGACIONES CON FILIALES LOCALES Y EXTRANJERAS,5
+250701,,Adeudos por préstamos de filiales locales,5
+2507011,,Moneda nacional,5
+2507012,,Moneda extranjera,5
+250702,,Adeudos por préstamos de filiales extranjeras,5
+2507021,,Moneda nacional,5
+2507022,,Moneda extranjera,5
+2508,,INTERESES POR PAGAR,5
+250801,,A instituciones financieras locales,5
+2508011,,Moneda nacional,5
+2508012,,Moneda extranjera,5
+250802,,A instituciones financeras extranjeras,5
+2508021,,Moneda nacional,5
+2508022,,Moneda extranjera,5
+250803,,A instituciones no financieras,5
+2508031,,Moneda nacional,5
+2508032,,Moneda extranjera,5
+250804,,A filiales,5
+2508041,,Moneda nacional,5
+2508042,,Moneda extranjera,5
+26,,OBLIGACIONES CON INTERMEDIARIOS Y AGENTES,5
+2601,,OBLIGACIONES CON INTERMEDIARIOS DE SEGUROS,5
+260101,,Comisiones por pagar a intermediarios,5
+2601011,,Moneda nacional,5
+2601012,,Moneda extranjera,5
+260109,,Otras obligaciones con intermediarios,5
+2601091,,Moneda nacional,5
+2601092,,Moneda extranjera,5
+2602,,OBLIGACIONES CON AGENTES,5
+260201,,Comisiones por pagar a agentes independientes,5
+2602011,,Moneda nacional,5
+2602012,,Moneda extranjera,5
+260202,,Comisiones por pagar a agentes dependientes,5
+2602021,,Moneda nacional,5
+2602022,,Moneda extranjera,5
+260209,,Otras obligaciones con agentes,5
+2602091,,Moneda nacional,5
+2602092,,Moneda extranjera,5
+2607,,OBLIGACIONES CON FILIALES INTERMEDIARIAS,5
+260701,,Comisiones por pagar a filiales intermediarias,5
+2607011,,Moneda nacional,5
+2607012,,Moneda extranjera,5
+260702,,Otras obligaciones con filiales intermediarias,5
+2607021,,Moneda nacional,5
+2607022,,Moneda extranjera,5
+27,,CUENTAS POR PAGAR,5
+2701,,"IMPUESTOS, CONTRIBUCIONES Y RETENCIONES",5
+270101,,Retenciones,5
+2701011,,Moneda nacional,5
+270101101,,Impuesto sobre la renta,5
+270101103,,Seguro social,5
+270101104,,Administradoras de fondos de pensión,5
+270101105,,Impuesto de vialidad,5
+270101106,,Cuotas de préstamos,5
+270101107,,Embargos,5
+270101108,,Cuotas alimenticias,5
+270101109,,Otras retenciones,5
+270102,,Impuestos y contribuciones,5
+2701021,,Moneda nacional,5
+270102101,,Impuesto sobre la renta,5
+270102102,,Impuestos municipales,5
+270102103,,Seguro social,5
+270102105,,Fondos de pensiones,5
+270102106,,Contribuciones especiales por ley – Plan de seguridad ciudadana-Grandes Contribuyentes (4),5
+270102109,,Otros impuestos y contribuciones,5
+2702,,REMUNERACIONES POR PAGAR,5
+270201,,Vacaciones por pagar,5
+2702011,,Moneda nacional,5
+270202,,Remuneraciones por pagar,5
+2702021,,Moneda nacional,5
+270203,,Honorarios por pagar,5
+2702031,,Moneda nacional,5
+2702032,,Moneda extranjera,5
+270204,,Dietas por pagar,5
+2702041,,Moneda nacional,5
+270205,,Aguinaldos y bonificaciones,5
+2702051,,Moneda nacional,5
+2706,,OTRAS CUENTAS POR PAGAR,5
+270601,,Proveedores,5
+2706011,,Moneda nacional,5
+2706012,,Moneda extranjera,5
+270602,,Alquileres por pagar,5
+2706021,,Moneda nacional,5
+2706022,,Moneda extranjera,5
+270603,,Dividendos por pagar,5
+2706031,,Moneda nacional,5
+2706032,,Moneda extranjera,5
+270604,,Sobrantes de caja y valores,5
+2706041,,Moneda nacional,5
+2706042,,Moneda extranjera,5
+270609,,Diversas,5
+2706091,,Moneda nacional,5
+2706092,,Moneda extranjera,5
+2707,,CUENTAS POR PAGAR A FILIALES,5
+270701,,Cuentas por pagar a filiales locales,5
+2707011,,Moneda nacional,5
+2707012,,Moneda extranjera,5
+270702,,Cuentas por pagar a filiales extranjeras,5
+2707021,,Moneda nacional,5
+2707022,,Moneda extranjera,5
+28,,PROVISIONES,5
+2801,,PROVISION POR OBLIGACIONES LABORALES,5
+280101,,Provisión por Obligaciones Laborales,5
+2801010,,Provisión por Obligaciones Laborales,5
+2802,,PROVISION POR CONTINGENCIAS,5
+280201,,Provisión para contingencias,5
+2802010,,Provisión para contingencias,5
+29,,OTROS PASIVOS,5
+2901,,INGRESOS DIFERIDOS,5
+290101,,Primas percibidas no devengadas por seguros,5
+2901011,,Moneda nacional,5
+2901012,,Moneda extranjera,5
+290102,,Primas percibidas no devengadas por afianzamientos,5
+2901021,,Moneda nacional,5
+2901022,,Moneda extranjera,5
+290103,,Comisiones diferidas,5
+2901031,,Moneda nacional,5
+2901032,,Moneda extranjera,5
+290104,,Alquileres cobrados por anticipado,5
+2901041,,Moneda nacional,5
+2901042,,Moneda extranjera,5
+290105,,Ingresos percibidos no devengados por reportos,5
+2901051,,Moneda nacional,5
+2901052,,Moneda extranjera,5
+290109,,Diversos,5
+2901091,,Moneda nacional,5
+2901092,,Moneda extranjera,5
+2904,,DEBITO FISCAL - IVA,5
+290401,,Débito fiscal - IVA,5
+2904011,,Moneda nacional,5
+2907,,OTROS PASIVOS CON FILIALES,5
+290701,,Ingresos diferidos,5
+2907011,,Moneda nacional,5
+2907012,,Moneda extranjera,5
+3,,PATRIMONIO,5
+31,,CAPITAL SOCIAL,5
+3101,,CAPITAL PAGADO,5
+3101010,,Capital suscrito,5
+3101020,,Capital suscrito no pagado (Cr.),5
+3101030,,Capital asignado a sucursales,5
+32,,DEROGADA (5),5
+3201,,DEROGADA (5),5
+3201010,,Derogada (5),5
+3201020,,Derogada (5),5
+33,,APORTE SOCIAL,5
+3301,,APORTE PAGADO,5
+3301010,,Aporte suscrito,5
+3301020,,Aporte suscrito no pagado (Cr.),5
+34,,DEROGADA (5),5
+3401,,DEROGADA (5),5
+3401010,,Derogada (5),5
+35,,RESERVAS DE CAPITAL,5
+3501,,RESERVAS OBLIGATORIAS,5
+3501010,,Reserva legal,5
+3501020,,Reservas estatutarias,5
+3502,,RESERVAS VOLUNTARIAS,5
+3502010,,Reservas voluntarias,5
+36,,PATRIMONIO RESTRINGIDO,5
+3601,,REVALUACIONES,5
+3601010,,Revaluación de inmuebles,5
+3601020,,Revaluación de participaciones,5
+3602,,UTILIDADES NO DISTRIBUIBLES,5
+3602010,,Utilidades no distribuibles,5
+3603,,DIVERSOS,5
+3603010,,Donaciones,5
+3603020,,Premios,5
+3603030,,Recuperaciones de activos,5
+38,,RESULTADOS ACUMULADOS,5
+3801,,RESULTADOS DEL EJERCICIO,5
+3801010,,Utilidades,5
+3801020,,Pérdidas (Cr.),5
+3802,,RESULTADOS DE EJERCICIOS ANTERIORES,5
+3802010,,Utilidades,5
+3802020,,Pérdidas (Cr.),5
+4,,GASTOS,5
+41,,SINIESTROS,5
+4101,,DE SEGUROS DE VIDA,5
+4101010,,Individual de largo plazo,5
+4101020,,Vida individual de corto plazo,5
+4101030,,Colectivo,5
+4101040,,Otros planes,5
+4102,,DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+4102010,,Rentas de invalidez y sobrevivencia,5
+4102020,,Sepelio,5
+4102030,,Otras rentas,5
+410203001,,Seguros directos,5
+41020300101,,Rentas ciertas,5
+41020300102,,Rentas temporales,5
+41020300103,,Rentas vitalicias,5
+41020300104,,Otros planes,5
+410203002,,Reaseguros tomados,5
+410203003,,Coaseguros,5
+410203009,,Seguros con filiales,5
+41020300901,,Seguros directos,5
+41020300902,,Reaseguros tomados,5
+41020300903,,Coaseguros,5
+4102040,,Pensiones,5
+4103,,DE SEGUROS DE ACCIDENTES Y ENFERMEDADES,5
+4103010,,Salud y hospitalización,5
+4103020,,Accidentes personales,5
+4103030,,Accidentes viajes aéreos,5
+4103040,,Escolares,5
+4104,,DE SEGUROS DE INCENDIOS Y LINEAS ALIADAS,5
+4104010,,Incendios,5
+4104020,,Líneas aliadas,5
+4105,,DE SEGUROS DE AUTOMOTORES,5
+4105010,,Automotores,5
+4106,,DE OTROS SEGUROS GENERALES,5
+4106010,,Rotura de Cristales,5
+4106020,,Transporte marítimo,5
+4106030,,Transporte aéreo,5
+4106040,,Transporte terrestre,5
+4106050,,Marítimos casco,5
+4106060,,Aviación,5
+4106070,,Robo y hurto,5
+4106080,,Fidelidad,5
+4106100,,Todo riesgo para contratistas,5
+4106110,,Todo riesgo equipo para contratistas,5
+4106120,,Rotura de maquinaria,5
+4106130,,Montaje contra todo riesgo,5
+4106140,,Todo riesgo equipo electrónico,5
+4106150,,Calderos,5
+4106160,,Lucro cesante por interrupción de negocios,5
+4106170,,Lucro cesante rotura de maquinaria,5
+4106180,,Responsabilidad civil,5
+4106190,,Riesgos profesionales,5
+4106200,,Ganadero,5
+4106210,,Agrícola,5
+4106220,,Domiciliario,5
+4106230,,Crédito interno,5
+4106240,,Crédito a la exportación,5
+4106250,,Misceláneos,5
+4107,,DE FIANZAS,5
+4107010,,Fidelidad,5
+4107020,,Garantía,5
+4107030,,Motoristas,5
+4108,,DOTALES VENCIDAS,5
+4109,,RESCATES,5
+4110,,GASTOS POR LIQUIDACION DE SINIESTROS DE SEGUROS Y FIANZAS,5
+4110010,,DE SEGUROS DE VIDA,5
+411001001,,Gastos por liquidación de siniestros de vida invidual de largo plazo,5
+411001002,,De vida individual de corto plazo,5
+411001003,,Seguro colectivo,5
+411001004,,Seguro de vida- otros planes,5
+4110020,,DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+411002001,,Rentas de invalidez y sobrevivencia,5
+411002002,,Sepelio,5
+411002003,,Otras rentas,5
+411002004,,Pensiones,5
+411003,,DE SEGUROS DE ACCIDENTES Y ENFERMEDADES,5
+411003001,,Salud y hospitalización,5
+411003002,,Accidentes personales,5
+411003003,,Accidentes viajes aéreos,5
+411003004,,Escolares,5
+411004,,DE SEGUROS DE INCENDIOS Y LINEAS ALIADAS,5
+411004001,,Incendios,5
+411004002,,Líneas aliadas,5
+411005,,DE SEGUROS AUTOMOTORES,5
+411005001,,Automotores,5
+411006,,DE OTROS SEGUROS GENERALES,5
+411006001,,Rotura de Cristales,5
+411006002,,Transporte marítimo,5
+411006003,,Transporte aéreo,5
+411006004,,Transporte terrestre,5
+411006005,,Marítimos casco,5
+411006006,,Aviación,5
+411006007,,Robo y hurto,5
+411006008,,Fidelidad,5
+411006009,,Seguro de bancos,5
+411006010,,Todo riesgo para contratistas,5
+411006011,,Todo riesgo equipo para contratistas,5
+411006012,,Rotura de maquinaria,5
+411006013,,Montaje contra todo riesgo,5
+411006014,,Todo riesgo equipo electrónico,5
+411006015,,Calderos,5
+411006016,,Lucro cesante por interrupción de negocios,5
+411006017,,Lucro cesante rotura de maquinaria,5
+411006018,,Responsabilidad civil,5
+411006019,,Riesgos profesionales,5
+411006020,,Ganadero,5
+411006021,,Agrícola,5
+411006022,,Domiciliario,5
+411006023,,Crédito interno,5
+411006024,,Crédito a la exportación,5
+411006025,,Misceláneos,5
+411007,,DE FIANZAS,5
+411007001,,Fidelidad,5
+411007002,,Garantía,5
+411007003,,Motoristas,5
+4111,,SALVAMENTOS Y RECUPERACIONES- PARTICIPACION DE OTRAS ENTIDADES,5
+411104,,SALVAMENTOS DE SEGUROS DE INCENDIOS Y LINEAS ALIADAS,5
+411104001,,Incendios,5
+411104002,,Líneas aliadas,5
+411105,,SALVAMENTOS DE SEGUROS DE AUTOMOTORES,5
+411105001,,Automotores,5
+41110500103,,Coaseguradoras,5
+41110500104,,Reaseguradoras,5
+41110500105,,Retrocesionarias de seguros,5
+41110500109,,Filiales,5
+4111050010903,,Coaseguradoras,5
+4111050010904,,Reaseguradoras,5
+4111050010905,,Retrocesionarias de seguros,5
+411106,,SALVAMENTOS DE OTROS SEGUROS GENERALES,5
+411106001,,Rotura de Cristales,5
+411106002,,Transporte marítimo,5
+411106003,,Transporte aéreo,5
+411106004,,Transporte terrestre,5
+411106005,,Marítimos casco,5
+411106006,,Aviación,5
+411106007,,Robo y hurto,5
+411106008,,Fidelidad,5
+411106009,,Seguro de bancos,5
+411106010,,Todo riesgo para contratistas,5
+411106011,,Todo riesgo equipo para contratistas,5
+411106012,,Rotura de maquinaria,5
+411106013,,Montaje contra todo riesgo,5
+411106014,,Todo riesgo equipo electrónico,5
+411106015,,Calderos,5
+411106016,,Lucro cesante por interrupción de negocios,5
+411106017,,Lucro cesante rotura de maquinaria,5
+411106018,,Responsabilidad civil,5
+411106019,,Riesgos profesionales,5
+411106020,,Ganadero,5
+411106021,,Agrícola,5
+411106022,,Domiciliario,5
+411106023,,Crédito interno,5
+411106024,,Crédito a la exportación,5
+411106025,,Misceláneos,5
+411107,,RECUPERACIONES DE FIANZAS,5
+411107001,,Fidelidad,5
+411107002,,Garantía,5
+411107003,,Motoristas,5
+42,,PRIMAS CEDIDAS POR REASEGUROS Y REAFIANZAMIENTOS,5
+4201,,DE SEGUROS DE VIDA,5
+4201010,,Individual de largo plazo,5
+4201020,,Vida individual de corto plazo,5
+4201030,,Colectivo,5
+4201040,,Otros planes,5
+4202,,DE SEGUROS PREVISIONALES RENTAS,5
+4202010,,Rentas de invalidez y sobrevivencia,5
+4202020,,Sepelio,5
+4202030,,Otras rentas,5
+4202040,,Pensiones,5
+4203,,DE SEGUROS DE ACCIDENTES Y ENFERMEDADES,5
+4203010,,Salud y hospitalización,5
+4203020,,Accidentes personales,5
+4203030,,Accidentes viajes aéreos,5
+4203040,,Escolares,5
+4204,,DE SEGUROS DE INCENDIOS Y LINEAS ALIADAS,5
+4204010,,Incendios,5
+4204020,,Líneas aliadas,5
+4205,,DE SEGUROS DE AUTOMOTORES,5
+4205010,,Automotores,5
+4206,,DE OTROS SEGUROS GENERALES,5
+4206010,,Rotura de Cristales,5
+4206020,,Transporte marítimo,5
+4206030,,Transporte aéreo,5
+4206040,,Transporte terrestre,5
+4206050,,Marítimos casco,5
+4206060,,Aviación,5
+4206070,,Robo y hurto,5
+4206080,,Fidelidad,5
+4206090,,Seguro de bancos,5
+4206100,,Todo riesgo para contratistas,5
+4206110,,Todo riesgo equipo para contratistas,5
+420611004,,Reaseguros cedidos,5
+420611005,,Retrocesión de seguros,5
+420611009,,Seguros a filiales,5
+42061100901,,Reaseguros cedidos,5
+42061100902,,Retrocesión de seguros,5
+4206120,,Rotura de maquinaria,5
+4206130,,Montaje contra todo riesgo,5
+4206140,,Todo riesgo equipo electrónico,5
+4206150,,Calderos,5
+4206160,,Lucro cesante por interrupción de negocios,5
+4206170,,Lucro cesante rotura de maquinaria,5
+4206180,,Responsabilidad civil,5
+4206190,,Riesgos profesionales,5
+4206200,,Ganadero,5
+4206210,,Agrícola,5
+4206220,,Domiciliario,5
+4206230,,Crédito interno,5
+4206240,,Crédito a la exportación,5
+4206250,,Misceláneos,5
+4207,,DE FIANZAS,5
+4207010,,Fidelidad,5
+4207020,,Garantía,5
+4207030,,Motoristas,5
+43,,GASTO POR INCREMENTO DE RESERVAS TECNICAS Y CONTINGENCIAL DE FIANZAS (3),5
+4301,,DE SEGUROS DE VIDA,5
+4301010,,Matemáticas de vida individual de largo plazo,5
+4301020,,Reserva de riesgo en curso de vida individual de corto plazo,5
+4301030,,Reserva de riesgos en curso de vida colectivo,5
+4301040,,Reservas de riesgos en curso de otros planes,5
+4301090,,Ajuste de reserva adicional de seguro de vida.,5
+430109001,,Seguros directos,5
+43010900101,,Accidentes,5
+43010900102,,Exoneración del pago de primas,5
+43010900103,,Extraprimas y riesgos tarados,5
+43010900104,,Capitales complementarios,5
+43010900105,,"Dividendos, cupones y bonos sobre pólizas",5
+43010900109,,Diversas,5
+430109002,,Reaseguros tomados,5
+430109003,,Coaseguros,5
+430109009,,Por operaciones con filiales,5
+43010900901,,Seguro directo,5
+43010900902,,Reaseguro tomado,5
+43010900903,,Coaseguro,5
+4302,,DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+4302010,,Rentas de invalidez y sobrevivencia,5
+4302020,,Sepelio,5
+4302030,,Otras rentas,5
+4302040,,Pensiones,5
+4303,,DE RIESGOS EN CURSO DE ACCIDENTES Y ENFERMEDADES,5
+4303010,,Salud y hospitalización,5
+4303020,,Accidentes personales,5
+4303030,,Accidentes viajes aéreos,5
+4303040,,Escolares,5
+4304,,DE RIESGOS EN CURSO DE INCENDIOS Y LINEAS ALIADAS,5
+4304010,,Incendios,5
+4304020,,Líneas aliadas,5
+4305,,DE RIESGOS EN CURSO DE AUTOMOTORES,5
+4305010,,Automotores,5
+4306,,DE RIESGOS EN CURSO-OTROS SEGUROS GENERALES,5
+4306010,,Rotura de Cristales,5
+4306020,,Transporte marítimo,5
+4306030,,Transporte aéreo,5
+4306040,,Transporte terrestre,5
+4306050,,Marítimos casco,5
+4306060,,Aviación,5
+4306070,,Robo y hurto,5
+4306080,,Fidelidad,5
+4306090,,Seguro de bancos,5
+4306100,,Todo riesgo para contratistas,5
+4306110,,Todo riesgo equipo para contratistas,5
+4306120,,Rotura de maquinaria,5
+4306130,,Montaje contra todo riesgo,5
+4306140,,Todo riesgo equipo electrónico,5
+4306150,,Calderos,5
+4306160,,Lucro cesante por interrupción de negocios,5
+4306170,,Lucro cesante rotura de maquinaria,5
+4306180,,Responsabilidad civil,5
+4306190,,Riesgos profesionales,5
+4306200,,Ganadero,5
+4306210,,Agrícola,5
+4306220,,Domiciliario,5
+4306230,,Crédito interno,5
+4306240,,Crédito a la exportación,5
+4306250,,Misceláneos,5
+4307,,DE RIESGOS EN CURSO DE FIANZAS,5
+4307010,,Fidelidad,5
+4307020,,Garantía,5
+4307030,,Motoristas,5
+4308,,DE PREVISION Y CONTINGENCIAL DE FIANZAS,5
+4308010,,De previsión para riesgo contingencial de terremoto,5
+4308020,,De previsión para riesgos especiales,5
+4308030,,Extraordinaria de previsión para otros riesgos cíclicos y fluctuantes,5
+4308040,,Reserva Contingencial de Fianzas (3),5
+43,,GASTOS POR INCREMENTO DE RESERVAS TÉCNICAS (1),5
+4309,,RECLAMOS EN TRÁMITE,5
+4309010,,De seguros de vida,5
+4309020,,De seguros previsionales rentas y pensiones,5
+4309030,,De seguros de accidentes y enfermedades,5
+430903001,,Salud y hospitalización,5
+430903002,,Accidentes Personales,5
+430903003,,Accidentes Viajes Aéreos,5
+430903004,,Escolares,5
+4309040,,De seguros de incendios y líneas aliadas,5
+4309050,,De seguros de automotores,5
+4309060,,De seguros de otros seguros generales,5
+430906001,,Rotura de cristales,5
+430906002,,Transporte marítimo,5
+430906003,,Transporte aéreo,5
+430906004,,Transporte terrestre,5
+430906005,,Marítimos casco,5
+430906006,,Aviación,5
+430906007,,Robo y hurto,5
+430906008,,Fidelidad,5
+430906009,,Seguro de bancos,5
+430906010,,Todo riesgo para contratistas,5
+430906011,,Todo riesgo equipo para contratistas,5
+430906012,,Rotura de maquinaria,5
+430906013,,Montaje contra todo riesgo,5
+430906014,,Todo riesgo equipo electrónico,5
+430906015,,Calderos,5
+430906016,,Lucro cesante por interrupción de negocios,5
+430906017,,Lucro cesante rotura de maquinaria,5
+430906018,,Responsabilidad civil,5
+430906019,,Riesgos profesionales,5
+430906020,,Ganadero,5
+430906021,,Agrícola,5
+430906022,,Domicilio,5
+430906023,,Crédito interno,5
+430906024,,Crédito a la exportación,5
+430906025,,Misceláneos,5
+4309070,,Fianzas,5
+430907001,,Fidelidad,5
+430907002,,Garantía,5
+430907003,,Motoristas,5
+45,,GASTOS DE ADQUISICION Y CONSERVACION,5
+4501,,COMISIONES Y PARTICIPACIONES DE SEGUROS DE VIDA,5
+4501010,,De seguros de vida individual de largo plazo,5
+4501020,,De vida individual de corto plazo,5
+4501030,,De vida colectivo,5
+4501040,,De vida otros planes,5
+4502,,"COMISIONES Y PARTICIPACIONES DE SEGUROS PREVISIONALES, RENTAS Y PENSIONES",5
+4502010,,Rentas de invalidez y sobrevivencia,5
+4502020,,Sepelio,5
+4502030,,Otras rentas,5
+4502040,,Pensiones,5
+4503,,COMISIONES Y PARTICIPACIONES DE SEGUROS DE ACCIDENTES Y ENFERMEDADES,5
+4503010,,Salud y hospitalización,5
+4503020,,Accidentes personales,5
+4503030,,Accidentes viajes aéreos,5
+4503040,,Escolares,5
+4504,,COMISIONES Y PARTICIPACIONES DE SEGUROS DE INCENDIOS Y LINEAS ALIADAS,5
+4504010,,Incendios,5
+4504020,,Líneas aliadas,5
+4505,,COMISIONES Y PARTICIPACIONES DE SEGUROS DE AUTOMOTORES,5
+4505010,,Automotores,5
+4506,,COMISIONES Y PARTICIPACIONES DE OTROS SEGUROS GENERALES,5
+4506010,,Rotura de Cristales,5
+4506020,,Transporte marítimo,5
+4506030,,Transporte aéreo,5
+4506040,,Transporte terrestre,5
+4506050,,Marítimos casco,5
+4506060,,Aviación,5
+4506070,,Robo y hurto,5
+4506080,,Fidelidad,5
+4506090,,Seguro de bancos,5
+4506100,,Todo riesgo para contratistas,5
+4506110,,Todo riesgo equipo para contratistas,5
+4506120,,Rotura de maquinaria,5
+4506130,,Montaje contra todo riesgo,5
+4506140,,Todo riesgo equipo electrónico,5
+4506150,,Calderos,5
+4506160,,Lucro cesante por interrupción de negocios,5
+4506170,,Lucro cesante rotura de maquinaria,5
+4506180,,Responsabilidad civil,5
+4506190,,Riesgos profesionales,5
+4506200,,Ganadero,5
+4506210,,Agrícola,5
+4506220,,Domiciliario,5
+4506230,,Crédito interno,5
+4506240,,Crédito a la exportación,5
+4506250,,Misceláneos,5
+4507,,COMISIONES Y PARTICIPACIONES DE FIANZAS,5
+4507010,,Fidelidad,5
+450701001,,Fianzas directas,5
+45070100101,,Iniciales,5
+45070100102,,Renovaciones,5
+45070100103,,Compensaciones adiocionales sobre primas,5
+450701002,,Reafianzamiento tomado,5
+450701003,,Coafianzamientos,5
+450701009,,Fianzas de filiales,5
+45070100901,,Fianzas directas,5
+45070100902,,Reafianzamiento tomado,5
+45070100903,,Coafianzamientos,5
+4507020,,Garantía,5
+4507030,,Motoristas,5
+4509,,GASTOS DE ADQUISICION Y CONSERVACION CON ASEGURADOS,5
+4509010,,Accidentes,5
+4509020,,Exoneraciones de pago de primas,5
+4509030,,Extraprimas de riesgos anormales,5
+4509040,,"Dividendos, cupones y bonos sobre pólizas",5
+4509050,,Premios,5
+4510,,GASTOS POR OBLIGACIONES CON REASEGURADAS Y REAFIANZADAS,5
+4510010,,Gastos por obligaciones en cuenta corriente con reaseguradas,5
+4510020,,Gastos por primas retenidas con reaseguradas,5
+4510030,,Gastos por obligaciones en cuenta corriente con reafianzadas,5
+4510040,,Gastos por primas retenidas con reafianzadas,5
+4511,,GASTOS DE COBRANZA DE PRIMAS,5
+4511010,,Sueldos,5
+4511020,,Remuneraciones extraordinarias,5
+4511030,,Aguinaldos y bonificaciones,5
+451103001,,Aguinaldos,5
+451103002,,Bonificaciones,5
+4511040,,Vacaciones,5
+4511050,,Capacitación,5
+4511060,,Indemnizaciones,5
+4511070,,Obligaciones laborales,5
+4511080,,Otras prestaciones al personal,5
+4511090,,Viáticos,5
+4511100,,Transportes,5
+4511110,,Comunicaciones,5
+451111001,,Servicio telefonico,5
+451111002,,Franqueo postal,5
+4511120,,Seguros y Fianzas al Personal,5
+4511130,,"Papelería, útiles y enseres",5
+4511140,,Cuotas patronales de previsión social,5
+451114001,,Cuota patronal - I.S.S.S,5
+451114002,,Administradora de Fondos de Pensiones,5
+451114003,,Unidad de pensiones - I.S.S.S,5
+4511150,,Legales,5
+4511160,,Alquileres y otros gastos,5
+4511170,,Uniformes y equipo,5
+4511990,,Otros,5
+4515,,OTROS GASTOS DE ADQUISICIÓN Y CONSERVACION,5
+4515010,,Sueldos,5
+4515020,,Remuneraciones extraordinarias,5
+4515030,,Aguinaldos y bonificaciones,5
+451503001,,Aguinaldos,5
+451503002,,Bonificaciones,5
+4515040,,Vacaciones,5
+4515050,,Capacitación,5
+4515060,,Indemnizaciones,5
+4515070,,Obligaciones laborales,5
+4515080,,Otras prestaciones al personal,5
+4515090,,Gastos de representación,5
+4515100,,Viáticos,5
+4515110,,Transporte,5
+451511001,,Combutibles y lubricantes,5
+451511002,,Gastos de viaje,5
+451511003,,Encomiendas,5
+4515120,,Comunicaciones,5
+451512001,,Servicios telefonicos,5
+451512002,,Franqueo postal,5
+4515130,,Publicidad,5
+4515140,,Seguros al personal,5
+4515150,,"Papelería, útiles y enseres",5
+4515160,,Exámenes médicos a los asegurados,5
+4515170,,Gastos de inspección de riesgos,5
+4515180,,Otros honorarios,5
+4515190,,Cuotas patronales de previsión social,5
+451519001,,Cuota patronal - I.S.S.S.,5
+451519002,,Administradora de Fondos de Pensiones,5
+451519003,,Unidad de pensiones - I.S.S.S,5
+4515200,,Legales,5
+4515210,,Alquileres y otros gastos,5
+4515220,,Suscripciones,5
+4515230,,Contribuciones,5
+4515240,,Adecuación y mantenimiento de locales ajenos,5
+4515250,,Mantenimiento de edificio,5
+4515260,,Mantenimiento de vehiculos,5
+4515270,,Mantenimiento de mobiliario y equipo,5
+4515280,,Convenciones de agentes,5
+4515290,,Seguridad,5
+4515300,,Uniformes y equipo,5
+4515310,,Depreciación de bienes muebles,5
+4515320,,Depreciación de bienes Inmuebles,5
+4515990,,Otros,5
+46,,DEVOLUCIONES Y CANCELACIONES DE PRIMAS,5
+4601,,DE SEGUROS DE VIDA,5
+4601010,,Devoluciones y cancelaciones de vida individual de largo plazo,5
+4601020,,De vida individual de corto plazo,5
+4601030,,De vida colectivo,5
+4601040,,De vida otros planes,5
+4602,,DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+4602010,,Rentas de invalidez y sobrevivencia,5
+4602020,,Sepelio,5
+4602030,,Otras rentas,5
+4602040,,Pensiones,5
+4603,,DE ACCIDENTES Y ENFERMEDADES,5
+4603010,,Salud y hospitalización,5
+4603020,,Accidentes personales,5
+4603030,,Accidentes viajes aéreos,5
+4603040,,Escolares,5
+4604,,DE INCENDIOS Y LINEAS ALIADAS,5
+4604010,,Incendios,5
+4604020,,Líneas aliadas,5
+4605,,DE AUTOMOTORES,5
+4605010,,Automotores,5
+4606,,OTROS SEGUROS GENERALES,5
+4606010,,Rotura de Cristales,5
+4606020,,Transporte marítimo,5
+4606030,,Transporte aéreo,5
+4606040,,Transporte terrestre,5
+4606050,,Marítimos casco,5
+4606060,,Aviación,5
+4606070,,Robo y hurto,5
+4606080,,Fidelidad,5
+4606090,,Seguro de bancos,5
+4606100,,Todos riesgo para contratistas,5
+4606110,,Todo riesgo equipo para contratistas,5
+4606120,,Rotura de maquinaria,5
+4606130,,Montaje contra todo riesgo,5
+4606140,,Todo riesgo equipo electrónico,5
+4606150,,Calderos,5
+4606160,,Lucro cesante por interrupción de negocios,5
+4606170,,Lucro cesante rotura de maquinaria,5
+4606180,,Responsabilidad civil,5
+4606190,,Riesgos profesionales,5
+4606200,,Ganadero,5
+4606210,,Agrícola,5
+4606220,,Domiciliario,5
+4606230,,Crédito interno,5
+4606240,,Crédito a la exportación,5
+4606250,,Misceláneos,5
+4607,,DE FIANZAS,5
+4607010,,Fidelidad,5
+4607020,,Garantía,5
+4607030,,Motoristas,5
+47,,GASTOS FINANCIEROS Y DE INVERSION,5
+4701,,POR OBLIGACIONES FINANCIERAS Y OTROS PASIVOS,5
+4701010,,Gastos por obligaciones con instituciones financieras,5
+470101001,,Intereses,5
+470101002,,Comisiones,5
+4701020,,Gastos por obligaciones con instituciones financieras extranjeras,5
+4701030,,Gastos por obligaciones con instituciones no financieras,5
+4701040,,Gastos por valores vendidos en reporto,5
+4701050,,Gastos por obligaciones con filiales,5
+4701060,,Gastos por cuentas por pagar,5
+4701090,,Gastos financieros por otros pasivos,5
+4702,,PROVISIONES PARA DESVALORIZACION DE INVERSION,5
+4702010,,Constitución de provisiones para desvalorización de inversiones en valores,5
+4703,,PROVISIONES PARA CREDITOS,5
+4703010,,Constitución de provisiones para préstamos vigentes,5
+4703020,,Constitución de provisiones para préstamos refinanciados,5
+4703030,,Constitución de provisiones para préstamos vencidos,5
+4704,,PROVISIONES POR SALDOS A CARGO DE,5
+4704010,,A cargo de reaseguradores,5
+4704020,,A cargo de reafianzadores,5
+4704030,,Por cobrar diversas,5
+4708,,GASTOS POR DIFERENCIAS DE CAMBIO,5
+4708010,,Gastos por diferencias de cambio,5
+4709,,GASTOS DE OFICINA PRINCIPAL Y SUCURSALES,5
+4709010,,Gastos por oficina principal,5
+4709020,,Gastos por sucursales,5
+48,,GASTOS DE ADMINISTRACION,5
+4801,,DE PERSONAL,5
+4801010,,Sueldos,5
+4801020,,Remuneraciones extraordinarias,5
+4801030,,Aguinaldos y bonificaciones,5
+480103001,,Aguinaldos,5
+480103002,,Bonificaciones,5
+4801040,,Vacaciones,5
+4801050,,Capacitación,5
+4801060,,Indemnizaciones,5
+4801070,,Obligaciones laborales,5
+4801080,,Otras prestaciones al personal,5
+480108001,,Recreación del personal,5
+480108002,,Asistencia medico dental,5
+480108003,,Uniformes y equipo,5
+4801090,,Gastos de representación,5
+4801100,,Cuota patronales de prevision social,5
+480110001,,Cuota patronal - I.S.S.S,5
+480110002,,Administradora de Fondos de Pensiones,5
+480110003,,Unidad de pensiones - I.S.S.S,5
+4802,,DE DIRECTORES,5
+4802010,,Dietas,5
+4802020,,Gestión de negocios y representación,5
+4802090,,Otros gastos del directorio,5
+4803,,POR SERVICIOS RECIBIDOS DE TERCEROS,5
+4803010,,Vigilancia y protección,5
+4803020,,Transporte,5
+4803030,,Comunicación,5
+480303001,,Servicio telefonico,5
+480303002,,Franqueo postal,5
+480303003,,Servicio de internet,5
+480303004,,Contribución especial para la seguridad ciudadana y convivencia (4),5
+4803040,,Custodia de valores,5
+4803050,,Informática,5
+4803060,,Honorarios profesionales,5
+4803070,,Electricidad y agua,5
+4803080,,Auditoría externa,5
+4803090,,Publicidad,5
+4803100,,Limpieza y fumigación,5
+4803110,,Mantenimiento de oficina,5
+4803120,,Reparación y mantenimiento de vehículos,5
+4803130,,Mantenimiento de muebles y equipo,5
+4803140,,Viáticos,5
+4803150,,Suscripciones,5
+4803160,,Contribuciones,5
+4803170,,Encomiendas,5
+4803180,,Conservacion y Mantenimiento de edificio,5
+4803190,,Otros gastos por servicios,5
+4804,,POR SEGUROS,5
+4804010,,Seguros sobre dinero y valores,5
+4804020,,Seguros para bienes,5
+4804030,,Seguros al personal,5
+4804090,,Otros seguros,5
+4805,,IMPUESTOS Y CONTRIBUCIONES,5
+4805010,,Impuestos municipales,5
+4805020,,Cuotas por fiscalización a la Superintendencia,5
+4805030,,Contribuciones especiales por ley – Plan de seguridad ciudadana (4),5
+4805090,,Otros impuestos y contribuciones,5
+4806,,DEPRECIACION,5
+4806010,,De edificios e instalaciones,5
+4806020,,De mobiliario y equipo,5
+4806030,,De equipos de transporte,5
+4806040,,De bienes tomados en arrendamiento financiero,5
+4806050,,De otros bienes de uso diverso,5
+4806060,,De instalaciones y mejoras en propiedades tomadas en alquiler,5
+4807,,PROVISIÓN DE ACTIVOS EXTRAORDINARIOS,5
+4807010,,Provisión de activos extraordinarios,5
+4808,,AMORTIZACION DE GASTOS,5
+4808010,,De gastos de organización e instalación,5
+4808020,,De gastos de reorganización administrativa,5
+4809,,GASTOS DIVERSOS,5
+4809010,,Alquiler de bienes,5
+4809020,,Papelería y útiles,5
+4809030,,Materiales y útiles de limpieza,5
+4809040,,Multas impuestas por la Superintendencia,5
+4809050,,Multas diversas,5
+4809070,,Gastos por conservación y mantenimiento de bienes extraordinarios,5
+4809080,,Combustibles y lubricantes,5
+4809090,,Otros gastos diversos,5
+49,,GASTOS EXTRAORDINARIOS Y DE EJERCICIOS ANTERIORES,5
+4901,,GASTOS EXTRAORDINARIOS,5
+4901010,,Pérdidas por siniestros de bienes propios,5
+4901020,,Pérdidas en venta de bienes,5
+4901030,,Castigo de rendimientos de disponibles,5
+4901040,,Castigo de rendimientos de inversiones en valores,5
+4901050,,Castigos de rendimientos de préstamos,5
+4901060,,Castigo de rendimientos de inversiones permanentes,5
+4901090,,Otros gastos extraordinarios,5
+490109001,,Fantante de caja y Valores,5
+490109002,,Saneamiento de Otros Activos,5
+490109009,,Otros,5
+4902,,GASTOS DE EJERCICIOS ANTERIORES,5
+4902010,,Gastos financieros y de inversión,5
+4902020,,Gastos de administración,5
+4902090,,Otros gastos de ejercicios anteriores,5
+5,,INGRESOS,5
+51,,PRIMAS PRODUCTOS,5
+5101,,DE SEGUROS DE VIDA,5
+5101010,,Individual de largo plazo,5
+5101020,,De vida individual de corto plazo,5
+5101030,,Colectivo,5
+5101040,,Otros planes,5
+5102,,DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+5102010,,Rentas de invalidez y sobrevivencia,5
+5102020,,Sepelio,5
+5102030,,Otras rentas,5
+5102040,,Pensiones,5
+5103,,SEGUROS DE ACCIDENTES Y ENFERMEDADES,5
+5103010,,Salud y hospitalización,5
+5103020,,Accidentes personales,5
+5103030,,Accidentes viajes aéreos,5
+5103040,,Escolares,5
+5104,,DE SEGUROS DE INCENDIOS Y LINEAS ALIADAS,5
+5104010,,Incendios,5
+5104020,,Líneas aliadas,5
+5104030,,Terremoto (1),5
+5105,,DE SEGUROS DE AUTOMOTORES,5
+5105010,,Automotores,5
+5106,,DE OTROS SEGUROS GENERALES,5
+5106010,,Rotura de Cristales,5
+5106020,,Transporte marítimo,5
+5106030,,Transporte aéreo,5
+5106040,,Transporte terrestre,5
+5106050,,Marítimos casco,5
+5106060,,Aviación,5
+5106070,,Robo y hurto,5
+5106080,,Fidelidad,5
+5106090,,Seguro de bancos,5
+5106100,,Todo riesgo para contratistas,5
+5106110,,Todo riesgo equipo para contratistas,5
+5106120,,Rotura de maquinaria,5
+5106130,,Montaje contra todo riesgo,5
+5106140,,Todo riesgo equipo electrónico,5
+5106150,,Calderos,5
+5106160,,Lucro cesante por interrupción de negocios,5
+5106170,,Lucro cesante rotura de maquinaria,5
+5106180,,Responsabilidad civil,5
+5106190,,Riesgos profesionales,5
+5106200,,Ganadero,5
+5106210,,Agrícola,5
+5106220,,Domiciliario,5
+5106230,,Crédito interno,5
+5106240,,Crédito a la exportación,5
+5106250,,Misceláneos,5
+5107,,DE FIANZAS,5
+5107010,,Fidelidad,5
+5107020,,Garantía,5
+5107030,,Motoristas,5
+52,,INGRESO POR DECREMENTO DE RESERVAS TECNICAS Y CONTINGENCIAL DE FIANZAS (3),5
+5201,,DE SEGUROS DE VIDA,5
+5201010,,Matemáticas de vida individual de largo plazo,5
+5201020,,De riesgos en curso de vida individual de corto plazo,5
+5201030,,De riesgos en curso de vida colectivo,5
+5201040,,De riesgos en curso de otros planes,5
+5201090,,Ajuste de reservas adicionales de seguro de vida,5
+52010901,,Seguros Directos,5
+52010900101,,De accidentes,5
+52010900102,,De exoneración del pago de primas,5
+52010900303,,De extra primas y riesgos tarados,5
+52010900404,,"De dividendos, cupones y bonos sobre pólizas",5
+52010900505,,De capitales complementarios,5
+52010900909,,Diversas,5
+520109002,,Reaseguros tomados,5
+520109003,,Coaseguros,5
+520109009,,Seguros con filiales,5
+52010900101,,Seguro directo,5
+52010900202,,Reaseguro tomado,5
+52010900303,,Coaseguro,5
+5202,,"MATEMATICAS DE SEGUROS PREVISIONALES, RENTAS Y PENSIONES",5
+5202010,,Rentas de invalidez y sobrevivencia,5
+520201001,,Seguros directos,5
+52020100101,,Rentas Ciertas,5
+52020100102,,Rentas Temporales,5
+52020100103,,Rentas Vitalicias,5
+52020100109,,Otros Planes,5
+520201002,,Reaseguros tomados,5
+520201003,,Coaseguros,5
+520201009,,Seguros con filiales,5
+52020100901,,Seguro directo,5
+52020100902,,Reaseguro tomado,5
+52020100903,,Coaseguro,5
+5202020,,Sepelio,5
+5202030,,Otras rentas,5
+5202040,,Pensiones,5
+5203,,PARA RIESGOS EN CURSO DE ACCIDENTES Y ENFERMEDADES,5
+5203010,,Salud y hospitalización,5
+5203020,,Accidentes personales,5
+5203030,,Accidentes viajes aéreos,5
+5203040,,Escolares,5
+5204,,DE RIESGOS EN CURSO DE INCENDIOS Y LINEAS ALIADAS,5
+5204010,,Incendios,5
+5204020,,Líneas aliadas,5
+5205,,AUTOMOTORES (1),5
+5205010,,Automotores,5
+5206,,DE RIESGOS EN CURSO-OTROS SEGUROS GENERALES,5
+5206010,,Rotura de Cristales,5
+5206020,,Transporte marítimo,5
+5206030,,Transporte aéreo,5
+5206040,,Transporte terrestre,5
+5206050,,Marítimos casco,5
+5206060,,Aviación,5
+5206070,,Robo y hurto,5
+5206080,,Fidelidad,5
+5206090,,Seguro de bancos,5
+5206100,,Todo riesgo para contratista,5
+5206110,,Todo riesgo equipo para contratistas,5
+5206120,,Rotura de maquinaria,5
+5206130,,Montaje contra todo riesgo,5
+5206140,,Todo riesgo equipo electrónico,5
+5206150,,Calderos,5
+5206160,,Lucro cesante por interrupción de negocios,5
+5206170,,Lucro cesante rotura de maquinaria,5
+5206180,,Responsabilidad civil,5
+5206190,,Riesgos profesionales,5
+5206200,,Ganadero,5
+5206210,,Agrícola,5
+5206220,,Domiciliario,5
+5206230,,Crédito interno,5
+5206240,,Crédito a la exportación,5
+5206250,,Misceláneos,5
+5207,,DE RIESGOS EN CURSO DE FIANZAS,5
+5207010,,Fidelidad,5
+5207020,,Garantía,5
+5207030,,Motoristas,5
+5208,,DE PREVISION Y CONTINGENCIAL DE FIANZAS,5
+5208010,,Reservas de previsión para riesgo contingencial de terremotos,5
+5208020,,Reservas de previsión para seguros especiales,5
+5208030,,Reservas de previsión de para otros riesgos cíclicos o fluctuantes,5
+5208040,,Reserva Contingencial de Fianzas (3),5
+52,,INGRESOS POR DECREMENTO DE RESERVAS TÉCNICAS (1),5
+5209,,RECLAMOS EN TRÁMITE,5
+5209010,,De seguros de vida,5
+5209020,,De seguros previsionales rentas y pensiones,5
+5209030,,De seguros de accidentes y enfermedades,5
+520903001,,Salud y hospitalización,5
+520903002,,Accidentes Personales,5
+520903003,,Accidentes Viajes Aéreos,5
+520903004,,Escolares,5
+5209040,,De seguros de incendios y líneas aliadas,5
+5209050,,De seguros de automotores,5
+5209060,,De seguros de otros seguros generales,5
+520906001,,Rotura de cristales,5
+520906002,,Transporte marítimo,5
+520906003,,Transporte aéreo,5
+520906004,,Transporte terrestre,5
+520906005,,Marítimos casco,5
+520906006,,Aviación,5
+520906007,,Robo y hurto,5
+520906008,,Fidelidad,5
+520906009,,Seguro de bancos,5
+520906010,,Todo riesgo para contratistas,5
+520906011,,Todo riesgo equipo para contratistas,5
+520906012,,Rotura de maquinaria,5
+520906013,,Montaje contra todo riesgo,5
+520906014,,Todo riesgo equipo electrónico,5
+520906015,,Calderos,5
+520906016,,Lucro cesante por interrupción de negocios,5
+520906017,,Lucro cesante rotura de maquinaria,5
+520906018,,Responsabilidad civil,5
+520906019,,Riesgos profesionales,5
+520906020,,Ganadero,5
+520906021,,Agrícola,5
+520906022,,Domicilio,5
+520906023,,Crédito interno,5
+520906024,,Crédito a la exportación,5
+520906025,,Misceláneos,5
+5209070,,Fianzas,5
+520907001,,Fidelidad,5
+520907002,,Garantía,5
+520907003,,Motoristas,5
+54,,SINIESTROS Y GASTOS RECUPERADOS POR REASEGUROS Y REAFIANZAMIENTOS CEDIDOS,5
+5401,,DE SEGUROS DE VIDA,5
+5401010,,Siniestros recuperados de vida individual de largo plazo,5
+5401020,,De vida individual de corto plazo,5
+5401030,,Colectivo,5
+5401040,,Otros planes,5
+5402,,DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+5402010,,Rentas de invalidez y sobrevivencia,5
+5402020,,Sepelio,5
+5402030,,Otras rentas,5
+5402040,,Pensiones,5
+5403,,DE SEGUROS DE ACCIDENTES Y ENFERMEDADES,5
+5403010,,Salud y hospitalización,5
+5403020,,Accidentes personales,5
+5403030,,Accidentes viajes aéreos,5
+5403040,,Escolares,5
+5404,,DE SEGUROS DE INCENDIOS Y LINEAS ALIADAS,5
+5404010,,Incendios,5
+5404020,,Líneas aliadas,5
+5405,,DE SEGUROS AUTOMOTORES,5
+5405010,,Automotores,5
+5406,,DE OTROS SEGUROS GENERALES,5
+5406010,,Rotura de Cristales,5
+5406020,,Transporte marítimo,5
+5406030,,Transporte aéreo,5
+5406040,,Transporte terrestre,5
+5406050,,Marítimos casco,5
+5406060,,Aviación,5
+5406070,,Robo y hurto,5
+5406080,,Fidelidad,5
+5406090,,Seguro de bancos,5
+5406100,,Todo riesgo para contratistas,5
+5406110,,Todo riesgo equipo para contratistas,5
+5406120,,Rotura de maquinaria,5
+5406130,,Montaje contra todo riesgo,5
+5406140,,Todo riesgo equipo electrónico,5
+5406150,,Calderos,5
+5406160,,Lucro cesante por interrupción de negocios,5
+5406170,,Lucro cesante rotura de maquinaria,5
+5406180,,Responsabilidad civil,5
+5406190,,Riesgos profesionales,5
+5406200,,Ganadero,5
+5406210,,Agrícola,5
+5406220,,Domiciliario,5
+5406230,,Crédito interno,5
+5406240,,Crédito a la exportación,5
+5406250,,Misceláneos,5
+5407,,DE FIANZAS,5
+5407010,,Fidelidad,5
+5407020,,Garantía,5
+5407030,,Motoristas,5
+5408,,RECUPERACION DE GASTOS DE LIQUIDACION DE SINIESTROS,5
+5408010,,DE SINIESTROS DE SEGUROS DE VIDA,5
+540801001,,Recuperación de gastos de liquidación de vida individual de largo plazo,5
+540801002,,Recuperación de gastos de liquidación de vida individual de corto plazo,5
+540801003,,Recuperación de gastos de liquidación de vida colectivo,5
+540801004,,Recuperación de gastos de liquidación de vida-otros planes,5
+5408020,,DE SINIESTROS DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+540802001,,Rentas de invalidez y sobrevivencia,5
+540802002,,Sepelio,5
+540802003,,Otras rentas,5
+540802004,,Pensiones,5
+5408030,,DE SINIESTROS DE SEGUROS DE ACCIDENTES Y ENFERMEDAD,5
+540803001,,Salud y hospitalización,5
+540803002,,Accidentes personales,5
+540803003,,Accidentes viajes aéreos,5
+540803004,,Escolares,5
+5408040,,DE SINIESTROS DE SEGUROS DE INCENDIOS Y LÍNEAS ALIADAS,5
+540804001,,Incendios,5
+540804002,,Líneas aliadas,5
+5408050,,DE SINIESTROS DE SEGUROS DE AUTOMOTORES,5
+540805001,,Automotores,5
+5408060,,DE SINIESTROS DE OTROS SEGUROS GENERALES,5
+540806001,,Rotura de Cristales,5
+540806002,,Transporte marítimo,5
+540806003,,Transporte aéreo,5
+540806004,,Transporte terrestre,5
+540806005,,Marítimos casco,5
+540806006,,Aviación,5
+540806007,,Robo y hurto,5
+540806008,,Fidelidad,5
+540806009,,Seguro de bancos,5
+540806010,,Todo riesgo para contratistas,5
+540806011,,Todo riesgo equipo para contratistas,5
+540806012,,Rotura de maquinaria,5
+540806013,,Montaje contra todo riesgo,5
+540806014,,Todo riesgo equipo electrónico,5
+540806015,,Calderos,5
+540806016,,Lucro cesante por interrupción de negocios,5
+540806017,,Lucro cesante rotura de maquinaria,5
+540806018,,Responsabilidad civil,5
+540806019,,Riesgos profesionales,5
+540806020,,Ganadero,5
+540806021,,Agrícola,5
+540806022,,Domiciliario,5
+540806023,,Crédito interno,5
+540806024,,Crédito a la exportación,5
+540806025,,Misceláneos,5
+5408070,,DE SINIESTROS DE FIANZAS,5
+540807001,,Fidelidad,5
+540807002,,Garantía,5
+540807003,,Motoristas,5
+55,,REEMBOLSOS DE GASTOS POR CESIONES DE SEGUROS Y FIANZAS (1),5
+5501,,DE SEGUROS DE VIDA,5
+5501010,,Ingresos por comisiones y participaciones de vida individual de largo plazo,5
+5501020,,De vida individual de corto plazo,5
+5501030,,Colectivo,5
+5501040,,Otros planes,5
+5502,,DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+5502010,,Rentas de invalidez y sobrevivencia,5
+5502020,,Sepelio,5
+5502030,,Otras rentas,5
+5502040,,Pensiones,5
+5503,,DE SEGUROS DE ACCIDENTES Y ENFERMEDADES,5
+5503010,,Salud y hospitalización,5
+5503020,,Accidentes personales,5
+5503030,,Accidentes viajes aéreos,5
+5503040,,Escolares,5
+5504,,DE SEGUROS DE INCENDIOS Y LINEAS ALIADAS,5
+5504010,,Incendios,5
+5504020,,Líneas aliadas,5
+5505,,DE SEGUROS DE AUTOMOTORES,5
+5505010,,Automotores,5
+5506,,DE OTROS SEGUROS GENERALES,5
+5506010,,Rotura de Cristales,5
+5506020,,Transporte marítimo,5
+5506030,,Transporte aéreo,5
+5506040,,Transporte terrestre,5
+5506050,,Marítimos casco,5
+5506060,,Aviación,5
+5506070,,Robo y hurto,5
+5506080,,Fidelidad,5
+5506090,,Seguro de bancos,5
+5506100,,Todo riesgo para contratistas,5
+5506110,,Todo riesgo equipo para contratistas,5
+5506120,,Rotura de maquinaria,5
+5506130,,Montaje contra todo riesgo,5
+5506140,,Todo riesgo equipo electrónico,5
+5506150,,Calderos,5
+5506160,,Lucro cesante por interrupción de negocios,5
+5506170,,Lucro cesante rotura de maquinaria,5
+5506180,,Responsabilidad civil,5
+5506190,,Riesgos profesionales,5
+5506200,,Ganadero,5
+5506210,,Agrícola,5
+5506220,,Domiciliario,5
+5506230,,Crédito interno,5
+5506240,,Crédito a la exportación,5
+5506250,,Misceláneos,5
+5507,,DE FIANZAS,5
+5507010,,Fidelidad,5
+5507020,,Garantía,5
+5507030,,Motoristas,5
+56,,SALVAMENTOS Y RECUPERACIONES,5
+5601,,DE SEGUROS DE VIDA,5
+5601010,,Reintegros de seguros de vida individual de largo plazo,5
+5601020,,De vida individual de corto plazo,5
+5601030,,Colectivo,5
+5601040,,Otros planes,5
+5602,,DE SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+5602010,,Rentas de invalidez y sobrevivencia,5
+5602020,,Sepelio,5
+5602030,,Otras rentas,5
+5602040,,Pensiones,5
+5603,,DE SEGUROS DE ACCIDENTES Y ENFERMEDADES,5
+5603010,,Salud y hospitalización,5
+5603020,,Accidentes personales,5
+5603030,,Accidentes viajes aéreos,5
+5603040,,Escolares,5
+5604,,DE SEGUROS DE INCENDIOS Y LINEAS ALIADAS,5
+5604010,,Incendios,5
+5604020,,Líneas aliadas,5
+5605,,DE SEGUROS DE AUTOMOTORES,5
+5605010,,Automotores,5
+5606,,DE OTROS SEGUROS GENERALES,5
+5606010,,Rotura de Cristales,5
+5606020,,Transporte marítimo,5
+5606030,,Transporte aéreo,5
+5606040,,Transporte terrestre,5
+5606050,,Marítimos casco,5
+5606060,,Aviación,5
+5606070,,Robo y hurto,5
+5606080,,Fidelidad,5
+5606090,,Seguro de bancos,5
+5606100,,Todo riesgo para contratistas,5
+5606110,,Todo riesgo equipo para contratistas,5
+5606120,,Rotura de maquinaria,5
+5606130,,Montaje contra todo riesgo,5
+5606140,,Todo riesgo equipo electrónico,5
+5606150,,Calderos,5
+5606160,,Lucro cesante por interrupción de negocios,5
+5606170,,Lucro cesante rotura de maquinaria,5
+5606180,,Responsabilidad civil,5
+5606190,,Riesgos profesionales,5
+5606200,,Ganadero,5
+5606210,,Agrícola,5
+5606230,,Crédito interno,5
+5606240,,Crédito a la exportación,5
+5606250,,Misceláneos,5
+5607,,DE FIANZAS,5
+5607010,,Fidelidad,5
+5607020,,Garantía,5
+5607030,,Motoristas,5
+57,,INGRESOS FINANCIEROS Y DE INVERSION,5
+5701,,DEPOSITOS,5
+5701010,,Ingresos por depósitos en bancos,5
+570101001,,Intereses,5
+57010100101,,Cuentas deAhorro,5
+57010100102,,Depósitos a Plazos,5
+570101002,,Otros,5
+57010100201,,Rendimientos sobre Reportos en Títulos Gravados con Impuesto sobre la Renta,5
+57010100202,,Rendimientos sobre Reportos en Títulos Exentos de Impuesto sobre la Renta,5
+5702,,POR INVERSIONES EN VALORES,5
+570201,,Ingresos por valores emitidos por el gobierno central y entidades del Estado,5
+570201101,,Intereses - Moneda Nacional,5
+570201201,,Intereses - Moneda Extranjera,5
+570202,,Ingresos por valores emitidos por instituciones financieras,5
+570202101,,Intereses - Moneda Nacional,5
+570202201,,Intereses - Moneda Extranjera,5
+570203,,Ingresos por valores emitidos por instituciones no financieras,5
+570203101,,Intereses - Moneda Nacional,5
+570203201,,Intereses - Moneda Extranjera,5
+570204,,Ingresos por valores emitidos por gobiernos y entidades extranjeras,5
+570204101,,Intereses - Moneda Nacional,5
+570204201,,Intereses - Moneda Extranjera,5
+570205,,Ingresos por participaciones en sociedades y fondos de inversión,5
+570205101,,Dividendos - Moneda Nacional,5
+570205201,,Dividendos - Moneda Extranjera,5
+5702060,,Ingresos por valores emitidos por sociedades filiales,5
+570206101,,Intereses - Moneda Nacional,5
+570206201,,Intereses - Moneda Extranjera,5
+5703,,POR PRESTAMOS,5
+5703010,,Ingresos por préstamos vigentes,5
+570301001,,Intereses,5
+570301002,,Comisiones y otros,5
+5703020,,Ingresos por préstamos refinanciados,5
+570302001,,Intereses,5
+570302002,,Comisiones y otros,5
+570303,,Ingresos por préstamos vencidos,5
+570303001,,Intereses,5
+570303002,,Comisiones y otros,5
+5704,,POR SOCIEDADES DEUDORAS DE SEGUROS Y FIANZAS,5
+570401,,Ingresos por cuentas corrientes con sociedades aseguradas y afianzadas,5
+5704011,,Ingresos por cuentas corrientes con sociedades aseguradas y afianzadas - Moneda Nacional,5
+5704012,,Ingresos por cuentas corrientes con sociedades aseguradas y afianzadas - Moneda Extranjera,5
+570402,,Ingresos por primas retenidas por sociedades aseguradas y afianzadas,5
+570402101,,Intereses Moneda Nacional,5
+570402201,,Intereses Moneda Extranjera,5
+570402102,,Otros ingresos Moneda Nacional,5
+570402202,,Otros ingresos Moneda Extranjera,5
+570403,,Ingresos de cuentas corrientes con reaseguradores y reafianzadoras,5
+5704031,,Ingresos de cuentas corrientes con reaseguradores y reafianzadores - Moneda Nacional,5
+5704032,,Ingresos de cuentas corrientes con reaseguradores y reafianzadores - Moneda Extranjera,5
+5705,,POR INVERSIONES PERMANENTES,5
+5705010,,Ingresos por inversiones en bienes raíces,5
+570501001,,Rentas por inversiones en bienes raíces,5
+5705020,,Ingresos por participación en sociedades de seguros,5
+570502001,,Dividendos y participaciones,5
+5705030,,Ingresos por participación en sociedades y sucursales delexterior,5
+570503001,,Dividendos y participaciones,5
+5705040,,Ingresos por inversiones permanentes de disponibilidad restringida,5
+570504001,,Dividendos y participaciones,5
+5706,,DIVERSOS,5
+570601,,Ingresos por comisiones,5
+570601001,,Comisiones de servicios de estudios,5
+570601002,,Comisiones por servicios de custodia,5
+570601003,,Ingresos por servicios varios,5
+5706020,,Recuperación de gastos financieros,5
+5706030,,Sobrantes de caja y valores,5
+5706040,,Reservas de Prevision,5
+5706090,,Otros ingresos,5
+5707,,INGRESOS POR DIFERENCIA EN CAMBIO,5
+5707010,,Ingresos por diferencia en cambio,5
+5708,,OFICINA PRINCIPAL Y SUCURSALES,5
+5708010,,Ingresos por oficina principal,5
+5708020,,Ingresos por sucursales,5
+58,,INGRESOS POR RECUPERACION DE ACTIVOS Y PROVISIONES,5
+5801,,RECUPERACION DE ACTIVOS,5
+5801010,,Préstamos,5
+5801020,,Inversiones,5
+5801030,,Cuentas por cobrar,5
+5801090,,Otros Activos,5
+5802,,DISMINUCION DE PROVISIONES,5
+5802010,,Provisiones para préstamos,5
+5802020,,Provisiones para inversiones,5
+5802090,,Provisiones varias,5
+59,,INGRESOS EXTRAORDINARIOS Y DE EJERCICIOS ANTERIORES,5
+5901,,EXTRAORDINARIOS,5
+5901010,,Ganancias por venta de bienes de uso,5
+5901020,,Ganancias por venta de activos extraordinarios,5
+5901030,,Ingresos por activos extraordinarios,5
+5901040,,Ingresos por recuperación de gastos,5
+5901050,,Ingresos de bienes ordinarios,5
+3901090,,Otros ingresos extraordinarios,5
+5902,,DE EJERCICIOS ANTERIORES,5
+5902010,,Ingresos de operación de seguros y fianzas,5
+5902020,,Ingresos financieros y de inversión,5
+5902030,,Ingresos por recuperación de activos,5
+5902090,,Otros ingresos de ejercicios anteriores,5
+6,,CONTINGENTES Y COMPROMISOS,5
+61,,CONTINGENTES Y COMPROMISOS DEUDORAS,5
+6101,,RESPONSABILIDAD POR POLIZAS DE SEGURO EN VIGOR,5
+610101,,DE SEGUROS DE VIDA,5
+6101011,,DE SEGUROS DE VIDA - MONEDA NACIONAL,5
+610101101,,INDIVIDUAL,5
+610101102,,POPULAR,5
+610101103,,COLECTIVO,5
+610101104,,OTROS PLANES,5
+6101012,,DE SEGUROS DE VIDA MONEDA EXTRANJERA,5
+610101201,,INDIVIDUAL,5
+610101202,,POPULAR,5
+610101203,,COLECTIVO,5
+610101204,,OTROS PLANES,5
+610102,,PREVISIONALES RENTAS Y PENSIONES,5
+6101021,,MONEDA NACIONAL,5
+6101022,,MONEDA EXTRANJERA,5
+610103,,DE ACCIDENTES Y ENFERMEDAD,5
+6101031,,DE ACCIDENTES Y ENFERMEDAD MONEDA NACIONAL,5
+610103101,,SALUD Y HOSPITALIZACION,5
+610103102,,ACCIDENTES PERSONALES,5
+610103103,,ACCIDENTES VIAJES AEREOS,5
+6101032,,DE ACCIDENTES Y ENFERMEDAD MONEDA EXTRANJERA,5
+610103201,,SALUD Y HOSPITALIZACION,5
+610103202,,ACCIDENTES PERSONALES,5
+610103203,,ACCIDENTES VIAJES AEREOS,5
+610104,,DE INCENDIO Y LINEAS ALIADAS,5
+6101041,,MONEDA NACIONAL,5
+6101042,,MONEDA EXTRANJERA,5
+610105,,DE AUTOMOTORES,5
+6101051,,MONEDA NACIONAL,5
+6101052,,MONEDA EXTRANJERA,5
+610106,,OTROS SEGUROS GENERALES,5
+6101061,,OTROS SEGUROS GENERALES - MONEDA NACIONAL,5
+610106101,,Rotura de Cristales,5
+610106102,,Transporte Marítimo,5
+610106103,,Transporte Aéreo,5
+610106104,,Transporte Terrestre,5
+610106105,,Marítimos Cascos,5
+610106106,,Aviación,5
+610106107,,Robo y Hurto,5
+610106108,,Fidelidad,5
+610106109,,Seguros de Bancos,5
+610106110,,Todo Riesgo para Contratistas,5
+610106111,,Todo Riesgo Equipo para Contratista,5
+610106112,,Rotura de Maquinaria,5
+610106113,,Montaje contra todo Riesgos,5
+610106114,,Todo Riesgo Equipo Electrónico,5
+610106115,,Calderos,5
+610106116,,Lucro Cesante por interrupción de Negocios,5
+610106117,,Lucro Cesante Rotura de Maquinaria,5
+610106118,,Responsabilidad Civil,5
+610106119,,Riesgos Profesionales,5
+610106120,,Ganadero,5
+610106121,,Agrícola,5
+610106122,,Domiciliario,5
+610106123,,Crédito Interno,5
+610106124,,Crédito a la Exportación,5
+610106125,,Misceláneos,5
+6101062,,OTROS SEGUROS GENERALES - MONEDA EXTRANJERA,5
+610106201,,Rotura de Cristales,5
+610106202,,Transporte Marítimo,5
+610106203,,Transporte Aéreo,5
+610106204,,Transporte Terrestre,5
+610106205,,Marítimos Cascos,5
+610106206,,aviación,5
+610106207,,Robo y Hurto,5
+610106208,,Fidelidad,5
+610106209,,Seguros de Bancos,5
+610106210,,Todo Riesgo para Contratistas,5
+610106211,,Todo Riesgo Equipo para Contratista,5
+610106212,,Rotura de Maquinaria,5
+610106213,,Montaje contra todo Riesgos,5
+610106214,,Todo Riesgo Equipo Electrónico,5
+610106215,,Calderos,5
+610106216,,Lucro Cesante por interrupción de Negocios,5
+610106217,,Lucro Cesante Rotura de Maquinaria,5
+610106218,,Responsabilidad Civil,5
+610106219,,Riesgos Profesionales,5
+610106220,,Ganadero,5
+610106221,,Agrícola,5
+610106222,,Domiciliario,5
+610106223,,Crédito Interno,5
+610106224,,Crédito a la Exportación,5
+610106225,,Miscelaneos,5
+6102,,RESPONSABILIDADES POR FIANZAS EN VIGOR,5
+610201,,DE FIANZAS FIDELIDAD,5
+6102011,,MONEDA NACIONAL,5
+6102012,,MONEDA EXTRANJERA,5
+610202,,DE FIANZAS GARANTIAS,5
+6102021,,MONEDA NACIONAL,5
+6102022,,MONEDA EXTRANJERA,5
+610203,,DE FIANZAS MOTORISTAS,5
+6102031,,MONEDA NACIONAL,5
+6102032,,MONEDA EXTRANJERA,5
+6103,,RESPONSABILIDADES POR REASEGURO TOMADO,5
+610301,,DE SEGUROS DE VIDA,5
+6103011,,DE SEGUROS DE VIDA MONEDA NACIONAL,5
+610301101,,INDIVIDUAL,5
+610301102,,POPULAR,5
+610301103,,COLECTIVO,5
+610301104,,OTROS PLANES,5
+6103012,,DE SEGUROS DE VIDA -MONEDA EXTRANJERA,5
+610301201,,INDIVIDUAL,5
+610301202,,POPULAR,5
+610301203,,COLECTIVO,5
+610301204,,OTROS PLANES,5
+610302,,PREVISIONALES RENTAS Y PENSIONES,5
+6103021,,MONEDA NACIONAL,5
+6103022,,MONEDA EXTRANJERA,5
+610303,,DE ACCIDENTES Y ENFERMEDAD,5
+6103031,,DE ACCIDENTES Y ENFERMEDAD MONEDA NACIONAL,5
+610303101,,SALUD Y HOSPITALIZACION -,5
+610303102,,ACCIDENTES PERSONALES,5
+610303103,,ACCIDENTES VIAJES AEREOS -,5
+6103032,,DE ACCIDENTES Y ENFERMEDAD MONEDA EXTRANJERA,5
+610303201,,SALUD Y HOSPITALIZACION -,5
+610303202,,ACCIDENTES PERSONALES,5
+610303203,,ACCIDENTES VIAJES AEREOS -,5
+610304,,DE INCENDIO Y LINEAS ALIADAS,5
+6103041,,MONEDA NACIONAL,5
+6103042,,MONEDA EXTRANJERA,5
+610305,,DE AUTOMOTORES,5
+6103051,,MONEDA NACIONAL,5
+6103052,,MONEDA EXTRANJERA,5
+610306,,OTROS SEGUROS GENERALES,5
+6103061,,OTROS SEGUROS GENERALES - MONEDA NACIONAL,5
+610306101,,Rotura de Cristales,5
+610306102,,Transporte Marítimo,5
+610306103,,Transporte Aéreo,5
+610306104,,Transporte Terrestre,5
+610306105,,Marítimos Cascos,5
+610306106,,Aviación,5
+610306107,,Robo y Hurto,5
+610306108,,Fidelidad,5
+610306109,,Seguros de Bancos,5
+610306110,,Todo Riesgo para Contratistas,5
+610306111,,Todo Riesgo Equipo para Contratista,5
+610306112,,Rotura de Maquinaria,5
+610306113,,Montaje contra todo Riesgos,5
+610306114,,Todo Riesgo Equipo Electrónico,5
+610306115,,Calderos,5
+610306116,,Lucro Cesante por interrupción de Negocios,5
+610306117,,Lucro Cesante Rotura de Maquinaria,5
+610306118,,Responsabilidad Civil,5
+610306119,,Riesgos Profesionales,5
+610306120,,Ganadero,5
+610306121,,Agrícola,5
+610306122,,Domiciliario,5
+610306123,,Crédito Interno,5
+610306124,,Crédito a la Exportación,5
+610306125,,Miscelaneos,5
+6103062,,OTROS SEGUROS GENERALES - MONEDA EXTRANJERA,5
+610306201,,Rotura de Cristales,5
+610306202,,Transporte Marítimo,5
+610306203,,Transporte Aéreo,5
+610306204,,Transporte Terrestre,5
+610306205,,Marítimos Cascos,5
+610306206,,aviación,5
+610306207,,Robo y Hurto,5
+610306208,,Fidelidad,5
+610306209,,Seguros de Bancos,5
+610306210,,Todo Riesgo para Contratistas,5
+610306211,,Todo Riesgo Equipo para Contratista,5
+610306212,,Rotura de Maquinaria,5
+610306213,,Montaje contra todo Riesgos,5
+610306214,,Todo Riesgo Equipo Electrónico,5
+610306215,,Calderos,5
+610306216,,Lucro Cesante por interrupción de Negocios,5
+610306217,,Lucro Cesante Rotura de Maquinaria,5
+610306218,,Responsabilidad Civil,5
+610306219,,Riesgos Profesionales,5
+610306220,,Ganadero,5
+610306221,,Agrícola,5
+610306222,,Domiciliario,5
+610306223,,Crédito Interno,5
+610306224,,Crédito a la Exportación,5
+610306225,,Misceláneos,5
+6104,,RESPONSABILIDADES POR REAFIANZAMIENTO TOMADO,5
+610401,,DE FIANZAS FIDELIDAD,5
+6104011,,MONEDA NACIONAL,5
+6104012,,MONEDA EXTRANJERA,5
+610402,,DE FIANZAS GARANTIAS,5
+6104021,,MONEDA NACIONAL,5
+6104022,,MONEDA EXTRANJERA,5
+610403,,DE FIANZAS MOTORISTAS,5
+6104031,,MONEDA NACIONAL,5
+6104032,,MONEDA EXTRANJERA,5
+6105,,RESPONSABILIDADES CEDIDAS A SOCIEDADES LOCALES,5
+610501,,POR SEGUROS DE VIDA,5
+6105011,,DE SEGUROS DE VIDA MONEDA NACIONAL,5
+610501101,,INDIVIDUAL,5
+610501102,,POPULAR,5
+610501103,,COLECTIVO,5
+610501104,,OTROS PLANES,5
+6105012,,DE SEGUROS DE VIDA -MONEDA EXTRANJERA,5
+610501201,,INDIVIDUAL,5
+610501202,,POPULAR,5
+610501203,,COLECTIVO,5
+610501204,,OTROS PLANES,5
+610502,,POR SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+6105021,,MONEDA NACIONAL,5
+6105022,,MONEDA EXTRANJERA,5
+610503,,POR SEGUROS DE ACCIDENTES Y ENFERMEDAD,5
+6105031,,DE ACCIDENTES Y ENFERMEDAD - MONEDA NACIONAL,5
+610503101,,SALUD Y HOSPITALIZACION,5
+610503102,,ACCIDENTES PERSONALES,5
+610503103,,ACCIDENTES VIAJES AEREOS,5
+6105032,,DE ACCIDENTES Y ENFERMEDAD - MONEDA EXTRANJERA,5
+610503201,,SALUD Y HOSPITALIZACION -,5
+610503202,,ACCIDENTES PERSONALES,5
+610503203,,ACCIDENTES VIAJES AEREOS -,5
+610504,,POR SEGUROS DE INCENDIO Y LINEAS ALIADAS,5
+6105041,,MONEDA NACIONAL,5
+6105042,,MONEDA EXTRANJERA,5
+610505,,POR SEGUROS DE AUTOMOTORES,5
+6105051,,MONEDA NACIONAL,5
+6105052,,MONEDA EXTRANJERA,5
+610506,,POR OTROS SEGUROS GENERALES,5
+6105061,,OTROS SEGUROS GENERALES - MONEDA NACIONAL,5
+610506101,,Rotura de Cristales,5
+610506102,,Transporte Marítimo,5
+610506103,,Transporte Aéreo,5
+610506104,,Transporte Terrestre,5
+610506105,,Marítimos Cascos,5
+610506106,,Aviación,5
+610506107,,Robo y Hurto,5
+610506108,,Fidelidad,5
+610506109,,Seguros de Bancos,5
+610506110,,Todo Riesgo para Contratistas,5
+610506111,,Todo Riesgo Equipo para Contratista,5
+610506112,,Rotura de Maquinaria,5
+610506113,,Montaje contra todo Riesgos,5
+610506114,,Todo Riesgo Equipo Electrónico,5
+610506115,,Calderos,5
+610506116,,Lucro Cesante por interrupción de Negocios,5
+610506117,,Lucro Cesante Rotura de Maquinaria,5
+610506118,,Responsabilidad Civil,5
+610506119,,Riesgos Profesionales,5
+610506120,,Ganadero,5
+610506121,,Agrícola,5
+610506122,,Domiciliario,5
+610506123,,Crédito Interno,5
+610506124,,Crédito a la Exportación,5
+610506125,,Misceláneos,5
+6105062,,OTROS SEGUROS GENERALES - MONEDA EXTRANJERA,5
+610506201,,Rotura de Cristales,5
+610506202,,Transporte Marítimo,5
+610506203,,Transporte Aéreo,5
+610506204,,Transporte Terrestre,5
+610506205,,Marítimos Cascos,5
+610506206,,aviación,5
+610506207,,Robo y Hurto,5
+610506208,,Fidelidad,5
+610506209,,Seguros de Bancos,5
+610506210,,Todo Riesgo para Contratistas,5
+610506211,,Todo Riesgo Equipo para Contratista,5
+610506212,,Rotura de Maquinaria,5
+610506213,,Montaje contra todo Riesgos,5
+610506214,,Todo Riesgo Equipo Electrónico,5
+610506215,,Calderos,5
+610506216,,Lucro Cesante por interrupción de Negocios,5
+610506217,,Lucro Cesante Rotura de Maquinaria,5
+610506218,,Responsabilidad Civil,5
+610506219,,Riesgos Profesionales,5
+610506220,,Ganadero,5
+610506221,,Agrícola,5
+610506222,,Domiciliario,5
+610506223,,Crédito Interno,5
+610506224,,Crédito a la Exportación,5
+610506225,,Misceláneos,5
+6106,,RESPONSABILIDADES CEDIDAS A SOCIEDADES DE PRIMER ORDEN DEL EXTERIOR,5
+610601,,DE SEGUROS DE VIDA,5
+6106011,,DE SEGUROS DE VIDA MONEDA NACIONAL,5
+610601101,,INDIVIDUAL,5
+610601102,,POPULAR,5
+610601103,,COLECTIVO,5
+610601104,,OTROS PLANES,5
+6106012,,DE SEGUROS DE VIDA -MONEDA EXTRANJERA,5
+610601201,,INDIVIDUAL,5
+610601202,,POPULAR,5
+610601203,,COLECTIVO,5
+610601204,,OTROS PLANES,5
+610602,,POR SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+6106021,,MONEDA NACIONAL,5
+6106022,,MONEDA EXTRANJERA,5
+610603,,DE ACCIDENTES Y ENFERMEDAD,5
+6106031,,DE ACCIDENTES Y ENFERMEDAD MONEDA NACIONAL,5
+610603101,,SALUD Y HOSPITALIZACION -,5
+610603102,,ACCIDENTES PERSONALES,5
+610603103,,ACCIDENTES VIAJES AEREOS -,5
+6106032,,DE ACCIDENTES Y ENFERMEDAD MONEDA EXTRANJERA,5
+610603201,,SALUD Y HOSPITALIZACION -,5
+610603202,,ACCIDENTES PERSONALES,5
+610603203,,ACCIDENTES VIAJES AEREOS -,5
+610604,,POR SEGUROS DE INCENDIO Y LINEAS ALIADAS,5
+6106041,,MONEDA NACIONAL,5
+6106042,,MONEDA EXTRANJERA,5
+610605,,POR SEGUROS DE AUTOMOTORES,5
+6106051,,MONEDA NACIONAL,5
+6106052,,MONEDA EXTRANJERA,5
+610606,,POR OTROS SEGUROS GENERALES,5
+6106061,,OTROS SEGUROS GENERALES - MONEDA NACIONAL,5
+610606101,,Rotura de Cristales,5
+610606102,,Transporte Marítimo,5
+610606103,,Transporte Aéreo,5
+610606104,,Transporte Terrestre,5
+610606105,,Marítimos Cascos,5
+610606106,,Aviación,5
+610606107,,Robo y Hurto,5
+610606108,,Fidelidad,5
+610606109,,Seguros de Bancos,5
+610606110,,Todo Riesgo para Contratistas,5
+610606111,,Todo Riesgo Equipo para Contratista,5
+610606112,,Rotura de Maquinaria,5
+610606113,,Montaje contra todo Riesgos,5
+610606114,,Todo Riesgo Equipo Electrónico,5
+610606115,,Calderos,5
+610606116,,Lucro Cesante por interrupción de Negocios,5
+610606117,,Lucro Cesante Rotura de Maquinaria,5
+610606118,,Responsabilidad Civil,5
+610606119,,Riesgos Profesionales,5
+610606120,,Ganadero,5
+610606121,,Agrícola,5
+610606122,,Domiciliario,5
+610606123,,Crédito Interno,5
+610606124,,Crédito a la Exportación,5
+610606125,,Miscelaneos,5
+6106062,,OTROS SEGUROS GENERALES - MONEDA EXTRANJERA,5
+610606201,,Rotura de Cristales,5
+610606202,,Transporte Marítimo,5
+610606203,,Transporte Aéreo,5
+610606204,,Transporte Terrestre,5
+610606205,,Marítimos Cascos,5
+610606206,,aviación,5
+610606207,,Robo y Hurto,5
+610606208,,Fidelidad,5
+610606209,,Seguros de Bancos,5
+610606210,,Todo Riesgo para Contratistas,5
+610606211,,Todo Riesgo Equipo para Contratista,5
+610606212,,Rotura de Maquinaria,5
+610606213,,Montaje contra todo Riesgos,5
+610606214,,Todo Riesgo Equipo Electrónico,5
+610606215,,Calderos,5
+610606216,,Lucro Cesante por interrupción de Negocios,5
+610606217,,Lucro Cesante Rotura de Maquinaria,5
+610606218,,Responsabilidad Civil,5
+610606219,,Riesgos Profesionales,5
+610606220,,Ganadero,5
+610606221,,Agrícola,5
+610606222,,Domiciliario,5
+610606223,,Crédito Interno,5
+610606224,,Crédito a la Exportación,5
+610606225,,Misceláneos,5
+6107,,RESPONSABILIDADES CEDIDAS A OTRAS SOCIEDADES DEL EXTERIOR,5
+610701,,DE SEGUROS DE VIDA,5
+6107011,,DE SEGUROS DE VIDA MONEDA NACIONAL,5
+610701101,,INDIVIDUAL,5
+610701102,,POPULAR,5
+610701103,,COLECTIVO,5
+610701104,,OTROS PLANES,5
+6107012,,DE SEGUROS DE VIDA -MONEDA EXTRANJERA,5
+610701201,,INDIVIDUAL,5
+610701202,,POPULAR,5
+610701203,,COLECTIVO,5
+610701204,,OTROS PLANES,5
+610702,,POR SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+6107021,,MONEDA NACIONAL,5
+6107022,,MONEDA EXTRANJERA,5
+610703,,DE ACCIDENTES Y ENFERMEDAD,5
+6107031,,DE ACCIDENTES Y ENFERMEDAD MONEDA NACIONAL,5
+610703101,,SALUD Y HOSPITALIZACION,5
+610703102,,ACCIDENTES PERSONALES,5
+610703103,,ACCIDENTES VIAJES AEREOS -,5
+6107032,,DE ACCIDENTES Y ENFERMEDAD MONEDA EXTRANJERA,5
+610703201,,SALUD Y HOSPITALIZACION -,5
+610703202,,ACCIDENTES PERSONALES,5
+610703203,,ACCIDENTES VIAJES AEREOS -,5
+610704,,POR SEGUROS DE INCENDIO Y LINEAS ALIADAS,5
+6107041,,MONEDA NACIONAL,5
+6107042,,MONEDA EXTRANJERA,5
+610705,,POR SEGUROS DE AUTOMOTORES,5
+6107051,,MONEDA NACIONAL,5
+6107052,,MONEDA EXTRANJERA,5
+610706,,POR OTROS SEGUROS GENERALES,5
+6107061,,OTROS SEGUROS GENERALES - MONEDA NACIONAL,5
+610706101,,Rotura de Cristales,5
+610706102,,Transporte Marítimo,5
+610706103,,Transporte Aéreo,5
+610706104,,Transporte Terrestre,5
+610706105,,Marítimos Cascos,5
+610706106,,Aviación,5
+610706107,,Robo y Hurto,5
+610706108,,Fidelidad,5
+610706109,,Seguros de Bancos,5
+610706110,,Todo Riesgo para Contratistas,5
+610706111,,Todo Riesgo Equipo para Contratista,5
+610706112,,Rotura de Maquinaria-,5
+610706113,,Montaje contra todo Riesgos,5
+610706114,,Todo Riesgo Equipo Electrónico,5
+610706115,,Calderos,5
+610706116,,Lucro Cesante por interrupción de Negocios,5
+610706117,,Lucro Cesante Rotura de Maquinaria,5
+610706118,,Responsabilidad Civil,5
+610706119,,Riesgos Profesionales,5
+610706120,,Ganadero,5
+610706121,,Agrícola,5
+610706122,,Domiciliario,5
+610706123,,Crédito Interno,5
+610706124,,Crédito a la Exportación,5
+610706125,,Misceláneos,5
+6107062,,OTROS SEGUROS GENERALES - MONEDA EXTRANJERA,5
+610706201,,Rotura de Cristales,5
+610706202,,Transporte Marítimo,5
+610706203,,Transporte Aéreo,5
+610706204,,Transporte Terrestre,5
+610706205,,Marítimos Cascos,5
+610706206,,aviación,5
+610706207,,Robo y Hurto,5
+610706208,,Fidelidad,5
+610706209,,Seguros de Bancos,5
+610706210,,Todo Riesgo para Contratistas,5
+610706211,,Todo Riesgo Equipo para Contratista,5
+610706212,,Rotura de Maquinaria,5
+610706213,,Montaje contra todo Riesgos,5
+610706214,,Todo Riesgo Equipo Electrónico,5
+610706215,,Calderos,5
+610706216,,Lucro Cesante por interrupción de Negocios,5
+610706217,,Lucro Cesante Rotura de Maquinaria,5
+610706218,,Responsabilidad Civil,5
+610706219,,Riesgos Profesionales,5
+610706220,,Ganadero,5
+610706221,,Agrícola,5
+610706222,,Domiciliario,5
+610706223,,Crédito Interno,5
+610706224,,Crédito a la Exportación,5
+610706225,,Misceláneos,5
+6108,,RESPONSABILIDAD POR REAFIANZAMIENTO CEDIDO A SOCIEDADES LOCALES,5
+610801,,DE FIANZAS FIDELIDAD,5
+6108011,,MONEDA NACIONAL,5
+6108012,,MONEDA EXTRANJERA,5
+610802,,DE FIANZAS GARANTIAS,5
+6108021,,MONEDA NACIONAL,5
+6108022,,MONEDA EXTRANJERA,5
+610803,,DE FIANZAS MOTORISTAS,5
+6108031,,MONEDA NACIONAL,5
+6108032,,MONEDA EXTRANJERA,5
+6109,,RESPONSABILIDADES POR REAFIANZAMIENTO CEDIDO A SOCIEDADES DE PRIMER ORDEN DEL EXTERIOR,5
+610901,,DE FIANZAS FIDELIDAD,5
+6109011,,MONEDA NACIONAL,5
+6109012,,MONEDA EXTRANJERA,5
+610902,,DE FIANZAS GARANTIAS,5
+6109021,,MONEDA NACIONAL,5
+6109022,,MONEDA EXTRANJERA,5
+610903,,DE FIANZAS MOTORISTAS,5
+6109031,,MONEDA NACIONAL,5
+6109032,,MONEDA EXTRANJERA,5
+6110,,RESPONSABILIDADES POR REAFIANZAMIENTO CEDIDO A OTRAS SOCIEDADES DEL EXTERIOR,5
+611001,,DE FIANZAS FIDELIDAD,5
+6110011,,MONEDA NACIONAL,5
+6110012,,MONEDA EXTRANJERA,5
+611002,,DE FIANZAS GARANTIAS,5
+6110021,,MONEDA NACIONAL,5
+6110022,,MONEDA EXTRANJERA,5
+611003,,DE FIANZAS MOTORISTAS,5
+6110031,,MONEDA NACIONAL,5
+6110032,,MONEDA EXTRANJERA,5
+6111,,RESPONSABILIDADES POR RETROCESIONES A SOCIEDADES LOCALES,5
+611101,,DE SEGUROS DE VIDA,5
+6111011,,DE SEGUROS DE VIDA MONEDA NACIONAL,5
+611101101,,INDIVIDUAL,5
+611101102,,POPULAR,5
+611101103,,COLECTIVO,5
+611101104,,OTROS PLANES,5
+6111012,,DE SEGUROS DE VIDA -MONEDA EXTRANJERA,5
+611101201,,INDIVIDUAL,5
+611101202,,POPULAR,5
+611101203,,COLECTIVO,5
+611101204,,OTROS PLANES,5
+611102,,POR SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+6111021,,MONEDA NACIONAL,5
+6111022,,MONEDA EXTRANJERA,5
+611103,,DE ACCIDENTES Y ENFERMEDAD,5
+6111031,,DE ACCIDENTES Y ENFERMEDAD MONEDA NACIONAL,5
+611103101,,SALUD Y HOSPITALIZACION,5
+611103102,,ACCIDENTES PERSONALES,5
+611103103,,ACCIDENTES VIAJES AEREOS,5
+6111032,,DE ACCIDENTES Y ENFERMEDAD MONEDA EXTRANJERA,5
+611103201,,SALUD Y HOSPITALIZACION,5
+611103202,,ACCIDENTES PERSONALES,5
+611103203,,ACCIDENTES VIAJES AEREOS -,5
+611104,,POR SEGUROS DE INCENDIO Y LINEAS ALIADAS,5
+6111041,,MONEDA NACIONAL,5
+6111042,,MONEDA EXTRANJERA,5
+611105,,POR SEGUROS DE AUTOMOTORES,5
+6111051,,MONEDA NACIONAL,5
+6111052,,MONEDA EXTRANJERA,5
+611106,,POR OTROS SEGUROS GENERALES,5
+6111061,,OTROS SEGUROS GENERALES - MONEDA NACIONAL,5
+611106101,,Rotura de Cristales,5
+611106102,,Transporte Marítimo,5
+611106103,,Transporte Aéreo,5
+611106104,,Transporte Terrestre,5
+611106105,,Marítimos Cascos,5
+611106106,,Aviación,5
+611106107,,Robo y Hurto,5
+611106108,,Fidelidad,5
+611106109,,Seguros de Bancos,5
+611106110,,Todo Riesgo para Contratistas,5
+611106111,,Todo Riesgo Equipo para Contratista,5
+611106112,,Rotura de Maquinaria,5
+611106113,,Montaje contra todo Riesgos,5
+611106114,,Todo Riesgo Equipo Electrónico,5
+611106115,,Calderos,5
+611106116,,Lucro Cesante por interrupción de Negocios,5
+611106117,,Lucro Cesante Rotura de Maquinaria,5
+611106118,,Responsabilidad Civil,5
+611106119,,Riesgos Profesionales,5
+611106120,,Ganadero,5
+611106121,,Agrícola,5
+611106122,,Domiciliario,5
+611106123,,Crédito Interno,5
+611106124,,Crédito a la Exportación,5
+611106125,,Misceláneos,5
+6111062,,OTROS SEGUROS GENERALES - MONEDA EXTRANJERA,5
+611106201,,Rotura de Cristales,5
+611106202,,Transporte Marítimo,5
+611106203,,Transporte Aéreo,5
+611106204,,Transporte Terrestre,5
+611106205,,Marítimos Cascos,5
+611106206,,aviación,5
+611106207,,Robo y Hurto,5
+611106208,,Fidelidad,5
+611106209,,Seguros de Bancos,5
+611106210,,Todo Riesgo para Contratistas,5
+611106211,,Todo Riesgo Equipo para Contratista,5
+611106212,,Rotura de Maquinaria,5
+611106213,,Montaje contra todo Riesgos,5
+611106214,,Todo Riesgo Equipo Electrónico,5
+611106215,,Calderos,5
+611106216,,Lucro Cesante por interrupción de Negocios,5
+611106217,,Lucro Cesante Rotura de Maquinaria,5
+611106218,,Responsabilidad Civil,5
+611106219,,Riesgos Profesionales,5
+611106220,,Ganadero,5
+611106221,,Agrícola,5
+611106222,,Domiciliario,5
+611106223,,Crédito Interno,5
+611106224,,Crédito a la Exportación,5
+611106225,,Misceláneos,5
+6112,,RESPONSABILIDADES POR RETROCESIONES A SOCIEDADES DE PRIMER ORDEN DEL EXTERIOR,5
+611201,,DE SEGUROS DE VIDA,5
+6112011,,DE SEGUROS DE VIDA MONEDA NACIONAL,5
+611201101,,INDIVIDUAL,5
+611201102,,POPULAR,5
+611201103,,COLECTIVO,5
+611201104,,OTROS PLANES,5
+6112012,,DE SEGUROS DE VIDA -MONEDA EXTRANJERA,5
+611201201,,INDIVIDUAL,5
+611201202,,POPULAR,5
+611201203,,COLECTIVO,5
+611201204,,OTROS PLANES,5
+611202,,POR SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+6112021,,MONEDA NACIONAL,5
+6112022,,MONEDA EXTRANJERA,5
+611203,,DE ACCIDENTES Y ENFERMEDAD,5
+6112031,,DE ACCIDENTES Y ENFERMEDAD MONEDA NACIONAL,5
+611203101,,SALUD Y HOSPITALIZACION -,5
+611203102,,ACCIDENTES PERSONALES,5
+611203103,,ACCIDENTES VIAJES AEREOS -,5
+6112032,,DE ACCIDENTES Y ENFERMEDAD MONEDA EXTRANJERA,5
+611203201,,SALUD Y HOSPITALIZACION -,5
+611203202,,ACCIDENTES PERSONALES,5
+611203203,,ACCIDENTES VIAJES AEREOS -,5
+611204,,POR SEGUROS DE INCENDIO Y LINEAS ALIADAS,5
+6112041,,MONEDA NACIONAL,5
+6112042,,MONEDA EXTRANJERA,5
+611205,,POR SEGUROS DE AUTOMOTORES,5
+6112051,,MONEDA NACIONAL,5
+6112052,,MONEDA EXTRANJERA,5
+611206,,POR OTROS SEGUROS GENERALES,5
+6112061,,OTROS SEGUROS GENERALES - MONEDA NACIONAL,5
+611206101,,Rotura de Cristales,5
+611206102,,Transporte Marítimo,5
+611206103,,Transporte Aéreo,5
+611206104,,Transporte Terrestre,5
+611206105,,Marítimos Cascos,5
+611206106,,Aviación,5
+611206107,,Robo y Hurto,5
+611206108,,Fidelidad,5
+611206109,,Seguros de Bancos,5
+611206110,,Todo Riesgo para Contratistas,5
+611206111,,Todo Riesgo Equipo para Contratista,5
+611206112,,Rotura de Maquinaria,5
+611206113,,Montaje contra todo Riesgos,5
+611206114,,Todo Riesgo Equipo Electrónico,5
+611206115,,Calderos,5
+611206116,,Lucro Cesante por interrupción de Negocios,5
+611206117,,Lucro Cesante Rotura de Maquinaria,5
+611206118,,Responsabilidad Civil,5
+611206119,,Riesgos Profesionales,5
+611206120,,Ganadero,5
+611206121,,Agrícola,5
+611206122,,Domiciliario,5
+611206123,,Crédito Interno,5
+611206124,,Crédito a la Exportación,5
+611206125,,Misceláneos,5
+6112062,,OTROS SEGUROS GENERALES - MONEDA EXTRANJERA,5
+611206201,,Rotura de Cristales,5
+611206202,,Transporte Marítimo,5
+611206203,,Transporte Aéreo,5
+611206204,,Transporte Terrestre,5
+611206205,,Marítimos Cascos,5
+611206206,,aviación,5
+611206207,,Robo y Hurto,5
+611206208,,Fidelidad,5
+611206209,,Seguros de Bancos,5
+611206210,,Todo Riesgo para Contratistas,5
+611206211,,Todo Riesgo Equipo para Contratista,5
+611206212,,Rotura de Maquinaria,5
+611206213,,Montaje contra todo Riesgos,5
+611206214,,Todo Riesgo Equipo Electrónico,5
+611206215,,Calderos,5
+611206216,,Lucro Cesante por interrupción de Negocios,5
+611206217,,Lucro Cesante Rotura de Maquinaria,5
+611206218,,Responsabilidad Civil,5
+611206219,,Riesgos Profesionales,5
+611206220,,Ganadero,5
+611206221,,Agrícola,5
+611206222,,Domiciliario,5
+611206223,,Crédito Interno,5
+611206224,,Crédito a la Exportación,5
+611206225,,Misceláneos,5
+6113,,RESPONSABILIDADES POR RETROCESIONES A OTRAS SOCIEDADES DEL EXTERIOR,5
+611301,,DE SEGUROS DE VIDA,5
+6113011,,DE SEGUROS DE VIDA MONEDA NACIONAL,5
+611301101,,INDIVIDUAL,5
+611301102,,POPULAR,5
+611301103,,COLECTIVO,5
+611301104,,OTROS PLANES,5
+6113012,,DE SEGUROS DE VIDA -MONEDA EXTRANJERA,5
+611301201,,INDIVIDUAL,5
+611301202,,POPULAR,5
+611301203,,COLECTIVO,5
+611301204,,OTROS PLANES,5
+611302,,POR SEGUROS PREVISIONALES RENTAS Y PENSIONES,5
+6113021,,MONEDA NACIONAL,5
+6113022,,MONEDA EXTRANJERA,5
+611303,,DE ACCIDENTES Y ENFERMEDAD,5
+6113031,,DE ACCIDENTES Y ENFERMEDAD MONEDA NACIONAL,5
+611303101,,SALUD Y HOSPITALIZACION -,5
+611303102,,ACCIDENTES PERSONALES,5
+611303103,,ACCIDENTES VIAJES AEREOS -,5
+6113032,,DE ACCIDENTES Y ENFERMEDAD MONEDA EXTRANJERA,5
+611303201,,SALUD Y HOSPITALIZACION -,5
+611303202,,ACCIDENTES PERSONALES,5
+611303203,,ACCIDENTES VIAJES AEREOS -,5
+611304,,POR SEGUROS DE INCENDIO Y LINEAS ALIADAS,5
+6113041,,MONEDA NACIONAL,5
+6113042,,MONEDA EXTRANJERA,5
+611305,,POR SEGUROS DE AUTOMOTORES,5
+6113051,,MONEDA NACIONAL,5
+6113052,,MONEDA EXTRANJERA,5
+611306,,POR OTROS SEGUROS GENERALES,5
+6113061,,OTROS SEGUROS GENERALES - MONEDA NACIONAL,5
+611306101,,Rotura de Cristales,5
+611306102,,Transporte Marítimo,5
+611306103,,Transporte Aéreo,5
+611306104,,Transporte Terrestre,5
+611306105,,Marítimos Cascos,5
+611306106,,Aviación,5
+611306107,,Robo y Hurto,5
+611306108,,Fidelidad,5
+611306109,,Seguros de Bancos,5
+611306110,,Todo Riesgo para Contratistas,5
+611306111,,Todo Riesgo Equipo para Contratista,5
+611306112,,Rotura de Maquinaria,5
+611306113,,Montaje contra todo Riesgos,5
+611306114,,Todo Riesgo Equipo Electrónico,5
+611306115,,Calderos,5
+611306116,,Lucro Cesante por interrupción de Negocios,5
+611306117,,Lucro Cesante Rotura de Maquinaria,5
+611306118,,Responsabilidad Civil,5
+611306119,,Riesgos Profesionales,5
+611306120,,Ganadero,5
+611306121,,Agrícola,5
+611306122,,Domiciliario,5
+611306123,,Crédito Interno,5
+611306124,,Crédito a la Exportación,5
+611306125,,Miscelaneos,5
+6113062,,OTROS SEGUROS GENERALES - MONEDA EXTRANJERA,5
+611306201,,Rotura de Cristales,5
+611306202,,Transporte Marítimo,5
+611306203,,Transporte Aéreo,5
+611306204,,Transporte Terrestre,5
+611306205,,Marítimos Cascos,5
+611306206,,aviación,5
+611306207,,Robo y Hurto,5
+611306208,,Fidelidad,5
+611306209,,Seguros de Bancos,5
+611306210,,Todo Riesgo para Contratistas,5
+611306211,,Todo Riesgo Equipo para Contratista,5
+611306212,,Rotura de Maquinaria -,5
+611306213,,Montaje contra todo Riesgos -,5
+611306214,,Todo Riesgo Equipo Electrónico,5
+611306215,,Calderos,5
+611306216,,Lucro Cesante por interrupción de Negocios,5
+611306217,,Lucro Cesante Rotura de Maquinaria,5
+611306218,,Responsabilidad Civil,5
+611306219,,Riesgos Profesionales,5
+611306220,,Ganadero,5
+611306221,,Agrícola,5
+611306222,,Domiciliario,5
+611306223,,Crédito Interno,5
+611306224,,Crédito a la Exportación,5
+611306225,,Misceláneos,5
+6114,,RESPONSABILIDADES POR RETROCESIONES DE FIANZAS A SOCIEDADES LOCALES,5
+611401,,DE FIANZAS FIDELIDAD,5
+6114011,,MONEDA NACIONAL,5
+6114012,,MONEDA EXTRANJERA,5
+611402,,DE FIANZAS GARANTIAS,5
+6114021,,MONEDA NACIONAL,5
+6114022,,MONEDA EXTRANJERA,5
+611403,,DE FIANZAS MOTORISTAS,5
+6114031,,MONEDA NACIONAL,5
+6114032,,MONEDA EXTRANJERA,5
+6115,,RESPONSABILIDADES POR RETROCESIONES DE FIANZAS A SOCIEDADES DE PRIMER ORDEN DEL EXTERIOR,5
+611501,,DE FIANZAS FIDELIDAD,5
+6115011,,MONEDA NACIONAL,5
+6115012,,MONEDA EXTRANJERA,5
+611502,,DE FIANZAS GARANTIAS,5
+6115021,,MONEDA NACIONAL,5
+6115022,,MONEDA EXTRANJERA,5
+611503,,DE FIANZAS MOTORISTAS,5
+6115031,,MONEDA NACIONAL,5
+6115032,,MONEDA EXTRANJERA,5
+6116,,RESPONSABILIDADES POR RETROCESIONES DE FIANZAS A OTRAS SOCIEDADES DEL EXTERIOR,5
+611601,,DE FIANZAS FIDELIDAD,5
+6116011,,MONEDA NACIONAL,5
+6116012,,MONEDA EXTRANJERA,5
+611602,,DE FIANZAS GARANTIAS,5
+6116021,,MONEDA NACIONAL,5
+6116022,,MONEDA EXTRANJERA,5
+611603,,DE FIANZAS MOTORISTAS,5
+6116031,,MONEDA NACIONAL,5
+6116032,,MONEDA EXTRANJERA,5
+6117,,RESPONSABILIDAD POR LITIGIOS Y DEMANDAS,5
+611701,,POR CAUSAS RELACIONADAS AL GIRO DEL NEGOCIO,5
+611702,,POR OTRAS CAUSAS,5
+62,,DERECHOS POR FIANZAS EMITIDAS,5
+6201,,DERECHOS POR FIANZAS EMITIDAS,5
+620101,,FIDELIDAD,5
+6201011,,MONEDA NACIONAL,5
+6201012,,MONEDA EXTRANJERA,5
+620102,,GARANTIA,5
+6201021,,MONEDA NACIONAL,5
+6201022,,MONEDA EXTRANJERA,5
+620103,,MOTORISTAS,5
+6201031,,MONEDA NACIONAL,5
+6201032,,MONEDA EXTRANJERA,5
+6299,,PROVISIONES POR FIANZAS EMITIDAS (cr),5
+629901,,FIDELIDAD,5
+6299011,,MONEDA NACIONAL,5
+6299012,,MONEDA EXTRANJERA,5
+629902,,GARANTIA,5
+6299021,,MONEDA NACIONAL,5
+6299022,,MONEDA EXTRANJERA,5
+629903,,MOTORISTAS,5
+6299031,,MONEDA NACIONAL,5
+6299032,,MONEDA EXTRANJERA,5
+7,,CONTINGENTES Y COMPROMISOS POR CONTRA,5
+71,,CONTINGENTES Y COMPROMISOS POR CONTRA,5
+72,,COMPROMISOS POR FIANZAS EMITIDAS POR CONTRA,5
+8,,CUENTAS DE CONTROL,5
+81,,CUENTAS DE CONTROL DEUDORAS,5
+8101,,"RIESGOS CATASTROFICOS, COASEGUROS Y DEDUCIBLES",5
+8101010,,RIESGOS CATASTROFICOS DIRECTOS,5
+8101020,,RIESGOS CATASTROFICOS CEDIDOS,5
+8101030,,RIESGOS CATASTROFICOS TOMADOS,5
+8101040,,COASEGUROS,5
+8101050,,DEDUCIBLES,5
+8102,,DOCUMENTOS Y VALORES RECIBIDOS EN GARANTIA,5
+8102010,,GARANTIAS DE TITULOS VALORES,5
+8102020,,GARANTIAS PRENDARIAS,5
+8102030,,GARANTIAS HIPOTECARIAS,5
+8102040,,GARANTIAS DE POLIZAS,5
+8103,,VALORES Y BIENES DADOS EN CUSTODIA,5
+8103010,,TITULOS VALORES DADOS EN CUSTODIA,5
+8103020,,BIENES EN CUSTODIA,5
+8103030,,DOCUMENTOS EN CUSTODIA,5
+8104,,OPERACIONES CON PARTES RELACIONADAS,5
+8104010,,PRESTAMOS CON PARTES RELACIONADAS,5
+8105,,DOCUMENTOS Y VALORES DADOS EN GARANTIA,5
+8105010,,DOCUMENTOS Y VALORES DADOS EN GARANTIA,5
+8106,,SALVAMENTOS POR REALIZAR,5
+8106010,,SALVAMENTOS POR REALIZAR,5
+8109,,CUENTAS DE CONTROL DIVERSAS,5
+8109010,,INVERSIONES EN VALORES RETIRADAS DEL ACTIVO,5
+8109020,,PRESTAMOS INCOBRABLES RETIRADOS DEL ACTIVO,5
+8109030,,DEUDORES INSOLVENTES POR FIANZAS HONRADAS RETIRADAS DEL ACTIVO,5
+8109040,,CUENTAS POR COBRAR RETIRADAS DEL ACTIVO,5
+8109050,,INTERESES EN SUSPENSO DE PRESTAMOS VENCIDOS,5
+8109060,,INTERESES EN SUSPENSO DE PRESTAMOS EN COBRO JUDICIAL,5
+8109070,,RENDIMIENTO DE INVERSIONES RETIRADOS DEL ACTIVO,5
+8109080,,RENDIMIENTO DE PRESTAMOS RETIRADOS DEL ACTIVO,5
+8109090,,ACTIVO DEPRECIADO,5
+8109100,,CARTERA DE INVERSIONES Y PRESTAMOS CLASIFICADOS PARA SU VENTA,5
+8109110,,CARTERA DE INVERSIONES VENDIDAS,5
+8109120,,PRESTAMOS OBTENIDOS NO UTILIZADOS,5
+8109130,,CREDITOS AUTORIZADOS NO ESCRITURADOS,5
+8109140,,CUPONES DE TITULOS VALORES PROPIOS,5
+8109150,,OTROS,5
+810915001,,DOCUMENTOS Y VALORES RECIBIDOS EN CUSTODIA,5
+810915002,,ACCIONES Y PARTICIPACIONES SUSCRITOS DE OTRAS EMPRESAS,5
+810915003,,TITULOS VALORES VENDIDOS CON CONTRATO DE RECOMPRA,5
+810915004,,DISPONIBILIDADES POR PRESTAMOS OTORGADOS,5
+810915005,,CONT. POR COBRAR INMUEBLE ARRENDAMIENTO PROMESA DE VENTA,5
+810915006,,PRIMAS INCOBRABLES SEGUROS,5
+810915007,,PRIMAS INCOBRABLES FIANZAS,5
+810915008,,DEUDORES INSOLVENTES POR FIANZAS PAGADAS,5
+810915009,,PRODUCTOS IRRECUPERABLES LIQUIDADOS,5
+9,,CUENTAS DE CONTROL POR CONTRA,5
