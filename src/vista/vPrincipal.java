@@ -45,6 +45,7 @@ public class vPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlBase = new javax.swing.JPanel();
+        pnl = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
         rSLabelFecha1 = new rojeru_san.rsdate.RSLabelFecha();
         rSLabelHora1 = new rojeru_san.rsdate.RSLabelHora();
@@ -55,7 +56,12 @@ public class vPrincipal extends javax.swing.JFrame {
         rSButtonShapeIcon1 = new RSMaterialComponent.RSButtonShapeIcon();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        pnl = new javax.swing.JPanel();
+        opc4 = new RSMaterialComponent.RSButtonShapeIcon();
+        opc5 = new RSMaterialComponent.RSButtonShapeIcon();
+        opc6 = new RSMaterialComponent.RSButtonShapeIcon();
+        opc7 = new RSMaterialComponent.RSButtonShapeIcon();
+        topbar = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -64,16 +70,7 @@ public class vPrincipal extends javax.swing.JFrame {
 
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
-        pnlBase.setLayout(pnlBaseLayout);
-        pnlBaseLayout.setHorizontalGroup(
-            pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1062, Short.MAX_VALUE)
-        );
-        pnlBaseLayout.setVerticalGroup(
-            pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 671, Short.MAX_VALUE)
-        );
+        pnl.setLayout(new javax.swing.BoxLayout(pnl, javax.swing.BoxLayout.LINE_AXIS));
 
         sidebar.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -84,9 +81,11 @@ public class vPrincipal extends javax.swing.JFrame {
         rSLabelHora1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         opc1.setBackground(new java.awt.Color(73, 120, 248));
-        opc1.setText("OPCION 1");
+        opc1.setText("Estado de resultados");
         opc1.setBackgroundHover(new java.awt.Color(73, 65, 248));
         opc1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        opc1.setSizeIcon(25.0F);
+        opc1.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         opc1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opc1ActionPerformed(evt);
@@ -94,8 +93,10 @@ public class vPrincipal extends javax.swing.JFrame {
         });
 
         opc2.setBackground(new java.awt.Color(73, 120, 248));
-        opc2.setText("OPCION 2");
+        opc2.setText("Libro diario");
         opc2.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        opc2.setSizeIcon(25.0F);
+        opc2.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         opc2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opc2ActionPerformed(evt);
@@ -103,8 +104,10 @@ public class vPrincipal extends javax.swing.JFrame {
         });
 
         opc3.setBackground(new java.awt.Color(73, 120, 248));
-        opc3.setText("OPCION 3");
+        opc3.setText("Libro mayor");
         opc3.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        opc3.setSizeIcon(25.0F);
+        opc3.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         opc3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opc3ActionPerformed(evt);
@@ -112,9 +115,11 @@ public class vPrincipal extends javax.swing.JFrame {
         });
 
         opcConfig.setBackground(new java.awt.Color(73, 120, 248));
-        opcConfig.setText("CONFIGURACIÓN");
+        opcConfig.setText("Configuración");
+        opcConfig.setToolTipText("Configuración del usuario");
         opcConfig.setBackgroundHover(new java.awt.Color(73, 65, 248));
         opcConfig.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.WIDGETS);
+        opcConfig.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         opcConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opcConfigActionPerformed(evt);
@@ -125,6 +130,7 @@ public class vPrincipal extends javax.swing.JFrame {
         rSButtonShapeIcon1.setText("CERRAR SESIÓN");
         rSButtonShapeIcon1.setBackgroundHover(new java.awt.Color(213, 12, 10));
         rSButtonShapeIcon1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.EXIT_TO_APP);
+        rSButtonShapeIcon1.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         rSButtonShapeIcon1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonShapeIcon1ActionPerformed(evt);
@@ -141,29 +147,83 @@ public class vPrincipal extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Victor Acevedo");
 
+        opc4.setBackground(new java.awt.Color(73, 120, 248));
+        opc4.setText("Balanza de comprobación");
+        opc4.setToolTipText("Balanza de comprobación");
+        opc4.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        opc4.setSizeIcon(25.0F);
+        opc4.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        opc4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opc4ActionPerformed(evt);
+            }
+        });
+
+        opc5.setBackground(new java.awt.Color(73, 120, 248));
+        opc5.setText("Balance general");
+        opc5.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        opc5.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        opc5.setSizeIcon(25.0F);
+        opc5.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        opc5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opc5ActionPerformed(evt);
+            }
+        });
+
+        opc6.setBackground(new java.awt.Color(73, 120, 248));
+        opc6.setText("Estado de flujo de efectivo");
+        opc6.setToolTipText("Estado de flujo de efectivo");
+        opc6.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        opc6.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        opc6.setSizeIcon(25.0F);
+        opc6.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        opc6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opc6ActionPerformed(evt);
+            }
+        });
+
+        opc7.setBackground(new java.awt.Color(73, 120, 248));
+        opc7.setText("Estado de cambios en el patrimonio");
+        opc7.setToolTipText("Estado de cambios en el patrimonio");
+        opc7.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        opc7.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        opc7.setSizeIcon(25.0F);
+        opc7.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        opc7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opc7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidebarLayout = new javax.swing.GroupLayout(sidebar);
         sidebar.setLayout(sidebarLayout);
         sidebarLayout.setHorizontalGroup(
             sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sidebarLayout.createSequentialGroup()
-                .addGroup(sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opc2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opcConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opc3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(sidebarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rSLabelHora1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(rSLabelFecha1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidebarLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)))
                 .addContainerGap())
+            .addGroup(sidebarLayout.createSequentialGroup()
+                .addGroup(sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(opcConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opc2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opc3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opc4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opc5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opc6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opc7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         sidebarLayout.setVerticalGroup(
             sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,20 +236,70 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addComponent(rSLabelFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSLabelHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(opc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(opc2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(opc2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(opc3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(opc3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(opc4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(opcConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(opc1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(opc5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(opc6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(opc7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(opcConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
 
-        pnl.setLayout(new javax.swing.BoxLayout(pnl, javax.swing.BoxLayout.LINE_AXIS));
+        topbar.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("CONTABILIDAD BANCARIA");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        javax.swing.GroupLayout topbarLayout = new javax.swing.GroupLayout(topbar);
+        topbar.setLayout(topbarLayout);
+        topbarLayout.setHorizontalGroup(
+            topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topbarLayout.createSequentialGroup()
+                .addContainerGap(420, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        topbarLayout.setVerticalGroup(
+            topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topbarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
+        pnlBase.setLayout(pnlBaseLayout);
+        pnlBaseLayout.setHorizontalGroup(
+            pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBaseLayout.createSequentialGroup()
+                .addComponent(sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        pnlBaseLayout.setVerticalGroup(
+            pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlBaseLayout.createSequentialGroup()
+                .addComponent(topbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,23 +307,11 @@ public class vPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1062, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 838, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(224, 224, 224)
-                    .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 671, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 695, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -271,6 +369,22 @@ public class vPrincipal extends javax.swing.JFrame {
         /**/
     }//GEN-LAST:event_rSButtonShapeIcon1ActionPerformed
 
+    private void opc4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opc4ActionPerformed
+
+    private void opc5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opc5ActionPerformed
+
+    private void opc6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opc6ActionPerformed
+
+    private void opc7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_opc7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -308,10 +422,15 @@ public class vPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private RSMaterialComponent.RSButtonShapeIcon opc1;
     private RSMaterialComponent.RSButtonShapeIcon opc2;
     private RSMaterialComponent.RSButtonShapeIcon opc3;
+    private RSMaterialComponent.RSButtonShapeIcon opc4;
+    private RSMaterialComponent.RSButtonShapeIcon opc5;
+    private RSMaterialComponent.RSButtonShapeIcon opc6;
+    private RSMaterialComponent.RSButtonShapeIcon opc7;
     private RSMaterialComponent.RSButtonShapeIcon opcConfig;
     private javax.swing.JPanel pnl;
     private javax.swing.JPanel pnlBase;
@@ -319,5 +438,6 @@ public class vPrincipal extends javax.swing.JFrame {
     private rojeru_san.rsdate.RSLabelFecha rSLabelFecha1;
     private rojeru_san.rsdate.RSLabelHora rSLabelHora1;
     private javax.swing.JPanel sidebar;
+    private javax.swing.JPanel topbar;
     // End of variables declaration//GEN-END:variables
 }
