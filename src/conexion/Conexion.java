@@ -7,22 +7,21 @@ package conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import utils.constantes.Constantes;
 
 /**
  *
  * @author vacev
  */
 public class Conexion {
-    
-    public String rutaDbGlobalDefecto = "db/horas_sociales_db.db";
-    public String rutaDbGlobal = rutaDbGlobalDefecto;
-    
+        
     Connection cx = null;
     
     public Connection conectar() {
         try {
             Class.forName("org.sqlite.JDBC");
-            cx = DriverManager.getConnection("jdbc:sqlite:"+rutaDbGlobal);
+            String url = "jdbc:sqlite:" + Constantes.rutaConexion;
+            cx = DriverManager.getConnection(url);
             System.out.println("CONECTADO!");
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();

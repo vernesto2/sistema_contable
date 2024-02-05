@@ -28,7 +28,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="1062" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="1079" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="pnlBase" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -69,8 +69,8 @@
               <Component id="sidebar" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Component id="topbar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="pnl" min="-2" pref="649" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="pnl" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,15 +106,15 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="opcConfig" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnConfig" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="rSButtonShapeIcon1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="opc2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="opc1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="opc3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="opc4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="opc5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="opc6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="opc7" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLibroDiario" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEstadoResultado" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLibroMayor" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnBalanzaComprobacion" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnBalanceGeneral" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnFlujoEfectivo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCambiosPatrimonio" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -132,21 +132,21 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="rSLabelHora1" min="-2" pref="19" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="opc2" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnLibroDiario" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="opc3" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnLibroMayor" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="opc4" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnBalanzaComprobacion" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="opc1" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnEstadoResultado" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="opc5" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnBalanceGeneral" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="opc6" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnFlujoEfectivo" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="opc7" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="opcConfig" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnCambiosPatrimonio" min="-2" pref="36" max="-2" attributes="0"/>
+                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <Component id="btnConfig" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="rSButtonShapeIcon1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -175,7 +175,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="opc1">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnEstadoResultado">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f8" green="78" red="49" type="rgb"/>
@@ -193,10 +193,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opc1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEstadoResultadoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="opc2">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnLibroDiario">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f8" green="78" red="49" type="rgb"/>
@@ -211,10 +211,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opc2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLibroDiarioActionPerformed"/>
               </Events>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="opc3">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnLibroMayor">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f8" green="78" red="49" type="rgb"/>
@@ -229,10 +229,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opc3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLibroMayorActionPerformed"/>
               </Events>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="opcConfig">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnConfig">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f8" green="78" red="49" type="rgb"/>
@@ -250,7 +250,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opcConfigActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfigActionPerformed"/>
               </Events>
             </Component>
             <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon1">
@@ -293,7 +293,7 @@
                 <Property name="text" type="java.lang.String" value="Victor Acevedo"/>
               </Properties>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="opc4">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnBalanzaComprobacion">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f8" green="78" red="49" type="rgb"/>
@@ -309,10 +309,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opc4ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBalanzaComprobacionActionPerformed"/>
               </Events>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="opc5">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnBalanceGeneral">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f8" green="78" red="49" type="rgb"/>
@@ -330,10 +330,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opc5ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBalanceGeneralActionPerformed"/>
               </Events>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="opc6">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnFlujoEfectivo">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f8" green="78" red="49" type="rgb"/>
@@ -352,10 +352,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opc6ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFlujoEfectivoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="opc7">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnCambiosPatrimonio">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f8" green="78" red="49" type="rgb"/>
@@ -374,7 +374,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="opc7ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCambiosPatrimonioActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -390,7 +390,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="420" max="32767" attributes="0"/>
+                      <EmptySpace pref="437" max="32767" attributes="0"/>
                       <Component id="jLabel2" min="-2" pref="424" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>

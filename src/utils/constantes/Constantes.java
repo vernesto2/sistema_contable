@@ -9,7 +9,7 @@ package utils.constantes;
  * @author vacev
  */
 public class Constantes {
-    
-   
-    
+    // ruta de configuracion de archivo de DB
+    public static String rutaConexion = "database/db.sqlite";
+
 }

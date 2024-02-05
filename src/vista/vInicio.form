@@ -66,10 +66,10 @@
                               <Component id="rSButtonShapeIcon9" alignment="1" min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="rSButtonShapeIcon10" max="32767" attributes="0"/>
-                                      <Component id="rSButtonShapeIcon15" min="-2" pref="255" max="-2" attributes="0"/>
+                                      <Component id="btnCrearConfig" max="32767" attributes="0"/>
+                                      <Component id="btnIniciarSesion" min="-2" pref="255" max="-2" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Component id="lblRutaGlobal" max="32767" attributes="0"/>
+                                          <Component id="lblRutaGlobal" pref="0" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="rSButtonShapeIcon16" min="-2" pref="45" max="-2" attributes="0"/>
                                       </Group>
@@ -95,10 +95,10 @@
                       <Component id="lblRutaGlobal" max="32767" attributes="0"/>
                       <Component id="rSButtonShapeIcon16" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnIniciarSesion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="rSButtonShapeIcon15" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="rSButtonShapeIcon10" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCrearConfig" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Component id="rSPanelGradiente1" max="32767" attributes="0"/>
@@ -160,19 +160,20 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Prueba Ruta"/>
-            <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="lblRutaGlobal.getText()" type="code"/>
-            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Origen de datos"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblRutaGlobalMouseEntered"/>
+          </Events>
         </Component>
-        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon15">
+        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnIniciarSesion">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f8" green="78" red="49" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="INICIAR SESION"/>
-            <Property name="toolTipText" type="java.lang.String" value="INICIAR SESION"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f8" green="41" red="49" type="rgb"/>
             </Property>
@@ -186,18 +187,21 @@
             <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
               <Value id="PEOPLE"/>
             </Property>
+            <Property name="themeTooltip" type="necesario.Global$THEMETOOLTIP" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="LIGHT"/>
+            </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon15ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciarSesionActionPerformed"/>
           </Events>
         </Component>
-        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon10">
+        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnCrearConfig">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="6" green="cd" red="fb" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CREAR CONFIGURACI&#xd3;N"/>
-            <Property name="toolTipText" type="java.lang.String" value="CREAR UNA CONFIGURACI&#xd3;N NUEVA"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="6" green="ae" red="fb" type="rgb"/>
             </Property>
@@ -222,9 +226,12 @@
             <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
               <Value id="NEW_RELEASES"/>
             </Property>
+            <Property name="themeTooltip" type="necesario.Global$THEMETOOLTIP" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="LIGHT"/>
+            </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon10ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearConfigActionPerformed"/>
           </Events>
         </Component>
         <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon9">
@@ -287,7 +294,7 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" pref="40" max="-2" attributes="0"/>
-                      <EmptySpace pref="129" max="32767" attributes="0"/>
+                      <EmptySpace pref="152" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

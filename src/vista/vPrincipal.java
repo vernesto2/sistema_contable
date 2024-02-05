@@ -32,7 +32,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/utils/icon/user.png")));
         
-        this.opc1.setSelected(true);
+        this.btnLibroDiario.setSelected(true);
         new CambiaPanel(pnl, new vLibroDiario());
     }
     /**
@@ -49,17 +49,17 @@ public class vPrincipal extends javax.swing.JFrame {
         sidebar = new javax.swing.JPanel();
         rSLabelFecha1 = new rojeru_san.rsdate.RSLabelFecha();
         rSLabelHora1 = new rojeru_san.rsdate.RSLabelHora();
-        opc1 = new RSMaterialComponent.RSButtonShapeIcon();
-        opc2 = new RSMaterialComponent.RSButtonShapeIcon();
-        opc3 = new RSMaterialComponent.RSButtonShapeIcon();
-        opcConfig = new RSMaterialComponent.RSButtonShapeIcon();
+        btnEstadoResultado = new RSMaterialComponent.RSButtonShapeIcon();
+        btnLibroDiario = new RSMaterialComponent.RSButtonShapeIcon();
+        btnLibroMayor = new RSMaterialComponent.RSButtonShapeIcon();
+        btnConfig = new RSMaterialComponent.RSButtonShapeIcon();
         rSButtonShapeIcon1 = new RSMaterialComponent.RSButtonShapeIcon();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        opc4 = new RSMaterialComponent.RSButtonShapeIcon();
-        opc5 = new RSMaterialComponent.RSButtonShapeIcon();
-        opc6 = new RSMaterialComponent.RSButtonShapeIcon();
-        opc7 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnBalanzaComprobacion = new RSMaterialComponent.RSButtonShapeIcon();
+        btnBalanceGeneral = new RSMaterialComponent.RSButtonShapeIcon();
+        btnFlujoEfectivo = new RSMaterialComponent.RSButtonShapeIcon();
+        btnCambiosPatrimonio = new RSMaterialComponent.RSButtonShapeIcon();
         topbar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -80,49 +80,49 @@ public class vPrincipal extends javax.swing.JFrame {
         rSLabelHora1.setForeground(new java.awt.Color(0, 0, 0));
         rSLabelHora1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        opc1.setBackground(new java.awt.Color(73, 120, 248));
-        opc1.setText("Estado de resultados");
-        opc1.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        opc1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
-        opc1.setSizeIcon(25.0F);
-        opc1.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        opc1.addActionListener(new java.awt.event.ActionListener() {
+        btnEstadoResultado.setBackground(new java.awt.Color(73, 120, 248));
+        btnEstadoResultado.setText("Estado de resultados");
+        btnEstadoResultado.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnEstadoResultado.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        btnEstadoResultado.setSizeIcon(25.0F);
+        btnEstadoResultado.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnEstadoResultado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opc1ActionPerformed(evt);
+                btnEstadoResultadoActionPerformed(evt);
             }
         });
 
-        opc2.setBackground(new java.awt.Color(73, 120, 248));
-        opc2.setText("Libro diario");
-        opc2.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        opc2.setSizeIcon(25.0F);
-        opc2.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        opc2.addActionListener(new java.awt.event.ActionListener() {
+        btnLibroDiario.setBackground(new java.awt.Color(73, 120, 248));
+        btnLibroDiario.setText("Libro diario");
+        btnLibroDiario.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnLibroDiario.setSizeIcon(25.0F);
+        btnLibroDiario.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnLibroDiario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opc2ActionPerformed(evt);
+                btnLibroDiarioActionPerformed(evt);
             }
         });
 
-        opc3.setBackground(new java.awt.Color(73, 120, 248));
-        opc3.setText("Libro mayor");
-        opc3.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        opc3.setSizeIcon(25.0F);
-        opc3.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        opc3.addActionListener(new java.awt.event.ActionListener() {
+        btnLibroMayor.setBackground(new java.awt.Color(73, 120, 248));
+        btnLibroMayor.setText("Libro mayor");
+        btnLibroMayor.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnLibroMayor.setSizeIcon(25.0F);
+        btnLibroMayor.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnLibroMayor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opc3ActionPerformed(evt);
+                btnLibroMayorActionPerformed(evt);
             }
         });
 
-        opcConfig.setBackground(new java.awt.Color(73, 120, 248));
-        opcConfig.setText("Configuración");
-        opcConfig.setToolTipText("Configuración del usuario");
-        opcConfig.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        opcConfig.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.WIDGETS);
-        opcConfig.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        opcConfig.addActionListener(new java.awt.event.ActionListener() {
+        btnConfig.setBackground(new java.awt.Color(73, 120, 248));
+        btnConfig.setText("Configuración");
+        btnConfig.setToolTipText("Configuración del usuario");
+        btnConfig.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnConfig.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.WIDGETS);
+        btnConfig.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnConfig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opcConfigActionPerformed(evt);
+                btnConfigActionPerformed(evt);
             }
         });
 
@@ -147,53 +147,53 @@ public class vPrincipal extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Victor Acevedo");
 
-        opc4.setBackground(new java.awt.Color(73, 120, 248));
-        opc4.setText("Balanza de comprobación");
-        opc4.setToolTipText("Balanza de comprobación");
-        opc4.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        opc4.setSizeIcon(25.0F);
-        opc4.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        opc4.addActionListener(new java.awt.event.ActionListener() {
+        btnBalanzaComprobacion.setBackground(new java.awt.Color(73, 120, 248));
+        btnBalanzaComprobacion.setText("Balanza de comprobación");
+        btnBalanzaComprobacion.setToolTipText("Balanza de comprobación");
+        btnBalanzaComprobacion.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnBalanzaComprobacion.setSizeIcon(25.0F);
+        btnBalanzaComprobacion.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnBalanzaComprobacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opc4ActionPerformed(evt);
+                btnBalanzaComprobacionActionPerformed(evt);
             }
         });
 
-        opc5.setBackground(new java.awt.Color(73, 120, 248));
-        opc5.setText("Balance general");
-        opc5.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        opc5.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
-        opc5.setSizeIcon(25.0F);
-        opc5.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        opc5.addActionListener(new java.awt.event.ActionListener() {
+        btnBalanceGeneral.setBackground(new java.awt.Color(73, 120, 248));
+        btnBalanceGeneral.setText("Balance general");
+        btnBalanceGeneral.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnBalanceGeneral.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        btnBalanceGeneral.setSizeIcon(25.0F);
+        btnBalanceGeneral.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnBalanceGeneral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opc5ActionPerformed(evt);
+                btnBalanceGeneralActionPerformed(evt);
             }
         });
 
-        opc6.setBackground(new java.awt.Color(73, 120, 248));
-        opc6.setText("Estado de flujo de efectivo");
-        opc6.setToolTipText("Estado de flujo de efectivo");
-        opc6.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        opc6.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
-        opc6.setSizeIcon(25.0F);
-        opc6.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        opc6.addActionListener(new java.awt.event.ActionListener() {
+        btnFlujoEfectivo.setBackground(new java.awt.Color(73, 120, 248));
+        btnFlujoEfectivo.setText("Estado de flujo de efectivo");
+        btnFlujoEfectivo.setToolTipText("Estado de flujo de efectivo");
+        btnFlujoEfectivo.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnFlujoEfectivo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        btnFlujoEfectivo.setSizeIcon(25.0F);
+        btnFlujoEfectivo.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnFlujoEfectivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opc6ActionPerformed(evt);
+                btnFlujoEfectivoActionPerformed(evt);
             }
         });
 
-        opc7.setBackground(new java.awt.Color(73, 120, 248));
-        opc7.setText("Estado de cambios en el patrimonio");
-        opc7.setToolTipText("Estado de cambios en el patrimonio");
-        opc7.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        opc7.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
-        opc7.setSizeIcon(25.0F);
-        opc7.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        opc7.addActionListener(new java.awt.event.ActionListener() {
+        btnCambiosPatrimonio.setBackground(new java.awt.Color(73, 120, 248));
+        btnCambiosPatrimonio.setText("Estado de cambios en el patrimonio");
+        btnCambiosPatrimonio.setToolTipText("Estado de cambios en el patrimonio");
+        btnCambiosPatrimonio.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnCambiosPatrimonio.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        btnCambiosPatrimonio.setSizeIcon(25.0F);
+        btnCambiosPatrimonio.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnCambiosPatrimonio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opc7ActionPerformed(evt);
+                btnCambiosPatrimonioActionPerformed(evt);
             }
         });
 
@@ -214,15 +214,15 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(sidebarLayout.createSequentialGroup()
                 .addGroup(sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opcConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opc2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opc3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opc4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opc5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opc6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opc7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLibroDiario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEstadoResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBalanceGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFlujoEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCambiosPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         sidebarLayout.setVerticalGroup(
@@ -237,21 +237,21 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSLabelHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(opc2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLibroDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(opc3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(opc4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(opc1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEstadoResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(opc5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBalanceGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(opc6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnFlujoEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(opc7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(opcConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCambiosPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -269,7 +269,7 @@ public class vPrincipal extends javax.swing.JFrame {
         topbarLayout.setHorizontalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topbarLayout.createSequentialGroup()
-                .addContainerGap(420, Short.MAX_VALUE)
+                .addContainerGap(437, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -297,15 +297,15 @@ public class vPrincipal extends javax.swing.JFrame {
             .addComponent(sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addComponent(topbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnl, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1062, Short.MAX_VALUE)
+            .addGap(0, 1079, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -320,42 +320,48 @@ public class vPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void seleccionarBoton() {
-        this.opc1.setSelected(false);
-        this.opc2.setSelected(false);
-        this.opc3.setSelected(false);
-        this.opcConfig.setSelected(false);
+        
+        this.btnLibroDiario.setSelected(false);
+        this.btnLibroMayor.setSelected(false);
+        this.btnBalanzaComprobacion.setSelected(false);
+        this.btnEstadoResultado.setSelected(false);
+        this.btnBalanceGeneral.setSelected(false);
+        this.btnFlujoEfectivo.setSelected(false);
+        this.btnCambiosPatrimonio.setSelected(false);
+        this.btnConfig.setSelected(false);
+        
     }
     
-    private void opc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc1ActionPerformed
+    private void btnEstadoResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoResultadoActionPerformed
         this.seleccionarBoton();
-        if (!this.opc1.isSelected()) {
-            this.opc1.setSelected(true);
+        if (!this.btnEstadoResultado.isSelected()) {
+            this.btnEstadoResultado.setSelected(true);
             new CambiaPanel(pnl, new vLibroDiario());
         }
-    }//GEN-LAST:event_opc1ActionPerformed
+    }//GEN-LAST:event_btnEstadoResultadoActionPerformed
 
-    private void opc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc2ActionPerformed
+    private void btnLibroDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibroDiarioActionPerformed
         this.seleccionarBoton();
-        if (!this.opc2.isSelected()) {
-            this.opc2.setSelected(true);
-            new CambiaPanel(pnl, new vLibroMayor());
+        if (!this.btnLibroDiario.isSelected()) {
+            this.btnLibroDiario.setSelected(true);
+            new CambiaPanel(pnl, new vLibroDiario());
         }
-    }//GEN-LAST:event_opc2ActionPerformed
+    }//GEN-LAST:event_btnLibroDiarioActionPerformed
 
-    private void opc3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc3ActionPerformed
+    private void btnLibroMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibroMayorActionPerformed
         this.seleccionarBoton();
-        if (!this.opc3.isSelected()) {
-            this.opc3.setSelected(true);
+        if (!this.btnLibroMayor.isSelected()) {
+            this.btnLibroMayor.setSelected(true);
         }
-    }//GEN-LAST:event_opc3ActionPerformed
+    }//GEN-LAST:event_btnLibroMayorActionPerformed
 
-    private void opcConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcConfigActionPerformed
+    private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
         this.seleccionarBoton();
-        if (!this.opcConfig.isSelected()) {
-            this.opcConfig.setSelected(true);
+        if (!this.btnConfig.isSelected()) {
+            this.btnConfig.setSelected(true);
             new CambiaPanel(pnl, new vConfiguracion());
         }
-    }//GEN-LAST:event_opcConfigActionPerformed
+    }//GEN-LAST:event_btnConfigActionPerformed
 
     private void rSButtonShapeIcon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon1ActionPerformed
         //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
@@ -369,21 +375,21 @@ public class vPrincipal extends javax.swing.JFrame {
         /**/
     }//GEN-LAST:event_rSButtonShapeIcon1ActionPerformed
 
-    private void opc4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc4ActionPerformed
+    private void btnBalanzaComprobacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanzaComprobacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_opc4ActionPerformed
+    }//GEN-LAST:event_btnBalanzaComprobacionActionPerformed
 
-    private void opc5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc5ActionPerformed
+    private void btnBalanceGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanceGeneralActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_opc5ActionPerformed
+    }//GEN-LAST:event_btnBalanceGeneralActionPerformed
 
-    private void opc6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc6ActionPerformed
+    private void btnFlujoEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlujoEfectivoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_opc6ActionPerformed
+    }//GEN-LAST:event_btnFlujoEfectivoActionPerformed
 
-    private void opc7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opc7ActionPerformed
+    private void btnCambiosPatrimonioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiosPatrimonioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_opc7ActionPerformed
+    }//GEN-LAST:event_btnCambiosPatrimonioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -421,17 +427,17 @@ public class vPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonShapeIcon btnBalanceGeneral;
+    private RSMaterialComponent.RSButtonShapeIcon btnBalanzaComprobacion;
+    private RSMaterialComponent.RSButtonShapeIcon btnCambiosPatrimonio;
+    private RSMaterialComponent.RSButtonShapeIcon btnConfig;
+    private RSMaterialComponent.RSButtonShapeIcon btnEstadoResultado;
+    private RSMaterialComponent.RSButtonShapeIcon btnFlujoEfectivo;
+    private RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;
+    private RSMaterialComponent.RSButtonShapeIcon btnLibroMayor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private RSMaterialComponent.RSButtonShapeIcon opc1;
-    private RSMaterialComponent.RSButtonShapeIcon opc2;
-    private RSMaterialComponent.RSButtonShapeIcon opc3;
-    private RSMaterialComponent.RSButtonShapeIcon opc4;
-    private RSMaterialComponent.RSButtonShapeIcon opc5;
-    private RSMaterialComponent.RSButtonShapeIcon opc6;
-    private RSMaterialComponent.RSButtonShapeIcon opc7;
-    private RSMaterialComponent.RSButtonShapeIcon opcConfig;
     private javax.swing.JPanel pnl;
     private javax.swing.JPanel pnlBase;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon1;
