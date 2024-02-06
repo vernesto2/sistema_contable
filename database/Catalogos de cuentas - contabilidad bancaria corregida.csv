@@ -1,0 +1,2209 @@
+codigo,tipo,cuenta,tipo_catalogo
+1,,ACTIVOS,4
+11,,ACTIVOS DE INTERMEDIACIÓN,4
+111,,FONDOS DISPONIBLES,4
+1110,,FONDOS DISPONIBLES,4
+111001,,CAJA,4
+1110010101,,Oficina central - ML,4
+1110010102,,Oficina central - ME,4
+1110010201,,Agencias - ML,4
+1110010202,,Agencias - ME,4
+1110010301,,Fondos fijos - ML,4
+1110010302,,Fondos fijos - ME,4
+1110010401,,Remesas locales en tránsito - ML,4
+1110010402,,Remesas locales en tránsito - ME,4
+111002,,DEPÓSITOS EN EL BCR,4
+1110020101,,Depósitos para encaje legal- ML,4
+1110020102,,Depósitos para encaje legal - ME,4
+1110020201,,Depósitos otros -ML,4
+1110020202,,Depósitos otros -ME,4
+1110029901,,Intereses y otros por cobrar - ML,4
+1110029902,,Intereses y otros por cobrar - ME,4
+111003,,DOCUMENTOS A CARGO DE OTROS BANCOS,4
+1110030100,,Compensaciones pendientes,4
+1110030200,,Rechazos por compensación,4
+111004,,DEPÓSITOS EN BANCOS LOCALES,4
+1110040101,,A la vista - ML,4
+1110040102,,A la vista - ME,4
+1110040201,,Depósitos de ahorro - ML,4
+1110040202,,Depósitos de ahorro - ME,4
+1110040301,,A plazo - ML,4
+1110040302,,A plazo - ME,4
+1110049901,,Intereses y otros por cobrar - ML,4
+1110049902,,Intereses y otros por cobrar - ME,4
+111006,,DEPOSITOS EN BANCOS EXTRANJEROS,4
+1110060101,,A la vista - ML,4
+1110060102,,A la vista - ME,4
+1110060201,,A plazo - ML,4
+1110060202,,A plazo - ME,4
+1110060301,,Remesas en tránsito - ML,4
+1110060302,,Remesas en tránsito - ME,4
+1110069901,,Intereses y otros por cobrar - ML,4
+1110069902,,Intereses y otros por cobrar - ME,4
+112,,ADQUISICIÓN TEMPORAL DE DOCUMENTOS,4
+1121,,DOCUMENTOS ADQUIRIDOS HASTA UN AÑO PLAZO,4
+112101,,OPERACIONES DE REPORTO CON EL BANCO CENTRAL DE RESERVA,4
+1121010101,,Emitidos por el Banco Central de Reserva - ML,4
+1121010102,,Emitidos por el Banco Central de Reserva - ME,4
+1121010201,,Emitidos por entidades del Estado - ML,4
+1121010202,,Emitidos por entidades del Estado - ME,4
+1121010301,,Emitidos por empresas privadas - ML,4
+1121010302,,Emitidos por empresas privadas - ME,4
+1121010501,,Emitidos por bancos - ML,4
+1121010502,,Emitidos por bancos - ME,4
+1121010601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1121010602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1121010701,,Emitidos por entidades del extranjero - ML,4
+1121010702,,Emitidos por entidades del extranjero - ME,4
+112102,,OPERACIONES DE REPORTO CON ENTIDADES DEL ESTADO,4
+1121020101,,Emitidos por el Banco Central de Reserva - ML,4
+1121020102,,Emitidos por el Banco Central de Reserva - ME,4
+1121020201,,Emitidos por entidades del Estado - ML,4
+1121020202,,Emitidos por entidades del Estado - ME,4
+1121020301,,Emitidos por empresas privadas - ML,4
+1121020302,,Emitidos por empresas privadas - ME,4
+1121020501,,Emitidos por bancos - ML,4
+1121020502,,Emitidos por bancos - ME,4
+1121020601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1121020602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1121020701,,Emitidos por entidades del extranjero - ML,4
+1121020702,,Emitidos por entidades del extranjero - ME,4
+112103,,OPERACIONES DE REPORTO CON EMPRESAS PRIVADAS,4
+1121030101,,Emitidos por el Banco Central de Reserva - ML,4
+1121030102,,Emitidos por el Banco Central de Reserva - ME,4
+1121030201,,Emitidos por entidades del Estado - ML,4
+1121030202,,Emitidos por entidades del Estado - ME,4
+1121030301,,Emitidos por empresas privadas - ML,4
+1121030302,,Emitidos por empresas privadas - ME,4
+1121030501,,Emitidos por bancos - ML,4
+1121030502,,Emitidos por bancos - ME,4
+1121030601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1121030602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1121030701,,Emitidos por entidades del extranjero - ML,4
+1121030702,,Emitidos por entidades del extranjero - ME,4
+112104,,OPERACIONES DE REPORTO CON PARTICULARES,4
+1121040101,,Emitidos por el Banco Central de Reserva - ML,4
+1121040102,,Emitidos por el Banco Central de Reserva - ME,4
+1121040201,,Emitidos por entidades del Estado - ML,4
+1121040202,,Emitidos por entidades del Estado - ME,4
+1121040301,,Emitidos por empresas privadas - ML,4
+1121040302,,Emitidos por empresas privadas - ME,4
+1121040501,,Emitidos por bancos - ML,4
+1121040502,,Emitidos por bancos - ME,4
+1121040601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1121040602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1121040701,,Emitidos por entidades del extranjero - ML,4
+1121040702,,Emitidos por entidades del extranjero - ME,4
+112105,,OPERACIONES DE REPORTO CON BANCOS Y FINANCIERAS,4
+1121050101,,Emitidos por el Banco Central de Reserva - ML,4
+1121050102,,Emitidos por el Banco Central de Reserva - ME,4
+1121050201,,Emitidos por entidades del Estado - ML,4
+1121050202,,Emitidos por entidades del Estado - ME,4
+1121050301,,Emitidos por empresas privadas - ML,4
+1121050302,,Emitidos por empresas privadas - ME,4
+1121050501,,Emitidos por bancos - ML,4
+1121050502,,Emitidos por bancos - ME,4
+1121050601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1121050602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1121050701,,Emitidos por entidades del extranjero - ML,4
+1121050702,,Emitidos por entidades del extranjero - ME,4
+112106,,OPERACIONES DE REPORTO CON OTRAS ENTIDADES DEL SISTEMA FINANCIERO,4
+1121060101,,Emitidos por el Banco Central de Reserva - ML,4
+1121060102,,Emitidos por el Banco Central de Reserva - ME,4
+1121060201,,Emitidos por entidades del Estado - ML,4
+1121060202,,Emitidos por entidades del Estado - ME,4
+1121060301,,Emitidos por empresas privadas - ML,4
+1121060302,,Emitidos por empresas privadas - ME,4
+1121060501,,Emitidos por bancos - ML,4
+1121060502,,Emitidos por bancos - ME,4
+1121060601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1121060602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1121060701,,Emitidos por entidades del extranjero - ML,4
+1121060702,,Emitidos por entidades del extranjero - ME,4
+112107,,OPERACIONES BURSÁTILES,4
+1121070101,,Emitidos por el Banco Central de Reserva - ML,4
+1121070102,,Emitidos por el Banco Central de Reserva - ME,4
+1121070201,,Emitidos por entidades del Estado - ML,4
+1121070202,,Emitidos por entidades del Estado - ME,4
+1121070301,,Emitidos por empresas privadas - ML,4
+1121070302,,Emitidos por empresas privadas - ME,4
+1121070501,,Emitidos por bancos - ML,4
+1121070502,,Emitidos por bancos - ME,4
+1121070601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1121070602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1121070701,,Emitidos por entidades del extranjero - ML,4
+1121070702,,Emitidos por entidades del extranjero - ME,4
+1128,,DOCUMENTOS VENCIDOS,4
+112801,,OPERACIONES DE REPORTO CON EL BANCO CENTRAL DE RESERVA,4
+1128010101,,Emitidos por el Banco Central de Reserva - ML,4
+1128010102,,Emitidos por el Banco Central de Reserva - ME,4
+1128010201,,Emitidos por entidades del Estado - ML,4
+1128010202,,Emitidos por entidades del Estado - ME,4
+1128010301,,Emitidos por empresas privadas - ML,4
+1128010302,,Emitidos por empresas privadas - ME,4
+1128010501,,Emitidos por bancos - ML,4
+1128010502,,Emitidos por bancos - ME,4
+1128010601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1128010602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1128010701,,Emitidos por entidades del extranjero - ML,4
+1128010702,,Emitidos por entidades del extranjero - ME,4
+112802,,OPERACIONES DE REPORTO CON ENTIDADES DEL ESTADO,4
+1128020101,,Emitidos por el Banco Central de Reserva - ML,4
+1128020102,,Emitidos por el Banco Central de Reserva - ME,4
+1128020201,,Emitidos por entidades del Estado - ML,4
+1128020202,,Emitidos por entidades del Estado - ME,4
+1128020301,,Emitidos por empresas privadas - ML,4
+1128020302,,Emitidos por empresas privadas - ME,4
+1128020501,,Emitidos por bancos - ML,4
+1128020502,,Emitidos por bancos - ME,4
+1128020601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1128020602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1128020701,,Emitidos por entidades del extranjero - ML,4
+1128020702,,Emitidos por entidades del extranjero - ME,4
+112803,,OPERACIONES DE REPORTO CON EMPRESAS PRIVADAS,4
+1128030101,,Emitidos por el Banco Central de Reserva - ML,4
+1128030102,,Emitidos por el Banco Central de Reserva - ME,4
+1128030201,,Emitidos por entidades del Estado - ML,4
+1128030202,,Emitidos por entidades del Estado - ME,4
+1128030301,,Emitidos por empresas privadas - ML,4
+1128030302,,Emitidos por empresas privadas - ME,4
+1128030501,,Emitidos por bancos - ML,4
+1128030502,,Emitidos por bancos - ME,4
+1128030601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1128030602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1128030701,,Emitidos por entidades del extranjero - ML,4
+1128030702,,Emitidos por entidades del extranjero - ME,4
+112804,,OPERACIONES DE REPORTO CON PARTICULARES,4
+1128040101,,Emitidos por el Banco Central de Reserva - ML,4
+1128040102,,Emitidos por el Banco Central de Reserva - ME,4
+1128040201,,Emitidos por entidades del Estado - ML,4
+1128040202,,Emitidos por entidades del Estado - ME,4
+1128040301,,Emitidos por empresas privadas - ML,4
+1128040302,,Emitidos por empresas privadas - ME,4
+1128040501,,Emitidos por bancos - ML,4
+1128040502,,Emitidos por bancos - ME,4
+1128040601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1128040602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1128040701,,Emitidos por entidades del extranjero - ML,4
+1128040702,,Emitidos por entidades del extranjero - ME,4
+112805,,OPERACIONES DE REPORTO CON BANCOS Y FINANCIERAS,4
+1128050101,,Emitidos por el Banco Central de Reserva - ML,4
+1128050102,,Emitidos por el Banco Central de Reserva - ME,4
+1128050201,,Emitidos por entidades del Estado - ML,4
+1128050202,,Emitidos por entidades del Estado - ME,4
+1128050301,,Emitidos por empresas privadas - ML,4
+1128050302,,Emitidos por empresas privadas - ME,4
+1128050501,,Emitidos por bancos - ML,4
+1128050502,,Emitidos por bancos - ME,4
+1128050601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1128050602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1128050701,,Emitidos por entidades del extranjero - ML,4
+1128050702,,Emitidos por entidades del extranjero - ME,4
+112806,,OPERACIONES DE REPORTO CON OTRAS ENTIDADES DEL SISTEMA FINANCIERO,4
+1128060101,,Emitidos por el Banco Central de Reserva - ML,4
+1128060102,,Emitidos por el Banco Central de Reserva - ME,4
+1128060201,,Emitidos por entidades del Estado - ML,4
+1128060202,,Emitidos por entidades del Estado - ME,4
+1128060301,,Emitidos por empresas privadas - ML,4
+1128060302,,Emitidos por empresas privadas - ME,4
+1128060501,,Emitidos por bancos - ML,4
+1128060502,,Emitidos por bancos - ME,4
+1128060601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1128060602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1128060701,,Emitidos por entidades del extranjero - ML,4
+1128060702,,Emitidos por entidades del extranjero - ME,4
+112807,,OPERACIONES BURSÁTILES,4
+1128070101,,Emitidos por el Banco Central de Reserva - ML,4
+1128070102,,Emitidos por el Banco Central de Reserva - ME,4
+1128070201,,Emitidos por entidades del Estado - ML,4
+1128070202,,Emitidos por entidades del Estado - ME,4
+1128070301,,Emitidos por empresas privadas - ML,4
+1128070302,,Emitidos por empresas privadas - ME,4
+1128070501,,Emitidos por bancos - ML,4
+1128070502,,Emitidos por bancos - ME,4
+1128070601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1128070602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1128070701,,Emitidos por entidades del extranjero - ML,4
+1128070702,,Emitidos por entidades del extranjero - ME,4
+1129,,PROVISIÓN POR PÉRDIDAS,4
+112900,,PROVISIÓN POR PÉRDIDAS,4
+1129000001,,Provisión por pérdidas - ML,4
+1129000002,,Provisión por pérdidas-ME,4
+113,,INVERSIONES FINANCIERAS,4
+1130,,TÍTULOSVALORES CONSERVADOS PARA NEGOCIACIÓN,4
+113001,,TÍTULOSVALORES PROPIOS,4
+1130010101,,Emitidos por el BCR - ML,4
+1130010102,,Emitidos por el BCR - ME,4
+1130010201,,Emitidos por el Estado - ML,4
+1130010202,,Emitidos por el Estado - ME,4
+1130010301,,Emitidos por empresas privadas - ML,4
+1130010302,,Emitidos por empresas privadas - ME,4
+1130010501,,Emitidos por bancos - ML,4
+1130010502,,Emitidos por bancos - ME,4
+1130010601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1130010602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1130010701,,Emitidos por instituciones extranjeras - ML,4
+1130010702,,Emitidos por instituciones extranjeras - ME,4
+1130010801,,Emitidos por el Instituto de Garantía de Depósitos - ML,4
+1130010802,,Emitidos por el Instituto de Garantía de Depósitos - ME,4
+1130019901,,Intereses y otros por cobrar - ML,4
+1130019902,,Intereses y otros por cobrar - ME,4
+113002,,TÍTULOSVALORES TRANSFERIDOS,4
+1130020101,,Emitidos por el BCR - ML,4
+1130020102,,Emitidos por el BCR - ME,4
+1130020201,,Emitidos por el Estado - ML,4
+1130020202,,Emitidos por el Estado - ME,4
+1130020301,,Emitidos por empresas privadas - ML,4
+1130020302,,Emitidos por empresas privadas - ME,4
+1130020501,,Emitidos por bancos - ML,4
+1130020502,,Emitidos por bancos - ME,4
+1130020601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1130020602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1130020701,,Emitidos por instituciones extranjeras - ML,4
+1130020702,,Emitidos por instituciones extranjeras - ME,4
+1130020801,,Emitidos por el Instituto de Garantía de Depósitos - ML,4
+1130020802,,Emitidos por el Instituto de Garantía de Depósitos - ME,4
+1130029901,,Intereses y otros por cobrar - ML,4
+1130029902,,Intereses y otros por cobrar - ME,4
+113003,,COLOCACIÓN DE FONDOS,4
+1130030101,,Fondos en administración de cartera - ML,4
+1130030102,,Fondos en administración de cartera - ME,4
+1131,,TÍTULOSVALORES PARA CONSERVARSE HASTA EL VENCIMIENTO,4
+113100,,TITULOSVALORES PARA CONSERVARSE HASTA EL VENCIMIENTO,4
+1131000101,,Emitidos por el BCR - ML,4
+1131000102,,Emitidos por el BCR - ME,4
+1131000201,,Emitidos por el Estado - ML,4
+1131000202,,Emitidos por el Estado - ME,4
+1131000301,,Emitidos por empresas privadas - ML,4
+1131000302,,Emitidos por empresas privadas - ME,4
+1131000501,,Emitidos por bancos - ML,4
+1131000502,,Emitidos por bancos - ME,4
+1131000601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1131000602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1131000701,,Emitidos por instituciones extranjeras - ML,4
+1131000702,,Emitidos por instituciones extranjeras - ME,4
+1131000801,,Emitidos por el Instituto de Garantía de Depósitos - ML,4
+1131000802,,Emitidos por el Instituto de Garantía de Depósitos - ME,4
+1131009901,,Intereses y otros por cobrar - ML,4
+1131009902,,Intereses y otros por cobrar - ME,4
+1132,,TÍTULOSVALORES DISPONIBLES PARA VENTA,4
+113200,,TÍTULOSVALORES DISPONIBLES PARA VENTA,4
+1132000101,,Emitidos por el BCR - ML,4
+1132000102,,Emitidos por el BCR - ME,4
+1132000201,,Emitidos por el Estado - ML,4
+1132000202,,Emitidos por el Estado - ME,4
+1132000301,,Emitidos por empresas privadas - ML,4
+1132000302,,Emitidos por empresas privadas - ME,4
+1132000501,,Emitidos por bancos - ML,4
+1132000502,,Emitidos por bancos - ME,4
+1132000601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1132000602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1132000701,,Emitidos por instituciones extranjeras - ML,4
+1132000702,,Emitidos por instituciones extranjeras - ME,4
+1132000801,,Emitidos por el Instituto de Garantía de Depósitos - ML,4
+1132000802,,Emitidos por el Instituto de Garantía de Depósitos - ME,4
+1132009901,,Intereses y otros por cobrar - ML,4
+1132009902,,Intereses y otros por cobrar - ME,4
+1138,,INVERSIONES VENCIDAS,4
+113801,,TÍTULOSVALORES CONSERVADOS PARA NEGOCIACIÓN,4
+1138010101,,Emitidos por el BCR - ML,4
+1138010102,,Emitidos por el BCR - ME,4
+1138010201,,Emitidos por el Estado - ML,4
+1138010202,,Emitidos por el Estado - ME,4
+1138010301,,Emitidos por empresas privadas - ML,4
+1138010302,,Emitidos por empresas privadas - ME,4
+1138010501,,Emitidos por bancos - ML,4
+1138010502,,Emitidos por bancos - ME,4
+1138010601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1138010602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1138010701,,Emitidos por instituciones extranjeras - ML,4
+1138010702,,Emitidos por instituciones extranjeras - ME,4
+1138010801,,Emitidos por el Instituto de Garantía de Depósitos - ML,4
+1138010802,,Emitidos por el Instituto de Garantía de Depósitos - ME,4
+1138019901,,Intereses y otros por cobrar - ML,4
+1138019902,,Intereses y otros por cobrar - ME,4
+113802,,TÍTULOSVALORES PARA CONSERVARSE HASTA EL VENCIMIENTO,4
+1138020101,,Emitidos por el BCR - ML,4
+1138020102,,Emitidos por el BCR - ME,4
+1138020201,,Emitidos por el Estado - ML,4
+1138020202,,Emitidos por el Estado - ME,4
+1138020301,,Emitidos por empresas privadas - ML,4
+1138020302,,Emitidos por empresas privadas - ME,4
+1138020501,,Emitidos por bancos - ML,4
+1138020502,,Emitidos por bancos - ME,4
+1138020601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1138020602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1138020701,,Emitidos por instituciones extranjeras - ML,4
+1138020702,,Emitidos por instituciones extranjeras - ME,4
+1138020801,,Emitidos por el Instituto de Garantía de Depósitos - ML,4
+1138020802,,Emitidos por el Instituto de Garantía de Depósitos - ME,4
+1138029901,,Intereses y otros por cobrar - ML,4
+1138029902,,Intereses y otros por cobrar - ME,4
+113803,,TÍTULOSVALORES DISPONIBLES PARA VENTA,4
+1138030101,,Emitidos por el BCR - ML,4
+1138030102,,Emitidos por el BCR - ME,4
+1138030201,,Emitidos por el Estado - ML,4
+1138030202,,Emitidos por el Estado - ME,4
+1138030301,,Emitidos por empresas privadas - ML,4
+1138030302,,Emitidos por empresas privadas - ME,4
+1138030501,,Emitidos por bancos - ML,4
+1138030502,,Emitidos por bancos - ME,4
+1138030601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+1138030602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+1138030701,,Emitidos por instituciones extranjeras - ML,4
+1138030702,,Emitidos por instituciones extranjeras - ME,4
+1138030801,,Emitidos por el Instituto de Garantía de Depósitos - ML,4
+1138030802,,Emitidos por el Instituto de Garantía de Depósitos - ME,4
+1138039901,,Intereses y otros por cobrar - ML,4
+1138039902,,Intereses y otros por cobrar - ME,4
+1139,,PROVISIÓN PARA VALUACIÓN DE INVERSIONES,4
+113900,,PROVISIÓN PARA VALUACIÓN DE INVERSIONES,4
+1139000001,,Provisión para valuación de inversiones - ML,4
+1139000002,,Provisión para valuación de inversiones -ME,4
+114,,PRÉSTAMOS,4
+1141,,PRÉSTAMOS PACTADOS HASTA UN AÑO PLAZO,4
+114102,,PRÉSTAMOS A ENTIDADES DEL ESTADO,4
+1141020101,,Otorgamientos originales - ML,4
+1141020102,,Otorgamientos originales - ME,4
+1141020201,,Refinanciados - ML,4
+1141020202,,Refinanciados - ME,4
+1141020301,,Reestructurados - ML,4
+1141020302,,Reestructurados - ME,4
+1141029901,,Intereses y otros por cobrar - ML,4
+1141029902,,Intereses y otros por cobrar - ME,4
+114103,,PRÉSTAMOS A EMPRESAS PRIVADAS,4
+1141030101,,Otorgamientos originales - ML,4
+1141030102,,Otorgamientos originales - ME,4
+1141030201,,Refinanciados - ML,4
+1141030202,,Refinanciados - ME,4
+1141030301,,Reestructurados - ML,4
+1141030302,,Reestructurados - ME,4
+1141039901,,Intereses y otros por cobrar - ML,4
+1141039902,,Intereses y otros por cobrar - ME,4
+114104,,PRÉSTAMOS A PARTICULARES,4
+1141040101,,Otorgamientos originales - ML,4
+1141040102,,Otorgamientos originales - ME,4
+1141040201,,Refinanciados - ML,4
+1141040202,,Refinanciados - ME,4
+1141040301,,Reestructurados - ML,4
+1141040302,,Reestructurados - ME,4
+1141049901,,Intereses y otros por cobrar - ML,4
+1141049902,,Intereses y otros por cobrar - ME,4
+114105,,PRÉSTAMOS A BANCOS,4
+1141050101,,Para cubrir déficit de caja - ML,4
+1141050102,,Para cubrir déficit de caja - ME,4
+1141050301,,Préstamos convertibles en acciones - ML,4
+1141050302,,Préstamos convertibles en acciones - ME,4
+1141059901,,Intereses y otros por cobrar - ML,4
+1141059902,,Intereses y otros por cobrar - ME,4
+114106,,PRÉSTAMOS A OTRAS ENTIDADES DEL SISTEMA,4
+1141060101,,Otorgamientos originales - ML,4
+1141060102,,Otorgamientos originales - ME,4
+1141060201,,Refinanciados - ML,4
+1141060202,,Refinanciados - ME,4
+1141060301,,Reestructurados - ML,4
+1141060302,,Reestructurados - ME,4
+1141069901,,Intereses y otros por cobrar - ML,4
+1141069902,,Intereses y otros por cobrar - ME,4
+114107,,PRÉSTAMOS A AGENCIAS Y SUBSIDIARIAS EN EL EXTRANJERO,4
+1141070101,,Otorgamientos originales - ML,4
+1141070102,,Otorgamientos originales - ME,4
+1141070201,,Refinanciados - ML,4
+1141070202,,Refinanciados - ME,4
+1141070301,,Reestructurados - ML,4
+1141070302,,Reestructurados - ME,4
+1141079901,,Intereses y otros por cobrar - ML,4
+1141079902,,Intereses y otros por cobrar - ME,4
+114108,,PRÉSTAMOS A EMPRESAS NO DOMICILIADAS,4
+1141080101,,Otorgamientos originales - ML,4
+1141080102,,Otorgamientos originales - ME,4
+1141080201,,Refinanciados - ML,4
+1141080202,,Refinanciados - ME,4
+1141080301,,Reestructurados - ML,4
+1141080302,,Reestructurados - ME,4
+1141089901,,Intereses y otros por cobrar - ML,4
+1141089902,,Intereses y otros por cobrar - ME,4
+114199,,DESEMBOLSOS Y RECUPERACIONES POR APLICAR,4
+1141990101,,Desembolsos por aplicar - ML,4
+1141990102,,Desembolsos por aplicar- ME,4
+1141990201,,Recuperaciones por aplicar - ML,4
+1141990202,,Recuperaciones por aplicar - ME,4
+1142,,PRÉSTAMOS PACTADOS A MÁS DE UN AÑO PLAZO,4
+114202,,PRÉSTAMOS A ENTIDADES DEL ESTADO,4
+1142020101,,Otorgamientos originales - ML,4
+1142020102,,Otorgamientos originales - ME,4
+1142020201,,Refinanciados - ML,4
+1142020202,,Refinanciados - ME,4
+1142020301,,Reestructurados - ML,4
+1142020302,,Reestructurados - ME,4
+1142029901,,Intereses y otros por cobrar - ML,4
+1142029902,,Intereses y otros por cobrar - ME,4
+114203,,PRÉSTAMOS A EMPRESAS PRIVADAS,4
+1142030101,,Otorgamientos originales - ML,4
+1142030102,,Otorgamientos originales - ME,4
+1142030201,,Refinanciados - ML,4
+1142030202,,Refinanciados - ME,4
+1142030301,,Reestructurados - ML,4
+1142030302,,Reestructurados - ME,4
+1142039901,,Intereses y otros por cobrar - ML,4
+1142039902,,Intereses y otros por cobrar - ME,4
+114204,,PRÉSTAMOS A PARTICULARES,4
+1142040101,,Otorgamientos originales - ML,4
+1142040102,,Otorgamientos originales - ME,4
+1142040201,,Refinanciados - ML,4
+1142040202,,Refinanciados - ME,4
+1142040301,,Reestructurados - ML,4
+1142040302,,Reestructurados - ME,4
+1142049901,,Intereses y otros por cobrar - ML,4
+1142049902,,Intereses y otros por cobrar - ME,4
+1142040701,,Préstamos para adquisición de vivienda,4
+1142040702,,préstamos para -adquisición de vivienda - ME),4
+114205,,PRÉSTAMOS A BANCOS,4
+1142050101,,Préstamos convertibles en acciones - ML,4
+1142050102,,Préstamos convertibles en acciones - ME,4
+1142059901,,Intereses y otros por cobrar - ML,4
+1142059902,,Intereses y otros por cobrar - ME,4
+114206,,PRÉSTAMOS A OTRAS ENTIDADES DEL SISTEMA,4
+1142060101,,Otorgamientos originales - ML,4
+1142060102,,Otorgamientos originales - ME,4
+1142060201,,Refinanciados - ML,4
+1142060202,,Refinanciados - ME,4
+1142060301,,Reestructurados - ML,4
+1142060302,,Reestructurados - ME,4
+1142069901,,Intereses y otros por cobrar - ML,4
+1142069902,,Intereses y otros por cobrar - ME,4
+114207,,PRÉSTAMOS A AGENCIAS Y SUBSIDIARIAS EN EL EXTRANJERO,4
+1142070101,,Otorgamientos originales - ML,4
+1142070102,,Otorgamientos originales - ME,4
+1142070201,,Refinanciados - ML,4
+1142070202,,Refinanciados - ME,4
+1142070301,,Reestructurados - ML,4
+1142070302,,Reestructurados - ME,4
+1142079901,,Intereses y otros por cobrar - ML,4
+1142079902,,Intereses y otros por cobrar - ME,4
+114208,,PRÉSTAMOS A EMPRESAS NO DOMICILIADAS,4
+1142080101,,Otorgamientos originales - ML,4
+1142080102,,Otorgamientos originales - ME,4
+1142080201,,Refinanciados - ML,4
+1142080202,,Refinanciados - ME,4
+1142080301,,Reestructurados - ML,4
+1142080302,,Reestructurados - ME,4
+1142089901,,Intereses y otros por cobrar - ML,4
+1142089902,,Intereses y otros por cobrar - ME,4
+1148,,PRÉSTAMOS VENCIDOS,4
+114802,,PRÉSTAMOS A ENTIDADES DEL ESTADO,4
+1148020101,,Otorgamientos originales - ML,4
+1148020102,,Otorgamientos originales - ME,4
+1148020201,,Refinanciados - ML,4
+1148020202,,Refinanciados - ME,4
+1148020301,,Reestructurados - ML,4
+1148020302,,Reestructurados - ME,4
+114803,,PRÉSTAMOS A EMPRESAS PRIVADAS,4
+1148030101,,Otorgamientos originales - ML,4
+1148030102,,Otorgamientos originales - ME,4
+1148030201,,Refinanciados - ML,4
+1148030202,,Refinanciados - ME,4
+1148030301,,Reestructurados - ML,4
+1148030302,,Reestructurados - ME,4
+114804,,PRÉSTAMOS A PARTICULARES,4
+1148040101,,Otorgamientos originales - ML,4
+1148040102,,Otorgamientos originales - ME,4
+1148040201,,Refinanciados - ML,4
+1148040202,,Refinanciados - ME,4
+1148040301,,Reestructurados - ML,4
+1148040302,,Reestructurados - ME,4
+1148040701,,Préstamos para adquisición de vivienda,4
+1148040702,,préstamos para -adquisición de vivienda - ME),4
+114805,,PRÉSTAMOS A BANCOS,4
+1148050101,,Para cubrir déficit de caja - ML,4
+1148050102,,Para cubrir déficit de caja - ME,4
+1148050301,,Préstamos convertibles en acciones - ML,4
+1148050302,,Préstamos convertibles en acciones - ME,4
+114806,,PRÉSTAMOS A OTRAS ENTIDADES DEL SISTEMA,4
+1148060101,,Otorgamientos originales - ML,4
+1148060102,,Otorgamientos originales - ME,4
+1148060201,,Refinanciados - ML,4
+1148060202,,Refinanciados - ME,4
+1148060301,,Reestructurados - ML,4
+1148060302,,Reestructurados - ME,4
+114807,,PRÉSTAMOS A AGENCIAS Y SUBSIDIARIAS EN EL EXTRANJERO,4
+1148070101,,Otorgamientos originales - ML,4
+1148070102,,Otorgamientos originales - ME,4
+1148070201,,Refinanciados - ML,4
+1148070202,,Refinanciados - ME,4
+1148070301,,Reestructurados - ML,4
+1148070302,,Reestructurados - ME,4
+114808,,PRÉSTAMOS A EMPRESAS NO DOMICILIADAS,4
+1148080101,,Otorgamientos originales - ML,4
+1148080102,,Otorgamientos originales - ME,4
+1148080201,,Refinanciados - ML,4
+1148080202,,Refinanciados - ME,4
+1148080301,,Reestructurados - ML,4
+1148080302,,Reestructurados - ME,4
+114899,,RECUPERACIONES DE PRÉSTAMOS EN COBRO JUDICIAL,4
+1148990101,,Otorgamientos originales - ML,4
+1148990102,,Otorgamientos originales - ME,4
+1148990201,,Refinanciados - ML,4
+1148990202,,Refinanciados - ME,4
+1148990301,,Reestructurados - ML,4
+1148990302,,Reestructurados - ME,4
+1148999901,,Intereses y otros por cobrar - ML,4
+1148999902,,Intereses y otros por cobrar - ME,4
+1149,,PROVISIÓN PARA INCOBRABILIDAD DE PRÉSTAMOS,4
+114901,,PROVISIÓN PARA INCOBRABILIDAD DE PRÉSTAMOS,4
+1149010101,,Provisiones por categoría de riesgo - ML,4
+1149010102,,Provisiones por categoría de riesgo - ME,4
+1149010201,,Provisiones por exceso de créditos relacionados - ML,4
+1149010202,,Provisiones por exceso de créditos relacionados - ME,4
+1149010301,,Provisiones voluntarias - ML,4
+1149010302,,Provisiones voluntarias - ME,4
+1149010401,,Provisiones restringidas - ML,4
+1149010402,,Provisiones restringidas - ME,4
+1149010501,,Provisión por riesgo de manejo de la cartera - ML,4
+1149010502,,Provisión por riesgo de manejo de la cartera - ME,4
+1149010601,,Provisiones genericas - ML,4
+1149010701,,Provisiones por riesgos de calificacion de deudores - ML,4
+1149010801,,Provisiones especiales -ML,4
+1149010802,,Provisiones especiales -ME,4
+12,,OTROS ACTIVOS,4
+121,,SALDOS ENTRE COMPAÑÍAS,4
+1210,,SALDOS ENTRE COMPAÑÍAS,4
+121000,,SALDOS ENTRE COMPAÑÍAS,4
+1210000101,,Saldos con agencias nacionales - ML,4
+1210000102,,Saldos con agencias nacionales - ME,4
+1210000201,,Saldos con agencias extranjeras - ML,4
+1210000202,,Saldos con agencias extranjeras - ME,4
+1210000501,,Saldos con subsidiarias nacionales - ML,4
+1210000502,,Saldos con subsidiarias nacionales - ME,4
+1210000602,,Saldos con subsidiarias extranjeras - ME,4
+1210000702,,Saldos con bancos extranjeros - ME,4
+122,,BIENES RECIBIDOS EN PAGO O ADJUDICADOS,4
+1220,,BIENES RECIBIDOS EN PAGO O ADJUDICADOS,4
+122001,,BIENES INMUEBLES,4
+1220010101,,Urbanos,4
+1220010201,,Rústicos,4
+1220010301,,Saldo a cargo de deudores (1),4
+122002,,BIENES MUEBLES,4
+1220020001,,Bienes muebles,4
+1220020301,,Saldo a cargo de deudores (1),4
+122003,,TÍTULOS VALORES,4
+1220030101,,Vigentes - ML,4
+1220030102,,Vigentes - ME,4
+1220030201,,Vencidos - ML,4
+1220030202,,Vencidos - ME,4
+1220030301,,Saldo a cargo de deudores (1),4
+122004,,CONSTRUCCIONES EN PROCESO,4
+1220040001,,Construcciones en proceso,4
+122904,,(DEROGADA),4
+12304,,EXISTENCIAS,4
+123004,,EXISTENCIAS,4
+123001,,BIENES PARA LA VENTA,4
+1230010101,,Chequeras,4
+1230010201,,Tarjetas de crédito,4
+1230010301,,Otros,4
+123002,,BIENES PARA CONSUMO,4
+1230020101,,"Papelería, útiles y enseres",4
+1230020201,,Especies postales,4
+1230020301,,Otros,4
+124,,GASTOS PAGADOS POR ANTICIPADO Y CARGOS DIFERIDOS,4
+1240,,GASTOS PAGADOS POR ANTICIPADO Y CARGOS DIFERIDOS,4
+124001,,SEGUROS,4
+1240010101,,Sobre personas,4
+1240010201,,Sobre bienes,4
+1240010301,,Sobre riesgos bancarios,4
+124002,,ALQUILERES,4
+1240020101,,Locales,4
+1240020201,,Equipo,4
+124003,,GASTOS DE ORGANIZACIÓN,4
+1240030001,,Gastos de organización,4
+124004,,INTERESES PAGADOS POR ANTICIPADO,4
+1240040001,,Intereses pagados por anticipado - ML,4
+1240040002,,Intereses pagados por anticipado - ME,4
+124005,,INTANGIBLES,4
+1240050101,,Programas computacionales - ML,4
+124006,,DIFERENCIAS TEMPORARIAS POR IMPUESTOS SOBRE LAS GANANCIAS,4
+1240060101,,Impuesto sobre la renta,4
+1240060901,,Otros,4
+124098,,OTROS PAGOS ANTICIPADOS,4
+1240980101,,Pago a cuenta del impuesto sobre la renta,4
+1240980201,,Suscripciones y contratos de mantenimiento,4
+1240980901,,Otros,4
+124099,,OTROS CARGOS DIFERIDOS,4
+1240990101,,Costos de publicidad,4
+1240990201,,Prestaciones al personal,4
+1240990901,,Otros,4
+125,,CUENTAS POR COBRAR,4
+1250,,CUENTAS POR COBRAR,4
+125001,,COMISIONES Y RECARGOS DE AVALES Y FIANZAS,4
+1250019901,,Ingresos por percibir de avales y fianzas - ML,4
+1250019902,,Ingresos por percibir de avales y fianzas - ME,4
+125002,,PAGOS POR CUENTA AJENA,4
+1250020101,,Gastos de cartas de crédito - ML,4
+1250020102,,Gastos de cartas de crédito - ME,4
+1250020201,,Gastos de otras operaciones - ML,4
+1250020202,,Gastos de otras operaciones - ME,4
+1250020301,,Costas procesales,4
+1250020401,,Otros deudores,4
+125003,,SERVICIOS BANCARIOS,4
+1250030101,,Comisión fiduciaria por percibir,4
+1250030201,,Almacenajes por percibir,4
+1250030301,,Servicios de caja por percibir,4
+1250030401,,Trámites jurídicos por percibir,4
+1250030501,,Otros servicios bancarios - ML,4
+1250030502,,Otros servicios bancarios - ME,4
+125004,,ANTICIPOS,4
+1250040101,,Al personal - ML,4
+1250040102,,Al personal - ME,4
+1250040201,,A proveedores - ML,4
+1250040202,,A proveedores - ME,4
+125099,,OTRAS,4
+1250990101,,Faltantes de cajeros - ML,4
+1250990102,,Faltantes de cajeros - ME,4
+1250990201,,Otros faltantes,4
+1250990301,,Crédito fiscal- IVA,4
+1250999101,,Otras - ML,4
+1250999102,,Otras - ME,4
+1259,,PROVISIÓN DE INCOBRABILIDAD DE CUENTAS POR COBRAR,4
+125900,,PROVISIÓN DE INCOBRABILIDAD DE CUENTAS POR COBRAR,4
+1259000001,,Provisión por incobrabilidad de cuentas por cobrar - ML,4
+1259000002,,Provisión por incobrabilidad de cuentas por cobrar -ME,4
+126,,DERECHOS Y PARTICIPACIONES,4
+1260,,DERECHOS Y PARTICIPACIONES,4
+126001,,INVERSIONES CONJUNTAS,4
+1260010101,,En sociedades nacionales - ML- valor de adquisición,4
+1260010102,,En sociedades nacionales -ME - valor de adquisición,4
+1260010201,,En sociedades extranjeras - ML- valor de adquisición,4
+1260010202,,En sociedades extranjeras - ME- valor de adquisición,4
+1260019801,,En sociedades nacionales - ML - revalúo,4
+1260019802,,En sociedades extranjeras - ME - revalúo,4
+126002,,SUBSIDIARIAS,4
+1260020101,,En sociedades nacionales - ML- valor de adquisición,4
+1260020102,,En sociedades nacionales - ME- valor de adquisición,4
+1260020201,,En sociedades extranjeras - ML- valor de adquisición,4
+1260020202,,En sociedades extranjeras - ME- valor de adquisición,4
+1260029801,,En sociedades nacionales - ML - revalúo,4
+1260029802,,En sociedades extranjeras - ME - revalúo,4
+126003,,PARTICIPACIONES Y OTROS DERECHOS,4
+1260030101,,Participaciones - ML- valor de adquisición,4
+1260030102,,Participaciones - ME - valor de adquisición,4
+1260030301,,Fondos para despensa de empleados - ML,4
+1260039801,,Participaciones - ML - revalúo,4
+1260039802,,Participaciones - ME - revalúo,4
+126005,,BANCOS EXTRANJEROS,4
+1260050101,,Bancos extranjeros - valor de adquisición - ML,4
+1260050102,,Bancos extranjeros - valor de adquisición - ME,4
+1260059802,,Bancos extranjeros - revalúo - ME,4
+13,,ACTIVO FIJO,4
+131,,NO DEPRECIABLES,4
+1310,,NO DEPRECIABLES,4
+131001,,TERRENOS,4
+1310010101,,Terrenos - valor de adquisición,4
+1310019801,,Terrenos - revalúo,4
+131002,,CONSTRUCCIONES EN PROCESO,4
+1310020101,,Inmuebles,4
+1310020201,,Muebles,4
+131003,,MOBILIARIO Y EQUIPO POR UTILIZAR,4
+1310030101,,Mobiliario y equipo en tránsito,4
+1310030201,,Mobiliario y equipo en existencia,4
+132,,DEPRECIABLES,4
+1320,,DEPRECIABLES,4
+132001,,EDIFICACIONES,4
+1320010101,,Edificaciones - valor de adquisición,4
+1320019801,,Edificaciones - revalúo,4
+132002,,EQUIPO DE COMPUTACIÓN,4
+1320020101,,Equipo de computación - valor de adquisición,4
+1320029801,,Equipo de computación - revalúo,4
+132003,,EQUIPO DE OFICINA,4
+1320030101,,Equipo de oficina - valor de adquisición,4
+1320039801,,Equipo de oficina - revalúo,4
+132004,,MOBILIARIO,4
+1320040101,,Mobiliario - valor de adquisición,4
+1320049801,,Mobiliario - revalúo,4
+132005,,VEHÍCULOS,4
+1320050101,,Vehículos - valor de adquisición,4
+1320059801,,Vehículos - revalúo,4
+132006,,"MAQUINARIA, EQUIPO Y HERRAMIENTA",4
+1320060101,,"Maquinaria, equipo y herramienta - valor de adquisición.",4
+1320069801,,"Maquinaria, equipo y herramienta- revalúo",4
+132099,,OTROS,4
+13200101,,Biblioteca,4
+1329,,DEPRECIACIÓN ACUMULADA,4
+132900,,DEPRECIACIÓN ACUMULADA,4
+1329000100,,Edificaciones,4
+1329000200,,Equipo de computación,4
+1329000300,,Equipo de oficina,4
+1329000400,,Mobiliario,4
+1329000500,,Vehículos,4
+1329000600,,"Maquinaria, equipo y herramienta",4
+133,,AMORTIZABLES,4
+1330,,AMORTIZABLES,4
+133001,,CONSTRUCCIONES EN LOCALES ARRENDADOS,4
+1330010101,,Inmuebles,4
+1330010201,,Muebles,4
+133002,,REMODELACIONES Y READECUACIONES EN LOCALES PROPIOS,4
+1330020101,,Inmuebles,4
+1330020201,,Muebles,4
+133099,,OTROS,4
+1330990001,,Otros,4
+2,,PASIVOS,4
+21,,PASIVOS DE INTERMEDIACIÓN,4
+211,,DEPÓSITOS,4
+2110,,DEPÓSITOS A LA VISTA,4
+211001,,DEPÓSITOS EN CUENTA CORRIENTE,4
+2110010101,,Banco Central de Reserva - ML,4
+2110010102,,Banco Central de Reserva - ME,4
+2110010201,,Entidades del Estado - ML,4
+2110010202,,Entidades del Estado - ME,4
+2110010301,,Empresas privadas - ML,4
+2110010302,,Empresas privadas - ME,4
+2110010401,,Particulares - ML,4
+2110010402,,Particulares - ME,4
+2110010501,,Bancos - ML,4
+2110010502,,Bancos - ME,4
+2110010601,,Otras entidades del Sistema Financiero - ML,4
+2110010602,,Otras entidades del Sistema Financiero - ME,4
+2110010701,,Depósitos por aplicar - ML,4
+2110010702,,Depósitos por aplicar - ME,4
+2110010801,,Retiros por aplicar - ML,4
+2110010802,,Retiros por aplicar - ME,4
+2110019901,,Intereses y otros por pagar - ML,4
+2110019902,,Intereses y otros por pagar - ME,4
+211002,,DEPÓSITOS DE AHORRO,4
+2110020101,,Banco Central de Reserva - ML,4
+2110020102,,Banco Central de Reserva - ME,4
+2110020201,,Entidades del Estado - ML,4
+2110020202,,Entidades del Estado - ME,4
+2110020301,,Empresas privadas - ML,4
+2110020302,,Empresas privadas - ME,4
+2110020401,,Particulares - ML,4
+2110020402,,Particulares - ME,4
+2110020501,,Bancos - ML,4
+2110020502,,Bancos - ME,4
+2110020601,,Otras entidades del Sistema Financiero - ML,4
+2110020602,,Otras entidades del Sistema Financiero - ME,4
+2110020701,,Depósitos por aplicar - ML,4
+2110020702,,Depósitos por aplicar - ME,4
+2110020801,,Retiros por aplicar - ML,4
+2110020802,,Retiros por aplicar - ME,4
+2110029901,,Intereses y otros por pagar - ML,4
+2110029902,,Intereses y otros por pagar - ME,4
+2111,,DEPÓSITOS PACTADOS HASTA UN AÑO PLAZO,4
+211101,,TÍTULOS DE AHORRO PACTADOS A MENOS DE TREINTA DÍAS PLAZO,4
+2111010101,,Banco Central de Reserva - ML,4
+2111010102,,Banco Central de Reserva - ME,4
+2111010201,,Entidades del Estado - ML,4
+2111010202,,Entidades del Estado - ME,4
+2111010301,,Empresas privadas - ML,4
+2111010302,,Empresas privadas - ME,4
+2111010401,,Particulares - ML,4
+2111010402,,Particulares - ME,4
+2111010501,,Bancos - ML,4
+2111010502,,Bancos - ME,4
+2111010601,,Otras entidades del Sistema Financiero - ML,4
+2111010602,,Otras entidades del Sistema Financiero - ME,4
+2111010701,,Depósitos por aplicar - ML,4
+2111010702,,Depósitos por aplicar - ME,4
+2111010801,,Retiros por aplicar - ML,4
+2111010802,,Retiros por aplicar - ME,4
+2111019901,,Intereses y otros por pagar - ML,4
+2111019902,,Intereses y otros por pagar - ME,4
+211102,,DEPÓSITOS A 30 DÍAS PLAZO,4
+2111020101,,Banco Central de Reserva - ML,4
+2111020102,,Banco Central de Reserva - ME,4
+2111020201,,Entidades del Estado - ML,4
+2111020202,,Entidades del Estado - ME,4
+2111020301,,Empresas privadas - ML,4
+2111020302,,Empresas privadas - ME,4
+2111020401,,Particulares - ML,4
+2111020402,,Particulares - ME,4
+2111020501,,Bancos - ML,4
+2111020502,,Bancos - ME,4
+2111020601,,Otras entidades del Sistema Financiero - ML,4
+2111020602,,Otras entidades del Sistema Financiero - ME,4
+2111020701,,Depósitos por aplicar - ML,4
+2111020702,,Depósitos por aplicar - ME,4
+2111020801,,Retiros por aplicar - ML,4
+2111020802,,Retiros por aplicar - ME,4
+2111029901,,Intereses y otros por pagar - ML,4
+2111029902,,Intereses y otros por pagar - ME,4
+211103,,DEPÓSITOS A 60 DÍAS PLAZO,4
+2111030101,,Banco Central de Reserva - ML,4
+2111030102,,Banco Central de Reserva - ME,4
+2111030201,,Entidades del Estado - ML,4
+2111030202,,Entidades del Estado - ME,4
+2111030301,,Empresas privadas - ML,4
+2111030302,,Empresas privadas - ME,4
+2111030401,,Particulares - ML,4
+2111030402,,Particulares - ME,4
+2111030501,,Bancos - ML,4
+2111030502,,Bancos - ME,4
+2111030601,,Otras entidades del Sistema Financiero - ML,4
+2111030602,,Otras entidades del Sistema Financiero - ME,4
+2111030701,,Depósitos por aplicar - ML,4
+2111030702,,Depósitos por aplicar - ME,4
+2111030801,,Retiros por aplicar - ML,4
+2111030802,,Retiros por aplicar - ME,4
+2111039901,,Intereses y otros por pagar - ML,4
+2111039902,,Intereses y otros por pagar - ME,4
+211104,,DEPÓSITOS A 90 DÍAS PLAZO,4
+2111040101,,Banco Central de Reserva - ML,4
+2111040102,,Banco Central de Reserva - ME,4
+2111040201,,Entidades del Estado - ML,4
+2111040202,,Entidades del Estado - ME,4
+2111040301,,Empresas privadas - ML,4
+2111040302,,Empresas privadas - ME,4
+2111040401,,Particulares - ML,4
+2111040402,,Particulares - ME,4
+2111040501,,Bancos - ML,4
+2111040502,,Bancos - ME,4
+2111040601,,Otras entidades del Sistema Financiero - ML,4
+2111040602,,Otras entidades del Sistema Financiero - ME,4
+2111040701,,Depósitos por aplicar - ML,4
+2111040702,,Depósitos por aplicar - ME,4
+2111040801,,Retiros por aplicar - ML,4
+2111040802,,Retiros por aplicar - ME,4
+2111049901,,Intereses y otros por pagar - ML,4
+2111049902,,Intereses y otros por pagar - ME,4
+211105,,DEPÓSITOS A 120 DÍAS PLAZO,4
+2111050101,,Banco Central de Reserva - ML,4
+2111050102,,Banco Central de Reserva - ME,4
+2111050201,,Entidades del Estado - ML,4
+2111050202,,Entidades del Estado - ME,4
+2111050301,,Empresas privadas - ML,4
+2111050302,,Empresas privadas - ME,4
+2111050401,,Particulares - ML,4
+2111050402,,Particulares - ME,4
+2111050501,,Bancos - ML,4
+2111050502,,Bancos - ME,4
+2111050601,,Otras entidades del Sistema Financiero - ML,4
+2111050602,,Otras entidades del Sistema Financiero - ME,4
+2111050701,,Depósitos por aplicar - ML,4
+2111050702,,Depósitos por aplicar - ME,4
+2111050801,,Retiros por aplicar - ML,4
+2111050802,,Retiros por aplicar - ME,4
+2111059901,,Intereses y otros por pagar - ML,4
+2111059902,,Intereses y otros por pagar - ME,4
+211106,,DEPÓSITOS A 150 DÍAS PLAZO,4
+2111060101,,Banco Central de Reserva - ML,4
+2111060102,,Banco Central de Reserva - ME,4
+2111060201,,Entidades del Estado - ML,4
+2111060202,,Entidades del Estado - ME,4
+2111060301,,Empresas privadas - ML,4
+2111060302,,Empresas privadas - ME,4
+2111060401,,Particulares - ML,4
+2111060402,,Particulares - ME,4
+2111060501,,Bancos - ML,4
+2111060502,,Bancos - ME,4
+2111060601,,Otras entidades del Sistema Financiero - ML,4
+2111060602,,Otras entidades del Sistema Financiero - ME,4
+2111060701,,Depósitos por aplicar - ML,4
+2111060702,,Depósitos por aplicar - ME,4
+2111060801,,Retiros por aplicar - ML,4
+2111060802,,Retiros por aplicar - ME,4
+2111069901,,Intereses y otros por pagar - ML,4
+2111069902,,Intereses y otros por pagar - ME,4
+211107,,DEPÓSITOS A 180 DÍAS PLAZO,4
+2111070101,,Banco Central de Reserva - ML,4
+2111070102,,Banco Central de Reserva - ME,4
+2111070201,,Entidades del Estado - ML,4
+2111070202,,Entidades del Estado - ME,4
+2111070301,,Empresas privadas - ML,4
+2111070302,,Empresas privadas - ME,4
+2111070401,,Particulares - ML,4
+2111070402,,Particulares - ME,4
+2111070501,,Bancos - ML,4
+2111070502,,Bancos - ME,4
+2111070601,,Otras entidades del Sistema Financiero - ML,4
+2111070602,,Otras entidades del Sistema Financiero - ME,4
+2111070701,,Depósitos por aplicar - ML,4
+2111070702,,Depósitos por aplicar - ME,4
+2111070801,,Retiros por aplicar - ML,4
+2111070802,,Retiros por aplicar - ME,4
+2111079901,,Intereses y otros por pagar - ML,4
+2111079902,,Intereses y otros por pagar - ME,4
+211108,,DEPÓSITOS PACTADOS A MAS DE 180 DÍAS PLAZO (2),4
+2111080101,,Banco Central de Reserva - ML,4
+2111080102,,Banco Central de Reserva - ME,4
+2111080201,,Entidades del Estado - ML,4
+2111080202,,Entidades del Estado - ME,4
+2111080301,,Empresas privadas - ML,4
+2111080302,,Empresas privadas - ME,4
+2111080401,,Particulares - ML,4
+2111080402,,Particulares - ME,4
+2111080501,,Bancos - ML,4
+2111080502,,Bancos - ME,4
+2111080601,,Otras entidades del Sistema Financiero - ML,4
+2111080602,,Otras entidades del Sistema Financiero - ME,4
+2111080701,,Depósitos por aplicar - ML,4
+2111080702,,Depósitos por aplicar - ME,4
+2111080801,,Retiros por aplicar - ML,4
+2111080802,,Retiros por aplicar - ME,4
+2111089901,,Intereses y otros por pagar - ML,4
+2111089902,,Intereses y otros por pagar - ME,4
+211113,,DEPÓSITOS A 360 DÍAS PLAZO,4
+2111130101,,Banco Central de Reserva - ML,4
+2111130102,,Banco Central de Reserva - ME,4
+2111130201,,Entidades del Estado - ML,4
+2111130202,,Entidades del Estado - ME,4
+2111130301,,Empresas privadas - ML,4
+2111130302,,Empresas privadas - ME,4
+2111130401,,Particulares - ML,4
+2111130402,,Particulares - ME,4
+2111130501,,Bancos - ML,4
+2111130502,,Bancos - ME,4
+2111130601,,Otras entidades del Sistema Financiero - ML,4
+2111130602,,Otras entidades del Sistema Financiero - ME,4
+2111130701,,Depósitos por aplicar - ML,4
+2111130702,,Depósitos por aplicar - ME,4
+2111130801,,Retiros por aplicar - ML,4
+2111130802,,Retiros por aplicar - ME,4
+2111139901,,Intereses y otros por pagar - ML,4
+2111139902,,Intereses y otros por pagar - ME,4
+211114,,DEPÓSITOS DE AHORRO PROGRAMADO,4
+2111140101,,Banco Central de Reserva - ML,4
+2111140102,,Banco Central de Reserva - ME,4
+2111140201,,Entidades del Estado - ML,4
+2111140202,,Entidades del Estado - ME,4
+2111140301,,Empresas privadas - ML,4
+2111140302,,Empresas privadas - ME,4
+2111140401,,Particulares - ML,4
+2111140402,,Particulares - ME,4
+2111140501,,Bancos - ML,4
+2111140502,,Bancos - ME,4
+2111140601,,Otras entidades del Sistema Financiero - ML,4
+2111140602,,Otras entidades del Sistema Financiero - ME,4
+2111140701,,Depósitos por aplicar - ML,4
+2111140702,,Depósitos por aplicar - ME,4
+2111140801,,Retiros por aplicar - ML,4
+2111140802,,Retiros por aplicar - ME,4
+2111149901,,Intereses y otros por pagar - ML,4
+2111149902,,Intereses y otros por pagar - ME,4
+211199,,DEPÓSITOS EN GARANTÍA DE CARTAS DE CRÉDITO,4
+2111990101,,Banco Central de Reserva - ML,4
+2111990102,,Banco Central de Reserva - ME,4
+2111990201,,Entidades del Estado - ML,4
+2111990202,,Entidades del Estado - ME,4
+2111990301,,Empresas privadas - ML,4
+2111990302,,Empresas privadas - ME,4
+2111990401,,Particulares - ML,4
+2111990402,,Particulares - ME,4
+2111990501,,Bancos - ML,4
+2111990502,,Bancos - ME,4
+2111990601,,Otras entidades del Sistema Financiero - ML,4
+2111990602,,Otras entidades del Sistema Financiero - ME,4
+2111990701,,Depósitos por aplicar - ML,4
+2111990702,,Depósitos por aplicar - ME,4
+2111990801,,Retiros por aplicar - ML,4
+2111990802,,Retiros por aplicar - ME,4
+2111999901,,Intereses y otros por pagar - ML,4
+2111999902,,Intereses y otros por pagar - ME,4
+2112,,DEPÓSITOS PACTADOS A MÁS DE UN AÑO PLAZO,4
+211201,,DEPÓSITOS A PLAZO,4
+2112010101,,Banco Central de Reserva - ML,4
+2112010102,,Banco Central de Reserva - ME,4
+2112010201,,Entidades del Estado - ML,4
+2112010202,,Entidades del Estado - ME,4
+2112010301,,Empresas privadas - ML,4
+2112010302,,Empresas privadas - ME,4
+2112010401,,Particulares - ML,4
+2112010402,,Particulares - ME,4
+2112010501,,Bancos - ML,4
+2112010502,,Bancos - ME,4
+2112010601,,Otras entidades del Sistema Financiero - ML,4
+2112010602,,Otras entidades del Sistema Financiero - ME,4
+2112010701,,Depósitos por aplicar - ML,4
+2112010702,,Depósitos por aplicar - ME,4
+2112010801,,Retiros por aplicar - ML,4
+2112010802,,Retiros por aplicar - ME,4
+2112019901,,Intereses y otros por pagar - ML,4
+2112019902,,Intereses y otros por pagar - ME,4
+211202,,DEPÓSITOS A PLAZO CON ENCAJE ESPECIAL,4
+2112020101,,Banco Central de Reserva - ML,4
+2112020102,,Banco Central de Reserva - ME,4
+2112020201,,Entidades del Estado - ML,4
+2112020202,,Entidades del Estado - ME,4
+2112020301,,Empresas privadas - ML,4
+2112020302,,Empresas privadas - ME,4
+2112020401,,Particulares - ML,4
+2112020402,,Particulares - ME,4
+2112020501,,Bancos - ML,4
+2112020502,,Bancos - ME,4
+2112020601,,Otras entidades del Sistema Financiero - ML,4
+2112020602,,Otras entidades del Sistema Financiero - ME,4
+2112020701,,Depósitos por aplicar - ML,4
+2112020702,,Depósitos por aplicar - ME,4
+2112020801,,Retiros por aplicar - ML,4
+2112020802,,Retiros por aplicar - ME,4
+2112029901,,Intereses y otros por pagar - ML,4
+2112029902,,Intereses y otros por pagar - ME,4
+211203,,DEPÓSITOS EN GARANTÍA DE CARTAS DE CRÉDITO,4
+2112030101,,Banco Central de Reserva - ML,4
+2112030102,,Banco Central de Reserva - ME,4
+2112030201,,Entidades del Estado - ML,4
+2112030202,,Entidades del Estado - ME,4
+2112030301,,Empresas privadas - ML,4
+2112030302,,Empresas privadas - ME,4
+2112030401,,Particulares - ML,4
+2112030402,,Particulares - ME,4
+2112030501,,Bancos - ML,4
+2112030502,,Bancos - ME,4
+2112030601,,Otras entidades del Sistema Financiero - ML,4
+2112030602,,Otras entidades del Sistema Financiero - ME,4
+2112030701,,Depósitos por aplicar - ML,4
+2112030702,,Depósitos por aplicar - ME,4
+2112030801,,Retiros por aplicar - ML,4
+2112030802,,Retiros por aplicar - ME,4
+2112039901,,Intereses y otros por pagar - ML,4
+2112039902,,Intereses y otros por pagar - ME,4
+211204,,DEPÓSITOS DE AHORRO PROGRAMADO,4
+2112040101,,Banco Central de Reserva - ML,4
+2112040102,,Banco Central de Reserva - ME,4
+2112040201,,Entidades del Estado - ML,4
+2112040202,,Entidades del Estado - ME,4
+2112040301,,Empresas privadas - ML,4
+2112040302,,Empresas privadas - ME,4
+2112040401,,Particulares - ML,4
+2112040402,,Particulares - ME,4
+2112040501,,Bancos - ML,4
+2112040502,,Bancos - ME,4
+2112040601,,Otras entidades del Sistema Financiero - ML,4
+2112040602,,Otras entidades del Sistema Financiero - ME,4
+2112040701,,Depósitos por aplicar - ML,4
+2112040702,,Depósitos por aplicar - ME,4
+2112040801,,Retiros por aplicar - ML,4
+2112040802,,Retiros por aplicar - ME,4
+2112049901,,Intereses y otros por pagar - ML,4
+2112049902,,Intereses y otros por pagar - ME,4
+2114,,DEPÓSITOS RESTRINGIDOS E INACTIVOS,4
+211401,,DEPÓSITOS EN GARANTÍA - CUENTA DE AHORRO,4
+2114010101,,Banco Central de Reserva - ML,4
+2114010102,,Banco Central de Reserva - ME,4
+2114010201,,Entidades del Estado - ML,4
+2114010202,,Entidades del Estado - ME,4
+2114010301,,Empresas privadas - ML,4
+2114010302,,Empresas privadas - ME,4
+2114010401,,Particulares - ML,4
+2114010402,,Particulares - ME,4
+2114010501,,Bancos - ML,4
+2114010502,,Bancos- ME,4
+2114010601,,Otras entidades del Sistema Financiero- ML,4
+2114010602,,Otras entidades del Sistema Financiero- ME,4
+2114019901,,Intereses y otros por pagar - ML,4
+2114019902,,Intereses y otros por pagar - ME,4
+211402,,DEPÓSITOS EN GARANTÍA - A PLAZO,4
+2114020101,,Banco Central de Reserva - ML,4
+2114020102,,Banco Central de Reserva - ME,4
+2114020201,,Entidades del Estado - ML,4
+2114020202,,Entidades del Estado - ME,4
+2114020301,,Empresas privadas - ML,4
+2114020302,,Empresas privadas - ME,4
+2114020401,,Particulares - ML,4
+2114020402,,Particulares - ME,4
+2114020501,,Bancos - ML,4
+2114020502,,Bancos- ME,4
+2114020601,,Otras entidades del Sistema Financiero- ML,4
+2114020602,,Otras entidades del Sistema Financiero- ME,4
+2114029901,,Intereses y otros por pagar - ML,4
+2114029902,,Intereses y otros por pagar - ME,4
+211403,,DEPÓSITOS EMBARGADOS - CUENTA CORRIENTE,4
+2114030101,,Banco Central de Reserva - ML,4
+2114030102,,Banco Central de Reserva - ME,4
+2114030201,,Entidades del Estado - ML,4
+2114030202,,Entidades del Estado - ME,4
+2114030301,,Empresas privadas - ML,4
+2114030302,,Empresas privadas - ME,4
+2114030401,,Particulares - ML,4
+2114030402,,Particulares - ME,4
+2114030501,,Bancos - ML,4
+2114030502,,Bancos- ME,4
+2114030601,,Otras entidades del Sistema Financiero- ML,4
+2114030602,,Otras entidades del Sistema Financiero- ME,4
+2114039901,,Intereses y otros por pagar - ML,4
+2114039902,,Intereses y otros por pagar - ME,4
+211404,,DEPÓSITOS EMBARGADOS - CUENTA DE AHORRO,4
+2114040101,,Banco Central de Reserva - ML,4
+2114040102,,Banco Central de Reserva - ME,4
+2114040201,,Entidades del Estado - ML,4
+2114040202,,Entidades del Estado - ME,4
+2114040301,,Empresas privadas - ML,4
+2114040302,,Empresas privadas - ME,4
+2114040401,,Particulares - ML,4
+2114040402,,Particulares - ME,4
+2114040501,,Bancos - ML,4
+2114040502,,Bancos- ME,4
+2114040601,,Otras entidades del Sistema Financiero- ML,4
+2114040602,,Otras entidades del Sistema Financiero- ME,4
+2114049901,,Intereses y otros por pagar - ML,4
+2114049902,,Intereses y otros por pagar - ME,4
+211405,,DEPÓSITOS EMBARGADOS - DEPÓSITOS A PLAZO,4
+2114050101,,Banco Central de Reserva - ML,4
+2114050102,,Banco Central de Reserva - ME,4
+2114050201,,Entidades del Estado - ML,4
+2114050202,,Entidades del Estado - ME,4
+2114050301,,Empresas privadas - ML,4
+2114050302,,Empresas privadas - ME,4
+2114050401,,Particulares - ML,4
+2114050402,,Particulares - ME,4
+2114050501,,Bancos - ML,4
+2114050502,,Bancos- ME,4
+2114050601,,Otras entidades del Sistema Financiero- ML,4
+2114050602,,Otras entidades del Sistema Financiero- ME,4
+2114059901,,Intereses y otros por pagar - ML,4
+2114059902,,Intereses y otros por pagar - ME,4
+211406,,DEPÓSITOS INACTIVOS - CUENTAS CORRIENTES,4
+2114060101,,Banco Central de Reserva - ML,4
+2114060102,,Banco Central de Reserva - ME,4
+2114060201,,Entidades del Estado - ML,4
+2114060202,,Entidades del Estado - ME,4
+2114060301,,Empresas privadas - ML,4
+2114060302,,Empresas privadas - ME,4
+2114060401,,Particulares - ML,4
+2114060402,,Particulares - ME,4
+2114060501,,Bancos - ML,4
+2114060502,,Bancos- ME,4
+2114060601,,Otras entidades del Sistema Financiero- ML,4
+2114060602,,Otras entidades del Sistema Financiero- ME,4
+2114069901,,Intereses y otros por pagar - ML,4
+2114069902,,Intereses y otros por pagar - ME,4
+211407,,DEPÓSITOS INACTIVOS - AHORROS,4
+2114070101,,Banco Central de Reserva - ML,4
+2114070102,,Banco Central de Reserva - ME,4
+2114070201,,Entidades del Estado - ML,4
+2114070202,,Entidades del Estado - ME,4
+2114070301,,Empresas privadas - ML,4
+2114070302,,Empresas privadas - ME,4
+2114070401,,Particulares - ML,4
+2114070402,,Particulares - ME,4
+2114070501,,Bancos - ML,4
+2114070502,,Bancos- ME,4
+2114070601,,Otras entidades del Sistema Financiero- ML,4
+2114070602,,Otras entidades del Sistema Financiero- ME,4
+2114079901,,Intereses y otros por pagar - ML,4
+2114079902,,Intereses y otros por pagar - ME,4
+212,,PRÉSTAMOS,4
+2121,,PRÉSTAMOS PACTADOS HASTA UN AÑO PLAZO,4
+212101,,ADEUDADO AL BCR,4
+2121010101,,Créditos de liquidez automáticos - ML,4
+2121010102,,Créditos de liquidez automáticos - ME,4
+2121010201,,Créditos para cubrir deterioros de liquidez - ML,4
+2121010202,,Créditos para cubrir deterioros de liquidez -ME,4
+2121019901,,Intereses y otros por pagar - ML,4
+2121019902,,Intereses y otros por pagar - ME,4
+212102,,ADEUDADO A ENTIDADES DEL ESTADO,4
+2121020101,,Para prestar a terceros - ML,4
+2121020102,,Para prestar a terceros - ME,4
+2121029901,,Intereses y otros por pagar - ML,4
+2121029902,,Intereses y otros por pagar - ME,4
+212103,,ADEUDADO AL INSTITUTO DE GARANTÍA DE DEPÓSITOS,4
+2121030101,,Préstamos convertibles en acciones,4
+2121030201,,Préstamos para cubrir situaciones de insolvencia,4
+212105,,ADEUDADO A BANCOS,4
+2121050101,,Para cubrir déficit de caja - ML,4
+2121050102,,Para cubrir déficit de caja - ME,4
+2121059901,,Intereses y otros por pagar - ML,4
+2121059902,,Intereses y otros por pagar - ME,4
+212106,,ADEUDADO A OTRAS ENTIDADES DEL SISTEMA FINANCIERO,4
+2121060101,,Para cubrir déficit de caja - ML,4
+2121060102,,Para cubrir déficit de caja - ME,4
+2121060201,,Para prestar a terceros - ML,4
+2121060202,,Para prestar a terceros - ME,4
+2121060301,,Para capitalización o para reestructuración - ML,4
+2121060302,,Para capitalización o para reestructuración -ME,4
+2121069901,,Intereses y otros por pagar - ML,4
+2121069902,,Intereses y otros por pagar - ME,4
+212107,,ADEUDADO AL BMI PARA PRESTAR A TERCEROS,4
+2121070101,,Para prestar a terceros - ML,4
+2121070102,,Para prestar a terceros - ME,4
+2121079901,,Intereses y otros por pagar - ML,4
+2121079902,,Intereses y otros por pagar - ME,4
+212108,,ADEUDADO A ENTIDADES EXTRANJERAS,4
+2121080101,,Adeudado a bancos extranjeros por cartas de crédito - ML,4
+2121080102,,Adeudado a bancos extranjeros por cartas de crédito - ME,4
+2121080201,,Adeudado a bancos extranjeros por líneas de crédito - ML,4
+2121080202,,Adeudado a bancos extranjeros por líneas de crédito - ME,4
+2121080301,,Adeudado a bancos extranjeros - otros - ML,4
+2121080302,,Adeudado a bancos extranjeros - otros - ME,4
+2121080401,,Adeudado a organismos multilaterales - ML,4
+2121080402,,Adeudado a organismos multilaterales - ME,4
+2121089901,,Intereses y otros por pagar - ML,4
+2121089902,,Intereses y otros por pagar - ME,4
+212109,,OTROS PRÉSTAMOS (1),4
+2121090101,,Para prestar a terceros - ML,4
+2121090102,,Para prestar a terceros - ME,4
+2121099901,,Intereses y otros por pagar - ML,4
+2121099902,,Intereses y otros por pagar - ME,4
+2122,,PRÉSTAMOS PACTADOS A MÁS DE UN AÑO PLAZO,4
+212201,,ADEUDADO AL BCR,4
+2122010101,,Créditos de liquidez automáticos - ML,4
+2122010102,,Créditos de liquidez automáticos - ME,4
+2122010201,,Créditos para cubrir deterioros de liquidez - ML,4
+2122010202,,Créditos para cubrir deterioros de liquidez -ME,4
+2122019901,,Intereses y otros por pagar - ML,4
+2122019902,,Intereses y otros por pagar - ME,4
+212202,,ADEUDADO A ENTIDADES DEL ESTADO,4
+2122020101,,Para prestar a terceros - ML,4
+2122020102,,Para prestar a terceros - ME,4
+2122029901,,Intereses y otros por pagar - ML,4
+2122029902,,Intereses y otros por pagar - ME,4
+212203,,ADEUDADO AL INSTITUTO DE GARANTÍA DE DEPÓSITOS,4
+2122030101,,Préstamos convertibles en acciones,4
+2122030201,,Préstamos para cubrir situaciones de insolvencia,4
+212206,,ADEUDADO A OTRAS ENTIDADES DEL SISTEMA FINANCIERO,4
+2122060101,,Para cubrir déficit de caja - ML,4
+2122060102,,Para cubrir déficit de caja - ME,4
+2122060201,,Para prestar a terceros - ML,4
+2122060202,,Para prestar a terceros - ME,4
+2122060301,,Para capitalización o para reestructuración - ML,4
+2122060302,,Para capitalización o para reestructuración -ME,4
+2122069901,,Intereses y otros por pagar - ML,4
+2122069902,,Intereses y otros por pagar - ME,4
+212207,,ADEUDADO AL BMI PARA PRESTAR A TERCEROS,4
+2122070101,,Para prestar a terceros - ML,4
+2122070102,,Para prestar a terceros - ME,4
+2122079901,,Intereses y otros por pagar - ML,4
+2122079902,,Intereses y otros por pagar - ME,4
+212208,,ADEUDADO A ENTIDADES EXTRANJERAS,4
+2122080101,,Adeudado a bancos extranjeros por cartas de crédito - ML,4
+2122080102,,Adeudado a bancos extranjeros por cartas de crédito - ME,4
+2122080201,,Adeudado a bancos extranjeros por líneas de crédito - ML,4
+2122080202,,Adeudado a bancos extranjeros por líneas de crédito - ME,4
+2122080301,,Adeudado a bancos extranjeros - otros - ML,4
+2122080302,,Adeudado a bancos extranjeros - otros - ME,4
+2122080401,,Adeudado a organismos multilaterales - ML,4
+2122080402,,Adeudado a organismos multilaterales - ME,4
+2122089901,,Intereses y otros por pagar - ML,4
+2122089902,,Intereses y otros por pagar - ME,4
+212209,,OTROS PRÉSTAMOS (1),4
+2122090101,,Para prestar a terceros - ML,4
+2122090102,,Para prestar a terceros - ME,4
+2122099901,,Intereses y otros por pagar - ML,4
+2122099902,,Intereses y otros por pagar - ME,4
+2123,,PRÉSTAMOS PACTADOS A CINCO O MAS AÑOS PLAZO,4
+212308,,ADEUDADO A ENTIDADES EXTRANJERAS,4
+2123080101,,Adeudado a bancos extranjeros por cartas de crédito - ML,4
+2123080102,,Adeudado a bancos extranjeros por cartas de crédito - ME,4
+2123080201,,Adeudado a bancos extranjeros por líneas de crédito - ML,4
+2123080202,,Adeudado a bancos extranjeros por líneas de crédito - ME,4
+2123080301,,Adeudado a bancos extranjeros - otros - ML,4
+2123080302,,Adeudado a bancos extranjeros - otros - ME,4
+2123080401,,Adeudado a organismos multilaterales - ML,4
+2123080402,,Adeudado a organismos multilaterales - ME,4
+2123089901,,Intereses y otros por pagar - ML,4
+2123089902,,Intereses y otros por pagar - ME,4
+212309,,OTROS PRÉSTAMOS  (1),4
+2123090101,,Para prestar a terceros - ML,4
+2123090102,,Para prestar a terceros - ME,4
+2123099901,,Intereses y otros por pagar - ML,4
+2123099902,,Intereses y otros por pagar - ME,4
+213,,OBLIGACIONES A LA VISTA,4
+2130,,OBLIGACIONES A LA VISTA,4
+213001,,CHEQUES PROPIOS,4
+2130010101,,Cheques de caja o gerencia - ML,4
+2130010102,,Cheques de caja o gerencia - ME,4
+2130010201,,Cheques certificados - ML,4
+2130010202,,Cheques certificados - ME,4
+213002,,OBLIGACIONES POR TARJETAS DE CRÉDITO,4
+2130020001,,Obligaciones por tarjetas de crédito - ML,4
+2130020002,,Obligaciones por tarjetas de crédito - ME,4
+213003,,COBROS POR CUENTA AJENA,4
+2130030101,,Cobranzas locales - ML,4
+2130030202,,Cobranzas del exterior - ME,4
+2130030301,,Impuestos y servicios públicos - ML,4
+213004,,CORRESPONSALÍAS,4
+2130040101,,Fondos fijos - ML,4
+2130040201,,Cheques de viajero - ML,4
+2130040202,,Cheques de viajero - ME,4
+213005,,TRANSFERENCIAS DE FONDOS,4
+2130050101,,Transferencias locales - ML,4
+2130050102,,Transferencias locales - ME,4
+2130050201,,Giros emitidos por pagar - ML,4
+2130050202,,Giros emitidos por pagar - ME,4
+2130050301,,Giros recibidos por pagar - ML,4
+2130050302,,Giros recibidos por pagar - ME,4
+214,,TÍTULOS DE EMISIÓN PROPIA,4
+2141,,TÍTULOS DE EMISIÓN PROPIA PACTADOS HASTA UN AÑO PLAZO.,4
+214100,,TÍTULOS DE EMISIÓN PROPIA PACTADOS HASTA UN AÑO PLAZO,4
+2141000101,,Títulosvalores con garantía hipotecaria - ML,4
+2141000102,,Títulosvalores con garantía hipotecaria -ME,4
+2141000201,,Títulosvalores sin garantía hipotecaria - ML,4
+2141000202,,Titulosvalores sin garantía hipotecaria -ME,4
+2141009901,,Intereses y otros por pagar - ML,4
+2141009902,,Intereses y otros por pagar - ME,4
+2142,,PACTADOS A MÁS DE UN AÑO PLAZO,4
+214201,,PACTADOS A MENOS DE CINCO AÑOS PLAZO,4
+2142010101,,Títulosvalores con garantía hipotecaria - ML,4
+2142010102,,Títulosvalores con garantía hipotecaria -ME,4
+2142010201,,Títulosvalores sin garantía hipotecaria - ML,4
+2142010202,,Titulosvalores sin garantía hipotecaria -ME,4
+2142019901,,Intereses y otros por pagar - ML,4
+2142019902,,Intereses y otros por pagar - ME,4
+214202,,PACTADOS A CINCO O MAS AÑOS PLAZO,4
+2142020101,,Títulosvalores con garantía hipotecaria - ML,4
+2142020102,,Títulosvalores con garantía hipotecaria -ME,4
+2142020201,,Títulosvalores sin garantía hipotecaria - ML,4
+2142020202,,Titulosvalores sin garantía hipotecaria -ME,4
+2142029901,,Intereses y otros por pagar - ML,4
+2142029902,,Intereses y otros por pagar - ME,4
+215,,DOCUMENTOS TRANSADOS,4
+2151,,DOCUMENTOS TRANSADOS HASTA UN AÑO PLAZO,4
+215101,,OPERACIONES DE REPORTO CON EL BANCO CENTRAL DE RESERVA,4
+2151010001,,Operaciones de reporto con el Banco Central de Reserva - ML,4
+2151010002,,Operaciones de reporto con el Banco Central de Reserva - ME,4
+2151019901,,"Comisiones, premios o primas - ML",4
+2151019902,,"Comisiones, premios o primas - ME",4
+215102,,OPERACIONES DE REPORTO CON ENTIDADES DEL ESTADO,4
+2151020001,,Operaciones de reporto con entidades del Estado - ML,4
+2151020002,,Operaciones de reporto con entidades del Estado - ME,4
+2151029901,,"Comisiones, premios o primas - ML",4
+2151029902,,"Comisiones, premios o primas - ME",4
+215103,,OPERACIONES DE REPORTO CON EMPRESAS PRIVADAS,4
+2151030001,,Operaciones de reporto con empresas privadas - ML,4
+2151030002,,Operaciones de reporto con empresas privadas - ME,4
+2151039901,,"Comisiones, premios o primas - ML",4
+2151039902,,"Comisiones, premios o primas - ME",4
+215104,,OPERACIONES DE REPORTO CON PARTICULARES,4
+2151040001,,Operaciones de reporto con particulares - ML,4
+2151040002,,Operaciones de reporto con particulares - ME,4
+2151049901,,"Comisiones, premios o primas - ML",4
+2151049902,,"Comisiones, premios o primas - ME",4
+215105,,OPERACIONES DE REPORTO CON BANCOS,4
+2151050001,,Operaciones de reporto con bancos y financieras - ML,4
+2151050002,,Operaciones de reporto con bancos y financieras - ME,4
+2151059901,,"Comisiones, premios o primas - ML",4
+2151059902,,"Comisiones, premios o primas - ME",4
+215106,,OPERACIONES DE REPORTO CON OTRAS ENTIDADES DEL SISTEMA FINANCIERO,4
+2151060001,,Operaciones de reporto con otras entidades del Sistema Financiero - ML,4
+2151060002,,Operaciones de reporto con otras entidades del Sistema Financiero - ME,4
+2151069901,,"Comisiones, premios o primas - ML",4
+2151069902,,"Comisiones, premios o primas - ME",4
+215107,,OPERACIONES BURSÁTILES,4
+2151070001,,Operaciones bursátiles - ML,4
+2151070002,,Operaciones bursátiles - ME,4
+2151079901,,"Comisiones, premios o primas - ML",4
+2151079902,,"Comisiones, premios o primas - ME",4
+216,,CHEQUES Y OTROS VALORES POR APLICAR,4
+2160,,CHEQUES Y OTROS VALORES POR APLICAR,4
+216001,,CAMARA DE COMPENSACIÓN,4
+2160010000,,Camara de Compensación,4
+216002,,DOCUMENTOS REMESADOS A BANCOS EXTRANJEROS,4
+2160020000,,Documentos Remesados a Bancos Extranjeros,4
+22,,OTROS PASIVOS,4
+221,,SALDOS ENTRE COMPAÑÍAS,4
+2210,,SALDOS ENTRE COMPAÑIAS,4
+221000,,SALDOS ENTRE COMPAÑIAS,4
+2210000101,,Saldos con agencias nacionales - ML,4
+2210000102,,Saldos con agencias nacionales - ME,4
+2210000201,,Saldos con agencias extranjeras - ML (1),4
+2210000202,,Saldos con agencias extranjeras - ME,4
+2210000301,,Saldos con sucursales nacionales - ML,4
+2210000302,,Saldos con sucursales nacionales - ME,4
+2210000401,,Saldos con sucursales extranjeras - ML (1),4
+2210000402,,Saldos con sucursales extranjeras - ME,4
+2210000501,,Saldos con subsidiarias nacionales - ML,4
+2210000502,,Saldos con subsidiarias nacionales - ME,4
+2210000601,,Saldos con subsidiarias extranjeras - ML (1),4
+2210000602,,Saldos con subsidiarias extranjeras - ME,4
+2210000701,,Saldos con bancos extranjeros - ML (1),4
+2210000702,,Saldos con bancos extranjeros - ME,4
+2210000801,,Préstamos de la matriz - ML (1),4
+2210000802,,Préstamos de la matriz - ME (1),4
+222,,CUENTAS POR PAGAR,4
+2220,,CUENTAS POR PAGAR,4
+222001,,CHEQUES DE CAJA PARA PROVEEDORES,4
+2220010101,,Cheques de caja para proveedores - ML,4
+2220010102,,Cheques de caja para proveedores - ME,4
+222002,,DIVIDENDOS Y PARTICIPACIONES,4
+2220020101,,Dividendos,4
+2220020201,,Participación de utilidades al personal,4
+222003,,IMPUESTOS SERVICIOS PÚBLICOS Y OTRAS OBLIGACIONES,4
+2220030101,,Impuestos,4
+2220030201,,Servicios públicos,4
+2220030301,,Cuota patronal ISSS,4
+2220030401,,Proveedores,4
+2220030501,,Otros acreedores - ML,4
+2220030502,,Otros acreedores - ME,4
+222004,,IMPUESTO SOBRE LA RENTA,4
+2220040001,,Impuesto sobre la renta,4
+222005,,PASIVOS TRANSITORIOS,4
+2220050101,,Derechos registrales,4
+2220050201,,Cobros por cuenta ajena - ML,4
+2220050202,,Cobros por cuenta ajena - ME,4
+222099,,OTRAS,4
+2220990101,,Sobrantes de caja - ML,4
+2220990102,,Sobrantes de caja - ME,4
+2220990201,,Débito fiscal,4
+2220999101,,Otras,4
+223,,RETENCIONES,4
+2230,,RETENCIONES,4
+223000,,RETENCIONES,4
+2230000100,,Impuesto sobre la renta,4
+2230000200,,ISSS,4
+2230000300,,AFP'S,4
+2230000400,,Bancos y financieras,4
+2230000500,,Otras retenciones,4
+224,,PROVISIONES,4
+2240,,PROVISIONES,4
+224001,,PROVISIONES LABORALES,4
+2240010101,,Salarios,4
+2240010201,,Vacaciones,4
+2240010301,,Gratificaciones,4
+2240010401,,Aguinaldos,4
+2240010501,,Indemnizaciones,4
+2240010601,,Retiro voluntario,4
+2240010701,,Pensiones y jubilaciones,4
+224002,,PROVISIONES POR CONTINGENCIAS,4
+2240020101,,Contingencia por litigios judiciales - ML,4
+2240020102,,Contingencia por litigios judiciales - ME,4
+2240020201,,Otras contingencias - ML,4
+2240020202,,Otras contingencias - ME,4
+224003,,PROVISIONES,4
+2240039901,,Diversas - ML,4
+2240039902,,Diversas - ME,4
+225,,CRÉDITOS DIFERIDOS,4
+2250,,CRÉDITOS DIFERIDOS,4
+225001,,INTERESES,4
+2250010001,,Intereses,4
+225002,,DIFERENCIAS DE PRECIOS EN OPERACIONES CON TÍTULOS VALORES,4
+2250020001,,Diferencias de precios en operaciones con títulos valores,4
+225003,,ANTICIPOS PARA RESERVACIÓN DE VIVIENDA,4
+2250030001,,Anticipos para reservación de vivienda,4
+225004,,"INGRESOS, PERCIBIDOS NO DEVENGADOS",4
+2250040100,,Operaciones de préstamos,4
+2250040200,,Otras operaciones,4
+2250040500,,Otros,4
+225005,,DIFERENCIAS TEMPORARIAS POR IMPUESTOS SOBRE LAS GANANCIAS,4
+2250050100,,Impuesto sobre la renta diferido,4
+2250050900,,Otros,4
+23,,OBLIGACIONES CONVERTIBLES EN ACCIONES,4
+231,,PRÉSTAMOS CONVERTIBLES EN ACCIONES,4
+2311,,PRESTAMOS CONVERTIBLES EN ACCIONES PACTADOS HASTA UN AÑO PLAZO,4
+231100,,PRESTAMOS CONVERTIBLES EN ACCIONES PACTADOS HASTA UN AÑO PLAZO,4
+2311000001,,Préstamos convertibles en acciones,4
+2311009901,,Intereses y otros por pagar - ML,4
+232,,BONOS CONVERTIBLES EN ACCIONES,4
+2321,,BONOS CONVERTIBLES EN ACCIONES PACTADOS HASTA UN AÑO PLAZO,4
+232100,,BONOS CONVERTIBLES EN ACCIONES PACTADOS HASTA UN AÑO PLAZO,4
+2321000001,,Bonos convertibles en acciones,4
+2321009901,,Intereses y otros por pagar - ML,4
+2322,,BONOS CONVERTIBLES EN ACCIONES PACTADOS A MÁS DE UN AÑO PLAZO,4
+232200,,BONOS CONVERTIBLES EN ACCIONES PACTADOS A MÁS DE UN AÑO PLAZO,4
+2322000001,,Bonos convertibles en acciones,4
+2322009901,,Intereses y otros por pagar - ML,4
+24,,DEUDA SUBORDINADA,4
+241,,DEUDA SUBORDINADA A PLAZO FIJO,4
+2413,,DEUDA SUBORDINADA A CINCO O MÁS AÑOS,4
+241300,,DEUDA SUBORDINADA A CINCO O MÁS AÑOS,4
+2413000001,,Deuda subordinada con instituciones extranjeras de primera línea - ML(2),4
+2413000002,,Deuda subordinada con instituciones extranjeras de primera línea - ME (2),4
+2413009901,,Intereses y otros por pagar - ML,4
+2413009902,,Intereses y otros por pagar - ME,4
+3,,PATRIMONIO,4
+31,,PATRIMONIO,4
+311,,CAPITAL SOCIAL PAGADO,4
+3110,,CAPITAL SOCIAL PAGADO,4
+311001,,CAPITAL SUSCRITO,4
+3110010101,,Acciones comunes,4
+3110010201,,Acciones preferidas,4
+311002,,CAPITAL SUSCRITO NO PAGADO,4
+3110020101,,Acciones comunes,4
+3110020201,,Acciones preferidas,4
+311003,,APORTES DEL ESTADO,4
+3110030101,,Aporte inicial,4
+3110030201,,Incrementos,4
+313,,RESERVAS DE CAPITAL,4
+3130,,RESERVAS DE CAPITAL,4
+313000,,RESERVAS,4
+3130000100,,Reserva legal,4
+3130000200,,Reservas estatutarias,4
+3130000300,,Reservas voluntarias,4
+314,,RESULTADOS POR APLICAR,4
+3140,,RESULTADOS POR APLICAR,4
+314001,,RESULTADOS DE EJERCICIOS ANTERIORES,4
+3140010101,,Utilidades,4
+3140010201,,Pérdidas,4
+314002,,RESULTADOS DEL PRESENTE EJERCICIO,4
+3140020101,,Utilidades,4
+3140020201,,Pérdidas,4
+32,,PATRIMONIO RESTRINGIDO,4
+321,,UTILIDADES NO DISTRIBUIBLES,4
+3210,,UTILIDADES NO DISTRIBUIBLES,4
+321000,,UTILIDADES NO DISTRIBUIBLES,4
+3210000101,,Utilidades no distribuibles,4
+322,,REVALUACIONES,4
+3220,,REVALUACIONES,4
+322000,,REVALÚOS,4
+3220000100,,Revalúo de inmuebles del activo fijo,4
+3220000200,,Revalúo de muebles del activo fijo,4
+3220000300,,Inversión neta en entidades extranjeras,4
+323,,RECUPERACIONES DE ACTIVOS CASTIGADOS,4
+3230,,RECUPERACIONES DE ACTIVOS CASTIGADOS,4
+323000,,RECUPERACIONES DE BIENES INMUEBLES Y MUEBLES,4
+3230000100,,Bienes Inmuebles,4
+3230000200,,Bienes Muebles,4
+324,,DONACIONES,4
+3240,,DONACIONES,4
+324000,,DONACIONES,4
+3240000100,,En efectivo,4
+3240000200,,Inmuebles,4
+3240000300,,Muebles,4
+325,,PROVISIONES,4
+3250,,PROVISIONES,4
+325001,,POR RIESGOS GENERICOS DE LA ACTIVIDAD BANCARIO,4
+3250010100,,Riesgo país,4
+3250010200,,Voluntarias,4
+325002,,POR BIENES RECIBIDOS EN PAGO O ADJUDICADOS,4
+3250020100,,Bienes Inmuebles,4
+3250020200,,Bienes Muebles,4
+3250020301,,Valores - ML,4
+3250020302,,Valores - ME,4
+4,,DERECHOS FUTUROS Y CONTINGENCIAS,4
+41,,DERECHOS FUTUROS Y CONTINGENCIAS,4
+411,,CARTAS DE CRÉDITO,4
+4110,,CARTAS DE CRÉDITO,4
+411001,,CARTAS DE CRÉDITO DE IMPORTACIÓN NO NEGOCIADAS,4
+4110010101,,Empresas privadas - ML,4
+4110010102,,Empresas privadas - ME,4
+4110010201,,Bancos - ML,4
+4110010202,,Bancos - ME,4
+4110010301,,Otras entidades del Sistema Financiero - ML,4
+4110010302,,Otras entidades del Sistema Financiero - ME,4
+4110010401,,Entidades del Estado - ML,4
+4110010402,,Entidades del Estado - ME,4
+4110010501,,Particulares - ML,4
+4110010502,,Particulares - ME,4
+411002,,CARTAS DE CRÉDITO DE IMPORTACIÓN NEGOCIADAS,4
+4110020101,,Empresas privadas - ML,4
+4110020102,,Empresas privadas - ME,4
+4110020201,,Bancos - ML,4
+4110020202,,Bancos - ME,4
+4110020301,,Otras entidades del Sistema Financiero - ML,4
+4110020302,,Otras entidades del Sistema Financiero - ME,4
+4110020401,,Entidades del Estado - ML,4
+4110020402,,Entidades del Estado - ME,4
+4110020501,,Particulares - ML,4
+4110020502,,Particulares - ME,4
+411003,,CARTAS DE CRÉDITO DE EXPORTACIÓN,4
+4110030101,,Empresas privadas - ML,4
+4110030102,,Empresas privadas - ME,4
+4110030201,,Entidades del Estado - ML,4
+4110030202,,Entidades del Estado - ME,4
+411004,,CARTAS DE CRÉDITO DE IMPORTACIÓN FINANCIADAS POR PROVEEDORES EXTRANJEROS,4
+4110040101,,Empresas privadas - ML,4
+4110040102,,Empresas privadas - ME,4
+4110040201,,Bancos - ML,4
+4110040202,,Bancos - ME,4
+4110040301,,Otras entidades del Sistema Financiero - ML,4
+4110040302,,Otras entidades del Sistema Financiero - ME,4
+4110040401,,Entidades del Estado - ML,4
+4110040402,,Entidades del Estado - ME,4
+4110040501,,Particulares - ML,4
+4110040502,,Particulares - ME,4
+411005,,CARTAS DE CRÉDITO DE EXPORTACIÓN FINANCIADAS POR PROVEEDORES LOCALES,4
+4110050101,,Empresas privadas - ML,4
+4110050102,,Empresas privadas - ME,4
+4110050201,,Entidades del Estado - ML,4
+4110050202,,Entidades del Estado - ME,4
+4119,,PROVISIÓN POR PÉRDIDAS,4
+411900,,PROVISIÓN POR PÉRDIDAS,4
+4119000001,,Provisión por pérdidas - ML,4
+4119000002,,Provisión por pérdidas -ME,4
+412,,CONTINGENCIAS POR AVALES Y FIANZAS,4
+4120,,CONTINGENCIAS POR AVALES Y FIANZAS,4
+412001,,CONTINGENCIAS POR AVALES A MENOS DE CINCO AÑOS PLAZO,4
+4120010101,,Empresas privadas - ML,4
+4120010102,,Empresas privadas - ME,4
+4120010201,,Bancos - ML,4
+4120010202,,Bancos - ME,4
+4120010301,,Otras entidades del Sistema Financiero - ML,4
+4120010302,,Otras entidades del Sistema Financiero - ME,4
+4120010401,,Entidades del Estado - ML,4
+4120010402,,Entidades del Estado - ME,4
+4120010501,,"Subsidiarias, agencias y bancos extranjeros - ML",4
+4120010502,,"Sucursales, subsidiarias , agencias y bancos extranjeros - ME",4
+4120010601,,Particulares - ML,4
+4120010602,,Particulares - ME,4
+412002,,CONTINGENCIAS POR FIANZAS A MENOS DE CINCO AÑOS PLAZO,4
+4120020101,,Empresas privadas - ML,4
+4120020102,,Empresas privadas - ME,4
+4120020201,,Bancos - ML,4
+4120020202,,Bancos - ME,4
+4120020301,,Otras entidades del Sistema Financiero - ML,4
+4120020302,,Otras entidades del Sistema Financiero - ME,4
+4120020401,,Entidades del Estado - ML,4
+4120020402,,Entidades del Estado - ME,4
+4120020501,,"Subsidiarias, agencias y bancos extranjeros - ML",4
+4120020502,,"Sucursales, subsidiarias , agencias y bancos extranjeros - ME",4
+4120020601,,Particulares - ML,4
+4120020602,,Particulares - ME,4
+412003,,CONTINGENCIAS POR AVALES A CINCO O MÁS AÑOS PLAZO,4
+4120030101,,Empresas privadas - ML,4
+4120030102,,Empresas privadas - ME,4
+4120030201,,Bancos - ML,4
+4120030202,,Bancos - ME,4
+4120030301,,Otras entidades del Sistema Financiero - ML,4
+4120030302,,Otras entidades del Sistema Financiero - ME,4
+4120030401,,Entidades del Estado - ML,4
+4120030402,,Entidades del Estado - ME,4
+4120030501,,"Subsidiarias, agencias y bancos extranjeros - ML",4
+4120030502,,"Sucursales, subsidiarias , agencias y bancos extranjeros - ME",4
+4120030601,,Particulares - ML,4
+4120030602,,Particulares - ME,4
+412004,,CONTINGENCIAS POR FIANZAS A CINCO O MAS AÑOS PLAZO,4
+4120040101,,Empresas privadas - ML,4
+4120040102,,Empresas privadas - ME,4
+4120040201,,Bancos - ML,4
+4120040202,,Bancos - ME,4
+4120040301,,Otras entidades del Sistema Financiero - ML,4
+4120040302,,Otras entidades del Sistema Financiero - ME,4
+4120040401,,Entidades del Estado - ML,4
+4120040402,,Entidades del Estado - ME,4
+4120040501,,"Subsidiarias, agencias y bancos extranjeros - ML",4
+4120040502,,"Sucursales, subsidiarias , agencias y bancos extranjeros - ME",4
+4120040601,,Particulares - ML,4
+4120040602,,Particulares - ME,4
+4129,,PROVISIÓN POR PÉRDIDAS,4
+412900,,PROVISIÓN POR PÉRDIDAS,4
+4129000001,,Provisión por pérdidas - ML,4
+4129000002,,Provisión por pérdidas -ME,4
+413,,DERECHOS POR OPERACIONES EN MONEDA EXTRANJERA,4
+4131,,DERECHOS POR OPERACIONES EN MONEDA EXTRANJERA,4
+413101,,CONTRATOS A FUTURO EN MONEDA EXTRANJERA,4
+4131010101,,Banco Central de Reserva - ML,4
+4131010102,,Banco Central de Reserva - ME,4
+4131010301,,Empresas privadas - ML,4
+4131010302,,Empresas privadas -ME,4
+4131010401,,Particulares - ML,4
+4131010402,,Particulares - ME,4
+4131010501,,Bancos - ML,4
+4131010502,,Bancos -ME,4
+4131010601,,Otras entidades del Sistema Financiero - ML,4
+4131010602,,Otras entidades del Sistema Financiero -ME,4
+413102,,CONTRATOS A FUTURO CON ARBITRAJE,4
+4131020101,,Banco Central de Reserva - ML,4
+4131020102,,Banco Central de Reserva - ME,4
+4131020301,,Empresas privadas - ML,4
+4131020302,,Empresas privadas -ME,4
+4131020401,,Particulares - ML,4
+4131020402,,Particulares - ME,4
+4131020501,,Bancos - ML,4
+4131020502,,Bancos -ME,4
+4131020601,,Otras entidades del Sistema Financiero - ML,4
+4131020602,,Otras entidades del Sistema Financiero -ME,4
+4131020702,,Diferencia de tipo de cambio -ME,4
+4139,,PROVISIÓN PÉRDIDAS EN DERECHOS POR OPERACIONES EN MONEDA EXTRANJERA,4
+413900,,PROVISIÓN PÉRDIDAS EN DERECHOS POR OPERACIONES EN MONEDA EXTRANJERA,4
+4139000001,,Provisión pérdidas en derechos por operaciones en moneda extranjera - ML,4
+4139000002,,Provisión pérdidas en derechos por operaciones en moneda extranjera -ME,4
+5,,COMPROMISOS FUTUROS Y CONTINGENCIAS,4
+51,,COMPROMISOS FUTUROS Y CONTINGENCIAS,4
+511,,OBLIGACIONES POR CARTAS DE CRÉDITO,4
+5110,,OBLIGACIONES POR CARTAS DE CRÉDITO,4
+511001,,CARTAS DE CRÉDITO DE IMPORTACIÓN,4
+5110010101,,Empresas privadas - ML,4
+5110010102,,Empresas privadas - ME,4
+5110010201,,Bancos - ML,4
+5110010202,,Bancos - ME,4
+5110010301,,Otras entidades del sistema financiero - ML,4
+5110010302,,Otras entidades del sistema financiero - ME,4
+5110010401,,Entidades del Estado - ML,4
+5110010402,,Entidades del Estado - ME,4
+5110010501,,Particulares - ML,4
+5110010502,,Particulares - ME,4
+511002,,CARTAS DE CRÉDITO DE EXPORTACIÓN,4
+5110020101,,Empresas privadas - ML,4
+5110020102,,Empresas privadas - ME,4
+5110020201,,Entidades del Estado - ML,4
+5110020202,,Entidades del Estado - ME,4
+511003,,CARTAS DE CRÉDITO DE IMPORTACIÓN FINANCIADAS POR PROVEEDORES EXTRANJEROS,4
+5110030101,,Empresas privadas - ML,4
+5110030102,,Empresas privadas - ME,4
+5110030201,,Bancos - ML,4
+5110030202,,Bancos - ME,4
+5110030301,,Otras entidades del sistema financiero - ML,4
+5110030302,,Otras entidades del sistema financiero - ME,4
+5110030401,,Entidades del Estado - ML,4
+5110030402,,Entidades del Estado - ME,4
+5110030501,,Particulares - ML,4
+5110030502,,Particulares - ME,4
+511004,,CARTAS DE CRÉDITO DE EXPORTACIÓN FINANCIADAS POR PROVEEDORES LOCALES,4
+5110040101,,Empresas privadas - ML,4
+5110040102,,Empresas privadas - ME,4
+5110040201,,Entidades del Estado - ML,4
+5110040202,,Entidades del Estado - ME,4
+512,,CONTINGENCIAS POR AVALES Y FIANZAS,4
+5120,,CONTINGENCIAS POR AVALES Y FIANZAS,4
+512001,,AVALES A MENOS DE CINCO AÑOS PLAZO,4
+5120010001,,Avales - ML,4
+5120010002,,Avales - ME,4
+512002,,FIANZAS A MENOS DE CINCO AÑOS PLAZO,4
+5120020001,,Fianzas - ML,4
+5120020002,,Fianzas - ME,4
+512003,,AVALES A MÁS DE CINCO AÑOS PLAZO,4
+5120030001,,Avales - ML,4
+5120030002,,Avales - ME,4
+512004,,FIANZAS A MÁS DE CINCO AÑOS PLAZO,4
+51200001,,Fianzas - ML,4
+51200002,,Fianzas - ME,4
+513,,COMPROMISOS POR OPERACIONES EN MONEDA EXTRANJERA,4
+5131,,COMPROMISOS POR OPERACIONES EN MONEDA EXTRANJERA,4
+513101,,CONTRATOS A FUTURO EN MONEDA EXTRANJERA,4
+5131010101,,Banco Central de Reserva - ML,4
+5131010102,,Banco Central de Reserva - ME,4
+5131010301,,Empresas privadas - ML,4
+5131010302,,Empresas privadas -ME,4
+5131010401,,Particulares - ML,4
+5131010402,,Particulares - ME,4
+5131010501,,Bancos - ML,4
+5131010502,,Bancos -ME,4
+5131010601,,Otras entidades del Sistema Financiero - ML,4
+5131010602,,Otras entidades del Sistema Financiero -ME,4
+513102,,CONTRATOS A FUTURO CON ARBITRAJE,4
+5131020101,,Banco Central de Reserva - ML,4
+5131020102,,Banco Central de Reserva - ME,4
+5131020301,,Empresas privadas - ML,4
+5131020302,,Empresas privadas -ME,4
+5131020401,,Particulares - ML,4
+5131020402,,Particulares - ME,4
+5131020501,,Bancos - ML,4
+5131020502,,Bancos -ME,4
+5131020601,,Otras entidades del Sistema Financiero - ML,4
+5131020602,,Otras entidades del Sistema Financiero -ME,4
+5131020702,,Diferencia de tipo de cambio -ME,4
+6,,INGRESOS,4
+61,,INGRESOS DE OPERACIONES DE INTERMEDIACION,4
+611,,INGRESOS DE OPERACIONES DE INTERMEDIACION,4
+6110,,INGRESOS DE OPERACIONES DE INTERMEDIACION,4
+611001,,CARTERA DE PRÉSTAMOS,4
+6110010100,,Intereses,4
+6110010200,,Comisiones por administración del crédito,4
+6110010300,,Comisiones por desembolsos pendientes,4
+6110010400,,Comisiones y recargos por tarjetas de crédito,4
+6110010500,,Comisiones por otorgamiento,4
+6110010600,,Otras comisiones y recargos sobre créditos,4
+6110010700,,Inspecciones y avalúos,4
+611002,,CARTERA DE INVERSIONES,4
+6110020100,,Intereses,4
+6110020200,,Venta de títulosvalores,4
+611003,,OPERACIONES TEMPORALES CON DOCUMENTOS,4
+6110030100,,Primas,4
+6110030200,,Otros ingresos,4
+611004,,INTERESES SOBRE DEPÓSITOS,4
+6110040100,,En el BCR,4
+6110040200,,En otras instituciones financieras,4
+62,,INGRESOS DE OTRAS OPERACIONES,4
+621,,INGRESOS DE OTRAS OPERACIONES,4
+6210,,INGRESOS DE OTRAS OPERACIONES,4
+621001,,OPERACIONES EN MONEDA EXTRANJERA,4
+6210010100,,Utilidad en venta de moneda extranjera,4
+6210010200,,Comisiones,4
+6210010300,,Intereses,4
+6210010400,,Revaluaciones,4
+621002,,CARTAS DE CRÉDITO,4
+6210020100,,Cartas de crédito de importación,4
+6210020200,,Cartas de crédito de exportación,4
+621003,,AVALES Y FIANZAS,4
+6210030100,,Comisiones,4
+6210030200,,Otros,4
+621004,,SERVICIOS,4
+6210040100,,Fideicomisos,4
+6210040200,,Cajeros a domicilio,4
+6210040300,,Trámites jurídicos,4
+6210040400,,Alquiler de cajas de seguridad,4
+6210040500,,Custodia de valores,4
+6210040600,,Otros,4
+63,,INGRESOS NO OPERACIONALES,4
+631,,INGRESOS NO OPERACIONALES,4
+6310,,INGRESOS NO OPERACIONALES,4
+631001,,INGRESOS DE EJERCICIOS ANTERIORES,4
+6310010100,,Recuperaciones de préstamos e intereses,4
+6310010200,,Recuperaciones de inversiones financieras e intereses,4
+6310010300,,Recuperaciones de gastos,4
+6310010400,,Liberación de reservas de saneamiento,4
+631002,,UTILIDAD EN VENTA DE ACTIVOS,4
+6310020100,,Activo fijo,4
+6310020200,,Bienes recibidos en pago,4
+631003,,INGRESOS POR EXPLOTACIÓN DE ACTIVOS,4
+6310030100,,Activo fijo,4
+6310030200,,Bienes recibidos en pago,4
+631004,,DIVIDENDOS,4
+6310040100,,Subsidiarias,4
+6310040200,,Otros,4
+631005,,INGRESOS POR DIFERENCIAS TEMPORARIAS DE IMPUESTOS SOBRE LAS GANANCIAS,4
+6310050100,,Impuesto sobre la renta temporario diferido,4
+6310050900,,Otros,4
+631099,,OTROS,4
+6310990000,,Otros,4
+7,,COSTOS,4
+71,,COSTOS DE OPERACIONES DE INTERMEDIACIÓN,4
+711,,CAPTACIÓN DE RECURSOS,4
+7110,,CAPTACIÓN DE RECURSOS,4
+711001,,DEPÓSITOS,4
+7110010100,,Intereses de ahorro,4
+7110010200,,Intereses de depósitos a plazo,4
+7110010300,,Premios cuentas de ahorro,4
+7110010400,,Seguros sobre depósitos,4
+7110010500,,Intereses de depósitos en cuenta corriente,4
+711002,,PRÉSTAMOS PARA TERCEROS,4
+7110020100,,Intereses,4
+7110020200,,Comisiones,4
+711003,,PRÉSTAMOS PARA CUBRIR DÉFICIT DE CAJA,4
+7110030100,,Intereses,4
+7110030200,,Comisiones,4
+711004,,TÍTULOS DE EMISIÓN PROPIA (1),4
+7110040100,,Intereses de títulos valores (1),4
+7110040200,,Otros costos de emisión (1),4
+711005,,PÉRDIDA POR DIFERENCIA DE PRECIOS,4
+7110050100,,Pérdida por venta de títulosvalores,4
+7110050200,,Pérdida por operaciones con títulosvalores,4
+711006,,PRIMAS POR GARANTÍA DE DEPÓSITOS,4
+7110060100,,Depósitos en cuenta corriente,4
+7110060200,,Depósitos de ahorro,4
+7110060300,,Depósitos a plazo,4
+711007,,OTROS COSTOS DE INTERMEDIACIÓN,4
+7110070100,,Materiales de tarjetas de crédito,4
+7110070200,,Comisiones y regalías sobre tarjetas de crédito,4
+7110070300,,Comisiones pagadas por adquisición de Títulos valores,4
+7110070400,,Comisión por administración de reserva de liquidez,4
+712,,SANEAMIENTO DE ACTIVOS DE INTERMEDIACIÓN,4
+7120,,SANEAMIENTO DE ACTIVOS DE INTERMEDIACION,4
+712000,,SANEAMIENTO DE ACTIVOS DE INTERMEDIACION,4
+7120000100,,Saneamiento de inversiones financieras e intereses,4
+7120000200,,Saneamiento de préstamos e intereses,4
+713,,CASTIGOS DE ACTIVOS DE INTERMEDIACIÓN,4
+7130,,CASTIGOS DE ACTIVOS DE INTERMEDIACION,4
+713000,,CASTIGOS DE ACTIVOS DE INTERMEDIACION,4
+7130000100,,Inversiones financieras e intereses,4
+7130000200,,Cartera de préstamos e intereses,4
+72,,COSTOS DE OTRAS OPERACIONES,4
+721,,OPERACIONES EN MONEDA EXTRANJERA,4
+7210,,OPERACIONES EN MONEDA EXTRANJERA,4
+721000,,OPERACIONES EN MONEDA EXTRANJERA,4
+7210000100,,Comisiones por compra de moneda extranjera,4
+7210000200,,Fluctuaciones de tipo de cambio,4
+722,,CARTAS DE CRÉDITO,4
+7220,,CARTAS DE CRÉDITO,4
+722000,,CARTAS DE CRÉDITO,4
+7220000100,,Cartas de crédito de importación,4
+7220000200,,Cartas de crédito de exportación,4
+723,,AVALES Y FIANZAS,4
+7230,,AVALES Y FIANZAS,4
+723000,,AVALES Y FIANZAS,4
+7230000100,,Avales,4
+7230000200,,Fianzas,4
+724,,PRESTACIÓN DE SERVICIOS,4
+7240,,PRESTACIÓN DE SERVICIOS,4
+724000,,PRESTACIÓN DE SERVICIOS,4
+7240000100,,Fideicomisos puros,4
+7240000200,,Fideicomisos de inversión,4
+7240000300,,Cajeros a domicilio,4
+7240000400,,Otros,4
+725,,SANEAMIENTOS,4
+7250,,SANEAMIENTOS,4
+725000,,SANEAMIENTOS,4
+7250000100,,Cartas de crédito,4
+7250000200,,Avales y fianzas,4
+7250000300,,Servicios bancarios,4
+726,,CASTIGOS DE CONTINGENCIAS,4
+7260,,CASTIGOS DE CONTINGENCIAS,4
+726000,,CASTIGOS DE CONTINGENCIAS,4
+7260000101,,Avales - ML,4
+7260000201,,Fianzas - ML,4
+8,,GASTOS,4
+81,,GASTOS DE OPERACIÓN,4
+811,,GASTOS DE FUNCIONARIOS Y EMPLEADOS,4
+8110,,GASTOS DE FUNCIONARIOS Y EMPLEADOS,4
+811001,,REMUNERACIONES,4
+8110010100,,Salarios ordinarios,4
+8110010200,,Salarios extraordinarios,4
+811002,,PRESTACIONES AL PERSONAL,4
+8110020100,,Aguinaldos y bonificaciones,4
+8110020200,,Vacaciones,4
+8110020300,,Uniformes,4
+8110020400,,Seguro Social y F.S.V.,4
+8110020500,,Gastos médicos,4
+8110020600,,Fondo de cajeros,4
+8110020700,,Atenciones y recreaciones,4
+8110020800,,Otros seguros,4
+8110020900,,AFP'S,4
+8110029900,,Otras Prestaciones al Personal,4
+811003,,INDEMNIZACIONES AL PERSONAL,4
+8110030100,,Por despido,4
+8110030200,,Por incapacidad temporal,4
+811004,,GASTOS DEL DIRECTORIO,4
+8110040100,,Dietas,4
+8110040200,,Remuneraciones,4
+8110040300,,Atenciones y representaciones,4
+8110040400,,Otras prestaciones,4
+811005,,OTROS GASTOS DEL PERSONAL,4
+8110050100,,Capacitación,4
+8110050200,,Gastos de viaje,4
+8110050300,,Combustible y lubricantes,4
+8110050400,,Viáticos y transporte,4
+811006,,PENSIONES Y JUBILACIONES,4
+8110060000,,Pensiones y jubilaciones,4
+812,,GASTOS GENERALES,4
+8120,,GASTOS GENERALES,4
+812001,,CONSUMO DE MATERIALES,4
+8120010100,,Combustible y lubricantes,4
+8120010200,,Papelería y útiles,4
+8120010300,,Materiales de limpieza,4
+812002,,REPARACIÓN Y MANTENIMIENTO DE ACTIVO FIJO,4
+8120020100,,Edificios propios,4
+8120020200,,Equipo de computación,4
+8120020300,,Vehículos,4
+8120020400,,Mobiliario y equipo de oficina,4
+812003,,SERVICIOS PÚBLICOS E IMPUESTOS,4
+8120030100,,Comunicaciones,4
+8120030200,,Energía eléctrica,4
+8120030300,,Agua potable,4
+8120030400,,Impuestos Fiscales,4
+8120030500,,Impuestos Municipales,4
+8120030600,,Multas,4
+812004,,PUBLICIDAD Y PROMOCIÓN,4
+8120040100,,Televisión,4
+8120040200,,Radio,4
+8120040300,,Prensa escrita,4
+8120040400,,Otros medios,4
+8120040500,,Artículos promocionales,4
+8120040600,,Gastos de representación,4
+812005,,ARRENDAMIENTOS Y MANTENIMIENTOS,4
+8120050100,,Locales,4
+8120050200,,Equipo,4
+8120050300,,Mantenimiento de locales arrendados,4
+8120050400,,Mantenimiento de equipo arrendado,4
+812006,,SEGUROS SOBRE BIENES,4
+8120060100,,Sobre activos fijos,4
+8120060200,,Sobre riesgos bancarios,4
+812007,,HONORARIOS PROFESIONALES,4
+8120070100,,Auditores,4
+8120070200,,Abogados,4
+8120070300,,Empresas consultoras,4
+8120070400,,Asesores Independientes,4
+812008,,SUPERINTENDENCIA DEL SISTEMA FINANCIERO,4
+8120080100,,Cuota obligatoria,4
+8120080200,,Multas,4
+812009,,SERVICIOS DE ADMINISTRACIÓN,4
+8120090000,,Servicios de administración de cartera de préstamos,4
+812099,,OTROS,4
+8120990100,,Servicios de seguridad,4
+8120990200,,Suscripciones,4
+8120990300,,Contribuciones,4
+8120990400,,Publicaciones y convocatorias,4
+8120990500,,Servicio de traslado de valores,4
+8120990600,,Gastos de organización,4
+8120999900,,Otros,4
+813,,DEPRECIACIONES Y AMORTIZACIONES,4
+8130,,DEPRECIACIONES Y AMORTIZACIONES,4
+813001,,DEPRECIACIONES,4
+8130010100,,Bienes muebles,4
+8130010200,,Bienes inmuebles,4
+813002,,AMORTIZACIONES,4
+8130020100,,Construcciones en locales arrendados,4
+8130020200,,Remodelaciones y readecuaciones en locales propios,4
+8130020300,,Gastos de organización,4
+8130020400,,Programas computacionales,4
+8130020500,,Inversiones,4
+82,,GASTOS NO OPERACIONALES,4
+821,,GASTOS DE EJERCICIOS ANTERIORES,4
+8210,,GASTOS DE EJERCICIOS ANTERIORES,4
+821001,,INTERESES,4
+8210010100,,Sobre préstamos,4
+8210010200,,Sobre títulos de emisión propia,4
+821002,,COMISIONES,4
+8210020000,,Comisiones,4
+821003,,OTROS,4
+8210030000,,Otros,4
+822,,PÉRDIDAS EN VENTA DE ACTIVOS,4
+8220,,PÉRDIDAS EN VENTA DE ACTIVOS,4
+822001,,ACTIVO FIJO,4
+8220010100,,Bienes inmuebles,4
+8220010200,,Bienes muebles,4
+822002,,BIENES RECIBIDOS EN PAGO O ADJUDICADOS,4
+8220020100,,Bienes inmuebles,4
+8220020200,,Bienes muebles,4
+8220020300,,Títulosvalores,4
+823,,GASTOS POR EXPLOTACIÓN DE ACTIVOS,4
+8230,,GASTOS POR EXPLOTACIÓN DE ACTIVOS,4
+823001,,ACTIVO FIJO,4
+8230010100,,Bienes inmuebles,4
+8230010200,,Bienes muebles,4
+823002,,BIENES RECIBIDOS EN PAGO O ADJUDICADOS,4
+8230020100,,Bienes inmuebles,4
+8230020200,,Bienes muebles,4
+824,,CASTIGOS DE BIENES RECIBIDOS EN PAGO O ADJUDICADOS,4
+8240,,CASTIGOS DE BIENES RECIBIDOS EN PAGO O ADJUDICADOS,4
+824000,,CASTIGOS DE BIENES RECIBIDOS EN PAGO O ADJUDICADOS,4
+8240000100,,Bienes inmuebles,4
+8240000200,,Bienes muebles,4
+8240000300,,Títulosvalores,4
+825,,GASTOS POR DIFERENCIAS TEMPORARIAS DE IMPUESTOS SOBRE LAS GANANCIAS,4
+8250,,GASTOS POR DIFERENCIAS TEMPORARIAS DE IMPUESTOS SOBRE LAS GANANCIAS,4
+825000,,GASTOS POR DIFERENCIAS TEMPORARIAS DE IMPUESTOS SOBRE LAS GANANCIAS,4
+8250000100,,Impuesto sobre la renta temporario,4
+8250000900,,Otros,4
+826,,PÉRDIDAS POR CONTINGENCIAS,4
+8260,,PÉRDIDAS POR CONTINGENCIAS,4
+826000,,PÉRDIDAS POR CONTINGENCIAS,4
+8260000100,,Litigios judiciales,4
+8260000900,,Otros,4
+827,,OTROS,4
+8270,,OTROS,4
+827000,,OTROS,4
+8270000000,,Otros,4
+83,,IMPUESTOS DIRECTOS,4
+831,,IMPUESTO SOBRE LA RENTA,4
+8310,,IMPUESTO SOBRE LA RENTA,4
+831000,,IMPUESTO SOBRE LA RENTA,4
+8310000000,,Impuesto sobre la renta,4
+9,,CUENTAS DE ORDEN,4
+91,,INFORMACIÓN FINANCIERA,4
+911,,DERECHOS Y OBLIGACIONES POR CRÉDITOS,4
+9110,,DERECHOS Y OBLIGACIONES POR CRÉDITOS,4
+911001,,DISPONIBILIDAD POR CRÉDITOS OBTENIDOS,4
+9110010101,,Otorgados por el BMI - ML,4
+9110010102,,Otorgados por el BMI - ME,4
+9110010201,,Otorgados por entidades del Estado - ML,4
+9110010202,,Otorgados por entidades del Estado - ME,4
+9110010301,,Otorgados por empresas privadas - ML,4
+9110010302,,Otorgados por empresas pirvadas - ME,4
+9110010401,,Otorgados por particulares - ML,4
+9110010402,,Otorgados por particulares - ME,4
+9110010501,,Otorgados por bancos y financieras - ML,4
+9110010502,,Otorgados por bancos y financieras - ME,4
+9110010601,,Otras entidades del Sistema Financiero - ML,4
+9110010602,,Otras entidades del Sistema Financiero - ME,4
+9110010701,,Otorgados por bancos extranjeros - ML,4
+9110010702,,Otorgados por bancos extranjeros - ME,4
+911002,,EXIGIBILIDAD POR CRÉDITOS OTORGADOS,4
+9110020101,,Créditos aprobados pendientes de formalizar - ML,4
+9110020102,,Créditos aprobados pendientes de formalizar - ME,4
+9110020201,,Saldos no utilizados de líneas de crédito - ML,4
+9110020202,,Saldos no utilizados de líneas de crédito - ME,4
+9110020301,,Saldos no utilizados de sobregiros - ML,4
+9110020302,,Saldos no utilizados de sobregiros - ME,4
+9110020401,,Saldos no utilizados de tarjetas de crédito - ML,4
+9110020402,,Saldos no utilizados de tarjetas de crédito - ME,4
+912,,FIDEICOMISOS Y FONDOS RECIBIDOS EN ADMINISTRACIÓN,4
+9120,,FIDEICOMISOS Y FONDOS RECIBIDOS EN ADMINISTRACIÓN,4
+912001,,FIDEICOMISOS,4
+9120010001,,Fideicomisos,4
+912002,,FONDOS RECIBIDOS EN ADMINISTRACIÓN,4
+9120020001,,Fondos recibidos en administración - ML,4
+9120020002,,Fondos recibidos en administración - ME,4
+913,,CARTERA EN ADMINISTRACIÓN,4
+9130,,CARTERA EN ADMINISTRACIÓN,4
+913000,,CARTERA EN ADMINISTRACIÓN,4
+9130000100,,Empresa privadas,4
+9130000200,,Bancos y financieras,4
+9130000300,,Otras instituciones del Sistema Financiero,4
+9130000400,,Entidades estatales,4
+9130000500,,Particulares,4
+914,,FONDOS DE GARANTÍA,4
+9140,,FONDOS DE GARANTÍA,4
+914000,,FONDOS DE GARANTÍA,4
+9140000100,,Empresa privadas,4
+9140000200,,Bancos y financieras,4
+9140000300,,Otras instituciones del Sistema Financiero,4
+9140000400,,Entidades estatales,4
+9140000500,,Particulares,4
+915,,INTERESES SOBRE PRESTAMOS DE DUDOSA RECUPERACIÓN,4
+9150,,INTERESES SOBRE PRESTAMOS DE DUDOSA RECUPERACIÓN,4
+915000,,INTERESES SOBRE PRÉSTAMOS DE DUDOSA RECUPERACIÓN,4
+9160,,CARTERA DE PRÉSTAMOS PIGNORADA,4
+916001,,A FAVOR DEL BANCO CENTRAL DE RESERVA,4
+916002,,A FAVOR DEL BMI,4
+916003,,PARA GARANTIZAR EMISIONES DE OBLIGACIONES NEGOCIABLES,4
+916004,,A FAVOR DEL INSTITUTO DE GARANTÍA DE DEPÓSITOS,4
+9170,,SALDOS A CARGO DE DEUDORES (1),4
+917000,,SALDOS A CARGO DE DEUDORES (1),4
+9170000001,,Saldos a cargo de deudores - ML (1),4
+9170000002,,Saldos a cargo de deudores - ME (1),4
+92,,EXISTENCIAS EN LA BÓVEDA,4
+921,,DOCUMENTOS DE PRESTAMOS Y CRÉDITOS,4
+9210,,DOCUMENTOS DE PRESTAMOS Y CRÉDITOS,4
+921000,,DOCUMENTOS DE PRESTAMOS Y CRÉDITOS,4
+9210000100,,Con hipoteca,4
+9210000200,,Con hipoteca abierta,4
+9210000300,,Con prenda con desplazamiento,4
+9210000400,,Con prenda sin desplazamiento,4
+9210000500,,Prenda sobre cosechas (avío),4
+9210000600,,Mutuos sin garantía real (1),4
+9210000700,,Hipoteca legal subsidiaria,4
+9210000800,,Con fianzas o avales,4
+922,,TÍTULOSVALORES Y OTROS DOCUMENTOS,4
+9220,,TÍTULOSVALORES Y OTROS DOCUMENTOS,4
+922001,,CHEQUES DE VIAJERO PARA LA VENTA,4
+9220010001,,Cheques de viajero para la venta - ML,4
+9220010002,,Cheques de viajero para la venta - ME,4
+922002,,DOCUMENTOS AJENOS AL COBRO,4
+9220020101,,Cobranzas locales,4
+9220020201,,Cobranzas del exterior - ML,4
+9220020202,,Cobranzas del exterior - ME,4
+9220020301,,Cartas de crédito - ML,4
+9220020302,,Cartas de crédito - ME,4
+922003,,CONTRA - GARANTÍAS POR AVALES Y FIANZAS,4
+9220030101,,Otorgadas por empresas nacionales - ML,4
+9220030102,,Otorgadas por empresas nacionales - ME,4
+9220030201,,Otorgadas por empresas extranjeras - ML,4
+9220030202,,Otorgadas por empresas extranjeras - ME,4
+922004,,DOCUMENTOS DESCONTADOS,4
+9220040000,,Documentos descontados,4
+922005,,DOCUMENTOS ADQUIRIDOS TEMPORALMENTE,4
+9220050101,,A empresas privadas,4
+9220050201,,A bancos,4
+9220050301,,A otras instituciones del Sistema Financiero,4
+9220050401,,A entidades del Estado,4
+9220050501,,A particulares,4
+922006,,DOCUMENTOS DE CARTERA EN ADMINISTRACIÓN,4
+9220060000,,Documentos de cartera en administración,4
+922007,,DOCUMENTOS DE FONDOS DE GARANTÍA,4
+9220070000,,Documentos de fondos de garantía,4
+922008,,DOCUMENTOS EN CUSTODIA,4
+9220080101,,Propios,4
+9220080201,,Ajenos,4
+923,,CARTERA DE INVERSIONES FINANCIERAS,4
+9230,,CARTERA DE INVERSIONES FINANCIERAS,4
+923001,,TÍTULOSVALORES NEGOCIABLES,4
+9230010101,,Emitidos por el BCR - ML,4
+9230010102,,Emitidos por el BCR - ME,4
+9230010201,,Emitidos por el Estado - ML,4
+9230010202,,Emitidos por el Estado - ME,4
+9230010301,,Emitidos por empresas privadas - ML,4
+9230010302,,Emitidos por empresas privadas - ME,4
+9230010501,,Emitidos por bancos - ML,4
+9230010502,,Emitidos por bancos - ME,4
+9230010601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+9230010602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+9230010701,,Emitidos por instituciones extranjeras - ML,4
+9230010702,,Emitidos por instituciones extranjeras - ME,4
+9230010801,,Emitidos por el Instituto de Garantía de Depósitos - ML,4
+9230010802,,Emitidos por el Instituto de Garantía de Depósitos - ME,4
+9230019901,,Intereses y otros por cobrar - ML,4
+9230019902,,Intereses y otros por cobrar - ME,4
+923002,,TÍTULOSVALORES NO NEGOCIABLES,4
+9230020101,,Emitidos por el BCR - ML,4
+9230020102,,Emitidos por el BCR - ME,4
+9230020201,,Emitidos por el Estado - ML,4
+9230020202,,Emitidos por el Estado - ME,4
+9230020301,,Emitidos por empresas privadas - ML,4
+9230020302,,Emitidos por empresas privadas - ME,4
+9230020501,,Emitidos por bancos - ML,4
+9230020502,,Emitidos por bancos - ME,4
+9230020601,,Emitidos por otras entidades del Sistema Financiero - ML,4
+9230020602,,Emitidos por otras entidades del Sistema Financiero - ME,4
+9230020701,,Emitidos por instituciones extranjeras - ML,4
+9230020702,,Emitidos por instituciones extranjeras - ME,4
+9230020801,,Emitidos por el Instituto de Garantía de Depósitos - ML,4
+9230020802,,Emitidos por el Instituto de Garantía de Depósitos - ME,4
+9230029901,,Intereses y otros por cobrar - ML,4
+9230029902,,Intereses y otros por cobrar - ME,4
+924,,ACTIVOS CASTIGADOS,4
+9240,,ACTIVOS CASTIGADOS,4
+924001,,CARTERA DE PRÉSTAMOS,4
+9240010001,,Cartera de préstamos - ML,4
+9240010002,,Cartera de préstamos - ME,4
+924002,,INVERSIONES FINANCIERAS,4
+9240020001,,Inversiones financieras - ML,4
+9240020002,,Inversiones financieras - ME,4
+93,,INFORMACIÓN FINANCIERA POR CONTRA,4
+94,,EXISTENCIAS EN LA BÓVEDA POR CONTRA,4
