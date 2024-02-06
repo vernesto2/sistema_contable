@@ -4,12 +4,16 @@
  */
 package vista;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import modelo.CambiaPanel;
+import utils.constantes.CambiaPanel;
 import rojerusan.RSPanelsSlider;
+import utils.constantes.Constantes;
 
 /**
  *
@@ -23,6 +27,8 @@ public class vPrincipal extends javax.swing.JFrame {
     public vPrincipal() {
         initComponents();
         this.iniciarVista();
+        this.txtNombreUsuario.setText(Constantes.persona.nombreCompleto());
+        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
     }
     
     public void iniciarVista() {
@@ -54,12 +60,13 @@ public class vPrincipal extends javax.swing.JFrame {
         btnLibroMayor = new RSMaterialComponent.RSButtonShapeIcon();
         btnConfig = new RSMaterialComponent.RSButtonShapeIcon();
         rSButtonShapeIcon1 = new RSMaterialComponent.RSButtonShapeIcon();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        imagenPrincipal = new javax.swing.JLabel();
+        txtNombreUsuario = new javax.swing.JLabel();
         btnBalanzaComprobacion = new RSMaterialComponent.RSButtonShapeIcon();
         btnBalanceGeneral = new RSMaterialComponent.RSButtonShapeIcon();
         btnFlujoEfectivo = new RSMaterialComponent.RSButtonShapeIcon();
         btnCambiosPatrimonio = new RSMaterialComponent.RSButtonShapeIcon();
+        btnCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
         topbar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -137,15 +144,15 @@ public class vPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/img/logo.png"))); // NOI18N
-        jLabel1.setToolTipText("");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIconTextGap(1);
+        imagenPrincipal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/avatar/avatar1.png"))); // NOI18N
+        imagenPrincipal.setToolTipText("");
+        imagenPrincipal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        imagenPrincipal.setIconTextGap(1);
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Victor Acevedo");
+        txtNombreUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtNombreUsuario.setText("Nombre Usuario");
 
         btnBalanzaComprobacion.setBackground(new java.awt.Color(73, 120, 248));
         btnBalanzaComprobacion.setText("Balanza de comprobación");
@@ -197,6 +204,19 @@ public class vPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnCicloContable.setBackground(new java.awt.Color(73, 120, 248));
+        btnCicloContable.setText("Ciclo contable");
+        btnCicloContable.setToolTipText("Estado de cambios en el patrimonio");
+        btnCicloContable.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        btnCicloContable.setSizeIcon(25.0F);
+        btnCicloContable.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnCicloContable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCicloContableActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidebarLayout = new javax.swing.GroupLayout(sidebar);
         sidebar.setLayout(sidebarLayout);
         sidebarLayout.setHorizontalGroup(
@@ -206,10 +226,10 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addGroup(sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rSLabelHora1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(rSLabelFecha1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidebarLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(imagenPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)))
                 .addContainerGap())
             .addGroup(sidebarLayout.createSequentialGroup()
@@ -222,16 +242,17 @@ public class vPrincipal extends javax.swing.JFrame {
                     .addComponent(btnBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBalanceGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFlujoEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCambiosPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCambiosPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         sidebarLayout.setVerticalGroup(
             sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sidebarLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imagenPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(txtNombreUsuario)
                 .addGap(14, 14, 14)
                 .addComponent(rSLabelFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -250,11 +271,13 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addComponent(btnFlujoEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCambiosPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         topbar.setBackground(new java.awt.Color(204, 204, 204));
@@ -328,6 +351,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.btnBalanceGeneral.setSelected(false);
         this.btnFlujoEfectivo.setSelected(false);
         this.btnCambiosPatrimonio.setSelected(false);
+        this.btnCicloContable.setSelected(false);
         this.btnConfig.setSelected(false);
         
     }
@@ -391,6 +415,14 @@ public class vPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCambiosPatrimonioActionPerformed
 
+    private void btnCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCicloContableActionPerformed
+        this.seleccionarBoton();
+        if (!this.btnCicloContable.isSelected()) {
+            this.btnCicloContable.setSelected(true);
+            new CambiaPanel(pnl, new vCicloContable());
+        }
+    }//GEN-LAST:event_btnCicloContableActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -430,14 +462,14 @@ public class vPrincipal extends javax.swing.JFrame {
     private RSMaterialComponent.RSButtonShapeIcon btnBalanceGeneral;
     private RSMaterialComponent.RSButtonShapeIcon btnBalanzaComprobacion;
     private RSMaterialComponent.RSButtonShapeIcon btnCambiosPatrimonio;
+    private RSMaterialComponent.RSButtonShapeIcon btnCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnConfig;
     private RSMaterialComponent.RSButtonShapeIcon btnEstadoResultado;
     private RSMaterialComponent.RSButtonShapeIcon btnFlujoEfectivo;
     private RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;
     private RSMaterialComponent.RSButtonShapeIcon btnLibroMayor;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel imagenPrincipal;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel pnl;
     private javax.swing.JPanel pnlBase;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon1;
@@ -445,5 +477,6 @@ public class vPrincipal extends javax.swing.JFrame {
     private rojeru_san.rsdate.RSLabelHora rSLabelHora1;
     private javax.swing.JPanel sidebar;
     private javax.swing.JPanel topbar;
+    private javax.swing.JLabel txtNombreUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -50,13 +50,13 @@ public class daoUsuario {
         try {
             var sql = """
                       INSERT INTO usuario 
-                      values (null, ?, ?, ?)
+                      values (?, ?, ?, ?)
                       """;
             ps = cx.conectar().prepareStatement(sql);
-            ps.setString(1, usuario.getUsuario());
-            ps.setString(2, usuario.getUsuario());
-            ps.setString(3, usuario.getClave());
-            ps.setString(4, usuario.getCorreo());
+            ps.setInt(1, usuario.getId());
+            ps.setInt(2, usuario.getId_persona());
+            ps.setString(4, usuario.getUsuario());
+            ps.setString(5, usuario.getCorreo());
             ps.executeUpdate();
             cx.desconectar();
             return rg.asCreated("", ps);

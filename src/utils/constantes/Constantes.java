@@ -4,6 +4,10 @@
  */
 package utils.constantes;
 
+import modelo.ConfiguracionUsuario;
+import modelo.Persona;
+import modelo.Usuario;
+
 /**
  *
  * @author vacev
@@ -11,5 +15,19 @@ package utils.constantes;
 public class Constantes {
     // ruta de configuracion de archivo de DB
     public static String rutaConexion = "database/db.sqlite";
-
+    
+    // constantes para manejar el tipo de PERSONA
+    public static int TIPO_DOCENTE = 1;
+    public static int TIPO_ALUMNO = 2;
+    
+    // constantes para saber si se resetea la clave al usuario
+    public static int RESETEAR_CLAVE = 1;
+    public static int NO_RESETEAR_CLAVE = 0;
+    
+    // modelos a usar en el proyecto general
+    public static Persona persona = new Persona();
+    public static Usuario usuario = new Usuario();
+    public static ConfiguracionUsuario configUsuario = new ConfiguracionUsuario();
+    
+    // logo en pantalla principal
 }

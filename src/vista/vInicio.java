@@ -14,7 +14,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import modelo.CambiaPanel;
+import utils.constantes.CambiaPanel;
 import necesario.RSFileChooser;
 import utils.constantes.Constantes;
 

@@ -103,7 +103,7 @@ public class vUsuario extends javax.swing.JFrame {
         });
         scroll.setViewportView(tblUsuarios);
 
-        getContentPane().add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 470, 250));
+        getContentPane().add(scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 470, 120));
 
         btnAgregar.setText("Agregar    ");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
