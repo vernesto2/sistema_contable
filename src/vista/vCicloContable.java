@@ -161,7 +161,7 @@ public class vCicloContable extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(33, 146, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(rSButtonShapeIcon11, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,7 +201,11 @@ public class vCicloContable extends javax.swing.JPanel {
 
             }
         ));
-        tblCicloContable.setColumnSelectionAllowed(true);
+        tblCicloContable.setBackgoundHead(new java.awt.Color(153, 153, 153));
+        tblCicloContable.setBackgoundHover(new java.awt.Color(204, 204, 204));
+        tblCicloContable.setColorPrimaryText(new java.awt.Color(0, 0, 0));
+        tblCicloContable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblCicloContable.setShowGrid(true);
         tblCicloContable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblCicloContableMouseClicked(evt);
@@ -223,8 +227,8 @@ public class vCicloContable extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -261,9 +265,16 @@ public class vCicloContable extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rSButtonShapeIcon10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon10ActionPerformed
-        
+       this.limpiarForm();
     }//GEN-LAST:event_rSButtonShapeIcon10ActionPerformed
 
+    public void limpiarForm() {
+        cicloContableModel = new CicloContable();
+        txtDesde.setDate(new Date());
+        txtHasta.setDate(new Date());
+        txtTitulo.setText("");
+    }
+    
     private void rSButtonShapeIcon15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon15ActionPerformed
        
     }//GEN-LAST:event_rSButtonShapeIcon15ActionPerformed

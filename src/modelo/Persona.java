@@ -28,8 +28,8 @@ public class Persona {
     
     public Persona() {
         this.id = -1;
-        this.nombres = "Victor";
-        this.apellidos = "Acevedo";
+        this.nombres = "Diego";
+        this.apellidos = "Palacios";
         this.tipo = Constantes.TIPO_ALUMNO;
         this.carnet = carnet;
     }

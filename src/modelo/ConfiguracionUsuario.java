@@ -25,7 +25,7 @@ public class ConfiguracionUsuario {
         this.id = -1;
         this.id_usuario = -1;
         this.id_ciclo_contable = -1;
-        this.avatar = "/utils/avatar/avatar1.png";
+        this.avatar = "/utils/avatar/avatar2.png";
     }
 
     public int getId() {
