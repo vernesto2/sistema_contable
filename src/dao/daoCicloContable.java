@@ -10,8 +10,14 @@ import utils.constantes.RespuestaGeneral;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.dtoCicloContable;
+import vista.vCicloContable;
 /**
  *
  * @author vacev
@@ -37,8 +43,19 @@ public class daoCicloContable {
                 cicloContable.setId(rs.getInt("id"));
                 cicloContable.setId_catalogo(rs.getInt("id_catalogo"));
                 cicloContable.setTitulo(rs.getString("titulo"));
-                cicloContable.setDesde(rs.getString("desde"));
-                cicloContable.setHasta(rs.getString("hasta"));
+                String titulo = rs.getString("titulo");
+                String sDesde = rs.getString("desde");
+                String sHasta = rs.getString("hasta");
+                Date desde = new Date();
+                Date hasta = new Date();
+                try {
+                    desde = new SimpleDateFormat("yyyy-MM-dd").parse(sDesde);
+                    hasta = new SimpleDateFormat("yyyy-MM-dd").parse(sHasta);
+                } catch (ParseException ex) {
+                    Logger.getLogger(vCicloContable.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                cicloContable.setDesde(desde);
+                cicloContable.setHasta(hasta);
                 cicloContable.setCatalogo(rs.getString("catalogo"));
                 lista.add(cicloContable);
             }

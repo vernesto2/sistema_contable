@@ -225,7 +225,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="12" style="1"/>
                 </Property>
-                <Property name="formatDate" type="java.lang.String" value="dd/MM/yyyy"/>
+                <Property name="formatDate" type="java.lang.String" value="dd-MM-yyyy"/>
               </Properties>
             </Component>
             <Component class="newscomponents.RSDateChooser" name="txtDesde">
@@ -233,8 +233,11 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="12" style="1"/>
                 </Property>
-                <Property name="formatDate" type="java.lang.String" value="dd/MM/yyyy"/>
+                <Property name="formatDate" type="java.lang.String" value="dd-MM-yyyy"/>
               </Properties>
+              <Events>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="txtDesdePropertyChange"/>
+              </Events>
             </Component>
             <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon11">
               <Properties>

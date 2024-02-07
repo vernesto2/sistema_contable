@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.Date;
+
 /**
  *
  * @author vacev
@@ -13,10 +15,10 @@ public class CicloContable {
     int id;
     int id_catalogo;
     String titulo;
-    String desde;
-    String hasta;
+    Date desde;
+    Date hasta;
 
-    public CicloContable(int id, int id_catalogo, String titulo, String desde, String hasta) {
+    public CicloContable(int id, int id_catalogo, String titulo, Date desde, Date hasta) {
         this.id = id;
         this.id_catalogo = id_catalogo;
         this.titulo = titulo;
@@ -28,8 +30,8 @@ public class CicloContable {
         this.id = -1;
         this.id_catalogo = -1;
         this.titulo = "";
-        this.desde = "";
-        this.hasta = "";
+        this.desde = new Date();
+        this.hasta = new Date();
     }
 
     public int getId() {
@@ -56,19 +58,19 @@ public class CicloContable {
         this.titulo = titulo;
     }
 
-    public String getDesde() {
+    public Date getDesde() {
         return desde;
     }
 
-    public void setDesde(String desde) {
+    public void setDesde(Date desde) {
         this.desde = desde;
     }
 
-    public String getHasta() {
+    public Date getHasta() {
         return hasta;
     }
 
-    public void setHasta(String hasta) {
+    public void setHasta(Date hasta) {
         this.hasta = hasta;
     }
     

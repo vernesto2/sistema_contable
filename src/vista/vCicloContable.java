@@ -30,6 +30,8 @@ public class vCicloContable extends javax.swing.JPanel {
     
     DefaultTableModel dtm = new DefaultTableModel();
     
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    
     public vCicloContable() {
         initComponents();
         this.setModel();
@@ -46,8 +48,8 @@ public class vCicloContable extends javax.swing.JPanel {
         Object[] datos = new Object[dtm.getColumnCount()];
         for (dtoCicloContable ciclo : listaCiclosContables) {
             datos[0] = ciclo.getTitulo();
-            datos[1] = ciclo.getDesde();
-            datos[2] = ciclo.getHasta();
+            datos[1] = sdf.format(ciclo.getDesde());
+            datos[2] = sdf.format(ciclo.getHasta());
             datos[3] = ciclo.getCatalogo();
             dtm.addRow(datos);
         }
@@ -127,10 +129,15 @@ public class vCicloContable extends javax.swing.JPanel {
         listCatalogo.setColorMaterial(new java.awt.Color(102, 102, 102));
 
         txtHasta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtHasta.setFormatDate("dd/MM/yyyy");
+        txtHasta.setFormatDate("dd-MM-yyyy");
 
         txtDesde.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtDesde.setFormatDate("dd/MM/yyyy");
+        txtDesde.setFormatDate("dd-MM-yyyy");
+        txtDesde.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtDesdePropertyChange(evt);
+            }
+        });
 
         rSButtonShapeIcon11.setBackground(new java.awt.Color(0, 153, 0));
         rSButtonShapeIcon11.setText("SELECCIONAR");
@@ -288,18 +295,15 @@ public class vCicloContable extends javax.swing.JPanel {
         // seteamos el ID para editar
         cicloContableModel.setId(this.listaCiclosContables.get(row).getId());
         txtTitulo.setText(this.listaCiclosContables.get(row).getTitulo());
-        Date desde = new Date();
-        Date hasta = new Date();
-        try {
-            desde = new SimpleDateFormat("yyyy-MM-dd").parse(this.listaCiclosContables.get(row).getDesde().toString());
-            hasta = new SimpleDateFormat("yyyy-MM-dd").parse(this.listaCiclosContables.get(row).getHasta().toString());
-        } catch (ParseException ex) {
-            Logger.getLogger(vCicloContable.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        txtDesde.setDate(desde);
-        txtHasta.setDate(hasta);
+        txtDesde.setDate(this.listaCiclosContables.get(row).getDesde());
+        txtDesde.setFormatDate("dd-MM-yyyy");
+        txtHasta.setDate(this.listaCiclosContables.get(row).getHasta());
+        txtHasta.setFormatDate("dd-MM-yyyy");
     }//GEN-LAST:event_tblCicloContableMouseClicked
 
+    private void txtDesdePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtDesdePropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDesdePropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
