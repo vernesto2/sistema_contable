@@ -29,5 +29,11 @@ public class Constantes {
     public static Usuario usuario = new Usuario();
     public static ConfiguracionUsuario configUsuario = new ConfiguracionUsuario();
     
+    public static final String [] PREGUNTAS_SEGURIDAD = new String[] { 
+        "Seleccione ...",
+        "¿Cuál es el nombre de tu primera mascota?", 
+        "¿Cuál sería tu trabajo ideal?", 
+        "¿Qué actividad es la que más disfrutas hacer?" 
+    };
     // logo en pantalla principal
 }

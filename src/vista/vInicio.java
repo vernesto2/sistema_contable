@@ -276,24 +276,27 @@ public class vInicio extends javax.swing.JFrame {
         selector.setFileFilter(fnef);
         selector.setCurrentDirectory(new File("./database"));
         selector.setMultiSelectionEnabled(false);
-        if (selector.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File archivo = selector.getSelectedFile();
-            try {
-                String ruta = archivo.getCanonicalPath();
-                this.lblRutaGlobal.setText(ruta);
-                System.out.println(ruta);
-                Constantes.rutaConexion = ruta;
-                if (ruta.contains(".sqlite") || ruta.contains(".db")) {
-                    this.archivoCorrecto = true;
-                } else {
-                    this.archivoCorrecto = false;
-                }
-            } catch (IOException ex) {
-                this.archivoCorrecto = false;
-                Logger.getLogger(vInicio.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        if (selector.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
+            JOptionPane.showMessageDialog(null, "¡No seleccionó ningún archivo: ", "Mensaje", JOptionPane.WARNING_MESSAGE);
         }
-        this.probarConexion();
+        File archivo = selector.getSelectedFile();
+        try {
+            String ruta = archivo.getCanonicalPath();
+            this.lblRutaGlobal.setText(ruta);
+            System.out.println(ruta);
+            Constantes.rutaConexion = ruta;
+            if (ruta.contains(".sqlite") || ruta.contains(".db")) {
+                this.archivoCorrecto = true;
+            } else {
+                this.archivoCorrecto = false;
+            }
+            this.probarConexion();
+        } catch (IOException ex) {
+            this.archivoCorrecto = false;
+            Logger.getLogger(vInicio.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "¡Ocurrió un error: " + ex.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
+        }
+        System.out.print("final");
     }//GEN-LAST:event_rSButtonShapeIcon16ActionPerformed
 
     private void lblRutaGlobalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRutaGlobalMouseEntered
