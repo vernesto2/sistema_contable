@@ -14,7 +14,7 @@ public class Usuario {
     
     int id;
     int id_persona;
-    String usuario; 
+    String nombre; 
     String correo;
     String clave;
     int resetear_clave;
@@ -24,11 +24,11 @@ public class Usuario {
     String respuesta2;
     int pregunta3;
     String respuesta3;
-
-    public Usuario(int id, int id_persona, String usuario, String correo, String clave, int resetear_clave, int pregunta1, String respuesta1, int pregunta2, String respuesta2, int pregunta3, String respuesta3) {
+    Persona persona; 
+    public Usuario(int id, int id_persona, String nombre, String correo, String clave, int resetear_clave, int pregunta1, String respuesta1, int pregunta2, String respuesta2, int pregunta3, String respuesta3) {
         this.id = id;
         this.id_persona = id_persona;
-        this.usuario = usuario;
+        this.nombre = nombre;
         this.correo = correo;
         this.clave = clave;
         this.resetear_clave = resetear_clave;
@@ -43,7 +43,7 @@ public class Usuario {
     public Usuario() {
         this.id = -1;
         this.id_persona = -1;
-        this.usuario = "";
+        this.nombre = "";
         this.correo = "";
         this.clave = "";
         this.resetear_clave = Constantes.RESETEAR_CLAVE;
@@ -71,12 +71,12 @@ public class Usuario {
         this.id_persona = id_persona;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getCorreo() {
@@ -149,6 +149,14 @@ public class Usuario {
 
     public void setRespuesta3(String respuesta3) {
         this.respuesta3 = respuesta3;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
     

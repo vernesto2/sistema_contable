@@ -16,7 +16,7 @@ import java.sql.SQLException;
  * @author vacev
  */
 public class daoUsuario {
-    
+    /*
     Conexion cx;
     
     public daoUsuario() {
@@ -67,5 +67,5 @@ public class daoUsuario {
             return rg.asBadRequest(mensaje);
         }
     }
-    
+    */
 }

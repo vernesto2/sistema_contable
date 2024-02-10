@@ -4,10 +4,13 @@
  */
 package vista;
 
+import dao.DaoUsuario;
 import java.awt.Toolkit;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
+import modelo.Persona;
+import modelo.Usuario;
 import utils.constantes.Constantes;
 
 /**
@@ -19,6 +22,8 @@ public class vConfigInicial extends javax.swing.JFrame {
     /**
      * Creates new form vConfigInicial
      */
+    DaoUsuario _usuario = new DaoUsuario();
+    
     public vConfigInicial() {
         initComponents();
         this.iniciarVista();
@@ -47,21 +52,22 @@ public class vConfigInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         rSPanel1 = new necesario.RSPanel();
-        rSButtonShapeIcon15 = new RSMaterialComponent.RSButtonShapeIcon();
-        rSButtonShapeIcon10 = new RSMaterialComponent.RSButtonShapeIcon();
-        jLabel1 = new javax.swing.JLabel();
-        comboPreguntaRecuperacion2 = new RSMaterialComponent.RSComboBoxMaterial();
-        txtRespuesta2 = new RSMaterialComponent.RSTextFieldMaterial();
-        rSButtonShapeIcon9 = new RSMaterialComponent.RSButtonShapeIcon();
-        txtCorreo = new RSMaterialComponent.RSTextFieldMaterial();
-        txtClave = new RSMaterialComponent.RSPasswordMaterial();
+        txtNombres = new RSMaterialComponent.RSTextFieldMaterial();
+        txtApellidos = new RSMaterialComponent.RSTextFieldMaterial();
         txtCarnet = new RSMaterialComponent.RSTextFieldMaterial();
+        txtClave = new RSMaterialComponent.RSPasswordMaterial();
+        txtRepetirClave = new RSMaterialComponent.RSPasswordMaterial();
+        txtCorreo = new RSMaterialComponent.RSTextFieldMaterial();
         comboPreguntaRecuperacion1 = new RSMaterialComponent.RSComboBoxMaterial();
         txtRespuesta1 = new RSMaterialComponent.RSTextFieldMaterial();
+        comboPreguntaRecuperacion2 = new RSMaterialComponent.RSComboBoxMaterial();
+        txtRespuesta2 = new RSMaterialComponent.RSTextFieldMaterial();
         comboPreguntaRecuperacion3 = new RSMaterialComponent.RSComboBoxMaterial();
         txtRespuesta3 = new RSMaterialComponent.RSTextFieldMaterial();
-        txtNombres = new RSMaterialComponent.RSTextFieldMaterial();
-        txtApellidos = new RSMaterialComponent.RSPasswordMaterial();
+        btnCrearConfiguracion = new RSMaterialComponent.RSButtonShapeIcon();
+        btnCancelar = new RSMaterialComponent.RSButtonShapeIcon();
+        jLabel1 = new javax.swing.JLabel();
+        rSButtonShapeIcon9 = new RSMaterialComponent.RSButtonShapeIcon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -70,39 +76,46 @@ public class vConfigInicial extends javax.swing.JFrame {
         rSPanel1.setForeground(new java.awt.Color(255, 255, 255));
         rSPanel1.setColorBackground(new java.awt.Color(255, 255, 255));
 
-        rSButtonShapeIcon15.setBackground(new java.awt.Color(33, 58, 86));
-        rSButtonShapeIcon15.setText("Crear configuración");
-        rSButtonShapeIcon15.setBackgroundHover(new java.awt.Color(33, 68, 86));
-        rSButtonShapeIcon15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        rSButtonShapeIcon15.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        rSButtonShapeIcon15.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
-        rSButtonShapeIcon15.addActionListener(new java.awt.event.ActionListener() {
+        txtNombres.setPlaceholder("Nombres");
+        txtNombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShapeIcon15ActionPerformed(evt);
+                txtNombresActionPerformed(evt);
             }
         });
 
-        rSButtonShapeIcon10.setBackground(new java.awt.Color(251, 205, 6));
-        rSButtonShapeIcon10.setText("CANCELAR");
-        rSButtonShapeIcon10.setBackgroundHover(new java.awt.Color(251, 174, 6));
-        rSButtonShapeIcon10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        rSButtonShapeIcon10.setForegroundHover(new java.awt.Color(0, 0, 0));
-        rSButtonShapeIcon10.setForegroundIcon(new java.awt.Color(0, 0, 0));
-        rSButtonShapeIcon10.setForegroundIconHover(new java.awt.Color(0, 0, 0));
-        rSButtonShapeIcon10.setForegroundText(new java.awt.Color(0, 0, 0));
-        rSButtonShapeIcon10.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        rSButtonShapeIcon10.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
-        rSButtonShapeIcon10.addActionListener(new java.awt.event.ActionListener() {
+        txtApellidos.setPlaceholder("Apellidos");
+        txtApellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShapeIcon10ActionPerformed(evt);
+                txtApellidosActionPerformed(evt);
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/img/recuperacion.png"))); // NOI18N
-        jLabel1.setToolTipText("");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIconTextGap(1);
+        txtCarnet.setPlaceholder("Carnét");
+        txtCarnet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCarnetActionPerformed(evt);
+            }
+        });
+
+        txtClave.setPlaceholder("Clave de acceso");
+
+        txtRepetirClave.setPlaceholder("Repetir clave de acceso");
+
+        txtCorreo.setPlaceholder("Correo");
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreoActionPerformed(evt);
+            }
+        });
+
+        comboPreguntaRecuperacion1.setColorMaterial(new java.awt.Color(102, 102, 102));
+
+        txtRespuesta1.setForeground(new java.awt.Color(0, 0, 0));
+        txtRespuesta1.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtRespuesta1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtRespuesta1.setPhColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta1.setPlaceholder("Digite la respuesta..");
+        txtRespuesta1.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         comboPreguntaRecuperacion2.setBorder(null);
         comboPreguntaRecuperacion2.setColorMaterial(new java.awt.Color(102, 102, 102));
@@ -113,6 +126,49 @@ public class vConfigInicial extends javax.swing.JFrame {
         txtRespuesta2.setPhColor(new java.awt.Color(0, 0, 0));
         txtRespuesta2.setPlaceholder("Digite la respuesta..");
         txtRespuesta2.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        comboPreguntaRecuperacion3.setColorMaterial(new java.awt.Color(102, 102, 102));
+
+        txtRespuesta3.setForeground(new java.awt.Color(0, 0, 0));
+        txtRespuesta3.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtRespuesta3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtRespuesta3.setPhColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta3.setPlaceholder("Digite la respuesta..");
+        txtRespuesta3.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        btnCrearConfiguracion.setBackground(new java.awt.Color(33, 58, 86));
+        btnCrearConfiguracion.setText("Crear configuración");
+        btnCrearConfiguracion.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnCrearConfiguracion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnCrearConfiguracion.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnCrearConfiguracion.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
+        btnCrearConfiguracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearConfiguracionActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setBackground(new java.awt.Color(251, 205, 6));
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.setBackgroundHover(new java.awt.Color(251, 174, 6));
+        btnCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnCancelar.setForegroundHover(new java.awt.Color(0, 0, 0));
+        btnCancelar.setForegroundIcon(new java.awt.Color(0, 0, 0));
+        btnCancelar.setForegroundIconHover(new java.awt.Color(0, 0, 0));
+        btnCancelar.setForegroundText(new java.awt.Color(0, 0, 0));
+        btnCancelar.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnCancelar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/img/recuperacion.png"))); // NOI18N
+        jLabel1.setToolTipText("");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIconTextGap(1);
 
         rSButtonShapeIcon9.setBackground(new java.awt.Color(33, 58, 86));
         rSButtonShapeIcon9.setToolTipText("SALIR DE LA APLICACIÓN");
@@ -126,49 +182,6 @@ public class vConfigInicial extends javax.swing.JFrame {
                 rSButtonShapeIcon9ActionPerformed(evt);
             }
         });
-
-        txtCorreo.setPlaceholder("Correo");
-        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreoActionPerformed(evt);
-            }
-        });
-
-        txtClave.setPlaceholder("Clave de acceso");
-
-        txtCarnet.setPlaceholder("Carnét");
-        txtCarnet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCarnetActionPerformed(evt);
-            }
-        });
-
-        comboPreguntaRecuperacion1.setColorMaterial(new java.awt.Color(102, 102, 102));
-
-        txtRespuesta1.setForeground(new java.awt.Color(0, 0, 0));
-        txtRespuesta1.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtRespuesta1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtRespuesta1.setPhColor(new java.awt.Color(0, 0, 0));
-        txtRespuesta1.setPlaceholder("Digite la respuesta..");
-        txtRespuesta1.setSelectionColor(new java.awt.Color(0, 0, 0));
-
-        comboPreguntaRecuperacion3.setColorMaterial(new java.awt.Color(102, 102, 102));
-
-        txtRespuesta3.setForeground(new java.awt.Color(0, 0, 0));
-        txtRespuesta3.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtRespuesta3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtRespuesta3.setPhColor(new java.awt.Color(0, 0, 0));
-        txtRespuesta3.setPlaceholder("Digite la respuesta..");
-        txtRespuesta3.setSelectionColor(new java.awt.Color(0, 0, 0));
-
-        txtNombres.setPlaceholder("Nombres");
-        txtNombres.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombresActionPerformed(evt);
-            }
-        });
-
-        txtApellidos.setPlaceholder("Apellidos");
 
         javax.swing.GroupLayout rSPanel1Layout = new javax.swing.GroupLayout(rSPanel1);
         rSPanel1.setLayout(rSPanel1Layout);
@@ -187,33 +200,37 @@ public class vConfigInicial extends javax.swing.JFrame {
                                 .addComponent(jLabel1))
                             .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53)
-                        .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtRespuesta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboPreguntaRecuperacion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRespuesta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(47, 47, 47)
+                        .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboPreguntaRecuperacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(108, 108, 108))
                     .addGroup(rSPanel1Layout.createSequentialGroup()
                         .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53)
+                            .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRepetirClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
                         .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboPreguntaRecuperacion3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtRespuesta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(rSPanel1Layout.createSequentialGroup()
-                                .addComponent(rSButtonShapeIcon10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rSButtonShapeIcon15, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(102, 102, 102))
+                                .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(rSPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnCrearConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(102, 102, 102))))
         );
         rSPanel1Layout.setVerticalGroup(
             rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rSPanel1Layout.createSequentialGroup()
                 .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rSPanel1Layout.createSequentialGroup()
+                    .addGroup(rSPanel1Layout.createSequentialGroup()
                         .addComponent(rSButtonShapeIcon9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
                         .addComponent(jLabel1)
@@ -221,34 +238,35 @@ public class vConfigInicial extends javax.swing.JFrame {
                         .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rSPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
+                    .addGroup(rSPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboPreguntaRecuperacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(rSPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
+                        .addComponent(comboPreguntaRecuperacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rSPanel1Layout.createSequentialGroup()
                         .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRepetirClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))
+                        .addContainerGap())
                     .addGroup(rSPanel1Layout.createSequentialGroup()
+                        .addComponent(txtRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboPreguntaRecuperacion3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rSButtonShapeIcon10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rSButtonShapeIcon15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(64, 64, 64))))
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCrearConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -267,15 +285,35 @@ public class vConfigInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rSButtonShapeIcon10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon10ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vInicio inicio = new vInicio();
         inicio.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_rSButtonShapeIcon10ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void rSButtonShapeIcon15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon15ActionPerformed
+    private void btnCrearConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfiguracionActionPerformed
+        Persona persona = new Persona();
+        persona.setNombres(txtApellidos.getText());
+        persona.setApellidos(txtApellidos.getText());
+        persona.setTipo(Constantes.TIPO_ALUMNO);
+        persona.setCarnet(txtCarnet.getText());
         
-    }//GEN-LAST:event_rSButtonShapeIcon15ActionPerformed
+        Usuario usuario = new Usuario();
+        usuario.setNombre(txtCarnet.getText());
+        usuario.setCorreo(txtCorreo.getText());
+        usuario.setClave(txtClave.getText());
+        usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+        
+        usuario.setPregunta1(comboPreguntaRecuperacion1.getSelectedIndex());
+        usuario.setRespuesta1(txtRespuesta1.getText());
+        usuario.setPregunta1(comboPreguntaRecuperacion2.getSelectedIndex());
+        usuario.setRespuesta1(txtRespuesta2.getText());
+        usuario.setPregunta1(comboPreguntaRecuperacion3.getSelectedIndex());
+        usuario.setRespuesta1(txtRespuesta3.getText());
+        
+        usuario.setPersona(persona);
+        this._usuario.insertar(usuario);
+    }//GEN-LAST:event_btnCrearConfiguracionActionPerformed
 
     private void rSButtonShapeIcon9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon9ActionPerformed
         // TODO add your handling code here:
@@ -289,6 +327,10 @@ public class vConfigInicial extends javax.swing.JFrame {
     private void txtCarnetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCarnetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCarnetActionPerformed
+
+    private void txtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellidosActionPerformed
 
     private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
         // TODO add your handling code here:
@@ -330,19 +372,20 @@ public class vConfigInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonShapeIcon btnCancelar;
+    private RSMaterialComponent.RSButtonShapeIcon btnCrearConfiguracion;
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion1;
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion2;
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion3;
     private javax.swing.JLabel jLabel1;
-    private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon10;
-    private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon15;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon9;
     private necesario.RSPanel rSPanel1;
-    private RSMaterialComponent.RSPasswordMaterial txtApellidos;
+    private RSMaterialComponent.RSTextFieldMaterial txtApellidos;
     private RSMaterialComponent.RSTextFieldMaterial txtCarnet;
     private RSMaterialComponent.RSPasswordMaterial txtClave;
     private RSMaterialComponent.RSTextFieldMaterial txtCorreo;
     private RSMaterialComponent.RSTextFieldMaterial txtNombres;
+    private RSMaterialComponent.RSPasswordMaterial txtRepetirClave;
     private RSMaterialComponent.RSTextFieldMaterial txtRespuesta1;
     private RSMaterialComponent.RSTextFieldMaterial txtRespuesta2;
     private RSMaterialComponent.RSTextFieldMaterial txtRespuesta3;

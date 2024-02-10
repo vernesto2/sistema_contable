@@ -69,36 +69,42 @@
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="txtApellidos" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombres" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNombres" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtRespuesta1" max="32767" attributes="0"/>
-                              <Component id="comboPreguntaRecuperacion2" max="32767" attributes="0"/>
-                              <Component id="txtRespuesta2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="comboPreguntaRecuperacion1" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="txtRespuesta1" min="-2" max="-2" attributes="0"/>
+                              <Component id="comboPreguntaRecuperacion2" min="-2" pref="250" max="-2" attributes="0"/>
+                              <Component id="comboPreguntaRecuperacion1" min="-2" pref="250" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtCorreo" min="-2" max="-2" attributes="0"/>
                               <Component id="txtClave" min="-2" max="-2" attributes="0"/>
                               <Component id="txtCarnet" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtRepetirClave" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="53" pref="53" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="comboPreguntaRecuperacion3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="comboPreguntaRecuperacion3" max="32767" attributes="0"/>
                               <Component id="txtRespuesta3" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="rSButtonShapeIcon10" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="rSButtonShapeIcon15" min="-2" pref="220" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="btnCancelar" min="-2" pref="150" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btnCrearConfiguracion" min="-2" pref="220" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="txtRespuesta2" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,7 +112,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="rSButtonShapeIcon9" min="-2" pref="28" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -115,38 +121,39 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtApellidos" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="comboPreguntaRecuperacion1" min="-2" pref="46" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="txtRespuesta1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="comboPreguntaRecuperacion2" min="-2" pref="46" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txtRespuesta2" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="txtCarnet" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtClave" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="txtRepetirClave" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtCorreo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
+                          <Component id="txtRespuesta2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="comboPreguntaRecuperacion3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="txtRespuesta3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="30" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="rSButtonShapeIcon10" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rSButtonShapeIcon15" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCrearConfiguracion" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -154,80 +161,50 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon15">
+        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtNombres">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="56" green="3a" red="21" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Crear configuraci&#xf3;n"/>
-            <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="56" green="44" red="21" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
-            </Property>
-            <Property name="forma" type="RSMaterialComponent.RSButtonShapeIcon$FORMA" editor="org.netbeans.modules.form.editors.EnumEditor">
-              <Value id="ROUND"/>
-            </Property>
-            <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
-              <Value id="CACHED"/>
-            </Property>
+            <Property name="placeholder" type="java.lang.String" value="Nombres"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon15ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombresActionPerformed"/>
           </Events>
         </Component>
-        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon10">
+        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtApellidos">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="6" green="cd" red="fb" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="CANCELAR"/>
-            <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="6" green="ae" red="fb" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
-            </Property>
-            <Property name="foregroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-            <Property name="foregroundIcon" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-            <Property name="foregroundIconHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-            <Property name="foregroundText" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-            <Property name="forma" type="RSMaterialComponent.RSButtonShapeIcon$FORMA" editor="org.netbeans.modules.form.editors.EnumEditor">
-              <Value id="ROUND"/>
-            </Property>
-            <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
-              <Value id="CANCEL"/>
-            </Property>
+            <Property name="placeholder" type="java.lang.String" value="Apellidos"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon10ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtApellidosActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtCarnet">
           <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/utils/img/recuperacion.png"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="iconTextGap" type="int" value="1"/>
+            <Property name="placeholder" type="java.lang.String" value="Carn&#xe9;t"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCarnetActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtClave">
+          <Properties>
+            <Property name="placeholder" type="java.lang.String" value="Clave de acceso"/>
           </Properties>
         </Component>
-        <Component class="RSMaterialComponent.RSComboBoxMaterial" name="comboPreguntaRecuperacion2">
+        <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtRepetirClave">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
+            <Property name="placeholder" type="java.lang.String" value="Repetir clave de acceso"/>
+          </Properties>
+        </Component>
+        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtCorreo">
+          <Properties>
+            <Property name="placeholder" type="java.lang.String" value="Correo"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCorreoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="RSMaterialComponent.RSComboBoxMaterial" name="comboPreguntaRecuperacion1">
+          <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
@@ -236,7 +213,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtRespuesta2">
+        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtRespuesta1">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -256,51 +233,11 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon9">
+        <Component class="RSMaterialComponent.RSComboBoxMaterial" name="comboPreguntaRecuperacion2">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="56" green="3a" red="21" type="rgb"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="SALIR DE LA APLICACI&#xd3;N"/>
-            <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="56" green="44" red="21" type="rgb"/>
-            </Property>
-            <Property name="forma" type="RSMaterialComponent.RSButtonShapeIcon$FORMA" editor="org.netbeans.modules.form.editors.EnumEditor">
-              <Value id="RECT"/>
-            </Property>
-            <Property name="hideActionText" type="boolean" value="true"/>
-            <Property name="horizontalTextPosition" type="int" value="2"/>
-            <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
-              <Value id="CLOSE"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon9ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtCorreo">
-          <Properties>
-            <Property name="placeholder" type="java.lang.String" value="Correo"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCorreoActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtClave">
-          <Properties>
-            <Property name="placeholder" type="java.lang.String" value="Clave de acceso"/>
-          </Properties>
-        </Component>
-        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtCarnet">
-          <Properties>
-            <Property name="placeholder" type="java.lang.String" value="Carn&#xe9;t"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCarnetActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="RSMaterialComponent.RSComboBoxMaterial" name="comboPreguntaRecuperacion1">
-          <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
@@ -309,7 +246,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtRespuesta1">
+        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtRespuesta2">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -359,18 +296,96 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="RSMaterialComponent.RSTextFieldMaterial" name="txtNombres">
+        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnCrearConfiguracion">
           <Properties>
-            <Property name="placeholder" type="java.lang.String" value="Nombres"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="56" green="3a" red="21" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Crear configuraci&#xf3;n"/>
+            <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="56" green="44" red="21" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="14" style="1"/>
+            </Property>
+            <Property name="forma" type="RSMaterialComponent.RSButtonShapeIcon$FORMA" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="ROUND"/>
+            </Property>
+            <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="CACHED"/>
+            </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombresActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearConfiguracionActionPerformed"/>
           </Events>
         </Component>
-        <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtApellidos">
+        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnCancelar">
           <Properties>
-            <Property name="placeholder" type="java.lang.String" value="Apellidos"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="6" green="cd" red="fb" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="CANCELAR"/>
+            <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="6" green="ae" red="fb" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="14" style="1"/>
+            </Property>
+            <Property name="foregroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="foregroundIcon" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="foregroundIconHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="foregroundText" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="forma" type="RSMaterialComponent.RSButtonShapeIcon$FORMA" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="ROUND"/>
+            </Property>
+            <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="CANCEL"/>
+            </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/utils/img/recuperacion.png"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="iconTextGap" type="int" value="1"/>
+          </Properties>
+        </Component>
+        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon9">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="56" green="3a" red="21" type="rgb"/>
+            </Property>
+            <Property name="toolTipText" type="java.lang.String" value="SALIR DE LA APLICACI&#xd3;N"/>
+            <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="56" green="44" red="21" type="rgb"/>
+            </Property>
+            <Property name="forma" type="RSMaterialComponent.RSButtonShapeIcon$FORMA" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="RECT"/>
+            </Property>
+            <Property name="hideActionText" type="boolean" value="true"/>
+            <Property name="horizontalTextPosition" type="int" value="2"/>
+            <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="CLOSE"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon9ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -131,16 +131,18 @@ public class vUsuario extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Usuario usuarioModel = new Usuario();
         
-        usuarioModel.setUsuario(txtUsuario.getText());
+        usuarioModel.setNombre(txtUsuario.getText());
         usuarioModel.setClave(txtClave.getText());
         usuarioModel.setCorreo(txtCorreo.getText());
         
+/*
         RespuestaGeneral rg = this._usuario.insertarUsuario(usuarioModel);
         if (rg.esExitosa()) {
         JOptionPane.showMessageDialog(null, "Agregado Correctamente", "Titulo", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, rg.getMensaje(), "Titulo", JOptionPane.OK_OPTION);
         }
+*/
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
