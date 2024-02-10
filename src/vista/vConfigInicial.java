@@ -11,6 +11,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import modelo.Persona;
 import modelo.Usuario;
+import servicios.ServicioConfiguracion;
+import servicios.ServicioUsuario;
 import utils.constantes.Constantes;
 
 /**
@@ -22,7 +24,7 @@ public class vConfigInicial extends javax.swing.JFrame {
     /**
      * Creates new form vConfigInicial
      */
-    DaoUsuario _usuario = new DaoUsuario();
+    ServicioConfiguracion _configuracion = new ServicioConfiguracion();
     
     public vConfigInicial() {
         initComponents();
@@ -293,26 +295,31 @@ public class vConfigInicial extends javax.swing.JFrame {
 
     private void btnCrearConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfiguracionActionPerformed
         Persona persona = new Persona();
-        persona.setNombres(txtApellidos.getText());
-        persona.setApellidos(txtApellidos.getText());
+        persona.setNombres(txtApellidos.getText().trim());
+        persona.setApellidos(txtApellidos.getText().trim());
         persona.setTipo(Constantes.TIPO_ALUMNO);
-        persona.setCarnet(txtCarnet.getText());
+        persona.setCarnet(txtCarnet.getText().trim());
         
         Usuario usuario = new Usuario();
-        usuario.setNombre(txtCarnet.getText());
-        usuario.setCorreo(txtCorreo.getText());
-        usuario.setClave(txtClave.getText());
+        usuario.setNombre(txtCarnet.getText().trim());
+        usuario.setCorreo(txtCorreo.getText().trim());
+        
+        //la clave se cifra en el servicio
+        //usuario.setClave(null);
+        char[] claveSinCifrar = txtClave.getPassword();
+        
         usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
         
         usuario.setPregunta1(comboPreguntaRecuperacion1.getSelectedIndex());
-        usuario.setRespuesta1(txtRespuesta1.getText());
+        usuario.setRespuesta1(txtRespuesta1.getText().trim());
         usuario.setPregunta1(comboPreguntaRecuperacion2.getSelectedIndex());
-        usuario.setRespuesta1(txtRespuesta2.getText());
+        usuario.setRespuesta1(txtRespuesta2.getText().trim());
         usuario.setPregunta1(comboPreguntaRecuperacion3.getSelectedIndex());
-        usuario.setRespuesta1(txtRespuesta3.getText());
+        usuario.setRespuesta1(txtRespuesta3.getText().trim());
         
         usuario.setPersona(persona);
-        this._usuario.insertar(usuario);
+        this._configuracion.crear(usuario, claveSinCifrar);
+        
     }//GEN-LAST:event_btnCrearConfiguracionActionPerformed
 
     private void rSButtonShapeIcon9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon9ActionPerformed

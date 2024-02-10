@@ -19,9 +19,8 @@ import utils.constantes.RespuestaGeneral;
  */
 public class DaoUsuario {
     Conexion cx;
-    
-    public DaoUsuario() {
-        this.cx = new Conexion();
+    public DaoUsuario(Conexion xc) {
+        this.cx = cx;
     }
     
     public RespuestaGeneral insertar(Usuario usuario) {
