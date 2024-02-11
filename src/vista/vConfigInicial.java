@@ -4,7 +4,6 @@
  */
 package vista;
 
-import dao.DaoUsuario;
 import java.awt.Toolkit;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.CicloContable;
 import modelo.dtoCicloContable;
 import vista.vCicloContable;
 /**
@@ -23,13 +24,16 @@ import vista.vCicloContable;
  * @author vacev
  */
 public class daoCicloContable {
+    
+    SimpleDateFormat sdfString = new SimpleDateFormat("yyyy-MM-dd");
     Conexion cx;
 
     public daoCicloContable() {
         this.cx = new Conexion();
     }
     
-    public ArrayList<dtoCicloContable> ListarCiclosContables() {
+    public RespuestaGeneral ListarCiclosContables() {
+        RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<dtoCicloContable> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
@@ -43,7 +47,6 @@ public class daoCicloContable {
                 cicloContable.setId(rs.getInt("id"));
                 cicloContable.setId_catalogo(rs.getInt("id_catalogo"));
                 cicloContable.setTitulo(rs.getString("titulo"));
-                String titulo = rs.getString("titulo");
                 String sDesde = rs.getString("desde");
                 String sHasta = rs.getString("hasta");
                 Date desde = new Date();
@@ -59,12 +62,84 @@ public class daoCicloContable {
                 cicloContable.setCatalogo(rs.getString("catalogo"));
                 lista.add(cicloContable);
             }
+            ps.close();
             cx.desconectar();
+            return rg.asOk("", lista);
             
         } catch (SQLException e) {
             e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asBadRequest(mensaje);
         }
-        return lista;
     }
     
+    public RespuestaGeneral insertarCicloContable(CicloContable ccontable) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        ResultSet rs = null;
+        var sql = """
+                  INSERT INTO ciclo_contable     
+                  VALUES(null, ?, ?, ?, ?, ?)
+                  """;
+        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+            ps.setInt(1, ccontable.getId_catalogo());
+            ps.setString(2, ccontable.getTitulo());
+            ps.setString(3, sdfString.format(ccontable.getDesde()));
+            ps.setString(4, sdfString.format(ccontable.getHasta()));
+            ps.setInt(5, 0);
+            
+            ps.executeUpdate();
+            ps.close();
+            cx.desconectar();
+            return rg.asCreated(RespuestaGeneral.GUARDADO_CORRECTAMENTE, ps);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asBadRequest(mensaje);
+        }
+    }
+    
+    public RespuestaGeneral editarCicloContable(CicloContable ccontable) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        var sql = """
+                    UPDATE ciclo_contable SET id_catalogo=?,titulo=?,desde=?,hasta=?,eliminado=? WHERE id=?
+                  """;
+        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+            ps.setInt(1, ccontable.getId_catalogo());
+            ps.setString(2, ccontable.getTitulo());
+            ps.setString(3, sdfString.format(ccontable.getDesde()));
+            ps.setString(4, sdfString.format(ccontable.getHasta()));
+            ps.setInt(5, ccontable.isEliminado() ? 1 : 0);
+            ps.setInt(6, ccontable.getId());
+            ps.executeUpdate();
+            ps.close();
+            cx.desconectar();
+            return rg.asCreated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, ps);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asBadRequest(mensaje);
+        }
+    }
+    
+    public RespuestaGeneral eliminarCicloContable(int id) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        var sql = """
+                    UPDATE ciclo_contable SET eliminado=? WHERE id=?
+                  """;
+        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+            ps.setInt(1, 1);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            cx.desconectar();
+            ps.close();
+            return rg.asOk(RespuestaGeneral.ELIMINADO_CORRECTAMENTE, ps);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asBadRequest(mensaje);
+        }
+    }
 }

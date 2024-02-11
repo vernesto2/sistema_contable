@@ -95,7 +95,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="rSButtonShapeIcon10" min="-2" pref="124" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="rSButtonShapeIcon15" min="-2" pref="122" max="-2" attributes="0"/>
+                              <Component id="btnGuardar" min="-2" pref="122" max="-2" attributes="0"/>
                           </Group>
                           <Component id="listCatalogo" min="-2" pref="406" max="-2" attributes="0"/>
                       </Group>
@@ -117,7 +117,7 @@
                           <Component id="txtDesde" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="rSButtonShapeIcon10" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="rSButtonShapeIcon15" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="rSButtonShapeIcon11" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -183,7 +183,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon10ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon15">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnGuardar">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="3a" red="21" type="rgb"/>
@@ -204,7 +204,7 @@
                 <Property name="sizeIcon" type="float" value="20.0"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon15ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
               </Events>
             </Component>
             <Component class="RSMaterialComponent.RSComboBoxMaterial" name="listCatalogo">

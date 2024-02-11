@@ -17,13 +17,15 @@ public class CicloContable {
     String titulo;
     Date desde;
     Date hasta;
+    boolean eliminado;
 
-    public CicloContable(int id, int id_catalogo, String titulo, Date desde, Date hasta) {
+    public CicloContable(int id, int id_catalogo, String titulo, Date desde, Date hasta, boolean eliminado) {
         this.id = id;
         this.id_catalogo = id_catalogo;
         this.titulo = titulo;
         this.desde = desde;
         this.hasta = hasta;
+        this.eliminado = eliminado;
     }
     
     public CicloContable() {
@@ -32,6 +34,7 @@ public class CicloContable {
         this.titulo = "";
         this.desde = new Date();
         this.hasta = new Date();
+        this.eliminado = false;
     }
 
     public int getId() {
@@ -72,6 +75,14 @@ public class CicloContable {
 
     public void setHasta(Date hasta) {
         this.hasta = hasta;
+    }
+
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
     }
     
     

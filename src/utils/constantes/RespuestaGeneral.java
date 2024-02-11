@@ -22,6 +22,11 @@ public class RespuestaGeneral {
     public static final int CRUD_404_NotFOund = 404;
     public static final int CRUD_200_Ok = 200;
     public static final int CRUD_201_Created = 201;
+    public static final int CRUD_202_Updated = 202;
+    
+    public static final String GUARDADO_CORRECTAMENTE = "¡GUARDADO CORRECTAMENTE!";
+    public static final String ACTUALIZADO_CORRECTAMENTE = "¡ACTUALIZADO CORRECTAMENTE!";
+    public static final String ELIMINADO_CORRECTAMENTE = "¡ELIMINADO CORRECTAMENTE!";
 
     private RespuestaGeneral(int codigo, String mensaje, Object datos) {
         this.codigo = codigo;
@@ -39,7 +44,7 @@ public class RespuestaGeneral {
         return this.codigo != CRUD_200_Ok && this.codigo != CRUD_201_Created;
     }
     public boolean esExitosa() {
-        return this.codigo == CRUD_200_Ok || this.codigo == CRUD_201_Created;
+        return this.codigo == CRUD_200_Ok || this.codigo == CRUD_201_Created || this.codigo == CRUD_202_Updated;
     }
     public static final RespuestaGeneral asBadRequest(String mensaje, Object datos) {
         return new RespuestaGeneral(RespuestaGeneral.CRUD_400_BadRequest, mensaje, datos);
@@ -66,6 +71,10 @@ public class RespuestaGeneral {
     public static final RespuestaGeneral asCreated(String mensaje, Object datos) {
         return new RespuestaGeneral(RespuestaGeneral.CRUD_201_Created, mensaje, datos);
     }
+    
+    public static final RespuestaGeneral asUpdated(String mensaje, Object datos) {
+        return new RespuestaGeneral(RespuestaGeneral.CRUD_201_Created, mensaje, datos);
+    }
 
     public String getMensaje() {
         return mensaje;
@@ -77,6 +86,14 @@ public class RespuestaGeneral {
 
     public Object getDatos() {
         return datos;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
     
     

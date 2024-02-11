@@ -11,9 +11,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.CicloContable;
 import modelo.dtoCicloContable;
+import servicios.ServicioCicloContable;
+import utils.constantes.RespuestaGeneral;
 
 /**
  *
@@ -24,7 +27,7 @@ public class vCicloContable extends javax.swing.JPanel {
     /**
      * Creates new form vCicloContable
      */
-    daoCicloContable _cicloContable = new daoCicloContable();
+    ServicioCicloContable _cicloContable = new ServicioCicloContable();
     ArrayList<dtoCicloContable> listaCiclosContables = new ArrayList<>();
     CicloContable cicloContableModel = new CicloContable();
     
@@ -57,10 +60,25 @@ public class vCicloContable extends javax.swing.JPanel {
     }
     
     public void obtenerListadoCiclosContables() {
-        this.listaCiclosContables = this._cicloContable.ListarCiclosContables();
+        this.listaCiclosContables = new ArrayList<>();
+        tblCicloContable.clearSelection();
+        this.limiparTabla();
+        RespuestaGeneral rs = _cicloContable.obtenerLista();
+        if (rs.esExitosa()) {
+            this.listaCiclosContables = (ArrayList<dtoCicloContable>)rs.getDatos();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo obtener el listado", "ALERTA", JOptionPane.ERROR_MESSAGE);
+        }
         this.setDatos();
     }
 
+    public void limiparTabla() {
+        for (int i = 0; i < tblCicloContable.getRowCount(); i++) {
+            dtm.removeRow(i);
+            i-=1;
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,7 +92,7 @@ public class vCicloContable extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         txtTitulo = new RSMaterialComponent.RSTextFieldMaterial();
         rSButtonShapeIcon10 = new RSMaterialComponent.RSButtonShapeIcon();
-        rSButtonShapeIcon15 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnGuardar = new RSMaterialComponent.RSButtonShapeIcon();
         listCatalogo = new RSMaterialComponent.RSComboBoxMaterial();
         txtHasta = new newscomponents.RSDateChooser();
         txtDesde = new newscomponents.RSDateChooser();
@@ -112,16 +130,16 @@ public class vCicloContable extends javax.swing.JPanel {
             }
         });
 
-        rSButtonShapeIcon15.setBackground(new java.awt.Color(33, 58, 86));
-        rSButtonShapeIcon15.setText("GUARDAR");
-        rSButtonShapeIcon15.setBackgroundHover(new java.awt.Color(33, 68, 86));
-        rSButtonShapeIcon15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        rSButtonShapeIcon15.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        rSButtonShapeIcon15.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
-        rSButtonShapeIcon15.setSizeIcon(20.0F);
-        rSButtonShapeIcon15.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(33, 58, 86));
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardar.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnGuardar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
+        btnGuardar.setSizeIcon(20.0F);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShapeIcon15ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
@@ -175,7 +193,7 @@ public class vCicloContable extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(rSButtonShapeIcon10, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rSButtonShapeIcon15, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(listCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -192,7 +210,7 @@ public class vCicloContable extends javax.swing.JPanel {
                     .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rSButtonShapeIcon10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(rSButtonShapeIcon15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(rSButtonShapeIcon11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
@@ -280,11 +298,40 @@ public class vCicloContable extends javax.swing.JPanel {
         txtDesde.setDate(new Date());
         txtHasta.setDate(new Date());
         txtTitulo.setText("");
+        tblCicloContable.clearSelection();
     }
     
-    private void rSButtonShapeIcon15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon15ActionPerformed
-       
-    }//GEN-LAST:event_rSButtonShapeIcon15ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // setear info al modelo
+        this.cicloContableModel.setTitulo(this.txtTitulo.getText());
+        this.cicloContableModel.setDesde(this.txtDesde.getDate());
+        this.cicloContableModel.setHasta(this.txtHasta.getDate());
+        this.cicloContableModel.setId_catalogo(1);
+        // guardamos la info
+        // verificamos si es NUEVO
+        btnGuardar.setEnabled(false);
+        if (this.cicloContableModel.getId() < 0) {
+            RespuestaGeneral rs = _cicloContable.insertar(this.cicloContableModel);
+            if (rs.esExitosa()) {
+                JOptionPane.showMessageDialog(null, rs.getMensaje(), "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+                this.obtenerListadoCiclosContables();
+            } else {
+                JOptionPane.showMessageDialog(null, rs.getMensaje(), "¡ALERTA!", JOptionPane.ERROR_MESSAGE);
+            }
+        
+            // verificamos si es NUEVO
+        } else {
+            RespuestaGeneral rs = _cicloContable.editar(this.cicloContableModel);
+            if (rs.esExitosa()) {
+                JOptionPane.showMessageDialog(null, rs.getMensaje(), "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+                this.obtenerListadoCiclosContables();
+            } else {
+                JOptionPane.showMessageDialog(null, rs.getMensaje(), "¡ALERTA!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        btnGuardar.setEnabled(true);
+        this.limpiarForm();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void rSButtonShapeIcon11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon11ActionPerformed
         // TODO add your handling code here:
@@ -306,6 +353,7 @@ public class vCicloContable extends javax.swing.JPanel {
     }//GEN-LAST:event_txtDesdePropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -313,7 +361,6 @@ public class vCicloContable extends javax.swing.JPanel {
     private RSMaterialComponent.RSComboBoxMaterial listCatalogo;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon10;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon11;
-    private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon15;
     private rojerusan.RSTableMetro tblCicloContable;
     private newscomponents.RSDateChooser txtDesde;
     private newscomponents.RSDateChooser txtHasta;
