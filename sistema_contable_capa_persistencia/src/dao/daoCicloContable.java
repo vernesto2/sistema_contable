@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.CicloContable;
 import modelo.dtoCicloContable;
-import vista.vCicloContable;
+
 /**
  *
  * @author vacev
@@ -55,7 +55,7 @@ public class daoCicloContable {
                     desde = new SimpleDateFormat("yyyy-MM-dd").parse(sDesde);
                     hasta = new SimpleDateFormat("yyyy-MM-dd").parse(sHasta);
                 } catch (ParseException ex) {
-                    Logger.getLogger(vCicloContable.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
                 }
                 cicloContable.setDesde(desde);
                 cicloContable.setHasta(hasta);

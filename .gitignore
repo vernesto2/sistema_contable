@@ -4,3 +4,9 @@
 /bin/
 dist.zip
 nbproject/private/
+/sistema_contable_capa_persistencia/nbproject/private/
+/sistema_contable_capa_persistencia/build/
+/sistema_contable_capa_persistencia/dist/
+/sistema_contable_logica_negocio/nbproject/private/
+/sistema_contable_logica_negocio/build/
+/sistema_contable_logica_negocio/dist/
