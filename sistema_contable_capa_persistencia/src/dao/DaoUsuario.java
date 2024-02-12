@@ -31,11 +31,11 @@ public class DaoUsuario {
                   """;
         var sqlUsuario = """
                   INSERT INTO usuario ( 
-                         id_persona, nombre, correo, clave, resetear_clave, 
+                         id_persona, nombre, correo, salt, clave, resetear_clave, 
                          pregunta1, respuesta1,  pregunta2, respuesta2, pregunta3, respuesta3 
                   )
                   VALUES ( 
-                         ?, ?, ?, ?, ?, 
+                         ?, ?, ?, ?; ?, ?, 
                          ?, ?, ?, ?, ?, ?
                   )    
         """;
@@ -61,14 +61,15 @@ public class DaoUsuario {
             psUsuario.setInt(1, persona.getId());
             psUsuario.setString(2, usuario.getNombre());
             psUsuario.setString(3, usuario.getCorreo());
-            psUsuario.setString(4, usuario.getClave());
-            psUsuario.setInt(5, usuario.getResetear_clave());
-            psUsuario.setInt(6, usuario.getPregunta1());
-            psUsuario.setString(7, usuario.getRespuesta1());
-            psUsuario.setInt(8, usuario.getPregunta2());
-            psUsuario.setString(9, usuario.getRespuesta2());
-            psUsuario.setInt(10, usuario.getPregunta3());
-            psUsuario.setString(11, usuario.getRespuesta3());
+            psUsuario.setString(4, usuario.getSalt());
+            psUsuario.setString(5, usuario.getClave());
+            psUsuario.setInt(6, usuario.getResetear_clave());
+            psUsuario.setInt(7, usuario.getPregunta1());
+            psUsuario.setString(8, usuario.getRespuesta1());
+            psUsuario.setInt(9, usuario.getPregunta2());
+            psUsuario.setString(10, usuario.getRespuesta2());
+            psUsuario.setInt(11, usuario.getPregunta3());
+            psUsuario.setString(12, usuario.getRespuesta3());
             
             psUsuario.executeUpdate();
             

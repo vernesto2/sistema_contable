@@ -16,6 +16,7 @@ public class Usuario {
     int id_persona;
     String nombre; 
     String correo;
+    String salt;
     String clave;
     int resetear_clave;
     int pregunta1;
@@ -25,11 +26,12 @@ public class Usuario {
     int pregunta3;
     String respuesta3;
     Persona persona; 
-    public Usuario(int id, int id_persona, String nombre, String correo, String clave, int resetear_clave, int pregunta1, String respuesta1, int pregunta2, String respuesta2, int pregunta3, String respuesta3) {
+    public Usuario(int id, int id_persona, String nombre, String correo, String salt, String clave, int resetear_clave, int pregunta1, String respuesta1, int pregunta2, String respuesta2, int pregunta3, String respuesta3) {
         this.id = id;
         this.id_persona = id_persona;
         this.nombre = nombre;
         this.correo = correo;
+        this.salt = salt;
         this.clave = clave;
         this.resetear_clave = resetear_clave;
         this.pregunta1 = pregunta1;
@@ -39,22 +41,9 @@ public class Usuario {
         this.pregunta3 = pregunta3;
         this.respuesta3 = respuesta3;
     }
-    
     public Usuario() {
-        this.id = -1;
-        this.id_persona = -1;
-        this.nombre = "";
-        this.correo = "";
-        this.clave = "";
-        this.resetear_clave = Constantes.RESETEAR_CLAVE;
-        this.pregunta1 = -1;
-        this.respuesta1 = "";
-        this.pregunta2 = -1;
-        this.respuesta2 = "";
-        this.pregunta3 = -1;
-        this.respuesta3 = "";
+        
     }
-
     public int getId() {
         return id;
     }
@@ -85,6 +74,14 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getClave() {

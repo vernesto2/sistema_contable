@@ -4,7 +4,12 @@
  */
 package servicios;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Usuario;
+import utils.constantes.RespuestaGeneral;
 
 /**
  *
@@ -12,12 +17,24 @@ import modelo.Usuario;
  */
 public class ServicioConfiguracion {
     
-    ServicioUsuario _servicioUsuario;
+    ServicioUsuario _usuario;
+    public ServicioConfiguracion() {
+        _usuario = new ServicioUsuario();
+    }
+    public ServicioConfiguracion(ServicioUsuario _usuario) {
+        this._usuario = _usuario;
+    }
     
-    public void crear(Usuario usuario, char [] claveSinCifrar) {
-        //ejecutar el código SQL inicial
-        
-        //crear el nuevo usuario
-        _servicioUsuario.crear(usuario, claveSinCifrar);
+    public RespuestaGeneral crear(Usuario usuario, char [] claveSinCifrar) {
+        try {
+            //ejecutar el código SQL inicial
+            
+            //crear el nuevo usuario
+            return _usuario.crear(usuario, claveSinCifrar);
+        } catch (NoSuchAlgorithmException ex) {
+            return RespuestaGeneral.asBadRequest(ex.getMessage());
+        } catch (InvalidKeySpecException ex) {
+            return RespuestaGeneral.asBadRequest(ex.getMessage());
+        }
     }
 }

@@ -6,38 +6,54 @@ package servicios;
 
 import conexion.Conexion;
 import dao.DaoUsuario;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import modelo.Persona;
 import modelo.Usuario;
 import utils.constantes.Constantes;
+import utils.cifrado.PassBasedEnc;
+import utils.constantes.RespuestaGeneral;
 
 /**
  *
  * @author student
  */
 public class ServicioUsuario {
+
     DaoUsuario daoUsuario;
     Conexion cx = new Conexion();
-    public ServicioUsuario () {
+
+    public ServicioUsuario() {
         this.daoUsuario = new DaoUsuario(this.cx);
     }
-    public void crear(Usuario usuario, char[] claveSinCifrar) {
+
+    public RespuestaGeneral crear(Usuario usuario, char[] claveSinCifrar) throws NoSuchAlgorithmException, InvalidKeySpecException {
         Persona persona = usuario.getPersona();
-        if(persona.getNombres().isEmpty()
+        if (persona.getNombres().isEmpty()
                 || persona.getApellidos().isEmpty()
                 || persona.getCarnet().isEmpty()
-                || (persona.getTipo() != Constantes.TIPO_DOCENTE || persona.getTipo() != Constantes.TIPO_ALUMNO) ) {
+                || (persona.getTipo() != Constantes.TIPO_DOCENTE || persona.getTipo() != Constantes.TIPO_ALUMNO)) {
             throw new IllegalStateException("Persona con datos inválidos");
         }
-        
+
         usuario.setNombre(
                 usuario.getNombre().toString().toLowerCase()
         );
-        
+
         //pendiente, hay que cifrar clave
-        usuario.setClave(claveSinCifrar.toString());
-        
-        if(usuario.getCorreo().isEmpty() 
-                || usuario.getClave().isEmpty() 
+        this.cifrarClave(usuario, claveSinCifrar);
+
+        if (usuario.getCorreo().isEmpty()
+                || usuario.getClave().isEmpty()
                 || usuario.getNombre().isEmpty()
                 || usuario.getResetear_clave() == 1
                 || usuario.getPregunta1() == 0 || usuario.getRespuesta1().isEmpty()
@@ -45,8 +61,34 @@ public class ServicioUsuario {
                 || usuario.getPregunta3() == 0 || usuario.getRespuesta3().isEmpty()) {
             throw new IllegalStateException("Usuario con datos inválidos");
         }
-        
+
         usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
         daoUsuario.insertar(usuario);
+        return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
+    }
+
+    public void cifrarClave(Usuario usuario, char[] claveSinCifrar) throws InvalidKeySpecException {
+        /* Plain text Password. */
+
+        // generates the Salt value. It can be stored in a database. 
+        String saltvalue = PassBasedEnc.getSaltvalue(30);
+
+        /* generates an encrypted password. It can be stored in a database.*/
+        String claveCifrada = PassBasedEnc.generateSecurePassword(claveSinCifrar, saltvalue);
+
+        /* Print out plain text password, encrypted password and salt value. */
+        System.out.println("Secure password = " + claveCifrada);
+        System.out.println("Salt value = " + saltvalue);
+
+        usuario.setClave(claveCifrada);
+        usuario.setSalt(saltvalue);
+    }
+
+    public boolean coinciden(char[] claveSinCifrar, String claveCifrada, String salt) throws InvalidKeySpecException {
+
+        /* verify the original password and encrypted password */
+        Boolean status = PassBasedEnc.verifyUserPassword(claveSinCifrar, claveCifrada, salt);
+        return status;
+
     }
 }
