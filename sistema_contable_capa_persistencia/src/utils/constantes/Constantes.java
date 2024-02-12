@@ -36,4 +36,6 @@ public class Constantes {
         "¿Qué actividad es la que más disfrutas hacer?" 
     };
     // logo en pantalla principal
+    
+    public static final int QUERY_SUCCESS = 1;
 }

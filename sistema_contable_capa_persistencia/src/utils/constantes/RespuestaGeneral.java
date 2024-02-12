@@ -16,6 +16,7 @@ public class RespuestaGeneral {
     // datos puede ser 1 objeto, una lista de cualquier tipo de dato
     private Object datos;
     
+    public static final int CRUD_500_ServerError = 500;
     public static final int CRUD_400_BadRequest = 400;
     public static final int CRUD_401_Unauthorized = 401;
     public static final int CRUD_402_Forbidden = 402;
@@ -46,6 +47,15 @@ public class RespuestaGeneral {
     public boolean esExitosa() {
         return this.codigo == CRUD_200_Ok || this.codigo == CRUD_201_Created || this.codigo == CRUD_202_Updated;
     }
+    
+    public static final RespuestaGeneral asServerError(String mensaje, Object datos) {
+        return new RespuestaGeneral(RespuestaGeneral.CRUD_500_ServerError, mensaje, datos);
+    }
+
+    public static final RespuestaGeneral asServerError(String mensaje) {
+        return new RespuestaGeneral(RespuestaGeneral.CRUD_500_ServerError, mensaje, null);
+    }
+    
     public static final RespuestaGeneral asBadRequest(String mensaje, Object datos) {
         return new RespuestaGeneral(RespuestaGeneral.CRUD_400_BadRequest, mensaje, datos);
     }

@@ -58,7 +58,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnEstadoResultado = new RSMaterialComponent.RSButtonShapeIcon();
         btnLibroDiario = new RSMaterialComponent.RSButtonShapeIcon();
         btnLibroMayor = new RSMaterialComponent.RSButtonShapeIcon();
-        btnConfig = new RSMaterialComponent.RSButtonShapeIcon();
+        btnConfigUsuario = new RSMaterialComponent.RSButtonShapeIcon();
         rSButtonShapeIcon1 = new RSMaterialComponent.RSButtonShapeIcon();
         imagenPrincipal = new javax.swing.JLabel();
         txtNombreUsuario = new javax.swing.JLabel();
@@ -120,15 +120,15 @@ public class vPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnConfig.setBackground(new java.awt.Color(73, 120, 248));
-        btnConfig.setText("Configuración");
-        btnConfig.setToolTipText("Configuración del usuario");
-        btnConfig.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        btnConfig.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.WIDGETS);
-        btnConfig.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        btnConfig.addActionListener(new java.awt.event.ActionListener() {
+        btnConfigUsuario.setBackground(new java.awt.Color(73, 120, 248));
+        btnConfigUsuario.setText("Config. usuario");
+        btnConfigUsuario.setToolTipText("Configuración del usuario");
+        btnConfigUsuario.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnConfigUsuario.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.WIDGETS);
+        btnConfigUsuario.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnConfigUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfigActionPerformed(evt);
+                btnConfigUsuarioActionPerformed(evt);
             }
         });
 
@@ -204,8 +204,8 @@ public class vPrincipal extends javax.swing.JFrame {
         });
 
         btnCicloContable.setBackground(new java.awt.Color(73, 120, 248));
-        btnCicloContable.setText("Ciclo contable");
-        btnCicloContable.setToolTipText("Estado de cambios en el patrimonio");
+        btnCicloContable.setText("Config. contabilidad");
+        btnCicloContable.setToolTipText("Configuración de contabilidad (Ciclos contables, Catalogos, etc.)");
         btnCicloContable.setBackgroundHover(new java.awt.Color(73, 65, 248));
         btnCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
         btnCicloContable.setSizeIcon(25.0F);
@@ -233,7 +233,7 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(sidebarLayout.createSequentialGroup()
                 .addGroup(sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfigUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLibroDiario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEstadoResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,7 +273,7 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnConfigUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -291,7 +291,7 @@ public class vPrincipal extends javax.swing.JFrame {
         topbarLayout.setHorizontalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topbarLayout.createSequentialGroup()
-                .addContainerGap(437, Short.MAX_VALUE)
+                .addContainerGap(419, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -333,7 +333,7 @@ public class vPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -351,7 +351,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.btnFlujoEfectivo.setSelected(false);
         this.btnCambiosPatrimonio.setSelected(false);
         this.btnCicloContable.setSelected(false);
-        this.btnConfig.setSelected(false);
+        this.btnConfigUsuario.setSelected(false);
         
     }
     
@@ -378,13 +378,13 @@ public class vPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLibroMayorActionPerformed
 
-    private void btnConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigActionPerformed
+    private void btnConfigUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigUsuarioActionPerformed
         this.seleccionarBoton();
-        if (!this.btnConfig.isSelected()) {
-            this.btnConfig.setSelected(true);
+        if (!this.btnConfigUsuario.isSelected()) {
+            this.btnConfigUsuario.setSelected(true);
             new CambiaPanel(pnl, new vConfiguracion());
         }
-    }//GEN-LAST:event_btnConfigActionPerformed
+    }//GEN-LAST:event_btnConfigUsuarioActionPerformed
 
     private void rSButtonShapeIcon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon1ActionPerformed
         //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
@@ -418,7 +418,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnCicloContable.isSelected()) {
             this.btnCicloContable.setSelected(true);
-            new CambiaPanel(pnl, new vCicloContable());
+            new CambiaPanel(pnl, new vConfigContabilidad());
         }
     }//GEN-LAST:event_btnCicloContableActionPerformed
 
@@ -462,7 +462,7 @@ public class vPrincipal extends javax.swing.JFrame {
     private RSMaterialComponent.RSButtonShapeIcon btnBalanzaComprobacion;
     private RSMaterialComponent.RSButtonShapeIcon btnCambiosPatrimonio;
     private RSMaterialComponent.RSButtonShapeIcon btnCicloContable;
-    private RSMaterialComponent.RSButtonShapeIcon btnConfig;
+    private RSMaterialComponent.RSButtonShapeIcon btnConfigUsuario;
     private RSMaterialComponent.RSButtonShapeIcon btnEstadoResultado;
     private RSMaterialComponent.RSButtonShapeIcon btnFlujoEfectivo;
     private RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;

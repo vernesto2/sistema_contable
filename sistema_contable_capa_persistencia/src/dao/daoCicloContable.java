@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.CicloContable;
 import modelo.dtoCicloContable;
+import utils.constantes.Constantes;
 
 /**
  *
@@ -28,8 +29,8 @@ public class daoCicloContable {
     SimpleDateFormat sdfString = new SimpleDateFormat("yyyy-MM-dd");
     Conexion cx;
 
-    public daoCicloContable() {
-        this.cx = new Conexion();
+    public daoCicloContable(Conexion cx) {
+        this.cx = cx;
     }
     
     public RespuestaGeneral ListarCiclosContables() {
@@ -39,6 +40,7 @@ public class daoCicloContable {
         var sql = """
                   select cc.*, tc.tipo as catalogo from ciclo_contable cc
                   left join tipo_catalogo tc on cc.id_catalogo = tc.id
+                  where cc.eliminado = 0
                   """;
         try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
             rs = ps.executeQuery();
@@ -69,13 +71,12 @@ public class daoCicloContable {
         } catch (SQLException e) {
             e.printStackTrace();
             String mensaje = e.getMessage().toString();
-            return rg.asBadRequest(mensaje);
+            return rg.asServerError(mensaje);
         }
     }
     
     public RespuestaGeneral insertarCicloContable(CicloContable ccontable) {
         RespuestaGeneral rg = new RespuestaGeneral();
-        ResultSet rs = null;
         var sql = """
                   INSERT INTO ciclo_contable     
                   VALUES(null, ?, ?, ?, ?, ?)
@@ -88,19 +89,25 @@ public class daoCicloContable {
             ps.setInt(5, 0);
             
             ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            int id = -1;
+            if(rs.next()){
+                id = rs.getInt(1);
+            }
             ps.close();
             cx.desconectar();
-            return rg.asCreated(RespuestaGeneral.GUARDADO_CORRECTAMENTE, ps);
+            return rg.asCreated(RespuestaGeneral.GUARDADO_CORRECTAMENTE, id);
             
         } catch (SQLException e) {
             e.printStackTrace();
             String mensaje = e.getMessage().toString();
-            return rg.asBadRequest(mensaje);
+            return rg.asServerError(mensaje);
         }
     }
     
     public RespuestaGeneral editarCicloContable(CicloContable ccontable) {
         RespuestaGeneral rg = new RespuestaGeneral();
+        ResultSet rs = null;
         var sql = """
                     UPDATE ciclo_contable SET id_catalogo=?,titulo=?,desde=?,hasta=?,eliminado=? WHERE id=?
                   """;
@@ -112,14 +119,15 @@ public class daoCicloContable {
             ps.setInt(5, ccontable.isEliminado() ? 1 : 0);
             ps.setInt(6, ccontable.getId());
             ps.executeUpdate();
+            
             ps.close();
             cx.desconectar();
-            return rg.asCreated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, ps);
+            return rg.asCreated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, ccontable.getId());
             
         } catch (SQLException e) {
             e.printStackTrace();
             String mensaje = e.getMessage().toString();
-            return rg.asBadRequest(mensaje);
+            return rg.asServerError(mensaje);
         }
     }
     
@@ -139,7 +147,7 @@ public class daoCicloContable {
         } catch (SQLException e) {
             e.printStackTrace();
             String mensaje = e.getMessage().toString();
-            return rg.asBadRequest(mensaje);
+            return rg.asServerError(mensaje);
         }
     }
 }
