@@ -16,53 +16,36 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modelo.CicloContable;
-import modelo.dtoCicloContable;
+import modelo.TipoCatalogo;
 import utils.constantes.Constantes;
 
 /**
  *
  * @author vacev
  */
-public class daoCicloContable {
+public class daoTipoCatalogo {
     
     SimpleDateFormat sdfString = new SimpleDateFormat("yyyy-MM-dd");
     Conexion cx;
 
-    public daoCicloContable(Conexion cx) {
+    public daoTipoCatalogo(Conexion cx) {
         this.cx = cx;
     }
     
-    public RespuestaGeneral ListarCiclosContables() {
+    public RespuestaGeneral Listar() {
         RespuestaGeneral rg = new RespuestaGeneral();
-        ArrayList<dtoCicloContable> lista = new ArrayList<>();
+        ArrayList<TipoCatalogo> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  select cc.*, tc.tipo as catalogo from ciclo_contable cc
-                  left join tipo_catalogo tc on cc.id_catalogo = tc.id
-                  where cc.eliminado = 0 and tc.eliminado = 0
+                  SELECT * FROM tipo_catalogo tc where tc.eliminado = 0
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             rs = ps.executeQuery();
             while (rs.next()) {
-                dtoCicloContable cicloContable = new dtoCicloContable();
-                cicloContable.setId(rs.getInt("id"));
-                cicloContable.setId_catalogo(rs.getInt("id_catalogo"));
-                cicloContable.setTitulo(rs.getString("titulo"));
-                String sDesde = rs.getString("desde");
-                String sHasta = rs.getString("hasta");
-                Date desde = new Date();
-                Date hasta = new Date();
-                try {
-                    desde = new SimpleDateFormat("yyyy-MM-dd").parse(sDesde);
-                    hasta = new SimpleDateFormat("yyyy-MM-dd").parse(sHasta);
-                } catch (ParseException ex) {
-                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                }
-                cicloContable.setDesde(desde);
-                cicloContable.setHasta(hasta);
-                cicloContable.setCatalogo(rs.getString("catalogo"));
-                lista.add(cicloContable);
+                TipoCatalogo tcatalogo = new TipoCatalogo();
+                tcatalogo.setId(rs.getInt("id"));
+                tcatalogo.setTipo(rs.getString("tipo"));
+                lista.add(tcatalogo);
             }
             
             return rg.asOk("", lista);
@@ -74,18 +57,16 @@ public class daoCicloContable {
         }
     }
     
-    public RespuestaGeneral insertarCicloContable(CicloContable ccontable) {
+    public RespuestaGeneral insertar(TipoCatalogo tcatalogo) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
-                  INSERT INTO ciclo_contable     
-                  VALUES(null, ?, ?, ?, ?, ?)
+                  INSERT INTO tipo_catalogo     
+                  VALUES(null, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
-            ps.setInt(1, ccontable.getId_catalogo());
-            ps.setString(2, ccontable.getTitulo());
-            ps.setString(3, sdfString.format(ccontable.getDesde()));
-            ps.setString(4, sdfString.format(ccontable.getHasta()));
-            ps.setInt(5, 0);
+            ps.setString(1, tcatalogo.getTipo());
+            ps.setString(2, tcatalogo.getRef());
+            ps.setInt(3, 0);
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -103,22 +84,20 @@ public class daoCicloContable {
         }
     }
     
-    public RespuestaGeneral editarCicloContable(CicloContable ccontable) {
+    public RespuestaGeneral editar(TipoCatalogo tcatalogo) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ResultSet rs = null;
         var sql = """
-                    UPDATE ciclo_contable SET id_catalogo=?,titulo=?,desde=?,hasta=?,eliminado=? WHERE id=?
+                    UPDATE tipo_catalogo SET tipo=?,ref=?,eliminado=? WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
-            ps.setInt(1, ccontable.getId_catalogo());
-            ps.setString(2, ccontable.getTitulo());
-            ps.setString(3, sdfString.format(ccontable.getDesde()));
-            ps.setString(4, sdfString.format(ccontable.getHasta()));
-            ps.setInt(5, ccontable.isEliminado() ? 1 : 0);
-            ps.setInt(6, ccontable.getId());
+            ps.setString(1, tcatalogo.getTipo());
+            ps.setString(2, tcatalogo.getRef());
+            ps.setInt(3, tcatalogo.isEliminado() ? 1 : 0);
+            ps.setInt(4, tcatalogo.getId());
             ps.executeUpdate();
             
-            return rg.asCreated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, ccontable.getId());
+            return rg.asCreated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, tcatalogo.getId());
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -127,10 +106,10 @@ public class daoCicloContable {
         }
     }
     
-    public RespuestaGeneral eliminarCicloContable(int id) {
+    public RespuestaGeneral eliminar(int id) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
-                    UPDATE ciclo_contable SET eliminado=? WHERE id=?
+                    UPDATE tipo_catalogo SET eliminado=? WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, 1);
