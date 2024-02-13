@@ -311,10 +311,10 @@ public class vConfigInicial extends javax.swing.JFrame {
         
         usuario.setPregunta1(comboPreguntaRecuperacion1.getSelectedIndex());
         usuario.setRespuesta1(txtRespuesta1.getText().trim());
-        usuario.setPregunta1(comboPreguntaRecuperacion2.getSelectedIndex());
-        usuario.setRespuesta1(txtRespuesta2.getText().trim());
-        usuario.setPregunta1(comboPreguntaRecuperacion3.getSelectedIndex());
-        usuario.setRespuesta1(txtRespuesta3.getText().trim());
+        usuario.setPregunta2(comboPreguntaRecuperacion2.getSelectedIndex());
+        usuario.setRespuesta2(txtRespuesta2.getText().trim());
+        usuario.setPregunta3(comboPreguntaRecuperacion3.getSelectedIndex());
+        usuario.setRespuesta3(txtRespuesta3.getText().trim());
         
         usuario.setPersona(persona);
         this._configuracion.crear(usuario, claveSinCifrar);

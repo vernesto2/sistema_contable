@@ -41,7 +41,7 @@ public class ServicioUsuario {
         if (persona.getNombres().isEmpty()
                 || persona.getApellidos().isEmpty()
                 || persona.getCarnet().isEmpty()
-                || (persona.getTipo() != Constantes.TIPO_DOCENTE || persona.getTipo() != Constantes.TIPO_ALUMNO)) {
+                || !(persona.getTipo() == Constantes.TIPO_DOCENTE || persona.getTipo() == Constantes.TIPO_ALUMNO)) {
             throw new IllegalStateException("Persona con datos inválidos");
         }
 
@@ -63,7 +63,9 @@ public class ServicioUsuario {
         }
 
         usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+        this.cx.conectar();
         daoUsuario.insertar(usuario);
+        this.cx.desconectar();
         return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
     }
 
