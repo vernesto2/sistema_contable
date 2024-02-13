@@ -40,7 +40,7 @@ public class Conexion {
     public void desconectar() {
         try {
             cx.close();
-            System.out.println("NO CONECTADO!");
+            System.out.println("Desconectado!");
         } catch (SQLException e) {
             e.printStackTrace();
         }

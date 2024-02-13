@@ -48,8 +48,7 @@ public class ServicioUsuario {
         usuario.setNombre(
                 usuario.getNombre().toString().toLowerCase()
         );
-
-        //pendiente, hay que cifrar clave
+        
         this.cifrarClave(usuario, claveSinCifrar);
 
         if (usuario.getCorreo().isEmpty()

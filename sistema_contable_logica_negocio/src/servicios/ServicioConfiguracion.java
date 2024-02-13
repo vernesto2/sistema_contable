@@ -36,5 +36,5 @@ public class ServicioConfiguracion {
         } catch (InvalidKeySpecException ex) {
             return RespuestaGeneral.asBadRequest(ex.getMessage());
         }
-    }
+    }   
 }

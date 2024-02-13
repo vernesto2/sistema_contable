@@ -5,14 +5,17 @@
 package vista;
 
 import java.awt.Toolkit;
+import java.util.Arrays;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.Persona;
 import modelo.Usuario;
 import servicios.ServicioConfiguracion;
 import servicios.ServicioUsuario;
 import utils.constantes.Constantes;
+import utils.constantes.RespuestaGeneral;
 
 /**
  *
@@ -24,20 +27,20 @@ public class vConfigInicial extends javax.swing.JFrame {
      * Creates new form vConfigInicial
      */
     ServicioConfiguracion _configuracion = new ServicioConfiguracion();
-    
+
     public vConfigInicial() {
         initComponents();
         this.iniciarVista();
     }
-    
+
     public void iniciarVista() {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/utils/icon/user.png")));
-        
-        ComboBoxModel<String> modeloPreguntasRecuperacion1 = new DefaultComboBoxModel<String> (Constantes.PREGUNTAS_SEGURIDAD);
-        ComboBoxModel<String> modeloPreguntasRecuperacion2 = new DefaultComboBoxModel<String> (Constantes.PREGUNTAS_SEGURIDAD);
-        ComboBoxModel<String> modeloPreguntasRecuperacion3 = new DefaultComboBoxModel<String> (Constantes.PREGUNTAS_SEGURIDAD);
+
+        ComboBoxModel<String> modeloPreguntasRecuperacion1 = new DefaultComboBoxModel<String>(Constantes.PREGUNTAS_SEGURIDAD);
+        ComboBoxModel<String> modeloPreguntasRecuperacion2 = new DefaultComboBoxModel<String>(Constantes.PREGUNTAS_SEGURIDAD);
+        ComboBoxModel<String> modeloPreguntasRecuperacion3 = new DefaultComboBoxModel<String>(Constantes.PREGUNTAS_SEGURIDAD);
         this.comboPreguntaRecuperacion1.setModel(modeloPreguntasRecuperacion1);
         this.comboPreguntaRecuperacion2.setModel(modeloPreguntasRecuperacion2);
         this.comboPreguntaRecuperacion3.setModel(modeloPreguntasRecuperacion3);
@@ -293,32 +296,45 @@ public class vConfigInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCrearConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfiguracionActionPerformed
-        Persona persona = new Persona();
-        persona.setNombres(txtApellidos.getText().trim());
-        persona.setApellidos(txtApellidos.getText().trim());
-        persona.setTipo(Constantes.TIPO_ALUMNO);
-        persona.setCarnet(txtCarnet.getText().trim());
-        
-        Usuario usuario = new Usuario();
-        usuario.setNombre(txtCarnet.getText().trim());
-        usuario.setCorreo(txtCorreo.getText().trim());
-        
-        //la clave se cifra en el servicio
-        //usuario.setClave(null);
-        char[] claveSinCifrar = txtClave.getPassword();
-        
-        usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
-        
-        usuario.setPregunta1(comboPreguntaRecuperacion1.getSelectedIndex());
-        usuario.setRespuesta1(txtRespuesta1.getText().trim());
-        usuario.setPregunta2(comboPreguntaRecuperacion2.getSelectedIndex());
-        usuario.setRespuesta2(txtRespuesta2.getText().trim());
-        usuario.setPregunta3(comboPreguntaRecuperacion3.getSelectedIndex());
-        usuario.setRespuesta3(txtRespuesta3.getText().trim());
-        
-        usuario.setPersona(persona);
-        this._configuracion.crear(usuario, claveSinCifrar);
-        
+        try {
+            Persona persona = new Persona();
+            persona.setNombres(txtApellidos.getText().trim());
+            persona.setApellidos(txtApellidos.getText().trim());
+            persona.setTipo(Constantes.TIPO_ALUMNO);
+            persona.setCarnet(txtCarnet.getText().trim());
+
+            Usuario usuario = new Usuario();
+            usuario.setNombre(txtCarnet.getText().trim());
+            usuario.setCorreo(txtCorreo.getText().trim());
+
+            //la clave se cifra en el servicio
+            //usuario.setClave(null);
+            char[] claveSinCifrar = txtClave.getPassword();
+            char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
+            if (!Arrays.equals(claveSinCifrar, repetirClaveSinCifrar)) {
+                JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+
+            usuario.setPregunta1(comboPreguntaRecuperacion1.getSelectedIndex());
+            usuario.setRespuesta1(txtRespuesta1.getText().trim());
+            usuario.setPregunta2(comboPreguntaRecuperacion2.getSelectedIndex());
+            usuario.setRespuesta2(txtRespuesta2.getText().trim());
+            usuario.setPregunta3(comboPreguntaRecuperacion3.getSelectedIndex());
+            usuario.setRespuesta3(txtRespuesta3.getText().trim());
+
+            usuario.setPersona(persona);
+            RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
+            if (resp.esExitosa()) {
+                JOptionPane.showMessageDialog(null, resp.getMensaje(), "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, resp.getMensaje(), "Mensaje", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCrearConfiguracionActionPerformed
 
     private void rSButtonShapeIcon9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon9ActionPerformed
