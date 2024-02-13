@@ -40,9 +40,9 @@ public class daoCicloContable {
         var sql = """
                   select cc.*, tc.tipo as catalogo from ciclo_contable cc
                   left join tipo_catalogo tc on cc.id_catalogo = tc.id
-                  where cc.eliminado = 0
+                  where cc.eliminado = 0 and tc.eliminado = 0
                   """;
-        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             rs = ps.executeQuery();
             while (rs.next()) {
                 dtoCicloContable cicloContable = new dtoCicloContable();
@@ -64,8 +64,7 @@ public class daoCicloContable {
                 cicloContable.setCatalogo(rs.getString("catalogo"));
                 lista.add(cicloContable);
             }
-            ps.close();
-            cx.desconectar();
+            
             return rg.asOk("", lista);
             
         } catch (SQLException e) {
@@ -81,7 +80,7 @@ public class daoCicloContable {
                   INSERT INTO ciclo_contable     
                   VALUES(null, ?, ?, ?, ?, ?)
                   """;
-        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, ccontable.getId_catalogo());
             ps.setString(2, ccontable.getTitulo());
             ps.setString(3, sdfString.format(ccontable.getDesde()));
@@ -94,8 +93,7 @@ public class daoCicloContable {
             if(rs.next()){
                 id = rs.getInt(1);
             }
-            ps.close();
-            cx.desconectar();
+            
             return rg.asCreated(RespuestaGeneral.GUARDADO_CORRECTAMENTE, id);
             
         } catch (SQLException e) {
@@ -111,7 +109,7 @@ public class daoCicloContable {
         var sql = """
                     UPDATE ciclo_contable SET id_catalogo=?,titulo=?,desde=?,hasta=?,eliminado=? WHERE id=?
                   """;
-        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, ccontable.getId_catalogo());
             ps.setString(2, ccontable.getTitulo());
             ps.setString(3, sdfString.format(ccontable.getDesde()));
@@ -120,8 +118,6 @@ public class daoCicloContable {
             ps.setInt(6, ccontable.getId());
             ps.executeUpdate();
             
-            ps.close();
-            cx.desconectar();
             return rg.asCreated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, ccontable.getId());
             
         } catch (SQLException e) {
@@ -136,12 +132,11 @@ public class daoCicloContable {
         var sql = """
                     UPDATE ciclo_contable SET eliminado=? WHERE id=?
                   """;
-        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, 1);
             ps.setInt(2, id);
             ps.executeUpdate();
-            cx.desconectar();
-            ps.close();
+            
             return rg.asOk(RespuestaGeneral.ELIMINADO_CORRECTAMENTE, ps);
             
         } catch (SQLException e) {

@@ -39,7 +39,7 @@ public class daoTipoCatalogo {
         var sql = """
                   SELECT * FROM tipo_catalogo tc where tc.eliminado = 0
                   """;
-        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             rs = ps.executeQuery();
             while (rs.next()) {
                 TipoCatalogo tcatalogo = new TipoCatalogo();
@@ -47,8 +47,7 @@ public class daoTipoCatalogo {
                 tcatalogo.setTipo(rs.getString("tipo"));
                 lista.add(tcatalogo);
             }
-            ps.close();
-            cx.desconectar();
+            
             return rg.asOk("", lista);
             
         } catch (SQLException e) {
@@ -64,7 +63,7 @@ public class daoTipoCatalogo {
                   INSERT INTO tipo_catalogo     
                   VALUES(null, ?, ?, ?)
                   """;
-        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setString(1, tcatalogo.getTipo());
             ps.setString(2, tcatalogo.getRef());
             ps.setInt(3, 0);
@@ -75,8 +74,7 @@ public class daoTipoCatalogo {
             if(rs.next()){
                 id = rs.getInt(1);
             }
-            ps.close();
-            cx.desconectar();
+            
             return rg.asCreated(RespuestaGeneral.GUARDADO_CORRECTAMENTE, id);
             
         } catch (SQLException e) {
@@ -92,15 +90,13 @@ public class daoTipoCatalogo {
         var sql = """
                     UPDATE tipo_catalogo SET tipo=?,ref=?,eliminado=? WHERE id=?
                   """;
-        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setString(1, tcatalogo.getTipo());
             ps.setString(2, tcatalogo.getRef());
             ps.setInt(3, tcatalogo.isEliminado() ? 1 : 0);
             ps.setInt(4, tcatalogo.getId());
             ps.executeUpdate();
             
-            ps.close();
-            cx.desconectar();
             return rg.asCreated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, tcatalogo.getId());
             
         } catch (SQLException e) {
@@ -115,12 +111,11 @@ public class daoTipoCatalogo {
         var sql = """
                     UPDATE tipo_catalogo SET eliminado=? WHERE id=?
                   """;
-        try (PreparedStatement ps = cx.conectar().prepareStatement(sql)) {
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, 1);
             ps.setInt(2, id);
             ps.executeUpdate();
-            cx.desconectar();
-            ps.close();
+            
             return rg.asOk(RespuestaGeneral.ELIMINADO_CORRECTAMENTE, ps);
             
         } catch (SQLException e) {

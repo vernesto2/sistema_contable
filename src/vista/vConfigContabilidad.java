@@ -29,6 +29,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     // VARIABLES DE CICLO CONTABLE
     ServicioCicloContable _cicloContable = new ServicioCicloContable();
     ArrayList<dtoCicloContable> listaCiclosContables = new ArrayList<>();
+    ArrayList<TipoCatalogo> listaCmbTipoCatalogo = new ArrayList<>();
     CicloContable cicloContableModel = new CicloContable();
     
     // VARIABLES DE TIPO DE CATALOGO
@@ -53,6 +54,23 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         String[] cabecera = {"Titulo","Desde","Hasta","Catalogo"};
         dtm.setColumnIdentifiers(cabecera);
         tblCicloContable.setModel(dtm);
+    }
+    
+    public void obtenerListaCmbTipoCatalogo() {
+        // obtenemos el listado de tipos de catalogo
+        this.listaCmbTipoCatalogo = new ArrayList<>();
+        RespuestaGeneral rg = _tipoCatalogo.obtenerLista();
+        if (rg.esExitosa()) {
+            this.listaCmbTipoCatalogo = (ArrayList<TipoCatalogo>)rg.getDatos();
+            cmbTipoCatalogo.removeAllItems();
+            for (TipoCatalogo itemTipoCatalogo : listaCmbTipoCatalogo) {
+                cmbTipoCatalogo.addItem(itemTipoCatalogo.getTipo());
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rg));
+        }
+        
+        //cmbTipoCatalogo.addItem();
     }
     
     public void setDatosCicloContable() {
@@ -96,6 +114,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         txtTitulo.setText("");
         btnEliminarCicloContable.setEnabled(false);
         btnEstablecerCicloContable.setEnabled(false);
+        cmbTipoCatalogo.setSelectedIndex(0);
         tblCicloContable.clearSelection();
     }
     
@@ -167,7 +186,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         txtTitulo = new RSMaterialComponent.RSTextFieldMaterial();
         btnCancelarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
         btnGuardarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
-        listCatalogo = new RSMaterialComponent.RSComboBoxMaterial();
+        cmbTipoCatalogo = new RSMaterialComponent.RSComboBoxMaterial();
         txtHasta = new newscomponents.RSDateChooser();
         txtDesde = new newscomponents.RSDateChooser();
         btnEstablecerCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
@@ -241,8 +260,13 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             }
         });
 
-        listCatalogo.setBorder(null);
-        listCatalogo.setColorMaterial(new java.awt.Color(102, 102, 102));
+        cmbTipoCatalogo.setBorder(null);
+        cmbTipoCatalogo.setColorMaterial(new java.awt.Color(102, 102, 102));
+        cmbTipoCatalogo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTipoCatalogoItemStateChanged(evt);
+            }
+        });
 
         txtHasta.setBackground(new java.awt.Color(153, 153, 153));
         txtHasta.setBgColor(new java.awt.Color(153, 153, 153));
@@ -316,23 +340,23 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                     .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(listCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                    .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(65, 65, 65)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnGuardarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -341,7 +365,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEliminarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnEstablecerCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57))
+                .addGap(30, 30, 30))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,7 +374,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(listCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel3Layout.createSequentialGroup()
@@ -636,7 +660,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         this.cicloContableModel.setTitulo(this.txtTitulo.getText());
         this.cicloContableModel.setDesde(this.txtDesde.getDate());
         this.cicloContableModel.setHasta(this.txtHasta.getDate());
-        this.cicloContableModel.setId_catalogo(1);
+        this.seleccionarOpcionCmbTipoCatalogo();
         // guardamos la info
         // verificamos si es NUEVO
         btnGuardarCicloContable.setEnabled(false);
@@ -676,6 +700,14 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         txtHasta.setDate(this.listaCiclosContables.get(row).getHasta());
         txtDesde.setFormatDate("dd-MM-yyyy");
         txtHasta.setFormatDate("dd-MM-yyyy");
+        int iCmb = 0, i = 0;
+        for (TipoCatalogo tipoCatalogo : listaCmbTipoCatalogo) {
+            if (tipoCatalogo.getId() == this.listaCiclosContables.get(row).getId_catalogo()) {
+                iCmb = i;
+            }
+            i++;
+        }
+        cmbTipoCatalogo.setSelectedIndex(iCmb);
         btnEliminarCicloContable.setEnabled(true);
         btnEstablecerCicloContable.setEnabled(true);
     }//GEN-LAST:event_tblCicloContableMouseClicked
@@ -760,6 +792,17 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btnEliminarTipoCatalogo.setEnabled(true);
     }//GEN-LAST:event_tblTipoCatalogoMouseClicked
 
+    private void cmbTipoCatalogoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoCatalogoItemStateChanged
+        //this.seleccionarOpcionCmbTipoCatalogo();
+    }//GEN-LAST:event_cmbTipoCatalogoItemStateChanged
+
+    public void seleccionarOpcionCmbTipoCatalogo() {
+        int i = cmbTipoCatalogo.getSelectedIndex();
+        if (i >= 0) {
+            this.cicloContableModel.setId_catalogo(this.listaCmbTipoCatalogo.get(i).getId());
+        }
+    }
+    
     public void cargarInfoSegunTab() {
         this.limiparTablaTipoCatalogo();
         this.limiparTablaCicloContable();
@@ -773,6 +816,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     
     public void iniciarCicloContable() {
         this.setModelCicloContable();
+        this.obtenerListaCmbTipoCatalogo();
         this.obtenerListadoCiclosContables();
     }
     
@@ -793,6 +837,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     private RSMaterialComponent.RSButtonShapeIcon btnEstablecerCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo;
+    private RSMaterialComponent.RSComboBoxMaterial cmbTipoCatalogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -807,7 +852,6 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private RSMaterialComponent.RSComboBoxMaterial listCatalogo;
     private javax.swing.JTabbedPane tabPanelContabilidad;
     private rojerusan.RSTableMetro tblCicloContable;
     private rojerusan.RSTableMetro tblTipoCatalogo;
