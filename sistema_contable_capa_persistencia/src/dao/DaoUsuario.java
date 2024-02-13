@@ -19,7 +19,7 @@ import utils.constantes.RespuestaGeneral;
  */
 public class DaoUsuario {
     Conexion cx;
-    public DaoUsuario(Conexion xc) {
+    public DaoUsuario(Conexion cx) {
         this.cx = cx;
     }
     
@@ -40,8 +40,8 @@ public class DaoUsuario {
                   )    
         """;
         try (
-                PreparedStatement psPersona = cx.conectar().prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS); 
-                PreparedStatement psUsuario = cx.conectar().prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS); 
+                PreparedStatement psPersona = cx.getCx().prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS); 
+                PreparedStatement psUsuario = cx.getCx().prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS); 
                 ) {
             Persona persona = usuario.getPersona();
             
@@ -78,8 +78,6 @@ public class DaoUsuario {
                 Integer id = rsKeyUsuario.getInt(1);
                 usuario.setId(id);
             }
-            
-            cx.desconectar();
             return rg.asCreated("", psPersona);
         } catch (SQLException e) {
             e.printStackTrace();

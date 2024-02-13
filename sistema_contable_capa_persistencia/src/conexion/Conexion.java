@@ -28,6 +28,14 @@ public class Conexion {
         }
         return cx;
     }
+
+    public Connection getCx() {
+        return cx;
+    }
+
+    public void setCx(Connection cx) {
+        this.cx = cx;
+    }
     
     public void desconectar() {
         try {
@@ -37,10 +45,4 @@ public class Conexion {
             e.printStackTrace();
         }
     }
-    
-    public static void main(String [] args) {
-        Conexion cx = new Conexion();
-        cx.conectar();
-    }
-
 }
