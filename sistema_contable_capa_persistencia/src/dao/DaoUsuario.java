@@ -35,7 +35,7 @@ public class DaoUsuario {
                          pregunta1, respuesta1,  pregunta2, respuesta2, pregunta3, respuesta3 
                   )
                   VALUES ( 
-                         ?, ?, ?, ?; ?, ?, 
+                         ?, ?, ?, ?, ?, ?, 
                          ?, ?, ?, ?, ?, ?
                   )    
         """;
