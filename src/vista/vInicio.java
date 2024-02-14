@@ -281,20 +281,23 @@ public class vInicio extends javax.swing.JFrame {
         }
         File archivo = selector.getSelectedFile();
         try {
-            String ruta = archivo.getCanonicalPath();
-            this.lblRutaGlobal.setText(ruta);
-            System.out.println(ruta);
-            Constantes.rutaConexion = ruta;
-            if (ruta.contains(".sqlite") || ruta.contains(".db")) {
-                this.archivoCorrecto = true;
-            } else {
-                this.archivoCorrecto = false;
+            if (archivo != null) {
+                String ruta = archivo.getCanonicalPath();
+                this.lblRutaGlobal.setText(ruta);
+                System.out.println(ruta);
+                Constantes.rutaConexion = ruta;
+                if (ruta.contains(".sqlite") || ruta.contains(".db")) {
+                    this.archivoCorrecto = true;
+                } else {
+                    this.archivoCorrecto = false;
+                }
+                this.probarConexion();
             }
-            this.probarConexion();
+            
         } catch (IOException ex) {
             this.archivoCorrecto = false;
             Logger.getLogger(vInicio.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "¡Ocurrió un error: " + ex.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "¡Ocurrió un error: " + ex.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
         }
         System.out.print("final");
     }//GEN-LAST:event_rSButtonShapeIcon16ActionPerformed

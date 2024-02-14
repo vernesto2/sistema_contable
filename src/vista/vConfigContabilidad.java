@@ -67,7 +67,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                 cmbTipoCatalogo.addItem(itemTipoCatalogo.getTipo());
             }
         } else {
-            JOptionPane.showMessageDialog(null, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rg));
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rg));
         }
         
         //cmbTipoCatalogo.addItem();
@@ -93,7 +93,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (rs.esExitosa()) {
             this.listaCiclosContables = (ArrayList<dtoCicloContable>)rs.getDatos();
         } else {
-            JOptionPane.showMessageDialog(null, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rs));
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rs));
         }
         this.setDatosCicloContable();
     }
@@ -148,7 +148,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (rs.esExitosa()) {
             this.listaTiposCatalogos = (ArrayList<TipoCatalogo>)rs.getDatos();
         } else {
-            JOptionPane.showMessageDialog(null, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rs));
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rs));
         }
         this.setDatosTipoCatalogo();
     }
@@ -667,20 +667,20 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (this.cicloContableModel.getId() < 0) {
             RespuestaGeneral rs = _cicloContable.insertar(this.cicloContableModel);
             if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(null, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
                 this.obtenerListadoCiclosContables();
             } else {
-                JOptionPane.showMessageDialog(null, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
             }
 
             // verificamos si es NUEVO
         } else {
             RespuestaGeneral rs = _cicloContable.editar(this.cicloContableModel);
             if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(null, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
                 this.obtenerListadoCiclosContables();
             } else {
-                JOptionPane.showMessageDialog(null, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
             }
         }
         btnGuardarCicloContable.setEnabled(true);
@@ -723,13 +723,13 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (opc == 0) {
             RespuestaGeneral rg = _cicloContable.eliminar(this.cicloContableModel.getId());
             if (rg.esExitosa()) {
-                JOptionPane.showMessageDialog(null, rg.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rg));
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rg));
                 btnEliminarCicloContable.setEnabled(false);
                 btnEstablecerCicloContable.setEnabled(false);
                 this.limpiarFormCicloContable();
                 this.obtenerListadoCiclosContables();
             } else {
-                JOptionPane.showMessageDialog(null, rg.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rg));
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rg));
             }
         }
     }//GEN-LAST:event_btnEliminarCicloContableActionPerformed
@@ -747,20 +747,20 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (this.tipoCatalogoModel.getId() < 0) {
             RespuestaGeneral rs = _tipoCatalogo.insertar(this.tipoCatalogoModel);
             if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(null, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
                 this.obtenerListadoTipoCatalogo();
             } else {
-                JOptionPane.showMessageDialog(null, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
             }
 
             // verificamos si es NUEVO
         } else {
             RespuestaGeneral rs = _tipoCatalogo.editar(this.tipoCatalogoModel);
             if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(null, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
                 this.obtenerListadoTipoCatalogo();
             } else {
-                JOptionPane.showMessageDialog(null, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
             }
         }
         btnGuardarTipoCatalogo.setEnabled(true);
@@ -774,12 +774,12 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (opc == 0) {
             RespuestaGeneral rg = _tipoCatalogo.eliminar(this.tipoCatalogoModel.getId());
             if (rg.esExitosa()) {
-                JOptionPane.showMessageDialog(null, rg.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rg));
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rg));
                 btnEliminarTipoCatalogo.setEnabled(false);
                 this.limpiarFormTipoCatalogo();
                 this.obtenerListadoTipoCatalogo();
             } else {
-                JOptionPane.showMessageDialog(null, rg.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rg));
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rg));
             }
         }
     }//GEN-LAST:event_btnEliminarTipoCatalogoActionPerformed
