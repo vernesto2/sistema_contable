@@ -328,12 +328,12 @@ public class vConfigInicial extends javax.swing.JFrame {
             usuario.setPersona(persona);
             RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
             if (resp.esExitosa()) {
-                JOptionPane.showMessageDialog(null, resp.getMensaje(), "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, resp.getMensaje(), "Mensaje", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnCrearConfiguracionActionPerformed
 
