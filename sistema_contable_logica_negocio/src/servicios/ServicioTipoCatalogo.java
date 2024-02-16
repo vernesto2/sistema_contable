@@ -5,7 +5,9 @@
 package servicios;
 
 import conexion.Conexion;
+import dao.daoCicloContable;
 import dao.daoTipoCatalogo;
+import java.util.ArrayList;
 import modelo.TipoCatalogo;
 import utils.constantes.RespuestaGeneral;
 
@@ -15,15 +17,24 @@ import utils.constantes.RespuestaGeneral;
  */
 public class ServicioTipoCatalogo {
     daoTipoCatalogo daoTipoCatalogo;
+    daoCicloContable daoCicloContable;
     Conexion cx = new Conexion();
 
     public ServicioTipoCatalogo() {
         this.daoTipoCatalogo = new daoTipoCatalogo(this.cx);
+        this.daoCicloContable = new daoCicloContable(this.cx);
     }
     
     public RespuestaGeneral obtenerLista() {
         this.cx.conectar();
         RespuestaGeneral rs = this.daoTipoCatalogo.Listar();
+        this.cx.desconectar(); 
+        return rs;
+    }
+    
+    public RespuestaGeneral obtenerPorId(int id) {
+        this.cx.conectar();
+        RespuestaGeneral rs = this.daoTipoCatalogo.ObtenerPorId(id);
         this.cx.desconectar(); 
         return rs;
     }
@@ -58,9 +69,20 @@ public class ServicioTipoCatalogo {
     
     public RespuestaGeneral eliminar(int id) {
         this.cx.conectar();
-        RespuestaGeneral rs = this.daoTipoCatalogo.eliminar(id);
+        RespuestaGeneral rg = RespuestaGeneral.asBadRequest("");
+        rg = daoCicloContable.ObtenerPorIdTipoCatalogo(id);
+        if (rg.esExitosa()) {
+            ArrayList<daoCicloContable> listaCicloContable = (ArrayList<daoCicloContable>) rg.getDatos();
+            if (listaCicloContable.isEmpty()) {
+                rg = this.daoTipoCatalogo.eliminar(id);
+            } else {
+                rg = RespuestaGeneral.asBadRequest("No se puede eliminar, \nEsta siendo usado en al menos un ciclo contable");
+            }
+        } else {
+            rg = RespuestaGeneral.asBadRequest("No se pudo validar para eliminar");
+        }
         this.cx.desconectar();
-        return rs;
+        return rg;
     }
     
 }

@@ -5,6 +5,7 @@
 package dao;
 
 import conexion.Conexion;
+import dto.dtoCuenta;
 import utils.constantes.RespuestaGeneral;
 
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Cuenta;
 import modelo.TipoCatalogo;
 import utils.constantes.Constantes;
 
@@ -23,29 +25,42 @@ import utils.constantes.Constantes;
  *
  * @author vacev
  */
-public class daoTipoCatalogo {
+public class daoCuenta {
     
     SimpleDateFormat sdfString = new SimpleDateFormat("yyyy-MM-dd");
     Conexion cx;
 
-    public daoTipoCatalogo(Conexion cx) {
+    public daoCuenta(Conexion cx) {
         this.cx = cx;
     }
     
     public RespuestaGeneral Listar() {
         RespuestaGeneral rg = new RespuestaGeneral();
-        ArrayList<TipoCatalogo> lista = new ArrayList<>();
+        ArrayList<dtoCuenta> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  SELECT * FROM tipo_catalogo tc where tc.eliminado = 0
+                  select 
+                  	c.*
+                  	,tc.tipo as catalogo
+                  from cuenta c
+                  left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             rs = ps.executeQuery();
             while (rs.next()) {
-                TipoCatalogo tcatalogo = new TipoCatalogo();
-                tcatalogo.setId(rs.getInt("id"));
-                tcatalogo.setTipo(rs.getString("tipo"));
-                lista.add(tcatalogo);
+                dtoCuenta cuenta = new dtoCuenta();
+                cuenta.setId(rs.getInt("id"));
+                cuenta.setId_tipo_catalogo(rs.getInt("id_tipo_catalogo"));
+                cuenta.setCodigo(rs.getString("catalogo"));
+                cuenta.setRef(rs.getString("ref"));
+                cuenta.setNombre(rs.getString("nombre"));
+                cuenta.setNivel(rs.getInt("nivel"));
+                cuenta.setTipo_saldo(rs.getString("tipo_caldo"));
+                cuenta.setIngresos(rs.getString("ingresos"));
+                cuenta.setEgresos(rs.getString("egresos"));
+                cuenta.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
+                cuenta.setCatalogo(rs.getString("catalogo"));
+                lista.add(cuenta);
             }
             
             return rg.asOk("", lista);
@@ -59,19 +74,27 @@ public class daoTipoCatalogo {
     
     public RespuestaGeneral ObtenerPorId(int id) {
         RespuestaGeneral rg = new RespuestaGeneral();
-        ArrayList<TipoCatalogo> lista = new ArrayList<>();
+        ArrayList<Cuenta> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  SELECT * FROM tipo_catalogo tc where tc.id = ?
+                  SELECT * FROM cuenta c where c.id = ?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                TipoCatalogo tcatalogo = new TipoCatalogo();
-                tcatalogo.setId(rs.getInt("id"));
-                tcatalogo.setTipo(rs.getString("tipo"));
-                lista.add(tcatalogo);
+                Cuenta cuenta = new Cuenta();
+                cuenta.setId(rs.getInt("id"));
+                cuenta.setId_tipo_catalogo(rs.getInt("id_tipo_catalogo"));
+                cuenta.setCodigo(rs.getString("catalogo"));
+                cuenta.setRef(rs.getString("ref"));
+                cuenta.setNombre(rs.getString("nombre"));
+                cuenta.setNivel(rs.getInt("nivel"));
+                cuenta.setTipo_saldo(rs.getString("tipo_caldo"));
+                cuenta.setIngresos(rs.getString("ingresos"));
+                cuenta.setEgresos(rs.getString("egresos"));
+                cuenta.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
+                lista.add(cuenta);
             }
             
             return rg.asOk("", lista);
@@ -83,17 +106,22 @@ public class daoTipoCatalogo {
         }
     }
     
-    public RespuestaGeneral insertar(TipoCatalogo tcatalogo) {
+    public RespuestaGeneral insertar(Cuenta cuenta) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
-                  INSERT INTO tipo_catalogo     
-                  VALUES(null, ?, ?, ?)
+                  INSERT INTO cuenta     
+                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
-            ps.setString(1, tcatalogo.getTipo());
-            ps.setString(2, tcatalogo.getRef());
-            ps.setInt(3, 0);
-            
+            ps.setInt(1, cuenta.getId_tipo_catalogo());
+            ps.setString(2, cuenta.getCodigo());
+            ps.setString(3, cuenta.getRef());
+            ps.setString(4, cuenta.getNombre());
+            ps.setInt(5, cuenta.getNivel());
+            ps.setString(6, cuenta.getTipo_saldo());
+            ps.setString(7, cuenta.getIngresos());
+            ps.setString(8, cuenta.getEgresos());
+            ps.setInt(9, cuenta.isEliminado() ? 1 : 0);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             int id = -1;
@@ -110,20 +138,34 @@ public class daoTipoCatalogo {
         }
     }
     
-    public RespuestaGeneral editar(TipoCatalogo tcatalogo) {
+    public RespuestaGeneral editar(Cuenta cuenta) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ResultSet rs = null;
         var sql = """
-                    UPDATE tipo_catalogo SET tipo=?,ref=?,eliminado=? WHERE id=?
+                    UPDATE tipo_catalogo SET 
+                        id_tipo_catalogo=?,
+                        codigo=?,
+                        ref=?,
+                        nombre=?,
+                        nivel=?,
+                        tipo_saldo=?,
+                        ingresos=?,
+                        egresos=?
+                    WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
-            ps.setString(1, tcatalogo.getTipo());
-            ps.setString(2, tcatalogo.getRef());
-            ps.setInt(3, tcatalogo.isEliminado() ? 1 : 0);
-            ps.setInt(4, tcatalogo.getId());
+            ps.setInt(1, cuenta.getId_tipo_catalogo());
+            ps.setString(2, cuenta.getCodigo());
+            ps.setString(3, cuenta.getRef());
+            ps.setString(4, cuenta.getNombre());
+            ps.setInt(5, cuenta.getNivel());
+            ps.setString(6, cuenta.getTipo_saldo());
+            ps.setString(7, cuenta.getIngresos());
+            ps.setString(8, cuenta.getEgresos());
+            ps.setInt(9, cuenta.getId());
             ps.executeUpdate();
             
-            return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, tcatalogo.getId());
+            return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, cuenta.getId());
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,7 +177,7 @@ public class daoTipoCatalogo {
     public RespuestaGeneral eliminar(int id) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
-                    UPDATE tipo_catalogo SET eliminado=? WHERE id=?
+                    UPDATE cuenta SET eliminado=? WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, 1);

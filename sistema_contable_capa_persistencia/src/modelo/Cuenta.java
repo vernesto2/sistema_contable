@@ -11,22 +11,22 @@ package modelo;
 public class Cuenta {
     
     int id;
+    int id_tipo_catalogo;
     String codigo;
     String ref;
     String nombre;
-    int id_tipo_catalogo;
     int nivel;
     String tipo_saldo;
     String ingresos;
     String egresos;
     boolean eliminado;
 
-    public Cuenta(int id, String codigo, String ref, String nombre, int id_tipo_catalogo, int nivel, String tipo_saldo, String ingresos, String egresos, boolean eliminado) {
+    public Cuenta(int id, int id_tipo_catalogo, String codigo, String ref, String nombre, int nivel, String tipo_saldo, String ingresos, String egresos, boolean eliminado) {
         this.id = id;
+        this.id_tipo_catalogo = id_tipo_catalogo;
         this.codigo = codigo;
         this.ref = ref;
         this.nombre = nombre;
-        this.id_tipo_catalogo = id_tipo_catalogo;
         this.nivel = nivel;
         this.tipo_saldo = tipo_saldo;
         this.ingresos = ingresos;
