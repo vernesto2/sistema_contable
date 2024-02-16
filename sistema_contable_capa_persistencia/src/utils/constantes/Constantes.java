@@ -6,7 +6,6 @@ package utils.constantes;
 
 import dto.dtoLista;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import modelo.ConfiguracionUsuario;
 import modelo.Persona;
 import modelo.Usuario;
@@ -45,13 +44,13 @@ public class Constantes {
     public static int devolverCodigoMensaje(RespuestaGeneral rg) {
         int opcion = -1;
         if (rg.getCodigo() >= 200 && rg.getCodigo() <= 299) {
-            opcion = JOptionPane.INFORMATION_MESSAGE;
+            opcion = 1; //JOptionPane.INFORMATION_MESSAGE;
         } else if (rg.getCodigo() >= 400 && rg.getCodigo() <= 499) {
-            opcion = JOptionPane.WARNING_MESSAGE;
+            opcion = 2; // JOptionPane.WARNING_MESSAGE;
         } else if (rg.getCodigo() >= 500 && rg.getCodigo() <= 599) {
-            opcion = JOptionPane.ERROR_MESSAGE;
+            opcion = 0; // JOptionPane.ERROR_MESSAGE;
         } else {
-            opcion = JOptionPane.DEFAULT_OPTION;
+            opcion = -1; // JOptionPane.DEFAULT_OPTION;
         }
         return opcion;
     }
