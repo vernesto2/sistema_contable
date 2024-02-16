@@ -4,6 +4,8 @@
  */
 package utils.constantes;
 
+import dto.dtoLista;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.ConfiguracionUsuario;
 import modelo.Persona;
@@ -52,5 +54,20 @@ public class Constantes {
             opcion = JOptionPane.DEFAULT_OPTION;
         }
         return opcion;
-    } 
+    }
+    
+    // tipos de partidas disponibles en sistema
+    public static ArrayList<dtoLista> listaTiposPartidas() {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        dtoLista op1 = new dtoLista(0, "MOVIVIENTO");
+        dtoLista op2 = new dtoLista(1, "AJUSTE DE IVA");
+        dtoLista op3 = new dtoLista(2, "CIERRE");
+        lista.add(op1);
+        lista.add(op2);
+        lista.add(op3);
+        return lista;
+    }
+    
+    
+    
 }
