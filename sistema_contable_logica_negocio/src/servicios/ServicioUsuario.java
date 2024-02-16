@@ -84,12 +84,29 @@ public class ServicioUsuario {
         usuario.setClave(claveCifrada);
         usuario.setSalt(saltvalue);
     }
+    public RespuestaGeneral obtenerPorCarnet(String carnet) {
+        try {
+            this.cx.conectar();
+            Usuario usuario = daoUsuario.obtenerPorCarnet(carnet);
+            this.cx.desconectar();
+            if(usuario == null) {
+                return RespuestaGeneral.asNotFound("No se encontró el usuario", null);
+            }
+            return RespuestaGeneral.asOk(null, usuario);
+        } catch(Exception   ex) {
+            return RespuestaGeneral.asNotFound("No se encontró el usuario", null);
+        }
+    }
 
-    public boolean coinciden(char[] claveSinCifrar, String claveCifrada, String salt) throws InvalidKeySpecException {
-
-        /* verify the original password and encrypted password */
-        Boolean status = PassBasedEnc.verifyUserPassword(claveSinCifrar, claveCifrada, salt);
-        return status;
+    public RespuestaGeneral coinciden(char[] claveSinCifrar, String claveCifrada, String salt) {
+        try {
+            /* verify the original password and encrypted password */
+            Boolean status = PassBasedEnc.verifyUserPassword(claveSinCifrar, claveCifrada, salt);
+            return RespuestaGeneral.asOk(null, status);
+        } catch (InvalidKeySpecException ex) {
+            Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return RespuestaGeneral.asBadRequest(ex.getMessage());
+        }
 
     }
 }

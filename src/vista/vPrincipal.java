@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.Usuario;
 import utils.constantes.CambiaPanel;
 import rojerusan.RSPanelsSlider;
 import utils.constantes.Constantes;
@@ -24,6 +25,19 @@ public class vPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form vPrincipal
      */
+
+    private Usuario usuario;
+    
+    public vPrincipal(Usuario usuario) {
+        if(usuario == null) {
+            this.dispose();
+            throw new IllegalAccessError("No puede iniciar sin usuario");
+        }
+        initComponents();
+        this.iniciarVista();
+        this.txtNombreUsuario.setText(usuario.getPersona().nombreCompleto());
+        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
+    }
     public vPrincipal() {
         initComponents();
         this.iniciarVista();

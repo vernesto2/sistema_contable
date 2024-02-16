@@ -53,7 +53,7 @@ public class vInicio extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        rSButtonShapeIcon16 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnSeleccionarArchivo = new RSMaterialComponent.RSButtonShapeIcon();
         lblRutaGlobal = new javax.swing.JLabel();
         btnIniciarSesion = new RSMaterialComponent.RSButtonShapeIcon();
         btnCrearConfig = new RSMaterialComponent.RSButtonShapeIcon();
@@ -78,17 +78,17 @@ public class vInicio extends javax.swing.JFrame {
         jLabel2.setText("¿Que desea hacer hoy?");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        rSButtonShapeIcon16.setBackground(new java.awt.Color(33, 58, 86));
-        rSButtonShapeIcon16.setToolTipText("SELECCIONAR RUTA DE CONFIGURACIÓN");
-        rSButtonShapeIcon16.setBackgroundHover(new java.awt.Color(33, 68, 86));
-        rSButtonShapeIcon16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        rSButtonShapeIcon16.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        rSButtonShapeIcon16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rSButtonShapeIcon16.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.STORAGE);
-        rSButtonShapeIcon16.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        rSButtonShapeIcon16.addActionListener(new java.awt.event.ActionListener() {
+        btnSeleccionarArchivo.setBackground(new java.awt.Color(33, 58, 86));
+        btnSeleccionarArchivo.setToolTipText("SELECCIONAR RUTA DE CONFIGURACIÓN");
+        btnSeleccionarArchivo.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnSeleccionarArchivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnSeleccionarArchivo.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnSeleccionarArchivo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnSeleccionarArchivo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.STORAGE);
+        btnSeleccionarArchivo.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnSeleccionarArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShapeIcon16ActionPerformed(evt);
+                btnSeleccionarArchivoActionPerformed(evt);
             }
         });
 
@@ -143,7 +143,6 @@ public class vInicio extends javax.swing.JFrame {
         rSButtonShapeIcon9.setHideActionText(true);
         rSButtonShapeIcon9.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         rSButtonShapeIcon9.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CLOSE);
-        rSButtonShapeIcon9.setMargin(new java.awt.Insets(0, 0, 0, 0));
         rSButtonShapeIcon9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonShapeIcon9ActionPerformed(evt);
@@ -173,7 +172,7 @@ public class vInicio extends javax.swing.JFrame {
             .addGroup(rSPanelGradiente1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanelGradiente1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -213,7 +212,7 @@ public class vInicio extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(lblRutaGlobal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rSButtonShapeIcon16, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(85, 85, 85))))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -227,7 +226,7 @@ public class vInicio extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblRutaGlobal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rSButtonShapeIcon16, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSeleccionarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -267,7 +266,7 @@ public class vInicio extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_rSButtonShapeIcon9ActionPerformed
 
-    private void rSButtonShapeIcon16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon16ActionPerformed
+    private void btnSeleccionarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarArchivoActionPerformed
         //JFileChooser selectorArchivos = new JFileChooser("./");
         RSFileChooser selector = new RSFileChooser();
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("sqlite", "sqlite", "db");
@@ -300,7 +299,7 @@ public class vInicio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "¡Ocurrió un error: " + ex.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
         }
         System.out.print("final");
-    }//GEN-LAST:event_rSButtonShapeIcon16ActionPerformed
+    }//GEN-LAST:event_btnSeleccionarArchivoActionPerformed
 
     private void lblRutaGlobalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRutaGlobalMouseEntered
 
@@ -355,13 +354,13 @@ public class vInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnCrearConfig;
     private RSMaterialComponent.RSButtonShapeIcon btnIniciarSesion;
+    private RSMaterialComponent.RSButtonShapeIcon btnSeleccionarArchivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblRutaGlobal;
-    private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon16;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon9;
     private rspanelgradiente.RSPanelGradiente rSPanelGradiente1;
     // End of variables declaration//GEN-END:variables

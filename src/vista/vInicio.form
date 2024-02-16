@@ -71,7 +71,7 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="lblRutaGlobal" pref="0" max="32767" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="rSButtonShapeIcon16" min="-2" pref="45" max="-2" attributes="0"/>
+                                          <Component id="btnSeleccionarArchivo" min="-2" pref="45" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
@@ -93,7 +93,7 @@
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="lblRutaGlobal" max="32767" attributes="0"/>
-                      <Component id="rSButtonShapeIcon16" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnSeleccionarArchivo" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnIniciarSesion" min="-2" max="-2" attributes="0"/>
@@ -126,7 +126,7 @@
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon16">
+        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnSeleccionarArchivo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="56" green="3a" red="21" type="rgb"/>
@@ -150,7 +150,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon16ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSeleccionarArchivoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblRutaGlobal">
@@ -251,9 +251,6 @@
             <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
               <Value id="CLOSE"/>
             </Property>
-            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 0, 0, 0]"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon9ActionPerformed"/>
@@ -278,7 +275,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="64" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
