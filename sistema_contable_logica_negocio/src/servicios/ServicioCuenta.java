@@ -22,9 +22,9 @@ public class ServicioCuenta {
         this.daoCuenta = new daoCuenta(this.cx);
     }
     
-    public RespuestaGeneral obtenerLista() {
+    public RespuestaGeneral obtenerListaPorIdTipoCatalogo(int idTipoCatalogo) {
         this.cx.conectar();
-        RespuestaGeneral rs = this.daoCuenta.Listar();
+        RespuestaGeneral rs = this.daoCuenta.Listar(idTipoCatalogo);
         this.cx.desconectar(); 
         return rs;
     }

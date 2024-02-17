@@ -34,7 +34,7 @@ public class daoCuenta {
         this.cx = cx;
     }
     
-    public RespuestaGeneral Listar() {
+    public RespuestaGeneral Listar(int idTipoCatalogo) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<dtoCuenta> lista = new ArrayList<>();
         ResultSet rs = null;
@@ -44,18 +44,21 @@ public class daoCuenta {
                   	,tc.tipo as catalogo
                   from cuenta c
                   left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
+                  where c.id_tipo_catalogo = ?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, idTipoCatalogo);
             rs = ps.executeQuery();
             while (rs.next()) {
                 dtoCuenta cuenta = new dtoCuenta();
                 cuenta.setId(rs.getInt("id"));
                 cuenta.setId_tipo_catalogo(rs.getInt("id_tipo_catalogo"));
-                cuenta.setCodigo(rs.getString("catalogo"));
+                cuenta.setCodigo(rs.getString("codigo"));
+                cuenta.setCatalogo(rs.getString("catalogo"));
                 cuenta.setRef(rs.getString("ref"));
                 cuenta.setNombre(rs.getString("nombre"));
                 cuenta.setNivel(rs.getInt("nivel"));
-                cuenta.setTipo_saldo(rs.getString("tipo_caldo"));
+                cuenta.setTipo_saldo(rs.getString("tipo_saldo"));
                 cuenta.setIngresos(rs.getString("ingresos"));
                 cuenta.setEgresos(rs.getString("egresos"));
                 cuenta.setEliminado(rs.getInt("eliminado") == 0 ? false : true);

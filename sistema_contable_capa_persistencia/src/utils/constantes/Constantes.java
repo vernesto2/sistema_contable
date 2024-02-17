@@ -58,15 +58,22 @@ public class Constantes {
     // tipos de partidas disponibles en sistema
     public static ArrayList<dtoLista> listaTiposPartidas() {
         ArrayList<dtoLista> lista = new ArrayList<>();
-        dtoLista op1 = new dtoLista(0, "MOVIVIENTO");
-        dtoLista op2 = new dtoLista(1, "AJUSTE DE IVA");
-        dtoLista op3 = new dtoLista(2, "CIERRE");
+        dtoLista op1 = new dtoLista("0", "MOVIVIENTO");
+        dtoLista op2 = new dtoLista("1", "AJUSTE DE IVA");
+        dtoLista op3 = new dtoLista("2", "CIERRE");
         lista.add(op1);
         lista.add(op2);
         lista.add(op3);
         return lista;
     }
     
-    
+    public static ArrayList<dtoLista> listaTiposSaldoCuentas() {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        dtoLista op1 = new dtoLista("", "DEUDOR");
+        dtoLista op2 = new dtoLista("R", "ACREEDOR");
+        lista.add(op1);
+        lista.add(op2);
+        return lista;
+    }
     
 }

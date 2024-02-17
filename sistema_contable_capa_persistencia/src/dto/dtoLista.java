@@ -10,24 +10,24 @@ package dto;
  */
 public class dtoLista {
     
-    int value;
+    String value;
     String label;
 
-    public dtoLista(int value, String label) {
+    public dtoLista(String value, String label) {
         this.value = value;
         this.label = label;
     }
     
     public dtoLista() {
-        this.value = 0;
+        this.value = "";
         this.label = "";
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
