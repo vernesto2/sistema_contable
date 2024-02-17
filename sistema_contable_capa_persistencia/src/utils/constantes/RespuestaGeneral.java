@@ -10,7 +10,7 @@ package utils.constantes;
  */
 public class RespuestaGeneral {
     
-     private String mensaje;
+    private String mensaje;
     // codigo es para el codigo http
     private int codigo;
     // datos puede ser 1 objeto, una lista de cualquier tipo de dato

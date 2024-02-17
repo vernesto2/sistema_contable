@@ -15,6 +15,8 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Usuario;
@@ -54,9 +56,14 @@ public class ServicioConfiguracion {
         String sql = leerArchivoConfiguracionInicial();
         ejecutarSQL(sql);
     }
-
+    private String fechaAFormatoPreferido(LocalDateTime fechaHora) {
+        //2024-02-16-1657
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HHmm");
+        return fechaHora.format(formatter); // "1986-04-08 12:30"
+    }
     private void ejecutarSQL(String sql) throws SQLException {
-        String fileName = "database/db-copia.sqlite";
+        String strFechaHoraActual = fechaAFormatoPreferido(LocalDateTime.now());
+        String fileName = "database/db-"+strFechaHoraActual+".sqlite";
         Connection connection = conectar(fileName);
         try (
                 Statement statement = connection.createStatement();

@@ -6,7 +6,15 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.security.spec.InvalidKeySpecException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.Usuario;
+import servicios.ServicioUsuario;
+import utils.constantes.Constantes;
+import utils.constantes.RespuestaGeneral;
 
 /**
  *
@@ -17,13 +25,14 @@ public class vLogin extends javax.swing.JFrame {
     /**
      * Creates new form vLogin
      */
-    public char pass; 
-    
+    private ServicioUsuario _usuario = new ServicioUsuario();
+    public char pass;
+
     public vLogin() {
         initComponents();
         this.iniciarVista();
     }
-    
+
     public void iniciarVista() {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -43,11 +52,11 @@ public class vLogin extends javax.swing.JFrame {
 
         rSPanel1 = new necesario.RSPanel();
         txtUsuario = new RSMaterialComponent.RSTextFieldMaterial();
-        checkBox = new rojerusan.RSCheckBox();
-        rSButtonShapeIcon15 = new RSMaterialComponent.RSButtonShapeIcon();
-        rSButtonShapeIcon10 = new RSMaterialComponent.RSButtonShapeIcon();
-        jLabel1 = new javax.swing.JLabel();
         txtClave = new RSMaterialComponent.RSPasswordMaterial();
+        checkMostrarClave = new rojerusan.RSCheckBox();
+        btnIngresar = new RSMaterialComponent.RSButtonShapeIcon();
+        btnCancelar = new RSMaterialComponent.RSButtonShapeIcon();
+        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         rSButtonShapeIcon9 = new RSMaterialComponent.RSButtonShapeIcon();
         btnOlvidoContraseña = new rojeru_san.RSButton();
@@ -67,51 +76,6 @@ public class vLogin extends javax.swing.JFrame {
         txtUsuario.setPlaceholder("Digite el usuario..");
         txtUsuario.setSelectionColor(new java.awt.Color(0, 0, 0));
 
-        checkBox.setForeground(new java.awt.Color(0, 0, 0));
-        checkBox.setText("Mostrar Contraseña");
-        checkBox.setColorCheck(new java.awt.Color(0, 0, 0));
-        checkBox.setColorUnCheck(new java.awt.Color(0, 0, 0));
-        checkBox.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        checkBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkBoxActionPerformed(evt);
-            }
-        });
-
-        rSButtonShapeIcon15.setBackground(new java.awt.Color(33, 58, 86));
-        rSButtonShapeIcon15.setText("INGRESAR");
-        rSButtonShapeIcon15.setBackgroundHover(new java.awt.Color(33, 68, 86));
-        rSButtonShapeIcon15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        rSButtonShapeIcon15.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        rSButtonShapeIcon15.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
-        rSButtonShapeIcon15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShapeIcon15ActionPerformed(evt);
-            }
-        });
-
-        rSButtonShapeIcon10.setBackground(new java.awt.Color(251, 205, 6));
-        rSButtonShapeIcon10.setText("CANCELAR");
-        rSButtonShapeIcon10.setBackgroundHover(new java.awt.Color(251, 174, 6));
-        rSButtonShapeIcon10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        rSButtonShapeIcon10.setForegroundHover(new java.awt.Color(0, 0, 0));
-        rSButtonShapeIcon10.setForegroundIcon(new java.awt.Color(0, 0, 0));
-        rSButtonShapeIcon10.setForegroundIconHover(new java.awt.Color(0, 0, 0));
-        rSButtonShapeIcon10.setForegroundText(new java.awt.Color(0, 0, 0));
-        rSButtonShapeIcon10.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        rSButtonShapeIcon10.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
-        rSButtonShapeIcon10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShapeIcon10ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/img/login.png"))); // NOI18N
-        jLabel1.setToolTipText("");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIconTextGap(1);
-
         txtClave.setForeground(new java.awt.Color(0, 0, 0));
         txtClave.setActionCommand("<Not Set>");
         txtClave.setColorMaterial(new java.awt.Color(0, 0, 0));
@@ -121,6 +85,51 @@ public class vLogin extends javax.swing.JFrame {
         txtClave.setPlaceholder("Digite la contraseña..");
         txtClave.setSelectionColor(new java.awt.Color(0, 0, 0));
         txtClave.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+
+        checkMostrarClave.setForeground(new java.awt.Color(0, 0, 0));
+        checkMostrarClave.setText("Mostrar Contraseña");
+        checkMostrarClave.setColorCheck(new java.awt.Color(0, 0, 0));
+        checkMostrarClave.setColorUnCheck(new java.awt.Color(0, 0, 0));
+        checkMostrarClave.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        checkMostrarClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkMostrarClaveActionPerformed(evt);
+            }
+        });
+
+        btnIngresar.setBackground(new java.awt.Color(33, 58, 86));
+        btnIngresar.setText("INGRESAR");
+        btnIngresar.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnIngresar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnIngresar.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnIngresar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setBackground(new java.awt.Color(251, 205, 6));
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.setBackgroundHover(new java.awt.Color(251, 174, 6));
+        btnCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnCancelar.setForegroundHover(new java.awt.Color(0, 0, 0));
+        btnCancelar.setForegroundIcon(new java.awt.Color(0, 0, 0));
+        btnCancelar.setForegroundIconHover(new java.awt.Color(0, 0, 0));
+        btnCancelar.setForegroundText(new java.awt.Color(0, 0, 0));
+        btnCancelar.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnCancelar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/img/login.png"))); // NOI18N
+        jLabel1.setToolTipText("");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIconTextGap(1);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -134,7 +143,6 @@ public class vLogin extends javax.swing.JFrame {
         rSButtonShapeIcon9.setHideActionText(true);
         rSButtonShapeIcon9.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         rSButtonShapeIcon9.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CLOSE);
-        rSButtonShapeIcon9.setMargin(new java.awt.Insets(0, 0, 0, 0));
         rSButtonShapeIcon9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonShapeIcon9ActionPerformed(evt);
@@ -161,14 +169,14 @@ public class vLogin extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkBox, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkMostrarClave, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(71, 71, 71))
             .addGroup(rSPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(rSButtonShapeIcon10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rSButtonShapeIcon15, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanel1Layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
@@ -199,11 +207,11 @@ public class vLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
-                .addComponent(checkBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(checkMostrarClave, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rSButtonShapeIcon10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSButtonShapeIcon15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnOlvidoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
@@ -223,21 +231,46 @@ public class vLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rSButtonShapeIcon15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon15ActionPerformed
-        vPrincipal principal = new vPrincipal();
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+
+        String carnet = txtUsuario.getText();
+        char[] clave = txtClave.getPassword();
+
+        RespuestaGeneral rgUsuario = _usuario.obtenerPorCarnet(carnet);
+        if (rgUsuario.esFallida()) {
+            JOptionPane.showMessageDialog(this, rgUsuario.getMensaje(), "Mensaje", Constantes.devolverCodigoMensaje(rgUsuario));
+            return;
+        }
+        
+        Usuario usuario = (Usuario) rgUsuario.getDatos();
+        RespuestaGeneral rgValidar = _usuario.coinciden(clave, usuario.getClave(), usuario.getSalt());
+        
+        if( rgValidar.esFallida() ) {
+            JOptionPane.showMessageDialog(this, rgUsuario.getMensaje(), "Mensaje", Constantes.devolverCodigoMensaje(rgValidar));
+            return;
+        }
+        
+        Boolean coinciden = (Boolean) rgValidar.getDatos();
+        
+        if(coinciden == false) {
+            JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", Constantes.devolverCodigoMensaje(rgValidar));
+            return;
+        }
+        
+        vPrincipal principal = new vPrincipal(usuario);
         principal.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_rSButtonShapeIcon15ActionPerformed
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
-    private void rSButtonShapeIcon10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon10ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vInicio inicio = new vInicio();
         inicio.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_rSButtonShapeIcon10ActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void checkBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxActionPerformed
+    private void checkMostrarClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkMostrarClaveActionPerformed
         char character = this.txtClave.getEchoChar();
-        if (this.checkBox.isSelected()) {
+        if (this.checkMostrarClave.isSelected()) {
             this.pass = character;
             this.txtClave.setEchoChar((char) 0);
             this.txtClave.requestFocus();
@@ -245,7 +278,7 @@ public class vLogin extends javax.swing.JFrame {
             this.txtClave.setEchoChar((char) this.pass);
             this.txtClave.requestFocus();
         }
-    }//GEN-LAST:event_checkBoxActionPerformed
+    }//GEN-LAST:event_checkMostrarClaveActionPerformed
 
     private void rSButtonShapeIcon9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon9ActionPerformed
         // TODO add your handling code here:
@@ -296,12 +329,12 @@ public class vLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonShapeIcon btnCancelar;
+    private RSMaterialComponent.RSButtonShapeIcon btnIngresar;
     private rojeru_san.RSButton btnOlvidoContraseña;
-    private rojerusan.RSCheckBox checkBox;
+    private rojerusan.RSCheckBox checkMostrarClave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon10;
-    private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon15;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon9;
     private necesario.RSPanel rSPanel1;
     private RSMaterialComponent.RSPasswordMaterial txtClave;
