@@ -14,6 +14,7 @@ import modelo.Persona;
 import modelo.Usuario;
 import servicios.ServicioConfiguracion;
 import servicios.ServicioUsuario;
+import utils.constantes.CharArrayUtils;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
@@ -296,45 +297,48 @@ public class vConfigInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCrearConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfiguracionActionPerformed
-        try {
-            Persona persona = new Persona();
-            persona.setNombres(txtApellidos.getText().trim());
-            persona.setApellidos(txtApellidos.getText().trim());
-            persona.setTipo(Constantes.TIPO_ALUMNO);
-            persona.setCarnet(txtCarnet.getText().trim());
+        char[] claveSinCifrar = txtClave.getPassword();
+        char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
 
-            Usuario usuario = new Usuario();
-            usuario.setNombre(txtCarnet.getText().trim());
-            usuario.setCorreo(txtCorreo.getText().trim());
+        Persona persona = new Persona();
+        persona.setNombres(txtApellidos.getText().trim());
+        persona.setApellidos(txtApellidos.getText().trim());
+        persona.setTipo(Constantes.TIPO_ALUMNO);
+        persona.setCarnet(txtCarnet.getText().trim());
 
-            //la clave se cifra en el servicio
-            //usuario.setClave(null);
-            char[] claveSinCifrar = txtClave.getPassword();
-            char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
-            if (!Arrays.equals(claveSinCifrar, repetirClaveSinCifrar)) {
-                JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+        Usuario usuario = new Usuario();
+        usuario.setNombre(txtCarnet.getText().trim());
+        usuario.setCorreo(txtCorreo.getText().trim());
 
-            usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
-
-            usuario.setPregunta1(comboPreguntaRecuperacion1.getSelectedIndex());
-            usuario.setRespuesta1(txtRespuesta1.getText().trim());
-            usuario.setPregunta2(comboPreguntaRecuperacion2.getSelectedIndex());
-            usuario.setRespuesta2(txtRespuesta2.getText().trim());
-            usuario.setPregunta3(comboPreguntaRecuperacion3.getSelectedIndex());
-            usuario.setRespuesta3(txtRespuesta3.getText().trim());
-
-            usuario.setPersona(persona);
-            RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
-            if (resp.esExitosa()) {
-                JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
+        //la clave se cifra en el servicio
+        //usuario.setClave(null);
+        if (!Arrays.equals(claveSinCifrar, repetirClaveSinCifrar)) {
+            JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+
+        usuario.setPregunta1(comboPreguntaRecuperacion1.getSelectedIndex());
+        usuario.setRespuesta1(txtRespuesta1.getText().trim());
+        usuario.setPregunta2(comboPreguntaRecuperacion2.getSelectedIndex());
+        usuario.setRespuesta2(txtRespuesta2.getText().trim());
+        usuario.setPregunta3(comboPreguntaRecuperacion3.getSelectedIndex());
+        usuario.setRespuesta3(txtRespuesta3.getText().trim());
+
+        usuario.setPersona(persona);
+        RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
+        if (resp.esExitosa()) {
+            JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(resp));
+            vInicio vistaInicio = new vInicio();
+            vistaInicio.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", Constantes.devolverCodigoMensaje(resp));
+        }
+        //limpiar el array de char, en caso de volcado de memoria, no esté la clave
+        CharArrayUtils.limpiar(claveSinCifrar);
+        CharArrayUtils.limpiar(repetirClaveSinCifrar);
     }//GEN-LAST:event_btnCrearConfiguracionActionPerformed
 
     private void rSButtonShapeIcon9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon9ActionPerformed

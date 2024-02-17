@@ -18,9 +18,13 @@ public class Conexion {
     Connection cx = null;
     
     public Connection conectar() {
+        return conectar(Constantes.rutaConexion);
+    }
+    
+    public Connection conectar(String fileName) {
         try {
             Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:" + Constantes.rutaConexion;
+            String url = "jdbc:sqlite:" + fileName;
             cx = DriverManager.getConnection(url);
             System.out.println("CONECTADO!");
         } catch (ClassNotFoundException | SQLException ex) {

@@ -10,8 +10,11 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,40 +38,53 @@ public class ServicioUsuario {
     public ServicioUsuario() {
         this.daoUsuario = new DaoUsuario(this.cx);
     }
-
-    public RespuestaGeneral crear(Usuario usuario, char[] claveSinCifrar) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public void cerrarConexion() {
+        try {
+            this.cx.getCx().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void setConexion(Conexion conexion) {
+        this.cx = conexion;
+        this.daoUsuario = new DaoUsuario(cx);
+    }
+    public RespuestaGeneral validarUsuario(Usuario usuario, char [] claveSinCifrar) {
         Persona persona = usuario.getPersona();
         if (persona.getNombres().isEmpty()
                 || persona.getApellidos().isEmpty()
                 || persona.getCarnet().isEmpty()
                 || !(persona.getTipo() == Constantes.TIPO_DOCENTE || persona.getTipo() == Constantes.TIPO_ALUMNO)) {
-            throw new IllegalStateException("Persona con datos inválidos");
+            return RespuestaGeneral.asBadRequest("Persona con datos inválidos");
         }
-
-        usuario.setNombre(
-                usuario.getNombre().toString().toLowerCase()
-        );
         
-        this.cifrarClave(usuario, claveSinCifrar);
-
         if (usuario.getCorreo().isEmpty()
-                || usuario.getClave().isEmpty()
                 || usuario.getNombre().isEmpty()
                 || usuario.getResetear_clave() == 1
                 || usuario.getPregunta1() == 0 || usuario.getRespuesta1().isEmpty()
                 || usuario.getPregunta2() == 0 || usuario.getRespuesta2().isEmpty()
                 || usuario.getPregunta3() == 0 || usuario.getRespuesta3().isEmpty()) {
-            throw new IllegalStateException("Usuario con datos inválidos");
+            return RespuestaGeneral.asBadRequest("Usuario con datos inválidos");
         }
-
+        return RespuestaGeneral.asOk(null, null);
+    }
+    public RespuestaGeneral crear(Usuario usuario, char[] claveSinCifrar) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        RespuestaGeneral respValidar = validarUsuario(usuario, claveSinCifrar);
+        if(respValidar.esFallida()) {
+            return respValidar;
+        }
+        usuario.setNombre(
+                usuario.getNombre().toString().toLowerCase()
+        );
+        Map<String, String> obj = cifrarClave(claveSinCifrar);
+        usuario.setClave(obj.get("clave"));
+        usuario.setSalt(obj.get("salt"));
         usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
-        this.cx.conectar();
         daoUsuario.insertar(usuario);
-        this.cx.desconectar();
         return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
     }
 
-    public void cifrarClave(Usuario usuario, char[] claveSinCifrar) throws InvalidKeySpecException {
+    public Map<String, String> cifrarClave(char[] claveSinCifrar) throws InvalidKeySpecException {
         /* Plain text Password. */
 
         // generates the Salt value. It can be stored in a database. 
@@ -80,9 +96,10 @@ public class ServicioUsuario {
         /* Print out plain text password, encrypted password and salt value. */
         System.out.println("Secure password = " + claveCifrada);
         System.out.println("Salt value = " + saltvalue);
-
-        usuario.setClave(claveCifrada);
-        usuario.setSalt(saltvalue);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("clave", claveCifrada);
+        map.put("salt", saltvalue);
+        return map;
     }
     public RespuestaGeneral obtenerPorCarnet(String carnet) {
         try {
