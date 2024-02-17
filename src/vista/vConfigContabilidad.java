@@ -805,6 +805,8 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     
     public void cargarInfoSegunTab() {
         this.limiparTablaTipoCatalogo();
+        this.limpiarFormTipoCatalogo();
+        this.limpiarFormCicloContable();
         this.limiparTablaCicloContable();
         switch (this.tabPanelContabilidad.getSelectedIndex()) {
             case 0 -> this.iniciarCicloContable();

@@ -74,6 +74,45 @@ public class daoCicloContable {
         }
     }
     
+    public RespuestaGeneral ObtenerPorIdTipoCatalogo(int id) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        ArrayList<CicloContable> lista = new ArrayList<>();
+        ResultSet rs = null;
+        var sql = """
+                  select * from ciclo_contable cc where cc.id_catalogo = ?
+                  """;
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CicloContable cicloContable = new CicloContable();
+                cicloContable.setId(rs.getInt("id"));
+                cicloContable.setId_catalogo(rs.getInt("id_catalogo"));
+                cicloContable.setTitulo(rs.getString("titulo"));
+                String sDesde = rs.getString("desde");
+                String sHasta = rs.getString("hasta");
+                Date desde = new Date();
+                Date hasta = new Date();
+                try {
+                    desde = new SimpleDateFormat("yyyy-MM-dd").parse(sDesde);
+                    hasta = new SimpleDateFormat("yyyy-MM-dd").parse(sHasta);
+                } catch (ParseException ex) {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                }
+                cicloContable.setDesde(desde);
+                cicloContable.setHasta(hasta);
+                lista.add(cicloContable);
+            }
+            
+            return rg.asOk("", lista);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asServerError(mensaje);
+        }
+    }
+    
     public RespuestaGeneral insertarCicloContable(CicloContable ccontable) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
@@ -118,7 +157,7 @@ public class daoCicloContable {
             ps.setInt(6, ccontable.getId());
             ps.executeUpdate();
             
-            return rg.asCreated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, ccontable.getId());
+            return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, ccontable.getId());
             
         } catch (SQLException e) {
             e.printStackTrace();

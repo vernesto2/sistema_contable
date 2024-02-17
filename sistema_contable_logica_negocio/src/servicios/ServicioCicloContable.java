@@ -30,6 +30,13 @@ public class ServicioCicloContable {
         return rs;
     }
     
+    public RespuestaGeneral obtenerPorId(int id) {
+        this.cx.conectar();
+        RespuestaGeneral rs = this.daoCicloContable.ObtenerPorIdTipoCatalogo(id);
+        this.cx.desconectar();
+        return rs;
+    }
+    
     public RespuestaGeneral insertar(CicloContable cicloContable) {
         RespuestaGeneral rs = RespuestaGeneral.asBadRequest("");
         // validaciones
