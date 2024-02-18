@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
 import servicios.ServicioUsuario;
+import utils.UtileriaVista;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
@@ -238,7 +239,7 @@ public class vLogin extends javax.swing.JFrame {
 
         RespuestaGeneral rgUsuario = _usuario.obtenerPorCarnet(carnet);
         if (rgUsuario.esFallida()) {
-            JOptionPane.showMessageDialog(this, rgUsuario.getMensaje(), "Mensaje", Constantes.devolverCodigoMensaje(rgUsuario));
+            JOptionPane.showMessageDialog(this, rgUsuario.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(rgUsuario));
             return;
         }
         
@@ -246,14 +247,14 @@ public class vLogin extends javax.swing.JFrame {
         RespuestaGeneral rgValidar = _usuario.coinciden(clave, usuario.getClave(), usuario.getSalt());
         
         if( rgValidar.esFallida() ) {
-            JOptionPane.showMessageDialog(this, rgUsuario.getMensaje(), "Mensaje", Constantes.devolverCodigoMensaje(rgValidar));
+            JOptionPane.showMessageDialog(this, rgUsuario.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(rgValidar));
             return;
         }
         
         Boolean coinciden = (Boolean) rgValidar.getDatos();
         
         if(coinciden == false) {
-            JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", Constantes.devolverCodigoMensaje(rgValidar));
+            JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", UtileriaVista.devolverCodigoMensaje(rgValidar));
             return;
         }
         

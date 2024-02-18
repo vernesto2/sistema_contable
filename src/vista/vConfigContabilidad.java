@@ -18,6 +18,7 @@ import modelo.dtoCicloContable;
 import servicios.ServicioCicloContable;
 import servicios.ServicioCuenta;
 import servicios.ServicioTipoCatalogo;
+import utils.UtileriaVista;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
@@ -75,7 +76,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                 cmbTipoCatalogo.addItem(itemTipoCatalogo.getTipo());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rg));
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rg));
         }
         
         //cmbTipoCatalogo.addItem();
@@ -101,7 +102,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (rs.esExitosa()) {
             this.listaCiclosContables = (ArrayList<dtoCicloContable>)rs.getDatos();
         } else {
-            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rs));
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rs));
         }
         this.setDatosCicloContable();
     }
@@ -156,7 +157,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (rs.esExitosa()) {
             this.listaTiposCatalogos = (ArrayList<TipoCatalogo>)rs.getDatos();
         } else {
-            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rs));
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rs));
         }
         this.setDatosTipoCatalogo();
     }
@@ -199,7 +200,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                 cmbTipoCatalogo2.addItem(itemTipoCatalogo.getTipo());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rg));
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rg));
         }
         
         //cmbTipoCatalogo.addItem();
@@ -235,7 +236,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (rg.esExitosa()) {
             this.listaCuentas = (ArrayList<dtoCuenta>)rg.getDatos();
         } else {
-            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", Constantes.devolverCodigoMensaje(rg));
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rg));
         }
         this.setDatosCuentas();
     }
@@ -467,7 +468,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -674,13 +675,14 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnGuardarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancelarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(78, Short.MAX_VALUE))
         );
 
@@ -796,7 +798,6 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             }
         });
 
-        cmbTipoCatalogo2.setBorder(null);
         cmbTipoCatalogo2.setColorMaterial(new java.awt.Color(102, 102, 102));
         cmbTipoCatalogo2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -862,7 +863,6 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         jLabel12.setText("Tipo de saldo:");
         jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        cmbTipoSaldo.setBorder(null);
         cmbTipoSaldo.setColorMaterial(new java.awt.Color(102, 102, 102));
         cmbTipoSaldo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1082,20 +1082,20 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (this.cicloContableModel.getId() < 0) {
             RespuestaGeneral rs = _cicloContable.insertar(this.cicloContableModel);
             if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rs));
                 this.obtenerListadoCiclosContables();
             } else {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rs));
             }
 
             // verificamos si es NUEVO
         } else {
             RespuestaGeneral rs = _cicloContable.editar(this.cicloContableModel);
             if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rs));
                 this.obtenerListadoCiclosContables();
             } else {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rs));
             }
         }
         btnGuardarCicloContable.setEnabled(true);
@@ -1138,13 +1138,13 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (opc == 0) {
             RespuestaGeneral rg = _cicloContable.eliminar(this.cicloContableModel.getId());
             if (rg.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rg));
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
                 btnEliminarCicloContable.setEnabled(false);
                 btnEstablecerCicloContable.setEnabled(false);
                 this.limpiarFormCicloContable();
                 this.obtenerListadoCiclosContables();
             } else {
-                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rg));
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
             }
         }
     }//GEN-LAST:event_btnEliminarCicloContableActionPerformed
@@ -1162,20 +1162,20 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (this.tipoCatalogoModel.getId() < 0) {
             RespuestaGeneral rs = _tipoCatalogo.insertar(this.tipoCatalogoModel);
             if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rs));
                 this.obtenerListadoTipoCatalogo();
             } else {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rs));
             }
 
             // verificamos si es NUEVO
         } else {
             RespuestaGeneral rs = _tipoCatalogo.editar(this.tipoCatalogoModel);
             if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rs));
                 this.obtenerListadoTipoCatalogo();
             } else {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rs));
+                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rs));
             }
         }
         btnGuardarTipoCatalogo.setEnabled(true);
@@ -1189,12 +1189,12 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         if (opc == 0) {
             RespuestaGeneral rg = _tipoCatalogo.eliminar(this.tipoCatalogoModel.getId());
             if (rg.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(rg));
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
                 btnEliminarTipoCatalogo.setEnabled(false);
                 this.limpiarFormTipoCatalogo();
                 this.obtenerListadoTipoCatalogo();
             } else {
-                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", Constantes.devolverCodigoMensaje(rg));
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
             }
         }
     }//GEN-LAST:event_btnEliminarTipoCatalogoActionPerformed

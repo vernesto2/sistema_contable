@@ -41,20 +41,6 @@ public class Constantes {
     
     public static final int QUERY_SUCCESS = 1;
     
-    public static int devolverCodigoMensaje(RespuestaGeneral rg) {
-        int opcion = -1;
-        if (rg.getCodigo() >= 200 && rg.getCodigo() <= 299) {
-            opcion = 1; //JOptionPane.INFORMATION_MESSAGE;
-        } else if (rg.getCodigo() >= 400 && rg.getCodigo() <= 499) {
-            opcion = 2; // JOptionPane.WARNING_MESSAGE;
-        } else if (rg.getCodigo() >= 500 && rg.getCodigo() <= 599) {
-            opcion = 0; // JOptionPane.ERROR_MESSAGE;
-        } else {
-            opcion = -1; // JOptionPane.DEFAULT_OPTION;
-        }
-        return opcion;
-    }
-    
     // tipos de partidas disponibles en sistema
     public static ArrayList<dtoLista> listaTiposPartidas() {
         ArrayList<dtoLista> lista = new ArrayList<>();

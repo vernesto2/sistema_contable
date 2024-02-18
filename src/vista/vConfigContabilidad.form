@@ -596,13 +596,15 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnGuardarTipoCatalogo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnCancelarTipoCatalogo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnEliminarTipoCatalogo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="txtTipoCatalogo" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel5" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btnGuardarTipoCatalogo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnCancelarTipoCatalogo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnEliminarTipoCatalogo" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="78" max="32767" attributes="0"/>
@@ -1094,9 +1096,6 @@
                 </Component>
                 <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbTipoCatalogo2">
                   <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
-                    </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
                     </Property>
@@ -1238,9 +1237,6 @@
                 </Component>
                 <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbTipoSaldo">
                   <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
-                    </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="0"/>
                     </Property>

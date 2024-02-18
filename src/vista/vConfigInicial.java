@@ -14,6 +14,7 @@ import modelo.Persona;
 import modelo.Usuario;
 import servicios.ServicioConfiguracion;
 import servicios.ServicioUsuario;
+import utils.UtileriaVista;
 import utils.constantes.CharArrayUtils;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
@@ -329,12 +330,12 @@ public class vConfigInicial extends javax.swing.JFrame {
         usuario.setPersona(persona);
         RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
         if (resp.esExitosa()) {
-            JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", Constantes.devolverCodigoMensaje(resp));
+            JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
             vInicio vistaInicio = new vInicio();
             vistaInicio.setVisible(true);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", Constantes.devolverCodigoMensaje(resp));
+            JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
         }
         //limpiar el array de char, en caso de volcado de memoria, no esté la clave
         CharArrayUtils.limpiar(claveSinCifrar);
