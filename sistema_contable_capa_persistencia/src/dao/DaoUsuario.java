@@ -31,8 +31,11 @@ public class DaoUsuario {
         this.cx = cx;
     }
 
-    public RespuestaGeneral insertar(Usuario usuario) {
+    public void insertar(Usuario usuario) {
         RespuestaGeneral rg = new RespuestaGeneral();
+        String sqlBuscarPorCarnet = """
+select count(id) as encontrados from usuario where usuario.nombre = ?                     
+""";
         var sqlPersona = """
                   INSERT INTO persona ( nombres, apellidos, tipo, carnet )
                   values (?, ?, ?, ?)
@@ -48,7 +51,17 @@ public class DaoUsuario {
                   )    
         """;
         try (
-                PreparedStatement psPersona = cx.getCx().prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS); PreparedStatement psUsuario = cx.getCx().prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS);) {
+                PreparedStatement psPersona = cx.getCx().prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS); 
+                PreparedStatement psUsuario = cx.getCx().prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement psBuscarUsuario = cx.getCx().prepareStatement(sqlBuscarPorCarnet);
+            ) {
+            psBuscarUsuario.setString(1, usuario.getNombre());
+            try (ResultSet rs = psBuscarUsuario.executeQuery();) {
+                Integer encontrados = rs.getInt("encontrados");
+                if(encontrados > 0) {
+                    throw new IllegalStateException("Ya existe usuario con el carnet proporcionado");
+                }
+            }
             Persona persona = usuario.getPersona();
 
             psPersona.setString(1, persona.getNombres());
@@ -58,10 +71,11 @@ public class DaoUsuario {
 
             psPersona.executeUpdate();
 
-            ResultSet rsKeyPersona = psPersona.getGeneratedKeys();
-            while (rsKeyPersona.next()) {
-                Integer id = rsKeyPersona.getInt(1);
-                persona.setId(id);
+            try (ResultSet rsKeyPersona = psPersona.getGeneratedKeys();) {
+                while (rsKeyPersona.next()) {
+                    Integer id = rsKeyPersona.getInt(1);
+                    persona.setId(id);
+                }
             }
 
             psUsuario.setInt(1, persona.getId());
@@ -79,16 +93,15 @@ public class DaoUsuario {
 
             psUsuario.executeUpdate();
 
-            ResultSet rsKeyUsuario = psPersona.getGeneratedKeys();
-            while (rsKeyUsuario.next()) {
-                Integer id = rsKeyUsuario.getInt(1);
-                usuario.setId(id);
+            try (ResultSet rsKeyUsuario = psPersona.getGeneratedKeys();) {
+                while (rsKeyUsuario.next()) {
+                    Integer id = rsKeyUsuario.getInt(1);
+                    usuario.setId(id);
+                }
             }
-            return rg.asCreated("", psPersona);
         } catch (SQLException e) {
             e.printStackTrace();
             String mensaje = e.getMessage();
-            return rg.asBadRequest(mensaje);
         }
     }
 
@@ -105,9 +118,8 @@ public class DaoUsuario {
         """;
         //este try es para que se cierre el PreparedStatement
         try (
-                PreparedStatement psUsuario = cx.getCx().prepareStatement(sqlUsuario);
-            ) {
-            
+                PreparedStatement psUsuario = cx.getCx().prepareStatement(sqlUsuario);) {
+
             psUsuario.setString(1, carnet);
             //este try aniddado es para que se cierre el ResultSet
             try (ResultSet rs = psUsuario.executeQuery();) {

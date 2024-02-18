@@ -276,7 +276,7 @@ public class vInicio extends javax.swing.JFrame {
         selector.setCurrentDirectory(new File("./database"));
         selector.setMultiSelectionEnabled(false);
         if (selector.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
-            JOptionPane.showMessageDialog(null, "¡No seleccionó ningún archivo: ", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "¡No seleccionó ningún archivo: ", "Mensaje", JOptionPane.WARNING_MESSAGE);
         }
         File archivo = selector.getSelectedFile();
         try {
@@ -307,9 +307,9 @@ public class vInicio extends javax.swing.JFrame {
 
     public void probarConexion() {
         if (this.archivoCorrecto) {
-            JOptionPane.showMessageDialog(null, "¡Conexión correcta!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "¡Conexión correcta!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "¡Conexión incorrecta!", "Alerta", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "¡Conexión incorrecta!", "Alerta", JOptionPane.ERROR_MESSAGE);
         }
         this.btnIniciarSesion.setEnabled(this.archivoCorrecto);
         this.lblRutaGlobal.setText(Constantes.rutaConexion);

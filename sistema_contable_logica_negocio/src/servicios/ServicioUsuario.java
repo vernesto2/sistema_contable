@@ -38,6 +38,7 @@ public class ServicioUsuario {
     public ServicioUsuario() {
         this.daoUsuario = new DaoUsuario(this.cx);
     }
+
     public void cerrarConexion() {
         try {
             this.cx.getCx().close();
@@ -45,11 +46,13 @@ public class ServicioUsuario {
             Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void setConexion(Conexion conexion) {
         this.cx = conexion;
         this.daoUsuario = new DaoUsuario(cx);
     }
-    public RespuestaGeneral validarUsuario(Usuario usuario, char [] claveSinCifrar) {
+
+    public RespuestaGeneral validarUsuario(Usuario usuario, char[] claveSinCifrar) {
         Persona persona = usuario.getPersona();
         if (persona.getNombres().isEmpty()
                 || persona.getApellidos().isEmpty()
@@ -57,7 +60,7 @@ public class ServicioUsuario {
                 || !(persona.getTipo() == Constantes.TIPO_DOCENTE || persona.getTipo() == Constantes.TIPO_ALUMNO)) {
             return RespuestaGeneral.asBadRequest("Persona con datos inválidos");
         }
-        
+
         if (usuario.getCorreo().isEmpty()
                 || usuario.getNombre().isEmpty()
                 || usuario.getResetear_clave() == 1
@@ -68,20 +71,26 @@ public class ServicioUsuario {
         }
         return RespuestaGeneral.asOk(null, null);
     }
+
     public RespuestaGeneral crear(Usuario usuario, char[] claveSinCifrar) throws NoSuchAlgorithmException, InvalidKeySpecException {
         RespuestaGeneral respValidar = validarUsuario(usuario, claveSinCifrar);
-        if(respValidar.esFallida()) {
-            return respValidar;
+        try {
+            if (respValidar.esFallida()) {
+                return respValidar;
+            }
+            usuario.setNombre(
+                    usuario.getNombre().trim().toLowerCase()
+            );
+            Map<String, String> obj = cifrarClave(claveSinCifrar);
+            usuario.setClave(obj.get("clave"));
+            usuario.setSalt(obj.get("salt"));
+            usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+            daoUsuario.insertar(usuario);
+            return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
+        } catch (Exception e) {
+            return RespuestaGeneral.asBadRequest(e.getMessage());
         }
-        usuario.setNombre(
-                usuario.getNombre().toString().toLowerCase()
-        );
-        Map<String, String> obj = cifrarClave(claveSinCifrar);
-        usuario.setClave(obj.get("clave"));
-        usuario.setSalt(obj.get("salt"));
-        usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
-        daoUsuario.insertar(usuario);
-        return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
+
     }
 
     public Map<String, String> cifrarClave(char[] claveSinCifrar) throws InvalidKeySpecException {
@@ -101,16 +110,17 @@ public class ServicioUsuario {
         map.put("salt", saltvalue);
         return map;
     }
+
     public RespuestaGeneral obtenerPorCarnet(String carnet) {
         try {
             this.cx.conectar();
             Usuario usuario = daoUsuario.obtenerPorCarnet(carnet);
             this.cx.desconectar();
-            if(usuario == null) {
+            if (usuario == null) {
                 return RespuestaGeneral.asNotFound("No se encontró el usuario", null);
             }
             return RespuestaGeneral.asOk(null, usuario);
-        } catch(Exception   ex) {
+        } catch (Exception ex) {
             return RespuestaGeneral.asNotFound("No se encontró el usuario", null);
         }
     }
