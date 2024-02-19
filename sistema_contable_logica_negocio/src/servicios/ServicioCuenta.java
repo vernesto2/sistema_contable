@@ -22,9 +22,9 @@ public class ServicioCuenta {
         this.daoCuenta = new daoCuenta(this.cx);
     }
     
-    public RespuestaGeneral obtenerListaPorIdTipoCatalogo(int idTipoCatalogo) {
+    public RespuestaGeneral obtenerListaPorIdTipoCatalogo(int idTipoCatalogo, String busqueda) {
         this.cx.conectar();
-        RespuestaGeneral rs = this.daoCuenta.Listar(idTipoCatalogo);
+        RespuestaGeneral rs = this.daoCuenta.Listar(idTipoCatalogo, busqueda);
         this.cx.desconectar(); 
         return rs;
     }
@@ -44,7 +44,7 @@ public class ServicioCuenta {
         } else if (cuenta.getNombre().isEmpty()) {
             rs.setMensaje("No se ha ingresado el concepto de la cuenta");
         } else if (cuenta.getId_tipo_catalogo() == -1) {
-            rs.setMensaje("No se ha seleccionado ningun catalogo para guardar la cuenta");
+            rs.setMensaje("No se ha seleccionado ningun catálogo para guardar la cuenta");
         } else {
             // si todo esta correcto procedemos a guardar
             this.cx.conectar();
@@ -62,7 +62,7 @@ public class ServicioCuenta {
         } else if (cuenta.getNombre().isEmpty()) {
             rs.setMensaje("No se ha ingresado el concepto de la cuenta");
         } else if (cuenta.getId_tipo_catalogo() == -1) {
-            rs.setMensaje("No se ha seleccionado ningun catalogo para guardar la cuenta");
+            rs.setMensaje("No se ha seleccionado ningun catálogo para actualizar la cuenta");
         } else {
             // si todo esta correcto procedemos a guardar
             this.cx.conectar();

@@ -34,7 +34,7 @@ public class daoCuenta {
         this.cx = cx;
     }
     
-    public RespuestaGeneral Listar(int idTipoCatalogo) {
+    public RespuestaGeneral Listar(int idTipoCatalogo, String busqueda) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<dtoCuenta> lista = new ArrayList<>();
         ResultSet rs = null;
@@ -44,10 +44,14 @@ public class daoCuenta {
                   	,tc.tipo as catalogo
                   from cuenta c
                   left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
-                  where c.id_tipo_catalogo = ?
+                  where c.id_tipo_catalogo = ? and (c.nombre like '%busqueda%' or c.codigo like '%busqueda%')
+                  order by cast(c.codigo as text)
                   """;
-        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+        String newSql = sql.replaceAll("busqueda", busqueda);
+        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql)) {
             ps.setInt(1, idTipoCatalogo);
+            //ps.setString(2, busqueda);
+            //ps.setString(3, busqueda);
             rs = ps.executeQuery();
             while (rs.next()) {
                 dtoCuenta cuenta = new dtoCuenta();
@@ -145,7 +149,7 @@ public class daoCuenta {
         RespuestaGeneral rg = new RespuestaGeneral();
         ResultSet rs = null;
         var sql = """
-                    UPDATE tipo_catalogo SET 
+                    UPDATE cuenta SET 
                         id_tipo_catalogo=?,
                         codigo=?,
                         ref=?,
