@@ -160,34 +160,63 @@ select count(id) as encontrados from usuario where usuario.nombre = ?
         }
     }
 
-    public RespuestaGeneral actualizar(Usuario usuario) {
-        return null;
-        /*
-        
-                RespuestaGeneral rg = new RespuestaGeneral();
-        PreparedStatement ps = null;
-        try {
-            var sql = """
-                      INSERT INTO usuario 
-                      values (?, ?, ?, ?)
-                      """;
-            ps = cx.conectar().prepareStatement(sql);
-            ps.setInt(1, usuario.getId());
-            ps.setInt(2, usuario.getId_persona());
-            ps.setString(4, usuario.getUsuario());
-            ps.setString(5, usuario.getCorreo());
-            ps.setString(5, usuario.getCorreo());
-            ps.executeUpdate();
-            cx.desconectar();
-            return rg.asCreated("", ps);
+    public void actualizar(Usuario usuario) {
+        var sqlPersona = """
+                  UPDATE persona SET nombres = ?, apellidos = ?, tipo = ?
+                  WHERE id = ?
+                  """;
+        var sqlUsuario = """
+                  UPDATE usuario SET
+                         correo = ?, clave = ?, resetear_clave = ?, 
+                         pregunta1 = ?, respuesta1 = ?,  
+                         pregunta2 = ?, respuesta2 = ?, 
+                         pregunta3 = ?, respuesta3 = ?
+                  WHERE id = ? AND id_persona = ?
+        """;
+        try (
+                PreparedStatement psPersona = cx.getCx().prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS); 
+                PreparedStatement psUsuario = cx.getCx().prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS);
+            ) {
             
+            Persona persona = usuario.getPersona();
+            
+            //parametros a actualizar
+            psPersona.setString(1, persona.getNombres());
+            psPersona.setString(2, persona.getApellidos());
+            psPersona.setInt(3, persona.getTipo());
+            //parametros de identificacion del registro a actualizar
+            psPersona.setInt(4, persona.getId());
+            
+            int filasAfectadasPersona = psPersona.executeUpdate();
+            if(filasAfectadasPersona == 0 || filasAfectadasPersona > 1) {
+                throw new IllegalStateException("No se encontró o se actualizó más de un registro");
+            }
+
+            //parametros a actualizar
+            psUsuario.setString(1, usuario.getCorreo());
+            psUsuario.setString(2, usuario.getClave());
+            psUsuario.setInt(3, usuario.getResetear_clave());
+            psUsuario.setString(4, usuario.getClave());
+            psUsuario.setInt(5, usuario.getResetear_clave());
+            psUsuario.setInt(6, usuario.getPregunta1());
+            psUsuario.setString(7, usuario.getRespuesta1());
+            psUsuario.setInt(8, usuario.getPregunta2());
+            psUsuario.setString(9, usuario.getRespuesta2());
+            psUsuario.setInt(10, usuario.getPregunta3());
+            psUsuario.setString(11, usuario.getRespuesta3());
+
+            //parametros de identificación del registro a actualizar
+            psUsuario.setInt(12, usuario.getId());
+            psUsuario.setInt(13, usuario.getPersona().getId());
+            
+            int filasAfectadasUsuario = psUsuario.executeUpdate();
+            if(filasAfectadasUsuario == 0 || filasAfectadasUsuario > 1) {
+                throw new IllegalStateException("No se encontró o se actualizó más de un registro");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            String mensaje = e.getMessage().toString().contains("is not unique") ? "Ya existe un usuario llamado " + usuario.getUsuario() : e.getMessage();
-            return rg.asBadRequest(mensaje);
+            String mensaje = e.getMessage();
         }
-        *
-         */
     }
 
 }
