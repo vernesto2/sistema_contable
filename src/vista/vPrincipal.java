@@ -4,16 +4,11 @@
  */
 package vista;
 
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
 import utils.constantes.CambiaPanel;
-import rojerusan.RSPanelsSlider;
 import utils.constantes.Constantes;
 
 /**
@@ -25,23 +20,32 @@ public class vPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form vPrincipal
      */
-
-    private Usuario usuario;
     
-    public vPrincipal(Usuario usuario) {
-        if(usuario == null) {
-            this.dispose();
-            throw new IllegalAccessError("No puede iniciar sin usuario");
-        }
-        initComponents();
-        this.iniciarVista();
-        this.txtNombreUsuario.setText(usuario.getPersona().nombreCompleto());
-        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
-    }
+//    public vPrincipal(Usuario usuario) {
+//        if(usuario == null) {
+//            this.dispose();
+//            throw new IllegalAccessError("No puede iniciar sin usuario");
+//        }
+//        initComponents();
+//        this.iniciarVista();
+//        if (Constantes.configUsuario.getId_ciclo_contable() == -1) {
+//            this.txtConfigCicloContable.setText("NO SE HA SELECCIONADO NINGUN CICLO CONTABLE");
+//        } else {
+//            this.txtConfigCicloContable.setText(Constantes.configUsuario.nombreCicloYCatalogo());
+//        }
+//        this.txtNombreUsuario.setText(usuario.getPersona().nombreCompleto());
+//        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
+//    }
+//    
     public vPrincipal() {
         initComponents();
         this.iniciarVista();
-        this.txtNombreUsuario.setText(Constantes.persona.nombreCompleto());
+        if (Constantes.configUsuario.getId_ciclo_contable() == -1) {
+            this.txtConfigCicloContable.setText("NO SE HA SELECCIONADO NINGUN CICLO CONTABLE");
+        } else {
+            this.txtConfigCicloContable.setText(Constantes.configUsuario.nombreCicloYCatalogo());
+        }
+        this.txtNombreUsuario.setText(Constantes.usuario.getPersona().nombreCompleto());
         this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
     }
     
@@ -82,7 +86,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnCambiosPatrimonio = new RSMaterialComponent.RSButtonShapeIcon();
         btnCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
         topbar = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        txtConfigCicloContable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -295,25 +299,25 @@ public class vPrincipal extends javax.swing.JFrame {
 
         topbar.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("CONTABILIDAD BANCARIA");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        txtConfigCicloContable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtConfigCicloContable.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtConfigCicloContable.setText("CONTABILIDAD BANCARIA");
+        txtConfigCicloContable.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout topbarLayout = new javax.swing.GroupLayout(topbar);
         topbar.setLayout(topbarLayout);
         topbarLayout.setHorizontalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topbarLayout.createSequentialGroup()
-                .addContainerGap(419, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
                 .addContainerGap())
         );
         topbarLayout.setVerticalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topbarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -482,7 +486,6 @@ public class vPrincipal extends javax.swing.JFrame {
     private RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;
     private RSMaterialComponent.RSButtonShapeIcon btnLibroMayor;
     private javax.swing.JLabel imagenPrincipal;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel pnl;
     private javax.swing.JPanel pnlBase;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon1;
@@ -490,6 +493,7 @@ public class vPrincipal extends javax.swing.JFrame {
     private rojeru_san.rsdate.RSLabelHora rSLabelHora1;
     private javax.swing.JPanel sidebar;
     private javax.swing.JPanel topbar;
+    public static javax.swing.JLabel txtConfigCicloContable;
     private javax.swing.JLabel txtNombreUsuario;
     // End of variables declaration//GEN-END:variables
 }

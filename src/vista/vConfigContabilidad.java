@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 import modelo.CicloContable;
+import modelo.ConfiguracionUsuario;
 import modelo.Cuenta;
 import modelo.TipoCatalogo;
 import modelo.dtoCicloContable;
+import rojerusan.RSTableMetro;
 import servicios.ServicioCicloContable;
+import servicios.ServicioConfigUsuario;
 import servicios.ServicioCuenta;
 import servicios.ServicioTipoCatalogo;
 import utils.UtileriaVista;
@@ -36,6 +38,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     ServicioCicloContable _cicloContable = new ServicioCicloContable();
     ArrayList<dtoCicloContable> listaCiclosContables = new ArrayList<>();
     CicloContable cicloContableModel = new CicloContable();
+    ServicioConfigUsuario _configUsuario = new ServicioConfigUsuario();
     
     // VARIABLES DE TIPO DE CATALOGO
     ServicioTipoCatalogo _tipoCatalogo = new ServicioTipoCatalogo();
@@ -94,6 +97,11 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             dtm.addRow(datos);
         }
         tblCicloContable.setModel(dtm);
+        tblCicloContable.setAutoResizeMode(tblCicloContable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        tblCicloContable.getColumnModel().getColumn(0).setPreferredWidth(220);
+        tblCicloContable.getColumnModel().getColumn(1).setPreferredWidth(20);
+        tblCicloContable.getColumnModel().getColumn(2).setPreferredWidth(20);
+        tblCicloContable.getColumnModel().getColumn(3).setPreferredWidth(100);
     }
     
     public void obtenerListadoCiclosContables() {
@@ -149,6 +157,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             dtm.addRow(datos);
         }
         tblTipoCatalogo.setModel(dtm);
+        tblCuentas.setAutoResizeMode(tblCuentas.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
     }
     
     public void obtenerListadoTipoCatalogo() {
@@ -226,6 +235,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             dtm.addRow(datos);
         }
         tblCuentas.setModel(dtm);
+        tblCuentas.setAutoResizeMode(tblCuentas.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         tblCuentas.getColumnModel().getColumn(0).setPreferredWidth(150);
         tblCuentas.getColumnModel().getColumn(1).setPreferredWidth(180);
         tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(485);
@@ -240,6 +250,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         this.listaCuentas = new ArrayList<>();
         tblCuentas.clearSelection();
         this.limiparTablaCuentas();
+        this.seleccionarOpcionCmbTipoCatalogo2();
         RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogo(this.cuentaModel.getId_tipo_catalogo(), this.txtQueryBusqueda.getText());
         if (rg.esExitosa()) {
             this.listaCuentas = (ArrayList<dtoCuenta>)rg.getDatos();
@@ -968,14 +979,15 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                                             .addComponent(txtConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addComponent(cmbTipoCatalogo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(txtIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEgresos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1155,7 +1167,25 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGuardarCicloContableActionPerformed
 
     private void btnEstablecerCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstablecerCicloContableActionPerformed
-        // TODO add your handling code here:
+        Constantes.configUsuario.setId_ciclo_contable(this.cicloContableModel.getId());
+        ArrayList<ConfiguracionUsuario> listaConfigUsuario = new ArrayList<>();
+        RespuestaGeneral rg = _configUsuario.editar(Constantes.configUsuario);
+        if (rg.esExitosa()) {
+            RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(Constantes.usuario.getId());
+            if (rg1.esExitosa()) {
+                listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg1.getDatos();
+                Constantes.configUsuario = listaConfigUsuario.get(0);
+                btnEstablecerCicloContable.setEnabled(false);
+                tblCicloContable.clearSelection();
+                this.limpiarFormCicloContable();
+                JOptionPane.showMessageDialog(this, "Se establecio el ciclo contable por defecto", "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
+                vPrincipal.txtConfigCicloContable.setText(Constantes.configUsuario.nombreCicloYCatalogo());
+            } else {
+                JOptionPane.showMessageDialog(this, rg1.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg1));
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+        }
     }//GEN-LAST:event_btnEstablecerCicloContableActionPerformed
 
     private void tblCicloContableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCicloContableMouseClicked
@@ -1264,7 +1294,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbTipoCatalogoItemStateChanged
 
     private void btnCancelarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCuentaActionPerformed
-        // TODO add your handling code here:
+        this.limpiarFormCuentas();
     }//GEN-LAST:event_btnCancelarCuentaActionPerformed
 
     private void btnGuardarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCuentaActionPerformed
@@ -1273,33 +1303,40 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         this.cuentaModel.setCodigo(this.txtCodigo.getText());
         this.cuentaModel.setEgresos(this.txtEgresos.getText());
         this.cuentaModel.setIngresos(this.txtIngresos.getText());
-        this.cuentaModel.setNivel(Integer.parseInt(this.txtNivel.getText()));
-        this.seleccionarOpcionCmbTipoCatalogo2();
-        this.seleccionarOpcionCmbTipoSaldo();
-        // guardamos la info
-        // verificamos si es NUEVO
-        btnGuardarCuenta.setEnabled(false);
-        if (this.cuentaModel.getId() < 0) {
-            RespuestaGeneral rs = _cuenta.insertar(this.cuentaModel);
-            if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rs));
-                this.obtenerListadoCuentasPorTipoCatalogo();
-            } else {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rs));
-            }
-
-            // verificamos si es NUEVO
+        // validamos si el nivel ha sido ingresado
+        if (this.txtNivel.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se ha ingresado el nivel", "INFORMACIÓN", JOptionPane.WARNING_MESSAGE);
         } else {
-            RespuestaGeneral rs = _cuenta.editar(this.cuentaModel);
-            if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rs));
-                this.obtenerListadoCuentasPorTipoCatalogo();
+            this.cuentaModel.setNivel(Integer.parseInt(this.txtNivel.getText()));
+            this.seleccionarOpcionCmbTipoCatalogo2();
+            this.seleccionarOpcionCmbTipoSaldo();
+            // guardamos la info
+            // verificamos si es NUEVO
+            btnGuardarCuenta.setEnabled(false);
+            if (this.cuentaModel.getId() < 0) {
+                RespuestaGeneral rs = _cuenta.insertar(this.cuentaModel);
+                if (rs.esExitosa()) {
+                    JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rs));
+                    this.limpiarFormCuentas();
+                    this.obtenerListadoCuentasPorTipoCatalogo();
+                } else {
+                    JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rs));
+                }
+                
+                // verificamos si es NUEVO
             } else {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rs));
+                RespuestaGeneral rs = _cuenta.editar(this.cuentaModel);
+                if (rs.esExitosa()) {
+                    JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rs));
+                    this.limpiarFormCuentas();
+                    this.obtenerListadoCuentasPorTipoCatalogo();
+                } else {
+                    JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rs));
+                }
             }
+            btnGuardarCuenta.setEnabled(true);
         }
-        btnGuardarCuenta.setEnabled(true);
-        this.limpiarFormCuentas();
+        
     }//GEN-LAST:event_btnGuardarCuentaActionPerformed
 
     private void cmbTipoCatalogo2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoCatalogo2ItemStateChanged
@@ -1309,7 +1346,19 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     }//GEN-LAST:event_cmbTipoCatalogo2ItemStateChanged
 
     private void btnEliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCuentaActionPerformed
-        // TODO add your handling code here:
+        String texto = "¿Esta seguro de continuar?, Se eliminará el registro: \n" + this.txtConcepto.getText();
+        int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (opc == 0) {
+            RespuestaGeneral rg = _cuenta.eliminar(this.cuentaModel.getId());
+            if (rg.esExitosa()) {
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
+                btnEliminarCuenta.setEnabled(false);
+                this.limpiarFormCuentas();
+                this.obtenerListadoCuentasPorTipoCatalogo();
+            } else {
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+            }
+        }
     }//GEN-LAST:event_btnEliminarCuentaActionPerformed
 
     private void tblCuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCuentasMouseClicked

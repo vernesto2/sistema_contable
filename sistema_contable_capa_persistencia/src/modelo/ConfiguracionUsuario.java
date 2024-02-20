@@ -13,12 +13,16 @@ public class ConfiguracionUsuario {
     int id_usuario;
     int id_ciclo_contable;
     String avatar;
+    String nombre_ciclo_contable;
+    String nombre_catalogo;
 
-    public ConfiguracionUsuario(int id, int id_usuario, int id_ciclo_contable, String avatar) {
+    public ConfiguracionUsuario(int id, int id_usuario, int id_ciclo_contable, String avatar, String nombre_ciclo_contable, String nombre_catalogo) {
         this.id = id;
         this.id_usuario = id_usuario;
         this.id_ciclo_contable = id_ciclo_contable;
         this.avatar = avatar;
+        this.nombre_ciclo_contable = nombre_ciclo_contable;
+        this.nombre_catalogo = nombre_catalogo;
     }
     
     public ConfiguracionUsuario() {
@@ -26,6 +30,8 @@ public class ConfiguracionUsuario {
         this.id_usuario = -1;
         this.id_ciclo_contable = -1;
         this.avatar = "/utils/avatar/avatar2.png";
+        this.nombre_ciclo_contable = "";
+        this.nombre_catalogo = "";
     }
 
     public int getId() {
@@ -59,6 +65,25 @@ public class ConfiguracionUsuario {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
+    public String getNombre_ciclo_contable() {
+        return nombre_ciclo_contable;
+    }
+
+    public void setNombre_ciclo_contable(String nombre_ciclo_contable) {
+        this.nombre_ciclo_contable = nombre_ciclo_contable;
+    }
+
+    public String getNombre_catalogo() {
+        return nombre_catalogo;
+    }
+
+    public void setNombre_catalogo(String nombre_catalogo) {
+        this.nombre_catalogo = nombre_catalogo;
+    }
     
-    
+    public String nombreCicloYCatalogo() {
+        String titulo = this.nombre_ciclo_contable + " ( " + this.nombre_catalogo + " ) ";
+        return titulo;
+    }
 }
