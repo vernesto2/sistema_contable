@@ -258,7 +258,7 @@ public class vLogin extends javax.swing.JFrame {
             return;
         }
         
-        vPrincipal principal = new vPrincipal(usuario);
+        vPrincipal principal = new vPrincipal(usuario, _usuario);
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnIngresarActionPerformed
