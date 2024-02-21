@@ -92,7 +92,9 @@ public class ServicioUsuario {
         }
 
     }
-
+    
+    
+    
     public RespuestaGeneral actualizar(Usuario usuario, int id) {
         Usuario existente = daoUsuario.obtenerPorCarnet(usuario.getNombre());
         if (existente == null) {
@@ -102,6 +104,7 @@ public class ServicioUsuario {
         daoUsuario.actualizar(usuario);
         return RespuestaGeneral.asUpdated("Se actualizó correctamente", usuario);
     }
+
 
     public Map<String, String> cifrarClave(char[] claveSinCifrar) throws InvalidKeySpecException {
         /* Plain text Password. */
