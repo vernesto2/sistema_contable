@@ -44,7 +44,7 @@ public class daoCuenta {
                   	,tc.tipo as catalogo
                   from cuenta c
                   left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
-                  where c.id_tipo_catalogo = ? and (c.nombre like '%busqueda%' or c.codigo like '%busqueda%')
+                  where c.id_tipo_catalogo = ? and c.eliminado = 0 and (c.nombre like '%busqueda%' or c.codigo like '%busqueda%')
                   order by cast(c.codigo as text)
                   """;
         String newSql = sql.replaceAll("busqueda", busqueda);
