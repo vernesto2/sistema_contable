@@ -4,6 +4,9 @@
  */
 package vista;
 
+import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author vacev
@@ -13,9 +16,45 @@ public class vLibroDiario extends javax.swing.JPanel {
     /**
      * Creates new form vLibroDiario
      */
+    
+    DefaultTableModel dtm = new DefaultTableModel();
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    
     public vLibroDiario() {
         initComponents();
+        btnGuardarPartida.setEnabled(false);
+        this.setModelPartida();
     }
+    
+    /* <------------------------------------------------------------------------------->
+                                   INICIO SECCION DE CICLO CONTABLE
+        <------------------------------------------------------------------------------->  */  
+    public void setModelPartida() {
+        String[] cabecera = {"Codigo","Concepto","Parcial","Debe","Haber"};
+        dtm.setColumnIdentifiers(cabecera);
+        tblDetallePartida.setModel(dtm);
+    }
+    
+    public void setDatosPartida() {
+//        Object[] datos = new Object[dtm.getColumnCount()];
+//        for (dtoCicloContable ciclo : listaCiclosContables) {
+//            datos[0] = ciclo.getTitulo();
+//            datos[1] = sdf.format(ciclo.getDesde());
+//            datos[2] = sdf.format(ciclo.getHasta());
+//            datos[3] = ciclo.getCatalogo();
+//            dtm.addRow(datos);
+//        }
+//        tblCicloContable.setModel(dtm);
+//        tblCicloContable.setAutoResizeMode(tblCicloContable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+//        tblCicloContable.getColumnModel().getColumn(0).setPreferredWidth(220);
+//        tblCicloContable.getColumnModel().getColumn(1).setPreferredWidth(20);
+//        tblCicloContable.getColumnModel().getColumn(2).setPreferredWidth(20);
+//        tblCicloContable.getColumnModel().getColumn(3).setPreferredWidth(100);
+    }
+    
+     /* <------------------------------------------------------------------------------->
+                                   FIN SECCION DE CICLO CONTABLE
+        <------------------------------------------------------------------------------->  */  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,81 +66,324 @@ public class vLibroDiario extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtTitulo = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel2 = new javax.swing.JLabel();
+        txtDesde = new newscomponents.RSDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        btnGuardarPartida = new RSMaterialComponent.RSButtonShapeIcon();
+        btnCarncelarPartida = new RSMaterialComponent.RSButtonShapeIcon();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        btnGuardarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
+        btnGuardarCicloContable2 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnEliminarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
+        comboBoxSuggestion1 = new combo_suggestion.ComboBoxSuggestion();
+        txtTitulo1 = new RSMaterialComponent.RSTextFieldMaterial();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDetallePartida = new rojerusan.RSTableMetro();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos de partida  "));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos de partida  ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("# Partida:");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtTitulo.setForeground(new java.awt.Color(0, 0, 0));
+        txtTitulo.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtTitulo.setEnabled(false);
+        txtTitulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtTitulo.setPhColor(new java.awt.Color(0, 0, 0));
+        txtTitulo.setPlaceholder("# de partida");
+        txtTitulo.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Fecha:");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtDesde.setBackground(new java.awt.Color(153, 153, 153));
+        txtDesde.setBgColor(new java.awt.Color(153, 153, 153));
+        txtDesde.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtDesde.setFormatDate("dd-MM-yyyy");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Comentario:");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        btnGuardarPartida.setBackground(new java.awt.Color(33, 58, 86));
+        btnGuardarPartida.setText("GUARDAR");
+        btnGuardarPartida.setToolTipText("GUARDAR O ACTUALIZAR PARTIDA");
+        btnGuardarPartida.setBackgroundHover(new java.awt.Color(33, 84, 86));
+        btnGuardarPartida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardarPartida.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnGuardarPartida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnGuardarPartida.setSizeIcon(18.0F);
+        btnGuardarPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarPartidaActionPerformed(evt);
+            }
+        });
+
+        btnCarncelarPartida.setBackground(new java.awt.Color(251, 205, 6));
+        btnCarncelarPartida.setText("CANCELAR");
+        btnCarncelarPartida.setToolTipText("LIMPIAR EL FORMULARIO DE PARTIDA");
+        btnCarncelarPartida.setBackgroundHover(new java.awt.Color(251, 174, 6));
+        btnCarncelarPartida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCarncelarPartida.setForegroundHover(new java.awt.Color(0, 0, 0));
+        btnCarncelarPartida.setForegroundIcon(new java.awt.Color(0, 0, 0));
+        btnCarncelarPartida.setForegroundIconHover(new java.awt.Color(0, 0, 0));
+        btnCarncelarPartida.setForegroundText(new java.awt.Color(0, 0, 0));
+        btnCarncelarPartida.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnCarncelarPartida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
+        btnCarncelarPartida.setSizeIcon(18.0F);
+        btnCarncelarPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarncelarPartidaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(63, 63, 63)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                .addGap(113, 113, 113)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGuardarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCarncelarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(117, 117, 117))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 155, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 16, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnGuardarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCarncelarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Detalles de partida  "));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Detalles de partida  ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+
+        btnGuardarCicloContable.setBackground(new java.awt.Color(33, 58, 86));
+        btnGuardarCicloContable.setText("CARGAR");
+        btnGuardarCicloContable.setToolTipText("CARGAR CUENTA");
+        btnGuardarCicloContable.setBackgroundHover(new java.awt.Color(33, 84, 86));
+        btnGuardarCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardarCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnGuardarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnGuardarCicloContable.setSizeIcon(18.0F);
+        btnGuardarCicloContable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCicloContableActionPerformed(evt);
+            }
+        });
+
+        btnGuardarCicloContable2.setBackground(new java.awt.Color(33, 58, 86));
+        btnGuardarCicloContable2.setText("ABONAR");
+        btnGuardarCicloContable2.setToolTipText("ABONAR CUENTA");
+        btnGuardarCicloContable2.setBackgroundHover(new java.awt.Color(33, 84, 86));
+        btnGuardarCicloContable2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardarCicloContable2.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnGuardarCicloContable2.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnGuardarCicloContable2.setSizeIcon(18.0F);
+        btnGuardarCicloContable2.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnGuardarCicloContable2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCicloContable2ActionPerformed(evt);
+            }
+        });
+
+        btnEliminarCicloContable.setBackground(new java.awt.Color(197, 0, 0));
+        btnEliminarCicloContable.setText("ELIMINAR");
+        btnEliminarCicloContable.setToolTipText("ELIMINAR EL REGISTRO SELECCIONADO");
+        btnEliminarCicloContable.setBackgroundHover(new java.awt.Color(242, 0, 0));
+        btnEliminarCicloContable.setEnabled(false);
+        btnEliminarCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnEliminarCicloContable.setForegroundHover(new java.awt.Color(0, 0, 0));
+        btnEliminarCicloContable.setForegroundIcon(new java.awt.Color(0, 0, 0));
+        btnEliminarCicloContable.setForegroundIconHover(new java.awt.Color(0, 0, 0));
+        btnEliminarCicloContable.setForegroundText(new java.awt.Color(0, 0, 0));
+        btnEliminarCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnEliminarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ERROR);
+        btnEliminarCicloContable.setSizeIcon(18.0F);
+        btnEliminarCicloContable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCicloContableActionPerformed(evt);
+            }
+        });
+
+        comboBoxSuggestion1.setBackground(new java.awt.Color(240, 240, 240));
+        comboBoxSuggestion1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ACTIVO", "PASIVO", "PATRIMONIO", "COSTOS", " " }));
+        comboBoxSuggestion1.setToolTipText("");
+        comboBoxSuggestion1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        txtTitulo1.setForeground(new java.awt.Color(0, 0, 0));
+        txtTitulo1.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtTitulo1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtTitulo1.setPhColor(new java.awt.Color(0, 0, 0));
+        txtTitulo1.setPlaceholder("Codigo de cuenta");
+        txtTitulo1.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        tblDetallePartida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tblDetallePartida.setBackgoundHead(new java.awt.Color(153, 153, 153));
+        tblDetallePartida.setBackgoundHover(new java.awt.Color(204, 204, 204));
+        tblDetallePartida.setColorPrimaryText(new java.awt.Color(0, 0, 0));
+        tblDetallePartida.setColorSecundaryText(new java.awt.Color(51, 51, 51));
+        tblDetallePartida.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        tblDetallePartida.setFontHead(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tblDetallePartida.setFontRowHover(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        tblDetallePartida.setFontRowSelect(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        tblDetallePartida.setPositionText(rojerusan.RSTableMetro.POSITION_TEXT.LEFT);
+        tblDetallePartida.setSelectionBackground(new java.awt.Color(153, 153, 153));
+        tblDetallePartida.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tblDetallePartida.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblDetallePartida.setShowGrid(true);
+        tblDetallePartida.setShowVerticalLines(false);
+        tblDetallePartida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDetallePartidaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblDetallePartida);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 927, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBoxSuggestion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGuardarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 273, Short.MAX_VALUE)
-        );
-
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Acciones de partida  "));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 94, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxSuggestion1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCicloContableActionPerformed
+        
+    }//GEN-LAST:event_btnGuardarCicloContableActionPerformed
+
+    private void btnCarncelarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarncelarPartidaActionPerformed
+        
+    }//GEN-LAST:event_btnCarncelarPartidaActionPerformed
+
+    private void btnEliminarCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCicloContableActionPerformed
+        
+    }//GEN-LAST:event_btnEliminarCicloContableActionPerformed
+
+    private void btnGuardarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPartidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarPartidaActionPerformed
+
+    private void btnGuardarCicloContable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCicloContable2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarCicloContable2ActionPerformed
+
+    private void tblDetallePartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetallePartidaMouseClicked
+        
+    }//GEN-LAST:event_tblDetallePartidaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonShapeIcon btnCarncelarPartida;
+    private RSMaterialComponent.RSButtonShapeIcon btnEliminarCicloContable;
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable;
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable2;
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardarPartida;
+    private combo_suggestion.ComboBoxSuggestion comboBoxSuggestion1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private rojerusan.RSTableMetro tblDetallePartida;
+    private newscomponents.RSDateChooser txtDesde;
+    private RSMaterialComponent.RSTextFieldMaterial txtTitulo;
+    private RSMaterialComponent.RSTextFieldMaterial txtTitulo1;
     // End of variables declaration//GEN-END:variables
 }
