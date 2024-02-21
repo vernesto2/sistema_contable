@@ -37,7 +37,13 @@ public class vPrincipal extends javax.swing.JFrame {
         this.usuario = usuario;
         initComponents();
         this.iniciarVista();
-        this.txtNombreUsuario.setText(usuario.getPersona().nombreCompleto());
+        if (Constantes.configUsuario.getId_ciclo_contable() == -1) {
+            this.txtConfigCicloContable.setText("NO SE HA SELECCIONADO NINGUN CICLO CONTABLE");
+        } else {
+            this.txtConfigCicloContable.setText(Constantes.configUsuario.nombreCicloYCatalogo());
+        }
+        this.txtNombreUsuario.setText(Constantes.usuario.getPersona().nombreCompleto());
+        //this.txtNombreUsuario.setText(usuario.getPersona().nombreCompleto());
         this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
     }
 

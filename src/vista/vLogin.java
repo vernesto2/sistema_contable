@@ -44,6 +44,8 @@ public class vLogin extends javax.swing.JFrame {
         this.setTitle("LOGIN");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/utils/icon/login.png")));
+        this.txtUsuario.setText("ac14072");
+        this.txtClave.setText("1234");
     }
 
     /**
@@ -266,6 +268,7 @@ public class vLogin extends javax.swing.JFrame {
         // buscamos si se encuentra creada una configuracion de usuario
         // de lo contrario procederemos a crear una con el usuario logeado
         this.setearInfoConfiguracionGeneralUsuario(usuario);
+        Constantes.usuario = usuario;
         
         vPrincipal principal = new vPrincipal(usuario, _usuario);
         principal.setVisible(true);
