@@ -167,7 +167,7 @@ select count(id) as encontrados from usuario where usuario.nombre = ?
                   """;
         var sqlUsuario = """
                   UPDATE usuario SET
-                         correo = ?, clave = ?, resetear_clave = ?, 
+                         correo = ?, resetear_clave = ?, 
                          pregunta1 = ?, respuesta1 = ?,  
                          pregunta2 = ?, respuesta2 = ?, 
                          pregunta3 = ?, respuesta3 = ?
@@ -196,7 +196,6 @@ select count(id) as encontrados from usuario where usuario.nombre = ?
             psUsuario.setString(1, usuario.getCorreo());
             psUsuario.setString(2, usuario.getClave());
             psUsuario.setInt(3, usuario.getResetear_clave());
-            psUsuario.setString(4, usuario.getClave());
             psUsuario.setInt(5, usuario.getResetear_clave());
             psUsuario.setInt(6, usuario.getPregunta1());
             psUsuario.setString(7, usuario.getRespuesta1());

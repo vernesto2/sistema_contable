@@ -266,9 +266,8 @@ public class vLogin extends javax.swing.JFrame {
         // buscamos si se encuentra creada una configuracion de usuario
         // de lo contrario procederemos a crear una con el usuario logeado
         this.setearInfoConfiguracionGeneralUsuario(usuario);
-        Constantes.usuario = usuario;
         
-        vPrincipal principal = new vPrincipal();
+        vPrincipal principal = new vPrincipal(usuario, _usuario);
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnIngresarActionPerformed

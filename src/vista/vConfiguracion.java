@@ -4,6 +4,21 @@
  */
 package vista;
 
+import java.awt.Toolkit;
+import java.util.Arrays;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.Persona;
+import modelo.Usuario;
+import servicios.ServicioConfiguracion;
+import servicios.ServicioUsuario;
+import utils.UtileriaVista;
+import utils.constantes.CharArrayUtils;
+import utils.constantes.Constantes;
+import utils.constantes.RespuestaGeneral;
+
 /**
  *
  * @author vacev
@@ -13,10 +28,46 @@ public class vConfiguracion extends javax.swing.JPanel {
     /**
      * Creates new form vConfiguracion
      */
-    public vConfiguracion() {
-        initComponents();
-    }
+    Usuario usuario;
+    ServicioUsuario _usuario;
+    ServicioConfiguracion _configuracion = new ServicioConfiguracion();
 
+    public vConfiguracion(Usuario usuario, ServicioUsuario _usuario) {
+        initComponents();
+        this.usuario = usuario;
+        this._usuario = _usuario;
+        this.iniciarVista();
+        this.rellenarDatosUsuario(usuario);
+    }
+    
+
+
+    public void iniciarVista() {
+        ComboBoxModel<String> modeloPreguntasRecuperacion1 = new DefaultComboBoxModel<String>(Constantes.PREGUNTAS_SEGURIDAD);
+        ComboBoxModel<String> modeloPreguntasRecuperacion2 = new DefaultComboBoxModel<String>(Constantes.PREGUNTAS_SEGURIDAD);
+        ComboBoxModel<String> modeloPreguntasRecuperacion3 = new DefaultComboBoxModel<String>(Constantes.PREGUNTAS_SEGURIDAD);
+        this.comboPreguntaRecuperacion1.setModel(modeloPreguntasRecuperacion1);
+        this.comboPreguntaRecuperacion2.setModel(modeloPreguntasRecuperacion2);
+        this.comboPreguntaRecuperacion3.setModel(modeloPreguntasRecuperacion3);
+        
+    }
+    public void rellenarDatosUsuario(Usuario usuario) {
+        Persona persona = usuario.getPersona();
+        
+        txtNombres.setText(persona.getNombres());
+        txtApellidos.setText(persona.getApellidos());
+        txtCarnet.setText(persona.getCarnet());
+        txtCorreo.setText(usuario.getCorreo());
+        
+        comboPreguntaRecuperacion1.setSelectedIndex(usuario.getPregunta1());
+        txtRespuesta1.setText(usuario.getRespuesta1());
+        comboPreguntaRecuperacion2.setSelectedIndex(usuario.getPregunta2());
+        txtRespuesta2.setText(usuario.getRespuesta2());
+        comboPreguntaRecuperacion3.setSelectedIndex(usuario.getPregunta3());
+        txtRespuesta3.setText(usuario.getRespuesta3());
+
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,6 +80,22 @@ public class vConfiguracion extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        rSPanel6 = new necesario.RSPanel();
+        txtNombres = new RSMaterialComponent.RSTextFieldMaterial();
+        txtApellidos = new RSMaterialComponent.RSTextFieldMaterial();
+        txtCarnet = new RSMaterialComponent.RSTextFieldMaterial();
+        txtClave = new RSMaterialComponent.RSPasswordMaterial();
+        txtRepetirClave = new RSMaterialComponent.RSPasswordMaterial();
+        txtCorreo = new RSMaterialComponent.RSTextFieldMaterial();
+        comboPreguntaRecuperacion1 = new RSMaterialComponent.RSComboBoxMaterial();
+        txtRespuesta1 = new RSMaterialComponent.RSTextFieldMaterial();
+        comboPreguntaRecuperacion2 = new RSMaterialComponent.RSComboBoxMaterial();
+        txtRespuesta2 = new RSMaterialComponent.RSTextFieldMaterial();
+        comboPreguntaRecuperacion3 = new RSMaterialComponent.RSComboBoxMaterial();
+        txtRespuesta3 = new RSMaterialComponent.RSTextFieldMaterial();
+        btnActualizar = new RSMaterialComponent.RSButtonShapeIcon();
+        jLabel3 = new javax.swing.JLabel();
+        rSButtonShapeIcon11 = new RSMaterialComponent.RSButtonShapeIcon();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -39,15 +106,193 @@ public class vConfiguracion extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        rSPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        rSPanel6.setForeground(new java.awt.Color(255, 255, 255));
+        rSPanel6.setColorBackground(new java.awt.Color(255, 255, 255));
+
+        txtNombres.setPlaceholder("Nombres");
+        txtNombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombresActionPerformed(evt);
+            }
+        });
+
+        txtApellidos.setPlaceholder("Apellidos");
+        txtApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtApellidosActionPerformed(evt);
+            }
+        });
+
+        txtCarnet.setPlaceholder("Carnét");
+        txtCarnet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCarnetActionPerformed(evt);
+            }
+        });
+
+        txtClave.setPlaceholder("Clave de acceso");
+
+        txtRepetirClave.setPlaceholder("Repetir clave de acceso");
+
+        txtCorreo.setPlaceholder("Correo");
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreoActionPerformed(evt);
+            }
+        });
+
+        comboPreguntaRecuperacion1.setColorMaterial(new java.awt.Color(102, 102, 102));
+
+        txtRespuesta1.setForeground(new java.awt.Color(0, 0, 0));
+        txtRespuesta1.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtRespuesta1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtRespuesta1.setPhColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta1.setPlaceholder("Digite la respuesta..");
+        txtRespuesta1.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        comboPreguntaRecuperacion2.setColorMaterial(new java.awt.Color(102, 102, 102));
+
+        txtRespuesta2.setForeground(new java.awt.Color(0, 0, 0));
+        txtRespuesta2.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtRespuesta2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtRespuesta2.setPhColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta2.setPlaceholder("Digite la respuesta..");
+        txtRespuesta2.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        comboPreguntaRecuperacion3.setColorMaterial(new java.awt.Color(102, 102, 102));
+
+        txtRespuesta3.setForeground(new java.awt.Color(0, 0, 0));
+        txtRespuesta3.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtRespuesta3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtRespuesta3.setPhColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta3.setPlaceholder("Digite la respuesta..");
+        txtRespuesta3.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        btnActualizar.setBackground(new java.awt.Color(33, 58, 86));
+        btnActualizar.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnActualizar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnActualizar.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnActualizar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
+        btnActualizar.setLabel("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/img/recuperacion.png"))); // NOI18N
+        jLabel3.setToolTipText("");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIconTextGap(1);
+
+        rSButtonShapeIcon11.setBackground(new java.awt.Color(33, 58, 86));
+        rSButtonShapeIcon11.setToolTipText("SALIR DE LA APLICACIÓN");
+        rSButtonShapeIcon11.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        rSButtonShapeIcon11.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
+        rSButtonShapeIcon11.setHideActionText(true);
+        rSButtonShapeIcon11.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        rSButtonShapeIcon11.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CLOSE);
+        rSButtonShapeIcon11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonShapeIcon11ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout rSPanel6Layout = new javax.swing.GroupLayout(rSPanel6);
+        rSPanel6.setLayout(rSPanel6Layout);
+        rSPanel6Layout.setHorizontalGroup(
+            rSPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rSPanel6Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(rSPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rSPanel6Layout.createSequentialGroup()
+                        .addGroup(rSPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(rSPanel6Layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel3))
+                            .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
+                        .addGroup(rSPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboPreguntaRecuperacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(108, 108, 108))
+                    .addGroup(rSPanel6Layout.createSequentialGroup()
+                        .addGroup(rSPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRepetirClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
+                        .addGroup(rSPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboPreguntaRecuperacion3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtRespuesta3, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
+                            .addGroup(rSPanel6Layout.createSequentialGroup()
+                                .addComponent(txtRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(102, 102, 102))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(rSPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rSButtonShapeIcon11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanel6Layout.createSequentialGroup()
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(198, 198, 198))))
+        );
+        rSPanel6Layout.setVerticalGroup(
+            rSPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rSPanel6Layout.createSequentialGroup()
+                .addGroup(rSPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(rSPanel6Layout.createSequentialGroup()
+                        .addComponent(rSButtonShapeIcon11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(rSPanel6Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboPreguntaRecuperacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(rSPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rSPanel6Layout.createSequentialGroup()
+                        .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRepetirClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(rSPanel6Layout.createSequentialGroup()
+                        .addComponent(txtRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboPreguntaRecuperacion3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1008, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(rSPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
+            .addComponent(rSPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jTabbedPane1.addTab("Seguridad", jPanel1);
@@ -64,10 +309,91 @@ public class vConfiguracion extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombresActionPerformed
+
+    private void txtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellidosActionPerformed
+
+    private void txtCarnetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCarnetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCarnetActionPerformed
+
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        char[] claveSinCifrar = txtClave.getPassword();
+        char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
+
+        Persona persona = new Persona();
+        persona.setNombres(txtApellidos.getText().trim());
+        persona.setApellidos(txtApellidos.getText().trim());
+        persona.setTipo(Constantes.TIPO_ALUMNO);
+        persona.setCarnet(txtCarnet.getText().trim());
+
+        Usuario usuario = new Usuario();
+        usuario.setNombre(txtCarnet.getText().trim());
+        usuario.setCorreo(txtCorreo.getText().trim());
+
+        //la clave se cifra en el servicio
+        //usuario.setClave(null);
+        if (!Arrays.equals(claveSinCifrar, repetirClaveSinCifrar)) {
+            JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+
+        usuario.setPregunta1(comboPreguntaRecuperacion1.getSelectedIndex());
+        usuario.setRespuesta1(txtRespuesta1.getText().trim());
+        usuario.setPregunta2(comboPreguntaRecuperacion2.getSelectedIndex());
+        usuario.setRespuesta2(txtRespuesta2.getText().trim());
+        usuario.setPregunta3(comboPreguntaRecuperacion3.getSelectedIndex());
+        usuario.setRespuesta3(txtRespuesta3.getText().trim());
+
+        usuario.setPersona(persona);
+        RespuestaGeneral resp = this._usuario.actualizar(usuario, usuario.getId());
+        if (resp.esExitosa()) {
+            JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
+            vInicio vistaInicio = new vInicio();
+            vistaInicio.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+        }
+        //limpiar el array de char, en caso de volcado de memoria, no esté la clave
+        CharArrayUtils.limpiar(claveSinCifrar);
+        CharArrayUtils.limpiar(repetirClaveSinCifrar);
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void rSButtonShapeIcon11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon11ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_rSButtonShapeIcon11ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonShapeIcon btnActualizar;
+    private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion1;
+    private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion2;
+    private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion3;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon11;
+    private necesario.RSPanel rSPanel6;
+    private RSMaterialComponent.RSTextFieldMaterial txtApellidos;
+    private RSMaterialComponent.RSTextFieldMaterial txtCarnet;
+    private RSMaterialComponent.RSPasswordMaterial txtClave;
+    private RSMaterialComponent.RSTextFieldMaterial txtCorreo;
+    private RSMaterialComponent.RSTextFieldMaterial txtNombres;
+    private RSMaterialComponent.RSPasswordMaterial txtRepetirClave;
+    private RSMaterialComponent.RSTextFieldMaterial txtRespuesta1;
+    private RSMaterialComponent.RSTextFieldMaterial txtRespuesta2;
+    private RSMaterialComponent.RSTextFieldMaterial txtRespuesta3;
     // End of variables declaration//GEN-END:variables
 }

@@ -302,7 +302,7 @@ public class vConfigInicial extends javax.swing.JFrame {
         char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
 
         Persona persona = new Persona();
-        persona.setNombres(txtApellidos.getText().trim());
+        persona.setNombres(txtNombres.getText().trim());
         persona.setApellidos(txtApellidos.getText().trim());
         persona.setTipo(Constantes.TIPO_ALUMNO);
         persona.setCarnet(txtCarnet.getText().trim());

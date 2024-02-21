@@ -9,6 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Usuario;
 import utils.constantes.CambiaPanel;
+
+import rojerusan.RSPanelsSlider;
+import servicios.ServicioUsuario;
+
 import utils.constantes.Constantes;
 
 /**
@@ -20,6 +24,23 @@ public class vPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form vPrincipal
      */
+
+    private Usuario usuario;
+    private ServicioUsuario _usuario;
+    
+    public vPrincipal(Usuario usuario, ServicioUsuario _usuario) {
+        this._usuario = _usuario;
+        if(usuario == null) {
+            this.dispose();
+            throw new IllegalAccessError("No puede iniciar sin usuario");
+        }
+        this.usuario = usuario;
+        initComponents();
+        this.iniciarVista();
+        this.txtNombreUsuario.setText(usuario.getPersona().nombreCompleto());
+        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
+    }
+
     
 //    public vPrincipal(Usuario usuario) {
 //        if(usuario == null) {
@@ -37,6 +58,7 @@ public class vPrincipal extends javax.swing.JFrame {
 //        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
 //    }
 //    
+
     public vPrincipal() {
         initComponents();
         this.iniciarVista();
@@ -400,7 +422,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnConfigUsuario.isSelected()) {
             this.btnConfigUsuario.setSelected(true);
-            new CambiaPanel(pnl, new vConfiguracion());
+            new CambiaPanel(pnl, new vConfiguracion(usuario, _usuario));
         }
     }//GEN-LAST:event_btnConfigUsuarioActionPerformed
 

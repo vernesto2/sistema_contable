@@ -92,25 +92,17 @@ public class ServicioUsuario {
         }
 
     }
-    
-    public RespuestaGeneral actualizar(Usuario usuario, int id, char [] claveSinCifrar) {
-        try {
-            Usuario existente = daoUsuario.obtenerPorCarnet(usuario.getNombre());
-            if(existente == null) {
-                return RespuestaGeneral.asNotFound("No se encontró", null);
-            }
-            Map<String, String> obj = cifrarClave(claveSinCifrar);
-            usuario.setClave(obj.get("clave"));
-            usuario.setSalt(obj.get("salt"));
-            usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
-            daoUsuario.actualizar(usuario);
-            return RespuestaGeneral.asUpdated("Se actualizó correctamente", usuario);
-        } catch (InvalidKeySpecException e) {
-            Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, e);
-            return RespuestaGeneral.asBadRequest(e.getMessage());
+
+    public RespuestaGeneral actualizar(Usuario usuario, int id) {
+        Usuario existente = daoUsuario.obtenerPorCarnet(usuario.getNombre());
+        if (existente == null) {
+            return RespuestaGeneral.asNotFound("No se encontró", null);
         }
+        usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+        daoUsuario.actualizar(usuario);
+        return RespuestaGeneral.asUpdated("Se actualizó correctamente", usuario);
     }
-            
+
     public Map<String, String> cifrarClave(char[] claveSinCifrar) throws InvalidKeySpecException {
         /* Plain text Password. */
 
