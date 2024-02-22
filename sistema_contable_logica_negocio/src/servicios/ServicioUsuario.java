@@ -90,28 +90,53 @@ public class ServicioUsuario {
         } catch (Exception e) {
             return RespuestaGeneral.asBadRequest(e.getMessage());
         }
-
     }
     
     
     
     public RespuestaGeneral actualizar(Usuario usuario, int id) {
-        Usuario existente = daoUsuario.obtenerPorCarnet(usuario.getNombre());
-        if (existente == null) {
-            return RespuestaGeneral.asNotFound("No se encontró", null);
+        try {
+            this.cx.conectar();
+            Usuario existente = daoUsuario.obtenerPorCarnet(usuario.getNombre());
+            if (existente == null) {
+                return RespuestaGeneral.asNotFound("No se encontró", null);
+            }
+            usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+            daoUsuario.actualizar(usuario);
+            return RespuestaGeneral.asUpdated("Se actualizó correctamente", usuario);
+        } catch (Exception e) {
+            return RespuestaGeneral.asBadRequest(e.getMessage());
+        } finally {
+            this.cx.desconectar();
         }
-        usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
-        daoUsuario.actualizar(usuario);
-        return RespuestaGeneral.asUpdated("Se actualizó correctamente", usuario);
     }
-
-
-    public Map<String, String> cifrarClave(char[] claveSinCifrar) throws InvalidKeySpecException {
-        /* Plain text Password. */
-
+    
+    public RespuestaGeneral actualizarClave(Usuario usuario, char [] claveSinCifrarActual, char [] claveSinCifrarNueva) {
+        try {
+            this.cx.conectar();
+            RespuestaGeneral respConciden = coinciden(claveSinCifrarActual, usuario.getClave(), usuario.getSalt());
+            Boolean coinciden = (Boolean) respConciden.getDatos();
+            if (coinciden == false) {
+                return RespuestaGeneral.asBadRequest("La clave actual proporcionada no es correcta");
+            }
+            Map<String, String> obj = cifrarClave(claveSinCifrarNueva, usuario.getSalt());
+            daoUsuario.actualizarClave(usuario, obj.get("clave"));
+            return RespuestaGeneral.asOk("Se actualizó exitosamente", null);
+        } catch (InvalidKeySpecException ex) {
+            Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return RespuestaGeneral.asBadRequest(ex.getMessage());
+        } finally {
+            this.cx.conectar();
+        }
+    }
+    
+    private Map<String, String> cifrarClave(char[] claveSinCifrar) throws  InvalidKeySpecException {
         // generates the Salt value. It can be stored in a database. 
         String saltvalue = PassBasedEnc.getSaltvalue(30);
+        return cifrarClave(claveSinCifrar, saltvalue);
+    }
 
+    private Map<String, String> cifrarClave(char[] claveSinCifrar, String saltvalue) throws InvalidKeySpecException {
         /* generates an encrypted password. It can be stored in a database.*/
         String claveCifrada = PassBasedEnc.generateSecurePassword(claveSinCifrar, saltvalue);
 
@@ -147,6 +172,5 @@ public class ServicioUsuario {
             Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return RespuestaGeneral.asBadRequest(ex.getMessage());
         }
-
     }
 }

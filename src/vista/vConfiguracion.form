@@ -96,7 +96,7 @@
                               </Group>
                               <Component id="jLabel7" alignment="1" min="-2" pref="400" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="760" max="32767" attributes="0"/>
+                          <EmptySpace pref="749" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -372,11 +372,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="231" max="-2" attributes="0"/>
-                              <Component id="btnActualizar2" min="-2" pref="263" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="0" min="-2" pref="263" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -384,15 +381,17 @@
                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtClave" pref="263" max="32767" attributes="0"/>
-                                  <Component id="txtClave1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtRepetirClave" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnActualizarClave" min="-2" pref="263" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="txtClaveActual" pref="263" max="32767" attributes="0"/>
+                                      <Component id="txtClaveNueva" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtRepetirClaveNueva" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Component id="jLabel6" alignment="0" min="-2" pref="263" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="1107" max="32767" attributes="0"/>
+                      <EmptySpace pref="1096" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -405,38 +404,38 @@
                       <Component id="jLabel6" min="-2" pref="42" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtClave" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtClaveActual" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtClave1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtClaveNueva" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtRepetirClave" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtRepetirClaveNueva" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="btnActualizar2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="301" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnActualizarClave" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="305" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtClave">
+            <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtClaveActual">
               <Properties>
                 <Property name="placeholder" type="java.lang.String" value="Clave actual"/>
               </Properties>
             </Component>
-            <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtRepetirClave">
+            <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtRepetirClaveNueva">
               <Properties>
                 <Property name="placeholder" type="java.lang.String" value="Repetir nueva clave de acceso"/>
               </Properties>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnActualizar2">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnActualizarClave">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="3a" red="21" type="rgb"/>
@@ -456,7 +455,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizar2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarClaveActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -480,7 +479,7 @@
                 <Property name="horizontalTextPosition" type="int" value="2"/>
               </Properties>
             </Component>
-            <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtClave1">
+            <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtClaveNueva">
               <Properties>
                 <Property name="placeholder" type="java.lang.String" value="Nueva clave de acceso"/>
               </Properties>

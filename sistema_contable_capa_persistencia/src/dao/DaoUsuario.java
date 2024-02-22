@@ -159,7 +159,7 @@ select count(id) as encontrados from usuario where usuario.nombre = ?
             return null;
         }
     }
-
+    
     public void actualizar(Usuario usuario) {
         var sqlPersona = """
                   UPDATE persona SET nombres = ?, apellidos = ?, tipo = ?
@@ -194,19 +194,17 @@ select count(id) as encontrados from usuario where usuario.nombre = ?
 
             //parametros a actualizar
             psUsuario.setString(1, usuario.getCorreo());
-            psUsuario.setString(2, usuario.getClave());
-            psUsuario.setInt(3, usuario.getResetear_clave());
-            psUsuario.setInt(5, usuario.getResetear_clave());
-            psUsuario.setInt(6, usuario.getPregunta1());
-            psUsuario.setString(7, usuario.getRespuesta1());
-            psUsuario.setInt(8, usuario.getPregunta2());
-            psUsuario.setString(9, usuario.getRespuesta2());
-            psUsuario.setInt(10, usuario.getPregunta3());
-            psUsuario.setString(11, usuario.getRespuesta3());
+            psUsuario.setInt(2, usuario.getResetear_clave());
+            psUsuario.setInt(3, usuario.getPregunta1());
+            psUsuario.setString(4, usuario.getRespuesta1());
+            psUsuario.setInt(5, usuario.getPregunta2());
+            psUsuario.setString(6, usuario.getRespuesta2());
+            psUsuario.setInt(7, usuario.getPregunta3());
+            psUsuario.setString(8, usuario.getRespuesta3());
 
             //parametros de identificación del registro a actualizar
-            psUsuario.setInt(12, usuario.getId());
-            psUsuario.setInt(13, usuario.getPersona().getId());
+            psUsuario.setInt(9, usuario.getId());
+            psUsuario.setInt(10, usuario.getPersona().getId());
             
             int filasAfectadasUsuario = psUsuario.executeUpdate();
             if(filasAfectadasUsuario == 0 || filasAfectadasUsuario > 1) {
@@ -217,5 +215,31 @@ select count(id) as encontrados from usuario where usuario.nombre = ?
             String mensaje = e.getMessage();
         }
     }
-
+    
+    public void actualizarClave(Usuario usuario, String nuevaClave) {
+        var sqlUsuario = """
+                  UPDATE usuario SET
+                         clave = ?
+                  WHERE id = ? AND id_persona = ?
+        """;
+        try (
+                PreparedStatement psUsuario = cx.getCx().prepareStatement(sqlUsuario, Statement.RETURN_GENERATED_KEYS);
+            ) {
+            
+            Persona persona = usuario.getPersona();
+            
+            //parametros de identificación del registro a actualizar
+            psUsuario.setString(1, nuevaClave);
+            psUsuario.setInt(2, usuario.getId());
+            psUsuario.setInt(3, usuario.getPersona().getId());
+            
+            int filasAfectadasUsuario = psUsuario.executeUpdate();
+            if(filasAfectadasUsuario == 0 || filasAfectadasUsuario > 1) {
+                throw new IllegalStateException("No se encontró o se actualizó más de un registro");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage();
+        }
+    }
 }

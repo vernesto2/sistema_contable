@@ -30,7 +30,6 @@ public class vConfiguracion extends javax.swing.JPanel {
      */
     Usuario usuario;
     ServicioUsuario _usuario;
-    ServicioConfiguracion _configuracion = new ServicioConfiguracion();
 
     public vConfiguracion(Usuario usuario, ServicioUsuario _usuario) {
         initComponents();
@@ -99,12 +98,12 @@ public class vConfiguracion extends javax.swing.JPanel {
         txtRespuesta3 = new RSMaterialComponent.RSTextFieldMaterial();
         jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        txtClave = new RSMaterialComponent.RSPasswordMaterial();
-        txtRepetirClave = new RSMaterialComponent.RSPasswordMaterial();
-        btnActualizar2 = new RSMaterialComponent.RSButtonShapeIcon();
+        txtClaveActual = new RSMaterialComponent.RSPasswordMaterial();
+        txtRepetirClaveNueva = new RSMaterialComponent.RSPasswordMaterial();
+        btnActualizarClave = new RSMaterialComponent.RSButtonShapeIcon();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtClave1 = new RSMaterialComponent.RSPasswordMaterial();
+        txtClaveNueva = new RSMaterialComponent.RSPasswordMaterial();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -244,7 +243,7 @@ public class vConfiguracion extends javax.swing.JPanel {
                             .addComponent(txtRespuesta1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(760, Short.MAX_VALUE))
+                .addContainerGap(749, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,19 +293,19 @@ public class vConfiguracion extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Datos de usuario", jScrollPane1);
 
-        txtClave.setPlaceholder("Clave actual");
+        txtClaveActual.setPlaceholder("Clave actual");
 
-        txtRepetirClave.setPlaceholder("Repetir nueva clave de acceso");
+        txtRepetirClaveNueva.setPlaceholder("Repetir nueva clave de acceso");
 
-        btnActualizar2.setBackground(new java.awt.Color(33, 58, 86));
-        btnActualizar2.setText("Actualizar clave de acceso");
-        btnActualizar2.setBackgroundHover(new java.awt.Color(33, 68, 86));
-        btnActualizar2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnActualizar2.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnActualizar2.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
-        btnActualizar2.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizarClave.setBackground(new java.awt.Color(33, 58, 86));
+        btnActualizarClave.setText("Actualizar clave de acceso");
+        btnActualizarClave.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnActualizarClave.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnActualizarClave.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnActualizarClave.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
+        btnActualizarClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizar2ActionPerformed(evt);
+                btnActualizarClaveActionPerformed(evt);
             }
         });
 
@@ -321,7 +320,7 @@ public class vConfiguracion extends javax.swing.JPanel {
         jLabel6.setText("Clave de acceso");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        txtClave1.setPlaceholder("Nueva clave de acceso");
+        txtClaveNueva.setPlaceholder("Nueva clave de acceso");
 
         jLabel10.setText("Clave actual");
 
@@ -335,22 +334,21 @@ public class vConfiguracion extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(btnActualizar2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11)
                             .addComponent(jLabel12))
                         .addGap(24, 24, 24)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtClave, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                            .addComponent(txtClave1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRepetirClave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1107, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnActualizarClave, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtClaveActual, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                                .addComponent(txtClaveNueva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtRepetirClaveNueva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(1096, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,19 +359,19 @@ public class vConfiguracion extends javax.swing.JPanel {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtClaveActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtClave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtClaveNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRepetirClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRepetirClaveNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
-                .addGap(24, 24, 24)
-                .addComponent(btnActualizar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnActualizarClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(305, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Clave de acceso", jPanel2);
@@ -390,30 +388,46 @@ public class vConfiguracion extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnActualizar2ActionPerformed
+    private void btnActualizarClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarClaveActionPerformed
+        char[] claveSinCifrarActual = txtClaveActual.getPassword();
+        char[] claveSinCifrarNueva = txtClaveNueva.getPassword();
+        char[] repetirClaveSinCifrarNueva = txtRepetirClaveNueva.getPassword();
+        //la clave se cifra en el servicio
+        //usuario.setClave(null);
+        if (!Arrays.equals(claveSinCifrarNueva, repetirClaveSinCifrarNueva)) {
+            JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        RespuestaGeneral resp = _usuario.actualizarClave(usuario, claveSinCifrarActual, claveSinCifrarNueva);
+        if (resp.esExitosa()) {
+            JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
+        } else {
+            JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+        }
+        //limpiar el array de char, en caso de volcado de memoria, no esté la clave
+        CharArrayUtils.limpiar(claveSinCifrarActual);
+        CharArrayUtils.limpiar(claveSinCifrarNueva);
+        CharArrayUtils.limpiar(repetirClaveSinCifrarNueva);
+        
+        //limpiar formulario
+        txtClaveNueva.setText("");
+        txtClaveActual.setText("");
+        txtRepetirClaveNueva.setText("");
+    }//GEN-LAST:event_btnActualizarClaveActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        char[] claveSinCifrar = txtClave.getPassword();
-        char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
+        
 
-        Persona persona = new Persona();
+        Persona persona = usuario.getPersona();
         persona.setNombres(txtApellidos.getText().trim());
         persona.setApellidos(txtApellidos.getText().trim());
         persona.setTipo(Constantes.TIPO_ALUMNO);
         persona.setCarnet(txtCarnet.getText().trim());
 
-        Usuario usuario = new Usuario();
         usuario.setNombre(txtCarnet.getText().trim());
         usuario.setCorreo(txtCorreo.getText().trim());
 
-        //la clave se cifra en el servicio
-        //usuario.setClave(null);
-        if (!Arrays.equals(claveSinCifrar, repetirClaveSinCifrar)) {
-            JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        
 
         usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
 
@@ -428,14 +442,10 @@ public class vConfiguracion extends javax.swing.JPanel {
         RespuestaGeneral resp = this._usuario.actualizar(usuario, usuario.getId());
         if (resp.esExitosa()) {
             JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
-            vInicio vistaInicio = new vInicio();
-            vistaInicio.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
         }
-        //limpiar el array de char, en caso de volcado de memoria, no esté la clave
-        CharArrayUtils.limpiar(claveSinCifrar);
-        CharArrayUtils.limpiar(repetirClaveSinCifrar);
+        
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
@@ -461,7 +471,7 @@ public class vConfiguracion extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnActualizar;
-    private RSMaterialComponent.RSButtonShapeIcon btnActualizar2;
+    private RSMaterialComponent.RSButtonShapeIcon btnActualizarClave;
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion1;
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion2;
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion3;
@@ -483,11 +493,11 @@ public class vConfiguracion extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTabbedPane1;
     private RSMaterialComponent.RSTextFieldMaterial txtApellidos;
     private RSMaterialComponent.RSTextFieldMaterial txtCarnet;
-    private RSMaterialComponent.RSPasswordMaterial txtClave;
-    private RSMaterialComponent.RSPasswordMaterial txtClave1;
+    private RSMaterialComponent.RSPasswordMaterial txtClaveActual;
+    private RSMaterialComponent.RSPasswordMaterial txtClaveNueva;
     private RSMaterialComponent.RSTextFieldMaterial txtCorreo;
     private RSMaterialComponent.RSTextFieldMaterial txtNombres;
-    private RSMaterialComponent.RSPasswordMaterial txtRepetirClave;
+    private RSMaterialComponent.RSPasswordMaterial txtRepetirClaveNueva;
     private RSMaterialComponent.RSTextFieldMaterial txtRespuesta1;
     private RSMaterialComponent.RSTextFieldMaterial txtRespuesta2;
     private RSMaterialComponent.RSTextFieldMaterial txtRespuesta3;
