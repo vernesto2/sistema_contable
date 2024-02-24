@@ -79,7 +79,7 @@ public class daoCicloContable {
         ArrayList<CicloContable> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  select * from ciclo_contable cc where cc.id_catalogo = ?
+                  select * from ciclo_contable cc where cc.id_catalogo = ? and cc.eliminado = 0
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, id);

@@ -97,6 +97,7 @@ public class vPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlBase = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         pnl = new javax.swing.JPanel();
         sidebar = new javax.swing.JPanel();
         rSLabelFecha1 = new rojeru_san.rsdate.RSLabelFecha();
@@ -115,14 +116,15 @@ public class vPrincipal extends javax.swing.JFrame {
         btnCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
         topbar = new javax.swing.JPanel();
         txtConfigCicloContable = new javax.swing.JLabel();
+        btnGuardarCicloContable2 = new RSMaterialComponent.RSButtonShapeIcon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setUndecorated(true);
 
         pnlBase.setBackground(new java.awt.Color(255, 255, 255));
 
         pnl.setLayout(new javax.swing.BoxLayout(pnl, javax.swing.BoxLayout.LINE_AXIS));
+        jScrollPane1.setViewportView(pnl);
 
         sidebar.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -318,7 +320,7 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addComponent(btnCambiosPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(btnConfigUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,21 +334,43 @@ public class vPrincipal extends javax.swing.JFrame {
         txtConfigCicloContable.setText("CONTABILIDAD BANCARIA");
         txtConfigCicloContable.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
+        btnGuardarCicloContable2.setBackground(new java.awt.Color(33, 58, 86));
+        btnGuardarCicloContable2.setToolTipText("ABONAR CUENTA");
+        btnGuardarCicloContable2.setBackgroundHover(new java.awt.Color(33, 84, 86));
+        btnGuardarCicloContable2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardarCicloContable2.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
+        btnGuardarCicloContable2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGuardarCicloContable2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGuardarCicloContable2.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.MENU);
+        btnGuardarCicloContable2.setSizeIcon(25.0F);
+        btnGuardarCicloContable2.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnGuardarCicloContable2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCicloContable2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout topbarLayout = new javax.swing.GroupLayout(topbar);
         topbar.setLayout(topbarLayout);
         topbarLayout.setHorizontalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topbarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 831, Short.MAX_VALUE)
+                .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
                 .addContainerGap())
         );
         topbarLayout.setVerticalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topbarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(topbarLayout.createSequentialGroup()
+                        .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(1, 1, 1))
+                    .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11))
         );
 
         javax.swing.GroupLayout pnlBaseLayout = new javax.swing.GroupLayout(pnlBase);
@@ -355,25 +379,24 @@ public class vPrincipal extends javax.swing.JFrame {
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addComponent(sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addGroup(pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)))
         );
         pnlBaseLayout.setVerticalGroup(
             pnlBaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addComponent(topbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(pnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1079, Short.MAX_VALUE)
+            .addGap(0, 1087, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(pnlBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -421,6 +444,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnLibroMayor.isSelected()) {
             this.btnLibroMayor.setSelected(true);
+            new CambiaPanel(pnl, new vLibroMayor());
         }
     }//GEN-LAST:event_btnLibroMayorActionPerformed
 
@@ -468,6 +492,15 @@ public class vPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCicloContableActionPerformed
 
+    private void btnGuardarCicloContable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCicloContable2ActionPerformed
+        boolean visible = this.sidebar.isVisible();
+        if (visible) {
+            this.sidebar.setVisible(false);
+        } else {
+            this.sidebar.setVisible(true);
+        }
+    }//GEN-LAST:event_btnGuardarCicloContable2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -511,9 +544,11 @@ public class vPrincipal extends javax.swing.JFrame {
     private RSMaterialComponent.RSButtonShapeIcon btnConfigUsuario;
     private RSMaterialComponent.RSButtonShapeIcon btnEstadoResultado;
     private RSMaterialComponent.RSButtonShapeIcon btnFlujoEfectivo;
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable2;
     private RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;
     private RSMaterialComponent.RSButtonShapeIcon btnLibroMayor;
     private javax.swing.JLabel imagenPrincipal;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnl;
     private javax.swing.JPanel pnlBase;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon1;
