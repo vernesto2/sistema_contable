@@ -6,6 +6,8 @@ package vista;
 
 import dto.dtoCuenta;
 import dto.dtoLista;
+import formularios.dTipoCatalogo;
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,11 +18,12 @@ import modelo.ConfiguracionUsuario;
 import modelo.Cuenta;
 import modelo.TipoCatalogo;
 import modelo.dtoCicloContable;
-import rojerusan.RSTableMetro;
+import rojeru_san.efectos.ValoresEnum;
 import servicios.ServicioCicloContable;
 import servicios.ServicioConfigUsuario;
 import servicios.ServicioCuenta;
 import servicios.ServicioTipoCatalogo;
+import utils.Render;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
@@ -52,7 +55,13 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     Cuenta cuentaModel = new Cuenta();
     
     // VARIABLES EN COMUN
-    DefaultTableModel dtm = new DefaultTableModel();
+    DefaultTableModel dtm = new DefaultTableModel() {
+        @Override 
+        public boolean isCellEditable(int row, int column) { 
+            return false;
+        }
+    };
+            
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     ArrayList<TipoCatalogo> listaCmbTipoCatalogo = new ArrayList<>();
     
@@ -73,7 +82,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     public void obtenerListaCmbTipoCatalogo() {
         // obtenemos el listado de tipos de catalogo
         this.listaCmbTipoCatalogo = new ArrayList<>();
-        RespuestaGeneral rg = _tipoCatalogo.obtenerLista();
+        RespuestaGeneral rg = _tipoCatalogo.obtenerLista("");
         if (rg.esExitosa()) {
             this.listaCmbTipoCatalogo = (ArrayList<TipoCatalogo>)rg.getDatos();
             cmbTipoCatalogo.removeAllItems();
@@ -145,26 +154,38 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                                    INICIO SECCION DE TIPOS DE CATALOGO
         <------------------------------------------------------------------------------->  */  
     public void setModelTipoCatalogo() {
-        String[] cabecera = {"Tipo"};
+        String[] cabecera = {"Tipo", "Editar", "Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
-        tblCicloContable.setModel(dtm);
+        tblTipoCatalogo.setModel(dtm);
+        tblTipoCatalogo.setDefaultRenderer(Object.class, new Render());
     }
     
     public void setDatosTipoCatalogo() {
         Object[] datos = new Object[dtm.getColumnCount()];
+        // definimos los botones a crear
+        RSMaterialComponent.RSButtonCustomIcon btn1 = new RSMaterialComponent.RSButtonCustomIcon();
+        RSMaterialComponent.RSButtonCustomIcon btn2 = new RSMaterialComponent.RSButtonCustomIcon();
+        btn1.setIcons(ValoresEnum.ICONS.EDIT);
+        btn2.setIcons(ValoresEnum.ICONS.DELETE);
+        btn2.setColorIcon(Color.RED);
         for (TipoCatalogo tipo : listaTiposCatalogos) {
             datos[0] = tipo.getTipo();
+            datos[1] = btn1;
+            datos[2] = btn2;
             dtm.addRow(datos);
         }
         tblTipoCatalogo.setModel(dtm);
-        tblCuentas.setAutoResizeMode(tblCuentas.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        tblTipoCatalogo.setAutoResizeMode(tblTipoCatalogo.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        tblTipoCatalogo.getColumnModel().getColumn(0).setPreferredWidth(720);
+        tblTipoCatalogo.getColumnModel().getColumn(1).setPreferredWidth(10);
+        tblTipoCatalogo.getColumnModel().getColumn(2).setPreferredWidth(10);
     }
     
     public void obtenerListadoTipoCatalogo() {
         this.listaTiposCatalogos = new ArrayList<>();
         tblTipoCatalogo.clearSelection();
         this.limiparTablaTipoCatalogo();
-        RespuestaGeneral rs = _tipoCatalogo.obtenerLista();
+        RespuestaGeneral rs = _tipoCatalogo.obtenerLista(this.txtBusquedaTipoCatalogo.getText());
         if (rs.esExitosa()) {
             this.listaTiposCatalogos = (ArrayList<TipoCatalogo>)rs.getDatos();
         } else {
@@ -179,14 +200,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             i-=1;
         }
     }
-    
-    public void limpiarFormTipoCatalogo() {
-        tipoCatalogoModel = new TipoCatalogo();
-        txtTipoCatalogo.setText("");
-        btnEliminarTipoCatalogo.setEnabled(false);
-        tblTipoCatalogo.clearSelection();
-    }
-    
+
     /* <------------------------------------------------------------------------------->
                                    FIN SECCION DE TIPOS DE CATALOGO
         <------------------------------------------------------------------------------->  */  
@@ -203,7 +217,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     public void obtenerListaCmbTipoCatalogo2() {
         // obtenemos el listado de tipos de catalogo
         this.listaCmbTipoCatalogo = new ArrayList<>();
-        RespuestaGeneral rg = _tipoCatalogo.obtenerLista();
+        RespuestaGeneral rg = _tipoCatalogo.obtenerLista("");
         if (rg.esExitosa()) {
             this.listaCmbTipoCatalogo = (ArrayList<TipoCatalogo>)rg.getDatos();
             cmbTipoCatalogo2.removeAllItems();
@@ -311,15 +325,14 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCicloContable = new rojerusan.RSTableMetro();
         jPanel2 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        txtTipoCatalogo = new RSMaterialComponent.RSTextFieldMaterial();
-        btnCancelarTipoCatalogo = new RSMaterialComponent.RSButtonShapeIcon();
-        btnGuardarTipoCatalogo = new RSMaterialComponent.RSButtonShapeIcon();
-        btnEliminarTipoCatalogo = new RSMaterialComponent.RSButtonShapeIcon();
-        jLabel5 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTipoCatalogo = new rojerusan.RSTableMetro();
+        btnGuardarTipoCatalogo1 = new RSMaterialComponent.RSButtonShapeIcon();
+        jLabel7 = new javax.swing.JLabel();
+        txtBusquedaTipoCatalogo = new RSMaterialComponent.RSTextFieldMaterial();
+        btnGuardarTipoCatalogo2 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnGuardarTipoCatalogo3 = new RSMaterialComponent.RSButtonShapeIcon();
         jPanel5 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         txtCodigo = new RSMaterialComponent.RSTextFieldMaterial();
@@ -587,7 +600,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -610,103 +623,6 @@ public class vConfigContabilidad extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Registro y edición de tipos de catalogo    ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
-
-        txtTipoCatalogo.setForeground(new java.awt.Color(0, 0, 0));
-        txtTipoCatalogo.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtTipoCatalogo.setPhColor(new java.awt.Color(0, 0, 0));
-        txtTipoCatalogo.setPlaceholder("Digite el tipo de catalogo");
-        txtTipoCatalogo.setSelectionColor(new java.awt.Color(0, 0, 0));
-
-        btnCancelarTipoCatalogo.setBackground(new java.awt.Color(251, 205, 6));
-        btnCancelarTipoCatalogo.setText("CANCELAR");
-        btnCancelarTipoCatalogo.setToolTipText("LIMPIAR EL FORMULARIO Y SELECCIÓN");
-        btnCancelarTipoCatalogo.setBackgroundHover(new java.awt.Color(251, 174, 6));
-        btnCancelarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnCancelarTipoCatalogo.setForegroundHover(new java.awt.Color(0, 0, 0));
-        btnCancelarTipoCatalogo.setForegroundIcon(new java.awt.Color(0, 0, 0));
-        btnCancelarTipoCatalogo.setForegroundIconHover(new java.awt.Color(0, 0, 0));
-        btnCancelarTipoCatalogo.setForegroundText(new java.awt.Color(0, 0, 0));
-        btnCancelarTipoCatalogo.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnCancelarTipoCatalogo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
-        btnCancelarTipoCatalogo.setSizeIcon(18.0F);
-        btnCancelarTipoCatalogo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarTipoCatalogoActionPerformed(evt);
-            }
-        });
-
-        btnGuardarTipoCatalogo.setBackground(new java.awt.Color(33, 58, 86));
-        btnGuardarTipoCatalogo.setText("GUARDAR");
-        btnGuardarTipoCatalogo.setToolTipText("GUARDAR O ACTUALIZAR EL TIPO DE CATALOGO");
-        btnGuardarTipoCatalogo.setBackgroundHover(new java.awt.Color(33, 68, 86));
-        btnGuardarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnGuardarTipoCatalogo.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnGuardarTipoCatalogo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
-        btnGuardarTipoCatalogo.setSizeIcon(18.0F);
-        btnGuardarTipoCatalogo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarTipoCatalogoActionPerformed(evt);
-            }
-        });
-
-        btnEliminarTipoCatalogo.setBackground(new java.awt.Color(197, 0, 0));
-        btnEliminarTipoCatalogo.setText("ELIMINAR");
-        btnEliminarTipoCatalogo.setToolTipText("ELIMINAR EL REGISTRO SELECCIONADO");
-        btnEliminarTipoCatalogo.setBackgroundHover(new java.awt.Color(242, 0, 0));
-        btnEliminarTipoCatalogo.setEnabled(false);
-        btnEliminarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnEliminarTipoCatalogo.setForegroundHover(new java.awt.Color(0, 0, 0));
-        btnEliminarTipoCatalogo.setForegroundIcon(new java.awt.Color(0, 0, 0));
-        btnEliminarTipoCatalogo.setForegroundIconHover(new java.awt.Color(0, 0, 0));
-        btnEliminarTipoCatalogo.setForegroundText(new java.awt.Color(0, 0, 0));
-        btnEliminarTipoCatalogo.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnEliminarTipoCatalogo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ERROR);
-        btnEliminarTipoCatalogo.setSizeIcon(18.0F);
-        btnEliminarTipoCatalogo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarTipoCatalogoActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Tipo:");
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTipoCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                .addGap(43, 43, 43)
-                .addComponent(btnGuardarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEliminarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Listado de tipos de catalogo   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
@@ -722,11 +638,12 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         tblTipoCatalogo.setBackgoundHover(new java.awt.Color(204, 204, 204));
         tblTipoCatalogo.setColorPrimaryText(new java.awt.Color(0, 0, 0));
         tblTipoCatalogo.setColorSecundaryText(new java.awt.Color(51, 51, 51));
-        tblTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        tblTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         tblTipoCatalogo.setFontHead(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        tblTipoCatalogo.setFontRowHover(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        tblTipoCatalogo.setFontRowSelect(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        tblTipoCatalogo.setFontRowHover(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tblTipoCatalogo.setFontRowSelect(new java.awt.Font("Arial", 1, 12)); // NOI18N
         tblTipoCatalogo.setPositionText(rojerusan.RSTableMetro.POSITION_TEXT.LEFT);
+        tblTipoCatalogo.setRowHeight(30);
         tblTipoCatalogo.setSelectionBackground(new java.awt.Color(153, 153, 153));
         tblTipoCatalogo.setSelectionForeground(new java.awt.Color(0, 0, 0));
         tblTipoCatalogo.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -736,8 +653,65 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblTipoCatalogoMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tblTipoCatalogoMouseEntered(evt);
+            }
         });
         jScrollPane2.setViewportView(tblTipoCatalogo);
+
+        btnGuardarTipoCatalogo1.setBackground(new java.awt.Color(33, 58, 86));
+        btnGuardarTipoCatalogo1.setText("BUSCAR");
+        btnGuardarTipoCatalogo1.setToolTipText("BUSCAR");
+        btnGuardarTipoCatalogo1.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnGuardarTipoCatalogo1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardarTipoCatalogo1.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnGuardarTipoCatalogo1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnGuardarTipoCatalogo1.setSizeIcon(18.0F);
+        btnGuardarTipoCatalogo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarTipoCatalogo1ActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Busqueda:");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtBusquedaTipoCatalogo.setForeground(new java.awt.Color(0, 0, 0));
+        txtBusquedaTipoCatalogo.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtBusquedaTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtBusquedaTipoCatalogo.setPhColor(new java.awt.Color(0, 0, 0));
+        txtBusquedaTipoCatalogo.setPlaceholder("Buscar por el tipo");
+        txtBusquedaTipoCatalogo.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        btnGuardarTipoCatalogo2.setBackground(new java.awt.Color(0, 153, 0));
+        btnGuardarTipoCatalogo2.setText("NUEVO");
+        btnGuardarTipoCatalogo2.setToolTipText("NUEVO REGISTRO");
+        btnGuardarTipoCatalogo2.setBackgroundHover(new java.awt.Color(0, 178, 0));
+        btnGuardarTipoCatalogo2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardarTipoCatalogo2.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnGuardarTipoCatalogo2.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnGuardarTipoCatalogo2.setSizeIcon(18.0F);
+        btnGuardarTipoCatalogo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarTipoCatalogo2ActionPerformed(evt);
+            }
+        });
+
+        btnGuardarTipoCatalogo3.setBackground(new java.awt.Color(102, 102, 102));
+        btnGuardarTipoCatalogo3.setText("LIMPIAR");
+        btnGuardarTipoCatalogo3.setToolTipText("LIMPIAR BUSQUEDA");
+        btnGuardarTipoCatalogo3.setBackgroundHover(new java.awt.Color(112, 113, 116));
+        btnGuardarTipoCatalogo3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardarTipoCatalogo3.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnGuardarTipoCatalogo3.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnGuardarTipoCatalogo3.setSizeIcon(18.0F);
+        btnGuardarTipoCatalogo3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarTipoCatalogo3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -745,14 +719,31 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtBusquedaTipoCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGuardarTipoCatalogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuardarTipoCatalogo3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(btnGuardarTipoCatalogo2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBusquedaTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarTipoCatalogo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarTipoCatalogo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarTipoCatalogo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -761,17 +752,12 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         tabPanelContabilidad.addTab("Tipos de Catálogos", jPanel2);
@@ -930,10 +916,10 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                    .addComponent(txtIngresos, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                    .addComponent(txtEgresos, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                    .addComponent(cmbTipoCatalogo2, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+                    .addComponent(txtConcepto, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(txtIngresos, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(txtEgresos, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(cmbTipoCatalogo2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -941,9 +927,9 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(cmbTipoSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(txtNivel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                    .addComponent(cmbTipoSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                    .addComponent(txtNivel, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1075,13 +1061,13 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1098,7 +1084,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                         .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1231,65 +1217,48 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnEliminarCicloContableActionPerformed
-
-    private void btnCancelarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTipoCatalogoActionPerformed
-        this.limpiarFormTipoCatalogo();
-    }//GEN-LAST:event_btnCancelarTipoCatalogoActionPerformed
-
-    private void btnGuardarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogoActionPerformed
-        // setear info al modelo
-        this.tipoCatalogoModel.setTipo(this.txtTipoCatalogo.getText());
-        // guardamos la info
-        // verificamos si es NUEVO
-        btnGuardarTipoCatalogo.setEnabled(false);
-        if (this.tipoCatalogoModel.getId() < 0) {
-            RespuestaGeneral rs = _tipoCatalogo.insertar(this.tipoCatalogoModel);
-            if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rs));
-                this.obtenerListadoTipoCatalogo();
-            } else {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rs));
-            }
-
-            // verificamos si es NUEVO
-        } else {
-            RespuestaGeneral rs = _tipoCatalogo.editar(this.tipoCatalogoModel);
-            if (rs.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rs));
-                this.obtenerListadoTipoCatalogo();
-            } else {
-                JOptionPane.showMessageDialog(this, rs.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rs));
-            }
-        }
-        btnGuardarTipoCatalogo.setEnabled(true);
-        this.limpiarFormTipoCatalogo();
-    }//GEN-LAST:event_btnGuardarTipoCatalogoActionPerformed
-
-    private void btnEliminarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTipoCatalogoActionPerformed
-        String texto = "¿Esta seguro de continuar?, Se eliminará el registro: " + this.txtTipoCatalogo.getText();
-        int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        //System.out.println(salida);
-        if (opc == 0) {
-            RespuestaGeneral rg = _tipoCatalogo.eliminar(this.tipoCatalogoModel.getId());
-            if (rg.esExitosa()) {
-                JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
-                btnEliminarTipoCatalogo.setEnabled(false);
-                this.limpiarFormTipoCatalogo();
-                this.obtenerListadoTipoCatalogo();
-            } else {
-                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
-            }
-        }
-    }//GEN-LAST:event_btnEliminarTipoCatalogoActionPerformed
     
     private void tblTipoCatalogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoCatalogoMouseClicked
+        int accion = tblTipoCatalogo.getSelectedColumn();
         int row = tblTipoCatalogo.getSelectedRow();
-        // seteamos el ID para editar
-        tipoCatalogoModel.setId(this.listaTiposCatalogos.get(row).getId());
-        txtTipoCatalogo.setText(this.listaTiposCatalogos.get(row).getTipo());
-        btnEliminarTipoCatalogo.setEnabled(true);
+        if (accion == 1) {
+            // este es editar
+            this.setearModeloTipoCatalogo(row);
+            this.abrirDialogTipoCatalogo(tipoCatalogoModel);
+            
+        } else if (accion == 2) {
+            // este es eliminar
+            //String texto = "¿Esta seguro de continuar?, Se eliminará el registro: " + this.txtTipoCatalogo.getText();
+            String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaTiposCatalogos.get(row).getTipo();
+            int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            //System.out.println(salida);
+            if (opc == 0) {
+                RespuestaGeneral rg = _tipoCatalogo.eliminar(this.listaTiposCatalogos.get(row).getId());
+                if (rg.esExitosa()) {
+                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
+                    this.obtenerListadoTipoCatalogo();
+                } else {
+                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+                }
+            }
+        }
     }//GEN-LAST:event_tblTipoCatalogoMouseClicked
 
+    public void setearModeloTipoCatalogo(int row) {
+        tipoCatalogoModel.setId(this.listaTiposCatalogos.get(row).getId());
+        tipoCatalogoModel.setTipo(this.listaTiposCatalogos.get(row).getTipo());
+    }
+    
+    public void abrirDialogTipoCatalogo(TipoCatalogo tipoCatalogo) {
+        dTipoCatalogo d = new dTipoCatalogo(null, true, tipoCatalogo);
+        d.setVisible(true);
+        // validamos si realizo alguna accion para actualizar el listado o no
+        if (d.getRealizoAccion()) {
+            JOptionPane.showMessageDialog(this, d.getRG().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRG()));
+            this.obtenerListadoTipoCatalogo();
+        }
+    }
+    
     private void cmbTipoCatalogoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoCatalogoItemStateChanged
         //this.seleccionarOpcionCmbTipoCatalogo();
     }//GEN-LAST:event_cmbTipoCatalogoItemStateChanged
@@ -1395,6 +1364,23 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         this.obtenerListadoCuentasPorTipoCatalogo();
     }//GEN-LAST:event_btnBuscarCuentaActionPerformed
 
+    private void btnGuardarTipoCatalogo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogo1ActionPerformed
+        this.obtenerListadoTipoCatalogo();
+    }//GEN-LAST:event_btnGuardarTipoCatalogo1ActionPerformed
+
+    private void btnGuardarTipoCatalogo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogo2ActionPerformed
+        this.abrirDialogTipoCatalogo(new TipoCatalogo());
+    }//GEN-LAST:event_btnGuardarTipoCatalogo2ActionPerformed
+
+    private void btnGuardarTipoCatalogo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogo3ActionPerformed
+        this.txtBusquedaTipoCatalogo.setText("");
+        this.obtenerListadoTipoCatalogo();
+    }//GEN-LAST:event_btnGuardarTipoCatalogo3ActionPerformed
+
+    private void tblTipoCatalogoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoCatalogoMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblTipoCatalogoMouseEntered
+
     public void seleccionarOpcionCmbTipoCatalogo() {
         int i = cmbTipoCatalogo.getSelectedIndex();
         if (i >= 0) {
@@ -1418,7 +1404,6 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     
     public void cargarInfoSegunTab() {
         this.limiparTablaTipoCatalogo();
-        this.limpiarFormTipoCatalogo();
         this.limpiarFormCicloContable();
         this.limiparTablaCicloContable();
         this.limiparTablaCuentas();
@@ -1452,14 +1437,14 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     private RSMaterialComponent.RSButtonShapeIcon btnBuscarCuenta;
     private RSMaterialComponent.RSButtonShapeIcon btnCancelarCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnCancelarCuenta;
-    private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo;
     private RSMaterialComponent.RSButtonShapeIcon btnEliminarCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnEliminarCuenta;
-    private RSMaterialComponent.RSButtonShapeIcon btnEliminarTipoCatalogo;
     private RSMaterialComponent.RSButtonShapeIcon btnEstablecerCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCuenta;
-    private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo;
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo1;
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo2;
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo3;
     private RSMaterialComponent.RSButtonShapeIcon btnLimpiarBusquedaCuenta;
     private RSMaterialComponent.RSComboBoxMaterial cmbTipoCatalogo;
     private RSMaterialComponent.RSComboBoxMaterial cmbTipoCatalogo2;
@@ -1474,15 +1459,14 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -1493,6 +1477,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     private rojerusan.RSTableMetro tblCicloContable;
     private rojerusan.RSTableMetro tblCuentas;
     private rojerusan.RSTableMetro tblTipoCatalogo;
+    private RSMaterialComponent.RSTextFieldMaterial txtBusquedaTipoCatalogo;
     private RSMaterialComponent.RSTextFieldMaterial txtCodigo;
     private RSMaterialComponent.RSTextFieldMaterial txtConcepto;
     private newscomponents.RSDateChooser txtDesde;
@@ -1501,7 +1486,6 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     private RSMaterialComponent.RSTextFieldMaterial txtIngresos;
     private RSMaterialComponent.RSTextFieldMaterial txtNivel;
     private RSMaterialComponent.RSTextFieldMaterial txtQueryBusqueda;
-    private RSMaterialComponent.RSTextFieldMaterial txtTipoCatalogo;
     private RSMaterialComponent.RSTextFieldMaterial txtTitulo;
     // End of variables declaration//GEN-END:variables
 }

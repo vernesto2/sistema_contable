@@ -10,14 +10,9 @@ import utils.constantes.RespuestaGeneral;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.TipoCatalogo;
-import utils.constantes.Constantes;
 
 /**
  *
@@ -32,14 +27,15 @@ public class daoTipoCatalogo {
         this.cx = cx;
     }
     
-    public RespuestaGeneral Listar() {
+    public RespuestaGeneral Listar(String busqueda) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<TipoCatalogo> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  SELECT * FROM tipo_catalogo tc where tc.eliminado = 0
+                  SELECT * FROM tipo_catalogo tc where tc.eliminado = 0 and tc.tipo like '%paramBusqueda%'
                   """;
-        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+        String newSql = sql.replaceAll("paramBusqueda", busqueda);
+        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql)) {
             rs = ps.executeQuery();
             while (rs.next()) {
                 TipoCatalogo tcatalogo = new TipoCatalogo();

@@ -25,9 +25,9 @@ public class ServicioTipoCatalogo {
         this.daoCicloContable = new daoCicloContable(this.cx);
     }
     
-    public RespuestaGeneral obtenerLista() {
+    public RespuestaGeneral obtenerLista(String busqueda) {
         this.cx.conectar();
-        RespuestaGeneral rs = this.daoTipoCatalogo.Listar();
+        RespuestaGeneral rs = this.daoTipoCatalogo.Listar(busqueda);
         this.cx.desconectar(); 
         return rs;
     }
