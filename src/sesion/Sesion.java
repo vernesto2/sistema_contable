@@ -14,8 +14,10 @@ import modelo.Usuario;
 public class Sesion {
     public Usuario usuario;
     public ConfiguracionUsuario configUsuario;
-    public Sesion(Usuario usuario, ConfiguracionUsuario configUsuario) {
+    public String rutaConexion;
+    public Sesion(Usuario usuario, ConfiguracionUsuario configUsuario, String rutaConexion) {
         this.usuario = usuario;
         this.configUsuario = configUsuario;
+        this.rutaConexion = rutaConexion;
     }
 }

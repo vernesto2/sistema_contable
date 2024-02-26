@@ -16,9 +16,10 @@ import utils.constantes.RespuestaGeneral;
  */
 public class ServicioCuenta {
     daoCuenta daoCuenta;
-    Conexion cx = new Conexion();
+    Conexion cx;
 
-    public ServicioCuenta() {
+    public ServicioCuenta(String rutaConexion) {
+        this.cx = new Conexion(rutaConexion);
         this.daoCuenta = new daoCuenta(this.cx);
     }
     

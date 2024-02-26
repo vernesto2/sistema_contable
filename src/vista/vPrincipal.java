@@ -103,7 +103,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnLibroDiario = new RSMaterialComponent.RSButtonShapeIcon();
         btnLibroMayor = new RSMaterialComponent.RSButtonShapeIcon();
         btnConfigUsuario = new RSMaterialComponent.RSButtonShapeIcon();
-        rSButtonShapeIcon1 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnCerrarSesion = new RSMaterialComponent.RSButtonShapeIcon();
         imagenPrincipal = new javax.swing.JLabel();
         txtNombreUsuario = new javax.swing.JLabel();
         btnBalanzaComprobacion = new RSMaterialComponent.RSButtonShapeIcon();
@@ -177,14 +177,14 @@ public class vPrincipal extends javax.swing.JFrame {
             }
         });
 
-        rSButtonShapeIcon1.setBackground(new java.awt.Color(213, 73, 24));
-        rSButtonShapeIcon1.setText("CERRAR SESIÓN");
-        rSButtonShapeIcon1.setBackgroundHover(new java.awt.Color(213, 12, 10));
-        rSButtonShapeIcon1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.EXIT_TO_APP);
-        rSButtonShapeIcon1.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        rSButtonShapeIcon1.addActionListener(new java.awt.event.ActionListener() {
+        btnCerrarSesion.setBackground(new java.awt.Color(213, 73, 24));
+        btnCerrarSesion.setText("CERRAR SESIÓN");
+        btnCerrarSesion.setBackgroundHover(new java.awt.Color(213, 12, 10));
+        btnCerrarSesion.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.EXIT_TO_APP);
+        btnCerrarSesion.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonShapeIcon1ActionPerformed(evt);
+                btnCerrarSesionActionPerformed(evt);
             }
         });
 
@@ -279,7 +279,7 @@ public class vPrincipal extends javax.swing.JFrame {
             .addGroup(sidebarLayout.createSequentialGroup()
                 .addGroup(sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnConfigUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLibroDiario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEstadoResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,7 +320,7 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(btnConfigUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rSButtonShapeIcon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -453,17 +453,20 @@ public class vPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnConfigUsuarioActionPerformed
 
-    private void rSButtonShapeIcon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon1ActionPerformed
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
         int salida = JOptionPane.showConfirmDialog(null, "¿Esta seguro de continuar?", "¡CERRAR SESIÓN!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         //System.out.println(salida);
         if (salida == 0) {
-            vLogin login = new vLogin();
+            
+            vLogin login = new vLogin(
+                    new Sesion(null, null, sesion.rutaConexion)
+            );
             login.setVisible(true);
             this.dispose();
         }
         /**/
-    }//GEN-LAST:event_rSButtonShapeIcon1ActionPerformed
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnBalanzaComprobacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanzaComprobacionActionPerformed
         // TODO add your handling code here:
@@ -537,6 +540,7 @@ public class vPrincipal extends javax.swing.JFrame {
     private RSMaterialComponent.RSButtonShapeIcon btnBalanceGeneral;
     private RSMaterialComponent.RSButtonShapeIcon btnBalanzaComprobacion;
     private RSMaterialComponent.RSButtonShapeIcon btnCambiosPatrimonio;
+    private RSMaterialComponent.RSButtonShapeIcon btnCerrarSesion;
     private RSMaterialComponent.RSButtonShapeIcon btnCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnConfigUsuario;
     private RSMaterialComponent.RSButtonShapeIcon btnEstadoResultado;
@@ -548,7 +552,6 @@ public class vPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnl;
     private javax.swing.JPanel pnlBase;
-    private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon1;
     private rojeru_san.rsdate.RSLabelFecha rSLabelFecha1;
     private rojeru_san.rsdate.RSLabelHora rSLabelHora1;
     private javax.swing.JPanel sidebar;

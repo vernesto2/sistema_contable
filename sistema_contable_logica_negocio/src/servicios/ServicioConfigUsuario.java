@@ -18,9 +18,10 @@ import utils.constantes.RespuestaGeneral;
  */
 public class ServicioConfigUsuario {
     daoConfigUsuario daoConfigUsuario;
-    Conexion cx = new Conexion();
+    Conexion cx;
 
-    public ServicioConfigUsuario() {
+    public ServicioConfigUsuario(String rutaConexion) {
+        this.cx = new Conexion(rutaConexion);
         this.daoConfigUsuario = new daoConfigUsuario(this.cx);
     }
     

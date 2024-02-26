@@ -18,9 +18,10 @@ import utils.constantes.RespuestaGeneral;
 public class ServicioTipoCatalogo {
     daoTipoCatalogo daoTipoCatalogo;
     daoCicloContable daoCicloContable;
-    Conexion cx = new Conexion();
+    Conexion cx;
 
-    public ServicioTipoCatalogo() {
+    public ServicioTipoCatalogo(String rutaConexion) {
+        this.cx = new Conexion(rutaConexion);
         this.daoTipoCatalogo = new daoTipoCatalogo(this.cx);
         this.daoCicloContable = new daoCicloContable(this.cx);
     }

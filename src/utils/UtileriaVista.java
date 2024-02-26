@@ -36,7 +36,7 @@ public class UtileriaVista {
     }
     
     public static void actualizarPerfil(Sesion sesion) {
-        ServicioConfigUsuario _configUsuario = new ServicioConfigUsuario();
+        ServicioConfigUsuario _configUsuario = new ServicioConfigUsuario(sesion.rutaConexion);
         ArrayList<ConfiguracionUsuario> listaConfigUsuario = new ArrayList<>();
         RespuestaGeneral rg = _configUsuario.obtenerPorIdUsuario(sesion.usuario.getId());
         if (rg.esExitosa()) {

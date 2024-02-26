@@ -33,9 +33,10 @@ import utils.constantes.RespuestaGeneral;
 public class ServicioUsuario {
 
     DaoUsuario daoUsuario;
-    Conexion cx = new Conexion();
+    Conexion cx;
 
-    public ServicioUsuario() {
+    public ServicioUsuario(String rutaConexion) {
+        this.cx = new Conexion(rutaConexion);
         this.daoUsuario = new DaoUsuario(this.cx);
     }
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.TipoCatalogo;
 import servicios.ServicioTipoCatalogo;
+import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
@@ -21,7 +22,8 @@ import vista.vConfigContabilidad;
 public class dTipoCatalogo extends javax.swing.JDialog {
 
     TipoCatalogo tipoCatalogoModel = new TipoCatalogo();
-    ServicioTipoCatalogo _tipoCatalogo = new ServicioTipoCatalogo();
+    Sesion sesion;
+    ServicioTipoCatalogo _tipoCatalogo;
     RespuestaGeneral rg = new RespuestaGeneral();
     ArrayList<dtoLista> listaColor = new ArrayList<>();
     
@@ -29,8 +31,10 @@ public class dTipoCatalogo extends javax.swing.JDialog {
     /**
      * Creates new form dTipoCatalogo
      */
-    public dTipoCatalogo(java.awt.Frame parent, boolean modal, TipoCatalogo tipoCatalogo) {
+    public dTipoCatalogo(java.awt.Frame parent, boolean modal, TipoCatalogo tipoCatalogo, Sesion sesion) {
         super(parent, modal);
+        this.sesion = sesion;
+        _tipoCatalogo = new ServicioTipoCatalogo(sesion.rutaConexion);
         initComponents();
         this.obtenerListaCmbColores();
         this.tipoCatalogoModel = (TipoCatalogo)tipoCatalogo;

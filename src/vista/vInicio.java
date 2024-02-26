@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import utils.constantes.CambiaPanel;
 import necesario.RSFileChooser;
+import sesion.Sesion;
 import utils.constantes.Constantes;
 
 /**
@@ -28,11 +29,12 @@ public class vInicio extends javax.swing.JFrame {
      * Creates new form vInicio
      */
     boolean archivoCorrecto = true;
-    
+    Sesion sesion;
     public vInicio() {
         initComponents();
         this.iniciarVista();
-        this.lblRutaGlobal.setText(Constantes.rutaConexion);
+        this.sesion = new Sesion(null, null, Constantes.rutaConexion);
+        this.lblRutaGlobal.setText(sesion.rutaConexion);
     }
     
     public void iniciarVista() {
@@ -250,13 +252,13 @@ public class vInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        vLogin login = new vLogin();
+        vLogin login = new vLogin(this.sesion);
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnCrearConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfigActionPerformed
-        vConfigInicial config = new vConfigInicial();
+        vConfigInicial config = new vConfigInicial(sesion);
         config.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCrearConfigActionPerformed
@@ -284,7 +286,9 @@ public class vInicio extends javax.swing.JFrame {
                 String ruta = archivo.getCanonicalPath();
                 this.lblRutaGlobal.setText(ruta);
                 System.out.println(ruta);
-                Constantes.rutaConexion = ruta;
+                
+                Sesion sesion = new Sesion(null, null, ruta);
+                this.sesion = sesion;
                 if (ruta.contains(".sqlite") || ruta.contains(".db")) {
                     this.archivoCorrecto = true;
                 } else {

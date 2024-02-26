@@ -16,12 +16,15 @@ import utils.constantes.Constantes;
 public class Conexion {
         
     Connection cx = null;
-    
+    String rutaConexion;
+    public Conexion(String rutaConexion) {
+        this.rutaConexion = rutaConexion;
+    }
     public Connection conectar() {
-        return conectar(Constantes.rutaConexion);
+        return conectar(this.rutaConexion);
     }
     
-    public Connection conectar(String fileName) {
+    private Connection conectar(String fileName) {
         try {
             Class.forName("org.sqlite.JDBC");
             String url = "jdbc:sqlite:" + fileName;

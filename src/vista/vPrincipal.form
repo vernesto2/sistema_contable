@@ -110,7 +110,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnConfigUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="rSButtonShapeIcon1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCerrarSesion" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnLibroDiario" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnEstadoResultado" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnLibroMayor" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -154,7 +154,7 @@
                       <EmptySpace pref="15" max="32767" attributes="0"/>
                       <Component id="btnConfigUsuario" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="rSButtonShapeIcon1" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -259,7 +259,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfigUsuarioActionPerformed"/>
               </Events>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="rSButtonShapeIcon1">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnCerrarSesion">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="18" green="49" red="d5" type="rgb"/>
@@ -276,7 +276,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rSButtonShapeIcon1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCerrarSesionActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="imagenPrincipal">

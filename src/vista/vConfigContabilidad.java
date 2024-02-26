@@ -42,18 +42,19 @@ public class vConfigContabilidad extends javax.swing.JPanel {
      * Creates new form vConfigContabilidad
      */
     // VARIABLES DE CICLO CONTABLE
-    ServicioCicloContable _cicloContable = new ServicioCicloContable();
+    ServicioCicloContable _cicloContable;
+    
     ArrayList<dtoCicloContable> listaCiclosContables = new ArrayList<>();
     CicloContable cicloContableModel = new CicloContable();
-    ServicioConfigUsuario _configUsuario = new ServicioConfigUsuario();
+    ServicioConfigUsuario _configUsuario;
     
     // VARIABLES DE TIPO DE CATALOGO
-    ServicioTipoCatalogo _tipoCatalogo = new ServicioTipoCatalogo();
+    ServicioTipoCatalogo _tipoCatalogo;
     ArrayList<TipoCatalogo> listaTiposCatalogos = new ArrayList<>();
     TipoCatalogo tipoCatalogoModel = new TipoCatalogo();
     
     // VARIABLES DE CUENTAS
-    ServicioCuenta _cuenta = new ServicioCuenta();
+    ServicioCuenta _cuenta;
     ArrayList<dtoCuenta> listaCuentas = new ArrayList<>();
     ArrayList<dtoLista> listaCmbTipoSaldo = new ArrayList<>();
     Cuenta cuentaModel = new Cuenta();
@@ -72,6 +73,10 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     
     public vConfigContabilidad(Sesion sesion) {
         this.sesion = sesion;
+        _cicloContable = new ServicioCicloContable(sesion.rutaConexion);
+        _configUsuario = new ServicioConfigUsuario(sesion.rutaConexion);
+        _tipoCatalogo = new ServicioTipoCatalogo(sesion.rutaConexion);
+        _cuenta = new ServicioCuenta(sesion.rutaConexion);
         initComponents();
         this.cargarInfoSegunTab();
     }
@@ -926,7 +931,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     }
     
     public void abrirDialogCicloContable(CicloContable cicloContable) {
-        dCicloContable d = new dCicloContable(null, true, cicloContable);
+        dCicloContable d = new dCicloContable(null, true, cicloContable, sesion);
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.getRealizoAccion()) {
@@ -979,7 +984,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     }
     
     public void abrirDialogTipoCatalogo(TipoCatalogo tipoCatalogo) {
-        dTipoCatalogo d = new dTipoCatalogo(null, true, tipoCatalogo);
+        dTipoCatalogo d = new dTipoCatalogo(null, true, tipoCatalogo, sesion);
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.getRealizoAccion()) {
@@ -1032,7 +1037,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     }
     
     public void abrirDialogCuentas(Cuenta cuenta, String titulo) {
-        dCuentas d = new dCuentas(null, true, cuenta, titulo);
+        dCuentas d = new dCuentas(null, true, cuenta, titulo, sesion);
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.getRealizoAccion()) {

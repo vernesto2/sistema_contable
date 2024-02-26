@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.CicloContable;
 import modelo.dtoCicloContable;
 import servicios.ServicioCicloContable;
+import sesion.Sesion;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -27,7 +28,8 @@ public class vCicloContable extends javax.swing.JPanel {
     /**
      * Creates new form vCicloContable
      */
-    ServicioCicloContable _cicloContable = new ServicioCicloContable();
+    Sesion sesion;
+    ServicioCicloContable _cicloContable;
     ArrayList<dtoCicloContable> listaCiclosContables = new ArrayList<>();
     CicloContable cicloContableModel = new CicloContable();
     
@@ -35,7 +37,9 @@ public class vCicloContable extends javax.swing.JPanel {
     
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     
-    public vCicloContable() {
+    public vCicloContable(Sesion sesion) {
+        this.sesion = sesion;
+        _cicloContable = new ServicioCicloContable(sesion.rutaConexion);
         initComponents();
         this.setModel();
         this.obtenerListadoCiclosContables();

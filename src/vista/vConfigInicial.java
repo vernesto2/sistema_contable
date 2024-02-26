@@ -14,6 +14,7 @@ import modelo.Persona;
 import modelo.Usuario;
 import servicios.ServicioConfiguracion;
 import servicios.ServicioUsuario;
+import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.CharArrayUtils;
 import utils.constantes.Constantes;
@@ -28,10 +29,12 @@ public class vConfigInicial extends javax.swing.JFrame {
     /**
      * Creates new form vConfigInicial
      */
-    ServicioConfiguracion _configuracion = new ServicioConfiguracion();
-
-    public vConfigInicial() {
+    ServicioConfiguracion _configuracion;
+    Sesion sesion;
+    public vConfigInicial(Sesion sesion) {
         initComponents();
+        this.sesion = sesion;
+        this._configuracion = new ServicioConfiguracion(sesion.rutaConexion);
         this.iniciarVista();
     }
 
@@ -392,7 +395,8 @@ public class vConfigInicial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vConfigInicial().setVisible(true);
+                Sesion sesion = new Sesion(null, null, Constantes.rutaConexion);
+                new vConfigInicial(sesion).setVisible(true);
             }
         });
     }

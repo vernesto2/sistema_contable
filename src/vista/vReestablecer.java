@@ -225,7 +225,7 @@ public class vReestablecer extends javax.swing.JFrame {
     }//GEN-LAST:event_rSButtonShapeIcon15ActionPerformed
 
     private void rSButtonShapeIcon10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon10ActionPerformed
-        vLogin login = new vLogin();
+        vLogin login = new vLogin(null);
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_rSButtonShapeIcon10ActionPerformed

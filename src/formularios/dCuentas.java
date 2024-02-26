@@ -14,6 +14,7 @@ import modelo.TipoCatalogo;
 import servicios.ServicioCicloContable;
 import servicios.ServicioCuenta;
 import servicios.ServicioTipoCatalogo;
+import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
@@ -25,20 +26,26 @@ import utils.constantes.RespuestaGeneral;
 public class dCuentas extends javax.swing.JDialog {
     
     RespuestaGeneral rg = new RespuestaGeneral();
-    ServicioCuenta _cuenta = new ServicioCuenta();
-    ServicioTipoCatalogo _tipoCatalogo = new ServicioTipoCatalogo();
+    ServicioCuenta _cuenta;
+    ServicioTipoCatalogo _tipoCatalogo;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     ArrayList<TipoCatalogo> listaCmbTipoCatalogo = new ArrayList<>();
     ArrayList<dtoLista> listaCmbTipoSaldo = new ArrayList<>();
     Cuenta cuentaModel = new Cuenta();
     
+    Sesion sesion;
     boolean realizoAccion = false;
     /**
      * Creates new form dTipoCatalogo
      */
-    public dCuentas(java.awt.Frame parent, boolean modal, Cuenta cuenta, String titulo) {
+    public dCuentas(java.awt.Frame parent, boolean modal, Cuenta cuenta, String titulo, Sesion sesion) {
         super(parent, modal);
+        _cuenta = new ServicioCuenta(sesion.rutaConexion);
+        _tipoCatalogo = new ServicioTipoCatalogo(sesion.rutaConexion);
         initComponents();
+        this.sesion = sesion;
+        
+                
         txtCatalogoSeleccionado.setText(titulo);
         this.cuentaModel = (Cuenta)cuenta;
         this.iniciarVistaDialog();

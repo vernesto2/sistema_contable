@@ -30,11 +30,10 @@ public class vLogin extends javax.swing.JFrame {
     /**
      * Creates new form vLogin
      */
-    private ServicioUsuario _usuario = new ServicioUsuario();
     public char pass;
-    private ServicioConfigUsuario _configUsuario = new ServicioConfigUsuario();
-
-    public vLogin() {
+    Sesion sesion;
+    public vLogin(Sesion sesion) {
+        this.sesion = sesion;
         initComponents();
         this.iniciarVista();
     }
@@ -244,7 +243,7 @@ public class vLogin extends javax.swing.JFrame {
 
         String carnet = txtUsuario.getText();
         char[] clave = txtClave.getPassword();
-
+        ServicioUsuario _usuario = new ServicioUsuario(sesion.rutaConexion);
         RespuestaGeneral rgUsuario = _usuario.obtenerPorCarnet(carnet);
         if (rgUsuario.esFallida()) {
             JOptionPane.showMessageDialog(this, rgUsuario.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(rgUsuario));
@@ -270,7 +269,8 @@ public class vLogin extends javax.swing.JFrame {
         // de lo contrario procederemos a crear una con el usuario logeado
         ConfiguracionUsuario cConfigUsuario = this.setearInfoConfiguracionGeneralUsuario(usuario);
         if(cConfigUsuario != null) {
-            Sesion sesion = new Sesion(usuario, cConfigUsuario);
+            Sesion sesion = new Sesion(usuario, cConfigUsuario, this.sesion.rutaConexion);
+            this.sesion = sesion;
             vPrincipal principal = new vPrincipal(_usuario, sesion);
             principal.setVisible(true);
             this.dispose();
@@ -278,6 +278,9 @@ public class vLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     public ConfiguracionUsuario setearInfoConfiguracionGeneralUsuario(Usuario usuario) {
+        
+        ServicioConfigUsuario _configUsuario = new ServicioConfigUsuario(sesion.rutaConexion);
+        
         ArrayList<ConfiguracionUsuario> listaConfigUsuario = new ArrayList<>();
         RespuestaGeneral rg = _configUsuario.obtenerPorIdUsuario(usuario.getId());
         if (rg.esExitosa()) {
@@ -367,7 +370,8 @@ public class vLogin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new vLogin().setVisible(true);
+                Sesion sesion = new Sesion(null, null, Constantes.rutaConexion);
+                new vLogin(sesion).setVisible(true);
             }
         });
     }

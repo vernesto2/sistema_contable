@@ -32,8 +32,8 @@ public class ServicioConfiguracion {
 
     ServicioUsuario _usuario;
 
-    public ServicioConfiguracion() {
-        _usuario = new ServicioUsuario();
+    public ServicioConfiguracion(String rutaConexion) {
+        _usuario = new ServicioUsuario(rutaConexion);
     }
 
     public ServicioConfiguracion(ServicioUsuario _usuario) {
@@ -49,9 +49,9 @@ public class ServicioConfiguracion {
             //ejecutar el código SQL inicial
             String fileName = crearConfiguracionInicial();
             
-            Conexion conexion = new Conexion();
+            Conexion conexion = new Conexion(fileName);
             //crear el usuario en el nuevo archivo
-            conexion.conectar(fileName);
+            conexion.conectar();
             _usuario.setConexion(conexion);
             //crear el nuevo usuario
             RespuestaGeneral rgUsuario = _usuario.crear(usuario, claveSinCifrar);

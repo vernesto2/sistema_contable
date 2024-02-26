@@ -12,6 +12,7 @@ import modelo.CicloContable;
 import modelo.TipoCatalogo;
 import servicios.ServicioCicloContable;
 import servicios.ServicioTipoCatalogo;
+import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.RespuestaGeneral;
 
@@ -23,17 +24,20 @@ public class dCicloContable extends javax.swing.JDialog {
 
     CicloContable cicloContableModel = new CicloContable();
     RespuestaGeneral rg = new RespuestaGeneral();
-    ServicioCicloContable _cicloContable = new ServicioCicloContable();
-    ServicioTipoCatalogo _tipoCatalogo = new ServicioTipoCatalogo();
+    ServicioCicloContable _cicloContable;
+    ServicioTipoCatalogo _tipoCatalogo;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     ArrayList<TipoCatalogo> listaCmbTipoCatalogo = new ArrayList<>();
-    
+    Sesion sesion;
     boolean realizoAccion = false;
     /**
      * Creates new form dTipoCatalogo
      */
-    public dCicloContable(java.awt.Frame parent, boolean modal, CicloContable cicloContable) {
+    public dCicloContable(java.awt.Frame parent, boolean modal, CicloContable cicloContable, Sesion sesion) {
         super(parent, modal);
+        
+        _cicloContable = new ServicioCicloContable(sesion.rutaConexion);
+        _tipoCatalogo = new ServicioTipoCatalogo(sesion.rutaConexion);
         initComponents();
         this.cicloContableModel = (CicloContable)cicloContable;
         this.iniciarVistaDialog();

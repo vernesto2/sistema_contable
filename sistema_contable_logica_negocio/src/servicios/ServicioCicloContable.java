@@ -17,9 +17,10 @@ import utils.constantes.RespuestaGeneral;
  */
 public class ServicioCicloContable {
     daoCicloContable daoCicloContable;
-    Conexion cx = new Conexion();
-
-    public ServicioCicloContable() {
+    Conexion cx;
+    
+    public ServicioCicloContable(String rutaConexion) {
+        this.cx = new Conexion(rutaConexion);
         this.daoCicloContable = new daoCicloContable(this.cx);
     }
     
