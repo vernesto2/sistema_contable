@@ -265,45 +265,12 @@ public class vLogin extends javax.swing.JFrame {
             return;
         }
         
-        // buscamos si se encuentra creada una configuracion de usuario
-        // de lo contrario procederemos a crear una con el usuario logeado
-        this.setearInfoConfiguracionGeneralUsuario(usuario);
         Constantes.usuario = usuario;
         
         vPrincipal principal = new vPrincipal(usuario, _usuario);
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnIngresarActionPerformed
-
-    public void setearInfoConfiguracionGeneralUsuario(Usuario usuario) {
-        ArrayList<ConfiguracionUsuario> listaConfigUsuario = new ArrayList<>();
-        RespuestaGeneral rg = _configUsuario.obtenerPorIdUsuario(usuario.getId());
-        if (rg.esExitosa()) {
-            listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg.getDatos();
-            ConfiguracionUsuario cUsuario = new ConfiguracionUsuario();
-            cUsuario.setId_usuario(usuario.getId());
-            if (listaConfigUsuario.isEmpty()) {
-                // creamos y guardamos una configuracion
-                RespuestaGeneral rg1 = _configUsuario.insertar(cUsuario);
-                if (rg1.esExitosa()) {
-                    cUsuario.setId(Integer.parseInt(rg1.getDatos().toString()));
-                } else {
-                    String mensaje = !rg1.getMensaje().equals("") ? rg1.getMensaje() : "No se pudo guardar la configuración de usuario";
-                    JOptionPane.showMessageDialog(this, mensaje, "Mensaje", UtileriaVista.devolverCodigoMensaje(rg1));
-                    return;
-                }
-                listaConfigUsuario.add(cUsuario);
-            }
-            cUsuario = listaConfigUsuario.get(0);
-            
-            // seteamos la informacion obtenida a la constante
-            Constantes.configUsuario = cUsuario;
-            
-        } else {
-            JOptionPane.showMessageDialog(this, "No se pudo recuperar la configuración de usuario", "Mensaje", UtileriaVista.devolverCodigoMensaje(rg));
-            return;
-        }
-    }
     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vInicio inicio = new vInicio();

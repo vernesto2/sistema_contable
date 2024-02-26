@@ -5,6 +5,7 @@
 package utils.constantes;
 
 import dto.dtoLista;
+import java.awt.Color;
 import java.util.ArrayList;
 import modelo.ConfiguracionUsuario;
 import modelo.Persona;
@@ -62,4 +63,53 @@ public class Constantes {
         return lista;
     }
     
+    public static ArrayList<dtoLista> listaColores() {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        dtoLista op0 = new dtoLista("0", "NEGRO");
+        dtoLista op1 = new dtoLista("1", "AZUL");
+        dtoLista op2 = new dtoLista("2", "CELESTE");
+        dtoLista op3 = new dtoLista("3", "GRIS OSCURO");
+        dtoLista op4 = new dtoLista("4", "GRIS");
+        dtoLista op5 = new dtoLista("5", "VERDE");
+        dtoLista op6 = new dtoLista("6", "GRIS CLARO");
+        dtoLista op7 = new dtoLista("7", "MORADO");
+        dtoLista op8 = new dtoLista("8", "NARANJA");
+        dtoLista op9 = new dtoLista("9", "ROSADO");
+        dtoLista op10 = new dtoLista("10", "ROJO");
+        dtoLista op11 = new dtoLista("11", "AMARILLO");
+        lista.add(op0);
+        lista.add(op1);
+        lista.add(op2);
+        lista.add(op3);
+        lista.add(op4);
+        lista.add(op5);
+        lista.add(op6);
+        lista.add(op7);
+        lista.add(op8);
+        lista.add(op9);
+        lista.add(op10);
+        lista.add(op11);
+        return lista;
+    }
+    
+    // devuelve un valor de tipo Color
+    public static Color devolverColor(int i) {
+        Color c = Color.BLACK;
+        switch (i) {
+            case 0 -> c = Color.BLACK;
+            case 1 -> c = Color.BLUE;
+            case 2 -> c = Color.CYAN;
+            case 3 -> c = Color.DARK_GRAY;
+            case 4 -> c = Color.GRAY;
+            case 5 -> c = Color.GREEN;
+            case 6 -> c = Color.LIGHT_GRAY;
+            case 7 -> c = Color.MAGENTA;
+            case 8 -> c = Color.ORANGE;
+            case 9 -> c = Color.PINK;
+            case 10 -> c = Color.RED;
+            case 11 -> c = Color.YELLOW;
+            default -> c = Color.BLACK;
+        }
+        return c;
+    }
 }

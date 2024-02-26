@@ -23,9 +23,9 @@ public class ServicioCicloContable {
         this.daoCicloContable = new daoCicloContable(this.cx);
     }
     
-    public RespuestaGeneral obtenerLista() {
+    public RespuestaGeneral obtenerLista(String busqueda) {
         this.cx.conectar();
-        RespuestaGeneral rs = this.daoCicloContable.ListarCiclosContables();
+        RespuestaGeneral rs = this.daoCicloContable.ListarCiclosContables(busqueda);
         this.cx.desconectar();
         return rs;
     }

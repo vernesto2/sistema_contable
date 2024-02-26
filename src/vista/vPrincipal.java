@@ -4,6 +4,7 @@
  */
 package vista;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -12,6 +13,7 @@ import utils.constantes.CambiaPanel;
 
 import rojerusan.RSPanelsSlider;
 import servicios.ServicioUsuario;
+import utils.UtileriaVista;
 
 import utils.constantes.Constantes;
 
@@ -37,14 +39,8 @@ public class vPrincipal extends javax.swing.JFrame {
         this.usuario = usuario;
         initComponents();
         this.iniciarVista();
-        if (Constantes.configUsuario.getId_ciclo_contable() == -1) {
-            this.txtConfigCicloContable.setText("NO SE HA SELECCIONADO NINGUN CICLO CONTABLE");
-        } else {
-            this.txtConfigCicloContable.setText(Constantes.configUsuario.nombreCicloYCatalogo());
-        }
-        this.txtNombreUsuario.setText(Constantes.usuario.getPersona().nombreCompleto());
-        //this.txtNombreUsuario.setText(usuario.getPersona().nombreCompleto());
-        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
+        UtileriaVista.actualizarPerfil(Constantes.usuario);
+        vPrincipal.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
     }
 
     
@@ -327,7 +323,7 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        topbar.setBackground(new java.awt.Color(204, 204, 204));
+        topbar.setBackground(new java.awt.Color(102, 102, 102));
 
         txtConfigCicloContable.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtConfigCicloContable.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -547,7 +543,7 @@ public class vPrincipal extends javax.swing.JFrame {
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable2;
     private RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;
     private RSMaterialComponent.RSButtonShapeIcon btnLibroMayor;
-    private javax.swing.JLabel imagenPrincipal;
+    public static javax.swing.JLabel imagenPrincipal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnl;
     private javax.swing.JPanel pnlBase;
@@ -557,6 +553,6 @@ public class vPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel sidebar;
     private javax.swing.JPanel topbar;
     public static javax.swing.JLabel txtConfigCicloContable;
-    private javax.swing.JLabel txtNombreUsuario;
+    public static javax.swing.JLabel txtNombreUsuario;
     // End of variables declaration//GEN-END:variables
 }

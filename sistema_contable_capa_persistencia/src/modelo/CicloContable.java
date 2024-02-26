@@ -18,14 +18,16 @@ public class CicloContable {
     Date desde;
     Date hasta;
     boolean eliminado;
+    TipoCatalogo tipoCatalogo = new TipoCatalogo();
 
-    public CicloContable(int id, int id_catalogo, String titulo, Date desde, Date hasta, boolean eliminado) {
+    public CicloContable(int id, int id_catalogo, String titulo, Date desde, Date hasta, boolean eliminado, TipoCatalogo tipoCatalogo) {
         this.id = id;
         this.id_catalogo = id_catalogo;
         this.titulo = titulo;
         this.desde = desde;
         this.hasta = hasta;
         this.eliminado = eliminado;
+        this.tipoCatalogo = tipoCatalogo;
     }
     
     public CicloContable() {
@@ -35,6 +37,7 @@ public class CicloContable {
         this.desde = new Date();
         this.hasta = new Date();
         this.eliminado = false;
+        this.tipoCatalogo = new TipoCatalogo();
     }
 
     public int getId() {
@@ -84,7 +87,13 @@ public class CicloContable {
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
     }
-    
-    
+
+    public TipoCatalogo getTipoCatalogo() {
+        return tipoCatalogo;
+    }
+
+    public void setTipoCatalogo(TipoCatalogo tipoCatalogo) {
+        this.tipoCatalogo = tipoCatalogo;
+    }
     
 }

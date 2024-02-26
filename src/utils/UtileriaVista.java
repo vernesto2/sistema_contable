@@ -1,8 +1,14 @@
 package utils;
 
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import modelo.ConfiguracionUsuario;
+import modelo.Usuario;
+import servicios.ServicioConfigUsuario;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
+import vista.vPrincipal;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -27,4 +33,41 @@ public class UtileriaVista {
         }
         return opcion;
     }
+    
+    public static void actualizarPerfil(Usuario usuario) {
+        ServicioConfigUsuario _configUsuario = new ServicioConfigUsuario();
+        ArrayList<ConfiguracionUsuario> listaConfigUsuario = new ArrayList<>();
+        RespuestaGeneral rg = _configUsuario.obtenerPorIdUsuario(usuario.getId());
+        if (rg.esExitosa()) {
+            listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg.getDatos();
+            ConfiguracionUsuario cUsuario = new ConfiguracionUsuario();
+            cUsuario.setId_usuario(usuario.getId());
+            if (listaConfigUsuario.isEmpty()) {
+                // creamos y guardamos una configuracion
+                RespuestaGeneral rg1 = _configUsuario.insertar(cUsuario);
+                if (rg1.esExitosa()) {
+                    cUsuario.setId(Integer.parseInt(rg1.getDatos().toString()));
+                } else {
+                    String mensaje = !rg1.getMensaje().equals("") ? rg1.getMensaje() : "No se pudo guardar la configuración de usuario";
+                    JOptionPane.showMessageDialog(null, mensaje, "Mensaje", UtileriaVista.devolverCodigoMensaje(rg1));
+                    return;
+                }
+                listaConfigUsuario.add(cUsuario);
+            }
+            Constantes.configUsuario = listaConfigUsuario.get(0);
+            if (Constantes.configUsuario.getId_ciclo_contable() == -1) {
+                vPrincipal.txtConfigCicloContable.setText("NO SE HA SELECCIONADO NINGUN CICLO CONTABLE");
+            } else {
+                vPrincipal.txtConfigCicloContable.setText(Constantes.configUsuario.nombreCicloYCatalogo());
+            }
+            int color = Constantes.configUsuario.getCicloContable().getTipoCatalogo().getColor();
+            vPrincipal.txtConfigCicloContable.setForeground(Constantes.devolverColor(color));
+            vPrincipal.txtNombreUsuario.setText(Constantes.usuario.getPersona().nombreCompleto());
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo recuperar la configuración de usuario", "Mensaje", UtileriaVista.devolverCodigoMensaje(rg));
+            return;
+        }
+    }
+    
 }

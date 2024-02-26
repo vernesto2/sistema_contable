@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.CicloContable;
+import modelo.Cuenta;
+import modelo.TipoCatalogo;
 import modelo.dtoCicloContable;
 import utils.constantes.Constantes;
 
@@ -28,21 +30,24 @@ public class daoCicloContable {
     
     SimpleDateFormat sdfString = new SimpleDateFormat("yyyy-MM-dd");
     Conexion cx;
+    daoTipoCatalogo _tipoCatalogo = null;
 
     public daoCicloContable(Conexion cx) {
         this.cx = cx;
+        _tipoCatalogo = new daoTipoCatalogo(this.cx);
     }
     
-    public RespuestaGeneral ListarCiclosContables() {
+    public RespuestaGeneral ListarCiclosContables(String busqueda) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<dtoCicloContable> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
                   select cc.*, tc.tipo as catalogo from ciclo_contable cc
                   left join tipo_catalogo tc on cc.id_catalogo = tc.id
-                  where cc.eliminado = 0 and tc.eliminado = 0
+                  where cc.eliminado = 0 and tc.eliminado = 0 and cc.titulo like '%paramBusqueda%'
                   """;
-        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+        String newSql = sql.replaceAll("paramBusqueda", busqueda);
+        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql)) {
             rs = ps.executeQuery();
             while (rs.next()) {
                 dtoCicloContable cicloContable = new dtoCicloContable();
@@ -101,6 +106,53 @@ public class daoCicloContable {
                 }
                 cicloContable.setDesde(desde);
                 cicloContable.setHasta(hasta);
+                lista.add(cicloContable);
+            }
+            
+            return rg.asOk("", lista);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asServerError(mensaje);
+        }
+    }
+    
+    public RespuestaGeneral ObtenerPorId(int id) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        ArrayList<CicloContable> lista = new ArrayList<>();
+        ResultSet rs = null;
+        var sql = """
+                  select * from ciclo_contable cc where cc.id = ? and cc.eliminado = 0
+                  """;
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CicloContable cicloContable = new CicloContable();
+                cicloContable.setId(rs.getInt("id"));
+                cicloContable.setId_catalogo(rs.getInt("id_catalogo"));
+                cicloContable.setTitulo(rs.getString("titulo"));
+                String sDesde = rs.getString("desde");
+                String sHasta = rs.getString("hasta");
+                Date desde = new Date();
+                Date hasta = new Date();
+                try {
+                    desde = new SimpleDateFormat("yyyy-MM-dd").parse(sDesde);
+                    hasta = new SimpleDateFormat("yyyy-MM-dd").parse(sHasta);
+                } catch (ParseException ex) {
+                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                }
+                cicloContable.setDesde(desde);
+                cicloContable.setHasta(hasta);
+                cicloContable.setTipoCatalogo(new TipoCatalogo());
+                if (cicloContable.getId_catalogo() > 0) {
+                    RespuestaGeneral rg1 = _tipoCatalogo.ObtenerPorId(cicloContable.getId_catalogo());
+                    if (rg1.esExitosa()) {
+                        ArrayList<TipoCatalogo> listaTipoCatalogo = (ArrayList<TipoCatalogo>)rg1.getDatos();
+                        cicloContable.setTipoCatalogo(listaTipoCatalogo.get(0));
+                    }
+                }
                 lista.add(cicloContable);
             }
             
