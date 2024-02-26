@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import modelo.CicloContable;
 import modelo.ConfiguracionUsuario;
 import modelo.TipoCatalogo;
 
@@ -23,9 +24,11 @@ public class daoConfigUsuario {
     
     SimpleDateFormat sdfString = new SimpleDateFormat("yyyy-MM-dd");
     Conexion cx;
+    daoCicloContable _daoCicloContable = null;
 
     public daoConfigUsuario(Conexion cx) {
         this.cx = cx;
+        _daoCicloContable = new daoCicloContable(this.cx);
     }
     
     public RespuestaGeneral ObtenerPorIdUsuario(int id) {
@@ -55,6 +58,15 @@ public class daoConfigUsuario {
                 usuario.setAvatar(rs.getString("avatar"));
                 usuario.setNombre_ciclo_contable(rs.getString("nombre_ciclo_contable"));
                 usuario.setNombre_catalogo(rs.getString("nombre_catalogo"));
+                // obtenemos el cicloContable segun el idCicloContable
+                usuario.setCicloContable(new CicloContable());
+                if (usuario.getId_ciclo_contable() > 0) {
+                    RespuestaGeneral rg1 = _daoCicloContable.ObtenerPorId(usuario.getId_ciclo_contable());
+                    if (rg1.esExitosa()) {
+                        ArrayList<CicloContable> listaCicloContable = (ArrayList<CicloContable>)rg1.getDatos();
+                        usuario.setCicloContable(listaCicloContable.get(0));
+                    }
+                }
                 lista.add(usuario);
             }
             

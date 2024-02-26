@@ -15,14 +15,16 @@ public class ConfiguracionUsuario {
     String avatar;
     String nombre_ciclo_contable;
     String nombre_catalogo;
+    CicloContable cicloContable = new CicloContable();
 
-    public ConfiguracionUsuario(int id, int id_usuario, int id_ciclo_contable, String avatar, String nombre_ciclo_contable, String nombre_catalogo) {
+    public ConfiguracionUsuario(int id, int id_usuario, int id_ciclo_contable, String avatar, String nombre_ciclo_contable, String nombre_catalogo, CicloContable cicloContable) {
         this.id = id;
         this.id_usuario = id_usuario;
         this.id_ciclo_contable = id_ciclo_contable;
         this.avatar = avatar;
         this.nombre_ciclo_contable = nombre_ciclo_contable;
         this.nombre_catalogo = nombre_catalogo;
+        this.cicloContable = cicloContable;
     }
     
     public ConfiguracionUsuario() {
@@ -32,6 +34,7 @@ public class ConfiguracionUsuario {
         this.avatar = "/utils/avatar/avatar2.png";
         this.nombre_ciclo_contable = "";
         this.nombre_catalogo = "";
+        this.cicloContable = new CicloContable();
     }
 
     public int getId() {
@@ -86,4 +89,13 @@ public class ConfiguracionUsuario {
         String titulo = this.nombre_ciclo_contable + " ( " + this.nombre_catalogo + " ) ";
         return titulo;
     }
+
+    public CicloContable getCicloContable() {
+        return cicloContable;
+    }
+
+    public void setCicloContable(CicloContable cicloContable) {
+        this.cicloContable = cicloContable;
+    }
+    
 }

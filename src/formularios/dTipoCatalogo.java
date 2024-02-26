@@ -4,10 +4,13 @@
  */
 package formularios;
 
+import dto.dtoLista;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.TipoCatalogo;
 import servicios.ServicioTipoCatalogo;
 import utils.UtileriaVista;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 import vista.vConfigContabilidad;
 
@@ -20,6 +23,7 @@ public class dTipoCatalogo extends javax.swing.JDialog {
     TipoCatalogo tipoCatalogoModel = new TipoCatalogo();
     ServicioTipoCatalogo _tipoCatalogo = new ServicioTipoCatalogo();
     RespuestaGeneral rg = new RespuestaGeneral();
+    ArrayList<dtoLista> listaColor = new ArrayList<>();
     
     boolean realizoAccion = false;
     /**
@@ -28,6 +32,7 @@ public class dTipoCatalogo extends javax.swing.JDialog {
     public dTipoCatalogo(java.awt.Frame parent, boolean modal, TipoCatalogo tipoCatalogo) {
         super(parent, modal);
         initComponents();
+        this.obtenerListaCmbColores();
         this.tipoCatalogoModel = (TipoCatalogo)tipoCatalogo;
         this.iniciarVistaDialog();
         this.setearData();
@@ -35,6 +40,31 @@ public class dTipoCatalogo extends javax.swing.JDialog {
     
     public void setearData() {
         txtTipoCatalogo.setText(this.tipoCatalogoModel.getTipo());
+        chLibroDiario.setSelected(this.tipoCatalogoModel.getLibro_diario() == 1 ? true : false);
+        chLibroMayor.setSelected(this.tipoCatalogoModel.getLibro_mayor()== 1 ? true : false);
+        chBalanzaComprobacion.setSelected(this.tipoCatalogoModel.getBalanza_comprobacion()== 1 ? true : false);
+        chEstadoResultado.setSelected(this.tipoCatalogoModel.getEstado_resultado()== 1 ? true : false);
+        chBalanceGeneral.setSelected(this.tipoCatalogoModel.getBalance_general()== 1 ? true : false);
+        chFlujoEfectivo.setSelected(this.tipoCatalogoModel.getFlujo_efectivo()== 1 ? true : false);
+        chCambiosPatromonio.setSelected(this.tipoCatalogoModel.getCambios_patrimonio()== 1 ? true : false);
+        
+        int iCmb = 0, i = 0;
+        for (dtoLista item : listaColor) {
+            if (Integer.parseInt(item.getValue()) == this.tipoCatalogoModel.getColor()) {
+                iCmb = i;
+            }
+            i++;
+        }
+        cmbColor.setSelectedIndex(iCmb);
+        
+    }
+    
+    public void obtenerListaCmbColores() {
+        this.listaColor = Constantes.listaColores();
+        cmbColor.removeAllItems();
+        for (dtoLista item : this.listaColor) {
+            cmbColor.addItem(item.getLabel());
+        }
     }
     
     public void iniciarVistaDialog() {
@@ -75,6 +105,17 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         btnGuardarTipoCatalogo = new RSMaterialComponent.RSButtonShapeIcon();
         jLabel5 = new javax.swing.JLabel();
         txtTipoCatalogo = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel6 = new javax.swing.JLabel();
+        cmbColor = new RSMaterialComponent.RSComboBoxMaterial();
+        jPanel3 = new javax.swing.JPanel();
+        chLibroDiario = new rojerusan.RSCheckBox();
+        chLibroMayor = new rojerusan.RSCheckBox();
+        chBalanzaComprobacion = new rojerusan.RSCheckBox();
+        chEstadoResultado = new rojerusan.RSCheckBox();
+        chBalanceGeneral = new rojerusan.RSCheckBox();
+        chFlujoEfectivo = new rojerusan.RSCheckBox();
+        chCambiosPatromonio = new rojerusan.RSCheckBox();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -122,9 +163,9 @@ public class dTipoCatalogo extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnGuardarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancelarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGuardarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -149,6 +190,108 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         txtTipoCatalogo.setPlaceholder("Digite el tipo de catalogo");
         txtTipoCatalogo.setSelectionColor(new java.awt.Color(0, 0, 0));
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Color:");
+        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        cmbColor.setBorder(null);
+        cmbColor.setColorMaterial(new java.awt.Color(102, 102, 102));
+        cmbColor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbColorItemStateChanged(evt);
+            }
+        });
+
+        chLibroDiario.setForeground(new java.awt.Color(0, 0, 0));
+        chLibroDiario.setText("Libro diario");
+        chLibroDiario.setColorCheck(new java.awt.Color(33, 58, 86));
+        chLibroDiario.setColorUnCheck(new java.awt.Color(0, 0, 0));
+        chLibroDiario.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+
+        chLibroMayor.setForeground(new java.awt.Color(0, 0, 0));
+        chLibroMayor.setText("Libro mayor");
+        chLibroMayor.setColorCheck(new java.awt.Color(33, 58, 86));
+        chLibroMayor.setColorUnCheck(new java.awt.Color(0, 0, 0));
+        chLibroMayor.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+
+        chBalanzaComprobacion.setForeground(new java.awt.Color(0, 0, 0));
+        chBalanzaComprobacion.setText("Balanza de comprobación");
+        chBalanzaComprobacion.setColorCheck(new java.awt.Color(33, 58, 86));
+        chBalanzaComprobacion.setColorUnCheck(new java.awt.Color(0, 0, 0));
+        chBalanzaComprobacion.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+
+        chEstadoResultado.setForeground(new java.awt.Color(0, 0, 0));
+        chEstadoResultado.setText("Estado de resultados");
+        chEstadoResultado.setColorCheck(new java.awt.Color(33, 58, 86));
+        chEstadoResultado.setColorUnCheck(new java.awt.Color(0, 0, 0));
+        chEstadoResultado.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+
+        chBalanceGeneral.setForeground(new java.awt.Color(0, 0, 0));
+        chBalanceGeneral.setText("Balance general");
+        chBalanceGeneral.setColorCheck(new java.awt.Color(33, 58, 86));
+        chBalanceGeneral.setColorUnCheck(new java.awt.Color(0, 0, 0));
+        chBalanceGeneral.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+
+        chFlujoEfectivo.setForeground(new java.awt.Color(0, 0, 0));
+        chFlujoEfectivo.setText("Flujo de efectivo");
+        chFlujoEfectivo.setColorCheck(new java.awt.Color(33, 58, 86));
+        chFlujoEfectivo.setColorUnCheck(new java.awt.Color(0, 0, 0));
+        chFlujoEfectivo.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+
+        chCambiosPatromonio.setForeground(new java.awt.Color(0, 0, 0));
+        chCambiosPatromonio.setText("Cambios en el patrimonio");
+        chCambiosPatromonio.setColorCheck(new java.awt.Color(33, 58, 86));
+        chCambiosPatromonio.setColorUnCheck(new java.awt.Color(0, 0, 0));
+        chCambiosPatromonio.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(chLibroDiario, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(chBalanzaComprobacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chEstadoResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chLibroMayor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(chBalanceGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(chFlujoEfectivo, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                    .addComponent(chCambiosPatromonio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chLibroDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chEstadoResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(chBalanceGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chFlujoEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chCambiosPatromonio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Estados financieros:");
+        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,10 +299,16 @@ public class dTipoCatalogo extends javax.swing.JDialog {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtTipoCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(cmbColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTipoCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +317,18 @@ public class dTipoCatalogo extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -194,12 +354,23 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         this.dispose();
     }
     
+    public void setearModelTipoCatalogo() {
+        this.tipoCatalogoModel.setTipo(this.txtTipoCatalogo.getText());
+        this.tipoCatalogoModel.setColor(this.cmbColor.getSelectedIndex());
+        this.tipoCatalogoModel.setLibro_diario(this.chLibroDiario.isSelected() ? 1 : 0);
+        this.tipoCatalogoModel.setLibro_mayor(this.chLibroMayor.isSelected() ? 1 : 0);
+        this.tipoCatalogoModel.setBalanza_comprobacion(this.chBalanzaComprobacion.isSelected() ? 1 : 0);
+        this.tipoCatalogoModel.setEstado_resultado(this.chEstadoResultado.isSelected() ? 1 : 0);
+        this.tipoCatalogoModel.setBalance_general(this.chBalanceGeneral.isSelected() ? 1 : 0);
+        this.tipoCatalogoModel.setFlujo_efectivo(this.chFlujoEfectivo.isSelected() ? 1 : 0);
+        this.tipoCatalogoModel.setCambios_patrimonio(this.chCambiosPatromonio.isSelected() ? 1 : 0);
+    }
+    
     private void btnGuardarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogoActionPerformed
         // setear info al modelo
-        this.tipoCatalogoModel.setTipo(this.txtTipoCatalogo.getText());
+        this.setearModelTipoCatalogo();
         // guardamos la info
         // verificamos si es NUEVO
-        btnGuardarTipoCatalogo.setEnabled(false);
         if (this.tipoCatalogoModel.getId() < 0) {
             this.rg = _tipoCatalogo.insertar(this.tipoCatalogoModel);
             if (rg.esExitosa()) {
@@ -222,6 +393,10 @@ public class dTipoCatalogo extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnGuardarTipoCatalogoActionPerformed
+
+    private void cmbColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbColorItemStateChanged
+        //this.seleccionarOpcionCmbTipoCatalogo();
+    }//GEN-LAST:event_cmbColorItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -268,9 +443,20 @@ public class dTipoCatalogo extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo;
+    private rojerusan.RSCheckBox chBalanceGeneral;
+    private rojerusan.RSCheckBox chBalanzaComprobacion;
+    private rojerusan.RSCheckBox chCambiosPatromonio;
+    private rojerusan.RSCheckBox chEstadoResultado;
+    private rojerusan.RSCheckBox chFlujoEfectivo;
+    private rojerusan.RSCheckBox chLibroDiario;
+    private rojerusan.RSCheckBox chLibroMayor;
+    private RSMaterialComponent.RSComboBoxMaterial cmbColor;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private RSMaterialComponent.RSTextFieldMaterial txtTipoCatalogo;
     // End of variables declaration//GEN-END:variables
 }

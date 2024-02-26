@@ -63,7 +63,7 @@ public class vCicloContable extends javax.swing.JPanel {
         this.listaCiclosContables = new ArrayList<>();
         tblCicloContable.clearSelection();
         this.limiparTabla();
-        RespuestaGeneral rs = _cicloContable.obtenerLista();
+        RespuestaGeneral rs = _cicloContable.obtenerLista("");
         if (rs.esExitosa()) {
             this.listaCiclosContables = (ArrayList<dtoCicloContable>)rs.getDatos();
         } else {

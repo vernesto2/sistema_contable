@@ -41,6 +41,15 @@ public class daoTipoCatalogo {
                 TipoCatalogo tcatalogo = new TipoCatalogo();
                 tcatalogo.setId(rs.getInt("id"));
                 tcatalogo.setTipo(rs.getString("tipo"));
+                tcatalogo.setRef(rs.getString("ref"));
+                tcatalogo.setColor(rs.getInt("color"));
+                tcatalogo.setLibro_diario(rs.getInt("libro_diario"));
+                tcatalogo.setLibro_mayor(rs.getInt("libro_mayor"));
+                tcatalogo.setBalanza_comprobacion(rs.getInt("balanza_comprobacion"));
+                tcatalogo.setEstado_resultado(rs.getInt("estado_resultado"));
+                tcatalogo.setBalance_general(rs.getInt("balance_general"));
+                tcatalogo.setFlujo_efectivo(rs.getInt("flujo_efectivo"));
+                tcatalogo.setCambios_patrimonio(rs.getInt("cambios_patrimonio"));
                 lista.add(tcatalogo);
             }
             
@@ -67,6 +76,15 @@ public class daoTipoCatalogo {
                 TipoCatalogo tcatalogo = new TipoCatalogo();
                 tcatalogo.setId(rs.getInt("id"));
                 tcatalogo.setTipo(rs.getString("tipo"));
+                tcatalogo.setRef(rs.getString("ref"));
+                tcatalogo.setColor(rs.getInt("color"));
+                tcatalogo.setLibro_diario(rs.getInt("libro_diario"));
+                tcatalogo.setLibro_mayor(rs.getInt("libro_mayor"));
+                tcatalogo.setBalanza_comprobacion(rs.getInt("balanza_comprobacion"));
+                tcatalogo.setEstado_resultado(rs.getInt("estado_resultado"));
+                tcatalogo.setBalance_general(rs.getInt("balance_general"));
+                tcatalogo.setFlujo_efectivo(rs.getInt("flujo_efectivo"));
+                tcatalogo.setCambios_patrimonio(rs.getInt("cambios_patrimonio"));
                 lista.add(tcatalogo);
             }
             
@@ -83,12 +101,20 @@ public class daoTipoCatalogo {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
                   INSERT INTO tipo_catalogo     
-                  VALUES(null, ?, ?, ?)
+                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setString(1, tcatalogo.getTipo());
             ps.setString(2, tcatalogo.getRef());
-            ps.setInt(3, 0);
+            ps.setInt(3, tcatalogo.getColor());
+            ps.setInt(4, tcatalogo.getLibro_diario());
+            ps.setInt(5, tcatalogo.getLibro_mayor());
+            ps.setInt(6, tcatalogo.getBalanza_comprobacion());
+            ps.setInt(7, tcatalogo.getEstado_resultado());
+            ps.setInt(8, tcatalogo.getBalance_general());
+            ps.setInt(9, tcatalogo.getFlujo_efectivo());
+            ps.setInt(10, tcatalogo.getCambios_patrimonio());
+            ps.setInt(11, 0);
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -110,13 +136,31 @@ public class daoTipoCatalogo {
         RespuestaGeneral rg = new RespuestaGeneral();
         ResultSet rs = null;
         var sql = """
-                    UPDATE tipo_catalogo SET tipo=?,ref=?,eliminado=? WHERE id=?
+                    UPDATE tipo_catalogo SET 
+                        tipo=?
+                        ,ref=?
+                        ,color=?
+                        ,libro_diario=?
+                        ,libro_mayor=?
+                        ,balanza_comprobacion=?
+                        ,estado_resultado=?
+                        ,balance_general=?
+                        ,flujo_efectivo=?
+                        ,cambios_patrimonio=?
+                    WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setString(1, tcatalogo.getTipo());
             ps.setString(2, tcatalogo.getRef());
-            ps.setInt(3, tcatalogo.isEliminado() ? 1 : 0);
-            ps.setInt(4, tcatalogo.getId());
+            ps.setInt(3, tcatalogo.getColor());
+            ps.setInt(4, tcatalogo.getLibro_diario());
+            ps.setInt(5, tcatalogo.getLibro_mayor());
+            ps.setInt(6, tcatalogo.getBalanza_comprobacion());
+            ps.setInt(7, tcatalogo.getEstado_resultado());
+            ps.setInt(8, tcatalogo.getBalance_general());
+            ps.setInt(9, tcatalogo.getFlujo_efectivo());
+            ps.setInt(10, tcatalogo.getCambios_patrimonio());
+            ps.setInt(11, tcatalogo.getId());
             ps.executeUpdate();
             
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, tcatalogo.getId());
