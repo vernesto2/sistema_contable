@@ -26,11 +26,6 @@ public class Constantes {
     public static int RESETEAR_CLAVE = 1;
     public static int NO_RESETEAR_CLAVE = 0;
     
-    // modelos a usar en el proyecto general
-    public static Persona persona = new Persona();
-    public static Usuario usuario = new Usuario();
-    public static ConfiguracionUsuario configUsuario = new ConfiguracionUsuario();
-    
     public static final String [] PREGUNTAS_SEGURIDAD = new String[] { 
         "Seleccione ...",
         "¿Cuál es el nombre de tu primera mascota?", 

@@ -16,6 +16,7 @@ import modelo.ConfiguracionUsuario;
 import modelo.Usuario;
 import servicios.ServicioConfigUsuario;
 import servicios.ServicioUsuario;
+import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
@@ -267,15 +268,16 @@ public class vLogin extends javax.swing.JFrame {
         
         // buscamos si se encuentra creada una configuracion de usuario
         // de lo contrario procederemos a crear una con el usuario logeado
-        this.setearInfoConfiguracionGeneralUsuario(usuario);
-        Constantes.usuario = usuario;
-        
-        vPrincipal principal = new vPrincipal(usuario, _usuario);
-        principal.setVisible(true);
-        this.dispose();
+        ConfiguracionUsuario cConfigUsuario = this.setearInfoConfiguracionGeneralUsuario(usuario);
+        if(cConfigUsuario != null) {
+            Sesion sesion = new Sesion(usuario, cConfigUsuario);
+            vPrincipal principal = new vPrincipal(_usuario, sesion);
+            principal.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
-    public void setearInfoConfiguracionGeneralUsuario(Usuario usuario) {
+    public ConfiguracionUsuario setearInfoConfiguracionGeneralUsuario(Usuario usuario) {
         ArrayList<ConfiguracionUsuario> listaConfigUsuario = new ArrayList<>();
         RespuestaGeneral rg = _configUsuario.obtenerPorIdUsuario(usuario.getId());
         if (rg.esExitosa()) {
@@ -290,18 +292,17 @@ public class vLogin extends javax.swing.JFrame {
                 } else {
                     String mensaje = !rg1.getMensaje().equals("") ? rg1.getMensaje() : "No se pudo guardar la configuración de usuario";
                     JOptionPane.showMessageDialog(this, mensaje, "Mensaje", UtileriaVista.devolverCodigoMensaje(rg1));
-                    return;
+                    return null;
                 }
                 listaConfigUsuario.add(cUsuario);
             }
             cUsuario = listaConfigUsuario.get(0);
             
             // seteamos la informacion obtenida a la constante
-            Constantes.configUsuario = cUsuario;
-            
+            return cUsuario;
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo recuperar la configuración de usuario", "Mensaje", UtileriaVista.devolverCodigoMensaje(rg));
-            return;
+            return null;
         }
     }
     

@@ -17,12 +17,14 @@ import modelo.CicloContable;
 import modelo.ConfiguracionUsuario;
 import modelo.Cuenta;
 import modelo.TipoCatalogo;
+import modelo.Usuario;
 import modelo.dtoCicloContable;
 import rojeru_san.efectos.ValoresEnum;
 import servicios.ServicioCicloContable;
 import servicios.ServicioConfigUsuario;
 import servicios.ServicioCuenta;
 import servicios.ServicioTipoCatalogo;
+import sesion.Sesion;
 import utils.Render;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
@@ -54,6 +56,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     ArrayList<dtoLista> listaCmbTipoSaldo = new ArrayList<>();
     Cuenta cuentaModel = new Cuenta();
     
+    Sesion sesion;
     // VARIABLES EN COMUN
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override 
@@ -65,7 +68,8 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     ArrayList<TipoCatalogo> listaCmbTipoCatalogo = new ArrayList<>();
     
-    public vConfigContabilidad() {
+    public vConfigContabilidad(Sesion sesion) {
+        this.sesion = sesion;
         initComponents();
         this.cargarInfoSegunTab();
     }
@@ -1154,19 +1158,19 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     }//GEN-LAST:event_btnGuardarCicloContableActionPerformed
 
     private void btnEstablecerCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstablecerCicloContableActionPerformed
-        Constantes.configUsuario.setId_ciclo_contable(this.cicloContableModel.getId());
+        sesion.configUsuario.setId_ciclo_contable(this.cicloContableModel.getId());
         ArrayList<ConfiguracionUsuario> listaConfigUsuario = new ArrayList<>();
-        RespuestaGeneral rg = _configUsuario.editar(Constantes.configUsuario);
+        RespuestaGeneral rg = _configUsuario.editar(sesion.configUsuario);
         if (rg.esExitosa()) {
-            RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(Constantes.usuario.getId());
+            RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(sesion.usuario.getId());
             if (rg1.esExitosa()) {
                 listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg1.getDatos();
-                Constantes.configUsuario = listaConfigUsuario.get(0);
+                sesion.configUsuario = listaConfigUsuario.get(0);
                 btnEstablecerCicloContable.setEnabled(false);
                 tblCicloContable.clearSelection();
                 this.limpiarFormCicloContable();
                 JOptionPane.showMessageDialog(this, "Se establecio el ciclo contable por defecto", "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
-                vPrincipal.txtConfigCicloContable.setText(Constantes.configUsuario.nombreCicloYCatalogo());
+                vPrincipal.txtConfigCicloContable.setText(sesion.configUsuario.nombreCicloYCatalogo());
             } else {
                 JOptionPane.showMessageDialog(this, rg1.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg1));
             }

@@ -7,11 +7,13 @@ package vista;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.ConfiguracionUsuario;
 import modelo.Usuario;
 import utils.constantes.CambiaPanel;
 
 import rojerusan.RSPanelsSlider;
 import servicios.ServicioUsuario;
+import sesion.Sesion;
 
 import utils.constantes.Constantes;
 
@@ -25,26 +27,25 @@ public class vPrincipal extends javax.swing.JFrame {
      * Creates new form vPrincipal
      */
 
-    private Usuario usuario;
     private ServicioUsuario _usuario;
-    
-    public vPrincipal(Usuario usuario, ServicioUsuario _usuario) {
+    private Sesion sesion;
+    public vPrincipal(ServicioUsuario _usuario, Sesion sesion) {
         this._usuario = _usuario;
-        if(usuario == null) {
+        if(sesion.usuario == null) {
             this.dispose();
             throw new IllegalAccessError("No puede iniciar sin usuario");
         }
-        this.usuario = usuario;
+        this.sesion = sesion;
         initComponents();
         this.iniciarVista();
-        if (Constantes.configUsuario.getId_ciclo_contable() == -1) {
+        if (sesion.configUsuario.getId_ciclo_contable() == -1) {
             this.txtConfigCicloContable.setText("NO SE HA SELECCIONADO NINGUN CICLO CONTABLE");
         } else {
-            this.txtConfigCicloContable.setText(Constantes.configUsuario.nombreCicloYCatalogo());
+            this.txtConfigCicloContable.setText(sesion.configUsuario.nombreCicloYCatalogo());
         }
-        this.txtNombreUsuario.setText(Constantes.usuario.getPersona().nombreCompleto());
+        this.txtNombreUsuario.setText(sesion.usuario.getPersona().nombreCompleto());
         //this.txtNombreUsuario.setText(usuario.getPersona().nombreCompleto());
-        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
+        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(sesion.configUsuario.getAvatar())));
     }
 
     
@@ -68,13 +69,13 @@ public class vPrincipal extends javax.swing.JFrame {
     public vPrincipal() {
         initComponents();
         this.iniciarVista();
-        if (Constantes.configUsuario.getId_ciclo_contable() == -1) {
+        if (sesion.configUsuario.getId_ciclo_contable() == -1) {
             this.txtConfigCicloContable.setText("NO SE HA SELECCIONADO NINGUN CICLO CONTABLE");
         } else {
-            this.txtConfigCicloContable.setText(Constantes.configUsuario.nombreCicloYCatalogo());
+            this.txtConfigCicloContable.setText(sesion.configUsuario.nombreCicloYCatalogo());
         }
-        this.txtNombreUsuario.setText(Constantes.usuario.getPersona().nombreCompleto());
-        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
+        this.txtNombreUsuario.setText(sesion.usuario.getPersona().nombreCompleto());
+        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(sesion.configUsuario.getAvatar())));
     }
     
     public void iniciarVista() {
@@ -452,7 +453,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnConfigUsuario.isSelected()) {
             this.btnConfigUsuario.setSelected(true);
-            new CambiaPanel(pnl, new vConfiguracion(usuario, _usuario));
+            new CambiaPanel(pnl, new vConfiguracion(sesion.usuario, _usuario));
         }
     }//GEN-LAST:event_btnConfigUsuarioActionPerformed
 
@@ -488,7 +489,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnCicloContable.isSelected()) {
             this.btnCicloContable.setSelected(true);
-            new CambiaPanel(pnl, new vConfigContabilidad());
+            new CambiaPanel(pnl, new vConfigContabilidad(sesion));
         }
     }//GEN-LAST:event_btnCicloContableActionPerformed
 
