@@ -455,12 +455,12 @@ public class vPrincipal extends javax.swing.JFrame {
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
-        int salida = JOptionPane.showConfirmDialog(null, "¿Esta seguro de continuar?", "¡CERRAR SESIÓN!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+        int salida = JOptionPane.showConfirmDialog(this, "¿Esta seguro de continuar?", "¡CERRAR SESIÓN!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         //System.out.println(salida);
         if (salida == 0) {
             
             vLogin login = new vLogin(
-                    new Sesion(null, null, sesion.rutaConexion)
+                    new Sesion(null, null, sesion. rutaConexion)
             );
             login.setVisible(true);
             this.dispose();

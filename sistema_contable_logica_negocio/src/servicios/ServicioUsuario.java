@@ -73,7 +73,7 @@ public class ServicioUsuario {
         return RespuestaGeneral.asOk(null, null);
     }
 
-    public RespuestaGeneral crear(Usuario usuario, char[] claveSinCifrar) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public RespuestaGeneral crearDocente(Usuario usuario, char[] claveSinCifrar) throws NoSuchAlgorithmException, InvalidKeySpecException {
         RespuestaGeneral respValidar = validarUsuario(usuario, claveSinCifrar);
         try {
             if (respValidar.esFallida()) {
@@ -82,6 +82,7 @@ public class ServicioUsuario {
             usuario.setNombre(
                     usuario.getNombre().trim().toLowerCase()
             );
+            usuario.getPersona().setTipo(Constantes.TIPO_DOCENTE);
             Map<String, String> obj = cifrarClave(claveSinCifrar);
             usuario.setClave(obj.get("clave"));
             usuario.setSalt(obj.get("salt"));
@@ -93,7 +94,42 @@ public class ServicioUsuario {
         }
     }
     
+    public RespuestaGeneral sePuedeCrearAlumno() {
+        int contarAlumnos = daoUsuario.contarAlumnos();
+        if(contarAlumnos != 0) {
+            return RespuestaGeneral.asBadRequest("Esta base de datos no soporta más alumnos");
+        }
+        return RespuestaGeneral.asOk("Esta base de datos si soporta 1 alumno", null);
+    }
     
+    public RespuestaGeneral crearAlumno(Usuario usuario, char[] claveSinCifrar) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        RespuestaGeneral respValidar = validarUsuario(usuario, claveSinCifrar);
+        try {
+            if (respValidar.esFallida()) {
+                return respValidar;
+            }
+            //sanear 
+            usuario.setNombre(
+                    usuario.getNombre().trim().toLowerCase()
+            );
+            
+            usuario.getPersona().setTipo(Constantes.TIPO_ALUMNO);
+            RespuestaGeneral respAlumno = sePuedeCrearAlumno();
+            if(respAlumno.esFallida()) {
+                return respAlumno;
+            }
+            
+            Map<String, String> obj = cifrarClave(claveSinCifrar);
+            usuario.setClave(obj.get("clave"));
+            usuario.setSalt(obj.get("salt"));
+            usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+            
+            daoUsuario.insertar(usuario);
+            return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
+        } catch (Exception e) {
+            return RespuestaGeneral.asBadRequest(e.getMessage());
+        }
+    }
     
     public RespuestaGeneral actualizar(Usuario usuario, int id) {
         try {

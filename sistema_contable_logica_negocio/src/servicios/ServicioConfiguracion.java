@@ -54,7 +54,7 @@ public class ServicioConfiguracion {
             conexion.conectar();
             _usuario.setConexion(conexion);
             //crear el nuevo usuario
-            RespuestaGeneral rgUsuario = _usuario.crear(usuario, claveSinCifrar);
+            RespuestaGeneral rgUsuario = _usuario.crearDocente(usuario, claveSinCifrar);
             _usuario.cerrarConexion();
             return rgUsuario;
         } catch (NoSuchAlgorithmException ex) {
@@ -118,7 +118,7 @@ public class ServicioConfiguracion {
 
     private String leerConfiguracionInicial() throws FileNotFoundException, IOException {
         // File path is passed as parameter
-        File file = new File("database/config_inicial.sql");
+        File file = new File(Constantes.RUTA_ARCHIVO_SQL_INICIAL);
         try (
                 // Note:  Double backquote is to avoid compiler
                 // jecu words

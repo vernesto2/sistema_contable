@@ -58,7 +58,7 @@ public class vInicio extends javax.swing.JFrame {
         btnSeleccionarArchivo = new RSMaterialComponent.RSButtonShapeIcon();
         lblRutaGlobal = new javax.swing.JLabel();
         btnIniciarSesion = new RSMaterialComponent.RSButtonShapeIcon();
-        btnCrearConfig = new RSMaterialComponent.RSButtonShapeIcon();
+        btnRestaurar = new RSMaterialComponent.RSButtonShapeIcon();
         rSButtonShapeIcon9 = new RSMaterialComponent.RSButtonShapeIcon();
         rSPanelGradiente1 = new rspanelgradiente.RSPanelGradiente();
         jLabel1 = new javax.swing.JLabel();
@@ -120,21 +120,21 @@ public class vInicio extends javax.swing.JFrame {
             }
         });
 
-        btnCrearConfig.setBackground(new java.awt.Color(251, 205, 6));
-        btnCrearConfig.setText("CREAR CONFIGURACIÓN");
-        btnCrearConfig.setToolTipText("");
-        btnCrearConfig.setBackgroundHover(new java.awt.Color(251, 174, 6));
-        btnCrearConfig.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnCrearConfig.setForegroundHover(new java.awt.Color(0, 0, 0));
-        btnCrearConfig.setForegroundIcon(new java.awt.Color(0, 0, 0));
-        btnCrearConfig.setForegroundIconHover(new java.awt.Color(0, 0, 0));
-        btnCrearConfig.setForegroundText(new java.awt.Color(0, 0, 0));
-        btnCrearConfig.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnCrearConfig.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.NEW_RELEASES);
-        btnCrearConfig.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        btnCrearConfig.addActionListener(new java.awt.event.ActionListener() {
+        btnRestaurar.setBackground(new java.awt.Color(251, 205, 6));
+        btnRestaurar.setText("Restaurar a versión inicial");
+        btnRestaurar.setToolTipText("");
+        btnRestaurar.setBackgroundHover(new java.awt.Color(251, 174, 6));
+        btnRestaurar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnRestaurar.setForegroundHover(new java.awt.Color(0, 0, 0));
+        btnRestaurar.setForegroundIcon(new java.awt.Color(0, 0, 0));
+        btnRestaurar.setForegroundIconHover(new java.awt.Color(0, 0, 0));
+        btnRestaurar.setForegroundText(new java.awt.Color(0, 0, 0));
+        btnRestaurar.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnRestaurar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.NEW_RELEASES);
+        btnRestaurar.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearConfigActionPerformed(evt);
+                btnRestaurarActionPerformed(evt);
             }
         });
 
@@ -209,7 +209,7 @@ public class vInicio extends javax.swing.JFrame {
                             .addComponent(rSButtonShapeIcon9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnCrearConfig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnRestaurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(lblRutaGlobal, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -232,7 +232,7 @@ public class vInicio extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCrearConfig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(rSPanelGradiente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -257,11 +257,11 @@ public class vInicio extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
-    private void btnCrearConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfigActionPerformed
-        vConfigInicial config = new vConfigInicial(sesion);
+    private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
+        vRestaurarConfiguracion config = new vRestaurarConfiguracion(sesion);
         config.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnCrearConfigActionPerformed
+    }//GEN-LAST:event_btnRestaurarActionPerformed
 
     private void rSButtonShapeIcon9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon9ActionPerformed
         // TODO add your handling code here:
@@ -356,8 +356,8 @@ public class vInicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RSMaterialComponent.RSButtonShapeIcon btnCrearConfig;
     private RSMaterialComponent.RSButtonShapeIcon btnIniciarSesion;
+    private RSMaterialComponent.RSButtonShapeIcon btnRestaurar;
     private RSMaterialComponent.RSButtonShapeIcon btnSeleccionarArchivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

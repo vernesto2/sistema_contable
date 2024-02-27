@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import modelo.Persona;
 import modelo.Usuario;
 import modelo.dtoCicloContable;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -157,6 +158,34 @@ select count(id) as encontrados from usuario where usuario.nombre = ?
             e.printStackTrace();
             String mensaje = e.getMessage();
             return null;
+        }
+    }
+    
+    public int contarAlumnos() {
+        var sqlUsuario = """
+            select 
+            count(usuario.id) as contar_alumnos
+            --count(usuario.id) as contar_estudiantes
+            from usuario inner join persona 
+            on usuario.id_persona = persona.id
+            where persona.tipo = ? /*tipo = 1 es docente, tipo = 2 es estudiante*/
+        """;
+        //este try es para que se cierre el PreparedStatement
+        try (
+                PreparedStatement psUsuario = cx.getCx().prepareStatement(sqlUsuario);) {
+
+            psUsuario.setInt(1, Constantes.TIPO_ALUMNO);
+            //este try aniddado es para que se cierre el ResultSet
+            try (ResultSet rs = psUsuario.executeQuery();) {
+                if (rs.getFetchSize() > 1) {
+                    throw new IllegalStateException("Error: se esperaba un resultado pero se obtuvieron más");
+                }
+                int contarAlumnos = rs.getInt("contar_alumnos");
+                return contarAlumnos;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new IllegalStateException(e.getMessage());
         }
     }
     

@@ -6,6 +6,7 @@ package sesion;
 
 import modelo.ConfiguracionUsuario;
 import modelo.Usuario;
+import utils.constantes.Constantes;
 
 /**
  *
@@ -19,5 +20,17 @@ public class Sesion {
         this.usuario = usuario;
         this.configUsuario = configUsuario;
         this.rutaConexion = rutaConexion;
+    }
+    
+    public boolean esAlumno() {
+        return usuario.getPersona().getTipo() == Constantes.TIPO_ALUMNO;
+    }
+    
+    public boolean esDocente() {
+        return usuario.getPersona().getTipo() == Constantes.TIPO_DOCENTE;
+    }
+    
+    public int tipoUsuario() {
+        return usuario.getPersona().getTipo();
     }
 }

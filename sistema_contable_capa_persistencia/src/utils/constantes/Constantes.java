@@ -17,8 +17,9 @@ import modelo.Usuario;
  */
 public class Constantes {
     // ruta de configuracion de archivo de DB
-    public static String rutaConexion = "database/db.sqlite";
-    
+    //final es para que no se pueda modificar ( variable = valor)
+    public static final String rutaConexion = "database/db.sqlite";
+    public static final String RUTA_ARCHIVO_SQL_INICIAL = "database/config_inicial.sql";
     // constantes para manejar el tipo de PERSONA
     public static int TIPO_DOCENTE = 1;
     public static int TIPO_ALUMNO = 2;

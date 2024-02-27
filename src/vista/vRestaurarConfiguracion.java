@@ -24,14 +24,14 @@ import utils.constantes.RespuestaGeneral;
  *
  * @author vacev
  */
-public class vConfigInicial extends javax.swing.JFrame {
+public class vRestaurarConfiguracion extends javax.swing.JFrame {
 
     /**
      * Creates new form vConfigInicial
      */
     ServicioConfiguracion _configuracion;
     Sesion sesion;
-    public vConfigInicial(Sesion sesion) {
+    public vRestaurarConfiguracion(Sesion sesion) {
         initComponents();
         this.sesion = sesion;
         this._configuracion = new ServicioConfiguracion(sesion.rutaConexion);
@@ -126,7 +126,6 @@ public class vConfigInicial extends javax.swing.JFrame {
         txtRespuesta1.setPlaceholder("Digite la respuesta..");
         txtRespuesta1.setSelectionColor(new java.awt.Color(0, 0, 0));
 
-        comboPreguntaRecuperacion2.setBorder(null);
         comboPreguntaRecuperacion2.setColorMaterial(new java.awt.Color(102, 102, 102));
 
         txtRespuesta2.setForeground(new java.awt.Color(0, 0, 0));
@@ -305,6 +304,14 @@ public class vConfigInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCrearConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfiguracionActionPerformed
+        //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
+        int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo archivo basado en la versión inicial del sistema. \nEl nuevo archivo no contendrá ningun dato que usted haya ingresado incluyendo catálogos, partidas, etc.\nEstará con el catálogo inicial, sin ninguna partida \n¿Esta seguro de continuar?", 
+                "¡Restaurar a versión inicial!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        //System.out.println(salida);
+        if (salida != 0) {
+            return;
+        }
+        
         char[] claveSinCifrar = txtClave.getPassword();
         char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
 
@@ -382,21 +389,22 @@ public class vConfigInicial extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vConfigInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vRestaurarConfiguracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vConfigInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vRestaurarConfiguracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vConfigInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vRestaurarConfiguracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(vConfigInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vRestaurarConfiguracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Sesion sesion = new Sesion(null, null, Constantes.rutaConexion);
-                new vConfigInicial(sesion).setVisible(true);
+                new vRestaurarConfiguracion(sesion).setVisible(true);
             }
         });
     }
