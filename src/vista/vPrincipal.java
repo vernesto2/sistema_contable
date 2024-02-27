@@ -4,20 +4,14 @@
  */
 package vista;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import modelo.ConfiguracionUsuario;
-import modelo.Usuario;
 import utils.constantes.CambiaPanel;
 
-import rojerusan.RSPanelsSlider;
 import servicios.ServicioUsuario;
 import sesion.Sesion;
 import utils.UtileriaVista;
-
-import utils.constantes.Constantes;
 
 /**
  *
@@ -77,12 +71,12 @@ public class vPrincipal extends javax.swing.JFrame {
     public void iniciarVista() {
         this.setLocationRelativeTo(null);
         //this.setResizable(false);
+        this.setTitle("SISTEMA CONTABLE");
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/utils/icon/user.png")));
         
-        this.btnLibroDiario.setSelected(true);
-        new CambiaPanel(pnl, new vLibroDiario());
+        new CambiaPanel(pnl, new vDashboard());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,6 +108,7 @@ public class vPrincipal extends javax.swing.JFrame {
         topbar = new javax.swing.JPanel();
         txtConfigCicloContable = new javax.swing.JLabel();
         btnGuardarCicloContable2 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnGuardarCicloContable3 = new RSMaterialComponent.RSButtonShapeIcon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -134,7 +129,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnEstadoResultado.setBackground(new java.awt.Color(73, 120, 248));
         btnEstadoResultado.setText("Estado de resultados");
         btnEstadoResultado.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        btnEstadoResultado.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        btnEstadoResultado.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.MONETIZATION_ON);
         btnEstadoResultado.setSizeIcon(25.0F);
         btnEstadoResultado.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         btnEstadoResultado.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +141,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnLibroDiario.setBackground(new java.awt.Color(73, 120, 248));
         btnLibroDiario.setText("Libro diario");
         btnLibroDiario.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnLibroDiario.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.LIST);
         btnLibroDiario.setSizeIcon(25.0F);
         btnLibroDiario.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         btnLibroDiario.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +153,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnLibroMayor.setBackground(new java.awt.Color(73, 120, 248));
         btnLibroMayor.setText("Libro mayor");
         btnLibroMayor.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnLibroMayor.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ACCOUNT_BALANCE);
         btnLibroMayor.setSizeIcon(25.0F);
         btnLibroMayor.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         btnLibroMayor.addActionListener(new java.awt.event.ActionListener() {
@@ -190,9 +187,15 @@ public class vPrincipal extends javax.swing.JFrame {
 
         imagenPrincipal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/avatar/avatar1.png"))); // NOI18N
-        imagenPrincipal.setToolTipText("");
+        imagenPrincipal.setToolTipText("Ver Dashboard");
+        imagenPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         imagenPrincipal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         imagenPrincipal.setIconTextGap(1);
+        imagenPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imagenPrincipalMouseClicked(evt);
+            }
+        });
 
         txtNombreUsuario.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -202,6 +205,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnBalanzaComprobacion.setText("Balanza de comprobación");
         btnBalanzaComprobacion.setToolTipText("Balanza de comprobación");
         btnBalanzaComprobacion.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnBalanzaComprobacion.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.LIBRARY_BOOKS);
         btnBalanzaComprobacion.setSizeIcon(25.0F);
         btnBalanzaComprobacion.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         btnBalanzaComprobacion.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +217,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnBalanceGeneral.setBackground(new java.awt.Color(73, 120, 248));
         btnBalanceGeneral.setText("Balance general");
         btnBalanceGeneral.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        btnBalanceGeneral.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        btnBalanceGeneral.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ASSESSMENT);
         btnBalanceGeneral.setSizeIcon(25.0F);
         btnBalanceGeneral.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         btnBalanceGeneral.addActionListener(new java.awt.event.ActionListener() {
@@ -226,7 +230,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnFlujoEfectivo.setText("Estado de flujo de efectivo");
         btnFlujoEfectivo.setToolTipText("Estado de flujo de efectivo");
         btnFlujoEfectivo.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        btnFlujoEfectivo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        btnFlujoEfectivo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ATTACH_MONEY);
         btnFlujoEfectivo.setSizeIcon(25.0F);
         btnFlujoEfectivo.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         btnFlujoEfectivo.addActionListener(new java.awt.event.ActionListener() {
@@ -239,7 +243,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnCambiosPatrimonio.setText("Estado de cambios en el patrimonio");
         btnCambiosPatrimonio.setToolTipText("Estado de cambios en el patrimonio");
         btnCambiosPatrimonio.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        btnCambiosPatrimonio.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        btnCambiosPatrimonio.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
         btnCambiosPatrimonio.setSizeIcon(25.0F);
         btnCambiosPatrimonio.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         btnCambiosPatrimonio.addActionListener(new java.awt.event.ActionListener() {
@@ -252,7 +256,7 @@ public class vPrincipal extends javax.swing.JFrame {
         btnCicloContable.setText("Config. contabilidad");
         btnCicloContable.setToolTipText("Configuración de contabilidad (Ciclos contables, Catalogos, etc.)");
         btnCicloContable.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        btnCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.TURNED_IN_NOT);
+        btnCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.BUILD);
         btnCicloContable.setSizeIcon(25.0F);
         btnCicloContable.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         btnCicloContable.addActionListener(new java.awt.event.ActionListener() {
@@ -301,7 +305,7 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addComponent(rSLabelFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rSLabelHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(btnLibroDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,9 +319,9 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addComponent(btnFlujoEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCambiosPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(btnCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConfigUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,7 +336,7 @@ public class vPrincipal extends javax.swing.JFrame {
         txtConfigCicloContable.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         btnGuardarCicloContable2.setBackground(new java.awt.Color(33, 58, 86));
-        btnGuardarCicloContable2.setToolTipText("ABONAR CUENTA");
+        btnGuardarCicloContable2.setToolTipText("OCULTAR / VER MENU LATERAL");
         btnGuardarCicloContable2.setBackgroundHover(new java.awt.Color(33, 84, 86));
         btnGuardarCicloContable2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardarCicloContable2.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
@@ -347,15 +351,33 @@ public class vPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnGuardarCicloContable3.setBackground(new java.awt.Color(33, 58, 86));
+        btnGuardarCicloContable3.setToolTipText("Ver Dashboard");
+        btnGuardarCicloContable3.setBackgroundHover(new java.awt.Color(33, 84, 86));
+        btnGuardarCicloContable3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardarCicloContable3.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
+        btnGuardarCicloContable3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGuardarCicloContable3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGuardarCicloContable3.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.HOME);
+        btnGuardarCicloContable3.setSizeIcon(25.0F);
+        btnGuardarCicloContable3.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnGuardarCicloContable3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCicloContable3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout topbarLayout = new javax.swing.GroupLayout(topbar);
         topbar.setLayout(topbarLayout);
         topbarLayout.setHorizontalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topbarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGuardarCicloContable3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
+                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
                 .addContainerGap())
         );
         topbarLayout.setVerticalGroup(
@@ -366,7 +388,8 @@ public class vPrincipal extends javax.swing.JFrame {
                     .addGroup(topbarLayout.createSequentialGroup()
                         .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(1, 1, 1))
-                    .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuardarCicloContable3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(11, 11, 11))
         );
 
@@ -385,7 +408,7 @@ public class vPrincipal extends javax.swing.JFrame {
             .addComponent(sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlBaseLayout.createSequentialGroup()
                 .addComponent(topbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jScrollPane1))
         );
 
@@ -407,6 +430,11 @@ public class vPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void irADashboar() {
+        this.seleccionarBoton();
+        new CambiaPanel(pnl, new vDashboard());
+    }
+    
     public void seleccionarBoton() {
         
         this.btnLibroDiario.setSelected(false);
@@ -425,7 +453,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnEstadoResultado.isSelected()) {
             this.btnEstadoResultado.setSelected(true);
-            new CambiaPanel(pnl, new vLibroDiario());
+            new CambiaPanel(pnl, new vLibroDiario(sesion));
         }
     }//GEN-LAST:event_btnEstadoResultadoActionPerformed
 
@@ -433,7 +461,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnLibroDiario.isSelected()) {
             this.btnLibroDiario.setSelected(true);
-            new CambiaPanel(pnl, new vLibroDiario());
+            new CambiaPanel(pnl, new vLibroDiario(sesion));
         }
     }//GEN-LAST:event_btnLibroDiarioActionPerformed
 
@@ -501,6 +529,14 @@ public class vPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGuardarCicloContable2ActionPerformed
 
+    private void imagenPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imagenPrincipalMouseClicked
+        this.irADashboar();
+    }//GEN-LAST:event_imagenPrincipalMouseClicked
+
+    private void btnGuardarCicloContable3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCicloContable3ActionPerformed
+        this.irADashboar();
+    }//GEN-LAST:event_btnGuardarCicloContable3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -537,17 +573,18 @@ public class vPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RSMaterialComponent.RSButtonShapeIcon btnBalanceGeneral;
-    private RSMaterialComponent.RSButtonShapeIcon btnBalanzaComprobacion;
-    private RSMaterialComponent.RSButtonShapeIcon btnCambiosPatrimonio;
+    public static RSMaterialComponent.RSButtonShapeIcon btnBalanceGeneral;
+    public static RSMaterialComponent.RSButtonShapeIcon btnBalanzaComprobacion;
+    public static RSMaterialComponent.RSButtonShapeIcon btnCambiosPatrimonio;
     private RSMaterialComponent.RSButtonShapeIcon btnCerrarSesion;
     private RSMaterialComponent.RSButtonShapeIcon btnCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnConfigUsuario;
-    private RSMaterialComponent.RSButtonShapeIcon btnEstadoResultado;
-    private RSMaterialComponent.RSButtonShapeIcon btnFlujoEfectivo;
+    public static RSMaterialComponent.RSButtonShapeIcon btnEstadoResultado;
+    public static RSMaterialComponent.RSButtonShapeIcon btnFlujoEfectivo;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable2;
-    private RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;
-    private RSMaterialComponent.RSButtonShapeIcon btnLibroMayor;
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable3;
+    public static RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;
+    public static RSMaterialComponent.RSButtonShapeIcon btnLibroMayor;
     public static javax.swing.JLabel imagenPrincipal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnl;

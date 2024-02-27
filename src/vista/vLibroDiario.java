@@ -4,8 +4,22 @@
  */
 package vista;
 
+import dto.dtoPartida;
+import formularios.dPartidas;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Cuenta;
+import modelo.Partida;
+import rojeru_san.efectos.ValoresEnum;
+import servicios.ServicioPartida;
+import sesion.Sesion;
+import utils.Render;
+import utils.UtileriaVista;
+import utils.constantes.RespuestaGeneral;
 
 /**
  *
@@ -16,45 +30,89 @@ public class vLibroDiario extends javax.swing.JPanel {
     /**
      * Creates new form vLibroDiario
      */
-    
-    DefaultTableModel dtm = new DefaultTableModel();
+    Sesion sesion;
+    Partida partidaModel = new Partida();
+    ArrayList<dtoPartida> listaPartidas = new ArrayList<>();
+    ServicioPartida _partida;
+    DefaultTableModel dtm = new DefaultTableModel() {
+        @Override 
+        public boolean isCellEditable(int row, int column) { 
+            return false;
+        }
+    };
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     
-    public vLibroDiario() {
+    public vLibroDiario(Sesion sesion) {
         initComponents();
-        btnGuardarPartida.setEnabled(false);
+        this.sesion = sesion;
+        _partida = new ServicioPartida(sesion.rutaConexion);
         this.setModelPartida();
+        this.obtenerListadoPartidas();
     }
     
-    /* <------------------------------------------------------------------------------->
-                                   INICIO SECCION DE CICLO CONTABLE
-        <------------------------------------------------------------------------------->  */  
     public void setModelPartida() {
-        String[] cabecera = {"Codigo","Concepto","Parcial","Debe","Haber"};
+        String[] cabecera = {"# Partida","Fecha","Comentario","Monto","Editar","Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
-        tblDetallePartida.setModel(dtm);
+        tblPartidas.setModel(dtm);
+        tblPartidas.setDefaultRenderer(Object.class, new Render());
     }
     
     public void setDatosPartida() {
-//        Object[] datos = new Object[dtm.getColumnCount()];
-//        for (dtoCicloContable ciclo : listaCiclosContables) {
-//            datos[0] = ciclo.getTitulo();
-//            datos[1] = sdf.format(ciclo.getDesde());
-//            datos[2] = sdf.format(ciclo.getHasta());
-//            datos[3] = ciclo.getCatalogo();
-//            dtm.addRow(datos);
-//        }
-//        tblCicloContable.setModel(dtm);
-//        tblCicloContable.setAutoResizeMode(tblCicloContable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-//        tblCicloContable.getColumnModel().getColumn(0).setPreferredWidth(220);
-//        tblCicloContable.getColumnModel().getColumn(1).setPreferredWidth(20);
-//        tblCicloContable.getColumnModel().getColumn(2).setPreferredWidth(20);
-//        tblCicloContable.getColumnModel().getColumn(3).setPreferredWidth(100);
+        RSMaterialComponent.RSButtonCustomIcon btn1 = new RSMaterialComponent.RSButtonCustomIcon();
+        RSMaterialComponent.RSButtonCustomIcon btn2 = new RSMaterialComponent.RSButtonCustomIcon();
+        btn1.setIcons(ValoresEnum.ICONS.EDIT);
+        Cursor cur = new Cursor(Cursor.HAND_CURSOR);
+        btn1.setCursor(cur);
+        btn2.setIcons(ValoresEnum.ICONS.DELETE);
+        btn2.setColorIcon(Color.RED);
+        btn2.setCursor(cur);
+        
+        Object[] datos = new Object[dtm.getColumnCount()];
+        for (dtoPartida partida : listaPartidas) {
+            datos[0] = partida.getNum_partida();
+            datos[1] = sdf.format(partida.getFecha());
+            datos[2] = partida.getComentario();
+            datos[3] = partida.getMonto();
+            datos[4] = btn1;
+            datos[5] = btn2;
+            dtm.addRow(datos);
+        }
+        tblPartidas.setModel(dtm);
+        tblPartidas.setAutoResizeMode(tblPartidas.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        tblPartidas.getColumnModel().getColumn(0).setPreferredWidth(30);
+        tblPartidas.getColumnModel().getColumn(1).setPreferredWidth(70);
+        tblPartidas.getColumnModel().getColumn(2).setPreferredWidth(400);
+        tblPartidas.getColumnModel().getColumn(3).setPreferredWidth(100);
+        tblPartidas.getColumnModel().getColumn(4).setPreferredWidth(20);
+        tblPartidas.getColumnModel().getColumn(5).setPreferredWidth(20);
     }
     
-     /* <------------------------------------------------------------------------------->
-                                   FIN SECCION DE CICLO CONTABLE
-        <------------------------------------------------------------------------------->  */  
+    public void obtenerListadoPartidas() {
+        this.listaPartidas = new ArrayList<>();
+        tblPartidas.clearSelection();
+        this.limiparTablaPartidas();
+        RespuestaGeneral rg = _partida.obtenerListaPorIdCicloContable(sesion.configUsuario.getId_ciclo_contable(), this.txtBusquedaPartidas.getText());
+        this.totalPartidas.setText("0");
+        if (rg.esExitosa()) {
+            this.listaPartidas = (ArrayList<dtoPartida>)rg.getDatos();
+            this.totalPartidas.setText(String.valueOf(this.listaPartidas.size()));
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rg));
+        }
+        this.setDatosPartida();
+    }
+    
+    public void limiparTablaPartidas() {
+        for (int i = 0; i < tblPartidas.getRowCount(); i++) {
+            dtm.removeRow(i);
+            i-=1;
+        }
+    }
+    
+    public void limpiarFormPartida() {
+        partidaModel = new Partida();
+        tblPartidas.clearSelection();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,214 +123,23 @@ public class vLibroDiario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtTitulo = new RSMaterialComponent.RSTextFieldMaterial();
-        jLabel2 = new javax.swing.JLabel();
-        txtDesde = new newscomponents.RSDateChooser();
+        jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        btnGuardarPartida = new RSMaterialComponent.RSButtonShapeIcon();
-        btnCarncelarPartida = new RSMaterialComponent.RSButtonShapeIcon();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        btnGuardarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
-        btnGuardarCicloContable2 = new RSMaterialComponent.RSButtonShapeIcon();
-        btnEliminarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
-        comboBoxSuggestion1 = new combo_suggestion.ComboBoxSuggestion();
-        txtTitulo1 = new RSMaterialComponent.RSTextFieldMaterial();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblDetallePartida = new rojerusan.RSTableMetro();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        tblPartidas = new rojerusan.RSTableMetro();
+        jLabel8 = new javax.swing.JLabel();
+        txtBusquedaPartidas = new RSMaterialComponent.RSTextFieldMaterial();
+        btnBuscarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
+        btnLimpiarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
+        btnNuevoCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
+        jLabel2 = new javax.swing.JLabel();
+        totalPartidas = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos de partida  ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Listado de partidas   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("# Partida:");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-
-        txtTitulo.setForeground(new java.awt.Color(0, 0, 0));
-        txtTitulo.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtTitulo.setEnabled(false);
-        txtTitulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtTitulo.setPhColor(new java.awt.Color(0, 0, 0));
-        txtTitulo.setPlaceholder("# de partida");
-        txtTitulo.setSelectionColor(new java.awt.Color(0, 0, 0));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Fecha:");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-
-        txtDesde.setBackground(new java.awt.Color(153, 153, 153));
-        txtDesde.setBgColor(new java.awt.Color(153, 153, 153));
-        txtDesde.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtDesde.setFormatDate("dd-MM-yyyy");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        btnGuardarPartida.setBackground(new java.awt.Color(33, 58, 86));
-        btnGuardarPartida.setText("GUARDAR");
-        btnGuardarPartida.setToolTipText("GUARDAR O ACTUALIZAR PARTIDA");
-        btnGuardarPartida.setBackgroundHover(new java.awt.Color(33, 84, 86));
-        btnGuardarPartida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnGuardarPartida.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnGuardarPartida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
-        btnGuardarPartida.setSizeIcon(18.0F);
-        btnGuardarPartida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarPartidaActionPerformed(evt);
-            }
-        });
-
-        btnCarncelarPartida.setBackground(new java.awt.Color(251, 205, 6));
-        btnCarncelarPartida.setText("CANCELAR");
-        btnCarncelarPartida.setToolTipText("LIMPIAR EL FORMULARIO DE PARTIDA");
-        btnCarncelarPartida.setBackgroundHover(new java.awt.Color(251, 174, 6));
-        btnCarncelarPartida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnCarncelarPartida.setForegroundHover(new java.awt.Color(0, 0, 0));
-        btnCarncelarPartida.setForegroundIcon(new java.awt.Color(0, 0, 0));
-        btnCarncelarPartida.setForegroundIconHover(new java.awt.Color(0, 0, 0));
-        btnCarncelarPartida.setForegroundText(new java.awt.Color(0, 0, 0));
-        btnCarncelarPartida.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnCarncelarPartida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
-        btnCarncelarPartida.setSizeIcon(18.0F);
-        btnCarncelarPartida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCarncelarPartidaActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Comentario:");
-        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
-                .addGap(113, 113, 113)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCarncelarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(525, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(2, 2, 2)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))))
-                .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnGuardarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCarncelarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(57, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(38, 38, 38)))
-        );
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Detalles de partida  ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
-
-        btnGuardarCicloContable.setBackground(new java.awt.Color(33, 58, 86));
-        btnGuardarCicloContable.setText("CARGAR");
-        btnGuardarCicloContable.setToolTipText("CARGAR CUENTA");
-        btnGuardarCicloContable.setBackgroundHover(new java.awt.Color(33, 84, 86));
-        btnGuardarCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnGuardarCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnGuardarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
-        btnGuardarCicloContable.setSizeIcon(18.0F);
-        btnGuardarCicloContable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarCicloContableActionPerformed(evt);
-            }
-        });
-
-        btnGuardarCicloContable2.setBackground(new java.awt.Color(33, 58, 86));
-        btnGuardarCicloContable2.setText("ABONAR");
-        btnGuardarCicloContable2.setToolTipText("ABONAR CUENTA");
-        btnGuardarCicloContable2.setBackgroundHover(new java.awt.Color(33, 84, 86));
-        btnGuardarCicloContable2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnGuardarCicloContable2.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnGuardarCicloContable2.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
-        btnGuardarCicloContable2.setSizeIcon(18.0F);
-        btnGuardarCicloContable2.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        btnGuardarCicloContable2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarCicloContable2ActionPerformed(evt);
-            }
-        });
-
-        btnEliminarCicloContable.setBackground(new java.awt.Color(197, 0, 0));
-        btnEliminarCicloContable.setText("ELIMINAR");
-        btnEliminarCicloContable.setToolTipText("ELIMINAR EL REGISTRO SELECCIONADO");
-        btnEliminarCicloContable.setBackgroundHover(new java.awt.Color(242, 0, 0));
-        btnEliminarCicloContable.setEnabled(false);
-        btnEliminarCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnEliminarCicloContable.setForegroundHover(new java.awt.Color(0, 0, 0));
-        btnEliminarCicloContable.setForegroundIcon(new java.awt.Color(0, 0, 0));
-        btnEliminarCicloContable.setForegroundIconHover(new java.awt.Color(0, 0, 0));
-        btnEliminarCicloContable.setForegroundText(new java.awt.Color(0, 0, 0));
-        btnEliminarCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnEliminarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ERROR);
-        btnEliminarCicloContable.setSizeIcon(18.0F);
-        btnEliminarCicloContable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCicloContableActionPerformed(evt);
-            }
-        });
-
-        comboBoxSuggestion1.setBackground(new java.awt.Color(240, 240, 240));
-        comboBoxSuggestion1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ACTIVO", "EFECTIVO Y EQUIVALENTE DE EFECTIVO", "PASIVO", "PATRIMONIO", "COSTOS" }));
-        comboBoxSuggestion1.setToolTipText("");
-        comboBoxSuggestion1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-
-        txtTitulo1.setForeground(new java.awt.Color(0, 0, 0));
-        txtTitulo1.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtTitulo1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtTitulo1.setPhColor(new java.awt.Color(0, 0, 0));
-        txtTitulo1.setPlaceholder("Codigo de cuenta");
-        txtTitulo1.setSelectionColor(new java.awt.Color(0, 0, 0));
-
-        tblDetallePartida.setModel(new javax.swing.table.DefaultTableModel(
+        tblPartidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -280,140 +147,208 @@ public class vLibroDiario extends javax.swing.JPanel {
 
             }
         ));
-        tblDetallePartida.setBackgoundHead(new java.awt.Color(153, 153, 153));
-        tblDetallePartida.setBackgoundHover(new java.awt.Color(204, 204, 204));
-        tblDetallePartida.setColorPrimaryText(new java.awt.Color(0, 0, 0));
-        tblDetallePartida.setColorSecundaryText(new java.awt.Color(51, 51, 51));
-        tblDetallePartida.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        tblDetallePartida.setFontHead(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        tblDetallePartida.setFontRowHover(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        tblDetallePartida.setFontRowSelect(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        tblDetallePartida.setPositionText(rojerusan.RSTableMetro.POSITION_TEXT.LEFT);
-        tblDetallePartida.setSelectionBackground(new java.awt.Color(153, 153, 153));
-        tblDetallePartida.setSelectionForeground(new java.awt.Color(0, 0, 0));
-        tblDetallePartida.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblDetallePartida.setShowGrid(true);
-        tblDetallePartida.setShowVerticalLines(false);
-        tblDetallePartida.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPartidas.setBackgoundHead(new java.awt.Color(153, 153, 153));
+        tblPartidas.setBackgoundHover(new java.awt.Color(204, 204, 204));
+        tblPartidas.setColorPrimaryText(new java.awt.Color(0, 0, 0));
+        tblPartidas.setColorSecundaryText(new java.awt.Color(51, 51, 51));
+        tblPartidas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tblPartidas.setFontHead(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tblPartidas.setFontRowHover(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tblPartidas.setFontRowSelect(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tblPartidas.setPositionText(rojerusan.RSTableMetro.POSITION_TEXT.LEFT);
+        tblPartidas.setRowHeight(30);
+        tblPartidas.setSelectionBackground(new java.awt.Color(153, 153, 153));
+        tblPartidas.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        tblPartidas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblPartidas.setShowGrid(true);
+        tblPartidas.setShowVerticalLines(false);
+        tblPartidas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDetallePartidaMouseClicked(evt);
+                tblPartidasMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblDetallePartida);
+        jScrollPane1.setViewportView(tblPartidas);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("$ 0.00");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Busqueda:");
+        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText("$ 0.00");
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        txtBusquedaPartidas.setForeground(new java.awt.Color(0, 0, 0));
+        txtBusquedaPartidas.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtBusquedaPartidas.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtBusquedaPartidas.setPhColor(new java.awt.Color(0, 0, 0));
+        txtBusquedaPartidas.setPlaceholder("Buscar por número de partida");
+        txtBusquedaPartidas.setSelectionColor(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        btnBuscarCicloContable.setBackground(new java.awt.Color(33, 58, 86));
+        btnBuscarCicloContable.setText("BUSCAR");
+        btnBuscarCicloContable.setToolTipText("BUSCAR");
+        btnBuscarCicloContable.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnBuscarCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnBuscarCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnBuscarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnBuscarCicloContable.setSizeIcon(18.0F);
+        btnBuscarCicloContable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCicloContableActionPerformed(evt);
+            }
+        });
+
+        btnLimpiarCicloContable.setBackground(new java.awt.Color(102, 102, 102));
+        btnLimpiarCicloContable.setText("LIMPIAR");
+        btnLimpiarCicloContable.setToolTipText("LIMPIAR BUSQUEDA");
+        btnLimpiarCicloContable.setBackgroundHover(new java.awt.Color(112, 113, 116));
+        btnLimpiarCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnLimpiarCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnLimpiarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CLEAR);
+        btnLimpiarCicloContable.setSizeIcon(18.0F);
+        btnLimpiarCicloContable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarCicloContableActionPerformed(evt);
+            }
+        });
+
+        btnNuevoCicloContable.setBackground(new java.awt.Color(0, 153, 0));
+        btnNuevoCicloContable.setText("NUEVO");
+        btnNuevoCicloContable.setToolTipText("NUEVO REGISTRO DE PARTIDA");
+        btnNuevoCicloContable.setBackgroundHover(new java.awt.Color(0, 178, 0));
+        btnNuevoCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnNuevoCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnNuevoCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ADD);
+        btnNuevoCicloContable.setSizeIcon(18.0F);
+        btnNuevoCicloContable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoCicloContableActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setText("Total de registros: ");
+
+        totalPartidas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        totalPartidas.setText("100");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboBoxSuggestion1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                        .addComponent(txtBusquedaPartidas, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGuardarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBuscarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(btnLimpiarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(btnNuevoCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(totalPartidas, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBoxSuggestion1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTitulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBusquedaPartidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevoCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(totalPartidas))
+                .addGap(7, 7, 7))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCicloContableActionPerformed
+    private void tblPartidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPartidasMouseClicked
+        // logica de acciones de botones
+        int accion = tblPartidas.getSelectedColumn();
+        int row = tblPartidas.getSelectedRow();
+        if (accion == 4) {
+            // editar
+            this.setearModeloCicloContable(row);
+            this.abrirDialogPartida(partidaModel);
+
+        } else if (accion == 5) {
+            // eliminar
+            String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaPartidas.get(row).getComentario();
+            int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (opc == 0) {
+                RespuestaGeneral rg = _partida.eliminar(this.listaPartidas.get(row).getId());
+                if (rg.esExitosa()) {
+                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
+                    this.limpiarFormPartida();
+                    this.obtenerListadoPartidas();
+                } else {
+                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+                }
+            }
+
+        }
+    }//GEN-LAST:event_tblPartidasMouseClicked
+
+    private void btnBuscarCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCicloContableActionPerformed
+        this.obtenerListadoPartidas();
+    }//GEN-LAST:event_btnBuscarCicloContableActionPerformed
+
+    private void btnLimpiarCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarCicloContableActionPerformed
+        this.txtBusquedaPartidas.setText("");
+        this.obtenerListadoPartidas();
+    }//GEN-LAST:event_btnLimpiarCicloContableActionPerformed
+
+    private void btnNuevoCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCicloContableActionPerformed
+        this.abrirDialogPartida(new Partida());
+    }//GEN-LAST:event_btnNuevoCicloContableActionPerformed
+
+    public void setearModeloCicloContable(int row) {
         
-    }//GEN-LAST:event_btnGuardarCicloContableActionPerformed
-
-    private void btnCarncelarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarncelarPartidaActionPerformed
-        
-    }//GEN-LAST:event_btnCarncelarPartidaActionPerformed
-
-    private void btnEliminarCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCicloContableActionPerformed
-        
-    }//GEN-LAST:event_btnEliminarCicloContableActionPerformed
-
-    private void btnGuardarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPartidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarPartidaActionPerformed
-
-    private void btnGuardarCicloContable2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCicloContable2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarCicloContable2ActionPerformed
-
-    private void tblDetallePartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetallePartidaMouseClicked
-        
-    }//GEN-LAST:event_tblDetallePartidaMouseClicked
-
+    }
+    
+    public void abrirDialogPartida(Partida partida) {
+        dPartidas d = new dPartidas(null, true, partida, sesion);
+        d.setVisible(true);
+        // validamos si realizo alguna accion para actualizar el listado o no
+        if (d.getRealizoAccion()) {
+            JOptionPane.showMessageDialog(this, d.getRG().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRG()));
+            this.obtenerListadoPartidas();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RSMaterialComponent.RSButtonShapeIcon btnCarncelarPartida;
-    private RSMaterialComponent.RSButtonShapeIcon btnEliminarCicloContable;
-    private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable;
-    private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable2;
-    private RSMaterialComponent.RSButtonShapeIcon btnGuardarPartida;
-    private combo_suggestion.ComboBoxSuggestion comboBoxSuggestion1;
-    private javax.swing.JLabel jLabel1;
+    private RSMaterialComponent.RSButtonShapeIcon btnBuscarCicloContable;
+    private RSMaterialComponent.RSButtonShapeIcon btnLimpiarCicloContable;
+    private RSMaterialComponent.RSButtonShapeIcon btnNuevoCicloContable;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private rojerusan.RSTableMetro tblDetallePartida;
-    private newscomponents.RSDateChooser txtDesde;
-    private RSMaterialComponent.RSTextFieldMaterial txtTitulo;
-    private RSMaterialComponent.RSTextFieldMaterial txtTitulo1;
+    private rojerusan.RSTableMetro tblPartidas;
+    private javax.swing.JLabel totalPartidas;
+    private RSMaterialComponent.RSTextFieldMaterial txtBusquedaPartidas;
     // End of variables declaration//GEN-END:variables
 }
