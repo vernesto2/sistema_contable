@@ -4,19 +4,23 @@
  */
 package formularios;
 
+
+import dto.dtoLista;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.CicloContable;
+import javax.swing.table.DefaultTableModel;
 import modelo.Cuenta;
 import modelo.Partida;
-import modelo.TipoCatalogo;
-import servicios.ServicioCicloContable;
-import servicios.ServicioCuenta;
+import modelo.PartidaDetalle;
+import rojeru_san.efectos.ValoresEnum;
 import servicios.ServicioPartida;
-import servicios.ServicioTipoCatalogo;
 import sesion.Sesion;
+import utils.Render;
 import utils.UtileriaVista;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -29,13 +33,27 @@ public class dPartidas extends javax.swing.JDialog {
     RespuestaGeneral rg = new RespuestaGeneral();
     ServicioPartida _partida;
     
+    ArrayList<dtoLista> listaTipoPartida = new ArrayList<>();
+    ArrayList<PartidaDetalle> listaPartidaDetalles = new ArrayList<>();
+    ArrayList<PartidaDetalle> listaPartidaDetallesEliminados = new ArrayList<>();
+    
     boolean realizoAccion = false;
+    Sesion sesion;
+    
+    DefaultTableModel dtm = new DefaultTableModel() {
+        @Override 
+        public boolean isCellEditable(int row, int column) { 
+            return false;
+        }
+    };
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     /**
      * Creates new form dTipoCatalogo
      */
     public dPartidas(java.awt.Frame parent, boolean modal, Partida partida, Sesion sesion) {
         super(parent, modal);
         initComponents();
+        this.sesion = sesion;
         _partida = new ServicioPartida(sesion.rutaConexion);
         this.partidaModel = (Partida)partida;
         this.iniciarVistaDialog();
@@ -47,38 +65,80 @@ public class dPartidas extends javax.swing.JDialog {
         this.setTitle((this.partidaModel.getId() > 0) ? "MODIFICACIÓN DE PARTIDA": "NUEVO REGISTRO DE PARTIDA");
         this.realizoAccion = false;
         // obtenemos los catalogos
-        //this.obtenerListaCmbColores();
-        //this.obtenerListaCmbTipoCatalogo();
+        this.obtenerListaCmbTipoPartidas();
         // seteamos la informacion
-        //this.setearData();
+        this.setModelPartida();
+        this.setearData();
+    }
+    
+    public void obtenerUltimoNumPartida() {
+        
     }
     
     public void setearData() {
-        //txtTipoCatalogo.setText(this.tipoCatalogoModel.getTipo());
-//        txtTitulo.setText(this.cicloContableModel.getTitulo());
-//        txtDesde.setDate(this.cicloContableModel.getDesde());
-//        txtDesde.setFormatDate("dd-MM-yyyy");
-//        txtHasta.setDate(this.cicloContableModel.getHasta());
-//        txtHasta.setFormatDate("dd-MM-yyyy");
+        txtNumPartida.setText(String.valueOf(this.partidaModel.getNum_partida()));
+        txtComentario.setText(this.partidaModel.getComentario());
+        txtFecha.setDate(this.partidaModel.getFecha());
+        txtFecha.setFormatDate("dd-MM-yyyy");
         
         // PROCESO PARA SELECCION DE COMBOBOX
-//        int iCmb = 0, i = 0;
-//        for (TipoCatalogo tipoCatalogo : listaCmbTipoCatalogo) {
-//            if (tipoCatalogo.getId() == this.cicloContableModel.getId_catalogo()) {
-//                iCmb = i;
-//            }
-//            i++;
-//        }
-//        cmbTipoCatalogo.setSelectedIndex(iCmb);
+        int iCmb = 0, i = 0;
+        for (dtoLista item : listaTipoPartida) {
+            if (Integer.parseInt(item.getValue()) == this.partidaModel.getId_tipo_partida()) {
+                iCmb = i;
+            }
+            i++;
+        }
+        cmbTipoPartida.setSelectedIndex(iCmb);
         
+        this.setDatosPartidaDetalle();
     }
     
-    public void obtenerListaCmbColores() {
-//        this.listaColor = Constantes.listaColores();
-//        cmbColor.removeAllItems();
-//        for (dtoLista item : this.listaColor) {
-//            cmbColor.addItem(item.getLabel());
-//        }
+    public void setModelPartida() {
+        String[] cabecera = {"Codigo","Concepto","Parcial","Debe","Haber","Editar","Eliminar"};
+        dtm.setColumnIdentifiers(cabecera);
+        tblDetallePartida.setModel(dtm);
+        tblDetallePartida.setDefaultRenderer(Object.class, new Render());
+    }
+    
+    public void setDatosPartidaDetalle() {
+        RSMaterialComponent.RSButtonCustomIcon btn1 = new RSMaterialComponent.RSButtonCustomIcon();
+        RSMaterialComponent.RSButtonCustomIcon btn2 = new RSMaterialComponent.RSButtonCustomIcon();
+        btn1.setIcons(ValoresEnum.ICONS.EDIT);
+        Cursor cur = new Cursor(Cursor.HAND_CURSOR);
+        btn1.setCursor(cur);
+        btn2.setIcons(ValoresEnum.ICONS.DELETE);
+        btn2.setColorIcon(Color.RED);
+        btn2.setCursor(cur);
+        
+        Object[] datos = new Object[dtm.getColumnCount()];
+        for (PartidaDetalle detalle : partidaModel.getListaPartidaDetalles()) {
+            datos[0] = detalle.getCuenta().getCodigo();
+            datos[1] = detalle.getCuenta().getNombre();
+            datos[2] = detalle.getParcial();
+            datos[3] = detalle.getDebe();
+            datos[4] = detalle.getHaber();
+            datos[5] = btn1;
+            datos[6] = btn2;
+            dtm.addRow(datos);
+        }
+        tblDetallePartida.setModel(dtm);
+        tblDetallePartida.setAutoResizeMode(tblDetallePartida.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        tblDetallePartida.getColumnModel().getColumn(0).setPreferredWidth(150);
+        tblDetallePartida.getColumnModel().getColumn(1).setPreferredWidth(400);
+        tblDetallePartida.getColumnModel().getColumn(2).setPreferredWidth(150);
+        tblDetallePartida.getColumnModel().getColumn(3).setPreferredWidth(150);
+        tblDetallePartida.getColumnModel().getColumn(4).setPreferredWidth(150);
+        tblDetallePartida.getColumnModel().getColumn(5).setPreferredWidth(50);
+        tblDetallePartida.getColumnModel().getColumn(6).setPreferredWidth(50);
+    }
+    
+    public void obtenerListaCmbTipoPartidas() {
+        this.listaTipoPartida = Constantes.listaTipoPartidas();
+        cmbTipoPartida.removeAllItems();
+        for (dtoLista item : this.listaTipoPartida) {
+            cmbTipoPartida.addItem(item.getLabel());
+        }
     }
     
     public boolean getRealizoAccion() {
@@ -89,7 +149,7 @@ public class dPartidas extends javax.swing.JDialog {
         return rg;
     }
 
-    public Partida getCuentaModel() {
+    public Partida getPartidaModel() {
         return partidaModel;
     }
 
@@ -113,15 +173,15 @@ public class dPartidas extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtDesde = new newscomponents.RSDateChooser();
-        txtTitulo = new RSMaterialComponent.RSTextFieldMaterial();
+        txtFecha = new newscomponents.RSDateChooser();
+        txtNumPartida = new RSMaterialComponent.RSTextFieldMaterial();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtComentario = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        cmbTipoSaldo = new RSMaterialComponent.RSComboBoxMaterial();
-        btnGuardarTipoCatalogo1 = new RSMaterialComponent.RSButtonShapeIcon();
+        cmbTipoPartida = new RSMaterialComponent.RSComboBoxMaterial();
+        btnAgregarDetallePartida = new RSMaterialComponent.RSButtonShapeIcon();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDetallePartida = new rojerusan.RSTableMetro();
@@ -138,7 +198,7 @@ public class dPartidas extends javax.swing.JDialog {
 
         btnCancelarTipoCatalogo.setBackground(new java.awt.Color(251, 205, 6));
         btnCancelarTipoCatalogo.setText("CERRAR");
-        btnCancelarTipoCatalogo.setToolTipText("LIMPIAR EL FORMULARIO Y SELECCIÓN");
+        btnCancelarTipoCatalogo.setToolTipText("CERRAR EL FORMULARIO");
         btnCancelarTipoCatalogo.setBackgroundHover(new java.awt.Color(251, 174, 6));
         btnCancelarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCancelarTipoCatalogo.setForegroundHover(new java.awt.Color(0, 0, 0));
@@ -156,7 +216,7 @@ public class dPartidas extends javax.swing.JDialog {
 
         btnGuardarTipoCatalogo.setBackground(new java.awt.Color(33, 58, 86));
         btnGuardarTipoCatalogo.setText("GUARDAR");
-        btnGuardarTipoCatalogo.setToolTipText("GUARDAR O ACTUALIZAR EL TIPO DE CATALOGO");
+        btnGuardarTipoCatalogo.setToolTipText("GUARDAR / ACTUALIZAR PARTIDA");
         btnGuardarTipoCatalogo.setBackgroundHover(new java.awt.Color(33, 68, 86));
         btnGuardarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardarTipoCatalogo.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
@@ -173,7 +233,7 @@ public class dPartidas extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(590, Short.MAX_VALUE)
+                .addContainerGap(777, Short.MAX_VALUE)
                 .addComponent(btnCancelarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,27 +259,27 @@ public class dPartidas extends javax.swing.JDialog {
         jLabel2.setText("Fecha:");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        txtDesde.setBackground(new java.awt.Color(153, 153, 153));
-        txtDesde.setBgColor(new java.awt.Color(153, 153, 153));
-        txtDesde.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtDesde.setFormatDate("dd-MM-yyyy");
+        txtFecha.setBackground(new java.awt.Color(153, 153, 153));
+        txtFecha.setBgColor(new java.awt.Color(153, 153, 153));
+        txtFecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtFecha.setFormatDate("dd-MM-yyyy");
 
-        txtTitulo.setForeground(new java.awt.Color(0, 0, 0));
-        txtTitulo.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtTitulo.setEnabled(false);
-        txtTitulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtTitulo.setPhColor(new java.awt.Color(0, 0, 0));
-        txtTitulo.setPlaceholder("# de partida");
-        txtTitulo.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtNumPartida.setForeground(new java.awt.Color(0, 0, 0));
+        txtNumPartida.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtNumPartida.setEnabled(false);
+        txtNumPartida.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtNumPartida.setPhColor(new java.awt.Color(0, 0, 0));
+        txtNumPartida.setPlaceholder("# de partida");
+        txtNumPartida.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("# Partida:");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtComentario.setColumns(20);
+        txtComentario.setRows(5);
+        jScrollPane1.setViewportView(txtComentario);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -228,26 +288,31 @@ public class dPartidas extends javax.swing.JDialog {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("# Partida:");
+        jLabel6.setText("Tipo de Partida:");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        cmbTipoSaldo.setColorMaterial(new java.awt.Color(102, 102, 102));
-        cmbTipoSaldo.addItemListener(new java.awt.event.ItemListener() {
+        cmbTipoPartida.setColorMaterial(new java.awt.Color(102, 102, 102));
+        cmbTipoPartida.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbTipoSaldoItemStateChanged(evt);
+                cmbTipoPartidaItemStateChanged(evt);
             }
         });
 
-        btnGuardarTipoCatalogo1.setBackground(new java.awt.Color(0, 153, 0));
-        btnGuardarTipoCatalogo1.setText("AGREGAR DETALLE");
-        btnGuardarTipoCatalogo1.setToolTipText("AGREGAR DETALLE");
-        btnGuardarTipoCatalogo1.setBackgroundHover(new java.awt.Color(0, 178, 0));
-        btnGuardarTipoCatalogo1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnGuardarTipoCatalogo1.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnGuardarTipoCatalogo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnGuardarTipoCatalogo1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnGuardarTipoCatalogo1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ADD);
-        btnGuardarTipoCatalogo1.setSizeIcon(18.0F);
+        btnAgregarDetallePartida.setBackground(new java.awt.Color(0, 153, 0));
+        btnAgregarDetallePartida.setText("AGREGAR DETALLE");
+        btnAgregarDetallePartida.setToolTipText("AGREGAR DETALLE");
+        btnAgregarDetallePartida.setBackgroundHover(new java.awt.Color(0, 178, 0));
+        btnAgregarDetallePartida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnAgregarDetallePartida.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnAgregarDetallePartida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnAgregarDetallePartida.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnAgregarDetallePartida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ADD);
+        btnAgregarDetallePartida.setSizeIcon(18.0F);
+        btnAgregarDetallePartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarDetallePartidaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -256,46 +321,50 @@ public class dPartidas extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbTipoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbTipoPartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnGuardarTipoCatalogo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txtNumPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregarDetallePartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                    .addComponent(cmbTipoPartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtNumPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cmbTipoSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarTipoCatalogo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(btnAgregarDetallePartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(2, 2, 2))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -313,11 +382,12 @@ public class dPartidas extends javax.swing.JDialog {
         tblDetallePartida.setBackgoundHover(new java.awt.Color(204, 204, 204));
         tblDetallePartida.setColorPrimaryText(new java.awt.Color(0, 0, 0));
         tblDetallePartida.setColorSecundaryText(new java.awt.Color(51, 51, 51));
-        tblDetallePartida.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        tblDetallePartida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         tblDetallePartida.setFontHead(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        tblDetallePartida.setFontRowHover(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        tblDetallePartida.setFontRowSelect(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        tblDetallePartida.setFontRowHover(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        tblDetallePartida.setFontRowSelect(new java.awt.Font("Arial", 1, 12)); // NOI18N
         tblDetallePartida.setPositionText(rojerusan.RSTableMetro.POSITION_TEXT.LEFT);
+        tblDetallePartida.setRowHeight(30);
         tblDetallePartida.setSelectionBackground(new java.awt.Color(153, 153, 153));
         tblDetallePartida.setSelectionForeground(new java.awt.Color(0, 0, 0));
         tblDetallePartida.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -359,7 +429,7 @@ public class dPartidas extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,7 +450,7 @@ public class dPartidas extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -421,15 +491,16 @@ public class dPartidas extends javax.swing.JDialog {
         this.dispose();
     }
     
-    public void setearModelTipoCatalogo() {
-//        this.cicloContableModel.setTitulo(this.txtTitulo.getText());
-//        this.cicloContableModel.setDesde(txtDesde.getDate());
-//        this.cicloContableModel.setHasta(txtHasta.getDate());
+    public void setearModelPartida() {
+        this.partidaModel.setId_ciclo(this.sesion.configUsuario.getId_ciclo_contable());
+        this.partidaModel.setId_tipo_partida(this.cmbTipoPartida.getSelectedIndex());
+        this.partidaModel.setFecha(txtFecha.getDate());
+        this.partidaModel.setComentario(txtComentario.getText());
     }
     
     private void btnGuardarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogoActionPerformed
         // setear info al modelo
-        this.setearModelTipoCatalogo();
+        this.setearModelPartida();
         // guardamos la info
         if (this.partidaModel.getId() < 0) {
             this.rg = _partida.insertar(this.partidaModel);
@@ -458,10 +529,25 @@ public class dPartidas extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tblDetallePartidaMouseClicked
 
-    private void cmbTipoSaldoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoSaldoItemStateChanged
+    private void cmbTipoPartidaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoPartidaItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbTipoSaldoItemStateChanged
+    }//GEN-LAST:event_cmbTipoPartidaItemStateChanged
 
+    private void btnAgregarDetallePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetallePartidaActionPerformed
+        dSeleccionarCuenta d = new dSeleccionarCuenta(null, true, sesion);
+        d.setAlwaysOnTop(true);
+        d.setVisible(true);
+        // validamos si realizo alguna accion para actualizar el listado o no
+        if (d.getRealizoAccion()) {
+            //JOptionPane.showMessageDialog(this, d.getRG().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRG()));
+            this.actualizarMontosDetallesPartidas(d.getListaPartidaDetalle());
+        }
+    }//GEN-LAST:event_btnAgregarDetallePartidaActionPerformed
+
+    public void actualizarMontosDetallesPartidas(ArrayList<PartidaDetalle> lista) {
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -505,10 +591,10 @@ public class dPartidas extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonShapeIcon btnAgregarDetallePartida;
     private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo;
-    private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo1;
-    private RSMaterialComponent.RSComboBoxMaterial cmbTipoSaldo;
+    private RSMaterialComponent.RSComboBoxMaterial cmbTipoPartida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -522,9 +608,9 @@ public class dPartidas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private rojerusan.RSTableMetro tblDetallePartida;
-    private newscomponents.RSDateChooser txtDesde;
-    private RSMaterialComponent.RSTextFieldMaterial txtTitulo;
+    private javax.swing.JTextArea txtComentario;
+    private newscomponents.RSDateChooser txtFecha;
+    private RSMaterialComponent.RSTextFieldMaterial txtNumPartida;
     // End of variables declaration//GEN-END:variables
 }

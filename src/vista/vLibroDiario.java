@@ -322,7 +322,21 @@ public class vLibroDiario extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLimpiarCicloContableActionPerformed
 
     private void btnNuevoCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCicloContableActionPerformed
-        this.abrirDialogPartida(new Partida());
+        // obtenemos el ultimo # de partida
+        RespuestaGeneral rg = _partida.obtenerUltimoNumPartida();
+        if (rg.esExitosa()) {
+            ArrayList<Partida> listaPartidaAux = (ArrayList<Partida>)rg.getDatos();
+            Partida partidaAux = new Partida();
+            if (listaPartidaAux.size() > 0) {
+                partidaAux = (Partida)listaPartidaAux.get(0);
+            } else {
+                partidaAux.setNum_partida(1);
+            }
+            this.abrirDialogPartida(partidaAux);
+        } else {
+            JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+        }
+        
     }//GEN-LAST:event_btnNuevoCicloContableActionPerformed
 
     public void setearModeloCicloContable(int row) {

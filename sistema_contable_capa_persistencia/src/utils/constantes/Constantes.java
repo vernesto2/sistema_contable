@@ -7,9 +7,6 @@ package utils.constantes;
 import dto.dtoLista;
 import java.awt.Color;
 import java.util.ArrayList;
-import modelo.ConfiguracionUsuario;
-import modelo.Persona;
-import modelo.Usuario;
 
 /**
  *
@@ -56,6 +53,17 @@ public class Constantes {
         dtoLista op2 = new dtoLista("R", "ACREEDOR");
         lista.add(op1);
         lista.add(op2);
+        return lista;
+    }
+    
+    public static ArrayList<dtoLista> listaTipoPartidas() {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        dtoLista op1 = new dtoLista("0", "OPERATIVA");
+        dtoLista op2 = new dtoLista("1", "AJUSTE");
+        dtoLista op3 = new dtoLista("2", "CIERRE");
+        lista.add(op1);
+        lista.add(op2);
+        lista.add(op3);
         return lista;
     }
     
@@ -108,4 +116,8 @@ public class Constantes {
         }
         return c;
     }
+    
+    // constantes para manejar el tipo de ACCION (ABONAR, CARGAR)
+    public static int TIPO_ABONO = 1;
+    public static int TIPO_CARGO = 2;
 }

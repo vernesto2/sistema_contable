@@ -149,7 +149,7 @@ public class dCuentas extends javax.swing.JDialog {
 
         btnCancelarTipoCatalogo.setBackground(new java.awt.Color(251, 205, 6));
         btnCancelarTipoCatalogo.setText("CERRAR");
-        btnCancelarTipoCatalogo.setToolTipText("LIMPIAR EL FORMULARIO Y SELECCIÓN");
+        btnCancelarTipoCatalogo.setToolTipText("CERRAR EL FORMULARIO");
         btnCancelarTipoCatalogo.setBackgroundHover(new java.awt.Color(251, 174, 6));
         btnCancelarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCancelarTipoCatalogo.setForegroundHover(new java.awt.Color(0, 0, 0));
@@ -167,7 +167,7 @@ public class dCuentas extends javax.swing.JDialog {
 
         btnGuardarTipoCatalogo.setBackground(new java.awt.Color(33, 58, 86));
         btnGuardarTipoCatalogo.setText("GUARDAR");
-        btnGuardarTipoCatalogo.setToolTipText("GUARDAR O ACTUALIZAR EL TIPO DE CATALOGO");
+        btnGuardarTipoCatalogo.setToolTipText("GUARDAR / ACTUALIZAR LA CUENTA");
         btnGuardarTipoCatalogo.setBackgroundHover(new java.awt.Color(33, 68, 86));
         btnGuardarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardarTipoCatalogo.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);

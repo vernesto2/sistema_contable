@@ -76,6 +76,35 @@ public class daoPartida {
         }
     }
     
+    public RespuestaGeneral ObtenerUltimoNumPartida() {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        ArrayList<Partida> lista = new ArrayList<>();
+        ResultSet rs = null;
+        var sql = """
+                  SELECT p.* FROM partida p where p.eliminado = 0 order by p.id desc limit 1
+                  """;
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Partida partida = new Partida();
+                partida.setId(-1);
+                partida.setId_ciclo(-1);
+                partida.setId_tipo_partida(-1);
+                partida.setNum_partida((rs.getInt("num_partida")) + 1);
+                partida.setComentario("");
+                partida.setFecha(new Date());
+                partida.setEliminado(false);
+                lista.add(partida);
+            }
+            return rg.asOk("", lista);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asServerError(mensaje);
+        }
+    }
+    
     public RespuestaGeneral ObtenerPorId(int id) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<dtoPartida> lista = new ArrayList<>();

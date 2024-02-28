@@ -155,7 +155,7 @@ public class dCicloContable extends javax.swing.JDialog {
 
         btnCancelarTipoCatalogo.setBackground(new java.awt.Color(251, 205, 6));
         btnCancelarTipoCatalogo.setText("CERRAR");
-        btnCancelarTipoCatalogo.setToolTipText("LIMPIAR EL FORMULARIO Y SELECCIÓN");
+        btnCancelarTipoCatalogo.setToolTipText("CERRAR FORMULARIO");
         btnCancelarTipoCatalogo.setBackgroundHover(new java.awt.Color(251, 174, 6));
         btnCancelarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCancelarTipoCatalogo.setForegroundHover(new java.awt.Color(0, 0, 0));
@@ -173,7 +173,7 @@ public class dCicloContable extends javax.swing.JDialog {
 
         btnGuardarTipoCatalogo.setBackground(new java.awt.Color(33, 58, 86));
         btnGuardarTipoCatalogo.setText("GUARDAR");
-        btnGuardarTipoCatalogo.setToolTipText("GUARDAR O ACTUALIZAR EL TIPO DE CATALOGO");
+        btnGuardarTipoCatalogo.setToolTipText("GUARDAR / ACTUALIZAR EL CICLO CONTABLE");
         btnGuardarTipoCatalogo.setBackgroundHover(new java.awt.Color(33, 68, 86));
         btnGuardarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardarTipoCatalogo.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
@@ -211,7 +211,6 @@ public class dCicloContable extends javax.swing.JDialog {
         jLabel4.setText("Tipo de catalogo:");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        cmbTipoCatalogo.setBorder(null);
         cmbTipoCatalogo.setColorMaterial(new java.awt.Color(102, 102, 102));
         cmbTipoCatalogo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {

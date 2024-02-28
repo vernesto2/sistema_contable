@@ -137,7 +137,7 @@
                   <Color blue="6" green="cd" red="fb" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="CERRAR"/>
-                <Property name="toolTipText" type="java.lang.String" value="LIMPIAR EL FORMULARIO Y SELECCI&#xd3;N"/>
+                <Property name="toolTipText" type="java.lang.String" value="CERRAR FORMULARIO"/>
                 <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="6" green="ae" red="fb" type="rgb"/>
                 </Property>
@@ -174,7 +174,7 @@
                   <Color blue="56" green="3a" red="21" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="GUARDAR"/>
-                <Property name="toolTipText" type="java.lang.String" value="GUARDAR O ACTUALIZAR EL TIPO DE CATALOGO"/>
+                <Property name="toolTipText" type="java.lang.String" value="GUARDAR / ACTUALIZAR EL CICLO CONTABLE"/>
                 <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="44" red="21" type="rgb"/>
                 </Property>

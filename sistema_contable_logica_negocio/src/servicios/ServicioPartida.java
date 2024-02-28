@@ -38,6 +38,13 @@ public class ServicioPartida {
         return rs;
     }
     
+    public RespuestaGeneral obtenerUltimoNumPartida() {
+        this.cx.conectar();
+        RespuestaGeneral rs = this.daoPartida.ObtenerUltimoNumPartida();
+        this.cx.desconectar(); 
+        return rs;
+    }
+    
     public RespuestaGeneral insertar(Partida partida) {
         RespuestaGeneral rs = RespuestaGeneral.asBadRequest("");
         // validaciones
