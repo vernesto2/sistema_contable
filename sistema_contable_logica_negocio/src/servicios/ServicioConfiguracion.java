@@ -30,18 +30,9 @@ import utils.constantes.RespuestaGeneral;
  */
 public class ServicioConfiguracion {
 
-    ServicioUsuario _usuario;
-
-    public ServicioConfiguracion(String rutaConexion) {
-        _usuario = new ServicioUsuario(rutaConexion);
-    }
-
-    public ServicioConfiguracion(ServicioUsuario _usuario) {
-        this._usuario = _usuario;
-    }
-
     public RespuestaGeneral crear(Usuario usuario, char[] claveSinCifrar)  {
         try {
+            ServicioUsuario _usuario = new ServicioUsuario(null);
             RespuestaGeneral respValidarUsuario = _usuario.validarUsuario(usuario, claveSinCifrar);
             if (respValidarUsuario.esFallida()) {
                 return respValidarUsuario;
@@ -49,13 +40,9 @@ public class ServicioConfiguracion {
             //ejecutar el código SQL inicial
             String fileName = crearConfiguracionInicial();
             
-            Conexion conexion = new Conexion(fileName);
-            //crear el usuario en el nuevo archivo
-            conexion.conectar();
-            _usuario.setConexion(conexion);
+            _usuario.setRutaConexion(fileName);
             //crear el nuevo usuario
             RespuestaGeneral rgUsuario = _usuario.crearDocente(usuario, claveSinCifrar);
-            _usuario.cerrarConexion();
             return rgUsuario;
         } catch (NoSuchAlgorithmException ex) {
             return RespuestaGeneral.asBadRequest(ex.getMessage());

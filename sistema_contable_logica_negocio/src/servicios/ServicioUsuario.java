@@ -36,21 +36,14 @@ public class ServicioUsuario {
     Conexion cx;
 
     public ServicioUsuario(String rutaConexion) {
+        setRutaConexion(rutaConexion);
+    }
+    public ServicioUsuario() {
+
+    }
+    public void setRutaConexion(String rutaConexion) {
         this.cx = new Conexion(rutaConexion);
         this.daoUsuario = new DaoUsuario(this.cx);
-    }
-
-    public void cerrarConexion() {
-        try {
-            this.cx.getCx().close();
-        } catch (SQLException ex) {
-            Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void setConexion(Conexion conexion) {
-        this.cx = conexion;
-        this.daoUsuario = new DaoUsuario(cx);
     }
 
     public RespuestaGeneral validarUsuario(Usuario usuario, char[] claveSinCifrar) {
@@ -87,19 +80,31 @@ public class ServicioUsuario {
             usuario.setClave(obj.get("clave"));
             usuario.setSalt(obj.get("salt"));
             usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+            
+            this.cx.desconectar();
             daoUsuario.insertar(usuario);
             return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
         } catch (Exception e) {
             return RespuestaGeneral.asBadRequest(e.getMessage());
+        } finally {
+            this.cx.desconectar();
         }
     }
     
     public RespuestaGeneral sePuedeCrearAlumno() {
-        int contarAlumnos = daoUsuario.contarAlumnos();
-        if(contarAlumnos != 0) {
-            return RespuestaGeneral.asBadRequest("Esta base de datos no soporta más alumnos");
+        try {
+            this.cx.conectar();
+            int contarAlumnos = daoUsuario.contarAlumnos();
+            if(contarAlumnos != 0) {
+                return RespuestaGeneral.asBadRequest("Esta base de datos no soporta más alumnos");
+            }
+            return RespuestaGeneral.asOk("Esta base de datos si soporta 1 alumno", null);
+        } catch (Exception e) {
+            return RespuestaGeneral.asServerError(e.getMessage());
+        } finally {
+            this.cx.desconectar();
         }
-        return RespuestaGeneral.asOk("Esta base de datos si soporta 1 alumno", null);
+        
     }
     
     public RespuestaGeneral crearAlumno(Usuario usuario, char[] claveSinCifrar) throws NoSuchAlgorithmException, InvalidKeySpecException {

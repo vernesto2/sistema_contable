@@ -32,8 +32,10 @@ public class vLogin extends javax.swing.JFrame {
      */
     public char pass;
     Sesion sesion;
+    ServicioUsuario _usuario;
     public vLogin(Sesion sesion) {
         this.sesion = sesion;
+        _usuario = new ServicioUsuario(sesion.rutaConexion);
         initComponents();
         this.iniciarVista();
     }
@@ -46,6 +48,15 @@ public class vLogin extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/utils/icon/login.png")));
         this.txtUsuario.setText("ac14072");
         this.txtClave.setText("1234");
+        
+        RespuestaGeneral resp = _usuario.sePuedeCrearAlumno();
+        if(resp.esExitosa()) {
+            lblSePuedeCrearAlumno.setText("Este archivo soporta la creación de un alumno");
+            btnCrearAlumno.setVisible(true);
+        } else {
+            lblSePuedeCrearAlumno.setText("Este archivo ya pertenece a un alumno");
+            btnCrearAlumno.setVisible(false);
+        }
     }
 
     /**
@@ -67,6 +78,8 @@ public class vLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         rSButtonShapeIcon9 = new RSMaterialComponent.RSButtonShapeIcon();
         btnOlvidoContraseña = new rojeru_san.RSButton();
+        btnCrearAlumno = new RSMaterialComponent.RSButtonShapeIcon();
+        lblSePuedeCrearAlumno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -169,6 +182,27 @@ public class vLogin extends javax.swing.JFrame {
             }
         });
 
+        btnCrearAlumno.setBackground(new java.awt.Color(251, 205, 6));
+        btnCrearAlumno.setText("Crear alumno");
+        btnCrearAlumno.setToolTipText("");
+        btnCrearAlumno.setBackgroundHover(new java.awt.Color(251, 174, 6));
+        btnCrearAlumno.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnCrearAlumno.setForegroundHover(new java.awt.Color(0, 0, 0));
+        btnCrearAlumno.setForegroundIcon(new java.awt.Color(0, 0, 0));
+        btnCrearAlumno.setForegroundIconHover(new java.awt.Color(0, 0, 0));
+        btnCrearAlumno.setForegroundText(new java.awt.Color(0, 0, 0));
+        btnCrearAlumno.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnCrearAlumno.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.NEW_RELEASES);
+        btnCrearAlumno.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnCrearAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearAlumnoActionPerformed(evt);
+            }
+        });
+
+        lblSePuedeCrearAlumno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSePuedeCrearAlumno.setText("jLabel2");
+
         javax.swing.GroupLayout rSPanel1Layout = new javax.swing.GroupLayout(rSPanel1);
         rSPanel1.setLayout(rSPanel1Layout);
         rSPanel1Layout.setHorizontalGroup(
@@ -181,24 +215,31 @@ public class vLogin extends javax.swing.JFrame {
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(71, 71, 71))
             .addGroup(rSPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanel1Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(93, 93, 93)
                         .addComponent(rSButtonShapeIcon9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanel1Layout.createSequentialGroup()
-                        .addComponent(btnOlvidoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101))))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(rSPanel1Layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(btnOlvidoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(rSPanel1Layout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(btnCrearAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(rSPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblSePuedeCrearAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(rSPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         rSPanel1Layout.setVerticalGroup(
             rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,13 +257,17 @@ public class vLogin extends javax.swing.JFrame {
                 .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addComponent(checkMostrarClave, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnOlvidoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblSePuedeCrearAlumno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(btnCrearAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,7 +278,7 @@ public class vLogin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(rSPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(rSPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -243,7 +288,7 @@ public class vLogin extends javax.swing.JFrame {
 
         String carnet = txtUsuario.getText();
         char[] clave = txtClave.getPassword();
-        ServicioUsuario _usuario = new ServicioUsuario(sesion.rutaConexion);
+        
         RespuestaGeneral rgUsuario = _usuario.obtenerPorCarnet(carnet);
         if (rgUsuario.esFallida()) {
             JOptionPane.showMessageDialog(this, rgUsuario.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(rgUsuario));
@@ -340,6 +385,14 @@ public class vLogin extends javax.swing.JFrame {
         this.btnOlvidoContraseña.enable();
     }//GEN-LAST:event_btnOlvidoContraseñaActionPerformed
 
+    private void btnCrearAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlumnoActionPerformed
+        //false hará que la vista intente crear alumno en vez de restaurar a la configuración inicial
+        final boolean esRestaurar = false;
+        vRestaurarConfiguracion config = new vRestaurarConfiguracion(sesion, esRestaurar);
+        config.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCrearAlumnoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -378,11 +431,13 @@ public class vLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnCancelar;
+    private RSMaterialComponent.RSButtonShapeIcon btnCrearAlumno;
     private RSMaterialComponent.RSButtonShapeIcon btnIngresar;
     private rojeru_san.RSButton btnOlvidoContraseña;
     private rojerusan.RSCheckBox checkMostrarClave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblSePuedeCrearAlumno;
     private RSMaterialComponent.RSButtonShapeIcon rSButtonShapeIcon9;
     private necesario.RSPanel rSPanel1;
     private RSMaterialComponent.RSPasswordMaterial txtClave;

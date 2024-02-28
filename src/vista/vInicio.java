@@ -258,7 +258,8 @@ public class vInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
-        vRestaurarConfiguracion config = new vRestaurarConfiguracion(sesion);
+        final boolean esRestaurar = true;
+        vRestaurarConfiguracion config = new vRestaurarConfiguracion(sesion, true);
         config.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRestaurarActionPerformed
