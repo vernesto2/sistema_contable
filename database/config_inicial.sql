@@ -1,4 +1,28 @@
 BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "partida_detalle" (
+	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"id_partida"	INTEGER NOT NULL,
+	"id_cuenta"	INTEGER NOT NULL,
+	"parcial"	NUMERIC,
+	"debe"	NUMERIC,
+	"haber"	NUMERIC,
+	"tipo_cargo_abono"	INTEGER DEFAULT 2,
+	"eliminado"	INTEGER NOT NULL DEFAULT 0
+);
+CREATE TABLE IF NOT EXISTS "tipo_catalogo" (
+	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"tipo"	TEXT NOT NULL,
+	"ref"	TEXT,
+	"color"	INTEGER DEFAULT 0,
+	"libro_diario"	INTEGER DEFAULT 1,
+	"libro_mayor"	INTEGER DEFAULT 0,
+	"balanza_comprobacion"	INTEGER DEFAULT 0,
+	"estado_resultado"	INTEGER DEFAULT 0,
+	"balance_general"	INTEGER DEFAULT 0,
+	"flujo_efectivo"	INTEGER DEFAULT 0,
+	"cambios_patrimonio"	INTEGER DEFAULT 0,
+	"eliminado"	INTEGER NOT NULL DEFAULT 0
+);
 CREATE TABLE IF NOT EXISTS "partida" (
 	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	"id_ciclo"	INTEGER NOT NULL,
@@ -21,15 +45,6 @@ CREATE TABLE IF NOT EXISTS "cuenta" (
 	"eliminado"	INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY("id")
 );
-CREATE TABLE IF NOT EXISTS "partida_detalle" (
-	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	"id_partida"	INTEGER NOT NULL,
-	"id_cuenta"	INTEGER NOT NULL,
-	"parcial"	NUMERIC,
-	"debe"	NUMERIC,
-	"haber"	NUMERIC,
-	"eliminado"	INTEGER NOT NULL DEFAULT 0
-);
 CREATE TABLE IF NOT EXISTS "usuario" (
 	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	"id_persona"	INTEGER NOT NULL,
@@ -45,12 +60,6 @@ CREATE TABLE IF NOT EXISTS "usuario" (
 	"respuesta3"	TEXT,
 	"salt"	TEXT,
 	FOREIGN KEY("id_persona") REFERENCES "persona"("id")
-);
-CREATE TABLE IF NOT EXISTS "tipo_catalogo" (
-	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	"tipo"	TEXT NOT NULL,
-	"ref"	TEXT,
-	"eliminado"	INTEGER NOT NULL DEFAULT 0
 );
 CREATE TABLE IF NOT EXISTS "ciclo_contable" (
 	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -123,6 +132,25 @@ CREATE TABLE IF NOT EXISTS "persona" (
 	"tipo"	INTEGER NOT NULL DEFAULT 1,
 	"carnet"	TEXT
 );
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (1,'Contabilidad financiera - método analítico','',7,1,1,1,1,1,1,1,0);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (2,'Contabilidad financiera - método perpetuo','',0,1,1,1,1,0,0,1,0);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (3,'Contabilidad de costos','',11,1,1,0,0,0,0,0,0);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (4,'Contabilidad bancaria','',6,1,1,0,0,0,0,0,0);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (5,'Contabilidad de seguros','',0,1,1,0,0,0,0,0,0);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (6,'Contabilidad agrícola cultivo de caña de azúcar','',0,1,1,0,0,0,0,0,0);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (7,'Contabilidad sector publico','',0,1,1,0,0,0,0,0,0);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (8,'Contabilidad agricola cultivo de café','',0,1,1,0,0,0,0,0,0);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (9,'PRUEBA','',0,1,0,0,0,0,0,0,1);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (10,'PRUEBA','',0,1,0,0,0,0,0,0,1);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (11,'PRUEBA','',0,1,0,0,0,0,0,0,1);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (12,'AAAAA','',0,1,0,0,0,0,0,0,1);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (13,'aaaaa','',0,1,0,0,0,0,0,0,1);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (14,'PRUEBA','',0,1,0,0,0,0,0,0,1);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (15,'Prueba tipo','',0,1,0,0,0,0,0,0,1);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (16,'CONTABILIDAD FINANCIERA 2024','',0,1,0,0,0,0,0,0,1);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (17,'PRUEBA','',0,1,0,0,0,0,0,0,1);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (18,'PRUEBA','',0,1,0,0,0,0,0,0,1);
+INSERT INTO "tipo_catalogo" ("id","tipo","ref","color","libro_diario","libro_mayor","balanza_comprobacion","estado_resultado","balance_general","flujo_efectivo","cambios_patrimonio","eliminado") VALUES (19,'NUEVO CATALOGO','',0,1,0,0,0,0,0,0,1);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (1,8,'1112','','Inventario',0,'',NULL,NULL,0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (2,8,'111201','','Plantia y arboles de sombra',0,'',NULL,NULL,0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (3,8,'111202','','Productos Agricolas-Cafe',0,'',NULL,NULL,0);
@@ -715,11 +743,11 @@ INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","t
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (590,6,'510101','','productos agricolas-caña de azucar',0,'',NULL,NULL,0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (591,6,'510102','','otros',0,'',NULL,NULL,0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (592,6,'5102','','ingresos por produccion de caña de azucar',0,'',NULL,NULL,0);
-INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (593,1,'1','','ACTIVO',0,'',NULL,NULL,0);
-INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (594,1,'11','','CORRIENTE',0,'',NULL,NULL,0);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (593,1,'1','','ACTIVO',0,'','','',0);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (594,1,'11','','CORRIENTE',0,'','','',0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (595,1,'1101','','EFECTIVO Y EQUIVALENTES DE EFECTIVO',0,'',NULL,NULL,0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (596,1,'110101','','CAJA GENERAL',0,'',NULL,NULL,0);
-INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (597,1,'110102','','CAJA CHICA',0,'',NULL,NULL,0);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (597,1,'110102','','CAJA CHICA',0,'','','',0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (598,1,'110103','','BANCOS',0,'',NULL,NULL,0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (599,1,'11010301','','CUENTA CORRIENTE',0,'',NULL,NULL,0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (600,1,'11010302','','CUENTA DE AHORRO',0,'',NULL,NULL,0);
@@ -8564,23 +8592,16 @@ INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","t
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8441,4,'9240020002','','Inversiones financieras - ME',0,'',NULL,NULL,0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8442,4,'93','','INFORMACIÓN FINANCIERA POR CONTRA',0,'',NULL,NULL,0);
 INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8443,4,'94','','EXISTENCIAS EN LA BÓVEDA POR CONTRA',0,'',NULL,NULL,0);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8444,1,'1110101','','PRUEBA DE CUENTA',0,'','','',1);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8445,1,'1101','','PRUEBA CONCEPTO',0,'','','',1);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8446,1,'1101','','ACTIVO PRUEBA',0,'','','',1);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8447,16,'1','','ACTIVO',1,'','','',0);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8448,16,'2','','PASIVO',1,'R','','',0);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8449,1,'110110','','CUENTA AUXIILAR',0,'','','',0);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8450,1,'2','','PRUEBA',0,'R','','',1);
+INSERT INTO "cuenta" ("id","id_tipo_catalogo","codigo","ref","nombre","nivel","tipo_saldo","ingresos","egresos","eliminado") VALUES (8451,1,'1101','','PRUEBA AA',4,'R','1111','1111',1);
 INSERT INTO "usuario" ("id","id_persona","nombre","correo","clave","resetear_clave","pregunta1","respuesta1","pregunta2","respuesta2","pregunta3","respuesta3","salt") VALUES (1,8,'pm15016','a','Fzh5wt3oC8lQiT0kWMph0Au0wr+OZV3ayKKJvMJLSq8=',0,1,'1',2,'2',3,'3','9dlY2Sue1yNwO1iVQ4Q3U1dPTfrmII');
 INSERT INTO "usuario" ("id","id_persona","nombre","correo","clave","resetear_clave","pregunta1","respuesta1","pregunta2","respuesta2","pregunta3","respuesta3","salt") VALUES (2,9,'ac14072','ac14072@ues.edu.sv','8psfkSRP7luf2YUhrWYjHaWgyAlmbsruVZgmLJiirm4=',0,1,'1',2,'2',3,'3','orxNExh2TBs1ZU3R38tucV2VyxCrak');
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (1,'Contabilidad financiera - método analítico','',0);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (2,'Contabilidad financiera - método perpetuo',NULL,0);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (3,'Contabilidad de costos',NULL,0);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (4,'Contabilidad bancaria',NULL,0);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (5,'Contabilidad de seguros',NULL,0);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (6,'Contabilidad agrícola cultivo de caña de azúcar',NULL,0);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (7,'Contabilidad sector publico',NULL,0);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (8,'Contabilidad agricola cultivo de café',NULL,0);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (9,'PRUEBA','',1);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (10,'PRUEBA','',1);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (11,'PRUEBA','',1);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (12,'AAAAA','',1);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (13,'aaaaa','',1);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (14,'PRUEBA','',1);
-INSERT INTO "tipo_catalogo" ("id","tipo","ref","eliminado") VALUES (15,'Prueba tipo','',1);
 INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (1,1,'EMPRESA XYZ','2023-01-01','2023-12-31',0);
 INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (2,2,'EMPRESA YYY','2024-01-01','2024-12-31',0);
 INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (3,1,'NUEVO 1','2024-02-01','2024-02-29',1);
@@ -8593,7 +8614,11 @@ INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","elimi
 INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (10,4,'aaaaa','2024-02-12','2024-02-12',1);
 INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (11,7,'PRUEBA CORRECTA','2024-01-01','2024-12-31',1);
 INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (12,14,'PRUEBA','2024-02-12','2024-02-12',0);
-INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (13,3,'Prueba x','2024-02-01','2024-04-30',0);
+INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (13,16,'Prueba x','2024-02-01','2024-04-30',1);
+INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (14,16,'EMPRESA LA CONSTANCIA','2024-02-21','2024-02-21',1);
+INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (15,3,'EMPRESA CONSTRUCTORA S.A DE C.V','2024-02-22','2024-12-31',0);
+INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (16,6,'PRUEBA','2024-03-01','2024-05-31',1);
+INSERT INTO "ciclo_contable" ("id","id_catalogo","titulo","desde","hasta","eliminado") VALUES (17,1,'PRUEBA','2024-02-25','2024-02-25',1);
 INSERT INTO "metodo_bancaria" ("codigo","tipo","cuenta","tipo_catalogo") VALUES (1,NULL,'ACTIVOS',4);
 INSERT INTO "metodo_bancaria" ("codigo","tipo","cuenta","tipo_catalogo") VALUES (11,NULL,'ACTIVOS DE INTERMEDIACIÓN',4);
 INSERT INTO "metodo_bancaria" ("codigo","tipo","cuenta","tipo_catalogo") VALUES (111,NULL,'FONDOS DISPONIBLES',4);
@@ -10802,6 +10827,7 @@ INSERT INTO "metodo_bancaria" ("codigo","tipo","cuenta","tipo_catalogo") VALUES 
 INSERT INTO "metodo_bancaria" ("codigo","tipo","cuenta","tipo_catalogo") VALUES (9240020002,NULL,'Inversiones financieras - ME',4);
 INSERT INTO "metodo_bancaria" ("codigo","tipo","cuenta","tipo_catalogo") VALUES (93,NULL,'INFORMACIÓN FINANCIERA POR CONTRA',4);
 INSERT INTO "metodo_bancaria" ("codigo","tipo","cuenta","tipo_catalogo") VALUES (94,NULL,'EXISTENCIAS EN LA BÓVEDA POR CONTRA',4);
+INSERT INTO "configuracion_usuario" ("id","id_usuario","id_ciclo_contable","avatar") VALUES (3,2,1,'/utils/avatar/avatar2.png');
 INSERT INTO "metodo_seguros" ("CODIGO","TIPO","CONCEPTO","tipo_catalogo") VALUES (1,NULL,'ACTIVO',5);
 INSERT INTO "metodo_seguros" ("CODIGO","TIPO","CONCEPTO","tipo_catalogo") VALUES (11,NULL,'DISPONIBLE',5);
 INSERT INTO "metodo_seguros" ("CODIGO","TIPO","CONCEPTO","tipo_catalogo") VALUES (1101,NULL,'CAJA',5);
@@ -17037,13 +17063,6 @@ INSERT INTO "metodo_analitico" ("Codigo","Tipo","Cuenta","tipo_catalogo") VALUES
 INSERT INTO "metodo_analitico" ("Codigo","Tipo","Cuenta","tipo_catalogo") VALUES (6,NULL,'CUENTA DE CIERRE',1);
 INSERT INTO "metodo_analitico" ("Codigo","Tipo","Cuenta","tipo_catalogo") VALUES (61,NULL,'CUENTA LIQUIDADORA',1);
 INSERT INTO "metodo_analitico" ("Codigo","Tipo","Cuenta","tipo_catalogo") VALUES (6101,NULL,'PÉRDIDAS Y GANANCIAS',1);
-INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (1,'diego','palacios',2,'pm15016');
-INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (2,'palacios','palacios',2,'pm15016');
-INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (3,'palacios','palacios',2,'pm15016');
-INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (4,'palacios','palacios',2,'pm15016');
-INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (5,'palacios','palacios',2,'pm15016');
-INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (6,'palacios','palacios',2,'pm15016');
-INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (7,'Duran','Duran',2,'dc14014');
-INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (8,'Palacios','Palacios',2,'pm15016');
-INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (9,'Acevedo','Acevedo',2,'ac14072');
+INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (8,'Palacios','Palacios',1,'pm15016');
+INSERT INTO "persona" ("id","nombres","apellidos","tipo","carnet") VALUES (9,'Victor','Acevedo',1,'ac14072');
 COMMIT;
