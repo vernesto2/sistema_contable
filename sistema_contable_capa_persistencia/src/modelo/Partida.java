@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -19,6 +20,9 @@ public class Partida {
     String comentario;
     Date fecha;
     boolean eliminado;
+    
+    ArrayList<PartidaDetalle> listaPartidaDetalles;
+    ArrayList<PartidaDetalle> listaPartidaDetallesEliminados;
 
     public Partida(int id, int id_ciclo, int id_tipo_partida, int num_partida, String comentario, Date fecha, boolean eliminado) {
         this.id = id;
@@ -38,6 +42,9 @@ public class Partida {
         this.comentario = "";
         this.fecha = new Date();
         this.eliminado = false;
+        
+        this.listaPartidaDetalles = new ArrayList<>();
+        this.listaPartidaDetallesEliminados = new ArrayList<>();
     }
 
     public int getId() {
@@ -95,4 +102,21 @@ public class Partida {
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
     }
+
+    public ArrayList<PartidaDetalle> getListaPartidaDetalles() {
+        return listaPartidaDetalles;
+    }
+
+    public void setListaPartidaDetalles(ArrayList<PartidaDetalle> listaPartidaDetalles) {
+        this.listaPartidaDetalles = listaPartidaDetalles;
+    }
+
+    public ArrayList<PartidaDetalle> getListaPartidaDetallesEliminados() {
+        return listaPartidaDetallesEliminados;
+    }
+
+    public void setListaPartidaDetallesEliminados(ArrayList<PartidaDetalle> listaPartidaDetallesEliminados) {
+        this.listaPartidaDetallesEliminados = listaPartidaDetallesEliminados;
+    }
+    
 }
