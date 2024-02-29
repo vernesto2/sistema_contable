@@ -32,6 +32,7 @@ public class vRestaurarConfiguracion extends javax.swing.JFrame {
     ServicioConfiguracion _configuracion;
     Sesion sesion;
     private final boolean esRestaurar;
+
     public vRestaurarConfiguracion(Sesion sesion, boolean esRestaurar) {
         initComponents();
         this.sesion = sesion;
@@ -51,7 +52,7 @@ public class vRestaurarConfiguracion extends javax.swing.JFrame {
         this.comboPreguntaRecuperacion1.setModel(modeloPreguntasRecuperacion1);
         this.comboPreguntaRecuperacion2.setModel(modeloPreguntasRecuperacion2);
         this.comboPreguntaRecuperacion3.setModel(modeloPreguntasRecuperacion3);
-        if(esRestaurar) {
+        if (esRestaurar) {
             btnCrearConfiguracion.setText("Crear configuración");
         } else {
             btnCrearConfiguracion.setText("Crear alumno");
@@ -153,9 +154,11 @@ public class vRestaurarConfiguracion extends javax.swing.JFrame {
 
         btnCrearConfiguracion.setBackground(new java.awt.Color(33, 58, 86));
         btnCrearConfiguracion.setText("Crear configuración");
+        btnCrearConfiguracion.setToolTipText("");
         btnCrearConfiguracion.setBackgroundHover(new java.awt.Color(33, 68, 86));
         btnCrearConfiguracion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnCrearConfiguracion.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnCrearConfiguracion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCrearConfiguracion.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
         btnCrearConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,14 +314,13 @@ public class vRestaurarConfiguracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCrearConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfiguracionActionPerformed
-        //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
-        int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo archivo basado en la versión inicial del sistema. \nEl nuevo archivo no contendrá ningun dato que usted haya ingresado incluyendo catálogos, partidas, etc.\nEstará con el catálogo inicial, sin ninguna partida \n¿Esta seguro de continuar?", 
-                "¡Restaurar a versión inicial!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        //System.out.println(salida);
-        if (salida != 0) {
-            return;
+        //restaurar a versión inicial
+        if (esRestaurar == true) {
+
+        } else {
+
         }
-        
+
         char[] claveSinCifrar = txtClave.getPassword();
         char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
 
@@ -349,15 +351,41 @@ public class vRestaurarConfiguracion extends javax.swing.JFrame {
         usuario.setRespuesta3(txtRespuesta3.getText().trim());
 
         usuario.setPersona(persona);
-        RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
-        if (resp.esExitosa()) {
-            JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
-            vInicio vistaInicio = new vInicio();
-            vistaInicio.setVisible(true);
-            this.dispose();
+
+        if (esRestaurar) {
+            //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
+            int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo archivo basado en la versión inicial del sistema. \nEl nuevo archivo no contendrá ningun dato que usted haya ingresado incluyendo catálogos, partidas, etc.\nEl nuevo archivo contendrá docentes creados por defecto en la versión inicial\nEstará con el catálogo inicial, sin ninguna partida \n¿Esta seguro de continuar?",
+                    "¡Restaurar a versión inicial!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            //System.out.println(salida);
+            if (salida == 0) {
+                RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
+                if (resp.esExitosa()) {
+                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
+                    vInicio vistaInicio = new vInicio();
+                    vistaInicio.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+                }
+            }
         } else {
-            JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+            int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo alumno\nEl alumno pasará a ser propietario de este archivo y no se podrá cambiar\n¿Esta seguro de continuar?", 
+                    "¡Crear alumno!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if(salida == 0) {
+                ServicioUsuario _usuario = new ServicioUsuario(sesion.rutaConexion);
+                
+                RespuestaGeneral resp = _usuario.crearAlumno(usuario, claveSinCifrar);
+                if (resp.esExitosa()) {
+                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
+                    vInicio vistaInicio = new vInicio();
+                    vistaInicio.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+                }
+            }
         }
+
         //limpiar el array de char, en caso de volcado de memoria, no esté la clave
         CharArrayUtils.limpiar(claveSinCifrar);
         CharArrayUtils.limpiar(repetirClaveSinCifrar);

@@ -109,6 +109,7 @@ public class vPrincipal extends javax.swing.JFrame {
         txtConfigCicloContable = new javax.swing.JLabel();
         btnGuardarCicloContable2 = new RSMaterialComponent.RSButtonShapeIcon();
         btnGuardarCicloContable3 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnGuardarCicloContable4 = new RSMaterialComponent.RSButtonShapeIcon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -188,7 +189,7 @@ public class vPrincipal extends javax.swing.JFrame {
         imagenPrincipal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/avatar/avatar1.png"))); // NOI18N
         imagenPrincipal.setToolTipText("Ver Dashboard");
-        imagenPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        imagenPrincipal.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         imagenPrincipal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         imagenPrincipal.setIconTextGap(1);
         imagenPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -367,6 +368,22 @@ public class vPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnGuardarCicloContable4.setBackground(new java.awt.Color(33, 58, 86));
+        btnGuardarCicloContable4.setToolTipText("Abrir archivo");
+        btnGuardarCicloContable4.setBackgroundHover(new java.awt.Color(33, 84, 86));
+        btnGuardarCicloContable4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardarCicloContable4.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
+        btnGuardarCicloContable4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnGuardarCicloContable4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnGuardarCicloContable4.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.FOLDER);
+        btnGuardarCicloContable4.setSizeIcon(25.0F);
+        btnGuardarCicloContable4.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnGuardarCicloContable4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCicloContable4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout topbarLayout = new javax.swing.GroupLayout(topbar);
         topbar.setLayout(topbarLayout);
         topbarLayout.setHorizontalGroup(
@@ -376,8 +393,10 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardarCicloContable3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
+                .addGap(3, 3, 3)
+                .addComponent(btnGuardarCicloContable4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
                 .addContainerGap())
         );
         topbarLayout.setVerticalGroup(
@@ -389,7 +408,8 @@ public class vPrincipal extends javax.swing.JFrame {
                         .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(1, 1, 1))
                     .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGuardarCicloContable3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(btnGuardarCicloContable3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnGuardarCicloContable4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(11, 11, 11))
         );
 
@@ -537,6 +557,10 @@ public class vPrincipal extends javax.swing.JFrame {
         this.irADashboar();
     }//GEN-LAST:event_btnGuardarCicloContable3ActionPerformed
 
+    private void btnGuardarCicloContable4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCicloContable4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarCicloContable4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -583,6 +607,7 @@ public class vPrincipal extends javax.swing.JFrame {
     public static RSMaterialComponent.RSButtonShapeIcon btnFlujoEfectivo;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable2;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable3;
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable4;
     public static RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;
     public static RSMaterialComponent.RSButtonShapeIcon btnLibroMayor;
     public static javax.swing.JLabel imagenPrincipal;

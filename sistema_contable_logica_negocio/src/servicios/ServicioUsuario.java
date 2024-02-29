@@ -66,7 +66,7 @@ public class ServicioUsuario {
         return RespuestaGeneral.asOk(null, null);
     }
 
-    public RespuestaGeneral crearDocente(Usuario usuario, char[] claveSinCifrar) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public RespuestaGeneral crearDocente(Usuario usuario, char[] claveSinCifrar)  {
         RespuestaGeneral respValidar = validarUsuario(usuario, claveSinCifrar);
         try {
             if (respValidar.esFallida()) {
@@ -86,7 +86,8 @@ public class ServicioUsuario {
             return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
         } catch (Exception e) {
             return RespuestaGeneral.asBadRequest(e.getMessage());
-        } finally {
+        }
+        finally {
             this.cx.desconectar();
         }
     }
@@ -107,7 +108,7 @@ public class ServicioUsuario {
         
     }
     
-    public RespuestaGeneral crearAlumno(Usuario usuario, char[] claveSinCifrar) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public RespuestaGeneral crearAlumno(Usuario usuario, char[] claveSinCifrar) {
         RespuestaGeneral respValidar = validarUsuario(usuario, claveSinCifrar);
         try {
             if (respValidar.esFallida()) {
@@ -128,11 +129,13 @@ public class ServicioUsuario {
             usuario.setClave(obj.get("clave"));
             usuario.setSalt(obj.get("salt"));
             usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
-            
+            this.cx.conectar();
             daoUsuario.insertar(usuario);
             return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
         } catch (Exception e) {
             return RespuestaGeneral.asBadRequest(e.getMessage());
+        } finally {
+            this.cx.desconectar();
         }
     }
     
