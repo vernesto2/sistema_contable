@@ -33,4 +33,10 @@ public class Sesion {
     public int tipoUsuario() {
         return usuario.getPersona().getTipo();
     }
+
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+ 
 }

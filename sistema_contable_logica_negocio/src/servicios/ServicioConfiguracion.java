@@ -44,10 +44,6 @@ public class ServicioConfiguracion {
             //crear el nuevo usuario
             RespuestaGeneral rgUsuario = _usuario.crearDocente(usuario, claveSinCifrar);
             return rgUsuario;
-        } catch (NoSuchAlgorithmException ex) {
-            return RespuestaGeneral.asBadRequest(ex.getMessage());
-        } catch (InvalidKeySpecException ex) {
-            return RespuestaGeneral.asBadRequest(ex.getMessage());
         } catch (IOException ex) {
             return RespuestaGeneral.asBadRequest(ex.getMessage());
         } catch (SQLException ex) {

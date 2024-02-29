@@ -4,14 +4,24 @@
  */
 package vista;
 
+import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import modelo.Usuario;
+import necesario.RSFileChooser;
 import utils.constantes.CambiaPanel;
 
 import servicios.ServicioUsuario;
 import sesion.Sesion;
 import utils.UtileriaVista;
+import utils.constantes.Constantes;
 
 /**
  *
@@ -66,6 +76,7 @@ public class vPrincipal extends javax.swing.JFrame {
         }
         this.txtNombreUsuario.setText(sesion.usuario.getPersona().nombreCompleto());
         this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(sesion.configUsuario.getAvatar())));
+        
     }
     
     public void iniciarVista() {
@@ -75,7 +86,13 @@ public class vPrincipal extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/utils/icon/user.png")));
-        
+        if(sesion.esAlumno()) {
+            btnSeleccionarArchivoAlumno.setEnabled(false);
+            this.setTitle(sesion.rutaConexion + " (Alumnos) ");
+        } else {
+            btnSeleccionarArchivoAlumno.setEnabled(true);
+            this.setTitle(sesion.rutaConexion + " (Docente) ");
+        }
         new CambiaPanel(pnl, new vDashboard());
     }
     /**
@@ -109,7 +126,7 @@ public class vPrincipal extends javax.swing.JFrame {
         txtConfigCicloContable = new javax.swing.JLabel();
         btnGuardarCicloContable2 = new RSMaterialComponent.RSButtonShapeIcon();
         btnGuardarCicloContable3 = new RSMaterialComponent.RSButtonShapeIcon();
-        btnGuardarCicloContable4 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnSeleccionarArchivoAlumno = new RSMaterialComponent.RSButtonShapeIcon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -320,7 +337,7 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addComponent(btnFlujoEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCambiosPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(btnCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConfigUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -368,19 +385,19 @@ public class vPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnGuardarCicloContable4.setBackground(new java.awt.Color(33, 58, 86));
-        btnGuardarCicloContable4.setToolTipText("Abrir archivo");
-        btnGuardarCicloContable4.setBackgroundHover(new java.awt.Color(33, 84, 86));
-        btnGuardarCicloContable4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnGuardarCicloContable4.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
-        btnGuardarCicloContable4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnGuardarCicloContable4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnGuardarCicloContable4.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.FOLDER);
-        btnGuardarCicloContable4.setSizeIcon(25.0F);
-        btnGuardarCicloContable4.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        btnGuardarCicloContable4.addActionListener(new java.awt.event.ActionListener() {
+        btnSeleccionarArchivoAlumno.setBackground(new java.awt.Color(33, 58, 86));
+        btnSeleccionarArchivoAlumno.setToolTipText("Abrir archivo");
+        btnSeleccionarArchivoAlumno.setBackgroundHover(new java.awt.Color(33, 84, 86));
+        btnSeleccionarArchivoAlumno.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnSeleccionarArchivoAlumno.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
+        btnSeleccionarArchivoAlumno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnSeleccionarArchivoAlumno.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSeleccionarArchivoAlumno.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.FOLDER);
+        btnSeleccionarArchivoAlumno.setSizeIcon(25.0F);
+        btnSeleccionarArchivoAlumno.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        btnSeleccionarArchivoAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarCicloContable4ActionPerformed(evt);
+                btnSeleccionarArchivoAlumnoActionPerformed(evt);
             }
         });
 
@@ -394,9 +411,9 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardarCicloContable3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addComponent(btnGuardarCicloContable4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSeleccionarArchivoAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
+                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
                 .addContainerGap())
         );
         topbarLayout.setVerticalGroup(
@@ -409,7 +426,7 @@ public class vPrincipal extends javax.swing.JFrame {
                         .addGap(1, 1, 1))
                     .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuardarCicloContable3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnGuardarCicloContable4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(btnSeleccionarArchivoAlumno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(11, 11, 11))
         );
 
@@ -557,9 +574,50 @@ public class vPrincipal extends javax.swing.JFrame {
         this.irADashboar();
     }//GEN-LAST:event_btnGuardarCicloContable3ActionPerformed
 
-    private void btnGuardarCicloContable4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCicloContable4ActionPerformed
+    private void btnSeleccionarArchivoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarArchivoAlumnoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarCicloContable4ActionPerformed
+        //JFileChooser selectorArchivos = new JFileChooser("./");
+        if(sesion.esAlumno()) {
+            return;
+        }
+        
+        RSFileChooser selector = new RSFileChooser();
+        FileNameExtensionFilter fnef = new FileNameExtensionFilter("sqlite", "sqlite", "db");
+        //selectorArchivos.setFileFilter(fnef);
+        //selectorArchivos.setMultiSelectionEnabled(false);
+        selector.setFileFilter(fnef);
+        selector.setCurrentDirectory(new File("./database"));
+        selector.setMultiSelectionEnabled(false);
+        if (selector.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
+            JOptionPane.showMessageDialog(this, "¡No seleccionó ningún archivo: ", "Mensaje", JOptionPane.WARNING_MESSAGE);
+        }
+        File archivo = selector.getSelectedFile();
+        try {
+            if (archivo != null) {
+                String ruta = archivo.getCanonicalPath();
+                System.out.println(ruta);
+                
+                Usuario usuarioInvitado = sesion.usuario;// (Usuario) sesion.usuario.clone();
+                Sesion sesionInvitado = new Sesion(usuarioInvitado, null, ruta);
+                
+                if (ruta.contains(".sqlite") || ruta.contains(".db")) {
+                    vPrincipal vInvitado = new vPrincipal(_usuario, sesionInvitado);
+                    vInvitado.setExtendedState(this.NORMAL);
+                    final int WIDTH = 500;
+                    final int HEIGHT = 600;
+                    Dimension dimension = new Dimension(WIDTH, HEIGHT);
+                    //vInvitado.setSize(dimension);
+                    vInvitado.setVisible(true);
+                    vInvitado.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "¡Archivo no valido: ", "Mensaje", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(vInicio.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "¡Ocurrió un error: " + ex.getMessage(), "Mensaje", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSeleccionarArchivoAlumnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -607,9 +665,9 @@ public class vPrincipal extends javax.swing.JFrame {
     public static RSMaterialComponent.RSButtonShapeIcon btnFlujoEfectivo;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable2;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable3;
-    private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable4;
     public static RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;
     public static RSMaterialComponent.RSButtonShapeIcon btnLibroMayor;
+    private RSMaterialComponent.RSButtonShapeIcon btnSeleccionarArchivoAlumno;
     public static javax.swing.JLabel imagenPrincipal;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnl;
