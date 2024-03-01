@@ -514,7 +514,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnConfigUsuario.isSelected()) {
             this.btnConfigUsuario.setSelected(true);
-            new CambiaPanel(pnl, new vConfiguracion(sesion.usuario, _usuario));
+            new CambiaPanel(pnl, new vConfiguracion(sesion, _usuario));
         }
     }//GEN-LAST:event_btnConfigUsuarioActionPerformed
 
