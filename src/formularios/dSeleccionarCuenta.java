@@ -33,7 +33,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     };
     boolean realizoAccion = false;   
     ServicioCuenta _cuenta;
-    ArrayList<dtoCuenta> listaCuentas = new ArrayList<>();
+    ArrayList<Cuenta> listaCuentas = new ArrayList<>();
     Cuenta cuentaSeleccionada = new Cuenta();
     ArrayList<PartidaDetalle> listaDetallePartida = new ArrayList<>();
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -70,10 +70,10 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         this.listaCuentas = new ArrayList<>();
         tblCuentas.clearSelection();
         this.limiparTablaCuentas();
-        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogo(this.sesion.configUsuario.getId_ciclo_contable(), this.txtQueryBusqueda.getText());
+        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.sesion.configUsuario.getId_ciclo_contable(), this.txtQueryBusqueda.getText());
         this.totalCuentas.setText("0");
         if (rg.esExitosa()) {
-            this.listaCuentas = (ArrayList<dtoCuenta>)rg.getDatos();
+            this.listaCuentas = (ArrayList<Cuenta>)rg.getDatos();
             this.totalCuentas.setText(String.valueOf(this.listaCuentas.size()));
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rg));
@@ -83,7 +83,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     
     public void setDatosCuentas() {
         Object[] datos = new Object[dtm.getColumnCount()];
-        for (dtoCuenta cuenta : listaCuentas) {
+        for (Cuenta cuenta : listaCuentas) {
             datos[0] = cuenta.getNivel();
             datos[1] = cuenta.getCodigo();
             datos[2] = cuenta.getNombre();
@@ -411,8 +411,36 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCargarActionPerformed
 
     public void buscarCuentaPadre(int tipoAccion) {
+        // verificamos si la cuenta seleccionada tiene una longitud de 4
+        if (this.cuentaSeleccionada.getCodigo().length() > 4) {
+            PartidaDetalle pDetallePadre = new PartidaDetalle();
+            Cuenta cuentaPadre = new Cuenta();
+            boolean encontroPadre = false;
+            String codigoPadre = this.cuentaSeleccionada.getCodigo().substring(0, 4);
+            for (Cuenta cuenta : listaCuentas) {
+                if (cuenta.getCodigo().equals(codigoPadre)) {
+                    cuentaPadre = cuenta;
+                    encontroPadre = true;
+                    break;
+                }
+            }
+            if (encontroPadre) {
+                pDetallePadre.setTipo_cargo_abono(tipoAccion);
+                pDetallePadre.setId_cuenta(cuentaPadre.getId());
+                pDetallePadre.setCuenta(cuentaPadre);
+                //pDetallePadre.setParcial(BigDecimal.valueOf(Double.parseDouble(txtMonto.getText())));
+                listaDetallePartida.add(pDetallePadre);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontro cuenta padre", "¡ALERTA!", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        }
+        
+        // creamos el detalle seleccionado
         PartidaDetalle pDetalle = new PartidaDetalle();
         pDetalle.setTipo_cargo_abono(tipoAccion);
+        pDetalle.setId_cuenta(this.cuentaSeleccionada.getId());
+        pDetalle.setCuenta(this.cuentaSeleccionada);
         pDetalle.setParcial(BigDecimal.valueOf(Double.parseDouble(txtMonto.getText())));
         listaDetallePartida.add(pDetalle);
     }

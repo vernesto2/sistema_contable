@@ -66,7 +66,47 @@ public class daoCuenta {
                 cuenta.setIngresos(rs.getString("ingresos"));
                 cuenta.setEgresos(rs.getString("egresos"));
                 cuenta.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
-                cuenta.setCatalogo(rs.getString("catalogo"));
+                lista.add(cuenta);
+            }
+            
+            return rg.asOk("", lista);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asServerError(mensaje);
+        }
+    }
+    
+    public RespuestaGeneral ListarCatalogo(int idTipoCatalogo, String busqueda) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        ArrayList<Cuenta> lista = new ArrayList<>();
+        ResultSet rs = null;
+        var sql = """
+                  select 
+                  	c.*
+                  from cuenta c
+                  where c.id_tipo_catalogo = ? and c.eliminado = 0 and (c.nombre like '%busqueda%' or c.codigo like '%busqueda%')
+                  order by cast(c.codigo as text)
+                  """;
+        String newSql = sql.replaceAll("busqueda", busqueda);
+        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql)) {
+            ps.setInt(1, idTipoCatalogo);
+            //ps.setString(2, busqueda);
+            //ps.setString(3, busqueda);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Cuenta cuenta = new Cuenta();
+                cuenta.setId(rs.getInt("id"));
+                cuenta.setId_tipo_catalogo(rs.getInt("id_tipo_catalogo"));
+                cuenta.setCodigo(rs.getString("codigo"));
+                cuenta.setRef(rs.getString("ref"));
+                cuenta.setNombre(rs.getString("nombre"));
+                cuenta.setNivel(rs.getInt("nivel"));
+                cuenta.setTipo_saldo(rs.getString("tipo_saldo"));
+                cuenta.setIngresos(rs.getString("ingresos"));
+                cuenta.setEgresos(rs.getString("egresos"));
+                cuenta.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
                 lista.add(cuenta);
             }
             

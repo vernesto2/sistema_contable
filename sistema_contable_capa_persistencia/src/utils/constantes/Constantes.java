@@ -118,6 +118,8 @@ public class Constantes {
     }
     
     // constantes para manejar el tipo de ACCION (ABONAR, CARGAR)
-    public static int TIPO_ABONO = 1;
-    public static int TIPO_CARGO = 2;
+    public static int TIPO_CARGO = 1;
+    public static int TIPO_ABONO = 2;
+    public static String TIPO_CARGO_S = "C";
+    public static String TIPO_ABONO_S = "A";
 }

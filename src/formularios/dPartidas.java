@@ -10,9 +10,10 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.Cuenta;
 import modelo.Partida;
 import modelo.PartidaDetalle;
 import rojeru_san.efectos.ValoresEnum;
@@ -95,10 +96,12 @@ public class dPartidas extends javax.swing.JDialog {
     }
     
     public void setModelPartida() {
-        String[] cabecera = {"Codigo","Concepto","Parcial","Debe","Haber","Editar","Eliminar"};
+        String[] cabecera = {"","Codigo","Concepto","Parcial","Debe","Haber","Editar","Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblDetallePartida.setModel(dtm);
-        tblDetallePartida.setDefaultRenderer(Object.class, new Render());
+        Render rr = new Render();
+        rr.setColumna(0);
+        tblDetallePartida.setDefaultRenderer(Object.class, rr);
     }
     
     public void setDatosPartidaDetalle() {
@@ -110,27 +113,36 @@ public class dPartidas extends javax.swing.JDialog {
         btn2.setIcons(ValoresEnum.ICONS.DELETE);
         btn2.setColorIcon(Color.RED);
         btn2.setCursor(cur);
-        
+        this.limiparTablaDetallePartida();
         Object[] datos = new Object[dtm.getColumnCount()];
-        for (PartidaDetalle detalle : partidaModel.getListaPartidaDetalles()) {
-            datos[0] = detalle.getCuenta().getCodigo();
-            datos[1] = detalle.getCuenta().getNombre();
-            datos[2] = detalle.getParcial();
-            datos[3] = detalle.getDebe();
-            datos[4] = detalle.getHaber();
-            datos[5] = btn1;
-            datos[6] = btn2;
+        for (PartidaDetalle detalle : this.listaPartidaDetalles) {
+            datos[0] = detalle.getTipo_cargo_abono() == 1 ? Constantes.TIPO_CARGO_S : Constantes.TIPO_ABONO_S;
+            datos[1] = detalle.getCuenta().getCodigo();
+            datos[2] = detalle.getCuenta().getNombre();
+            datos[3] = detalle.getParcial();
+            datos[4] = detalle.getDebe();
+            datos[5] = detalle.getHaber();
+            datos[6] = btn1;
+            datos[7] = btn2;
             dtm.addRow(datos);
         }
         tblDetallePartida.setModel(dtm);
         tblDetallePartida.setAutoResizeMode(tblDetallePartida.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        tblDetallePartida.getColumnModel().getColumn(0).setPreferredWidth(150);
-        tblDetallePartida.getColumnModel().getColumn(1).setPreferredWidth(400);
-        tblDetallePartida.getColumnModel().getColumn(2).setPreferredWidth(150);
+        tblDetallePartida.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tblDetallePartida.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tblDetallePartida.getColumnModel().getColumn(2).setPreferredWidth(400);
         tblDetallePartida.getColumnModel().getColumn(3).setPreferredWidth(150);
         tblDetallePartida.getColumnModel().getColumn(4).setPreferredWidth(150);
-        tblDetallePartida.getColumnModel().getColumn(5).setPreferredWidth(50);
+        tblDetallePartida.getColumnModel().getColumn(5).setPreferredWidth(150);
         tblDetallePartida.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tblDetallePartida.getColumnModel().getColumn(7).setPreferredWidth(50);
+    }
+    
+    public void limiparTablaDetallePartida() {
+        for (int i = 0; i < tblDetallePartida.getRowCount(); i++) {
+            dtm.removeRow(i);
+            i-=1;
+        }
     }
     
     public void obtenerListaCmbTipoPartidas() {
@@ -429,8 +441,8 @@ public class dPartidas extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -545,7 +557,39 @@ public class dPartidas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAgregarDetallePartidaActionPerformed
 
     public void actualizarMontosDetallesPartidas(ArrayList<PartidaDetalle> lista) {
+        // comparamos el listado que viene con el listado que tenemos para saber si ya se tiene al padre en la tabla y no duplicar
+        ArrayList<PartidaDetalle> listaAux = new ArrayList<>();
+        for (PartidaDetalle detalle : lista) {
+            boolean seEncontroDetalle = false;
+            for (PartidaDetalle pDetalle : this.listaPartidaDetalles) {
+                if (detalle.getId_cuenta() == pDetalle.getId_cuenta()) {
+                    seEncontroDetalle = true;
+                    break;
+                }
+            }
+            // sino se encuentra el detalle lo agregamos
+            if (!seEncontroDetalle) {
+                listaAux.add(detalle);
+            }
+        }
+        // una vez los detalles nuevos, se procede a agregarlos al listado 
+        for (PartidaDetalle partidaDetalle : listaAux) {
+            this.listaPartidaDetalles.add(partidaDetalle);
+        }
         
+        // una vez agregado los detalles, se muestran en la tabla
+        this.setDatosPartidaDetalle();
+    }
+    
+    public ArrayList<PartidaDetalle> ordernarDetallesDePartida() {
+        ArrayList<PartidaDetalle> lista = new ArrayList();
+        Collections.sort(lista, new Comparator<PartidaDetalle>() {
+            @Override
+            public int compare(PartidaDetalle p1, PartidaDetalle p2) {
+                    return new Integer(p1.getId_partida()).compareTo(new Integer(p2.getId_partida()));
+            }
+        });
+        return lista;
     }
     
     /**
