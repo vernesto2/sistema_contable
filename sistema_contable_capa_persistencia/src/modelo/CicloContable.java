@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -17,24 +18,18 @@ public class CicloContable {
     String titulo;
     Date desde;
     Date hasta;
+    int tipo_sociedad;
+    BigDecimal porcentaje_reserva_legal;
     boolean eliminado;
     TipoCatalogo tipoCatalogo = new TipoCatalogo();
-
-    public CicloContable(int id, int id_catalogo, String titulo, Date desde, Date hasta, boolean eliminado, TipoCatalogo tipoCatalogo) {
-        this.id = id;
-        this.id_catalogo = id_catalogo;
-        this.titulo = titulo;
-        this.desde = desde;
-        this.hasta = hasta;
-        this.eliminado = eliminado;
-        this.tipoCatalogo = tipoCatalogo;
-    }
     
     public CicloContable() {
         this.id = -1;
         this.id_catalogo = -1;
         this.titulo = "";
         this.desde = new Date();
+        this.tipo_sociedad = 0;
+        this.porcentaje_reserva_legal = BigDecimal.valueOf(Double.parseDouble("0"));
         this.hasta = new Date();
         this.eliminado = false;
         this.tipoCatalogo = new TipoCatalogo();
@@ -95,5 +90,20 @@ public class CicloContable {
     public void setTipoCatalogo(TipoCatalogo tipoCatalogo) {
         this.tipoCatalogo = tipoCatalogo;
     }
-    
+
+    public int getTipo_sociedad() {
+        return tipo_sociedad;
+    }
+
+    public void setTipo_sociedad(int tipo_sociedad) {
+        this.tipo_sociedad = tipo_sociedad;
+    }
+
+    public BigDecimal getPorcentaje_reserva_legal() {
+        return porcentaje_reserva_legal;
+    }
+
+    public void setPorcentaje_reserva_legal(BigDecimal porcentaje_reserva_legal) {
+        this.porcentaje_reserva_legal = porcentaje_reserva_legal;
+    }
 }

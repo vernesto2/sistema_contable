@@ -19,8 +19,6 @@ import modelo.CicloContable;
 import modelo.ConfiguracionUsuario;
 import modelo.Cuenta;
 import modelo.TipoCatalogo;
-import modelo.Usuario;
-import modelo.dtoCicloContable;
 import rojeru_san.efectos.ValoresEnum;
 import servicios.ServicioCicloContable;
 import servicios.ServicioConfigUsuario;
@@ -29,7 +27,6 @@ import servicios.ServicioTipoCatalogo;
 import sesion.Sesion;
 import utils.Render;
 import utils.UtileriaVista;
-import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -44,7 +41,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     // VARIABLES DE CICLO CONTABLE
     ServicioCicloContable _cicloContable;
     
-    ArrayList<dtoCicloContable> listaCiclosContables = new ArrayList<>();
+    ArrayList<CicloContable> listaCiclosContables = new ArrayList<>();
     CicloContable cicloContableModel = new CicloContable();
     ServicioConfigUsuario _configUsuario;
     
@@ -106,11 +103,11 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btn3.setColorIcon(Color.GREEN);
         
         Object[] datos = new Object[dtm.getColumnCount()];
-        for (dtoCicloContable ciclo : listaCiclosContables) {
+        for (CicloContable ciclo : listaCiclosContables) {
             datos[0] = ciclo.getTitulo();
             datos[1] = sdf.format(ciclo.getDesde());
             datos[2] = sdf.format(ciclo.getHasta());
-            datos[3] = ciclo.getCatalogo();
+            datos[3] = ciclo.getTipoCatalogo().getTipo();
             datos[4] = btn1;
             datos[5] = btn2;
             datos[6] = btn3;
@@ -134,7 +131,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         RespuestaGeneral rs = _cicloContable.obtenerLista(this.txtBusquedaCicloContable.getText());
         this.totalCicloContable.setText("0");
         if (rs.esExitosa()) {
-            this.listaCiclosContables = (ArrayList<dtoCicloContable>)rs.getDatos();
+            this.listaCiclosContables = (ArrayList<CicloContable>)rs.getDatos();
             this.totalCicloContable.setText(String.valueOf(this.listaCiclosContables.size()));
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rs));
@@ -923,11 +920,14 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     }//GEN-LAST:event_tblCicloContableMouseClicked
 
     public void setearModeloCicloContable(int row) {
-        cicloContableModel.setId(this.listaCiclosContables.get(row).getId());
-        cicloContableModel.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
-        cicloContableModel.setTitulo(this.listaCiclosContables.get(row).getTitulo());
-        cicloContableModel.setDesde(this.listaCiclosContables.get(row).getDesde());
-        cicloContableModel.setHasta(this.listaCiclosContables.get(row).getHasta());
+        cicloContableModel = (CicloContable)this.listaCiclosContables.get(row);
+//        cicloContableModel.setId(this.listaCiclosContables.get(row).getId());
+//        cicloContableModel.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
+//        cicloContableModel.setTitulo(this.listaCiclosContables.get(row).getTitulo());
+//        cicloContableModel.setDesde(this.listaCiclosContables.get(row).getDesde());
+//        cicloContableModel.setHasta(this.listaCiclosContables.get(row).getHasta());
+//        cicloContableModel.setTipo_sociedad(this.listaCiclosContables.get(row).getTipo_sociedad());
+//        cicloContableModel.setPorcentaje_reserva_legal(this.listaCiclosContables.get(row).getPorcentaje_reserva_legal());
     }
     
     public void abrirDialogCicloContable(CicloContable cicloContable) {
