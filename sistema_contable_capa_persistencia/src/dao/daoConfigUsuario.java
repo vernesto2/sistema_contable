@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import modelo.CicloContable;
 import modelo.ConfiguracionUsuario;
-import modelo.TipoCatalogo;
 
 /**
  *

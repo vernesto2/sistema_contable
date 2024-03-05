@@ -5,6 +5,7 @@
 package dao;
 
 import conexion.Conexion;
+import java.math.BigDecimal;
 import utils.constantes.RespuestaGeneral;
 
 import java.sql.PreparedStatement;
@@ -17,10 +18,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.CicloContable;
-import modelo.Cuenta;
 import modelo.TipoCatalogo;
-import modelo.dtoCicloContable;
-import utils.constantes.Constantes;
 
 /**
  *
@@ -39,18 +37,19 @@ public class daoCicloContable {
     
     public RespuestaGeneral ListarCiclosContables(String busqueda) {
         RespuestaGeneral rg = new RespuestaGeneral();
-        ArrayList<dtoCicloContable> lista = new ArrayList<>();
+        ArrayList<CicloContable> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  select cc.*, tc.tipo as catalogo from ciclo_contable cc
-                  left join tipo_catalogo tc on cc.id_catalogo = tc.id
-                  where cc.eliminado = 0 and tc.eliminado = 0 and cc.titulo like '%paramBusqueda%'
+                  select 
+                    cc.* 
+                  from ciclo_contable cc
+                  where cc.eliminado = 0 and cc.titulo like '%paramBusqueda%'
                   """;
         String newSql = sql.replaceAll("paramBusqueda", busqueda);
         try (PreparedStatement ps = cx.getCx().prepareStatement(newSql)) {
             rs = ps.executeQuery();
             while (rs.next()) {
-                dtoCicloContable cicloContable = new dtoCicloContable();
+                CicloContable cicloContable = new CicloContable();
                 cicloContable.setId(rs.getInt("id"));
                 cicloContable.setId_catalogo(rs.getInt("id_catalogo"));
                 cicloContable.setTitulo(rs.getString("titulo"));
@@ -66,7 +65,18 @@ public class daoCicloContable {
                 }
                 cicloContable.setDesde(desde);
                 cicloContable.setHasta(hasta);
-                cicloContable.setCatalogo(rs.getString("catalogo"));
+                cicloContable.setTipo_sociedad(rs.getInt("tipo_sociedad"));
+                double porcentajeReserva = Double.parseDouble(rs.getString("porcentaje_reserva_legal"));
+                cicloContable.setPorcentaje_reserva_legal(BigDecimal.valueOf(porcentajeReserva));
+                //cicloContable.setCatalogo(rs.getString("catalogo"));
+                cicloContable.setTipoCatalogo(new TipoCatalogo());
+                if (cicloContable.getId_catalogo() > 0) {
+                    RespuestaGeneral rg1 = _tipoCatalogo.ObtenerPorId(cicloContable.getId_catalogo());
+                    if (rg1.esExitosa()) {
+                        ArrayList<TipoCatalogo> listaTipoCatalogo = (ArrayList<TipoCatalogo>)rg1.getDatos();
+                        cicloContable.setTipoCatalogo(listaTipoCatalogo.get(0));
+                    }
+                }
                 lista.add(cicloContable);
             }
             
@@ -106,6 +116,9 @@ public class daoCicloContable {
                 }
                 cicloContable.setDesde(desde);
                 cicloContable.setHasta(hasta);
+                cicloContable.setTipo_sociedad(rs.getInt("tipo_sociedad"));
+                double porcentajeReserva = Double.parseDouble(rs.getString("porcentaje_reserva_legal"));
+                cicloContable.setPorcentaje_reserva_legal(BigDecimal.valueOf(porcentajeReserva));
                 lista.add(cicloContable);
             }
             
@@ -145,6 +158,9 @@ public class daoCicloContable {
                 }
                 cicloContable.setDesde(desde);
                 cicloContable.setHasta(hasta);
+                cicloContable.setTipo_sociedad(rs.getInt("tipo_sociedad"));
+                double porcentajeReserva = Double.parseDouble(rs.getString("porcentaje_reserva_legal"));
+                cicloContable.setPorcentaje_reserva_legal(BigDecimal.valueOf(porcentajeReserva));
                 cicloContable.setTipoCatalogo(new TipoCatalogo());
                 if (cicloContable.getId_catalogo() > 0) {
                     RespuestaGeneral rg1 = _tipoCatalogo.ObtenerPorId(cicloContable.getId_catalogo());
@@ -169,14 +185,16 @@ public class daoCicloContable {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
                   INSERT INTO ciclo_contable     
-                  VALUES(null, ?, ?, ?, ?, ?)
+                  VALUES(null, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, ccontable.getId_catalogo());
             ps.setString(2, ccontable.getTitulo());
             ps.setString(3, sdfString.format(ccontable.getDesde()));
             ps.setString(4, sdfString.format(ccontable.getHasta()));
-            ps.setInt(5, 0);
+            ps.setInt(5, ccontable.getTipo_sociedad());
+            ps.setString(6, String.valueOf(ccontable.getPorcentaje_reserva_legal()));
+            ps.setInt(7, 0);
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -198,15 +216,25 @@ public class daoCicloContable {
         RespuestaGeneral rg = new RespuestaGeneral();
         ResultSet rs = null;
         var sql = """
-                    UPDATE ciclo_contable SET id_catalogo=?,titulo=?,desde=?,hasta=?,eliminado=? WHERE id=?
+                    UPDATE ciclo_contable SET 
+                        id_catalogo=?
+                        ,titulo=?
+                        ,desde=?
+                        ,hasta=?
+                        ,tipo_sociedad=?
+                        ,porcentaje_reserva_legal=?
+                        ,eliminado=?
+                  WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, ccontable.getId_catalogo());
             ps.setString(2, ccontable.getTitulo());
             ps.setString(3, sdfString.format(ccontable.getDesde()));
             ps.setString(4, sdfString.format(ccontable.getHasta()));
-            ps.setInt(5, ccontable.isEliminado() ? 1 : 0);
-            ps.setInt(6, ccontable.getId());
+            ps.setInt(5, ccontable.getTipo_sociedad());
+            ps.setString(6, String.valueOf(ccontable.getPorcentaje_reserva_legal()));
+            ps.setInt(7, ccontable.isEliminado() ? 1 : 0);
+            ps.setInt(8, ccontable.getId());
             ps.executeUpdate();
             
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, ccontable.getId());

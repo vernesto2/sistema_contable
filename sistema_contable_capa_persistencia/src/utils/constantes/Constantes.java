@@ -67,6 +67,15 @@ public class Constantes {
         return lista;
     }
     
+    public static ArrayList<dtoLista> listaTipoSociedad() {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        dtoLista op1 = new dtoLista("0", "SOCIEDAD ANONIMA S.A de C.V");
+        dtoLista op2 = new dtoLista("1", "SOCIEDAD DE PERSONA");
+        lista.add(op1);
+        lista.add(op2);
+        return lista;
+    }
+    
     public static ArrayList<dtoLista> listaColores() {
         ArrayList<dtoLista> lista = new ArrayList<>();
         dtoLista op0 = new dtoLista("0", "NEGRO");
@@ -122,4 +131,20 @@ public class Constantes {
     public static int TIPO_ABONO = 2;
     public static String TIPO_CARGO_S = "C";
     public static String TIPO_ABONO_S = "A";
+    
+    public static boolean validarNumeros(int key) {
+        if (key >= 48 && key <= 57) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public static boolean validarPorcentaje(int key) {
+        if ((key >= 48 && key <= 57) || key == 46) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

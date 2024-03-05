@@ -230,6 +230,7 @@ public class dPartidas extends javax.swing.JDialog {
         btnGuardarTipoCatalogo.setText("GUARDAR");
         btnGuardarTipoCatalogo.setToolTipText("GUARDAR / ACTUALIZAR PARTIDA");
         btnGuardarTipoCatalogo.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnGuardarTipoCatalogo.setEnabled(false);
         btnGuardarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardarTipoCatalogo.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
         btnGuardarTipoCatalogo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
@@ -538,7 +539,15 @@ public class dPartidas extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGuardarTipoCatalogoActionPerformed
 
     private void tblDetallePartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetallePartidaMouseClicked
-
+        int row = tblDetallePartida.getSelectedRow();
+        int column = tblDetallePartida.getSelectedColumn();
+        if (column == 6) {
+            // editar
+            
+        } else if (column == 7) {
+            // eliminar
+            
+        }
     }//GEN-LAST:event_tblDetallePartidaMouseClicked
 
     private void cmbTipoPartidaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoPartidaItemStateChanged

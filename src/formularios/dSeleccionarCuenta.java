@@ -283,6 +283,11 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                 tblCuentasMouseClicked(evt);
             }
         });
+        tblCuentas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tblCuentasKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblCuentas);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -470,6 +475,14 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         this.btnAbonar.setEnabled(this.cuentaSeleccionada.getId() > 0 ? true : false);
         this.btnCargar.setEnabled(this.cuentaSeleccionada.getId() > 0 ? true : false);
     }//GEN-LAST:event_tblCuentasMouseClicked
+
+    private void tblCuentasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCuentasKeyTyped
+        int key = evt.getKeyChar();
+        boolean numeros = key >= 48 && key <= 57;
+        if (!numeros){
+            evt.consume();
+        }
+    }//GEN-LAST:event_tblCuentasKeyTyped
 
     /**
      * @param args the command line arguments

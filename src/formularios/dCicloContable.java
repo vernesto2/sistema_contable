@@ -5,15 +5,18 @@
 package formularios;
 
 import dto.dtoLista;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.text.Document;
 import modelo.CicloContable;
 import modelo.TipoCatalogo;
 import servicios.ServicioCicloContable;
 import servicios.ServicioTipoCatalogo;
 import sesion.Sesion;
 import utils.UtileriaVista;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -28,6 +31,7 @@ public class dCicloContable extends javax.swing.JDialog {
     ServicioTipoCatalogo _tipoCatalogo;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     ArrayList<TipoCatalogo> listaCmbTipoCatalogo = new ArrayList<>();
+    ArrayList<dtoLista> listaCmbTipoSociedad = new ArrayList<>();
     Sesion sesion;
     boolean realizoAccion = false;
     /**
@@ -40,16 +44,18 @@ public class dCicloContable extends javax.swing.JDialog {
         _tipoCatalogo = new ServicioTipoCatalogo(sesion.rutaConexion);
         initComponents();
         this.cicloContableModel = (CicloContable)cicloContable;
+        this.sesion = sesion;
         this.iniciarVistaDialog();
     }
     
     public void iniciarVistaDialog() {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        // agregar formato a los campos
         this.setTitle((this.cicloContableModel.getId() > 0) ? "MODIFICACIÓN DE CICLO CONTABLE": "NUEVO REGISTRO DE CICLO CONTABLE");
         this.realizoAccion = false;
         // obtenemos los catalogos
-        this.obtenerListaCmbColores();
+        this.obtenerListaCmbTipoSociedad();
         this.obtenerListaCmbTipoCatalogo();
         // seteamos la informacion
         this.setearData();
@@ -62,6 +68,7 @@ public class dCicloContable extends javax.swing.JDialog {
         txtDesde.setFormatDate("dd-MM-yyyy");
         txtHasta.setDate(this.cicloContableModel.getHasta());
         txtHasta.setFormatDate("dd-MM-yyyy");
+        txtPorcentajeReserva.setText(String.valueOf(this.cicloContableModel.getPorcentaje_reserva_legal()));
         
         // PROCESO PARA SELECCION DE COMBOBOX
         int iCmb = 0, i = 0;
@@ -72,6 +79,16 @@ public class dCicloContable extends javax.swing.JDialog {
             i++;
         }
         cmbTipoCatalogo.setSelectedIndex(iCmb);
+        
+        // PROCESO PARA SELECCION DE COMBOBOX DE TIPO SOCIEDAD
+        int iCmb1 = 0, i1 = 0;
+        for (dtoLista item : listaCmbTipoSociedad) {
+            if (Integer.parseInt(item.getValue()) == this.cicloContableModel.getTipo_sociedad()) {
+                iCmb1 = i1;
+            }
+            i1++;
+        }
+        cmbTipoSociedad.setSelectedIndex(iCmb1);
         
     }
     
@@ -92,18 +109,25 @@ public class dCicloContable extends javax.swing.JDialog {
         //cmbTipoCatalogo.addItem();
     }
     
-    public void obtenerListaCmbColores() {
-//        this.listaColor = Constantes.listaColores();
-//        cmbColor.removeAllItems();
-//        for (dtoLista item : this.listaColor) {
-//            cmbColor.addItem(item.getLabel());
-//        }
+    public void obtenerListaCmbTipoSociedad() {
+        this.listaCmbTipoSociedad = Constantes.listaTipoSociedad();
+        cmbTipoSociedad.removeAllItems();
+        for (dtoLista item : this.listaCmbTipoSociedad) {
+            cmbTipoSociedad.addItem(item.getLabel());
+        }
     }
     
     public void seleccionarOpcionCmbTipoCatalogo() {
         int i = cmbTipoCatalogo.getSelectedIndex();
         if (i >= 0) {
             this.cicloContableModel.setId_catalogo(this.listaCmbTipoCatalogo.get(i).getId());
+        }
+    }
+    
+    public void seleccionarOpcionCmbTipoSociedad() {
+        int i = cmbTipoSociedad.getSelectedIndex();
+        if (i >= 0) {
+            this.cicloContableModel.setTipo_sociedad(Integer.parseInt(this.listaCmbTipoSociedad.get(i).getValue()));
         }
     }
     
@@ -144,6 +168,10 @@ public class dCicloContable extends javax.swing.JDialog {
         txtDesde = new newscomponents.RSDateChooser();
         jLabel3 = new javax.swing.JLabel();
         txtHasta = new newscomponents.RSDateChooser();
+        jLabel5 = new javax.swing.JLabel();
+        cmbTipoSociedad = new RSMaterialComponent.RSComboBoxMaterial();
+        jLabel6 = new javax.swing.JLabel();
+        txtPorcentajeReserva = new RSMaterialComponent.RSTextFieldMaterial();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -250,6 +278,35 @@ public class dCicloContable extends javax.swing.JDialog {
         txtHasta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtHasta.setFormatDate("dd-MM-yyyy");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Tipo de sociedad:");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        cmbTipoSociedad.setColorMaterial(new java.awt.Color(102, 102, 102));
+        cmbTipoSociedad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTipoSociedadItemStateChanged(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("% Reserva legal:");
+        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtPorcentajeReserva.setForeground(new java.awt.Color(0, 0, 0));
+        txtPorcentajeReserva.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtPorcentajeReserva.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtPorcentajeReserva.setPhColor(new java.awt.Color(0, 0, 0));
+        txtPorcentajeReserva.setPlaceholder("Digite el porcentaje");
+        txtPorcentajeReserva.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtPorcentajeReserva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPorcentajeReservaKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -258,17 +315,23 @@ public class dCicloContable extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
-                        .addComponent(cmbTipoCatalogo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(txtTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                    .addComponent(cmbTipoCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbTipoSociedad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPorcentajeReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(40, 40, 40))
         );
         jPanel1Layout.setVerticalGroup(
@@ -290,7 +353,15 @@ public class dCicloContable extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTipoSociedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPorcentajeReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -318,9 +389,12 @@ public class dCicloContable extends javax.swing.JDialog {
     
     public void setearModelTipoCatalogo() {
         this.seleccionarOpcionCmbTipoCatalogo();
+        this.seleccionarOpcionCmbTipoSociedad();
         this.cicloContableModel.setTitulo(this.txtTitulo.getText());
         this.cicloContableModel.setDesde(txtDesde.getDate());
         this.cicloContableModel.setHasta(txtHasta.getDate());
+        double porcentajeReserva = Double.parseDouble(txtPorcentajeReserva.getText());
+        this.cicloContableModel.setPorcentaje_reserva_legal(BigDecimal.valueOf(porcentajeReserva));
     }
     
     private void btnGuardarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogoActionPerformed
@@ -353,6 +427,24 @@ public class dCicloContable extends javax.swing.JDialog {
     private void cmbTipoCatalogoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoCatalogoItemStateChanged
         //this.seleccionarOpcionCmbTipoCatalogo();
     }//GEN-LAST:event_cmbTipoCatalogoItemStateChanged
+
+    private void cmbTipoSociedadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoSociedadItemStateChanged
+        //this.seleccionarOpcionCmbTipoSociedad();
+        int i = cmbTipoSociedad.getSelectedIndex();
+        if (i >= 0) {
+            if (i == 0) {
+                txtPorcentajeReserva.setText("7");
+            } else {
+                txtPorcentajeReserva.setText("5");
+            }
+        }
+    }//GEN-LAST:event_cmbTipoSociedadItemStateChanged
+
+    private void txtPorcentajeReservaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcentajeReservaKeyTyped
+        if (!Constantes.validarPorcentaje(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPorcentajeReservaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -400,14 +492,18 @@ public class dCicloContable extends javax.swing.JDialog {
     private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo;
     private RSMaterialComponent.RSComboBoxMaterial cmbTipoCatalogo;
+    private RSMaterialComponent.RSComboBoxMaterial cmbTipoSociedad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private newscomponents.RSDateChooser txtDesde;
     private newscomponents.RSDateChooser txtHasta;
+    private RSMaterialComponent.RSTextFieldMaterial txtPorcentajeReserva;
     private RSMaterialComponent.RSTextFieldMaterial txtTitulo;
     // End of variables declaration//GEN-END:variables
 }
