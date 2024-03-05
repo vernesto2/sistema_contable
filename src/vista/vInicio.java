@@ -258,10 +258,14 @@ public class vInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
-        final boolean esRestaurar = true;
-        vRestaurarConfiguracion config = new vRestaurarConfiguracion(sesion, true);
+        vRestaurarConfiguracion config = new vRestaurarConfiguracion(sesion);
         config.setVisible(true);
         this.dispose();
+//
+//        PruebaRestaurarConfiguracion config = new PruebaRestaurarConfiguracion(sesion);
+//        config.setVisible(true);
+//        this.dispose();
+
     }//GEN-LAST:event_btnRestaurarActionPerformed
 
     private void rSButtonShapeIcon9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon9ActionPerformed

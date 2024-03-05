@@ -4,6 +4,7 @@
  */
 package vista;
 
+import formularios.dCrearUsuario;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.security.spec.InvalidKeySpecException;
@@ -387,9 +388,8 @@ public class vLogin extends javax.swing.JFrame {
 
     private void btnCrearAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearAlumnoActionPerformed
         //false hará que la vista intente crear alumno en vez de restaurar a la configuración inicial
-        final boolean esRestaurar = false;
-        vRestaurarConfiguracion config = new vRestaurarConfiguracion(sesion, esRestaurar);
-        config.setVisible(true);
+        dCrearUsuario dialogo = new dCrearUsuario(this, true, sesion, Constantes.TIPO_ALUMNO);
+        dialogo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCrearAlumnoActionPerformed
 

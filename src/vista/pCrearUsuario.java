@@ -16,6 +16,7 @@ import servicios.ServicioConfiguracion;
 import servicios.ServicioUsuario;
 import sesion.Sesion;
 import utils.UtileriaVista;
+import utils.constantes.CambiaPanel;
 import utils.constantes.CharArrayUtils;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
@@ -32,14 +33,21 @@ public class pCrearUsuario extends javax.swing.JPanel {
     ServicioConfiguracion _configuracion;
     Sesion sesion;
     private boolean esRestaurar;
+    private int tipoUsuario;
 
-    public pCrearUsuario(Sesion sesion, boolean esRestaurar) {
+    public pCrearUsuario(Sesion sesion, boolean esRestaurar, int tipoUsuario) {
         initComponents();
         this.sesion = sesion;
         this.esRestaurar = esRestaurar;
+        if(tipoUsuario == Constantes.TIPO_ALUMNO || tipoUsuario == Constantes.TIPO_DOCENTE) {
+            this.tipoUsuario = tipoUsuario;
+        } else 
+            throw new IllegalStateException("Tipo usuario incorrecto");
         this._configuracion = new ServicioConfiguracion();
+        
         this.iniciarVista();
     }
+
 
     public void iniciarVista() {
         ComboBoxModel<String> modeloPreguntasRecuperacion1 = new DefaultComboBoxModel<String>(Constantes.PREGUNTAS_SEGURIDAD);
@@ -83,6 +91,8 @@ public class pCrearUsuario extends javax.swing.JPanel {
         btnCrearConfiguracion = new RSMaterialComponent.RSButtonShapeIcon();
         btnCancelar = new RSMaterialComponent.RSButtonShapeIcon();
         jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         txtNombres.setPlaceholder("Nombres");
         txtNombres.addActionListener(new java.awt.event.ActionListener() {
@@ -276,7 +286,7 @@ public class pCrearUsuario extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
 
-    public Usuario capturarDatos() {
+    private void btnCrearConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfiguracionActionPerformed
         char[] claveSinCifrar = txtClave.getPassword();
         char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
 
@@ -294,7 +304,6 @@ public class pCrearUsuario extends javax.swing.JPanel {
         //usuario.setClave(null);
         if (!Arrays.equals(claveSinCifrar, repetirClaveSinCifrar)) {
             JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", JOptionPane.ERROR_MESSAGE);
-            return null;
         }
 
         usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
@@ -307,48 +316,60 @@ public class pCrearUsuario extends javax.swing.JPanel {
         usuario.setRespuesta3(txtRespuesta3.getText().trim());
 
         usuario.setPersona(persona);
-        return usuario;
-    }
-    private void btnCrearConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfiguracionActionPerformed
+        if (esRestaurar) {
+            //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
+            int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo archivo basado en la versión inicial del sistema. \nEl nuevo archivo no contendrá ningun dato que usted haya ingresado incluyendo catálogos, partidas, etc.\nEl nuevo archivo contendrá docentes creados por defecto en la versión inicial\nEstará con el catálogo inicial, sin ninguna partida \n¿Esta seguro de continuar?",
+                    "¡Restaurar a versión inicial!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            //System.out.println(salida);
+            if (salida == 0) {
+                RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
+                if (resp.esExitosa()) {
+                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
+                    vInicio vistaInicio = new vInicio();
+                    vistaInicio.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+                }
+            }
+        } else {
+            if(tipoUsuario == Constantes.TIPO_ALUMNO) {
+                int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo alumno\nEl alumno pasará a ser propietario de este archivo y no se podrá cambiar\n¿Esta seguro de continuar?",
+                    "¡Crear alumno!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (salida == 0) {
+                    ServicioUsuario _usuario = new ServicioUsuario(sesion.rutaConexion);
 
-//        if (esRestaurar) {
-//            //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
-//            int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo archivo basado en la versión inicial del sistema. \nEl nuevo archivo no contendrá ningun dato que usted haya ingresado incluyendo catálogos, partidas, etc.\nEl nuevo archivo contendrá docentes creados por defecto en la versión inicial\nEstará con el catálogo inicial, sin ninguna partida \n¿Esta seguro de continuar?",
-//                    "¡Restaurar a versión inicial!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-//            //System.out.println(salida);
-//            if (salida == 0) {
-//                RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
-//                if (resp.esExitosa()) {
-//                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
-//                    vInicio vistaInicio = new vInicio();
-//                    vistaInicio.setVisible(true);
-//                } else {
-//                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
-//                }
-//            }
-//        } else {
-//            int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo alumno\nEl alumno pasará a ser propietario de este archivo y no se podrá cambiar\n¿Esta seguro de continuar?",
-//                    "¡Crear alumno!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-//            if (salida == 0) {
-//                ServicioUsuario _usuario = new ServicioUsuario(sesion.rutaConexion);
-//
-//                RespuestaGeneral resp = _usuario.crearAlumno(usuario, claveSinCifrar);
-//                if (resp.esExitosa()) {
-//                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
-//                    vInicio vistaInicio = new vInicio();
-//                    vistaInicio.setVisible(true);
-//
-//                } else {
-//                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
-//                }
-//            }
-//        }
-//
-//        //limpiar el array de char, en caso de volcado de memoria, no esté la clave
-//        CharArrayUtils.limpiar(claveSinCifrar);
-//        CharArrayUtils.limpiar(repetirClaveSinCifrar);
+                    RespuestaGeneral resp = _usuario.crearAlumno(usuario, claveSinCifrar);
+                    if (resp.esExitosa()) {
+                        JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
+                        vInicio vistaInicio = new vInicio();
+                        vistaInicio.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+                    }
+                }
+            } else if (tipoUsuario == Constantes.TIPO_DOCENTE && sesion.esDocente()) {
+                int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo docente\n¿Esta seguro de continuar?",
+                    "¡Crear alumno!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (salida == 0) {
+                    ServicioUsuario _usuario = new ServicioUsuario(sesion.rutaConexion);
+
+                    RespuestaGeneral resp = _usuario.crearDocente(usuario, claveSinCifrar);
+                    if (resp.esExitosa()) {
+                        JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
+                    } else {
+                        JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+                    }
+                }
+            }
+        }
+
+        //limpiar el array de char, en caso de volcado de memoria, no esté la clave
+        CharArrayUtils.limpiar(claveSinCifrar);
+        CharArrayUtils.limpiar(repetirClaveSinCifrar);
     }//GEN-LAST:event_btnCrearConfiguracionActionPerformed
 
+
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vInicio inicio = new vInicio();
         inicio.setVisible(true);
