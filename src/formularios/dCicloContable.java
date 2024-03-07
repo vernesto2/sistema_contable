@@ -5,11 +5,9 @@
 package formularios;
 
 import dto.dtoLista;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.text.Document;
 import modelo.CicloContable;
 import modelo.TipoCatalogo;
 import servicios.ServicioCicloContable;
@@ -69,6 +67,9 @@ public class dCicloContable extends javax.swing.JDialog {
         txtHasta.setDate(this.cicloContableModel.getHasta());
         txtHasta.setFormatDate("dd-MM-yyyy");
         txtPorcentajeReserva.setText(String.valueOf(this.cicloContableModel.getPorcentaje_reserva_legal()));
+        txtMontoMaxVenta.setText(String.valueOf(this.cicloContableModel.getMonto_maximo_ventas()));
+        txtPorcentajeMin.setText(String.valueOf(this.cicloContableModel.getPorcentaje_min()));
+        txtPorcentajeMax.setText(String.valueOf(this.cicloContableModel.getPorcentaje_max()));
         
         // PROCESO PARA SELECCION DE COMBOBOX
         int iCmb = 0, i = 0;
@@ -172,6 +173,12 @@ public class dCicloContable extends javax.swing.JDialog {
         cmbTipoSociedad = new RSMaterialComponent.RSComboBoxMaterial();
         jLabel6 = new javax.swing.JLabel();
         txtPorcentajeReserva = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel7 = new javax.swing.JLabel();
+        txtMontoMaxVenta = new RSMaterialComponent.RSTextFieldMaterial();
+        txtPorcentajeMin = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel8 = new javax.swing.JLabel();
+        txtPorcentajeMax = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -236,7 +243,7 @@ public class dCicloContable extends javax.swing.JDialog {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Tipo de catalogo:");
+        jLabel4.setText("Tipo de catalogo: *");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         cmbTipoCatalogo.setColorMaterial(new java.awt.Color(102, 102, 102));
@@ -248,7 +255,7 @@ public class dCicloContable extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Titulo:");
+        jLabel1.setText("Titulo: *");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         txtTitulo.setForeground(new java.awt.Color(0, 0, 0));
@@ -260,7 +267,7 @@ public class dCicloContable extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Fecha desde:");
+        jLabel2.setText("Fecha desde: *");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         txtDesde.setBackground(new java.awt.Color(153, 153, 153));
@@ -270,7 +277,7 @@ public class dCicloContable extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Fecha hasta:");
+        jLabel3.setText("Fecha hasta: *");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         txtHasta.setBackground(new java.awt.Color(153, 153, 153));
@@ -280,7 +287,7 @@ public class dCicloContable extends javax.swing.JDialog {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Tipo de sociedad:");
+        jLabel5.setText("Tipo de sociedad: *");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         cmbTipoSociedad.setColorMaterial(new java.awt.Color(102, 102, 102));
@@ -292,7 +299,7 @@ public class dCicloContable extends javax.swing.JDialog {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("% Reserva legal:");
+        jLabel6.setText("% Reserva legal: *");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         txtPorcentajeReserva.setForeground(new java.awt.Color(0, 0, 0));
@@ -307,6 +314,57 @@ public class dCicloContable extends javax.swing.JDialog {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Monto Max. Ventas: *");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtMontoMaxVenta.setForeground(new java.awt.Color(0, 0, 0));
+        txtMontoMaxVenta.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtMontoMaxVenta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtMontoMaxVenta.setPhColor(new java.awt.Color(0, 0, 0));
+        txtMontoMaxVenta.setPlaceholder("Digite el monto maximo de ventas");
+        txtMontoMaxVenta.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtMontoMaxVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMontoMaxVentaKeyTyped(evt);
+            }
+        });
+
+        txtPorcentajeMin.setForeground(new java.awt.Color(0, 0, 0));
+        txtPorcentajeMin.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtPorcentajeMin.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtPorcentajeMin.setPhColor(new java.awt.Color(0, 0, 0));
+        txtPorcentajeMin.setPlaceholder("Digite el porcentaje minimo");
+        txtPorcentajeMin.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtPorcentajeMin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPorcentajeMinKeyTyped(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("% Minímo: *");
+        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtPorcentajeMax.setForeground(new java.awt.Color(0, 0, 0));
+        txtPorcentajeMax.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtPorcentajeMax.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtPorcentajeMax.setPhColor(new java.awt.Color(0, 0, 0));
+        txtPorcentajeMax.setPlaceholder("Digite el porcentaje maximo");
+        txtPorcentajeMax.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtPorcentajeMax.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPorcentajeMaxKeyTyped(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("% Maximo: *");
+        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -314,24 +372,28 @@ public class dCicloContable extends javax.swing.JDialog {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
-                    .addComponent(cmbTipoCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbTipoSociedad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPorcentajeReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                        .addComponent(cmbTipoCatalogo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbTipoSociedad, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPorcentajeReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMontoMaxVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPorcentajeMin, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPorcentajeMax, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40))
         );
         jPanel1Layout.setVerticalGroup(
@@ -361,7 +423,21 @@ public class dCicloContable extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPorcentajeReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMontoMaxVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPorcentajeMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPorcentajeMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -393,12 +469,18 @@ public class dCicloContable extends javax.swing.JDialog {
         this.cicloContableModel.setTitulo(this.txtTitulo.getText());
         this.cicloContableModel.setDesde(txtDesde.getDate());
         this.cicloContableModel.setHasta(txtHasta.getDate());
-        double porcentajeReserva = Double.parseDouble(txtPorcentajeReserva.getText());
-        this.cicloContableModel.setPorcentaje_reserva_legal(BigDecimal.valueOf(porcentajeReserva));
+        this.cicloContableModel.setPorcentaje_reserva_legal(Double.valueOf(txtPorcentajeReserva.getText()));
+        this.cicloContableModel.setMonto_maximo_ventas(Double.valueOf(txtMontoMaxVenta.getText()));
+        this.cicloContableModel.setPorcentaje_min(Double.valueOf(txtPorcentajeMin.getText()));
+        this.cicloContableModel.setPorcentaje_max(Double.valueOf(txtPorcentajeMax.getText()));
     }
     
     private void btnGuardarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogoActionPerformed
         // setear info al modelo
+        if (!this.validar()) {
+            JOptionPane.showMessageDialog(this, "Complete la información obligatoria", "¡ALERTA!", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         this.setearModelTipoCatalogo();
         // guardamos la info
         if (this.cicloContableModel.getId() < 0) {
@@ -424,6 +506,18 @@ public class dCicloContable extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnGuardarTipoCatalogoActionPerformed
 
+    public boolean validar() {
+        boolean valido = true;
+        if (txtTitulo.getText().isEmpty() ||
+                txtPorcentajeReserva.getText().isEmpty() || 
+                txtMontoMaxVenta.getText().isEmpty() || 
+                txtPorcentajeMin.getText().isEmpty() || 
+                txtPorcentajeMax.getText().isEmpty()) {
+            valido = false;
+        }
+        return valido;
+    }
+    
     private void cmbTipoCatalogoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoCatalogoItemStateChanged
         //this.seleccionarOpcionCmbTipoCatalogo();
     }//GEN-LAST:event_cmbTipoCatalogoItemStateChanged
@@ -445,6 +539,24 @@ public class dCicloContable extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtPorcentajeReservaKeyTyped
+
+    private void txtMontoMaxVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoMaxVentaKeyTyped
+        if (!Constantes.validarPorcentaje(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMontoMaxVentaKeyTyped
+
+    private void txtPorcentajeMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcentajeMinKeyTyped
+        if (!Constantes.validarPorcentaje(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPorcentajeMinKeyTyped
+
+    private void txtPorcentajeMaxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPorcentajeMaxKeyTyped
+        if (!Constantes.validarPorcentaje(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPorcentajeMaxKeyTyped
 
     /**
      * @param args the command line arguments
@@ -499,10 +611,16 @@ public class dCicloContable extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private newscomponents.RSDateChooser txtDesde;
     private newscomponents.RSDateChooser txtHasta;
+    private RSMaterialComponent.RSTextFieldMaterial txtMontoMaxVenta;
+    private RSMaterialComponent.RSTextFieldMaterial txtPorcentajeMax;
+    private RSMaterialComponent.RSTextFieldMaterial txtPorcentajeMin;
     private RSMaterialComponent.RSTextFieldMaterial txtPorcentajeReserva;
     private RSMaterialComponent.RSTextFieldMaterial txtTitulo;
     // End of variables declaration//GEN-END:variables

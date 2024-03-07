@@ -50,6 +50,7 @@ public class daoTipoCatalogo {
                 tcatalogo.setBalance_general(rs.getInt("balance_general"));
                 tcatalogo.setFlujo_efectivo(rs.getInt("flujo_efectivo"));
                 tcatalogo.setCambios_patrimonio(rs.getInt("cambios_patrimonio"));
+                tcatalogo.setNivel_mayorizar(rs.getInt("nivel_mayorizar"));
                 lista.add(tcatalogo);
             }
             
@@ -85,6 +86,7 @@ public class daoTipoCatalogo {
                 tcatalogo.setBalance_general(rs.getInt("balance_general"));
                 tcatalogo.setFlujo_efectivo(rs.getInt("flujo_efectivo"));
                 tcatalogo.setCambios_patrimonio(rs.getInt("cambios_patrimonio"));
+                tcatalogo.setNivel_mayorizar(rs.getInt("nivel_mayorizar"));
                 lista.add(tcatalogo);
             }
             
@@ -101,7 +103,7 @@ public class daoTipoCatalogo {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
                   INSERT INTO tipo_catalogo     
-                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setString(1, tcatalogo.getTipo());
@@ -114,7 +116,8 @@ public class daoTipoCatalogo {
             ps.setInt(8, tcatalogo.getBalance_general());
             ps.setInt(9, tcatalogo.getFlujo_efectivo());
             ps.setInt(10, tcatalogo.getCambios_patrimonio());
-            ps.setInt(11, 0);
+            ps.setInt(11, tcatalogo.getNivel_mayorizar());
+            ps.setInt(12, 0);
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -147,6 +150,7 @@ public class daoTipoCatalogo {
                         ,balance_general=?
                         ,flujo_efectivo=?
                         ,cambios_patrimonio=?
+                        ,nivel_mayorizar=?
                     WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
@@ -160,7 +164,8 @@ public class daoTipoCatalogo {
             ps.setInt(8, tcatalogo.getBalance_general());
             ps.setInt(9, tcatalogo.getFlujo_efectivo());
             ps.setInt(10, tcatalogo.getCambios_patrimonio());
-            ps.setInt(11, tcatalogo.getId());
+            ps.setInt(11, tcatalogo.getNivel_mayorizar());
+            ps.setInt(12, tcatalogo.getId());
             ps.executeUpdate();
             
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, tcatalogo.getId());

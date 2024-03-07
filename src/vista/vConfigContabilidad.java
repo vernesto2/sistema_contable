@@ -921,13 +921,6 @@ public class vConfigContabilidad extends javax.swing.JPanel {
 
     public void setearModeloCicloContable(int row) {
         cicloContableModel = (CicloContable)this.listaCiclosContables.get(row);
-//        cicloContableModel.setId(this.listaCiclosContables.get(row).getId());
-//        cicloContableModel.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
-//        cicloContableModel.setTitulo(this.listaCiclosContables.get(row).getTitulo());
-//        cicloContableModel.setDesde(this.listaCiclosContables.get(row).getDesde());
-//        cicloContableModel.setHasta(this.listaCiclosContables.get(row).getHasta());
-//        cicloContableModel.setTipo_sociedad(this.listaCiclosContables.get(row).getTipo_sociedad());
-//        cicloContableModel.setPorcentaje_reserva_legal(this.listaCiclosContables.get(row).getPorcentaje_reserva_legal());
     }
     
     public void abrirDialogCicloContable(CicloContable cicloContable) {
@@ -949,8 +942,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         int row = tblTipoCatalogo.getSelectedRow();
         if (accion == 1) {
             // este es editar
-            this.setearModeloTipoCatalogo(row);
-            this.abrirDialogTipoCatalogo(tipoCatalogoModel);
+            this.abrirDialogTipoCatalogo(this.listaTiposCatalogos.get(row));
             
         } else if (accion == 2) {
             // este es eliminar
@@ -969,19 +961,6 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_tblTipoCatalogoMouseClicked
-
-    public void setearModeloTipoCatalogo(int row) {
-        tipoCatalogoModel.setId(this.listaTiposCatalogos.get(row).getId());
-        tipoCatalogoModel.setTipo(this.listaTiposCatalogos.get(row).getTipo());
-        tipoCatalogoModel.setColor(this.listaTiposCatalogos.get(row).getColor());
-        tipoCatalogoModel.setLibro_diario(this.listaTiposCatalogos.get(row).getLibro_diario());
-        tipoCatalogoModel.setLibro_mayor(this.listaTiposCatalogos.get(row).getLibro_mayor());
-        tipoCatalogoModel.setBalanza_comprobacion(this.listaTiposCatalogos.get(row).getBalanza_comprobacion());
-        tipoCatalogoModel.setEstado_resultado(this.listaTiposCatalogos.get(row).getEstado_resultado());
-        tipoCatalogoModel.setBalance_general(this.listaTiposCatalogos.get(row).getBalance_general());
-        tipoCatalogoModel.setFlujo_efectivo(this.listaTiposCatalogos.get(row).getFlujo_efectivo());
-        tipoCatalogoModel.setCambios_patrimonio(this.listaTiposCatalogos.get(row).getCambios_patrimonio());
-    }
     
     public void abrirDialogTipoCatalogo(TipoCatalogo tipoCatalogo) {
         dTipoCatalogo d = new dTipoCatalogo(null, true, tipoCatalogo, sesion);

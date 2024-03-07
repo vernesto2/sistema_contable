@@ -44,13 +44,14 @@ public class dTipoCatalogo extends javax.swing.JDialog {
     
     public void setearData() {
         txtTipoCatalogo.setText(this.tipoCatalogoModel.getTipo());
-        chLibroDiario.setSelected(this.tipoCatalogoModel.getLibro_diario() == 1 ? true : false);
-        chLibroMayor.setSelected(this.tipoCatalogoModel.getLibro_mayor()== 1 ? true : false);
-        chBalanzaComprobacion.setSelected(this.tipoCatalogoModel.getBalanza_comprobacion()== 1 ? true : false);
-        chEstadoResultado.setSelected(this.tipoCatalogoModel.getEstado_resultado()== 1 ? true : false);
-        chBalanceGeneral.setSelected(this.tipoCatalogoModel.getBalance_general()== 1 ? true : false);
-        chFlujoEfectivo.setSelected(this.tipoCatalogoModel.getFlujo_efectivo()== 1 ? true : false);
-        chCambiosPatromonio.setSelected(this.tipoCatalogoModel.getCambios_patrimonio()== 1 ? true : false);
+        chLibroDiario.setSelected((this.tipoCatalogoModel.getLibro_diario() == 1));
+        chLibroMayor.setSelected((this.tipoCatalogoModel.getLibro_mayor()== 1));
+        chBalanzaComprobacion.setSelected((this.tipoCatalogoModel.getBalanza_comprobacion()== 1));
+        chEstadoResultado.setSelected((this.tipoCatalogoModel.getEstado_resultado()== 1));
+        chBalanceGeneral.setSelected((this.tipoCatalogoModel.getBalance_general()== 1));
+        chFlujoEfectivo.setSelected((this.tipoCatalogoModel.getFlujo_efectivo()== 1));
+        chCambiosPatromonio.setSelected((this.tipoCatalogoModel.getCambios_patrimonio()== 1));
+        txtNivelMayorizar.setText(String.valueOf(this.tipoCatalogoModel.getNivel_mayorizar()));
         
         int iCmb = 0, i = 0;
         for (dtoLista item : listaColor) {
@@ -120,6 +121,8 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         chFlujoEfectivo = new rojerusan.RSCheckBox();
         chCambiosPatromonio = new rojerusan.RSCheckBox();
         jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtNivelMayorizar = new RSMaterialComponent.RSTextFieldMaterial();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -184,7 +187,7 @@ public class dTipoCatalogo extends javax.swing.JDialog {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Tipo:");
+        jLabel5.setText("Tipo: *");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         txtTipoCatalogo.setForeground(new java.awt.Color(0, 0, 0));
@@ -196,10 +199,9 @@ public class dTipoCatalogo extends javax.swing.JDialog {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Color:");
+        jLabel6.setText("Color: *");
         jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        cmbColor.setBorder(null);
         cmbColor.setColorMaterial(new java.awt.Color(102, 102, 102));
         cmbColor.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -296,6 +298,24 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         jLabel8.setText("Estados financieros:");
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Nivel a mayorizar: *");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtNivelMayorizar.setForeground(new java.awt.Color(0, 0, 0));
+        txtNivelMayorizar.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtNivelMayorizar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtNivelMayorizar.setPhColor(new java.awt.Color(0, 0, 0));
+        txtNivelMayorizar.setPlaceholder("Digite el nivel a mayorizar");
+        txtNivelMayorizar.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtNivelMayorizar.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        txtNivelMayorizar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNivelMayorizarKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -304,6 +324,7 @@ public class dTipoCatalogo extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -311,8 +332,9 @@ public class dTipoCatalogo extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(cmbColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtTipoCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNivelMayorizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,14 +347,17 @@ public class dTipoCatalogo extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNivelMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -368,9 +393,14 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         this.tipoCatalogoModel.setBalance_general(this.chBalanceGeneral.isSelected() ? 1 : 0);
         this.tipoCatalogoModel.setFlujo_efectivo(this.chFlujoEfectivo.isSelected() ? 1 : 0);
         this.tipoCatalogoModel.setCambios_patrimonio(this.chCambiosPatromonio.isSelected() ? 1 : 0);
+        this.tipoCatalogoModel.setNivel_mayorizar(Integer.parseInt(txtNivelMayorizar.getText()));
     }
     
     private void btnGuardarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogoActionPerformed
+        if (!this.validar()) {
+            JOptionPane.showMessageDialog(this, "Complete la información obligatoria", "¡ALERTA!", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         // setear info al modelo
         this.setearModelTipoCatalogo();
         // guardamos la info
@@ -398,9 +428,23 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnGuardarTipoCatalogoActionPerformed
 
+    public boolean validar() {
+        boolean valido = true;
+        if (txtTipoCatalogo.getText().isEmpty() || txtNivelMayorizar.getText().isEmpty()) {
+            valido = false;
+        }
+        return valido;
+    }
+    
     private void cmbColorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbColorItemStateChanged
         //this.seleccionarOpcionCmbTipoCatalogo();
     }//GEN-LAST:event_cmbColorItemStateChanged
+
+    private void txtNivelMayorizarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNivelMayorizarKeyTyped
+        if (!Constantes.validarNumeros(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNivelMayorizarKeyTyped
 
     /**
      * @param args the command line arguments
@@ -457,10 +501,12 @@ public class dTipoCatalogo extends javax.swing.JDialog {
     private RSMaterialComponent.RSComboBoxMaterial cmbColor;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private RSMaterialComponent.RSTextFieldMaterial txtNivelMayorizar;
     private RSMaterialComponent.RSTextFieldMaterial txtTipoCatalogo;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,6 @@
 package dao;
 
 import conexion.Conexion;
-import java.math.BigDecimal;
 import utils.constantes.RespuestaGeneral;
 
 import java.sql.PreparedStatement;
@@ -66,9 +65,10 @@ public class daoCicloContable {
                 cicloContable.setDesde(desde);
                 cicloContable.setHasta(hasta);
                 cicloContable.setTipo_sociedad(rs.getInt("tipo_sociedad"));
-                double porcentajeReserva = Double.parseDouble(rs.getString("porcentaje_reserva_legal"));
-                cicloContable.setPorcentaje_reserva_legal(BigDecimal.valueOf(porcentajeReserva));
-                //cicloContable.setCatalogo(rs.getString("catalogo"));
+                cicloContable.setPorcentaje_reserva_legal(rs.getDouble("porcentaje_reserva_legal"));
+                cicloContable.setMonto_maximo_ventas(rs.getDouble("monto_maximo_ventas"));
+                cicloContable.setPorcentaje_min(rs.getDouble("porcentaje_min"));
+                cicloContable.setPorcentaje_max(rs.getDouble("porcentaje_max"));
                 cicloContable.setTipoCatalogo(new TipoCatalogo());
                 if (cicloContable.getId_catalogo() > 0) {
                     RespuestaGeneral rg1 = _tipoCatalogo.ObtenerPorId(cicloContable.getId_catalogo());
@@ -117,8 +117,10 @@ public class daoCicloContable {
                 cicloContable.setDesde(desde);
                 cicloContable.setHasta(hasta);
                 cicloContable.setTipo_sociedad(rs.getInt("tipo_sociedad"));
-                double porcentajeReserva = Double.parseDouble(rs.getString("porcentaje_reserva_legal"));
-                cicloContable.setPorcentaje_reserva_legal(BigDecimal.valueOf(porcentajeReserva));
+                cicloContable.setPorcentaje_reserva_legal(rs.getDouble("porcentaje_reserva_legal"));
+                cicloContable.setMonto_maximo_ventas(rs.getDouble("monto_maximo_ventas"));
+                cicloContable.setPorcentaje_min(rs.getDouble("porcentaje_min"));
+                cicloContable.setPorcentaje_max(rs.getDouble("porcentaje_max"));
                 lista.add(cicloContable);
             }
             
@@ -159,8 +161,10 @@ public class daoCicloContable {
                 cicloContable.setDesde(desde);
                 cicloContable.setHasta(hasta);
                 cicloContable.setTipo_sociedad(rs.getInt("tipo_sociedad"));
-                double porcentajeReserva = Double.parseDouble(rs.getString("porcentaje_reserva_legal"));
-                cicloContable.setPorcentaje_reserva_legal(BigDecimal.valueOf(porcentajeReserva));
+                cicloContable.setPorcentaje_reserva_legal(rs.getDouble("porcentaje_reserva_legal"));
+                cicloContable.setMonto_maximo_ventas(rs.getDouble("monto_maximo_ventas"));
+                cicloContable.setPorcentaje_min(rs.getDouble("porcentaje_min"));
+                cicloContable.setPorcentaje_max(rs.getDouble("porcentaje_max"));
                 cicloContable.setTipoCatalogo(new TipoCatalogo());
                 if (cicloContable.getId_catalogo() > 0) {
                     RespuestaGeneral rg1 = _tipoCatalogo.ObtenerPorId(cicloContable.getId_catalogo());
@@ -185,7 +189,7 @@ public class daoCicloContable {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
                   INSERT INTO ciclo_contable     
-                  VALUES(null, ?, ?, ?, ?, ?, ?, ?)
+                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, ccontable.getId_catalogo());
@@ -193,8 +197,11 @@ public class daoCicloContable {
             ps.setString(3, sdfString.format(ccontable.getDesde()));
             ps.setString(4, sdfString.format(ccontable.getHasta()));
             ps.setInt(5, ccontable.getTipo_sociedad());
-            ps.setString(6, String.valueOf(ccontable.getPorcentaje_reserva_legal()));
-            ps.setInt(7, 0);
+            ps.setDouble(6, ccontable.getPorcentaje_reserva_legal());
+            ps.setDouble(7, ccontable.getMonto_maximo_ventas());
+            ps.setDouble(8, ccontable.getPorcentaje_min());
+            ps.setDouble(9, ccontable.getPorcentaje_max());
+            ps.setInt(10, 0);
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -223,6 +230,9 @@ public class daoCicloContable {
                         ,hasta=?
                         ,tipo_sociedad=?
                         ,porcentaje_reserva_legal=?
+                        ,monto_maximo_ventas=?
+                        ,porcentaje_min=?
+                        ,porcentaje_max=?
                         ,eliminado=?
                   WHERE id=?
                   """;
@@ -232,9 +242,12 @@ public class daoCicloContable {
             ps.setString(3, sdfString.format(ccontable.getDesde()));
             ps.setString(4, sdfString.format(ccontable.getHasta()));
             ps.setInt(5, ccontable.getTipo_sociedad());
-            ps.setString(6, String.valueOf(ccontable.getPorcentaje_reserva_legal()));
-            ps.setInt(7, ccontable.isEliminado() ? 1 : 0);
-            ps.setInt(8, ccontable.getId());
+            ps.setDouble(6, ccontable.getPorcentaje_reserva_legal());
+            ps.setDouble(7, ccontable.getMonto_maximo_ventas());
+            ps.setDouble(8, ccontable.getPorcentaje_min());
+            ps.setDouble(9, ccontable.getPorcentaje_max());
+            ps.setInt(10, ccontable.isEliminado() ? 1 : 0);
+            ps.setInt(11, ccontable.getId());
             ps.executeUpdate();
             
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, ccontable.getId());

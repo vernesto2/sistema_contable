@@ -19,8 +19,12 @@ public class CicloContable {
     Date desde;
     Date hasta;
     int tipo_sociedad;
-    BigDecimal porcentaje_reserva_legal;
+    Double porcentaje_reserva_legal;
     boolean eliminado;
+    Double monto_maximo_ventas;
+    Double porcentaje_min;
+    Double porcentaje_max;
+    
     TipoCatalogo tipoCatalogo = new TipoCatalogo();
     
     public CicloContable() {
@@ -29,9 +33,13 @@ public class CicloContable {
         this.titulo = "";
         this.desde = new Date();
         this.tipo_sociedad = 0;
-        this.porcentaje_reserva_legal = BigDecimal.valueOf(Double.parseDouble("0"));
+        this.porcentaje_reserva_legal = 7.0;
         this.hasta = new Date();
         this.eliminado = false;
+        this.monto_maximo_ventas = 50000.00;
+        this.porcentaje_min = 25.00;
+        this.porcentaje_max = 30.00;
+        
         this.tipoCatalogo = new TipoCatalogo();
     }
 
@@ -99,11 +107,36 @@ public class CicloContable {
         this.tipo_sociedad = tipo_sociedad;
     }
 
-    public BigDecimal getPorcentaje_reserva_legal() {
+    public Double getPorcentaje_reserva_legal() {
         return porcentaje_reserva_legal;
     }
 
-    public void setPorcentaje_reserva_legal(BigDecimal porcentaje_reserva_legal) {
+    public void setPorcentaje_reserva_legal(Double porcentaje_reserva_legal) {
         this.porcentaje_reserva_legal = porcentaje_reserva_legal;
     }
+
+    public Double getMonto_maximo_ventas() {
+        return monto_maximo_ventas;
+    }
+
+    public void setMonto_maximo_ventas(Double monto_maximo_ventas) {
+        this.monto_maximo_ventas = monto_maximo_ventas;
+    }
+
+    public Double getPorcentaje_min() {
+        return porcentaje_min;
+    }
+
+    public void setPorcentaje_min(Double porcentaje_min) {
+        this.porcentaje_min = porcentaje_min;
+    }
+
+    public Double getPorcentaje_max() {
+        return porcentaje_max;
+    }
+
+    public void setPorcentaje_max(Double porcentaje_max) {
+        this.porcentaje_max = porcentaje_max;
+    }
+    
 }

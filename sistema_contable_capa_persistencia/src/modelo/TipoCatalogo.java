@@ -22,21 +22,7 @@ public class TipoCatalogo {
     int balance_general;
     int flujo_efectivo;
     int cambios_patrimonio;
-
-    public TipoCatalogo(int id, String tipo, String ref, boolean eliminado, int color, int libro_diario, int libro_mayor, int balanza_comprobacion, int estado_resultado, int balance_general, int flujo_efectivo, int cambios_patrimonio) {
-        this.id = id;
-        this.tipo = tipo;
-        this.ref = ref;
-        this.eliminado = eliminado;
-        this.color = color;
-        this.libro_diario = libro_diario;
-        this.libro_mayor = libro_mayor;
-        this.balanza_comprobacion = balanza_comprobacion;
-        this.estado_resultado = estado_resultado;
-        this.balance_general = balance_general;
-        this.flujo_efectivo = flujo_efectivo;
-        this.cambios_patrimonio = cambios_patrimonio;
-    }
+    int nivel_mayorizar;
 
     public TipoCatalogo() {
         this.id = -1;
@@ -51,6 +37,7 @@ public class TipoCatalogo {
         this.balance_general = 0;
         this.flujo_efectivo = 0;
         this.cambios_patrimonio = 0;
+        this.nivel_mayorizar = 3;
     }
 
     public int getId() {
@@ -147,6 +134,14 @@ public class TipoCatalogo {
 
     public void setCambios_patrimonio(int cambios_patrimonio) {
         this.cambios_patrimonio = cambios_patrimonio;
+    }
+
+    public int getNivel_mayorizar() {
+        return nivel_mayorizar;
+    }
+
+    public void setNivel_mayorizar(int nivel_mayorizar) {
+        this.nivel_mayorizar = nivel_mayorizar;
     }
     
 }

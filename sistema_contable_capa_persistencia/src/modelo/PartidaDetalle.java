@@ -20,19 +20,10 @@ public class PartidaDetalle {
     BigDecimal haber;
     int tipo_cargo_abono;
     boolean eliminado;
+    int folio_mayor;
     
     Cuenta cuenta;
     Cuenta cuentaMayor;
-
-    public PartidaDetalle(int id, int id_partida, int id_cuenta, BigDecimal parcial, BigDecimal debe, BigDecimal haber, boolean eliminado) {
-        this.id = id;
-        this.id_partida = id_partida;
-        this.id_cuenta = id_cuenta;
-        this.parcial = parcial;
-        this.debe = debe;
-        this.haber = haber;
-        this.eliminado = eliminado;
-    }
     
     public PartidaDetalle() {
         this.id = -1;
@@ -43,6 +34,7 @@ public class PartidaDetalle {
         this.haber = BigDecimal.valueOf(0);
         this.tipo_cargo_abono = 2;
         this.eliminado = false;
+        this.folio_mayor = 0;
         
         this.cuenta = new Cuenta();
         this.cuentaMayor = new Cuenta();
@@ -126,6 +118,14 @@ public class PartidaDetalle {
 
     public void setCuentaMayor(Cuenta cuentaMayor) {
         this.cuentaMayor = cuentaMayor;
+    }
+
+    public int getFolio_mayor() {
+        return folio_mayor;
+    }
+
+    public void setFolio_mayor(int folio_mayor) {
+        this.folio_mayor = folio_mayor;
     }
     
 }
