@@ -976,7 +976,10 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     private void cmbTipoCatalogo2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoCatalogo2ItemStateChanged
         this.seleccionarOpcionCmbTipoCatalogo2();
         this.limiparTablaCuentas();
-        this.obtenerListadoCuentasPorTipoCatalogo();
+        int i = cmbTipoCatalogo2.getSelectedIndex();
+        if (i >= 0) {
+            this.obtenerListadoCuentasPorTipoCatalogo();
+        }
     }//GEN-LAST:event_cmbTipoCatalogo2ItemStateChanged
 
     private void tblCuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCuentasMouseClicked
@@ -1088,7 +1091,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             case 0 -> this.iniciarCicloContable();
             case 1 -> this.iniciarTiposDeCatalogos();
             case 2 -> this.iniciarCatalogos();
-            default -> this.iniciarCatalogos();
+            default -> this.iniciarCicloContable();
         }
     }
     

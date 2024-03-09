@@ -33,19 +33,22 @@ public class daoCuenta {
         ArrayList<dtoCuenta> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  select 
-                  	c.*
-                  	,tc.tipo as catalogo
+                  select c.* ,nc.nivel as nivel ,tc.tipo as catalogo
                   from cuenta c
                   left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
-                  where c.id_tipo_catalogo = ? and c.eliminado = 0 and (c.nombre like '%busqueda%' or c.codigo like '%busqueda%')
+                  inner join ( select length(ci.codigo) as length_codigo ,row_number() over (order by length(ci.codigo)) as nivel
+                    from cuenta ci where ci.id_tipo_catalogo = ? and ci.eliminado = 0 group by length(ci.codigo)
+                  ) as nc on nc.length_codigo = length(c.codigo) where c.id_tipo_catalogo = ? and c.eliminado = 0 and (c.nombre like '%%' or c.codigo like '%%')
                   order by cast(c.codigo as text)
                   """;
-        String newSql = sql.replaceAll("busqueda", busqueda);
-        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql)) {
+//        String newSql = sql.replaceAll("paramBusqueda", busqueda);
+//        String newSql1 = newSql.replaceAll("paramIdCatalogo", String.valueOf(idTipoCatalogo));
+//        System.out.println(newSql1);
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, idTipoCatalogo);
-            //ps.setString(2, busqueda);
-            //ps.setString(3, busqueda);
+            ps.setInt(2, idTipoCatalogo);
+//            ps.setString(3, busqueda);
+//            ps.setString(4, busqueda);
             rs = ps.executeQuery();
             while (rs.next()) {
                 dtoCuenta cuenta = new dtoCuenta();
@@ -79,15 +82,25 @@ public class daoCuenta {
         var sql = """
                   select 
                   	c.*
+                  	,nc.nivel as nivel 
+                  	
                   from cuenta c
-                  where c.id_tipo_catalogo = ? and c.eliminado = 0 and (c.nombre like '%busqueda%' or c.codigo like '%busqueda%')
+                  inner join (
+                    select 
+                  	length(ci.codigo) as length_codigo
+                  	,row_number() over (order by length(ci.codigo)) as nivel
+                    from cuenta ci
+                    where ci.id_tipo_catalogo = paramIdCatalogo and ci.eliminado = 0
+                    group by length(ci.codigo)
+                  ) as nc 
+                  on nc.length_codigo = length(c.codigo)
+                  where c.id_tipo_catalogo = paramIdCatalogo and c.eliminado = 0 and (c.nombre like '%paramBusqueda%' or c.codigo like '%paramBusqueda%')
                   order by cast(c.codigo as text)
                   """;
-        String newSql = sql.replaceAll("busqueda", busqueda);
-        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql)) {
-            ps.setInt(1, idTipoCatalogo);
-            //ps.setString(2, busqueda);
-            //ps.setString(3, busqueda);
+        String newSql = sql.replaceAll("paramBusqueda", busqueda);
+        String newSql1 = newSql.replaceAll("paramIdCatalogo", String.valueOf(idTipoCatalogo));
+        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql1)) {
+            //ps.setInt(1, idTipoCatalogo);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Cuenta cuenta = new Cuenta();
@@ -118,10 +131,26 @@ public class daoCuenta {
         ArrayList<Cuenta> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  SELECT * FROM cuenta c where c.id = ?
+                  select 
+                  	c.*
+                  	,nc.nivel as nivel 
+                  	
+                  from cuenta c
+                  inner join (
+                    select 
+                  	length(ci.codigo) as length_codigo
+                  	,row_number() over (order by length(ci.codigo)) as nivel
+                    from cuenta ci
+                    where ci.id = paramId and ci.eliminado = 0
+                    group by length(ci.codigo)
+                  ) as nc 
+                  on nc.length_codigo = length(c.codigo)
+                  where c.id = paramId and c.eliminado = 0
+                  order by cast(c.codigo as text)
                   """;
-        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
-            ps.setInt(1, id);
+        String newSql = sql.replaceAll("paramId", String.valueOf(id));
+        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql)) {
+            //ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Cuenta cuenta = new Cuenta();
@@ -151,7 +180,7 @@ public class daoCuenta {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
                   INSERT INTO cuenta     
-                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, cuenta.getId_tipo_catalogo());
@@ -159,10 +188,10 @@ public class daoCuenta {
             ps.setString(3, cuenta.getRef());
             ps.setString(4, cuenta.getNombre());
             ps.setInt(5, cuenta.getNivel());
-            ps.setString(6, cuenta.getTipo_saldo());
-            ps.setString(7, cuenta.getIngresos());
-            ps.setString(8, cuenta.getEgresos());
-            ps.setInt(9, cuenta.isEliminado() ? 1 : 0);
+            //ps.setString(6, cuenta.getTipo_saldo());
+            ps.setString(6, cuenta.getIngresos());
+            ps.setString(7, cuenta.getEgresos());
+            ps.setInt(8, cuenta.isEliminado() ? 1 : 0);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             int id = -1;
@@ -188,7 +217,6 @@ public class daoCuenta {
                         codigo=?,
                         ref=?,
                         nombre=?,
-                        nivel=?,
                         tipo_saldo=?,
                         ingresos=?,
                         egresos=?
@@ -199,11 +227,11 @@ public class daoCuenta {
             ps.setString(2, cuenta.getCodigo());
             ps.setString(3, cuenta.getRef());
             ps.setString(4, cuenta.getNombre());
-            ps.setInt(5, cuenta.getNivel());
-            ps.setString(6, cuenta.getTipo_saldo());
-            ps.setString(7, cuenta.getIngresos());
-            ps.setString(8, cuenta.getEgresos());
-            ps.setInt(9, cuenta.getId());
+            //ps.setInt(5, cuenta.getNivel());
+            ps.setString(5, cuenta.getTipo_saldo());
+            ps.setString(6, cuenta.getIngresos());
+            ps.setString(7, cuenta.getEgresos());
+            ps.setInt(8, cuenta.getId());
             ps.executeUpdate();
             
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, cuenta.getId());

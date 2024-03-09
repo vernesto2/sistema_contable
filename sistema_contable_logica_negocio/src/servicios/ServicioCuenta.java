@@ -7,7 +7,6 @@ package servicios;
 import conexion.Conexion;
 import dao.daoCuenta;
 import modelo.Cuenta;
-import modelo.TipoCatalogo;
 import utils.constantes.RespuestaGeneral;
 
 /**
