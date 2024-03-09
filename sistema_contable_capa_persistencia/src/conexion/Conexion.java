@@ -26,11 +26,15 @@ public class Conexion {
     
     private Connection conectar(String fileName) {
         try {
-            Class.forName("org.sqlite.JDBC");
+            //Class.forName("org.sqlite.JDBC");
             String url = "jdbc:sqlite:" + fileName;
             cx = DriverManager.getConnection(url);
             System.out.println("CONECTADO!");
-        } catch (ClassNotFoundException | SQLException ex) {
+        } 
+//        catch (ClassNotFoundException | SQLException ex) {
+//            ex.printStackTrace();
+//        }
+        catch ( SQLException ex) {
             ex.printStackTrace();
         }
         return cx;

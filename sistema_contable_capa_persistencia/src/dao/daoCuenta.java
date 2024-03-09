@@ -32,13 +32,13 @@ public class daoCuenta {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<dtoCuenta> lista = new ArrayList<>();
         ResultSet rs = null;
-        var sql = """
-                  select c.* ,nc.nivel as nivel ,tc.tipo as catalogo
+        String sql = """
+                  select c.*, nc.nivel as nivel, tc.tipo as catalogo
                   from cuenta c
                   left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
-                  inner join ( select length(ci.codigo) as length_codigo ,row_number() over (order by length(ci.codigo)) as nivel
+                  inner join ( select length(ci.codigo) as length_codigo, row_number() over (order by length(ci.codigo)) as nivel
                     from cuenta ci where ci.id_tipo_catalogo = ? and ci.eliminado = 0 group by length(ci.codigo)
-                  ) as nc on nc.length_codigo = length(c.codigo) where c.id_tipo_catalogo = ? and c.eliminado = 0 and (c.nombre like '%%' or c.codigo like '%%')
+                  ) as nc on nc.length_codigo = length(c.codigo) where c.id_tipo_catalogo = ? and c.eliminado = 0 and (c.nombre like '% %' or c.codigo like '% %')
                   order by cast(c.codigo as text)
                   """;
 //        String newSql = sql.replaceAll("paramBusqueda", busqueda);
