@@ -255,6 +255,7 @@ public class dCuentas extends javax.swing.JDialog {
 
         txtNivel.setForeground(new java.awt.Color(0, 0, 0));
         txtNivel.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtNivel.setEnabled(false);
         txtNivel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtNivel.setPhColor(new java.awt.Color(0, 0, 0));
         txtNivel.setPlaceholder("Digite el nivel de la cuenta");

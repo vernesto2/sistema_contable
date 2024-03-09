@@ -37,18 +37,13 @@ public class daoCuenta {
                   from cuenta c
                   left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
                   inner join ( select length(ci.codigo) as length_codigo, row_number() over (order by length(ci.codigo)) as nivel
-                    from cuenta ci where ci.id_tipo_catalogo = ? and ci.eliminado = 0 group by length(ci.codigo)
-                  ) as nc on nc.length_codigo = length(c.codigo) where c.id_tipo_catalogo = ? and c.eliminado = 0 and (c.nombre like '% %' or c.codigo like '% %')
+                    from cuenta ci where ci.id_tipo_catalogo = paramIdCatalogo and ci.eliminado = 0 group by length(ci.codigo)
+                  ) as nc on nc.length_codigo = length(c.codigo) where c.id_tipo_catalogo = paramIdCatalogo and c.eliminado = 0 and (c.nombre like '%paramBusqueda%' or c.codigo like '%paramBusqueda%')
                   order by cast(c.codigo as text)
                   """;
-//        String newSql = sql.replaceAll("paramBusqueda", busqueda);
-//        String newSql1 = newSql.replaceAll("paramIdCatalogo", String.valueOf(idTipoCatalogo));
-//        System.out.println(newSql1);
-        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
-            ps.setInt(1, idTipoCatalogo);
-            ps.setInt(2, idTipoCatalogo);
-//            ps.setString(3, busqueda);
-//            ps.setString(4, busqueda);
+        String newSql = sql.replaceAll("paramBusqueda", busqueda);
+        String newSql1 = newSql.replaceAll("paramIdCatalogo", String.valueOf(idTipoCatalogo));
+        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql1)) {
             rs = ps.executeQuery();
             while (rs.next()) {
                 dtoCuenta cuenta = new dtoCuenta();
