@@ -5,6 +5,7 @@
 package vista;
 
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.util.Arrays;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -34,9 +35,11 @@ public class pCrearUsuario extends javax.swing.JPanel {
     Sesion sesion;
     private boolean esRestaurar;
     private int tipoUsuario;
-
-    public pCrearUsuario(Sesion sesion, boolean esRestaurar, int tipoUsuario) {
+    Window parentWindow;
+    public pCrearUsuario(Sesion sesion, boolean esRestaurar, int tipoUsuario, Window parentWindow) {
         initComponents();
+        
+        this.parentWindow = parentWindow;
         this.sesion = sesion;
         this.esRestaurar = esRestaurar;
         if(tipoUsuario == Constantes.TIPO_ALUMNO || tipoUsuario == Constantes.TIPO_DOCENTE) {
@@ -371,8 +374,11 @@ public class pCrearUsuario extends javax.swing.JPanel {
 
     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        vInicio inicio = new vInicio();
-        inicio.setVisible(true);
+        if(esRestaurar) {
+            vInicio inicio = new vInicio();
+            inicio.setVisible(true);
+        }
+        this.parentWindow.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 

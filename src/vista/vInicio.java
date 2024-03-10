@@ -275,7 +275,7 @@ public class vInicio extends javax.swing.JFrame {
 
     private void btnSeleccionarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarArchivoActionPerformed
         //JFileChooser selectorArchivos = new JFileChooser("./");
-        RSFileChooser selector = new RSFileChooser();
+        JFileChooser selector = new JFileChooser();
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("sqlite", "sqlite", "db");
         //selectorArchivos.setFileFilter(fnef);
         //selectorArchivos.setMultiSelectionEnabled(false);

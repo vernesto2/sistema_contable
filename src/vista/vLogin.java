@@ -317,7 +317,8 @@ public class vLogin extends javax.swing.JFrame {
         if(cConfigUsuario != null) {
             Sesion sesion = new Sesion(usuario, cConfigUsuario, this.sesion.rutaConexion);
             this.sesion = sesion;
-            vPrincipal principal = new vPrincipal(_usuario, sesion);
+            boolean esSecundaria = false;
+            vPrincipal principal = new vPrincipal(_usuario, sesion, esSecundaria);
             principal.setVisible(true);
             this.dispose();
         }
@@ -390,7 +391,6 @@ public class vLogin extends javax.swing.JFrame {
         //false hará que la vista intente crear alumno en vez de restaurar a la configuración inicial
         dCrearUsuario dialogo = new dCrearUsuario(this, true, sesion, Constantes.TIPO_ALUMNO);
         dialogo.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnCrearAlumnoActionPerformed
 
     /**

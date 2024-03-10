@@ -5,6 +5,7 @@
 package formularios;
 
 import java.awt.Dimension;
+import javax.swing.JDialog;
 import sesion.Sesion;
 import utils.constantes.CambiaPanel;
 import utils.constantes.Constantes;
@@ -33,8 +34,10 @@ public class dCrearUsuario extends javax.swing.JDialog {
         pCrearUsuario panel = new pCrearUsuario(
                         sesion, 
                         esRestaurar,
-                        tipoUsuario
+                        tipoUsuario, 
+                        this
                 );
+
         this.container.removeAll();
         this.container.add(panel);
         
@@ -42,7 +45,9 @@ public class dCrearUsuario extends javax.swing.JDialog {
         container.revalidate();
         container.repaint();
         iniciarVistaDialog();
+        
     }
+    
     public void iniciarVistaDialog() {
         
     }

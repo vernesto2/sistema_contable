@@ -48,7 +48,8 @@ public class vRestaurarConfiguracion extends javax.swing.JFrame {
         pCrearUsuario panel = new pCrearUsuario(
                         this.sesion, 
                         esRestaurar, 
-                        Constantes.TIPO_DOCENTE
+                        Constantes.TIPO_DOCENTE, 
+                        this
                 );
         this.panelBase.removeAll();
         //panel.setLocation(0,0);

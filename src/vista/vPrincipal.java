@@ -32,23 +32,24 @@ public class vPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form vPrincipal
      */
-
     private ServicioUsuario _usuario;
     private Sesion sesion;
-    public vPrincipal(ServicioUsuario _usuario, Sesion sesion) {
+    private boolean esVentanaSecundaria;
+    public vPrincipal(ServicioUsuario _usuario, Sesion sesion, boolean esVentanaSecundaria) {
+        initComponents();
         this._usuario = _usuario;
-        if(sesion.usuario == null) {
+        this.esVentanaSecundaria = esVentanaSecundaria;
+        if (sesion.usuario == null) {
             this.dispose();
             throw new IllegalAccessError("No puede iniciar sin usuario");
         }
         this.sesion = sesion;
-        initComponents();
+        
         this.iniciarVista();
         UtileriaVista.actualizarPerfil(sesion);
         vPrincipal.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(sesion.configUsuario.getAvatar())));
     }
 
-    
 //    public vPrincipal(Usuario usuario) {
 //        if(usuario == null) {
 //            this.dispose();
@@ -65,7 +66,6 @@ public class vPrincipal extends javax.swing.JFrame {
 //        this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(Constantes.configUsuario.getAvatar())));
 //    }
 //    
-
     public vPrincipal() {
         initComponents();
         this.iniciarVista();
@@ -77,24 +77,50 @@ public class vPrincipal extends javax.swing.JFrame {
         this.txtNombreUsuario.setText(sesion.usuario.getPersona().nombreCompleto());
         this.imagenPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource(sesion.configUsuario.getAvatar())));
         
+        
     }
-    
+
     public void iniciarVista() {
         this.setLocationRelativeTo(null);
         //this.setResizable(false);
         this.setTitle("SISTEMA CONTABLE");
         this.setExtendedState(this.MAXIMIZED_BOTH);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame ventana = this;
+        //evitar que la ventana se cierre por defecto
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                //confirmar al salir
+                if (JOptionPane.showConfirmDialog(ventana,
+                        "¿Realmente desea salir?", "Salir",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    if(esVentanaSecundaria == true) {
+                        ventana.dispose();
+                    } else {
+                        System.exit(0);
+                    }
+                    
+                }
+            }
+        });
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/utils/icon/user.png")));
-        if(sesion.esAlumno()) {
+        if (sesion.esAlumno()) {
             btnSeleccionarArchivoAlumno.setEnabled(false);
             this.setTitle(sesion.rutaConexion + " (Alumnos) ");
         } else {
             btnSeleccionarArchivoAlumno.setEnabled(true);
+            if(esVentanaSecundaria == true) {
+                btnSeleccionarArchivoAlumno.setEnabled(false);
+            }
             this.setTitle(sesion.rutaConexion + " (Docente) ");
         }
+        
         new CambiaPanel(pnl, new vDashboard());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -471,9 +497,9 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         new CambiaPanel(pnl, new vDashboard());
     }
-    
+
     public void seleccionarBoton() {
-        
+
         this.btnLibroDiario.setSelected(false);
         this.btnLibroMayor.setSelected(false);
         this.btnBalanzaComprobacion.setSelected(false);
@@ -483,9 +509,9 @@ public class vPrincipal extends javax.swing.JFrame {
         this.btnCambiosPatrimonio.setSelected(false);
         this.btnCicloContable.setSelected(false);
         this.btnConfigUsuario.setSelected(false);
-        
+
     }
-    
+
     private void btnEstadoResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoResultadoActionPerformed
         this.seleccionarBoton();
         if (!this.btnEstadoResultado.isSelected()) {
@@ -523,9 +549,9 @@ public class vPrincipal extends javax.swing.JFrame {
         int salida = JOptionPane.showConfirmDialog(this, "¿Esta seguro de continuar?", "¡CERRAR SESIÓN!", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
         //System.out.println(salida);
         if (salida == 0) {
-            
+
             vLogin login = new vLogin(
-                    new Sesion(null, null, sesion. rutaConexion)
+                    new Sesion(null, null, sesion.rutaConexion)
             );
             login.setVisible(true);
             this.dispose();
@@ -577,11 +603,11 @@ public class vPrincipal extends javax.swing.JFrame {
     private void btnSeleccionarArchivoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarArchivoAlumnoActionPerformed
         // TODO add your handling code here:
         //JFileChooser selectorArchivos = new JFileChooser("./");
-        if(sesion.esAlumno()) {
+        if (sesion.esAlumno()) {
             return;
         }
-        
-        RSFileChooser selector = new RSFileChooser();
+
+        JFileChooser selector = new JFileChooser();
         FileNameExtensionFilter fnef = new FileNameExtensionFilter("sqlite", "sqlite", "db");
         //selectorArchivos.setFileFilter(fnef);
         //selectorArchivos.setMultiSelectionEnabled(false);
@@ -596,12 +622,14 @@ public class vPrincipal extends javax.swing.JFrame {
             if (archivo != null) {
                 String ruta = archivo.getCanonicalPath();
                 System.out.println(ruta);
-                
+
                 Usuario usuarioInvitado = sesion.usuario;// (Usuario) sesion.usuario.clone();
                 Sesion sesionInvitado = new Sesion(usuarioInvitado, null, ruta);
-                
+
                 if (ruta.contains(".sqlite") || ruta.contains(".db")) {
-                    vPrincipal vInvitado = new vPrincipal(_usuario, sesionInvitado);
+                    ServicioUsuario _usuarioInvitado = new ServicioUsuario(sesionInvitado.rutaConexion);
+                    boolean esSecundaria = true;
+                    vPrincipal vInvitado = new vPrincipal(_usuarioInvitado, sesionInvitado, esSecundaria);
                     vInvitado.setExtendedState(this.NORMAL);
                     final int WIDTH = 500;
                     final int HEIGHT = 600;
