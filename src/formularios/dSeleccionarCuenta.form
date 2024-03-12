@@ -62,19 +62,19 @@
                               </Group>
                               <Component id="jLabel15" min="-2" pref="91" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="txtQueryBusqueda" pref="349" max="32767" attributes="0"/>
+                                  <Component id="txtQueryBusqueda" pref="409" max="32767" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnBuscarCuenta" min="-2" pref="111" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                                   <Component id="btnLimpiarBusquedaCuenta" min="-2" pref="103" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="txtMonto" min="-2" pref="179" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="txtCuentaSeleccionada" max="32767" attributes="0"/>
+                                  <Component id="txtMonto" pref="156" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCuentaSeleccionada" pref="485" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

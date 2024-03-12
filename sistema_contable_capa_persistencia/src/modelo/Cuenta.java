@@ -20,8 +20,9 @@ public class Cuenta {
     String ingresos;
     String egresos;
     boolean eliminado;
+    int disponible;
 
-    public Cuenta(int id, int id_tipo_catalogo, String codigo, String ref, String nombre, int nivel, String tipo_saldo, String ingresos, String egresos, boolean eliminado) {
+    public Cuenta(int id, int id_tipo_catalogo, String codigo, String ref, String nombre, int nivel, String tipo_saldo, String ingresos, String egresos, boolean eliminado, int disponible) {
         this.id = id;
         this.id_tipo_catalogo = id_tipo_catalogo;
         this.codigo = codigo;
@@ -32,6 +33,7 @@ public class Cuenta {
         this.ingresos = ingresos;
         this.egresos = egresos;
         this.eliminado = eliminado;
+        this.disponible = disponible;
     }
     
     public Cuenta() {
@@ -45,6 +47,7 @@ public class Cuenta {
         this.ingresos = "";
         this.egresos = "";
         this.eliminado = false;
+        this.disponible = 0;
     }
 
     public int getId() {
@@ -126,4 +129,13 @@ public class Cuenta {
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
     }
+
+    public int getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(int disponible) {
+        this.disponible = disponible;
+    }
+
 }

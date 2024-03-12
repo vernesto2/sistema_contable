@@ -72,7 +72,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="777" max="32767" attributes="0"/>
+                      <EmptySpace pref="801" max="32767" attributes="0"/>
                       <Component id="btnCancelarTipoCatalogo" min="-2" pref="106" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnGuardarTipoCatalogo" min="-2" pref="122" max="-2" attributes="0"/>

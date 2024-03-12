@@ -4,7 +4,6 @@
  */
 package formularios;
 
-import dto.dtoCuenta;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     }
 
     public void setModelCuentas() {
-        String[] cabecera = {"Nivel", "Codigo", "Concepto", "Tipo de Saldo", "Ingresos", "Egresos"};
+        String[] cabecera = {"Disponible", "Nivel", "Codigo", "Concepto", "Tipo de Saldo", "Ingresos", "Egresos"};
         dtm.setColumnIdentifiers(cabecera);
         tblCuentas.setModel(dtm);
         tblCuentas.setDefaultRenderer(Object.class, new Render());
@@ -84,22 +83,25 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     public void setDatosCuentas() {
         Object[] datos = new Object[dtm.getColumnCount()];
         for (Cuenta cuenta : listaCuentas) {
-            datos[0] = cuenta.getNivel();
-            datos[1] = cuenta.getCodigo();
-            datos[2] = cuenta.getNombre();
-            datos[3] = cuenta.getTipo_saldo();
-            datos[4] = cuenta.getIngresos();
-            datos[5] = cuenta.getEgresos();
+            String disponible = cuenta.getDisponible() == 1 ? "Si" : "No";
+            datos[0] = disponible;
+            datos[1] = cuenta.getNivel();
+            datos[2] = cuenta.getCodigo();
+            datos[3] = cuenta.getNombre();
+            datos[4] = cuenta.getTipo_saldo();
+            datos[5] = cuenta.getIngresos();
+            datos[6] = cuenta.getEgresos();
             dtm.addRow(datos);
         }
         tblCuentas.setModel(dtm);
         tblCuentas.setAutoResizeMode(tblCuentas.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        tblCuentas.getColumnModel().getColumn(0).setPreferredWidth(60);
-        tblCuentas.getColumnModel().getColumn(1).setPreferredWidth(120);
-        tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(425);
-        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(140);
-        tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tblCuentas.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tblCuentas.getColumnModel().getColumn(1).setPreferredWidth(60);
+        tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(425);
+        tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(140);
         tblCuentas.getColumnModel().getColumn(5).setPreferredWidth(100);
+        tblCuentas.getColumnModel().getColumn(6).setPreferredWidth(100);
        
     }
 
@@ -336,15 +338,15 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMonto, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -470,10 +472,18 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     private void tblCuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCuentasMouseClicked
         int row = tblCuentas.getSelectedRow();
         this.cuentaSeleccionada = (Cuenta)this.listaCuentas.get(row);
-        String tituloCuenta = this.cuentaSeleccionada.getCodigo() + " - " + this.cuentaSeleccionada.getNombre();
-        this.txtCuentaSeleccionada.setText(tituloCuenta);
-        this.btnAbonar.setEnabled(this.cuentaSeleccionada.getId() > 0 ? true : false);
-        this.btnCargar.setEnabled(this.cuentaSeleccionada.getId() > 0 ? true : false);
+        if (this.cuentaSeleccionada.getDisponible() == 1) {
+            String tituloCuenta = this.cuentaSeleccionada.getCodigo() + " - " + this.cuentaSeleccionada.getNombre();
+            this.txtCuentaSeleccionada.setText(tituloCuenta);
+            this.btnAbonar.setEnabled((this.cuentaSeleccionada.getId() > 0));
+            this.btnCargar.setEnabled((this.cuentaSeleccionada.getId() > 0));
+        } else {
+            String tituloCuenta = "CUENTA NO VALIDA";
+            this.txtCuentaSeleccionada.setText(tituloCuenta);
+            this.btnAbonar.setEnabled(false);
+            this.btnCargar.setEnabled(false);
+        }
+        
     }//GEN-LAST:event_tblCuentasMouseClicked
 
     private void tblCuentasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCuentasKeyTyped

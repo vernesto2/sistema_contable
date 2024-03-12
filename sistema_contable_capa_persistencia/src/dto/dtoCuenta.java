@@ -11,18 +11,17 @@ import modelo.Cuenta;
  * @author vacev
  */
 public class dtoCuenta extends Cuenta{
-    
     String catalogo = "";
 
-    public dtoCuenta(int id, int id_tipo_catalogo, String codigo, String ref, String nombre, int nivel, String tipo_saldo, String ingresos, String egresos, boolean eliminado, String catalogo) {
-        super(id, id_tipo_catalogo, codigo, ref, nombre, nivel, tipo_saldo, ingresos, egresos, eliminado);
+    public dtoCuenta(int id, int id_tipo_catalogo, String codigo, String ref, String nombre, int nivel, String tipo_saldo, String ingresos, String egresos, boolean eliminado, int disponible) {
+        super(id, id_tipo_catalogo, codigo, ref, nombre, nivel, tipo_saldo, ingresos, egresos, eliminado, disponible);
         this.catalogo = catalogo;
     }
 
     public dtoCuenta() {
         this.catalogo = "";
     }
-
+    
     public String getCatalogo() {
         return catalogo;
     }
@@ -30,5 +29,4 @@ public class dtoCuenta extends Cuenta{
     public void setCatalogo(String catalogo) {
         this.catalogo = catalogo;
     }
-    
 }

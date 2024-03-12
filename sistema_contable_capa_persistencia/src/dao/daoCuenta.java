@@ -78,8 +78,11 @@ public class daoCuenta {
                   select 
                   	c.*
                   	,nc.nivel as nivel 
+                        ,IIF(IIF(tc.nivel_mayorizar <= nc.nivel and nc.nivel, 1, 0) = 1 and 
+                            (nc.nivel < (LEAD(nc.nivel, 1) OVER(ORDER BY cast(c.codigo as text)))) = 0, 1, 0) disponible
                   	
                   from cuenta c
+                  left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
                   inner join (
                     select 
                   	length(ci.codigo) as length_codigo
@@ -109,6 +112,7 @@ public class daoCuenta {
                 cuenta.setIngresos(rs.getString("ingresos"));
                 cuenta.setEgresos(rs.getString("egresos"));
                 cuenta.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
+                cuenta.setDisponible(rs.getInt("disponible"));
                 lista.add(cuenta);
             }
             
