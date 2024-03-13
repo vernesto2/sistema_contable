@@ -10,29 +10,29 @@ import java.math.BigDecimal;
  *
  * @author vacev
  */
-public class PartidaDetalle {
+public class PartidaDetalle implements Comparable<PartidaDetalle>{
     
     int id;
     int id_partida;
     int id_cuenta;
-    BigDecimal parcial;
-    BigDecimal debe;
-    BigDecimal haber;
-    int tipo_cargo_abono;
+    double parcial;
+    double debe;
+    double haber;
+    public int tipo_cargo_abono;
     boolean eliminado;
     int folio_mayor;
     
-    Cuenta cuenta;
+    public Cuenta cuenta;
     Cuenta cuentaMayor;
     
     public PartidaDetalle() {
         this.id = -1;
         this.id_partida = -1;
         this.id_cuenta = -1;
-        this.parcial = BigDecimal.valueOf(0);
-        this.debe = BigDecimal.valueOf(0);
-        this.haber = BigDecimal.valueOf(0);
-        this.tipo_cargo_abono = 2;
+        this.parcial = 0.0;
+        this.debe = 0.0;
+        this.haber = 0.0;
+        this.tipo_cargo_abono = 1;
         this.eliminado = false;
         this.folio_mayor = 0;
         
@@ -64,27 +64,27 @@ public class PartidaDetalle {
         this.id_cuenta = id_cuenta;
     }
 
-    public BigDecimal getParcial() {
+    public double getParcial() {
         return parcial;
     }
 
-    public void setParcial(BigDecimal parcial) {
+    public void setParcial(double parcial) {
         this.parcial = parcial;
     }
 
-    public BigDecimal getDebe() {
+    public double getDebe() {
         return debe;
     }
 
-    public void setDebe(BigDecimal debe) {
+    public void setDebe(double debe) {
         this.debe = debe;
     }
 
-    public BigDecimal getHaber() {
+    public double getHaber() {
         return haber;
     }
 
-    public void setHaber(BigDecimal haber) {
+    public void setHaber(double haber) {
         this.haber = haber;
     }
 
@@ -128,4 +128,32 @@ public class PartidaDetalle {
         this.folio_mayor = folio_mayor;
     }
     
+    @Override
+    public String toString() {
+        return "PartidaDetalle{" +
+                "id=" + id +
+                ", id_partida=" + id_partida +
+                ", id_cuenta=" + id_cuenta +
+                ", parcial=" + parcial +
+                ", debe=" + debe +
+                ", haber=" + haber +
+                ", tipo_cargo_abono=" + tipo_cargo_abono +
+                ", eliminado=" + eliminado +
+                ", folio_mayor=" + folio_mayor +
+                ", cuenta=" + cuenta +
+                '}';
+    }
+
+    @Override
+    public int compareTo(PartidaDetalle o) {
+        // Comparar primero por tipo_cargo_abono
+        int comparacionPorTipo = Integer.compare(this.tipo_cargo_abono, o.tipo_cargo_abono);
+        // Si los tipo_cargo_abono son diferentes, devolver la comparación por tipo_cargo_abono
+        if (comparacionPorTipo != 0) {
+            return comparacionPorTipo;
+        }
+        // Si los tipo_cargo_abono son iguales, comparar por el código de la cuenta
+        return this.cuenta.codigo.compareTo(o.cuenta.codigo);
+    }
+
 }

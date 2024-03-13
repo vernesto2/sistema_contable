@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Cuenta;
 import modelo.Partida;
 import modelo.PartidaDetalle;
 import rojeru_san.efectos.ValoresEnum;
@@ -40,6 +41,9 @@ public class dPartidas extends javax.swing.JDialog {
     
     boolean realizoAccion = false;
     Sesion sesion;
+    
+    double totalDebe = 0;
+    double totalHaber = 0;
     
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override 
@@ -116,14 +120,21 @@ public class dPartidas extends javax.swing.JDialog {
         this.limiparTablaDetallePartida();
         Object[] datos = new Object[dtm.getColumnCount()];
         for (PartidaDetalle detalle : this.listaPartidaDetalles) {
+//            String cuentaNombre = "";
+//            String campo = "   ";
+//            if (detalle.getTipo_cargo_abono() == Constantes.TIPO_CARGO) {
+//                cuentaNombre = detalle.getCuenta().getNombre();
+//            } else {
+//                cuentaNombre = (campo + detalle.getCuenta().getNombre());
+//            }
             datos[0] = detalle.getTipo_cargo_abono() == 1 ? Constantes.TIPO_CARGO_S : Constantes.TIPO_ABONO_S;
             datos[1] = detalle.getCuenta().getCodigo();
             datos[2] = detalle.getCuenta().getNombre();
             datos[3] = detalle.getParcial();
             datos[4] = detalle.getDebe();
             datos[5] = detalle.getHaber();
-            datos[6] = btn1;
-            datos[7] = btn2;
+            datos[6] = detalle.getCuenta().getDisponible() == 1 ? btn1 : ' ';
+            datos[7] = detalle.getCuenta().getDisponible() == 1 ? btn2 : ' ';
             dtm.addRow(datos);
         }
         tblDetallePartida.setModel(dtm);
@@ -197,8 +208,8 @@ public class dPartidas extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDetallePartida = new rojerusan.RSTableMetro();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        txtTotalHaber = new javax.swing.JLabel();
+        txtTotalDebe = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -413,15 +424,15 @@ public class dPartidas extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblDetallePartida);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("$ 0.00");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        txtTotalHaber.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTotalHaber.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtTotalHaber.setText("$ 0.00");
+        txtTotalHaber.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText("$ 0.00");
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        txtTotalDebe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txtTotalDebe.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtTotalDebe.setText("$ 0.00");
+        txtTotalDebe.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -433,9 +444,9 @@ public class dPartidas extends javax.swing.JDialog {
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -445,8 +456,8 @@ public class dPartidas extends javax.swing.JDialog {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -543,11 +554,22 @@ public class dPartidas extends javax.swing.JDialog {
         int column = tblDetallePartida.getSelectedColumn();
         if (column == 6) {
             // editar
+            if (this.listaPartidaDetalles.get(row).getCuenta().getDisponible() == 0) {
+                JOptionPane.showMessageDialog(this, "No puede realizar acciones a una cuenta padre", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
+            } else {
+
+            }
             
         } else if (column == 7) {
             // eliminar
-            
+            if (this.listaPartidaDetalles.get(row).getCuenta().getDisponible() == 0) {
+                JOptionPane.showMessageDialog(this, "No puede realizar acciones a una cuenta padre", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
+            } else {
+
+            }
         }
+        
+        
     }//GEN-LAST:event_tblDetallePartidaMouseClicked
 
     private void cmbTipoPartidaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoPartidaItemStateChanged
@@ -587,7 +609,72 @@ public class dPartidas extends javax.swing.JDialog {
         }
         
         // una vez agregado los detalles, se muestran en la tabla
+        Collections.sort(listaPartidaDetalles, Comparator.comparingInt((PartidaDetalle d) -> d.tipo_cargo_abono)
+                .thenComparing((PartidaDetalle d) -> d.cuenta.codigo));
+        // una vez ordenado el listado actualizamos los montos de los detalles
+        this.actualizarMontosDeTabla();
         this.setDatosPartidaDetalle();
+    }
+    
+    public void actualizarMontosDeTabla() {
+        // limpiamos los calculos de los no disponibles para volver a realizar el calculo
+        this.listaPartidaDetalles.forEach((t) -> {
+            if (t.getCuenta().getDisponible() == 0) {
+                t.setDebe(0.0);
+                t.setHaber(0.0);
+            }
+        });
+        // validamos los escenarios en los cuales debe acumular el debe y haber
+        this.listaPartidaDetalles.forEach((t) -> {
+            if (t.getCuentaMayor().getId() > 0 && t.getCuenta().getDisponible() == 1) {
+                int rowPadre = this.buscarPadre(t.getCuentaMayor());
+                if (rowPadre >= 0) {
+                    PartidaDetalle cuentaPadre = this.listaPartidaDetalles.get(rowPadre);
+                    double acumulado = 0;
+                    if (t.getTipo_cargo_abono() == Constantes.TIPO_CARGO) {
+                        acumulado = cuentaPadre.getDebe();
+                        acumulado += t.getParcial();
+                        this.listaPartidaDetalles.get(rowPadre).setDebe(acumulado);
+                    } else {
+                        acumulado = cuentaPadre.getHaber();
+                        acumulado += t.getParcial();
+                        this.listaPartidaDetalles.get(rowPadre).setHaber(acumulado);
+                    }
+                }
+            }
+        });
+        
+        // acumulamos los totales de DEBE y HABER para validar la partida
+        this.totalDebe = 0;
+        this.totalHaber = 0;
+        this.listaPartidaDetalles.forEach((t) -> {
+            if (t.getTipo_cargo_abono() == Constantes.TIPO_CARGO) {
+                totalDebe += t.getDebe();
+            } else if (t.getTipo_cargo_abono() == Constantes.TIPO_ABONO) {
+                totalHaber += t.getHaber();
+            }
+        });
+        
+        this.txtTotalDebe.setText(String.valueOf(totalDebe));
+        this.txtTotalHaber.setText(String.valueOf(totalHaber));
+        if (this.totalDebe != this.totalHaber) {
+            this.txtTotalDebe.setForeground(Color.red);
+            this.txtTotalHaber.setForeground(Color.red);
+        } else {
+            this.txtTotalDebe.setForeground(Color.black);
+            this.txtTotalHaber.setForeground(Color.black);
+        }
+    }
+    
+    public int buscarPadre(Cuenta cuenta) {
+        int row = -1;
+        for (int i = 0; i < this.listaPartidaDetalles.size(); i++) {
+            if (cuenta.getId() == this.listaPartidaDetalles.get(i).getCuenta().getId()) {
+                row = i;
+                break;
+            }
+        }
+        return row;
     }
     
     public ArrayList<PartidaDetalle> ordernarDetallesDePartida() {
@@ -650,9 +737,7 @@ public class dPartidas extends javax.swing.JDialog {
     private RSMaterialComponent.RSComboBoxMaterial cmbTipoPartida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -665,5 +750,7 @@ public class dPartidas extends javax.swing.JDialog {
     private javax.swing.JTextArea txtComentario;
     private newscomponents.RSDateChooser txtFecha;
     private RSMaterialComponent.RSTextFieldMaterial txtNumPartida;
+    private javax.swing.JLabel txtTotalDebe;
+    private javax.swing.JLabel txtTotalHaber;
     // End of variables declaration//GEN-END:variables
 }

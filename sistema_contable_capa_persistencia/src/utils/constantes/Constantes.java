@@ -141,10 +141,6 @@ public class Constantes {
     }
     
     public static boolean validarPorcentaje(int key) {
-        if ((key >= 48 && key <= 57) || key == 46) {
-            return true;
-        } else {
-            return false;
-        }
+        return (key >= 48 && key <= 57) || key == 46;
     }
 }

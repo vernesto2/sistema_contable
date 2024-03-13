@@ -309,6 +309,11 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         txtMonto.setPhColor(new java.awt.Color(0, 0, 0));
         txtMonto.setPlaceholder("Digite el monto");
         txtMonto.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMontoKeyTyped(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -393,12 +398,17 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
 
     private void btnAbonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbonarActionPerformed
         // proceso para seleccionar cuenta y su cuenta padre
-        if (txtMonto.getText().trim().equals("") ) {
-            JOptionPane.showMessageDialog(this, "No ha ingresado un monto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
-        } else {
-            this.realizoAccion = true;
-            this.buscarCuentaPadre(Constantes.TIPO_ABONO);
-            this.cerrar();
+        try {
+            if (txtMonto.getText().trim().equals("") || txtMonto.getText().contains("..")) {
+                JOptionPane.showMessageDialog(this, "No ha ingresado un monto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
+            } else {
+                double valor = Double.parseDouble(txtMonto.getText());
+                this.realizoAccion = true;
+                this.buscarCuentaPadre(Constantes.TIPO_ABONO);
+                this.cerrar();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ingrese un monto correcto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnAbonarActionPerformed
 
@@ -408,22 +418,34 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
         // proceso para seleccionar cuenta y su cuenta padre
-        if (txtMonto.getText().trim().equals("") ) {
-            JOptionPane.showMessageDialog(this, "No ha ingresado un monto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
-        } else {
-            this.realizoAccion = true;
-            this.buscarCuentaPadre(Constantes.TIPO_CARGO);
-            this.cerrar();
+        try {
+            if (txtMonto.getText().trim().equals("") || txtMonto.getText().contains("..")) {
+                JOptionPane.showMessageDialog(this, "No ha ingresado un monto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
+            } else {
+                double valor = Double.parseDouble(txtMonto.getText());
+                this.realizoAccion = true;
+                this.buscarCuentaPadre(Constantes.TIPO_CARGO);
+                this.cerrar();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ingrese un monto correcto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnCargarActionPerformed
 
     public void buscarCuentaPadre(int tipoAccion) {
         // verificamos si la cuenta seleccionada tiene una longitud de 4
-        if (this.cuentaSeleccionada.getCodigo().length() > 4) {
-            PartidaDetalle pDetallePadre = new PartidaDetalle();
-            Cuenta cuentaPadre = new Cuenta();
-            boolean encontroPadre = false;
-            String codigoPadre = this.cuentaSeleccionada.getCodigo().substring(0, 4);
+        PartidaDetalle pDetallePadre = new PartidaDetalle();
+        Cuenta cuentaPadre = new Cuenta();
+        boolean encontroPadre = false;
+        if (this.cuentaSeleccionada.getNivel() > this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar()) {
+            int cantidadCodigo = 0;
+            for (Cuenta cuenta : listaCuentas) {
+                if (cuenta.getNivel() == this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar()) {
+                    cantidadCodigo = cuenta.getCodigo().length();
+                    break;
+                }
+            }
+            String codigoPadre = this.cuentaSeleccionada.getCodigo().substring(0, cantidadCodigo);
             for (Cuenta cuenta : listaCuentas) {
                 if (cuenta.getCodigo().equals(codigoPadre)) {
                     cuentaPadre = cuenta;
@@ -445,10 +467,17 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         
         // creamos el detalle seleccionado
         PartidaDetalle pDetalle = new PartidaDetalle();
+        pDetalle.setCuentaMayor(cuentaPadre);
         pDetalle.setTipo_cargo_abono(tipoAccion);
         pDetalle.setId_cuenta(this.cuentaSeleccionada.getId());
         pDetalle.setCuenta(this.cuentaSeleccionada);
-        pDetalle.setParcial(BigDecimal.valueOf(Double.parseDouble(txtMonto.getText())));
+        if (encontroPadre) {
+            pDetalle.setParcial(Double.parseDouble(txtMonto.getText()));
+        } else if (Constantes.TIPO_CARGO == tipoAccion) {
+            pDetalle.setDebe(Double.parseDouble(txtMonto.getText()));
+        } else if (Constantes.TIPO_ABONO == tipoAccion) {
+            pDetalle.setHaber(Double.parseDouble(txtMonto.getText()));
+        }
         listaDetallePartida.add(pDetalle);
     }
 
@@ -487,12 +516,14 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     }//GEN-LAST:event_tblCuentasMouseClicked
 
     private void tblCuentasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCuentasKeyTyped
-        int key = evt.getKeyChar();
-        boolean numeros = key >= 48 && key <= 57;
-        if (!numeros){
+        
+    }//GEN-LAST:event_tblCuentasKeyTyped
+
+    private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
+        if (!Constantes.validarPorcentaje(evt.getKeyChar())) {
             evt.consume();
         }
-    }//GEN-LAST:event_tblCuentasKeyTyped
+    }//GEN-LAST:event_txtMontoKeyTyped
 
     /**
      * @param args the command line arguments

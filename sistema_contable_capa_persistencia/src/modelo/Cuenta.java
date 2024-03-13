@@ -12,7 +12,7 @@ public class Cuenta {
     
     int id;
     int id_tipo_catalogo;
-    String codigo;
+    public String codigo;
     String ref;
     String nombre;
     int nivel;
@@ -34,6 +34,23 @@ public class Cuenta {
         this.egresos = egresos;
         this.eliminado = eliminado;
         this.disponible = disponible;
+    }
+    
+    @Override
+    public String toString() {
+        return "Cuenta{" +
+                "id=" + id +
+                ", codigo='" + codigo + '\'' +
+                ", ref='" + ref + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", id_tipo_catalogo=" + id_tipo_catalogo +
+                ", nivel=" + nivel +
+                ", tipo_saldo='" + tipo_saldo + '\'' +
+                ", ingresos='" + ingresos + '\'' +
+                ", egresos='" + egresos + '\'' +
+                ", eliminado=" + eliminado +
+                ", disponible=" + disponible +
+                '}';
     }
     
     public Cuenta() {
