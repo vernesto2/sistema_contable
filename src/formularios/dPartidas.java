@@ -52,6 +52,8 @@ public class dPartidas extends javax.swing.JDialog {
         }
     };
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    boolean banderaAgregar = true;
+    int contador = 0;
     /**
      * Creates new form dTipoCatalogo
      */
@@ -100,7 +102,7 @@ public class dPartidas extends javax.swing.JDialog {
     }
     
     public void setModelPartida() {
-        String[] cabecera = {"","Codigo","Concepto","Parcial","Debe","Haber","Editar","Eliminar"};
+        String[] cabecera = {"","Codigo","Concepto", "FM","Parcial","Debe","Haber","Editar","Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblDetallePartida.setModel(dtm);
         Render rr = new Render();
@@ -130,11 +132,12 @@ public class dPartidas extends javax.swing.JDialog {
             datos[0] = detalle.getTipo_cargo_abono() == 1 ? Constantes.TIPO_CARGO_S : Constantes.TIPO_ABONO_S;
             datos[1] = detalle.getCuenta().getCodigo();
             datos[2] = detalle.getCuenta().getNombre();
-            datos[3] = detalle.getParcial();
-            datos[4] = detalle.getDebe();
-            datos[5] = detalle.getHaber();
-            datos[6] = detalle.getCuenta().getDisponible() == 1 ? btn1 : ' ';
-            datos[7] = detalle.getCuenta().getDisponible() == 1 ? btn2 : ' ';
+            datos[3] = detalle.getFolio_mayor();
+            datos[4] = detalle.getParcial();
+            datos[5] = detalle.getDebe();
+            datos[6] = detalle.getHaber();
+            datos[7] = detalle.getCuenta().getDisponible() == 1 ? btn1 : ' ';
+            datos[8] = detalle.getCuenta().getDisponible() == 1 ? btn2 : ' ';
             dtm.addRow(datos);
         }
         tblDetallePartida.setModel(dtm);
@@ -142,11 +145,12 @@ public class dPartidas extends javax.swing.JDialog {
         tblDetallePartida.getColumnModel().getColumn(0).setPreferredWidth(0);
         tblDetallePartida.getColumnModel().getColumn(1).setPreferredWidth(150);
         tblDetallePartida.getColumnModel().getColumn(2).setPreferredWidth(400);
-        tblDetallePartida.getColumnModel().getColumn(3).setPreferredWidth(150);
+        tblDetallePartida.getColumnModel().getColumn(3).setPreferredWidth(50);
         tblDetallePartida.getColumnModel().getColumn(4).setPreferredWidth(150);
         tblDetallePartida.getColumnModel().getColumn(5).setPreferredWidth(150);
-        tblDetallePartida.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tblDetallePartida.getColumnModel().getColumn(6).setPreferredWidth(150);
         tblDetallePartida.getColumnModel().getColumn(7).setPreferredWidth(50);
+        tblDetallePartida.getColumnModel().getColumn(8).setPreferredWidth(50);
     }
     
     public void limiparTablaDetallePartida() {
@@ -552,26 +556,117 @@ public class dPartidas extends javax.swing.JDialog {
     private void tblDetallePartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetallePartidaMouseClicked
         int row = tblDetallePartida.getSelectedRow();
         int column = tblDetallePartida.getSelectedColumn();
-        if (column == 6) {
+        if (column == 7) {
             // editar
             if (this.listaPartidaDetalles.get(row).getCuenta().getDisponible() == 0) {
                 JOptionPane.showMessageDialog(this, "No puede realizar acciones a una cuenta padre", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
             } else {
-
+                double monto = 0;
+                if (this.listaPartidaDetalles.get(row).getDebe() == 0 && this.listaPartidaDetalles.get(row).getHaber()== 0) {
+                    monto = this.listaPartidaDetalles.get(row).getParcial();
+                } else if (this.listaPartidaDetalles.get(row).getParcial() == 0 && this.listaPartidaDetalles.get(row).getHaber()== 0) {
+                    monto = this.listaPartidaDetalles.get(row).getDebe();
+                } else if (this.listaPartidaDetalles.get(row).getParcial() == 0 && this.listaPartidaDetalles.get(row).getDebe()== 0) {
+                    monto = this.listaPartidaDetalles.get(row).getHaber();
+                }
+                int montoFM = 0;
+                
+                dModificarMonto d = new dModificarMonto(null, true, sesion, monto, montoFM);
+                d.setAlwaysOnTop(true);
+                d.setVisible(true);
+                // validamos si realizo alguna accion para actualizar el listado o no
+                if (d.isRealizoAccion()) {
+                    if (this.listaPartidaDetalles.get(row).getDebe() == 0 && this.listaPartidaDetalles.get(row).getHaber()== 0) {
+                        this.listaPartidaDetalles.get(row).setParcial(d.getMontoIngresado());
+                    } else if (this.listaPartidaDetalles.get(row).getParcial() == 0 && this.listaPartidaDetalles.get(row).getHaber()== 0) {
+                        this.listaPartidaDetalles.get(row).setDebe(d.getMontoIngresado());
+                    } else if (this.listaPartidaDetalles.get(row).getParcial() == 0 && this.listaPartidaDetalles.get(row).getDebe()== 0) {
+                        this.listaPartidaDetalles.get(row).setHaber(d.getMontoIngresado());
+                    }
+                    this.actualizarMontosDeTabla();
+                    this.setDatosPartidaDetalle();
+                }
             }
             
-        } else if (column == 7) {
+        } else if (column == 8) {
             // eliminar
             if (this.listaPartidaDetalles.get(row).getCuenta().getDisponible() == 0) {
                 JOptionPane.showMessageDialog(this, "No puede realizar acciones a una cuenta padre", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
             } else {
-
+                String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaPartidaDetalles.get(row).getCuenta().getNombre();
+                int opc = JOptionPane.showConfirmDialog(this, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (opc == 0) {
+                    // si la cuenta mayor tiene id = -1 significa que es la cuenta de nivel a mayorizar 
+                    // y unicamente la pasamos al listado de eliminar
+                    if (this.listaPartidaDetalles.get(row).getCuentaMayor().getId() == -1) {
+                        ArrayList<PartidaDetalle> listaEliminar = new ArrayList<>();
+                        listaEliminar.add(this.listaPartidaDetalles.get(row));
+                        this.listaPartidaDetalles = this.eliminarDetalledePartidaDetalle(listaEliminar);
+                        //this.listaPartidaDetallesEliminados.add(this.listaPartidaDetalles.get(row));
+                        
+                    } else {
+                        // buscamos todos los detalles que tienen ese padre junto a su padre y lo devolvemos en un listado
+                        this.buscarPadreYDetalles(this.listaPartidaDetalles.get(row).getCuentaMayor(), this.listaPartidaDetalles.get(row).getCuenta());
+                    }
+                    
+                    this.actualizarMontosDeTabla();
+                    this.setDatosPartidaDetalle();
+                }
             }
         }
-        
-        
     }//GEN-LAST:event_tblDetallePartidaMouseClicked
 
+    public void buscarPadreYDetalles(Cuenta cuentaPadre, Cuenta cuenta) {
+        ArrayList<PartidaDetalle> listaEliminar = new ArrayList<>();
+        // buscamos las cuentas que tengan al mismo padre
+        this.contador = 0;
+        this.listaPartidaDetalles.forEach((t) -> {
+            if (t.getCuentaMayor().getId() == cuentaPadre.getId()) {
+                this.contador++;
+            }
+        });
+        
+        if (this.contador <= 1) {
+            // si solo tenemos 1 valor debemos eliminar el padre e hijo
+            this.listaPartidaDetalles.forEach((t) -> {
+                if (t.getCuenta().getId() == cuenta.getId()) {
+                    listaEliminar.add(t);
+                }
+            });
+            // primero buscamos al padre
+            this.listaPartidaDetalles.forEach((t) -> {
+                if (t.getCuenta().getId() == cuentaPadre.getId()) {
+                    listaEliminar.add(t);
+                }
+            });
+        } else {
+            this.listaPartidaDetalles.forEach((t) -> {
+                if (t.getCuenta().getId() == cuenta.getId()) {
+                    listaEliminar.add(t);
+                }
+            });
+        }
+        
+        this.listaPartidaDetalles = this.eliminarDetalledePartidaDetalle(listaEliminar);
+    }
+    
+    public ArrayList<PartidaDetalle> eliminarDetalledePartidaDetalle(ArrayList<PartidaDetalle> lista) {
+        ArrayList<PartidaDetalle> listaRetornar = new ArrayList<>();
+        this.listaPartidaDetalles.forEach((t) -> {
+            this.banderaAgregar = true;
+            lista.forEach((t1) -> {
+                if (t.getCuenta().getId() == t1.getCuenta().getId()) {
+                    this.banderaAgregar = false;
+                    this.listaPartidaDetallesEliminados.add(t);
+                }
+            });
+            if (this.banderaAgregar) {
+                listaRetornar.add(t);
+            }
+        });
+        return listaRetornar;
+    }
+    
     private void cmbTipoPartidaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoPartidaItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTipoPartidaItemStateChanged

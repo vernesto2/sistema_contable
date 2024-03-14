@@ -4,6 +4,7 @@
  */
 package formularios;
 
+import java.awt.Color;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -137,6 +138,8 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         txtCuentaSeleccionada = new javax.swing.JLabel();
         txtMonto = new RSMaterialComponent.RSTextFieldMaterial();
         jLabel17 = new javax.swing.JLabel();
+        txtFM = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel18 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -320,6 +323,23 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         jLabel17.setText("Monto:");
         jLabel17.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
+        txtFM.setForeground(new java.awt.Color(0, 0, 0));
+        txtFM.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtFM.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtFM.setPhColor(new java.awt.Color(0, 0, 0));
+        txtFM.setPlaceholder("Digite el FM");
+        txtFM.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtFM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFMKeyTyped(evt);
+            }
+        });
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel18.setText("FM:");
+        jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -343,15 +363,19 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtMonto, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)))))
+                                .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -367,7 +391,10 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -401,7 +428,9 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         try {
             if (txtMonto.getText().trim().equals("") || txtMonto.getText().contains("..")) {
                 JOptionPane.showMessageDialog(this, "No ha ingresado un monto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
-            } else {
+            } else if (txtFM.getText().trim().equals("") || txtFM.getText().contains("..")) {
+                JOptionPane.showMessageDialog(this, "No ha ingresado un FM", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
+            }  else {
                 double valor = Double.parseDouble(txtMonto.getText());
                 this.realizoAccion = true;
                 this.buscarCuentaPadre(Constantes.TIPO_ABONO);
@@ -421,6 +450,8 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         try {
             if (txtMonto.getText().trim().equals("") || txtMonto.getText().contains("..")) {
                 JOptionPane.showMessageDialog(this, "No ha ingresado un monto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
+            } else if (txtFM.getText().trim().equals("") || txtFM.getText().contains("..")) {
+                JOptionPane.showMessageDialog(this, "No ha ingresado un FM", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
             } else {
                 double valor = Double.parseDouble(txtMonto.getText());
                 this.realizoAccion = true;
@@ -456,6 +487,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             if (encontroPadre) {
                 pDetallePadre.setTipo_cargo_abono(tipoAccion);
                 pDetallePadre.setId_cuenta(cuentaPadre.getId());
+                pDetallePadre.setFolio_mayor(Integer.parseInt(txtFM.getText()));
                 pDetallePadre.setCuenta(cuentaPadre);
                 //pDetallePadre.setParcial(BigDecimal.valueOf(Double.parseDouble(txtMonto.getText())));
                 listaDetallePartida.add(pDetallePadre);
@@ -473,10 +505,12 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         pDetalle.setCuenta(this.cuentaSeleccionada);
         if (encontroPadre) {
             pDetalle.setParcial(Double.parseDouble(txtMonto.getText()));
-        } else if (Constantes.TIPO_CARGO == tipoAccion) {
+        } else if (!encontroPadre && Constantes.TIPO_CARGO == tipoAccion) {
             pDetalle.setDebe(Double.parseDouble(txtMonto.getText()));
-        } else if (Constantes.TIPO_ABONO == tipoAccion) {
+            pDetalle.setFolio_mayor(Integer.parseInt(txtFM.getText()));
+        } else if (!encontroPadre && Constantes.TIPO_ABONO == tipoAccion) {
             pDetalle.setHaber(Double.parseDouble(txtMonto.getText()));
+            pDetalle.setFolio_mayor(Integer.parseInt(txtFM.getText()));
         }
         listaDetallePartida.add(pDetalle);
     }
@@ -506,9 +540,11 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             this.txtCuentaSeleccionada.setText(tituloCuenta);
             this.btnAbonar.setEnabled((this.cuentaSeleccionada.getId() > 0));
             this.btnCargar.setEnabled((this.cuentaSeleccionada.getId() > 0));
+            this.txtCuentaSeleccionada.setForeground(Color.black);
         } else {
-            String tituloCuenta = "CUENTA NO VALIDA";
+            String tituloCuenta = "*CUENTA NO VALIDA*";
             this.txtCuentaSeleccionada.setText(tituloCuenta);
+            this.txtCuentaSeleccionada.setForeground(Color.red);
             this.btnAbonar.setEnabled(false);
             this.btnCargar.setEnabled(false);
         }
@@ -524,6 +560,12 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtMontoKeyTyped
+
+    private void txtFMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFMKeyTyped
+        if (!Constantes.validarNumeros(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFMKeyTyped
 
     /**
      * @param args the command line arguments
@@ -576,12 +618,14 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
     private rojerusan.RSTableMetro tblCuentas;
     private javax.swing.JLabel totalCuentas;
     private javax.swing.JLabel txtCuentaSeleccionada;
+    private RSMaterialComponent.RSTextFieldMaterial txtFM;
     private RSMaterialComponent.RSTextFieldMaterial txtMonto;
     private RSMaterialComponent.RSTextFieldMaterial txtQueryBusqueda;
     // End of variables declaration//GEN-END:variables
