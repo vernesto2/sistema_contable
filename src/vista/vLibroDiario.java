@@ -4,6 +4,7 @@
  */
 package vista;
 
+import dto.dtoLista;
 import dto.dtoPartida;
 import formularios.dPartidas;
 import java.awt.Color;
@@ -12,13 +13,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.Cuenta;
 import modelo.Partida;
 import rojeru_san.efectos.ValoresEnum;
 import servicios.ServicioPartida;
 import sesion.Sesion;
 import utils.Render;
 import utils.UtileriaVista;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -27,6 +28,7 @@ import utils.constantes.RespuestaGeneral;
  */
 public class vLibroDiario extends javax.swing.JPanel {
 
+    ArrayList<dtoLista> listaTipoPartidas = new ArrayList<>();
     /**
      * Creates new form vLibroDiario
      */
@@ -47,11 +49,12 @@ public class vLibroDiario extends javax.swing.JPanel {
         this.sesion = sesion;
         _partida = new ServicioPartida(sesion.rutaConexion);
         this.setModelPartida();
+        this.listaTipoPartidas = Constantes.listaTipoPartidas();
         this.obtenerListadoPartidas();
     }
     
     public void setModelPartida() {
-        String[] cabecera = {"# Partida","Fecha","Comentario","Monto","Editar","Eliminar"};
+        String[] cabecera = {"# Partida","Fecha","Tipo de Partida","Comentario","Monto","Editar","Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblPartidas.setModel(dtm);
         tblPartidas.setDefaultRenderer(Object.class, new Render());
@@ -71,20 +74,22 @@ public class vLibroDiario extends javax.swing.JPanel {
         for (dtoPartida partida : listaPartidas) {
             datos[0] = partida.getNum_partida();
             datos[1] = sdf.format(partida.getFecha());
-            datos[2] = partida.getComentario();
-            datos[3] = partida.getMonto();
-            datos[4] = btn1;
-            datos[5] = btn2;
+            datos[2] = this.listaTipoPartidas.get(partida.getId_tipo_partida()).getLabel();
+            datos[3] = partida.getComentario();
+            datos[4] = partida.getMonto();
+            datos[5] = btn1;
+            datos[6] = btn2;
             dtm.addRow(datos);
         }
         tblPartidas.setModel(dtm);
         tblPartidas.setAutoResizeMode(tblPartidas.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         tblPartidas.getColumnModel().getColumn(0).setPreferredWidth(30);
         tblPartidas.getColumnModel().getColumn(1).setPreferredWidth(70);
-        tblPartidas.getColumnModel().getColumn(2).setPreferredWidth(400);
-        tblPartidas.getColumnModel().getColumn(3).setPreferredWidth(100);
-        tblPartidas.getColumnModel().getColumn(4).setPreferredWidth(20);
+        tblPartidas.getColumnModel().getColumn(2).setPreferredWidth(70);
+        tblPartidas.getColumnModel().getColumn(3).setPreferredWidth(400);
+        tblPartidas.getColumnModel().getColumn(4).setPreferredWidth(100);
         tblPartidas.getColumnModel().getColumn(5).setPreferredWidth(20);
+        tblPartidas.getColumnModel().getColumn(6).setPreferredWidth(20);
     }
     
     public void obtenerListadoPartidas() {
@@ -289,12 +294,12 @@ public class vLibroDiario extends javax.swing.JPanel {
         // logica de acciones de botones
         int accion = tblPartidas.getSelectedColumn();
         int row = tblPartidas.getSelectedRow();
-        if (accion == 4) {
+        if (accion == 5) {
             // editar
             this.setearModeloCicloContable(row);
             this.abrirDialogPartida(partidaModel);
 
-        } else if (accion == 5) {
+        } else if (accion == 6) {
             // eliminar
             String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaPartidas.get(row).getComentario();
             int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);

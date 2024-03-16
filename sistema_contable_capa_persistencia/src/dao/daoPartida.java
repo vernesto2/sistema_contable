@@ -27,9 +27,12 @@ public class daoPartida {
     
     SimpleDateFormat sdfString = new SimpleDateFormat("yyyy-MM-dd");
     Conexion cx;
+    daoPartidaDetalle _pDetalle;
+    int id = -1;
 
     public daoPartida(Conexion cx) {
         this.cx = cx;
+        _pDetalle = new daoPartidaDetalle(cx);
     }
     
     public RespuestaGeneral Listar(int idCicloContable, String busqueda) {
@@ -39,8 +42,16 @@ public class daoPartida {
         var sql = """
                   select 
                   	p.*
-                  	,0 as monto 
+                  	,pr.totalDebe as monto 
                   from partida p
+                  inner join(
+                  	select 
+                            sum(pd.debe) totalDebe
+                            ,pd.id_partida 
+                        from partida_detalle pd 
+                        where pd.eliminado = 0 
+                        GROUP by pd.id_partida
+                  )pr on pr.id_partida = p.id 
                   where p.eliminado = 0 and p.id_ciclo = ?
                   order by p.num_partida
                   """;
@@ -54,6 +65,7 @@ public class daoPartida {
                 partida.setId_ciclo(rs.getInt("id_ciclo"));
                 partida.setId_tipo_partida(rs.getInt("id_tipo_partida"));
                 partida.setNum_partida(rs.getInt("num_partida"));
+                partida.setMonto(rs.getDouble("monto"));
                 partida.setComentario(rs.getString("comentario"));
                 String sFechaPartida = rs.getString("fecha");
                 Date fechaPartida = new Date();
@@ -158,10 +170,19 @@ public class daoPartida {
             ps.setInt(6, 0);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            int id = -1;
+            id = -1;
             if(rs.next()){
                 id = rs.getInt(1);
             }
+            
+            // procedemos a guardar los nuevos detalles
+            partida.getListaPartidaDetalles().forEach((t) -> {
+                t.setId_partida(id);
+                RespuestaGeneral rgh = _pDetalle.insertar(t);
+                if (!rgh.esExitosa()) {
+                    rg.setMensaje("No se guardaron todos los detalles");
+                }
+            });
             
             return rg.asCreated(RespuestaGeneral.GUARDADO_CORRECTAMENTE, id);
             
@@ -192,6 +213,32 @@ public class daoPartida {
             ps.setString(5, sdfString.format(partida.getFecha()));
             ps.setInt(6, partida.getId());
             ps.executeUpdate();
+            
+            // procedemos a guardar o actualizar los detalles de partida
+            partida.getListaPartidaDetalles().forEach((t) -> {
+                t.setId_partida(id);
+                // verificamos si es un nuevo detalle
+                if (t.getId() > 0) {
+                    RespuestaGeneral rgh = _pDetalle.editar(t);
+                    if (!rgh.esExitosa()) {
+                        rg.setMensaje("No se guardaron todos los detalles");
+                    }
+                } else {
+                    RespuestaGeneral rgh = _pDetalle.insertar(t);
+                    if (!rgh.esExitosa()) {
+                        rg.setMensaje("No se guardaron todos los detalles");
+                    }
+                }
+                
+            });
+            
+            // eliminamos los detalles que se hayan eliminado
+            partida.getListaPartidaDetallesEliminados().forEach((t) -> {
+                RespuestaGeneral rgh = _pDetalle.eliminar(t.getId());
+                if (!rgh.esExitosa()) {
+                    rg.setMensaje("No se eliminaron los detalles");
+                }
+            });
             
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, partida.getId());
             

@@ -73,9 +73,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="801" max="32767" attributes="0"/>
-                      <Component id="btnCancelarTipoCatalogo" min="-2" pref="106" max="-2" attributes="0"/>
+                      <Component id="btnCancelarPartida" min="-2" pref="106" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnGuardarTipoCatalogo" min="-2" pref="122" max="-2" attributes="0"/>
+                      <Component id="btnGuardarPartida" min="-2" pref="122" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -85,8 +85,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnCancelarTipoCatalogo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnGuardarTipoCatalogo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCancelarPartida" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGuardarPartida" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -94,7 +94,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnCancelarTipoCatalogo">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnCancelarPartida">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="6" green="cd" red="fb" type="rgb"/>
@@ -128,10 +128,10 @@
                 <Property name="sizeIcon" type="float" value="18.0"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarTipoCatalogoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarPartidaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnGuardarTipoCatalogo">
+            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnGuardarPartida">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="3a" red="21" type="rgb"/>
@@ -154,7 +154,7 @@
                 <Property name="sizeIcon" type="float" value="18.0"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarTipoCatalogoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarPartidaActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

@@ -195,8 +195,8 @@ public class dPartidas extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnCancelarTipoCatalogo = new RSMaterialComponent.RSButtonShapeIcon();
-        btnGuardarTipoCatalogo = new RSMaterialComponent.RSButtonShapeIcon();
+        btnCancelarPartida = new RSMaterialComponent.RSButtonShapeIcon();
+        btnGuardarPartida = new RSMaterialComponent.RSButtonShapeIcon();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -223,36 +223,36 @@ public class dPartidas extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        btnCancelarTipoCatalogo.setBackground(new java.awt.Color(251, 205, 6));
-        btnCancelarTipoCatalogo.setText("CERRAR");
-        btnCancelarTipoCatalogo.setToolTipText("CERRAR EL FORMULARIO");
-        btnCancelarTipoCatalogo.setBackgroundHover(new java.awt.Color(251, 174, 6));
-        btnCancelarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnCancelarTipoCatalogo.setForegroundHover(new java.awt.Color(0, 0, 0));
-        btnCancelarTipoCatalogo.setForegroundIcon(new java.awt.Color(0, 0, 0));
-        btnCancelarTipoCatalogo.setForegroundIconHover(new java.awt.Color(0, 0, 0));
-        btnCancelarTipoCatalogo.setForegroundText(new java.awt.Color(0, 0, 0));
-        btnCancelarTipoCatalogo.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnCancelarTipoCatalogo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
-        btnCancelarTipoCatalogo.setSizeIcon(18.0F);
-        btnCancelarTipoCatalogo.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelarPartida.setBackground(new java.awt.Color(251, 205, 6));
+        btnCancelarPartida.setText("CERRAR");
+        btnCancelarPartida.setToolTipText("CERRAR EL FORMULARIO");
+        btnCancelarPartida.setBackgroundHover(new java.awt.Color(251, 174, 6));
+        btnCancelarPartida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCancelarPartida.setForegroundHover(new java.awt.Color(0, 0, 0));
+        btnCancelarPartida.setForegroundIcon(new java.awt.Color(0, 0, 0));
+        btnCancelarPartida.setForegroundIconHover(new java.awt.Color(0, 0, 0));
+        btnCancelarPartida.setForegroundText(new java.awt.Color(0, 0, 0));
+        btnCancelarPartida.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnCancelarPartida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
+        btnCancelarPartida.setSizeIcon(18.0F);
+        btnCancelarPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarTipoCatalogoActionPerformed(evt);
+                btnCancelarPartidaActionPerformed(evt);
             }
         });
 
-        btnGuardarTipoCatalogo.setBackground(new java.awt.Color(33, 58, 86));
-        btnGuardarTipoCatalogo.setText("GUARDAR");
-        btnGuardarTipoCatalogo.setToolTipText("GUARDAR / ACTUALIZAR PARTIDA");
-        btnGuardarTipoCatalogo.setBackgroundHover(new java.awt.Color(33, 68, 86));
-        btnGuardarTipoCatalogo.setEnabled(false);
-        btnGuardarTipoCatalogo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnGuardarTipoCatalogo.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnGuardarTipoCatalogo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
-        btnGuardarTipoCatalogo.setSizeIcon(18.0F);
-        btnGuardarTipoCatalogo.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarPartida.setBackground(new java.awt.Color(33, 58, 86));
+        btnGuardarPartida.setText("GUARDAR");
+        btnGuardarPartida.setToolTipText("GUARDAR / ACTUALIZAR PARTIDA");
+        btnGuardarPartida.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnGuardarPartida.setEnabled(false);
+        btnGuardarPartida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGuardarPartida.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnGuardarPartida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnGuardarPartida.setSizeIcon(18.0F);
+        btnGuardarPartida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarTipoCatalogoActionPerformed(evt);
+                btnGuardarPartidaActionPerformed(evt);
             }
         });
 
@@ -262,9 +262,9 @@ public class dPartidas extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(801, Short.MAX_VALUE)
-                .addComponent(btnCancelarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnGuardarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGuardarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -272,8 +272,8 @@ public class dPartidas extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCancelarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -511,22 +511,34 @@ public class dPartidas extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTipoCatalogoActionPerformed
+    private void btnCancelarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPartidaActionPerformed
         this.cerrar();
-    }//GEN-LAST:event_btnCancelarTipoCatalogoActionPerformed
+    }//GEN-LAST:event_btnCancelarPartidaActionPerformed
 
     public void cerrar() {
         this.dispose();
     }
     
     public void setearModelPartida() {
-        this.partidaModel.setId_ciclo(this.sesion.configUsuario.getId_ciclo_contable());
-        this.partidaModel.setId_tipo_partida(this.cmbTipoPartida.getSelectedIndex());
-        this.partidaModel.setFecha(txtFecha.getDate());
-        this.partidaModel.setComentario(txtComentario.getText());
+        if (this.sesion.configUsuario.getId_ciclo_contable() < 0) {
+            JOptionPane.showConfirmDialog(this, "No se ha seleccionado un ciclo contable por defecto", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
+        
+        } else if (this.listaPartidaDetalles.isEmpty()) {
+            JOptionPane.showConfirmDialog(this, "No se han ingresado detalles a la partida", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
+            
+        } else {
+            this.partidaModel.setId_ciclo(this.sesion.configUsuario.getId_ciclo_contable());
+            this.partidaModel.setId_tipo_partida(this.cmbTipoPartida.getSelectedIndex());
+            this.partidaModel.setFecha(txtFecha.getDate());
+            this.partidaModel.setComentario(txtComentario.getText());
+            this.partidaModel.setNum_partida(Integer.parseInt(txtNumPartida.getText()));
+
+            this.partidaModel.setListaPartidaDetalles(this.listaPartidaDetalles);
+            this.partidaModel.setListaPartidaDetallesEliminados(this.listaPartidaDetallesEliminados);
+        }
     }
     
-    private void btnGuardarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogoActionPerformed
+    private void btnGuardarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPartidaActionPerformed
         // setear info al modelo
         this.setearModelPartida();
         // guardamos la info
@@ -551,7 +563,7 @@ public class dPartidas extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
             }
         }
-    }//GEN-LAST:event_btnGuardarTipoCatalogoActionPerformed
+    }//GEN-LAST:event_btnGuardarPartidaActionPerformed
 
     private void tblDetallePartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetallePartidaMouseClicked
         int row = tblDetallePartida.getSelectedRow();
@@ -569,7 +581,9 @@ public class dPartidas extends javax.swing.JDialog {
                 } else if (this.listaPartidaDetalles.get(row).getParcial() == 0 && this.listaPartidaDetalles.get(row).getDebe()== 0) {
                     monto = this.listaPartidaDetalles.get(row).getHaber();
                 }
+                // buscamos la cuenta padre que tiene el FM
                 int montoFM = 0;
+                //int rowPadre
                 
                 dModificarMonto d = new dModificarMonto(null, true, sesion, monto, montoFM);
                 d.setAlwaysOnTop(true);
@@ -657,7 +671,9 @@ public class dPartidas extends javax.swing.JDialog {
             lista.forEach((t1) -> {
                 if (t.getCuenta().getId() == t1.getCuenta().getId()) {
                     this.banderaAgregar = false;
-                    this.listaPartidaDetallesEliminados.add(t);
+                    if (t.getId() > 0) {
+                        this.listaPartidaDetallesEliminados.add(t);
+                    }
                 }
             });
             if (this.banderaAgregar) {
@@ -755,9 +771,11 @@ public class dPartidas extends javax.swing.JDialog {
         if (this.totalDebe != this.totalHaber) {
             this.txtTotalDebe.setForeground(Color.red);
             this.txtTotalHaber.setForeground(Color.red);
+            this.btnGuardarPartida.setEnabled(false);
         } else {
             this.txtTotalDebe.setForeground(Color.black);
             this.txtTotalHaber.setForeground(Color.black);
+            this.btnGuardarPartida.setEnabled(true);
         }
     }
     
@@ -827,8 +845,8 @@ public class dPartidas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnAgregarDetallePartida;
-    private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo;
-    private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo;
+    private RSMaterialComponent.RSButtonShapeIcon btnCancelarPartida;
+    private RSMaterialComponent.RSButtonShapeIcon btnGuardarPartida;
     private RSMaterialComponent.RSComboBoxMaterial cmbTipoPartida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

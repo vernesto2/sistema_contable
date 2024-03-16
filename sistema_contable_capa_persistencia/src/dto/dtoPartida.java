@@ -13,7 +13,7 @@ import modelo.Partida;
  */
 public class dtoPartida extends Partida{
     
-    float monto;
+    double monto;
 
     public dtoPartida(int id, int id_ciclo, int id_tipo_partida, int num_partida, String comentario, Date fecha, boolean eliminado, float monto) {
         super(id, id_ciclo, id_tipo_partida, num_partida, comentario, fecha, eliminado);
@@ -24,11 +24,11 @@ public class dtoPartida extends Partida{
         this.monto = 0;
     }
 
-    public float getMonto() {
+    public double getMonto() {
         return monto;
     }
 
-    public void setMonto(float monto) {
+    public void setMonto(double monto) {
         this.monto = monto;
     }
     

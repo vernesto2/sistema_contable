@@ -4,8 +4,6 @@
  */
 package modelo;
 
-import java.math.BigDecimal;
-
 /**
  *
  * @author vacev
