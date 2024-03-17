@@ -4,16 +4,28 @@
  */
 package vista;
 
+import conexion.Conexion;
 import dto.dtoLista;
 import dto.dtoPartida;
 import formularios.dPartidas;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Partida;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import rojeru_san.efectos.ValoresEnum;
 import servicios.ServicioPartida;
 import sesion.Sesion;
@@ -37,13 +49,13 @@ public class vLibroDiario extends javax.swing.JPanel {
     ArrayList<dtoPartida> listaPartidas = new ArrayList<>();
     ServicioPartida _partida;
     DefaultTableModel dtm = new DefaultTableModel() {
-        @Override 
-        public boolean isCellEditable(int row, int column) { 
+        @Override
+        public boolean isCellEditable(int row, int column) {
             return false;
         }
     };
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    
+
     public vLibroDiario(Sesion sesion) {
         initComponents();
         this.sesion = sesion;
@@ -52,14 +64,14 @@ public class vLibroDiario extends javax.swing.JPanel {
         this.listaTipoPartidas = Constantes.listaTipoPartidas();
         this.obtenerListadoPartidas();
     }
-    
+
     public void setModelPartida() {
-        String[] cabecera = {"# Partida","Fecha","Tipo de Partida","Comentario","Monto","Editar","Eliminar"};
+        String[] cabecera = {"# Partida", "Fecha", "Tipo de Partida", "Comentario", "Monto", "Editar", "Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblPartidas.setModel(dtm);
         tblPartidas.setDefaultRenderer(Object.class, new Render());
     }
-    
+
     public void setDatosPartida() {
         RSMaterialComponent.RSButtonCustomIcon btn1 = new RSMaterialComponent.RSButtonCustomIcon();
         RSMaterialComponent.RSButtonCustomIcon btn2 = new RSMaterialComponent.RSButtonCustomIcon();
@@ -69,7 +81,7 @@ public class vLibroDiario extends javax.swing.JPanel {
         btn2.setIcons(ValoresEnum.ICONS.DELETE);
         btn2.setColorIcon(Color.RED);
         btn2.setCursor(cur);
-        
+
         Object[] datos = new Object[dtm.getColumnCount()];
         for (dtoPartida partida : listaPartidas) {
             datos[0] = partida.getNum_partida();
@@ -91,7 +103,7 @@ public class vLibroDiario extends javax.swing.JPanel {
         tblPartidas.getColumnModel().getColumn(5).setPreferredWidth(20);
         tblPartidas.getColumnModel().getColumn(6).setPreferredWidth(20);
     }
-    
+
     public void obtenerListadoPartidas() {
         this.listaPartidas = new ArrayList<>();
         tblPartidas.clearSelection();
@@ -99,21 +111,21 @@ public class vLibroDiario extends javax.swing.JPanel {
         RespuestaGeneral rg = _partida.obtenerListaPorIdCicloContable(sesion.configUsuario.getId_ciclo_contable(), this.txtBusquedaPartidas.getText());
         this.totalPartidas.setText("0");
         if (rg.esExitosa()) {
-            this.listaPartidas = (ArrayList<dtoPartida>)rg.getDatos();
+            this.listaPartidas = (ArrayList<dtoPartida>) rg.getDatos();
             this.totalPartidas.setText(String.valueOf(this.listaPartidas.size()));
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rg));
         }
         this.setDatosPartida();
     }
-    
+
     public void limiparTablaPartidas() {
         for (int i = 0; i < tblPartidas.getRowCount(); i++) {
             dtm.removeRow(i);
-            i-=1;
+            i -= 1;
         }
     }
-    
+
     public void limpiarFormPartida() {
         partidaModel = new Partida();
         tblPartidas.clearSelection();
@@ -135,9 +147,10 @@ public class vLibroDiario extends javax.swing.JPanel {
         txtBusquedaPartidas = new RSMaterialComponent.RSTextFieldMaterial();
         btnBuscarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
         btnLimpiarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
-        btnNuevoCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
+        btnVerReporteLibroDiario = new RSMaterialComponent.RSButtonShapeIcon();
         jLabel2 = new javax.swing.JLabel();
         totalPartidas = new javax.swing.JLabel();
+        btnNuevoCicloContable1 = new RSMaterialComponent.RSButtonShapeIcon();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -214,17 +227,17 @@ public class vLibroDiario extends javax.swing.JPanel {
             }
         });
 
-        btnNuevoCicloContable.setBackground(new java.awt.Color(0, 153, 0));
-        btnNuevoCicloContable.setText("NUEVO");
-        btnNuevoCicloContable.setToolTipText("NUEVO REGISTRO DE PARTIDA");
-        btnNuevoCicloContable.setBackgroundHover(new java.awt.Color(0, 178, 0));
-        btnNuevoCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnNuevoCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnNuevoCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ADD);
-        btnNuevoCicloContable.setSizeIcon(18.0F);
-        btnNuevoCicloContable.addActionListener(new java.awt.event.ActionListener() {
+        btnVerReporteLibroDiario.setBackground(new java.awt.Color(0, 153, 0));
+        btnVerReporteLibroDiario.setText("Ver libro diario");
+        btnVerReporteLibroDiario.setToolTipText("Ver libro diario");
+        btnVerReporteLibroDiario.setBackgroundHover(new java.awt.Color(0, 178, 0));
+        btnVerReporteLibroDiario.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnVerReporteLibroDiario.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnVerReporteLibroDiario.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.VIEW_LIST);
+        btnVerReporteLibroDiario.setSizeIcon(18.0F);
+        btnVerReporteLibroDiario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoCicloContableActionPerformed(evt);
+                btnVerReporteLibroDiarioActionPerformed(evt);
             }
         });
 
@@ -233,6 +246,20 @@ public class vLibroDiario extends javax.swing.JPanel {
 
         totalPartidas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         totalPartidas.setText("100");
+
+        btnNuevoCicloContable1.setBackground(new java.awt.Color(0, 153, 0));
+        btnNuevoCicloContable1.setText("NUEVO");
+        btnNuevoCicloContable1.setToolTipText("NUEVO REGISTRO DE PARTIDA");
+        btnNuevoCicloContable1.setBackgroundHover(new java.awt.Color(0, 178, 0));
+        btnNuevoCicloContable1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnNuevoCicloContable1.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnNuevoCicloContable1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ADD);
+        btnNuevoCicloContable1.setSizeIcon(18.0F);
+        btnNuevoCicloContable1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoCicloContable1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -250,14 +277,19 @@ public class vLibroDiario extends javax.swing.JPanel {
                         .addComponent(btnBuscarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(btnLimpiarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(btnNuevoCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(114, 114, 114))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(totalPartidas, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVerReporteLibroDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                    .addContainerGap(653, Short.MAX_VALUE)
+                    .addComponent(btnNuevoCicloContable1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(16, 16, 16)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,15 +299,22 @@ public class vLibroDiario extends javax.swing.JPanel {
                     .addComponent(txtBusquedaPartidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevoCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(totalPartidas))
-                .addGap(7, 7, 7))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(totalPartidas))
+                        .addGap(27, 27, 27))
+                    .addComponent(btnVerReporteLibroDiario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(btnNuevoCicloContable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(420, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -326,28 +365,33 @@ public class vLibroDiario extends javax.swing.JPanel {
         this.obtenerListadoPartidas();
     }//GEN-LAST:event_btnLimpiarCicloContableActionPerformed
 
-    private void btnNuevoCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCicloContableActionPerformed
-        // obtenemos el ultimo # de partida
-        RespuestaGeneral rg = _partida.obtenerUltimoNumPartida();
-        if (rg.esExitosa()) {
-            ArrayList<Partida> listaPartidaAux = (ArrayList<Partida>)rg.getDatos();
-            Partida partidaAux = new Partida();
-            if (listaPartidaAux.size() > 0) {
-                partidaAux = (Partida)listaPartidaAux.get(0);
-            } else {
-                partidaAux.setNum_partida(1);
-            }
-            this.abrirDialogPartida(partidaAux);
-        } else {
-            JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+    private void btnVerReporteLibroDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerReporteLibroDiarioActionPerformed
+        try {
+            Map<String, Object> params = new HashMap<String, Object>();
+            
+            Connection con;
+            JasperReport reporte;
+            Conexion cx = new Conexion(sesion.rutaConexion);
+            con = cx.conectar();
+            reporte = JasperCompileManager.compileReport("src/reportes/reporte-master-libro-diario.jrxml");
+            params.put("param_id_ciclo", sesion.configUsuario.getId_ciclo_contable());
+            JasperPrint jp = JasperFillManager.fillReport(reporte, params, con);
+            final boolean EXIT_ON_CLOSE = false;
+            JasperViewer.viewReport(jp, EXIT_ON_CLOSE);
+        } catch (JRException ex) {
+            Logger.getLogger(vLibroDiario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }//GEN-LAST:event_btnNuevoCicloContableActionPerformed
+
+    }//GEN-LAST:event_btnVerReporteLibroDiarioActionPerformed
+
+    private void btnNuevoCicloContable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCicloContable1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoCicloContable1ActionPerformed
 
     public void setearModeloCicloContable(int row) {
-        
+
     }
-    
+
     public void abrirDialogPartida(Partida partida) {
         dPartidas d = new dPartidas(null, true, partida, sesion);
         d.setVisible(true);
@@ -361,7 +405,8 @@ public class vLibroDiario extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnBuscarCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnLimpiarCicloContable;
-    private RSMaterialComponent.RSButtonShapeIcon btnNuevoCicloContable;
+    private RSMaterialComponent.RSButtonShapeIcon btnNuevoCicloContable1;
+    private RSMaterialComponent.RSButtonShapeIcon btnVerReporteLibroDiario;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel4;
