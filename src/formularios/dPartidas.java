@@ -44,6 +44,7 @@ public class dPartidas extends javax.swing.JDialog {
     
     double totalDebe = 0;
     double totalHaber = 0;
+    int rowPadre = 0;
     
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override 
@@ -585,19 +586,31 @@ public class dPartidas extends javax.swing.JDialog {
                 }
                 // buscamos la cuenta padre que tiene el FM
                 int montoFM = 0;
-                //int rowPadre
+                if (this.listaPartidaDetalles.get(row).getCuentaMayor().getId() > 0) {
+                    this.rowPadre = this.devolverRowPadre(this.listaPartidaDetalles.get(row).getCuentaMayor());
+                    montoFM = this.listaPartidaDetalles.get(this.rowPadre).getFolio_mayor();
+                } else {
+                    montoFM = this.listaPartidaDetalles.get(row).getFolio_mayor();
+                }
                 
                 dModificarMonto d = new dModificarMonto(null, true, sesion, monto, montoFM);
                 d.setAlwaysOnTop(true);
                 d.setVisible(true);
                 // validamos si realizo alguna accion para actualizar el listado o no
                 if (d.isRealizoAccion()) {
+                    // actializamos el monto
                     if (this.listaPartidaDetalles.get(row).getDebe() == 0 && this.listaPartidaDetalles.get(row).getHaber()== 0) {
                         this.listaPartidaDetalles.get(row).setParcial(d.getMontoIngresado());
                     } else if (this.listaPartidaDetalles.get(row).getParcial() == 0 && this.listaPartidaDetalles.get(row).getHaber()== 0) {
                         this.listaPartidaDetalles.get(row).setDebe(d.getMontoIngresado());
                     } else if (this.listaPartidaDetalles.get(row).getParcial() == 0 && this.listaPartidaDetalles.get(row).getDebe()== 0) {
                         this.listaPartidaDetalles.get(row).setHaber(d.getMontoIngresado());
+                    }
+                    // actializamos el FM
+                    if (this.listaPartidaDetalles.get(row).getCuentaMayor().getId() > 0) {
+                        this.listaPartidaDetalles.get(this.rowPadre).setFolio_mayor(d.getMontoFM());
+                    } else {
+                        this.listaPartidaDetalles.get(row).setFolio_mayor(d.getMontoFM());
                     }
                     this.actualizarMontosDeTabla();
                     this.setDatosPartidaDetalle();
@@ -632,6 +645,16 @@ public class dPartidas extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tblDetallePartidaMouseClicked
 
+    public int devolverRowPadre(Cuenta cuenta) {
+        int rowPadre = -1;
+        for (int i = 0; i < this.listaPartidaDetalles.size(); i++) {
+            if (this.listaPartidaDetalles.get(i).getCuenta().getId() == cuenta.getId()) {
+                rowPadre = i;
+            }
+        }
+        return rowPadre;
+    }
+    
     public void buscarPadreYDetalles(Cuenta cuentaPadre, Cuenta cuenta) {
         ArrayList<PartidaDetalle> listaEliminar = new ArrayList<>();
         // buscamos las cuentas que tengan al mismo padre

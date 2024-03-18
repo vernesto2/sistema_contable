@@ -209,7 +209,7 @@ public class dModificarMonto extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "No ha ingresado el FM", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
             } else {
                 montoIngresado = Double.parseDouble(txtMonto.getText());
-                montoIngresado = Double.parseDouble(txtMonto.getText());
+                montoFM = Integer.parseInt(txtFM.getText());
                 this.realizoAccion = true;
                 this.cerrar();
             }
