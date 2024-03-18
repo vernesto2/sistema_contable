@@ -411,6 +411,10 @@ public class vLibroDiario extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLimpiarCicloContableActionPerformed
 
     private void btnVerReporteLibroDiarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerReporteLibroDiarioActionPerformed
+        verReporteLibroDiario();
+    }//GEN-LAST:event_btnVerReporteLibroDiarioActionPerformed
+
+    private void verReporteLibroDiario() {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             
@@ -426,9 +430,7 @@ public class vLibroDiario extends javax.swing.JPanel {
         } catch (JRException ex) {
             Logger.getLogger(vLibroDiario.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }//GEN-LAST:event_btnVerReporteLibroDiarioActionPerformed
-
+    }
     private void btnNuevoCicloContable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCicloContable1ActionPerformed
         // obtenemos el ultimo # de partida
         RespuestaGeneral rg = _partida.obtenerUltimoNumPartida();
