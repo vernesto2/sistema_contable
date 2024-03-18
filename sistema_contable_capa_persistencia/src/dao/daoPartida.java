@@ -216,7 +216,7 @@ public class daoPartida {
             
             // procedemos a guardar o actualizar los detalles de partida
             partida.getListaPartidaDetalles().forEach((t) -> {
-                t.setId_partida(id);
+                t.setId_partida(partida.getId());
                 // verificamos si es un nuevo detalle
                 if (t.getId() > 0) {
                     RespuestaGeneral rgh = _pDetalle.editar(t);
@@ -234,6 +234,7 @@ public class daoPartida {
             
             // eliminamos los detalles que se hayan eliminado
             partida.getListaPartidaDetallesEliminados().forEach((t) -> {
+                t.setId_partida(partida.getId());
                 RespuestaGeneral rgh = _pDetalle.eliminar(t.getId());
                 if (!rgh.esExitosa()) {
                     rg.setMensaje("No se eliminaron los detalles");

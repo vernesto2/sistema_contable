@@ -98,6 +98,8 @@ public class dPartidas extends javax.swing.JDialog {
         }
         cmbTipoPartida.setSelectedIndex(iCmb);
         
+        this.listaPartidaDetalles = this.partidaModel.getListaPartidaDetalles();
+        this.actualizarMontosDeTabla();
         this.setDatosPartidaDetalle();
     }
     

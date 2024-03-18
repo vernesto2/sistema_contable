@@ -29,6 +29,18 @@ public class Render extends DefaultTableCellRenderer{
             this.setForeground(Color.DARK_GRAY);
         }
         
+        if(table.getValueAt(row,getColumna()).equals("No")){
+            this.setBackground(Color.getHSBColor(25, 35, 35));
+        } else if(table.getValueAt(row,getColumna()).equals("Si")){
+            this.setBackground(Color.white);
+        }
+        
+        if(table.getValueAt(row,getColumna()).equals("Por defecto")){
+            this.setBackground(Color.getHSBColor(25, 35, 35));
+        } else if(table.getValueAt(row,getColumna()).equals("-")){
+            this.setBackground(Color.white);
+        }
+        
         return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
     }
 

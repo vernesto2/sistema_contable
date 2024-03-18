@@ -5,7 +5,6 @@
 package formularios;
 
 import java.awt.Color;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -70,7 +69,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         this.listaCuentas = new ArrayList<>();
         tblCuentas.clearSelection();
         this.limiparTablaCuentas();
-        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.sesion.configUsuario.getId_ciclo_contable(), this.txtQueryBusqueda.getText());
+        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId(), this.txtQueryBusqueda.getText());
         this.totalCuentas.setText("0");
         if (rg.esExitosa()) {
             this.listaCuentas = (ArrayList<Cuenta>)rg.getDatos();
@@ -163,15 +162,15 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             }
         });
 
-        btnAbonar.setBackground(new java.awt.Color(33, 58, 86));
+        btnAbonar.setBackground(new java.awt.Color(153, 0, 0));
         btnAbonar.setText("ABONAR");
         btnAbonar.setToolTipText("ABONAR CUENTA");
-        btnAbonar.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnAbonar.setBackgroundHover(new java.awt.Color(204, 0, 0));
         btnAbonar.setEnabled(false);
         btnAbonar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnAbonar.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
         btnAbonar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnAbonar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnAbonar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ARROW_DOWNWARD);
         btnAbonar.setSizeIcon(18.0F);
         btnAbonar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,15 +178,15 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             }
         });
 
-        btnCargar.setBackground(new java.awt.Color(33, 58, 86));
+        btnCargar.setBackground(new java.awt.Color(0, 102, 51));
         btnCargar.setText("CARGAR");
         btnCargar.setToolTipText("CARGAR CUENTA");
-        btnCargar.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnCargar.setBackgroundHover(new java.awt.Color(0, 153, 0));
         btnCargar.setEnabled(false);
         btnCargar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnCargar.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
         btnCargar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnCargar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnCargar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ARROW_UPWARD);
         btnCargar.setSizeIcon(18.0F);
         btnCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,6 +301,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         totalCuentas.setText("100");
 
         txtCuentaSeleccionada.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtCuentaSeleccionada.setForeground(new java.awt.Color(204, 0, 0));
         txtCuentaSeleccionada.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtCuentaSeleccionada.setText("NO HA SELECCIONADO NINGUNA CUENTA");
         txtCuentaSeleccionada.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -388,13 +388,14 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                     .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -492,7 +493,9 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                 //pDetallePadre.setParcial(BigDecimal.valueOf(Double.parseDouble(txtMonto.getText())));
                 listaDetallePartida.add(pDetallePadre);
             } else {
-                JOptionPane.showMessageDialog(this, "No se encontro cuenta padre", "¡ALERTA!", JOptionPane.INFORMATION_MESSAGE);
+                if (this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar() > 0) {
+                    JOptionPane.showMessageDialog(this, "No se encontro cuenta padre", "¡ALERTA!", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
             
         }

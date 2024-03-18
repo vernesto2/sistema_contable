@@ -7,6 +7,7 @@ package servicios;
 import conexion.Conexion;
 import dao.daoCuenta;
 import dao.daoPartida;
+import dao.daoPartidaDetalle;
 import modelo.Cuenta;
 import modelo.Partida;
 import utils.constantes.RespuestaGeneral;
@@ -17,11 +18,13 @@ import utils.constantes.RespuestaGeneral;
  */
 public class ServicioPartida {
     daoPartida daoPartida;
+    daoPartidaDetalle daoPartidaDetalle;
     Conexion cx;
 
     public ServicioPartida(String rutaConexion) {
         this.cx = new Conexion(rutaConexion);
         this.daoPartida = new daoPartida(this.cx);
+        this.daoPartidaDetalle = new daoPartidaDetalle(this.cx);
     }
     
     public RespuestaGeneral obtenerListaPorIdCicloContable(int idTipoCatalogo, String busqueda) {
@@ -78,6 +81,13 @@ public class ServicioPartida {
         RespuestaGeneral rg = this.daoPartida.eliminar(id);
         this.cx.desconectar();
         return rg;
+    }
+    
+    public RespuestaGeneral obtenerDetallesPorIdPartida(int idPartida, int idTipoCatalogo) {
+        this.cx.conectar();
+        RespuestaGeneral rs = this.daoPartidaDetalle.ObtenerPorIdPartida(idPartida, idTipoCatalogo);
+        this.cx.desconectar(); 
+        return rs;
     }
     
 }

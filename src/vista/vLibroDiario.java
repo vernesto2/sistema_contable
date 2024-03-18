@@ -13,7 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Cuenta;
 import modelo.Partida;
+import modelo.PartidaDetalle;
 import rojeru_san.efectos.ValoresEnum;
 import servicios.ServicioPartida;
 import sesion.Sesion;
@@ -43,6 +45,9 @@ public class vLibroDiario extends javax.swing.JPanel {
         }
     };
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    
+    Cuenta cuentaMayor = new Cuenta();
+    int cantidadCodigo = 0;
     
     public vLibroDiario(Sesion sesion) {
         initComponents();
@@ -317,6 +322,53 @@ public class vLibroDiario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblPartidasMouseClicked
 
+    public void setearModeloCicloContable(int row) {
+        this.partidaModel = this.listaPartidas.get(row);
+        RespuestaGeneral rg = _partida.obtenerDetallesPorIdPartida(this.partidaModel.getId(), this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId());
+        if (rg.esExitosa()) {
+            ArrayList<PartidaDetalle> lista = (ArrayList<PartidaDetalle>)rg.getDatos();
+            // del listado tendremos que buscar si tienen padre las cuentas cargadas o abonadas
+            lista.forEach((t) -> {
+                // si se cumple la condicion significa que estas son sub-cuentas
+               if (t.getParcial() > 0) {
+                   t.setCuentaMayor(this.devolverCuentaMayor(lista, t.getCuenta()));
+               } 
+            });
+           this.partidaModel.setListaPartidaDetalles(lista);
+        }
+        // buscamos los detalles de la partida para setearlo antes de mandar a llamar al Dialog
+    }
+    
+    public Cuenta devolverCuentaMayor(ArrayList<PartidaDetalle> lista, Cuenta cuenta) {
+        cuentaMayor = new Cuenta();
+        cantidadCodigo = 0;
+        for (PartidaDetalle t : lista) {
+            if (t.getCuenta().getNivel() == this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar()) {
+                cantidadCodigo = t.getCuenta().getCodigo().length();
+                break;
+            }
+        }
+        
+        String codigoPadre = cuenta.getCodigo().substring(0, cantidadCodigo);
+        lista.forEach((t) -> {
+            if (t.getCuenta().getCodigo().equals(codigoPadre)) {
+                cuentaMayor = t.getCuenta();
+            }
+        });
+        
+        return cuentaMayor;
+    }
+    
+    public void abrirDialogPartida(Partida partida) {
+        dPartidas d = new dPartidas(null, true, partida, sesion);
+        d.setVisible(true);
+        // validamos si realizo alguna accion para actualizar el listado o no
+        if (d.getRealizoAccion()) {
+            JOptionPane.showMessageDialog(this, d.getRG().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRG()));
+            this.obtenerListadoPartidas();
+        }
+    }
+    
     private void btnBuscarCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCicloContableActionPerformed
         this.obtenerListadoPartidas();
     }//GEN-LAST:event_btnBuscarCicloContableActionPerformed
@@ -343,20 +395,6 @@ public class vLibroDiario extends javax.swing.JPanel {
         }
         
     }//GEN-LAST:event_btnNuevoCicloContableActionPerformed
-
-    public void setearModeloCicloContable(int row) {
-        
-    }
-    
-    public void abrirDialogPartida(Partida partida) {
-        dPartidas d = new dPartidas(null, true, partida, sesion);
-        d.setVisible(true);
-        // validamos si realizo alguna accion para actualizar el listado o no
-        if (d.getRealizoAccion()) {
-            JOptionPane.showMessageDialog(this, d.getRG().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRG()));
-            this.obtenerListadoPartidas();
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnBuscarCicloContable;

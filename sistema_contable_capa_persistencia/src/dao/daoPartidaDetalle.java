@@ -5,18 +5,14 @@
 package dao;
 
 import conexion.Conexion;
-import dto.dtoPartida;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utils.constantes.RespuestaGeneral;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import modelo.Cuenta;
 import modelo.PartidaDetalle;
 
 /**
@@ -27,40 +23,46 @@ public class daoPartidaDetalle {
     
     SimpleDateFormat sdfString = new SimpleDateFormat("yyyy-MM-dd");
     Conexion cx;
-
+    daoCuenta daoCuenta;
+    
     public daoPartidaDetalle(Conexion cx) {
         this.cx = cx;
+        this.daoCuenta = new daoCuenta(this.cx);
     }
     
-    public RespuestaGeneral ObtenerPorId(int id) {
+    public RespuestaGeneral ObtenerPorIdPartida(int idPartida, int idTipoCatalogo) {
         RespuestaGeneral rg = new RespuestaGeneral();
-        ArrayList<dtoPartida> lista = new ArrayList<>();
+        ArrayList<PartidaDetalle> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  SELECT * FROM partida p where p.id = ?
+                  SELECT * FROM partida_detalle p where p.id_partida = ? and p.eliminado = 0
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
-            ps.setInt(1, id);
+            ps.setInt(1, idPartida);
             rs = ps.executeQuery();
             while (rs.next()) {
-                dtoPartida partida = new dtoPartida();
-                partida.setId(rs.getInt("id"));
-                partida.setId_ciclo(rs.getInt("id_ciclo"));
-                partida.setId_tipo_partida(rs.getInt("id_tipo_partida"));
-                partida.setNum_partida(rs.getInt("num_partida"));
-                partida.setComentario(rs.getString("comentario"));
-                String sFechaPartida = rs.getString("fecha");
-                Date fechaPartida = new Date();
-                try {
-                    fechaPartida = new SimpleDateFormat("yyyy-MM-dd").parse(sFechaPartida);
-                } catch (ParseException ex) {
-                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+                PartidaDetalle pDetalle = new PartidaDetalle();
+                pDetalle.setId(rs.getInt("id"));
+                pDetalle.setId_partida(rs.getInt("id_partida"));
+                pDetalle.setId_cuenta(rs.getInt("id_cuenta"));
+                pDetalle.setParcial(rs.getDouble("parcial"));
+                pDetalle.setDebe(rs.getDouble("debe"));
+                pDetalle.setHaber(rs.getDouble("haber"));
+                pDetalle.setTipo_cargo_abono(rs.getInt("tipo_cargo_abono"));
+                pDetalle.setFolio_mayor(rs.getInt("folio_mayor"));
+                
+                // obtenemos la cuenta para que vaya tipado
+                pDetalle.setCuenta(new Cuenta());
+                RespuestaGeneral rgc = daoCuenta.ObtenerPorId(pDetalle.getId_cuenta(), idTipoCatalogo);
+                if (rgc.esExitosa()) {
+                    ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>)rgc.getDatos();
+                    if (!listaCuenta.isEmpty()) {
+                        pDetalle.setCuenta(listaCuenta.get(0));
+                    }   
                 }
-                partida.setFecha(fechaPartida);
-                partida.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
-                lista.add(partida);
+                
+                lista.add(pDetalle);
             }
-            
             return rg.asOk("", lista);
             
         } catch (SQLException e) {

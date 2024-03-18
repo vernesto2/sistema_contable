@@ -82,7 +82,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                                    INICIO SECCION DE CICLO CONTABLE
         <------------------------------------------------------------------------------->  */  
     public void setModelCicloContable() {
-        String[] cabecera = {"Titulo","Desde","Hasta","Catalogo", "Editar", "Eliminar", "Seleccionar"};
+        String[] cabecera = {"Seleccioado","Titulo","Desde","Hasta","Catalogo", "Editar", "Eliminar", "Seleccionar"};
         dtm.setColumnIdentifiers(cabecera);
         tblCicloContable.setModel(dtm);
         tblCicloContable.setDefaultRenderer(Object.class, new Render());
@@ -104,24 +104,26 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         
         Object[] datos = new Object[dtm.getColumnCount()];
         for (CicloContable ciclo : listaCiclosContables) {
-            datos[0] = ciclo.getTitulo();
-            datos[1] = sdf.format(ciclo.getDesde());
-            datos[2] = sdf.format(ciclo.getHasta());
-            datos[3] = ciclo.getTipoCatalogo().getTipo();
-            datos[4] = btn1;
-            datos[5] = btn2;
-            datos[6] = btn3;
+            datos[0] = (ciclo.getId() == this.sesion.configUsuario.getCicloContable().getId() ? "Por defecto" : "-");
+            datos[1] = ciclo.getTitulo();
+            datos[2] = sdf.format(ciclo.getDesde());
+            datos[3] = sdf.format(ciclo.getHasta());
+            datos[4] = ciclo.getTipoCatalogo().getTipo();
+            datos[5] = btn1;
+            datos[6] = btn2;
+            datos[7] = btn3;
             dtm.addRow(datos);
         }
         tblCicloContable.setModel(dtm);
         tblCicloContable.setAutoResizeMode(tblCicloContable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        tblCicloContable.getColumnModel().getColumn(0).setPreferredWidth(320);
-        tblCicloContable.getColumnModel().getColumn(1).setPreferredWidth(20);
+        tblCicloContable.getColumnModel().getColumn(0).setPreferredWidth(60);
+        tblCicloContable.getColumnModel().getColumn(1).setPreferredWidth(320);
         tblCicloContable.getColumnModel().getColumn(2).setPreferredWidth(20);
-        tblCicloContable.getColumnModel().getColumn(3).setPreferredWidth(200);
-        tblCicloContable.getColumnModel().getColumn(4).setPreferredWidth(10);
+        tblCicloContable.getColumnModel().getColumn(3).setPreferredWidth(20);
+        tblCicloContable.getColumnModel().getColumn(4).setPreferredWidth(200);
         tblCicloContable.getColumnModel().getColumn(5).setPreferredWidth(10);
         tblCicloContable.getColumnModel().getColumn(6).setPreferredWidth(10);
+        tblCicloContable.getColumnModel().getColumn(7).setPreferredWidth(10);
     }
     
     public void obtenerListadoCiclosContables() {
@@ -877,15 +879,15 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         // logica de acciones de botones
         int accion = tblCicloContable.getSelectedColumn();
         int row = tblCicloContable.getSelectedRow();
-        if (accion == 4) {
+        if (accion == 5) {
             // editar
             this.setearModeloCicloContable(row);
             this.abrirDialogCicloContable(cicloContableModel);
             
-        } else if (accion == 5) {
+        } else if (accion == 6) {
             // eliminar
             String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaCiclosContables.get(row).getTitulo();
-            int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (opc == 0) {
                 RespuestaGeneral rg = _cicloContable.eliminar(this.listaCiclosContables.get(row).getId());
                 if (rg.esExitosa()) {
@@ -897,25 +899,32 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                 }
             }
 
-        } else if (accion == 6) {
-            // seleccionar por defecto
-            sesion.configUsuario.setId_ciclo_contable(this.listaCiclosContables.get(row).getId());
-            ArrayList<ConfiguracionUsuario> listaConfigUsuario = new ArrayList<>();
-            RespuestaGeneral rg = _configUsuario.editar(sesion.configUsuario);
-            if (rg.esExitosa()) {
-                RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(sesion.usuario.getId());
-                if (rg1.esExitosa()) {
-                    listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg1.getDatos();
-                    sesion.configUsuario = listaConfigUsuario.get(0);
-                    this.limpiarFormCicloContable();
-                    JOptionPane.showMessageDialog(this, "Se establecio el ciclo contable por defecto", "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
-                    UtileriaVista.actualizarPerfil(sesion);
+        } else if (accion == 7) {
+            // mostrar alerta indicando si esta seguro de ralizar la accion
+            String texto = "¿Esta seguro de continuar?, Se cambiará el ciclo contable por defecto a:\n" + this.listaCiclosContables.get(row).getTitulo();
+            int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (opc == 0) {
+                // seleccionar por defecto
+                sesion.configUsuario.setId_ciclo_contable(this.listaCiclosContables.get(row).getId());
+                ArrayList<ConfiguracionUsuario> listaConfigUsuario = new ArrayList<>();
+                RespuestaGeneral rg = _configUsuario.editar(sesion.configUsuario);
+                if (rg.esExitosa()) {
+                    RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(sesion.usuario.getId());
+                    if (rg1.esExitosa()) {
+                        listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg1.getDatos();
+                        sesion.configUsuario = listaConfigUsuario.get(0);
+                        JOptionPane.showMessageDialog(this, "Se establecio el ciclo contable por defecto", "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
+                        UtileriaVista.actualizarPerfil(sesion);
+                        this.limpiarFormCicloContable();
+                        this.obtenerListadoCiclosContables();
+                    } else {
+                        JOptionPane.showMessageDialog(this, rg1.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg1));
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(this, rg1.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg1));
+                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
             }
+            
         }
     }//GEN-LAST:event_tblCicloContableMouseClicked
 

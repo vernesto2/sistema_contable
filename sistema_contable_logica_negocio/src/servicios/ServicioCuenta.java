@@ -36,9 +36,9 @@ public class ServicioCuenta {
         return rs;
     }
     
-    public RespuestaGeneral obtenerPorId(int id) {
+    public RespuestaGeneral obtenerPorId(int id, int idTipoCatalogo) {
         this.cx.conectar();
-        RespuestaGeneral rs = this.daoCuenta.ObtenerPorId(id);
+        RespuestaGeneral rs = this.daoCuenta.ObtenerPorId(id, idTipoCatalogo);
         this.cx.desconectar(); 
         return rs;
     }
