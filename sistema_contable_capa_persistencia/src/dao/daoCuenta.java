@@ -96,7 +96,7 @@ public class daoCuenta {
                   	group by length(ci.codigo)
                     ) as nc 
                     on nc.length_codigo = length(c.codigo)
-                    where c.id_tipo_catalogo = paramIdCatalogo and c.eliminado = 0 and (c.nombre like '%paramBusqueda%' or c.codigo like '%paramBusqueda%')
+                    where c.id_tipo_catalogo = paramIdCatalogo and c.eliminado = 0 
                     order by cast(c.codigo as text)
                   )
                   select 
@@ -107,6 +107,7 @@ public class daoCuenta {
                             when ct.disponible_1 = 1 and ct.disponible_2 = 0 then 1
                   	end as disponible
                   from catalogo ct
+                  WHERE (ct.nombre like '%paramBusqueda%' or ct.codigo like '%paramBusqueda%')
                   """;
         String newSql = sql.replaceAll("paramBusqueda", busqueda);
         String newSql1 = newSql.replaceAll("paramIdCatalogo", String.valueOf(idTipoCatalogo));
@@ -144,28 +145,38 @@ public class daoCuenta {
         ResultSet rs = null;
         var sql = """
                   with catalogo as (
-                    	select 
-                            c.*
-                            ,nc.nivel as nivel 
-                            ,IIF(IIF(tc.nivel_mayorizar <= nc.nivel and nc.nivel, 1, 0) = 1 and 
-                                        (nc.nivel < (LEAD(nc.nivel, 1) OVER(ORDER BY cast(c.codigo as text)))) = 0, 1, 0) disponible
-                    		
-                        from cuenta c
-                        left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
-                        inner join (
-                              select 
-                              length(ci.codigo) as length_codigo
-                              ,row_number() over (order by length(ci.codigo)) as nivel
-                              from cuenta ci
-                              where ci.id_tipo_catalogo = paramIdCatalogo and ci.eliminado = 0
-                              group by length(ci.codigo)
-                        ) as nc 
-                        on nc.length_codigo = length(c.codigo)
-                        where c.id_tipo_catalogo = paramIdCatalogo and c.eliminado = 0 --and (c.nombre like '%paramBusqueda%' or c.codigo like '%paramBusqueda%')
-                        order by cast(c.codigo as text)
+                    select 
+                      c.*
+                      ,nc.nivel as nivel 
+                      ,(LEAD(nc.nivel, 1) OVER(ORDER BY cast(c.codigo as text))) as nivel_sig
+                      ,(IIF(tc.nivel_mayorizar <= nc.nivel, 1, 0)) as disponible_1
+                      ,((tc.nivel_mayorizar = nc.nivel) and (nc.nivel < (LEAD(nc.nivel, 1) OVER(ORDER BY cast(c.codigo as text))))) as disponible_2
+                      ,IIF(IIF(tc.nivel_mayorizar <= nc.nivel, 1, 0) = 1 and 
+                              (nc.nivel < (LEAD(nc.nivel, 1) OVER(ORDER BY cast(c.codigo as text)))) = 0, 1, 0) disponible_old
+
+                      from cuenta c
+                      left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
+                      inner join (
+                      select 
+                      length(ci.codigo) as length_codigo
+                      ,row_number() over (order by length(ci.codigo)) as nivel
+                      from cuenta ci
+                      where ci.id_tipo_catalogo = paramIdCatalogo and ci.eliminado = 0
+                      group by length(ci.codigo)
+                      ) as nc 
+                      on nc.length_codigo = length(c.codigo)
+                      where c.id_tipo_catalogo = paramIdCatalogo and c.eliminado = 0 
+                      order by cast(c.codigo as text)
                     )
-                    
-                    select * from catalogo ct where ct.id = paramId
+                    select 
+                      ct.*
+                      ,case 
+                        when ct.disponible_1 = 0 and ct.disponible_2 = 0 then 0
+                        when ct.disponible_1 = 1 and ct.disponible_2 = 1 then 0
+                        when ct.disponible_1 = 1 and ct.disponible_2 = 0 then 1
+                      end as disponible
+                    from catalogo ct
+                    WHERE ct.id = paramId
                   """;
         String newSql = sql.replaceAll("paramIdCatalogo", String.valueOf(idTipoCatalogo));
         String newSql1 = newSql.replaceAll("paramId", String.valueOf(id));
