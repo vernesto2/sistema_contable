@@ -13,7 +13,9 @@ import java.awt.Cursor;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +25,7 @@ import modelo.Cuenta;
 import modelo.Partida;
 import modelo.PartidaDetalle;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -423,7 +426,15 @@ public class vLibroDiario extends javax.swing.JPanel {
             Conexion cx = new Conexion(sesion.rutaConexion);
             con = cx.conectar();
             reporte = JasperCompileManager.compileReport("src/reportes/reporte-master-libro-diario.jrxml");
+
+            //Currency currentyActual = Currency.getInstance(Locale.US);
+            Locale locale = new Locale("es", "SV");
+
             params.put("param_id_ciclo", sesion.configUsuario.getId_ciclo_contable());
+            params.put("param_titulo_ciclo_contable", sesion.configUsuario.getNombre_ciclo_contable());
+            params.put("param_nombre_completo", sesion.usuario.getPersona().nombreCompleto());
+            params.put("param_usuario", sesion.usuario.getNombre());
+            params.put(JRParameter.REPORT_LOCALE, locale);
             JasperPrint jp = JasperFillManager.fillReport(reporte, params, con);
             final boolean EXIT_ON_CLOSE = false;
             JasperViewer.viewReport(jp, EXIT_ON_CLOSE);

@@ -90,11 +90,20 @@ and pd.id_partida =   $P{param_id_partida}]]>
 			<property name="com.jaspersoft.studio.field.label" value="tipo_cargo_abono"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
+		<variable name="var_total_debe" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{debe}]]></variableExpression>
+		</variable>
+		<variable name="var_total_haber" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{haber}]]></variableExpression>
+		</variable>
 	</subDataset>
 	<parameter name="param_id_ciclo" class="java.lang.Integer"/>
 	<parameter name="param_id_partida" class="java.lang.Integer" isForPrompting="false">
 		<defaultValueExpression><![CDATA[$F{id}]]></defaultValueExpression>
 	</parameter>
+	<parameter name="param_titulo_ciclo_contable" class="java.lang.String"/>
+	<parameter name="param_nombre_completo" class="java.lang.String"/>
+	<parameter name="param_usuario" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT p.*,
 	 cast(CASE 
@@ -149,18 +158,26 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="65" splitType="Stretch">
+		<band height="80" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="440" height="30" uuid="11c5a924-bec6-4020-8200-298c594ee431"/>
+				<reportElement x="0" y="0" width="558" height="30" uuid="11c5a924-bec6-4020-8200-298c594ee431"/>
+				<textElement textAlignment="Center"/>
 				<text><![CDATA[Instituto Nacional de Apastepeque]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="20" width="440" height="19" uuid="388d71cf-93de-4555-b196-b0107ba7c9f6"/>
-				<textFieldExpression><![CDATA["Alumno/a"]]></textFieldExpression>
+				<reportElement x="0" y="20" width="558" height="19" uuid="388d71cf-93de-4555-b196-b0107ba7c9f6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Alumno/a: "+ $P{param_nombre_completo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="-3" y="39" width="561" height="20" uuid="ae2785cd-8087-4bf3-986d-861807150a5a"/>
-				<textFieldExpression><![CDATA["Ciclo contable: "]]></textFieldExpression>
+				<reportElement x="-3" y="60" width="561" height="20" uuid="ae2785cd-8087-4bf3-986d-861807150a5a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Ciclo contable: "+$P{param_titulo_ciclo_contable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="39" width="558" height="19" uuid="02147939-f2ed-4ff2-87a8-c96ec05a07c5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["NIE "+ $P{param_usuario}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -254,7 +271,7 @@ WHERE
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="f097642b-9a5c-417c-9ecc-589ee68fdb3b"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{parcial} == 0 ? "" :  $F{parcial}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{parcial} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{parcial} )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -267,12 +284,18 @@ WHERE
 								<text><![CDATA[Debe]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="30" uuid="c99795c4-9c54-4f50-819b-624478f8c467"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[NumberFormat.getCurrencyInstance(Locale.US).format($V{var_total_debe})]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="d804df37-0b72-4f97-a465-c883c1c79714"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{debe} == 0 ? "" : $F{debe}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{debe} == 0 ? "" : NumberFormat.getCurrencyInstance(Locale.US).format($F{debe})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -285,12 +308,18 @@ WHERE
 								<text><![CDATA[Haber]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="0d6ae371-fb55-4792-a7fc-b040619d5702"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[NumberFormat.getCurrencyInstance(Locale.US).format( $V{var_total_haber} )]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="bafa01cb-57cf-4eb0-b5d5-d5dc7b115e03"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{haber} == 0 ? "" : $F{haber}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{haber} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format( $F{haber} )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
