@@ -6,6 +6,7 @@ package vista;
 
 import conexion.Conexion;
 import java.sql.Connection;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;

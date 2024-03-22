@@ -105,17 +105,17 @@ and pd.eliminado = false]]>
 			<property name="com.jaspersoft.studio.field.name" value="num_partida_fm"/>
 			<property name="com.jaspersoft.studio.field.label" value="num_partida_fm"/>
 		</field>
-		<field name="debe" class="java.lang.Object">
+		<field name="debe" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.name" value="debe"/>
 			<property name="com.jaspersoft.studio.field.label" value="debe"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="haber" class="java.lang.Object">
+		<field name="haber" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.name" value="haber"/>
 			<property name="com.jaspersoft.studio.field.label" value="haber"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="saldo" class="java.lang.Object">
+		<field name="saldo" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.name" value="saldo"/>
 			<property name="com.jaspersoft.studio.field.label" value="saldo"/>
 		</field>
@@ -225,7 +225,7 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
 				</reportElement>
-				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
 					<datasetRun subDataset="Dataset1" uuid="0744d723-b3d2-4e3c-ba40-3d5de60463f8">
 						<datasetParameter name="param_id_cuenta">
 							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
@@ -240,12 +240,14 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="80" height="30" uuid="d6d6bf96-39b5-4f1e-b93c-b307b193cb17"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Fecha]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="c0aa58b8-6b1e-4955-8a0a-2b4e261e87c4"/>
+								<textElement verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -255,12 +257,14 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="210" height="30" uuid="d8b58a86-a0a7-43f7-8261-7a2150badeff"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Concepto]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="210" height="30" uuid="92f72743-9491-42bb-b66d-2eb4c7fd780c"/>
+								<textElement verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{comentario}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -270,12 +274,14 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="70" height="30" uuid="3e4af51a-0ecf-440d-b541-9516c30a43c2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[#Partida / folio]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="431ab410-c848-4aae-99f1-865b33c26673"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{num_partida_fm}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -285,12 +291,14 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="60" height="30" uuid="26543fd1-fb38-4535-94ab-f976e7d43105"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Debe]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="31b14657-e8b3-4746-aec2-4640e471f4c9"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{debe}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -300,12 +308,14 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="60" height="30" uuid="0c269977-5efb-4384-88ee-429779c65c2e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Haber]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="01385578-13d0-4e55-9efe-307498c52fc2"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{haber}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -315,12 +325,14 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="70" height="30" uuid="3f270ace-56d2-4f96-b241-2274af5991c3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Saldo]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="316c78b5-7f06-4aa2-8680-aaf088f4a52d"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -328,7 +340,7 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 				</jr:table>
 			</componentElement>
 			<textField>
-				<reportElement x="150" y="0" width="100" height="30" uuid="0f3d87fe-5f2c-43d6-b312-33fb4ee08902"/>
+				<reportElement x="2" y="10" width="100" height="30" uuid="0f3d87fe-5f2c-43d6-b312-33fb4ee08902"/>
 				<textFieldExpression><![CDATA["Id cuenta: "+$F{id}]]></textFieldExpression>
 			</textField>
 		</band>
