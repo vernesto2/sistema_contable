@@ -293,4 +293,32 @@ public class daoCuenta {
             return rg.asServerError(mensaje);
         }
     }
+    public Integer tamanoCodigoAMayorizar(Integer idTipoCaalogo) {
+        
+        ArrayList<Cuenta> lista = new ArrayList<>();
+        ResultSet rs = null;
+        Integer tamanoCodigoAMayorizar = null;
+        var sql = """
+select length(ci.codigo) as length_codigo
+	  , row_number() over (order by length(ci.codigo)) as nivel
+	  from cuenta ci
+	  where ci.id_tipo_catalogo = ?
+	  and ci.eliminado = false
+	  group by length(ci.codigo) 
+                  """;
+        
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, idTipoCaalogo);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                 tamanoCodigoAMayorizar = rs.getInt("length_codigo");
+            }
+            return tamanoCodigoAMayorizar;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            throw new IllegalStateException(mensaje);
+        }
+    }
 }

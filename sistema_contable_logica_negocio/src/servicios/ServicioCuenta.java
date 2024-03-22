@@ -85,5 +85,18 @@ public class ServicioCuenta {
         this.cx.desconectar();
         return rg;
     }
-    
+    public RespuestaGeneral tamanoCodigoAMayorizar(Integer idTipoCatalogo) {
+        try {
+            this.cx.conectar();
+            Integer tamanoCodigoAMayorizar = this.daoCuenta.tamanoCodigoAMayorizar(idTipoCatalogo);
+            this.cx.desconectar();
+            if(tamanoCodigoAMayorizar == null) {
+                return RespuestaGeneral.asBadRequest("Error: No se encontró el tamaño del código de cuenta a mayorizar");
+            }
+            return RespuestaGeneral.asOk(null, tamanoCodigoAMayorizar);
+        } catch (Exception e) {
+            return RespuestaGeneral.asBadRequest(e.getMessage());
+        }
+        
+    }
 }

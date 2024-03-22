@@ -532,7 +532,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnLibroMayor.isSelected()) {
             this.btnLibroMayor.setSelected(true);
-            new CambiaPanel(pnl, new vLibroMayor());
+            new CambiaPanel(pnl, new vLibroMayor(sesion));
         }
     }//GEN-LAST:event_btnLibroMayorActionPerformed
 
