@@ -33,7 +33,7 @@
 	<subDataset name="Dataset1" uuid="39a8139c-2d39-46ea-8ee9-27dd8f7b0afc">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
-		<parameter name="param_id_partida" class="java.lang.String"/>
+		<parameter name="param_id_partida" class="java.lang.Integer"/>
 		<queryString language="SQL">
 			<![CDATA[select 
 	pd.id, 
@@ -50,17 +50,17 @@ inner join cuenta c on c.id = pd.id_cuenta
 where pd.eliminado = false and c.eliminado = false
 and pd.id_partida =   $P{param_id_partida}]]>
 		</queryString>
-		<field name="id" class="java.lang.Integer">
+		<field name="id" class="java.lang.Object">
 			<property name="com.jaspersoft.studio.field.name" value="id"/>
 			<property name="com.jaspersoft.studio.field.label" value="id"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="id_partida" class="java.lang.Integer">
+		<field name="id_partida" class="java.lang.Object">
 			<property name="com.jaspersoft.studio.field.name" value="id_partida"/>
 			<property name="com.jaspersoft.studio.field.label" value="id_partida"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="cuenta" class="java.lang.String">
+		<field name="cuenta" class="java.lang.Object">
 			<property name="com.jaspersoft.studio.field.name" value="cuenta"/>
 			<property name="com.jaspersoft.studio.field.label" value="cuenta"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="cuenta"/>
@@ -70,22 +70,22 @@ and pd.id_partida =   $P{param_id_partida}]]>
 			<property name="com.jaspersoft.studio.field.label" value="folio_mayor"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="parcial" class="java.lang.Integer">
+		<field name="parcial" class="java.lang.Double">
 			<property name="com.jaspersoft.studio.field.name" value="parcial"/>
 			<property name="com.jaspersoft.studio.field.label" value="parcial"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="debe" class="java.lang.Integer">
+		<field name="debe" class="java.lang.Double">
 			<property name="com.jaspersoft.studio.field.name" value="debe"/>
 			<property name="com.jaspersoft.studio.field.label" value="debe"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="haber" class="java.lang.Integer">
+		<field name="haber" class="java.lang.Double">
 			<property name="com.jaspersoft.studio.field.name" value="haber"/>
 			<property name="com.jaspersoft.studio.field.label" value="haber"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="tipo_cargo_abono" class="java.lang.Integer">
+		<field name="tipo_cargo_abono" class="java.lang.Object">
 			<property name="com.jaspersoft.studio.field.name" value="tipo_cargo_abono"/>
 			<property name="com.jaspersoft.studio.field.label" value="tipo_cargo_abono"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
@@ -287,7 +287,7 @@ WHERE
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="c99795c4-9c54-4f50-819b-624478f8c467"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right"/>
 								<textFieldExpression><![CDATA[NumberFormat.getCurrencyInstance(Locale.US).format($V{var_total_debe})]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>
@@ -311,7 +311,7 @@ WHERE
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
 							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="0d6ae371-fb55-4792-a7fc-b040619d5702"/>
-								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textElement textAlignment="Right"/>
 								<textFieldExpression><![CDATA[NumberFormat.getCurrencyInstance(Locale.US).format( $V{var_total_haber} )]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>

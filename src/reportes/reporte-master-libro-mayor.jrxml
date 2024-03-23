@@ -105,17 +105,17 @@ and pd.eliminado = false]]>
 			<property name="com.jaspersoft.studio.field.name" value="num_partida_fm"/>
 			<property name="com.jaspersoft.studio.field.label" value="num_partida_fm"/>
 		</field>
-		<field name="debe" class="java.lang.Integer">
+		<field name="debe" class="java.lang.Double">
 			<property name="com.jaspersoft.studio.field.name" value="debe"/>
 			<property name="com.jaspersoft.studio.field.label" value="debe"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="haber" class="java.lang.Integer">
+		<field name="haber" class="java.lang.Double">
 			<property name="com.jaspersoft.studio.field.name" value="haber"/>
 			<property name="com.jaspersoft.studio.field.label" value="haber"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="saldo" class="java.lang.Integer">
+		<field name="saldo" class="java.lang.Double">
 			<property name="com.jaspersoft.studio.field.name" value="saldo"/>
 			<property name="com.jaspersoft.studio.field.label" value="saldo"/>
 		</field>
@@ -274,7 +274,7 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="70" height="30" uuid="3e4af51a-0ecf-440d-b541-9516c30a43c2"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textElement textAlignment="Center"/>
 								<text><![CDATA[#Partida / folio]]></text>
 							</staticText>
 						</jr:tableHeader>
@@ -299,7 +299,7 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="31b14657-e8b3-4746-aec2-4640e471f4c9"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{debe}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{debe} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{debe})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -316,7 +316,8 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="01385578-13d0-4e55-9efe-307498c52fc2"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{haber}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{haber} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{haber})
+]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -333,7 +334,7 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="316c78b5-7f06-4aa2-8680-aaf088f4a52d"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{saldo} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{saldo})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
