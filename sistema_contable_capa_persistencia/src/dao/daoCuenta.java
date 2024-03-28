@@ -13,7 +13,12 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Vector;
 import modelo.Cuenta;
+import reportes.CuentaBalanza;
+import utils.constantes.Constantes;
 
 /**
  *
@@ -298,14 +303,15 @@ public class daoCuenta {
         ArrayList<Cuenta> lista = new ArrayList<>();
         ResultSet rs = null;
         Integer tamanoCodigoAMayorizar = null;
-        var sql = """
+        var sql = 
+"""
 select length(ci.codigo) as length_codigo
-	  , row_number() over (order by length(ci.codigo)) as nivel
-	  from cuenta ci
-	  where ci.id_tipo_catalogo = ?
-	  and ci.eliminado = false
-	  group by length(ci.codigo) 
-                  """;
+, row_number() over (order by length(ci.codigo)) as nivel
+from cuenta ci
+where ci.id_tipo_catalogo = ?
+and ci.eliminado = false
+group by length(ci.codigo) 
+""";
         
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, idTipoCaalogo);
@@ -320,5 +326,153 @@ select length(ci.codigo) as length_codigo
             String mensaje = e.getMessage().toString();
             throw new IllegalStateException(mensaje);
         }
+    }
+    public List<CuentaBalanza> listarCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo) throws SQLException {
+        var sql = 
+"""
+with cte_balanza_comprobacion as (
+  select c.id, c.codigo, c.nombre, 
+  case 
+	when tipo_saldo = 'D' and es_restado = false then debe - haber
+	when tipo_saldo = 'D' and es_restado = true then haber - debe
+	when tipo_saldo = 'A' and es_restado = false then haber - debe
+	when tipo_saldo = 'A' and es_restado = true then debe - haber
+  else 0 
+  end
+  as saldo_inicial, 
+  row_number() over (PARTITION by c.id order by p.fecha asc, p.id asc) as row_number
+  from cuenta c 
+  inner join partida_detalle pd on pd.id_cuenta = c.id
+  inner join partida p on pd.id_partida = p.id
+  where c.eliminado = false 
+  and p.eliminado = false
+  and pd.eliminado = false
+  and p.id_ciclo = 1
+  and c.id_tipo_catalogo = 1
+)
+select cbc.*, saldo_calculado.total_debe, saldo_calculado.total_haber, saldo_calculado.saldo_final 
+from cte_balanza_comprobacion cbc 
+inner join (
+	select c.id, sum(pd.debe) as total_debe, sum(pd.haber) as total_haber, 
+	  sum (
+  case 
+	when tipo_saldo = 'D' and es_restado = false then debe - haber
+	when tipo_saldo = 'D' and es_restado = true then haber - debe
+	when tipo_saldo = 'A' and es_restado = false then haber - debe
+	when tipo_saldo = 'A' and es_restado = true then debe - haber
+	else 0
+end 
+  ) as saldo_final
+	from cuenta c 
+	  inner join partida_detalle pd on pd.id_cuenta = c.id
+	  inner join partida p on pd.id_partida = p.id
+	  where c.eliminado = false 
+	  and p.eliminado = false
+	  and pd.eliminado = false
+	  and p.id_ciclo = 1
+	  and c.id_tipo_catalogo = 1
+	group by c.id, c.codigo, c.nombre
+) as saldo_calculado on saldo_calculado.id = cbc.id
+where row_number = 1
+""";
+        List<CuentaBalanza> lista = new ArrayList<CuentaBalanza>();
+        try (
+                PreparedStatement ps = cx.getCx().prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+            ) 
+        {
+            //ps.setInt(1, id);
+            
+            while (rs.next()) {
+                CuentaBalanza item = new CuentaBalanza();
+                item.setId(rs.getObject("id", Integer.class));
+                item.setCodigo(rs.getObject("codigo", String.class));
+                item.setNombre(rs.getObject("nombre", String.class));
+                item.setSaldoInicial(rs.getObject("saldo_inicial", Double.class));
+                item.setTotalDebe(rs.getObject("total_debe", Double.class));
+                item.setTotalHaber(rs.getObject("total_haber", Double.class));
+                item.setSaldoFinal(rs.getObject("saldo_final", Double.class));
+                lista.add(item);
+            }
+            
+            return lista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+    
+    public static CuentaBalanza[] generarCuentasBalanza() {
+        CuentaBalanza [] listaBeans = new CuentaBalanza[3];
+        
+        CuentaBalanza cuenta0 = new CuentaBalanza();
+        cuenta0.setId(1);
+        cuenta0.setNombre("Efectivo y Equivalente de Efectivo");
+        cuenta0.setCodigo("1010");
+        cuenta0.setSaldoInicial(new Double(100));
+        cuenta0.setTotalDebe(new Double(300));
+        cuenta0.setTotalHaber(new Double(150));
+        cuenta0.setSaldoFinal(new Double(250));
+        
+        listaBeans[ 0 ] = cuenta0;
+        
+        CuentaBalanza cuenta1 = new CuentaBalanza();
+        cuenta1.setId(2);
+        cuenta1.setNombre("Deudas por pagar");
+        cuenta1.setCodigo("2010");
+        cuenta1.setSaldoInicial(new Double(100));
+        cuenta1.setTotalDebe(new Double(300));
+        cuenta1.setTotalHaber(new Double(150));
+        cuenta1.setSaldoFinal(new Double(250));
+        listaBeans[ 1 ] = new CuentaBalanza();
+        
+        CuentaBalanza cuenta2 = new CuentaBalanza();
+        cuenta2.setId(1);
+        cuenta2.setNombre("Ventas");
+        cuenta2.setCodigo("5010");
+        cuenta2.setSaldoInicial(new Double(100));
+        cuenta2.setTotalDebe(new Double(300));
+        cuenta2.setTotalHaber(new Double(150));
+        cuenta2.setSaldoFinal(new Double(250));
+        listaBeans[ 2 ] = new CuentaBalanza();
+        
+        return listaBeans;
+    }
+    
+    public static Collection<CuentaBalanza> generarCuentasBalanzaComprobacion() {
+        Vector coleccion = new Vector();
+        CuentaBalanza cuenta0 = new CuentaBalanza();
+        cuenta0.setId(1);
+        cuenta0.setNombre("Efectivo y Equivalente de Efectivo");
+        cuenta0.setCodigo("1010");
+        cuenta0.setSaldoInicial(new Double(100));
+        cuenta0.setTotalDebe(new Double(300));
+        cuenta0.setTotalHaber(new Double(150));
+        cuenta0.setSaldoFinal(new Double(250));
+        
+        coleccion.add(cuenta0);
+        
+        CuentaBalanza cuenta1 = new CuentaBalanza();
+        cuenta1.setId(2);
+        cuenta1.setNombre("Deudas por pagar");
+        cuenta1.setCodigo("2010");
+        cuenta1.setSaldoInicial(new Double(100));
+        cuenta1.setTotalDebe(new Double(300));
+        cuenta1.setTotalHaber(new Double(150));
+        cuenta1.setSaldoFinal(new Double(250));
+        
+        coleccion.add(cuenta1);
+        
+        CuentaBalanza cuenta2 = new CuentaBalanza();
+        cuenta2.setId(1);
+        cuenta2.setNombre("Ventas");
+        cuenta2.setCodigo("5010");
+        cuenta2.setSaldoInicial(new Double(100));
+        cuenta2.setTotalDebe(new Double(300));
+        cuenta2.setTotalHaber(new Double(150));
+        cuenta2.setSaldoFinal(new Double(250));
+        
+        coleccion.add(cuenta2);
+        return coleccion;
     }
 }

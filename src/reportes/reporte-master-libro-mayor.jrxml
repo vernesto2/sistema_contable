@@ -62,6 +62,8 @@
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<parameter name="param_id_ciclo_tabla" class="java.lang.Integer"/>
 		<parameter name="param_id_cuenta" class="java.lang.Integer"/>
+		<parameter name="param_es_restado" class="java.lang.Integer"/>
+		<parameter name="param_tipo_saldo" class="java.lang.String"/>
 		<queryString>
 			<![CDATA[select 
   p.id, 
@@ -71,7 +73,15 @@
   p.num_partida || " / " || pd.folio_mayor as num_partida_fm, 
   pd.debe, 
   pd.haber,
-  sum( debe - haber) over ( order by pd.id ) as saldo
+  sum( 
+case 
+	when tipo_saldo = 'D' and es_restado = false then debe - haber
+	when tipo_saldo = 'D' and es_restado = true then haber - debe
+	when tipo_saldo = 'A' and es_restado = false then haber - debe
+	when tipo_saldo = 'A' and es_restado = true then debe - haber
+	else 0
+end 
+  ) over ( order by pd.id ) as saldo
 from partida p
 inner join partida_detalle pd on pd.id_partida = p.id
 inner join cuenta c on pd.id_cuenta = c.id and c.eliminado = false
@@ -127,7 +137,9 @@ and pd.eliminado = false]]>
 	<parameter name="param_tamano_codigo" class="java.lang.Integer"/>
 	<parameter name="param_id_tipo_catalogo" class="java.lang.Integer"/>
 	<parameter name="param_id_cuenta" class="java.lang.Integer" isForPrompting="false"/>
-	<parameter name="param_id_ciclo_tabla" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="param_id_ciclo_tabla" class="java.lang.Short" isForPrompting="false"/>
+	<parameter name="param_tipo_saldo" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="param_es_restado" class="java.lang.Integer" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[select * from cuenta c
 where 
@@ -180,6 +192,11 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 		<property name="com.jaspersoft.studio.field.label" value="eliminado"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="cuenta"/>
 	</field>
+	<field name="es_restado" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="es_restado"/>
+		<property name="com.jaspersoft.studio.field.label" value="es_restado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cuenta"/>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -219,19 +236,25 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 				<textFieldExpression><![CDATA["Código: " + $F{codigo}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="2" y="40" width="550" height="80" uuid="69a703b1-3370-44c4-90d4-e4793767fe06">
+				<reportElement style="Table_TH" x="2" y="40" width="550" height="80" uuid="69a703b1-3370-44c4-90d4-e4793767fe06">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
-					<datasetRun subDataset="Dataset1" uuid="0744d723-b3d2-4e3c-ba40-3d5de60463f8">
+					<datasetRun subDataset="Dataset1" uuid="2e9df49e-2ef5-40f2-afac-106ce6532bcb">
 						<datasetParameter name="param_id_cuenta">
 							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
 						</datasetParameter>
 						<datasetParameter name="param_id_ciclo_tabla">
-							<datasetParameterExpression><![CDATA[1]]></datasetParameterExpression>
+							<datasetParameterExpression><![CDATA[$P{param_id_ciclo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_es_restado">
+							<datasetParameterExpression><![CDATA[$F{es_restado}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_tipo_saldo">
+							<datasetParameterExpression><![CDATA[$F{tipo_saldo}]]></datasetParameterExpression>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
@@ -274,7 +297,7 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="70" height="30" uuid="3e4af51a-0ecf-440d-b541-9516c30a43c2"/>
-								<textElement textAlignment="Center"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[#Partida / folio]]></text>
 							</staticText>
 						</jr:tableHeader>
@@ -316,8 +339,7 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="01385578-13d0-4e55-9efe-307498c52fc2"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{haber} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{haber})
-]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{haber} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{haber})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
