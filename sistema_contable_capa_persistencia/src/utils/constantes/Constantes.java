@@ -49,8 +49,17 @@ public class Constantes {
     
     public static ArrayList<dtoLista> listaTiposSaldoCuentas() {
         ArrayList<dtoLista> lista = new ArrayList<>();
-        dtoLista op1 = new dtoLista("", "DEUDOR");
-        dtoLista op2 = new dtoLista("R", "ACREEDOR");
+        dtoLista op1 = new dtoLista("D", "DEUDOR");
+        dtoLista op2 = new dtoLista("A", "ACREEDOR");
+        lista.add(op1);
+        lista.add(op2);
+        return lista;
+    }
+    
+    public static ArrayList<dtoLista> listaEleccionSINO() {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        dtoLista op1 = new dtoLista("0", "NO");
+        dtoLista op2 = new dtoLista("1", "SI");
         lista.add(op1);
         lista.add(op2);
         return lista;

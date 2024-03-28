@@ -21,8 +21,9 @@ public class Cuenta {
     String egresos;
     boolean eliminado;
     int disponible;
+    int es_restado;
 
-    public Cuenta(int id, int id_tipo_catalogo, String codigo, String ref, String nombre, int nivel, String tipo_saldo, String ingresos, String egresos, boolean eliminado, int disponible) {
+    public Cuenta(int id, int id_tipo_catalogo, String codigo, String ref, String nombre, int nivel, String tipo_saldo, String ingresos, String egresos, boolean eliminado, int disponible, int es_restado) {
         this.id = id;
         this.id_tipo_catalogo = id_tipo_catalogo;
         this.codigo = codigo;
@@ -34,6 +35,7 @@ public class Cuenta {
         this.egresos = egresos;
         this.eliminado = eliminado;
         this.disponible = disponible;
+        this.es_restado = es_restado;
     }
     
     @Override
@@ -50,6 +52,7 @@ public class Cuenta {
                 ", egresos='" + egresos + '\'' +
                 ", eliminado=" + eliminado +
                 ", disponible=" + disponible +
+                ", es_restado=" + es_restado +
                 '}';
     }
     
@@ -65,6 +68,7 @@ public class Cuenta {
         this.egresos = "";
         this.eliminado = false;
         this.disponible = 0;
+        this.es_restado = 0;
     }
 
     public int getId() {
@@ -153,6 +157,14 @@ public class Cuenta {
 
     public void setDisponible(int disponible) {
         this.disponible = disponible;
+    }
+
+    public int getEs_restado() {
+        return es_restado;
+    }
+
+    public void setEs_restado(int es_restado) {
+        this.es_restado = es_restado;
     }
 
 }

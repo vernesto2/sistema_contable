@@ -31,6 +31,7 @@ public class dCuentas extends javax.swing.JDialog {
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     ArrayList<TipoCatalogo> listaCmbTipoCatalogo = new ArrayList<>();
     ArrayList<dtoLista> listaCmbTipoSaldo = new ArrayList<>();
+    ArrayList<dtoLista> listaCmbEsRestado = new ArrayList<>();
     Cuenta cuentaModel = new Cuenta();
     
     Sesion sesion;
@@ -58,6 +59,7 @@ public class dCuentas extends javax.swing.JDialog {
         this.realizoAccion = false;
         // obtenemos los catalogos
         this.obtenerListaCmbTipoSaldo();
+        this.obtenerListaCmbEsRestado();
         // seteamos la informacion
         this.setearData();
     }
@@ -70,6 +72,7 @@ public class dCuentas extends javax.swing.JDialog {
         txtEgresos.setText(this.cuentaModel.getEgresos());
         
         // PROCESO PARA SELECCION DE COMBOBOX
+        // COMBO DE TIPO SALDO (DEUDOR - ACREEDOR)
         int iCmb = 0, i = 0;
         for (dtoLista item : listaCmbTipoSaldo) {
             if (item.getValue().equals(this.cuentaModel.getTipo_saldo())) {
@@ -78,6 +81,15 @@ public class dCuentas extends javax.swing.JDialog {
             i++;
         }
         cmbTipoSaldo.setSelectedIndex(iCmb);
+        // combo de (SI - NO)
+        int iCmb1 = 0, i1 = 0;
+        for (dtoLista item : listaCmbEsRestado) {
+            if (Integer.parseInt(item.getValue()) == this.cuentaModel.getEs_restado()) {
+                iCmb1 = i1;
+            }
+            i1++;
+        }
+        cmbEsRestada.setSelectedIndex(iCmb1);
         
     }
     
@@ -89,10 +101,25 @@ public class dCuentas extends javax.swing.JDialog {
         }
     }
     
+    public void obtenerListaCmbEsRestado() {
+        this.listaCmbEsRestado = Constantes.listaEleccionSINO();
+        cmbEsRestada.removeAllItems();
+        for (dtoLista item : listaCmbEsRestado) {
+            cmbEsRestada.addItem(item.getLabel());
+        }
+    }
+    
     public void seleccionarOpcionCmbTipoCatalogo() {
         int i = cmbTipoSaldo.getSelectedIndex();
         if (i >= 0) {
             this.cuentaModel.setTipo_saldo(this.listaCmbTipoSaldo.get(i).getValue());
+        }
+    }
+    
+    public void seleccionarOpcionCmbEsRestada() {
+        int i = cmbEsRestada.getSelectedIndex();
+        if (i >= 0) {
+            this.cuentaModel.setEs_restado(Integer.parseInt(this.listaCmbEsRestado.get(i).getValue()));
         }
     }
     
@@ -138,6 +165,8 @@ public class dCuentas extends javax.swing.JDialog {
         jLabel20 = new javax.swing.JLabel();
         txtEgresos = new RSMaterialComponent.RSTextFieldMaterial();
         txtCatalogoSeleccionado = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        cmbEsRestada = new RSMaterialComponent.RSComboBoxMaterial();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -278,6 +307,18 @@ public class dCuentas extends javax.swing.JDialog {
         txtCatalogoSeleccionado.setText("Cuenta de catalogo");
         txtCatalogoSeleccionado.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel21.setText("Es Restada:");
+        jLabel21.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        cmbEsRestada.setColorMaterial(new java.awt.Color(102, 102, 102));
+        cmbEsRestada.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbEsRestadaItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -285,24 +326,29 @@ public class dCuentas extends javax.swing.JDialog {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtCatalogoSeleccionado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtCatalogoSeleccionado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(18, 18, 18)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtIngresos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtConcepto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtNivel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtEgresos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbTipoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtIngresos, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
-                            .addComponent(cmbTipoSaldo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtConcepto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNivel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtEgresos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(cmbEsRestada, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -327,6 +373,10 @@ public class dCuentas extends javax.swing.JDialog {
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbTipoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEsRestada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIngresos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -334,7 +384,7 @@ public class dCuentas extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEgresos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -362,6 +412,7 @@ public class dCuentas extends javax.swing.JDialog {
     
     public void setearModelo() {
         this.seleccionarOpcionCmbTipoCatalogo();
+        this.seleccionarOpcionCmbEsRestada();
         cuentaModel.setCodigo(txtCodigo.getText());
         cuentaModel.setNivel(Integer.parseInt(txtNivel.getText()));
         cuentaModel.setNombre(txtConcepto.getText());
@@ -397,6 +448,10 @@ public class dCuentas extends javax.swing.JDialog {
     private void cmbTipoSaldoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoSaldoItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTipoSaldoItemStateChanged
+
+    private void cmbEsRestadaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEsRestadaItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEsRestadaItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -443,12 +498,14 @@ public class dCuentas extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo;
+    private RSMaterialComponent.RSComboBoxMaterial cmbEsRestada;
     private RSMaterialComponent.RSComboBoxMaterial cmbTipoSaldo;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

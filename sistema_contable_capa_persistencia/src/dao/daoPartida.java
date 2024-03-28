@@ -88,14 +88,15 @@ public class daoPartida {
         }
     }
     
-    public RespuestaGeneral ObtenerUltimoNumPartida() {
+    public RespuestaGeneral ObtenerUltimoNumPartida(int idCicloContable) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<Partida> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  SELECT p.* FROM partida p where p.eliminado = 0 order by p.id desc limit 1
+                  SELECT p.* FROM partida p where p.eliminado = 0 and p.id_ciclo = ? order by p.id desc limit 1
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, idCicloContable);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Partida partida = new Partida();

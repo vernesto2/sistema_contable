@@ -41,9 +41,9 @@ public class ServicioPartida {
         return rs;
     }
     
-    public RespuestaGeneral obtenerUltimoNumPartida() {
+    public RespuestaGeneral obtenerUltimoNumPartida(int idCicloContable) {
         this.cx.conectar();
-        RespuestaGeneral rs = this.daoPartida.ObtenerUltimoNumPartida();
+        RespuestaGeneral rs = this.daoPartida.ObtenerUltimoNumPartida(idCicloContable);
         this.cx.desconectar(); 
         return rs;
     }

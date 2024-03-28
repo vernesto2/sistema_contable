@@ -105,7 +105,7 @@ public class dPartidas extends javax.swing.JDialog {
     }
     
     public void setModelPartida() {
-        String[] cabecera = {"","Codigo","Concepto", "FM","Parcial","Debe","Haber","Editar","Eliminar"};
+        String[] cabecera = {"","Codigo", "","Concepto", "FM","Parcial","Debe","Haber","Editar","Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblDetallePartida.setModel(dtm);
         Render rr = new Render();
@@ -134,26 +134,28 @@ public class dPartidas extends javax.swing.JDialog {
 //            }
             datos[0] = detalle.getTipo_cargo_abono() == 1 ? Constantes.TIPO_CARGO_S : Constantes.TIPO_ABONO_S;
             datos[1] = detalle.getCuenta().getCodigo();
-            datos[2] = detalle.getCuenta().getNombre();
-            datos[3] = detalle.getFolio_mayor();
-            datos[4] = detalle.getParcial();
-            datos[5] = detalle.getDebe();
-            datos[6] = detalle.getHaber();
-            datos[7] = detalle.getCuenta().getDisponible() == 1 ? btn1 : ' ';
-            datos[8] = detalle.getCuenta().getDisponible() == 1 ? btn2 : ' ';
+            datos[2] = detalle.getCuenta().getEs_restado() == 0 ? "" : "R";
+            datos[3] = detalle.getCuenta().getNombre();
+            datos[4] = detalle.getFolio_mayor();
+            datos[5] = detalle.getParcial();
+            datos[6] = detalle.getDebe();
+            datos[7] = detalle.getHaber();
+            datos[8] = detalle.getCuenta().getDisponible() == 1 ? btn1 : ' ';
+            datos[9] = detalle.getCuenta().getDisponible() == 1 ? btn2 : ' ';
             dtm.addRow(datos);
         }
         tblDetallePartida.setModel(dtm);
         tblDetallePartida.setAutoResizeMode(tblDetallePartida.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         tblDetallePartida.getColumnModel().getColumn(0).setPreferredWidth(0);
         tblDetallePartida.getColumnModel().getColumn(1).setPreferredWidth(150);
-        tblDetallePartida.getColumnModel().getColumn(2).setPreferredWidth(400);
-        tblDetallePartida.getColumnModel().getColumn(3).setPreferredWidth(50);
-        tblDetallePartida.getColumnModel().getColumn(4).setPreferredWidth(150);
+        tblDetallePartida.getColumnModel().getColumn(2).setPreferredWidth(30);
+        tblDetallePartida.getColumnModel().getColumn(3).setPreferredWidth(400);
+        tblDetallePartida.getColumnModel().getColumn(4).setPreferredWidth(50);
         tblDetallePartida.getColumnModel().getColumn(5).setPreferredWidth(150);
         tblDetallePartida.getColumnModel().getColumn(6).setPreferredWidth(150);
-        tblDetallePartida.getColumnModel().getColumn(7).setPreferredWidth(50);
+        tblDetallePartida.getColumnModel().getColumn(7).setPreferredWidth(150);
         tblDetallePartida.getColumnModel().getColumn(8).setPreferredWidth(50);
+        tblDetallePartida.getColumnModel().getColumn(9).setPreferredWidth(50);
     }
     
     public void limiparTablaDetallePartida() {
@@ -571,7 +573,7 @@ public class dPartidas extends javax.swing.JDialog {
     private void tblDetallePartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetallePartidaMouseClicked
         int row = tblDetallePartida.getSelectedRow();
         int column = tblDetallePartida.getSelectedColumn();
-        if (column == 7) {
+        if (column == 8) {
             // editar
             if (this.listaPartidaDetalles.get(row).getCuenta().getDisponible() == 0) {
                 JOptionPane.showMessageDialog(this, "No puede realizar acciones a una cuenta padre", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
@@ -617,7 +619,7 @@ public class dPartidas extends javax.swing.JDialog {
                 }
             }
             
-        } else if (column == 8) {
+        } else if (column == 9) {
             // eliminar
             if (this.listaPartidaDetalles.get(row).getCuenta().getDisponible() == 0) {
                 JOptionPane.showMessageDialog(this, "No puede realizar acciones a una cuenta padre", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
@@ -729,7 +731,7 @@ public class dPartidas extends javax.swing.JDialog {
         for (PartidaDetalle detalle : lista) {
             boolean seEncontroDetalle = false;
             for (PartidaDetalle pDetalle : this.listaPartidaDetalles) {
-                if (detalle.getId_cuenta() == pDetalle.getId_cuenta()) {
+                if (detalle.getId_cuenta() == pDetalle.getId_cuenta() && detalle.getTipo_cargo_abono() == pDetalle.getTipo_cargo_abono()) {
                     seEncontroDetalle = true;
                     break;
                 }
@@ -763,7 +765,7 @@ public class dPartidas extends javax.swing.JDialog {
         // validamos los escenarios en los cuales debe acumular el debe y haber
         this.listaPartidaDetalles.forEach((t) -> {
             if (t.getCuentaMayor().getId() > 0 && t.getCuenta().getDisponible() == 1) {
-                int rowPadre = this.buscarPadre(t.getCuentaMayor());
+                int rowPadre = this.buscarPadre(t.getCuentaMayor(), t.getTipo_cargo_abono());
                 if (rowPadre >= 0) {
                     PartidaDetalle cuentaPadre = this.listaPartidaDetalles.get(rowPadre);
                     double acumulado = 0;
@@ -771,7 +773,9 @@ public class dPartidas extends javax.swing.JDialog {
                         acumulado = cuentaPadre.getDebe();
                         acumulado += t.getParcial();
                         this.listaPartidaDetalles.get(rowPadre).setDebe(acumulado);
-                    } else {
+                    } 
+                    
+                    if (t.getTipo_cargo_abono() == Constantes.TIPO_ABONO) {
                         acumulado = cuentaPadre.getHaber();
                         acumulado += t.getParcial();
                         this.listaPartidaDetalles.get(rowPadre).setHaber(acumulado);
@@ -804,10 +808,11 @@ public class dPartidas extends javax.swing.JDialog {
         }
     }
     
-    public int buscarPadre(Cuenta cuenta) {
+    public int buscarPadre(Cuenta cuenta, int tipoCargoAbono) {
         int row = -1;
         for (int i = 0; i < this.listaPartidaDetalles.size(); i++) {
-            if (cuenta.getId() == this.listaPartidaDetalles.get(i).getCuenta().getId()) {
+            if (cuenta.getId() == this.listaPartidaDetalles.get(i).getCuenta().getId() && 
+                    this.listaPartidaDetalles.get(i).getTipo_cargo_abono() == tipoCargoAbono) {
                 row = i;
                 break;
             }
