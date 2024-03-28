@@ -238,7 +238,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                                    INICIO SECCION DE CUENTAS
         <------------------------------------------------------------------------------->  */  
     public void setModelCuentas() {
-        String[] cabecera = {"Nivel", "Codigo", "Concepto", "Tipo de Saldo", "Ingresos", "Egresos", "Editar", "Eliminar"};
+        String[] cabecera = {"Nivel", "Codigo", " ","Concepto", "Tipo de Saldo", "Ingresos", "Egresos", "Editar", "Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblCuentas.setModel(dtm);
         tblCuentas.setDefaultRenderer(Object.class, new Render());
@@ -274,24 +274,26 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         for (dtoCuenta cuenta : listaCuentas) {
             datos[0] = cuenta.getNivel();
             datos[1] = cuenta.getCodigo();
-            datos[2] = cuenta.getNombre();
-            datos[3] = cuenta.getTipo_saldo();
-            datos[4] = cuenta.getIngresos();
-            datos[5] = cuenta.getEgresos();
-            datos[6] = btn1;
-            datos[7] = btn2;
+            datos[2] = cuenta.getEs_restado() == 0 ? "" : "R";
+            datos[3] = cuenta.getNombre();
+            datos[4] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": "ACREEDOR";
+            datos[5] = cuenta.getIngresos();
+            datos[6] = cuenta.getEgresos();
+            datos[7] = btn1;
+            datos[8] = btn2;
             dtm.addRow(datos);
         }
         tblCuentas.setModel(dtm);
         tblCuentas.setAutoResizeMode(tblCuentas.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         tblCuentas.getColumnModel().getColumn(0).setPreferredWidth(60);
         tblCuentas.getColumnModel().getColumn(1).setPreferredWidth(120);
-        tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(425);
-        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(140);
-        tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(25);
+        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(425);
+        tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(90);
         tblCuentas.getColumnModel().getColumn(5).setPreferredWidth(100);
-        tblCuentas.getColumnModel().getColumn(6).setPreferredWidth(20);
+        tblCuentas.getColumnModel().getColumn(6).setPreferredWidth(100);
         tblCuentas.getColumnModel().getColumn(7).setPreferredWidth(20);
+        tblCuentas.getColumnModel().getColumn(8).setPreferredWidth(20);
        
     }
     
@@ -995,12 +997,12 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         int accion = tblCuentas.getSelectedColumn();
         int row = tblCuentas.getSelectedRow();
         String tituloCatalogo = "Catalogo: " + this.listaCmbTipoCatalogo.get(this.cmbTipoCatalogo2.getSelectedIndex()).getTipo();
-        if (accion == 6) {
+        if (accion == 7) {
             // este es editar
             this.setearModeloCuentas(row);
             this.abrirDialogCuentas(cuentaModel, tituloCatalogo);
             
-        } else if (accion == 7) {
+        } else if (accion == 8) {
             String texto = "¿Esta seguro de continuar?, Se eliminará el registro: \n" + this.listaCuentas.get(row).getNombre();
             int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (opc == 0) {
@@ -1017,14 +1019,15 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     }//GEN-LAST:event_tblCuentasMouseClicked
 
     public void setearModeloCuentas(int row) {
-        cuentaModel.setId(this.listaCuentas.get(row).getId());
-        cuentaModel.setId_tipo_catalogo(this.listaCuentas.get(row).getId_tipo_catalogo());
-        cuentaModel.setCodigo(this.listaCuentas.get(row).getCodigo());
-        cuentaModel.setNivel(this.listaCuentas.get(row).getNivel());
-        cuentaModel.setNombre(this.listaCuentas.get(row).getNombre());
-        cuentaModel.setTipo_saldo(this.listaCuentas.get(row).getTipo_saldo());
-        cuentaModel.setEgresos(this.listaCuentas.get(row).getEgresos());
-        cuentaModel.setIngresos(this.listaCuentas.get(row).getIngresos());
+//        cuentaModel.setId(this.listaCuentas.get(row).getId());
+//        cuentaModel.setId_tipo_catalogo(this.listaCuentas.get(row).getId_tipo_catalogo());
+//        cuentaModel.setCodigo(this.listaCuentas.get(row).getCodigo());
+//        cuentaModel.setNivel(this.listaCuentas.get(row).getNivel());
+//        cuentaModel.setNombre(this.listaCuentas.get(row).getNombre());
+//        cuentaModel.setTipo_saldo(this.listaCuentas.get(row).getTipo_saldo());
+//        cuentaModel.setEgresos(this.listaCuentas.get(row).getEgresos());
+//        cuentaModel.setIngresos(this.listaCuentas.get(row).getIngresos());
+        cuentaModel = this.listaCuentas.get(row);
     }
     
     public void abrirDialogCuentas(Cuenta cuenta, String titulo) {

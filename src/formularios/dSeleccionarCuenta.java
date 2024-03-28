@@ -59,7 +59,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     }
 
     public void setModelCuentas() {
-        String[] cabecera = {"Disponible", "Nivel", "Codigo", "Concepto", "Tipo de Saldo", "Ingresos", "Egresos"};
+        String[] cabecera = {"Disponible", "Nivel", "Codigo", "", "Concepto", "Tipo Saldo", "Ingresos", "Egresos"};
         dtm.setColumnIdentifiers(cabecera);
         tblCuentas.setModel(dtm);
         tblCuentas.setDefaultRenderer(Object.class, new Render());
@@ -87,10 +87,11 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             datos[0] = disponible;
             datos[1] = cuenta.getNivel();
             datos[2] = cuenta.getCodigo();
-            datos[3] = cuenta.getNombre();
-            datos[4] = cuenta.getTipo_saldo();
-            datos[5] = cuenta.getIngresos();
-            datos[6] = cuenta.getEgresos();
+            datos[3] = cuenta.getEs_restado() == 0 ? "" : "R";
+            datos[4] = cuenta.getNombre();
+            datos[5] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": "ACREEDOR";
+            datos[6] = cuenta.getIngresos();
+            datos[7] = cuenta.getEgresos();
             dtm.addRow(datos);
         }
         tblCuentas.setModel(dtm);
@@ -98,10 +99,11 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         tblCuentas.getColumnModel().getColumn(0).setPreferredWidth(90);
         tblCuentas.getColumnModel().getColumn(1).setPreferredWidth(60);
         tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(120);
-        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(425);
-        tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(140);
-        tblCuentas.getColumnModel().getColumn(5).setPreferredWidth(100);
+        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(25);
+        tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(425);
+        tblCuentas.getColumnModel().getColumn(5).setPreferredWidth(90);
         tblCuentas.getColumnModel().getColumn(6).setPreferredWidth(100);
+        tblCuentas.getColumnModel().getColumn(7).setPreferredWidth(100);
        
     }
 
@@ -363,17 +365,17 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())

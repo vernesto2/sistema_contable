@@ -444,7 +444,7 @@ public class vLibroDiario extends javax.swing.JPanel {
     }
     private void btnNuevoCicloContable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCicloContable1ActionPerformed
         // obtenemos el ultimo # de partida
-        RespuestaGeneral rg = _partida.obtenerUltimoNumPartida();
+        RespuestaGeneral rg = _partida.obtenerUltimoNumPartida(this.sesion.configUsuario.getCicloContable().getId());
         if (rg.esExitosa()) {
             ArrayList<Partida> listaPartidaAux = (ArrayList<Partida>)rg.getDatos();
             Partida partidaAux = new Partida();

@@ -58,6 +58,7 @@ public class daoCuenta {
                 cuenta.setIngresos(rs.getString("ingresos"));
                 cuenta.setEgresos(rs.getString("egresos"));
                 cuenta.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
+                cuenta.setEs_restado(rs.getInt("es_restado"));
                 lista.add(cuenta);
             }
             
@@ -127,6 +128,7 @@ public class daoCuenta {
                 cuenta.setEgresos(rs.getString("egresos"));
                 cuenta.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
                 cuenta.setDisponible(rs.getInt("disponible"));
+                cuenta.setEs_restado(rs.getInt("es_restado"));
                 lista.add(cuenta);
             }
             
@@ -196,6 +198,7 @@ public class daoCuenta {
                 cuenta.setEgresos(rs.getString("egresos"));
                 cuenta.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
                 cuenta.setDisponible(rs.getInt("disponible"));
+                cuenta.setEs_restado(rs.getInt("es_restado"));
                 lista.add(cuenta);
             }
             
@@ -212,7 +215,7 @@ public class daoCuenta {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
                   INSERT INTO cuenta     
-                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?)
+                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, cuenta.getId_tipo_catalogo());
@@ -224,6 +227,7 @@ public class daoCuenta {
             ps.setString(6, cuenta.getIngresos());
             ps.setString(7, cuenta.getEgresos());
             ps.setInt(8, cuenta.isEliminado() ? 1 : 0);
+            ps.setInt(9, cuenta.getEs_restado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             int id = -1;
@@ -251,7 +255,8 @@ public class daoCuenta {
                         nombre=?,
                         tipo_saldo=?,
                         ingresos=?,
-                        egresos=?
+                        egresos=?,
+                        es_restado=?
                     WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
@@ -263,7 +268,8 @@ public class daoCuenta {
             ps.setString(5, cuenta.getTipo_saldo());
             ps.setString(6, cuenta.getIngresos());
             ps.setString(7, cuenta.getEgresos());
-            ps.setInt(8, cuenta.getId());
+            ps.setInt(8, cuenta.getEs_restado());
+            ps.setInt(9, cuenta.getId());
             ps.executeUpdate();
             
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, cuenta.getId());
@@ -293,18 +299,20 @@ public class daoCuenta {
             return rg.asServerError(mensaje);
         }
     }
+    
     public Integer tamanoCodigoAMayorizar(Integer idTipoCaalogo) {
         
         ArrayList<Cuenta> lista = new ArrayList<>();
         ResultSet rs = null;
         Integer tamanoCodigoAMayorizar = null;
         var sql = """
-select length(ci.codigo) as length_codigo
-	  , row_number() over (order by length(ci.codigo)) as nivel
-	  from cuenta ci
-	  where ci.id_tipo_catalogo = ?
-	  and ci.eliminado = false
-	  group by length(ci.codigo) 
+                select 
+                    length(ci.codigo) as length_codigo
+                    ,row_number() over (order by length(ci.codigo)) as nivel
+                from cuenta ci
+                where ci.id_tipo_catalogo = ?
+                and ci.eliminado = false
+                group by length(ci.codigo) 
                   """;
         
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
