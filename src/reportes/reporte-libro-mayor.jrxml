@@ -275,18 +275,18 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="210" uuid="dbcc21b7-9847-44bd-897b-0efb849bd5d9">
+					<jr:column width="200" uuid="dbcc21b7-9847-44bd-897b-0efb849bd5d9">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="210" height="30" uuid="d8b58a86-a0a7-43f7-8261-7a2150badeff"/>
+								<reportElement x="0" y="0" width="200" height="30" uuid="d8b58a86-a0a7-43f7-8261-7a2150badeff"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Concepto]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="210" height="30" uuid="92f72743-9491-42bb-b66d-2eb4c7fd780c"/>
+								<reportElement x="0" y="0" width="200" height="30" uuid="92f72743-9491-42bb-b66d-2eb4c7fd780c"/>
 								<textElement verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{comentario}]]></textFieldExpression>
 							</textField>
@@ -313,7 +313,9 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:tableHeader style="Table 1_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" uuid="26543fd1-fb38-4535-94ab-f976e7d43105"/>
+								<reportElement x="0" y="0" width="60" height="30" uuid="26543fd1-fb38-4535-94ab-f976e7d43105">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Debe]]></text>
 							</staticText>

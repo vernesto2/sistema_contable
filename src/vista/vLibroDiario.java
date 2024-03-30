@@ -425,7 +425,7 @@ public class vLibroDiario extends javax.swing.JPanel {
             JasperReport reporte;
             Conexion cx = new Conexion(sesion.rutaConexion);
             con = cx.conectar();
-            reporte = JasperCompileManager.compileReport("src/reportes/reporte-master-libro-diario.jrxml");
+            reporte = JasperCompileManager.compileReport("src/reportes/reporte-libro-diario.jrxml");
 
             //Currency currentyActual = Currency.getInstance(Locale.US);
             Locale locale = new Locale("es", "SV");

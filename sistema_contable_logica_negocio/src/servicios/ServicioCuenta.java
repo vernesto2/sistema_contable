@@ -6,7 +6,9 @@ package servicios;
 
 import conexion.Conexion;
 import dao.daoCuenta;
+import java.util.List;
 import modelo.Cuenta;
+import reportes.CuentaBalanza;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -98,5 +100,15 @@ public class ServicioCuenta {
             return RespuestaGeneral.asBadRequest(e.getMessage());
         }
         
+    }
+    public RespuestaGeneral listarCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo) {
+        try {
+            this.cx.conectar();
+            List<CuentaBalanza> listBeans = daoCuenta.listarCuentaBalanzaComprobacion(idTipoCatalogo, idCiclo);
+            this.cx.desconectar();
+            return RespuestaGeneral.asOk(null, listBeans);
+        } catch (Exception e) {
+            return RespuestaGeneral.asBadRequest(e.getMessage());
+        }
     }
 }

@@ -560,7 +560,7 @@ public class vPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnBalanzaComprobacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanzaComprobacionActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnBalanzaComprobacionActionPerformed
 
     private void btnBalanceGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanceGeneralActionPerformed
