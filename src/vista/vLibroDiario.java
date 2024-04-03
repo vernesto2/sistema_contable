@@ -10,6 +10,10 @@ import dto.dtoPartida;
 import formularios.dPartidas;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -418,14 +422,17 @@ public class vLibroDiario extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVerReporteLibroDiarioActionPerformed
 
     private void verReporteLibroDiario() {
-        try {
+        try (
+                InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-libro-diario.jrxml");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))
+                ) {
             Map<String, Object> params = new HashMap<String, Object>();
             
             Connection con;
             JasperReport reporte;
             Conexion cx = new Conexion(sesion.rutaConexion);
             con = cx.conectar();
-            reporte = JasperCompileManager.compileReport("src/reportes/reporte-libro-diario.jrxml");
+            reporte = JasperCompileManager.compileReport(inputStream);
 
             //Currency currentyActual = Currency.getInstance(Locale.US);
             Locale locale = new Locale("es", "SV");
@@ -438,7 +445,7 @@ public class vLibroDiario extends javax.swing.JPanel {
             JasperPrint jp = JasperFillManager.fillReport(reporte, params, con);
             final boolean EXIT_ON_CLOSE = false;
             JasperViewer.viewReport(jp, EXIT_ON_CLOSE);
-        } catch (JRException ex) {
+        } catch (IOException | JRException ex) {
             Logger.getLogger(vLibroDiario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
