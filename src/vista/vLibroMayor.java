@@ -5,6 +5,10 @@
 package vista;
 
 import conexion.Conexion;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.text.NumberFormat;
 import java.util.HashMap;
@@ -120,14 +124,17 @@ public class vLibroMayor extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBalanzaActionPerformed
     
     public void verBalanzaComprobacion() {
-        try {
+        try (
+                InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-balanza-comprobacion.jrxml");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))
+                ){
             Map<String, Object> params = new HashMap<String, Object>();
             
             Connection con;
             JasperReport reporte;
             Conexion cx = new Conexion(sesion.rutaConexion);
             con = cx.conectar();
-            reporte = JasperCompileManager.compileReport("src/reportes/reporte-balanza-comprobacion.jrxml");
+            reporte = JasperCompileManager.compileReport(inputStream);
 
             //Currency currentyActual = Currency.getInstance(Locale.US);
             Locale locale = new Locale("es", "SV");
@@ -162,20 +169,22 @@ public class vLibroMayor extends javax.swing.JPanel {
             JasperPrint jp = JasperFillManager.fillReport(reporte, params, new JRBeanCollectionDataSource(listBeans));
             final boolean EXIT_ON_CLOSE = false;
             JasperViewer.viewReport(jp, EXIT_ON_CLOSE);
-        } catch (JRException ex) {
+        } catch (IOException | JRException ex) {
             Logger.getLogger(vLibroDiario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void verLibroMayor() {
-         try {
+         try (
+                InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-libro-mayor.jrxml");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))
+                 ) {
             Map<String, Object> params = new HashMap<String, Object>();
             
             Connection con;
             JasperReport reporte;
             Conexion cx = new Conexion(sesion.rutaConexion);
             con = cx.conectar();
-            reporte = JasperCompileManager.compileReport("src/reportes/reporte-libro-mayor.jrxml");
-
+            reporte = JasperCompileManager.compileReport(inputStream);
             //Currency currentyActual = Currency.getInstance(Locale.US);
             Locale locale = new Locale("es", "SV");
 
@@ -206,7 +215,7 @@ public class vLibroMayor extends javax.swing.JPanel {
             JasperPrint jp = JasperFillManager.fillReport(reporte, params, con);
             final boolean EXIT_ON_CLOSE = false;
             JasperViewer.viewReport(jp, EXIT_ON_CLOSE);
-        } catch (JRException ex) {
+        } catch (IOException | JRException ex) {
             Logger.getLogger(vLibroDiario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
