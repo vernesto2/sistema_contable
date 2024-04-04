@@ -33,6 +33,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     boolean realizoAccion = false;   
     ServicioCuenta _cuenta;
     ArrayList<Cuenta> listaCuentas = new ArrayList<>();
+    ArrayList<Cuenta> listaCuentasCompleta = new ArrayList<>();
     Cuenta cuentaSeleccionada = new Cuenta();
     ArrayList<PartidaDetalle> listaDetallePartida = new ArrayList<>();
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -55,7 +56,8 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         this.realizoAccion = false;
         // seteamos la informacion
         this.setModelCuentas();
-        this.obtenerListadoCuentasPorTipoCatalogo();
+        this.obtenerListadoCuentasPorTipoCatalogoCompleto();
+        this.obtenerListadoCuentasPorTipoCatalogo();       
     }
 
     public void setModelCuentas() {
@@ -78,6 +80,16 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rg));
         }
         this.setDatosCuentas();
+    }
+    
+    public void obtenerListadoCuentasPorTipoCatalogoCompleto() {
+        this.listaCuentasCompleta = new ArrayList<>();
+        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId(), this.txtQueryBusqueda.getText());
+        if (rg.esExitosa()) {
+            this.listaCuentasCompleta = (ArrayList<Cuenta>)rg.getDatos();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo obtener el listado", "ALERTA", UtileriaVista.devolverCodigoMensaje(rg));
+        }
     }
     
     public void setDatosCuentas() {
@@ -473,14 +485,14 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         boolean encontroPadre = false;
         if (this.cuentaSeleccionada.getNivel() > this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar()) {
             int cantidadCodigo = 0;
-            for (Cuenta cuenta : listaCuentas) {
+            for (Cuenta cuenta : this.listaCuentasCompleta) {
                 if (cuenta.getNivel() == this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar()) {
                     cantidadCodigo = cuenta.getCodigo().length();
                     break;
                 }
             }
             String codigoPadre = this.cuentaSeleccionada.getCodigo().substring(0, cantidadCodigo);
-            for (Cuenta cuenta : listaCuentas) {
+            for (Cuenta cuenta : this.listaCuentasCompleta) {
                 if (cuenta.getCodigo().equals(codigoPadre)) {
                     cuentaPadre = cuenta;
                     encontroPadre = true;

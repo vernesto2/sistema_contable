@@ -137,9 +137,9 @@ public class dPartidas extends javax.swing.JDialog {
             datos[2] = detalle.getCuenta().getEs_restado() == 0 ? "" : "R";
             datos[3] = detalle.getCuenta().getNombre();
             datos[4] = detalle.getFolio_mayor();
-            datos[5] = detalle.getParcial();
-            datos[6] = detalle.getDebe();
-            datos[7] = detalle.getHaber();
+            datos[5] = detalle.getParcial() == 0 ? "" : detalle.getParcial();
+            datos[6] = detalle.getDebe() == 0 ? "" : detalle.getDebe();
+            datos[7] = detalle.getHaber() == 0 ? "" : detalle.getHaber();
             datos[8] = detalle.getCuenta().getDisponible() == 1 ? btn1 : ' ';
             datos[9] = detalle.getCuenta().getDisponible() == 1 ? btn2 : ' ';
             dtm.addRow(datos);
@@ -295,7 +295,7 @@ public class dPartidas extends javax.swing.JDialog {
         txtFecha.setBackground(new java.awt.Color(153, 153, 153));
         txtFecha.setBgColor(new java.awt.Color(153, 153, 153));
         txtFecha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtFecha.setFormatDate("dd-MM-yyyy");
+        txtFecha.setFormatDate("dd/MM/yyyy");
 
         txtNumPartida.setForeground(new java.awt.Color(0, 0, 0));
         txtNumPartida.setColorMaterial(new java.awt.Color(0, 0, 0));
@@ -450,7 +450,7 @@ public class dPartidas extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1019, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(txtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -466,7 +466,8 @@ public class dPartidas extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotalHaber, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtTotalDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);

@@ -471,7 +471,7 @@ where row_number = 1
         coleccion.add(cuenta1);
         
         CuentaBalanza cuenta2 = new CuentaBalanza();
-        cuenta2.setId(1);
+        cuenta2.setId(3);
         cuenta2.setNombre("Ventas");
         cuenta2.setCodigo("5010");
         cuenta2.setSaldoInicial(new Double(100));
