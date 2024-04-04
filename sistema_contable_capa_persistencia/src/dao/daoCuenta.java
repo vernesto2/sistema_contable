@@ -409,45 +409,10 @@ where row_number = 1
         }
     }
     
-    public static CuentaBalanza[] generarCuentasBalanza() {
-        CuentaBalanza [] listaBeans = new CuentaBalanza[3];
-        
-        CuentaBalanza cuenta0 = new CuentaBalanza();
-        cuenta0.setId(1);
-        cuenta0.setNombre("Efectivo y Equivalente de Efectivo");
-        cuenta0.setCodigo("1010");
-        cuenta0.setSaldoInicial(new Double(100));
-        cuenta0.setTotalDebe(new Double(300));
-        cuenta0.setTotalHaber(new Double(150));
-        cuenta0.setSaldoFinal(new Double(250));
-        
-        listaBeans[ 0 ] = cuenta0;
-        
-        CuentaBalanza cuenta1 = new CuentaBalanza();
-        cuenta1.setId(2);
-        cuenta1.setNombre("Deudas por pagar");
-        cuenta1.setCodigo("2010");
-        cuenta1.setSaldoInicial(new Double(100));
-        cuenta1.setTotalDebe(new Double(300));
-        cuenta1.setTotalHaber(new Double(150));
-        cuenta1.setSaldoFinal(new Double(250));
-        listaBeans[ 1 ] = new CuentaBalanza();
-        
-        CuentaBalanza cuenta2 = new CuentaBalanza();
-        cuenta2.setId(1);
-        cuenta2.setNombre("Ventas");
-        cuenta2.setCodigo("5010");
-        cuenta2.setSaldoInicial(new Double(100));
-        cuenta2.setTotalDebe(new Double(300));
-        cuenta2.setTotalHaber(new Double(150));
-        cuenta2.setSaldoFinal(new Double(250));
-        listaBeans[ 2 ] = new CuentaBalanza();
-        
-        return listaBeans;
-    }
     
     public static Collection<CuentaBalanza> generarCuentasBalanzaComprobacion() {
-        Vector coleccion = new Vector();
+        List<CuentaBalanza> coleccion = new ArrayList<CuentaBalanza>();
+        
         CuentaBalanza cuenta0 = new CuentaBalanza();
         cuenta0.setId(1);
         cuenta0.setNombre("Efectivo y Equivalente de Efectivo");
@@ -463,23 +428,35 @@ where row_number = 1
         cuenta1.setId(2);
         cuenta1.setNombre("Deudas por pagar");
         cuenta1.setCodigo("2010");
-        cuenta1.setSaldoInicial(new Double(100));
-        cuenta1.setTotalDebe(new Double(300));
-        cuenta1.setTotalHaber(new Double(150));
-        cuenta1.setSaldoFinal(new Double(250));
+        cuenta1.setSaldoInicial(new Double(1));
+        cuenta1.setTotalDebe(new Double(2));
+        cuenta1.setTotalHaber(new Double(3));
+        cuenta1.setSaldoFinal(new Double(4));
         
         coleccion.add(cuenta1);
         
         CuentaBalanza cuenta2 = new CuentaBalanza();
-        cuenta2.setId(1);
+        cuenta2.setId(3);
         cuenta2.setNombre("Ventas");
-        cuenta2.setCodigo("5010");
+        cuenta2.setCodigo("3010");
         cuenta2.setSaldoInicial(new Double(100));
         cuenta2.setTotalDebe(new Double(300));
         cuenta2.setTotalHaber(new Double(150));
         cuenta2.setSaldoFinal(new Double(250));
         
         coleccion.add(cuenta2);
+        
+        CuentaBalanza cuenta3 = new CuentaBalanza();
+        cuenta3.setId(4);
+        cuenta3.setNombre("Otras cuentas por cobrar");
+        cuenta3.setCodigo("4010");
+        cuenta3.setSaldoInicial(new Double(100));
+        cuenta3.setTotalDebe(new Double(300));
+        cuenta3.setTotalHaber(new Double(150));
+        cuenta3.setSaldoFinal(new Double(250));
+        
+        coleccion.add(cuenta3);
+        
         return coleccion;
     }
 }
