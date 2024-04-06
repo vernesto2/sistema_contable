@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Vector;
 import modelo.Cuenta;
+import modelo.TipoCatalogo;
 import reportes.CuentaBalanza;
 import utils.constantes.Constantes;
 
@@ -349,13 +350,13 @@ with cte_balanza_comprobacion as (
   as saldo_inicial, 
   row_number() over (PARTITION by c.id order by p.fecha asc, p.id asc) as row_number
   from cuenta c 
-  inner join partida_detalle pd on pd.id_cuenta = c.id
+  inner join partida_detalle pd on pd.id_cuenta = c.id and pd.parcial = 0
   inner join partida p on pd.id_partida = p.id
   where c.eliminado = false 
   and p.eliminado = false
   and pd.eliminado = false
-  and p.id_ciclo = 1
-  and c.id_tipo_catalogo = 1
+  and p.id_ciclo = ?
+  and c.id_tipo_catalogo = ?
 )
 select cbc.*, saldo_calculado.total_debe, saldo_calculado.total_haber, saldo_calculado.saldo_final 
 from cte_balanza_comprobacion cbc 
@@ -376,8 +377,8 @@ end
 	  where c.eliminado = false 
 	  and p.eliminado = false
 	  and pd.eliminado = false
-	  and p.id_ciclo = 1
-	  and c.id_tipo_catalogo = 1
+	  and p.id_ciclo = ?
+	  and c.id_tipo_catalogo = ?
 	group by c.id, c.codigo, c.nombre
 ) as saldo_calculado on saldo_calculado.id = cbc.id
 where row_number = 1
@@ -385,9 +386,13 @@ where row_number = 1
         List<CuentaBalanza> lista = new ArrayList<CuentaBalanza>();
         try (
                 PreparedStatement ps = cx.getCx().prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
             ) 
         {
+            ps.setObject(1, idCiclo);
+            ps.setObject(2, idTipoCatalogo);
+            ps.setObject(3, idCiclo);
+            ps.setObject(4, idTipoCatalogo);
+            ResultSet rs = ps.executeQuery();
             //ps.setInt(1, id);
             
             while (rs.next()) {

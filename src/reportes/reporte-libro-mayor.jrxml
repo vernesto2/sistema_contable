@@ -141,11 +141,34 @@ and pd.eliminado = false]]>
 	<parameter name="param_tipo_saldo" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="param_es_restado" class="java.lang.Integer" isForPrompting="false"/>
 	<queryString>
-		<![CDATA[select * from cuenta c
+		<![CDATA[select 
+	c.id, 
+	c.codigo, 
+	c.id_tipo_catalogo, 
+	c.nombre, 
+	c.tipo_saldo, 
+	c.ingresos, 
+	c.egresos, 
+	c.es_restado
+from cuenta c
+inner join partida_detalle pd on pd.id_cuenta = c.id
+inner join partida p on p.id = pd.id_partida
 where 
-eliminado = false
+c.eliminado = false
+and pd.eliminado = false
+and p.eliminado = false
 and id_tipo_catalogo =  $P{param_id_tipo_catalogo} 
-and length(c.codigo) =  $P{param_tamano_codigo}]]>
+and length(c.codigo) =  $P{param_tamano_codigo}
+group by 
+	c.id, 
+	c.codigo, 
+	c.id_tipo_catalogo, 
+	c.nombre, 
+	c.tipo_saldo, 
+	c.ingresos, 
+	c.egresos, 
+	c.es_restado
+]]>
 	</queryString>
 	<field name="id" class="java.lang.Object">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -160,11 +183,6 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 	<field name="codigo" class="java.lang.Object">
 		<property name="com.jaspersoft.studio.field.name" value="codigo"/>
 		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cuenta"/>
-	</field>
-	<field name="ref" class="java.lang.Object">
-		<property name="com.jaspersoft.studio.field.name" value="ref"/>
-		<property name="com.jaspersoft.studio.field.label" value="ref"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="cuenta"/>
 	</field>
 	<field name="nombre" class="java.lang.Object">
@@ -185,11 +203,6 @@ and length(c.codigo) =  $P{param_tamano_codigo}]]>
 	<field name="egresos" class="java.lang.Object">
 		<property name="com.jaspersoft.studio.field.name" value="egresos"/>
 		<property name="com.jaspersoft.studio.field.label" value="egresos"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="cuenta"/>
-	</field>
-	<field name="eliminado" class="java.lang.Object">
-		<property name="com.jaspersoft.studio.field.name" value="eliminado"/>
-		<property name="com.jaspersoft.studio.field.label" value="eliminado"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="cuenta"/>
 	</field>
 	<field name="es_restado" class="java.lang.Object">
