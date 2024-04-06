@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -165,8 +166,14 @@ public class vLibroMayor extends javax.swing.JPanel {
             List<CuentaBalanza> listBeans = (List<CuentaBalanza>) _cuenta
                     .listarCuentaBalanzaComprobacion(tipoCatalogo, idCiclo)
                     .getDatos();
+            
+            JRBeanCollectionDataSource param_cuentas_balanza = new JRBeanCollectionDataSource(listBeans);
+            params.put("param_cuentas_balanza", param_cuentas_balanza);
+//            params.put("params_cuentas_balanza", listBeans);
+            
             params.put(JRParameter.REPORT_LOCALE, locale);
-            JasperPrint jp = JasperFillManager.fillReport(reporte, params, new JRBeanCollectionDataSource(listBeans));
+            
+            JasperPrint jp = JasperFillManager.fillReport(reporte, params, new JREmptyDataSource() );
             final boolean EXIT_ON_CLOSE = false;
             JasperViewer.viewReport(jp, EXIT_ON_CLOSE);
         } catch (IOException | JRException ex) {

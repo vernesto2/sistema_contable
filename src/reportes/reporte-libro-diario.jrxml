@@ -158,7 +158,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="80" splitType="Stretch">
+		<band height="110" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="558" height="30" uuid="11c5a924-bec6-4020-8200-298c594ee431"/>
 				<textElement textAlignment="Center"/>
@@ -179,6 +179,13 @@ WHERE
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA["NIE "+ $P{param_usuario}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="558" height="20" uuid="b21f342f-7b50-48b1-b8a1-e14a33f6a2cb"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Libro diario]]></text>
+			</staticText>
 		</band>
 	</title>
 	<detail>
