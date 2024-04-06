@@ -221,7 +221,6 @@ public class dPartidas extends javax.swing.JDialog {
         txtTotalDebe = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
         setModal(true);
         setResizable(false);
 
@@ -717,7 +716,6 @@ public class dPartidas extends javax.swing.JDialog {
 
     private void btnAgregarDetallePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetallePartidaActionPerformed
         dSeleccionarCuenta d = new dSeleccionarCuenta(null, true, sesion);
-        d.setAlwaysOnTop(true);
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.getRealizoAccion()) {

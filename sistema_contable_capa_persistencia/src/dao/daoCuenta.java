@@ -336,6 +336,7 @@ group by length(ci.codigo)
         }
     }
     public List<CuentaBalanza> listarCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo) throws SQLException {
+        
         var sql = 
 """
 with cte_balanza_comprobacion as (

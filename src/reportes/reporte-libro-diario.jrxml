@@ -106,10 +106,10 @@ and pd.id_partida =   $P{param_id_partida}]]>
 	<parameter name="param_usuario" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT p.*,
-	 cast(CASE 
-WHEN 1 THEN "Operativa"
-WHEN 2 THEN "De ajuste"
-WHEN 3 THEN "De cierre"
+	 cast(CASE p.id_tipo_partida
+WHEN 0 THEN "Operativa"
+WHEN 1 THEN "De ajuste"
+WHEN 2 THEN "De cierre"
 ELSE "ERROR"
 END as text)
 	 AS tipo_partida

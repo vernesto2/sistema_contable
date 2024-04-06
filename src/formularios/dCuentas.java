@@ -169,7 +169,6 @@ public class dCuentas extends javax.swing.JDialog {
         cmbEsRestada = new RSMaterialComponent.RSComboBoxMaterial();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
         setModal(true);
         setResizable(false);
 
