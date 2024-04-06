@@ -560,7 +560,11 @@ public class vPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnBalanzaComprobacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanzaComprobacionActionPerformed
-        
+        this.seleccionarBoton();
+        if (!this.btnBalanzaComprobacion.isSelected()) {
+            this.btnBalanzaComprobacion.setSelected(true);
+            new CambiaPanel(pnl, new vBalanzaComprobacion());
+        }
     }//GEN-LAST:event_btnBalanzaComprobacionActionPerformed
 
     private void btnBalanceGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanceGeneralActionPerformed

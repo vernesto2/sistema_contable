@@ -62,12 +62,14 @@ public class vLibroMayor extends javax.swing.JPanel {
 
         btnVerLibroMayor = new RSMaterialComponent.RSButtonShapeIcon();
         btnBalanza = new RSMaterialComponent.RSButtonShapeIcon();
+        btnVerLibroMayor1 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnVerLibroMayor2 = new RSMaterialComponent.RSButtonShapeIcon();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         btnVerLibroMayor.setBackground(new java.awt.Color(251, 205, 6));
-        btnVerLibroMayor.setText("Ver libro mayor");
+        btnVerLibroMayor.setText("Ver libro mayor partidas operativas");
         btnVerLibroMayor.setBackgroundHover(new java.awt.Color(251, 174, 6));
         btnVerLibroMayor.setForegroundHover(new java.awt.Color(0, 0, 0));
         btnVerLibroMayor.setForegroundIcon(new java.awt.Color(0, 0, 0));
@@ -94,25 +96,59 @@ public class vLibroMayor extends javax.swing.JPanel {
             }
         });
 
+        btnVerLibroMayor1.setBackground(new java.awt.Color(251, 205, 6));
+        btnVerLibroMayor1.setText("Ver libro mayor partidas de ajuste");
+        btnVerLibroMayor1.setBackgroundHover(new java.awt.Color(251, 174, 6));
+        btnVerLibroMayor1.setForegroundHover(new java.awt.Color(0, 0, 0));
+        btnVerLibroMayor1.setForegroundIcon(new java.awt.Color(0, 0, 0));
+        btnVerLibroMayor1.setForegroundIconHover(new java.awt.Color(0, 0, 0));
+        btnVerLibroMayor1.setForegroundText(new java.awt.Color(0, 0, 0));
+        btnVerLibroMayor1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.BOOK);
+        btnVerLibroMayor1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerLibroMayor1ActionPerformed(evt);
+            }
+        });
+
+        btnVerLibroMayor2.setBackground(new java.awt.Color(251, 205, 6));
+        btnVerLibroMayor2.setText("Ver libro mayor partidas de cierre");
+        btnVerLibroMayor2.setBackgroundHover(new java.awt.Color(251, 174, 6));
+        btnVerLibroMayor2.setForegroundHover(new java.awt.Color(0, 0, 0));
+        btnVerLibroMayor2.setForegroundIcon(new java.awt.Color(0, 0, 0));
+        btnVerLibroMayor2.setForegroundIconHover(new java.awt.Color(0, 0, 0));
+        btnVerLibroMayor2.setForegroundText(new java.awt.Color(0, 0, 0));
+        btnVerLibroMayor2.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.BOOK);
+        btnVerLibroMayor2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerLibroMayor2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVerLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBalanza, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(390, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVerLibroMayor, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                    .addComponent(btnVerLibroMayor1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBalanza, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerLibroMayor2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(657, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
+                .addContainerGap()
                 .addComponent(btnVerLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVerLibroMayor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(btnVerLibroMayor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnBalanza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(415, Short.MAX_VALUE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,6 +159,14 @@ public class vLibroMayor extends javax.swing.JPanel {
     private void btnBalanzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanzaActionPerformed
         verBalanzaComprobacion();
     }//GEN-LAST:event_btnBalanzaActionPerformed
+
+    private void btnVerLibroMayor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerLibroMayor1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerLibroMayor1ActionPerformed
+
+    private void btnVerLibroMayor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerLibroMayor2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerLibroMayor2ActionPerformed
     
     public void verBalanzaComprobacion() {
         try (
@@ -229,5 +273,7 @@ public class vLibroMayor extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnBalanza;
     private RSMaterialComponent.RSButtonShapeIcon btnVerLibroMayor;
+    private RSMaterialComponent.RSButtonShapeIcon btnVerLibroMayor1;
+    private RSMaterialComponent.RSButtonShapeIcon btnVerLibroMayor2;
     // End of variables declaration//GEN-END:variables
 }
