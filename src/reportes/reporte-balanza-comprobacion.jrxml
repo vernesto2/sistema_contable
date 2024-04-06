@@ -59,7 +59,9 @@
 	<parameter name="param_nombre_completo" class="java.lang.String"/>
 	<parameter name="param_usuario" class="java.lang.String"/>
 	<parameter name="param_titulo_ciclo_contable" class="java.lang.String"/>
-	<parameter name="param_cuentas_balanza" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" nestedType="reportes.CuentaBalanza"/>
+	<parameter name="param_cuentas_balanza" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" nestedType="reportes.CuentaBalanza">
+		<defaultValueExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ( dao.daoCuenta.generarCuentasBalanzaComprobacion() )]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
