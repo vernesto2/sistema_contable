@@ -159,6 +159,7 @@ where
 c.eliminado = false
 and pd.eliminado = false
 and p.eliminado = false
+and p.id_ciclo =  $P{param_id_ciclo} 
 and id_tipo_catalogo =  $P{param_id_tipo_catalogo} 
 and length(c.codigo) =  $P{param_tamano_codigo}
 group by 
