@@ -337,12 +337,12 @@ group by length(ci.codigo)
         var sql = 
 """
 with cte_balanza_comprobacion as (
-  select c.id, c.codigo, c.nombre, 
+  select c.id, pd.folio_mayor, c.codigo, c.nombre, 
   case 
-	when tipo_saldo = 'D' and es_restado = false then debe - haber
-	when tipo_saldo = 'D' and es_restado = true then haber - debe
-	when tipo_saldo = 'A' and es_restado = false then haber - debe
-	when tipo_saldo = 'A' and es_restado = true then debe - haber
+  when tipo_saldo = 'D' and es_restado = false then debe - haber
+  when tipo_saldo = 'D' and es_restado = true then haber - debe
+  when tipo_saldo = 'A' and es_restado = false then haber - debe
+  when tipo_saldo = 'A' and es_restado = true then debe - haber
   else 0 
   end
   as saldo_inicial, 
@@ -356,30 +356,36 @@ with cte_balanza_comprobacion as (
   and p.id_ciclo = ?
   and c.id_tipo_catalogo = ?
 )
-select cbc.*, saldo_calculado.total_debe, saldo_calculado.total_haber, saldo_calculado.saldo_final 
+select cbc.*, saldo_calculado.saldo_deudor, saldo_calculado.saldo_acreedor
 from cte_balanza_comprobacion cbc 
 inner join (
-	select c.id, sum(pd.debe) as total_debe, sum(pd.haber) as total_haber, 
-	  sum (
-  case 
-	when tipo_saldo = 'D' and es_restado = false then debe - haber
-	when tipo_saldo = 'D' and es_restado = true then haber - debe
-	when tipo_saldo = 'A' and es_restado = false then haber - debe
-	when tipo_saldo = 'A' and es_restado = true then debe - haber
+  select c.id, 
+  sum(
+      case
+    when tipo_saldo = 'D' and es_restado = false then debe - haber
+    when tipo_saldo = 'D' and es_restado = true then haber - debe 
 	else 0
-end 
-  ) as saldo_final
-	from cuenta c 
-	  inner join partida_detalle pd on pd.id_cuenta = c.id
-	  inner join partida p on pd.id_partida = p.id
-	  where c.eliminado = false 
-	  and p.eliminado = false
-	  and pd.eliminado = false
-	  and p.id_ciclo = ?
-	  and c.id_tipo_catalogo = ?
-	group by c.id, c.codigo, c.nombre
+    end
+  ) as saldo_deudor, 
+  sum(
+      case
+    when tipo_saldo = 'A' and es_restado = false then haber - debe
+    when tipo_saldo = 'A' and es_restado = true then debe - haber
+	else 0
+      end
+  ) as saldo_acreedor
+  from cuenta c 
+    inner join partida_detalle pd on pd.id_cuenta = c.id
+    inner join partida p on pd.id_partida = p.id
+    where c.eliminado = false 
+    and p.eliminado = false
+    and pd.eliminado = false
+    and p.id_ciclo = ?
+    and c.id_tipo_catalogo = ?
+  group by c.id, c.codigo, c.nombre
 ) as saldo_calculado on saldo_calculado.id = cbc.id
 where row_number = 1
+order by folio_mayor
 """;
         List<CuentaBalanza> lista = new ArrayList<CuentaBalanza>();
         try (
@@ -396,12 +402,15 @@ where row_number = 1
             while (rs.next()) {
                 CuentaBalanza item = new CuentaBalanza();
                 item.setId(rs.getObject("id", Integer.class));
+                item.setFolioMayor(rs.getObject("folio_mayor", Integer.class));
                 item.setCodigo(rs.getObject("codigo", String.class));
                 item.setNombre(rs.getObject("nombre", String.class));
-                item.setSaldoInicial(rs.getObject("saldo_inicial", Double.class));
-                item.setTotalDebe(rs.getObject("total_debe", Double.class));
-                item.setTotalHaber(rs.getObject("total_haber", Double.class));
-                item.setSaldoFinal(rs.getObject("saldo_final", Double.class));
+                Double val;
+                val = rs.getObject("saldo_deudor", Double.class);
+                item.setSaldoDeudor(val);
+                val = rs.getObject("saldo_acreedor", Double.class);
+                item.setSaldoAcreedor(val);
+                
                 lista.add(item);
             }
             
@@ -420,21 +429,19 @@ where row_number = 1
         cuenta0.setId(1);
         cuenta0.setNombre("Efectivo y Equivalente de Efectivo");
         cuenta0.setCodigo("1010");
-        cuenta0.setSaldoInicial(new Double(100));
-        cuenta0.setTotalDebe(new Double(300));
-        cuenta0.setTotalHaber(new Double(150));
-        cuenta0.setSaldoFinal(new Double(250));
-        
+        cuenta0.setFolioMayor(1);
+        cuenta0.setSaldoDeudor(new Double(300));
+        cuenta0.setSaldoAcreedor(new Double(150));
+
         coleccion.add(cuenta0);
         
         CuentaBalanza cuenta1 = new CuentaBalanza();
         cuenta1.setId(2);
         cuenta1.setNombre("Deudas por pagar");
         cuenta1.setCodigo("2010");
-        cuenta1.setSaldoInicial(new Double(1));
-        cuenta1.setTotalDebe(new Double(2));
-        cuenta1.setTotalHaber(new Double(3));
-        cuenta1.setSaldoFinal(new Double(4));
+        cuenta1.setFolioMayor(2);
+        cuenta1.setSaldoDeudor(new Double(300));
+        cuenta1.setSaldoAcreedor(new Double(150));
         
         coleccion.add(cuenta1);
         
@@ -442,10 +449,9 @@ where row_number = 1
         cuenta2.setId(3);
         cuenta2.setNombre("Ventas");
         cuenta2.setCodigo("3010");
-        cuenta2.setSaldoInicial(new Double(100));
-        cuenta2.setTotalDebe(new Double(300));
-        cuenta2.setTotalHaber(new Double(150));
-        cuenta2.setSaldoFinal(new Double(250));
+        cuenta2.setFolioMayor(3);
+        cuenta2.setSaldoDeudor(new Double(300));
+        cuenta2.setSaldoAcreedor(new Double(150));
         
         coleccion.add(cuenta2);
         
@@ -453,10 +459,9 @@ where row_number = 1
         cuenta3.setId(4);
         cuenta3.setNombre("Otras cuentas por cobrar");
         cuenta3.setCodigo("4010");
-        cuenta3.setSaldoInicial(new Double(100));
-        cuenta3.setTotalDebe(new Double(300));
-        cuenta3.setTotalHaber(new Double(150));
-        cuenta3.setSaldoFinal(new Double(250));
+        cuenta3.setFolioMayor(4);
+        cuenta3.setSaldoDeudor(new Double(300));
+        cuenta3.setSaldoAcreedor(new Double(150));
         
         coleccion.add(cuenta3);
         
