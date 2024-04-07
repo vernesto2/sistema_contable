@@ -15,11 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Vector;
 import modelo.Cuenta;
-import modelo.TipoCatalogo;
 import reportes.CuentaBalanza;
-import utils.constantes.Constantes;
 
 /**
  *

@@ -8,6 +8,7 @@ import dto.dtoCuenta;
 import dto.dtoLista;
 import formularios.dCicloContable;
 import formularios.dCuentas;
+import formularios.dFormula;
 import formularios.dTipoCatalogo;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -162,7 +163,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         <------------------------------------------------------------------------------->  */  
     public void setModelTipoCatalogo() {
 //        String[] cabecera = {"Tipo", "Color", "Libro diario", "Libro mayor", "Balanza comprobacion", "Estado resultado", "Balance general", "Flujo de efectivo", "Cambios en patrimonio", "Editar", "Eliminar"};
-        String[] cabecera = {"Tipo", "Editar", "Eliminar"};
+        String[] cabecera = {"Tipo", "Editar", "Eliminar", "Formula"};
         dtm.setColumnIdentifiers(cabecera);
         tblTipoCatalogo.setModel(dtm);
         tblTipoCatalogo.setDefaultRenderer(Object.class, new Render());
@@ -173,12 +174,16 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         // definimos los botones a crear
         RSMaterialComponent.RSButtonCustomIcon btn1 = new RSMaterialComponent.RSButtonCustomIcon();
         RSMaterialComponent.RSButtonCustomIcon btn2 = new RSMaterialComponent.RSButtonCustomIcon();
+        RSMaterialComponent.RSButtonCustomIcon btn3 = new RSMaterialComponent.RSButtonCustomIcon();
         btn1.setIcons(ValoresEnum.ICONS.EDIT);
         Cursor cur = new Cursor(Cursor.HAND_CURSOR);
         btn1.setCursor(cur);
         btn2.setIcons(ValoresEnum.ICONS.DELETE);
         btn2.setColorIcon(Color.RED);
         btn2.setCursor(cur);
+        btn3.setIcons(ValoresEnum.ICONS.LIST);
+        btn3.setColorIcon(Color.GREEN);
+        btn3.setCursor(cur);
         for (TipoCatalogo tipo : listaTiposCatalogos) {
             datos[0] = tipo.getTipo();
 //            datos[1] = "";
@@ -191,6 +196,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
 //            datos[8] = tipo.getCambios_patrimonio()== 1 ? "SI" : "NO";
             datos[1] = btn1;
             datos[2] = btn2;
+            datos[3] = btn3;
             dtm.addRow(datos);
         }
         tblTipoCatalogo.setModel(dtm);
@@ -970,6 +976,9 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
                 }
             }
+        } else if (accion == 3) {
+            dFormula d = new dFormula(null, true, this.listaTiposCatalogos.get(row), sesion);
+            d.setVisible(true);
         }
     }//GEN-LAST:event_tblTipoCatalogoMouseClicked
     

@@ -4,22 +4,17 @@
  */
 package servicios;
 
-import conexion.Conexion;
 import java.sql.Statement;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.Usuario;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;

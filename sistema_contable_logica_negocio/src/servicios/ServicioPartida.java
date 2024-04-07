@@ -5,10 +5,8 @@
 package servicios;
 
 import conexion.Conexion;
-import dao.daoCuenta;
 import dao.daoPartida;
 import dao.daoPartidaDetalle;
-import modelo.Cuenta;
 import modelo.Partida;
 import utils.constantes.RespuestaGeneral;
 
