@@ -10,23 +10,23 @@ package reportes;
  */
 public class CuentaBalanza {
     private Integer id;
+    private Integer folioMayor;
     private String nombre;
     private String codigo;
-    private Double saldoInicial;
-    private Double totalDebe;
-    private Double totalHaber;
-    private Double saldoFinal;
+    private Double saldoDeudor;
+    private Double saldoAcreedor;
+    
     public CuentaBalanza() {
         
     }
-    public CuentaBalanza(Integer id, String nombre, String codigo, Double saldoInicial, Double totalDebe, Double totalHaber, Double saldoFinal) {
+
+    public CuentaBalanza(Integer id, Integer folioMayor, String nombre, String codigo, Double saldoDeudor, Double saldoAcreedor) {
         this.id = id;
+        this.folioMayor = folioMayor;
         this.nombre = nombre;
         this.codigo = codigo;
-        this.saldoInicial = saldoInicial;
-        this.totalDebe = totalDebe;
-        this.totalHaber = totalHaber;
-        this.saldoFinal = saldoFinal;
+        this.saldoDeudor = saldoDeudor;
+        this.saldoAcreedor = saldoAcreedor;
     }
 
     public Integer getId() {
@@ -35,6 +35,14 @@ public class CuentaBalanza {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getFolioMayor() {
+        return folioMayor;
+    }
+
+    public void setFolioMayor(Integer folioMayor) {
+        this.folioMayor = folioMayor;
     }
 
     public String getNombre() {
@@ -53,37 +61,19 @@ public class CuentaBalanza {
         this.codigo = codigo;
     }
 
-    public Double getSaldoInicial() {
-        return saldoInicial;
+    public Double getSaldoDeudor() {
+        return saldoDeudor;
     }
 
-    public void setSaldoInicial(Double saldoInicial) {
-        this.saldoInicial = saldoInicial;
+    public void setSaldoDeudor(Double saldoDeudor) {
+        this.saldoDeudor = saldoDeudor;
     }
 
-    public Double getTotalDebe() {
-        return totalDebe;
+    public Double getSaldoAcreedor() {
+        return saldoAcreedor;
     }
 
-    public void setTotalDebe(Double totalDebe) {
-        this.totalDebe = totalDebe;
+    public void setSaldoAcreedor(Double saldoAcreedor) {
+        this.saldoAcreedor = saldoAcreedor;
     }
-
-    public Double getTotalHaber() {
-        return totalHaber;
-    }
-
-    public void setTotalHaber(Double totalHaber) {
-        this.totalHaber = totalHaber;
-    }
-
-    public Double getSaldoFinal() {
-        return saldoFinal;
-    }
-
-    public void setSaldoFinal(Double saldoFinal) {
-        this.saldoFinal = saldoFinal;
-    }
-
-    
 }

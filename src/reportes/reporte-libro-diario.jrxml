@@ -38,6 +38,7 @@
 			<![CDATA[select 
 	pd.id, 
 	pd.id_partida as id_partida, 
+	c.codigo, 
 	c.nombre as cuenta, 
 	folio_mayor, 
 	parcial, 
@@ -50,17 +51,22 @@ inner join cuenta c on c.id = pd.id_cuenta
 where pd.eliminado = false and c.eliminado = false
 and pd.id_partida =   $P{param_id_partida}]]>
 		</queryString>
-		<field name="id" class="java.lang.Object">
+		<field name="id" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.name" value="id"/>
 			<property name="com.jaspersoft.studio.field.label" value="id"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="id_partida" class="java.lang.Object">
+		<field name="id_partida" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.name" value="id_partida"/>
 			<property name="com.jaspersoft.studio.field.label" value="id_partida"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<field name="cuenta" class="java.lang.Object">
+		<field name="codigo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="codigo"/>
+			<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="cuenta"/>
+		</field>
+		<field name="cuenta" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.name" value="cuenta"/>
 			<property name="com.jaspersoft.studio.field.label" value="cuenta"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="cuenta"/>
@@ -83,11 +89,6 @@ and pd.id_partida =   $P{param_id_partida}]]>
 		<field name="haber" class="java.lang.Double">
 			<property name="com.jaspersoft.studio.field.name" value="haber"/>
 			<property name="com.jaspersoft.studio.field.label" value="haber"/>
-			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
-		</field>
-		<field name="tipo_cargo_abono" class="java.lang.Object">
-			<property name="com.jaspersoft.studio.field.name" value="tipo_cargo_abono"/>
-			<property name="com.jaspersoft.studio.field.label" value="tipo_cargo_abono"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
 		<variable name="var_total_debe" class="java.lang.Double" calculation="Sum">
@@ -191,7 +192,7 @@ WHERE
 	<detail>
 		<band height="176" splitType="Stretch">
 			<textField>
-				<reportElement x="416" y="60" width="52" height="30" uuid="bbf35d5a-4c22-4ca3-90ff-9dd9831a71ac">
+				<reportElement x="408" y="50" width="52" height="20" uuid="bbf35d5a-4c22-4ca3-90ff-9dd9831a71ac">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c96d99fb-9ac5-4905-8683-6667b616812a"/>
 				</reportElement>
 				<textFieldExpression><![CDATA["Id: " + $F{id}]]></textFieldExpression>
@@ -209,7 +210,7 @@ WHERE
 				<textFieldExpression><![CDATA["Partida #" +  $F{num_partida}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="468" y="60" width="92" height="30" uuid="4a95dce4-e3e4-494c-ad9c-21bb10edede0">
+				<reportElement x="460" y="50" width="92" height="20" uuid="4a95dce4-e3e4-494c-ad9c-21bb10edede0">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62785bc7-d8c1-4b2a-a85d-50ff8656d03a"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
@@ -228,11 +229,29 @@ WHERE
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="320" uuid="992bb4e6-9fcf-43b6-b537-8e76bdb8315e">
+					<jr:column width="60" uuid="75d84b2f-4b9d-40ef-a5a6-935d70b33f87">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="320" height="30" uuid="a8b735a8-60f5-4031-ac65-e6b48ce782b3"/>
+								<reportElement x="0" y="0" width="60" height="30" uuid="05358928-54d9-4619-9083-f7ddcb7d1e7e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Codigo]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="30" uuid="271871ee-3a73-45a8-9e5d-a4321fba4e79"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="210" uuid="992bb4e6-9fcf-43b6-b537-8e76bdb8315e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="210" height="30" uuid="a8b735a8-60f5-4031-ac65-e6b48ce782b3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None"/>
 								<text><![CDATA[Cuenta]]></text>
 							</staticText>
@@ -240,14 +259,14 @@ WHERE
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="320" height="30" uuid="75071f7e-8c85-4c66-808b-958569e8b1e8"/>
+								<reportElement x="0" y="0" width="210" height="30" uuid="75071f7e-8c85-4c66-808b-958569e8b1e8"/>
 								<textElement verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{cuenta}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="40" uuid="50c0f341-e231-4566-a77c-42d98efe4091">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="40" height="30" uuid="aed52935-cf86-4df0-a91b-bf3592254c32"/>
@@ -264,11 +283,11 @@ WHERE
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="34464324-9f78-4fb2-982d-1ea8fbd25b74">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+					<jr:column width="80" uuid="34464324-9f78-4fb2-982d-1ea8fbd25b74">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="cc3fa60b-9a52-42e7-800e-b38bbbdcf7b4"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="cc3fa60b-9a52-42e7-800e-b38bbbdcf7b4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None"/>
 								<text><![CDATA[Parcial]]></text>
 							</staticText>
@@ -276,55 +295,55 @@ WHERE
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="70" height="30" uuid="f097642b-9a5c-417c-9ecc-589ee68fdb3b"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="f097642b-9a5c-417c-9ecc-589ee68fdb3b"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{parcial} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{parcial} )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="6b08ff6a-24ae-4607-8bdb-7588662f9ad4">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+					<jr:column width="90" uuid="6b08ff6a-24ae-4607-8bdb-7588662f9ad4">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="70" height="30" uuid="b06a6fa8-1790-44bb-9fba-3cf67b07af68"/>
+								<reportElement x="0" y="0" width="90" height="30" uuid="b06a6fa8-1790-44bb-9fba-3cf67b07af68"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None"/>
 								<text><![CDATA[Debe]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="70" height="30" uuid="c99795c4-9c54-4f50-819b-624478f8c467"/>
+								<reportElement x="0" y="0" width="90" height="30" uuid="c99795c4-9c54-4f50-819b-624478f8c467"/>
 								<textElement textAlignment="Right"/>
 								<textFieldExpression><![CDATA[NumberFormat.getCurrencyInstance(Locale.US).format($V{var_total_debe})]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="70" height="30" uuid="d804df37-0b72-4f97-a465-c883c1c79714"/>
+								<reportElement x="0" y="0" width="90" height="30" uuid="d804df37-0b72-4f97-a465-c883c1c79714"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{debe} == 0 ? "" : NumberFormat.getCurrencyInstance(Locale.US).format($F{debe})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="60" uuid="f12471eb-c55f-4718-aa74-d278be1948e1">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+					<jr:column width="80" uuid="f12471eb-c55f-4718-aa74-d278be1948e1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="30" uuid="bd7d262b-6699-458d-bf8c-6063c0490446"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="bd7d262b-6699-458d-bf8c-6063c0490446"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None"/>
 								<text><![CDATA[Haber]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="60" height="30" uuid="0d6ae371-fb55-4792-a7fc-b040619d5702"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="0d6ae371-fb55-4792-a7fc-b040619d5702"/>
 								<textElement textAlignment="Right"/>
 								<textFieldExpression><![CDATA[NumberFormat.getCurrencyInstance(Locale.US).format( $V{var_total_haber} )]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="60" height="30" uuid="bafa01cb-57cf-4eb0-b5d5-d5dc7b115e03"/>
+								<reportElement x="0" y="0" width="80" height="30" uuid="bafa01cb-57cf-4eb0-b5d5-d5dc7b115e03"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{haber} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format( $F{haber} )]]></textFieldExpression>
 							</textField>
