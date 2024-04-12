@@ -55,7 +55,7 @@ public class daoFormula {
                 formulaAux.setSigno(rs.getString("signo"));
                 formulaAux.setNombre(rs.getString("nombre"));
                 formulaAux.setTipo_cuenta_especial(rs.getInt("tipo_cuenta_especial"));
-                formulaAux.setPosicion(rs.getInt("posicion"));
+                formulaAux.setPosicion(rs.getDouble("posicion"));
                 formulaAux.setId_formula(rs.getInt("id_formula"));
                 formulaAux.setTipo_formula(rs.getString("tipo_formula"));
                 formulaAux.setEliminado(rs.getInt("eliminado"));
@@ -130,7 +130,7 @@ public class daoFormula {
                 formulaAux.setSigno(rs.getString("signo"));
                 formulaAux.setNombre(rs.getString("nombre"));
                 formulaAux.setTipo_cuenta_especial(rs.getInt("tipo_cuenta_especial"));
-                formulaAux.setPosicion(rs.getInt("posicion"));
+                formulaAux.setPosicion(rs.getDouble("posicion"));
                 formulaAux.setId_formula(rs.getInt("id_formula"));
                 formulaAux.setTipo_formula(rs.getString("tipo_formula"));
                 formulaAux.setEliminado(rs.getInt("eliminado"));
@@ -151,7 +151,7 @@ public class daoFormula {
     public RespuestaGeneral insertar(Formula formula) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
-                  INSERT INTO cuenta     
+                  INSERT INTO formula     
                   VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
@@ -160,7 +160,7 @@ public class daoFormula {
             ps.setString(3, formula.getSigno());
             ps.setString(4, formula.getNombre());
             ps.setInt(5, formula.getTipo_cuenta_especial());
-            ps.setInt(6, formula.getPosicion());
+            ps.setDouble(6, formula.getPosicion());
             ps.setInt(7, formula.getId_formula());
             ps.setString(8, formula.getTipo_formula());
             ps.setInt(9, formula.getEliminado());
@@ -184,7 +184,7 @@ public class daoFormula {
         RespuestaGeneral rg = new RespuestaGeneral();
         ResultSet rs = null;
         var sql = """
-                    UPDATE cuenta SET 
+                    UPDATE formula SET 
                         id_tipo_catalogo=?,
                         id_cuenta=?,
                         signo=?,
@@ -201,7 +201,7 @@ public class daoFormula {
             ps.setString(3, formula.getSigno());
             ps.setString(4, formula.getNombre());
             ps.setInt(5, formula.getTipo_cuenta_especial());
-            ps.setInt(6, formula.getPosicion());
+            ps.setDouble(6, formula.getPosicion());
             ps.setInt(7, formula.getId_formula());
             ps.setString(8, formula.getTipo_formula());
             ps.setInt(9, formula.getId());

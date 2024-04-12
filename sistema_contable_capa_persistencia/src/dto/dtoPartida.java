@@ -15,8 +15,8 @@ public class dtoPartida extends Partida{
     
     double monto;
 
-    public dtoPartida(int id, int id_ciclo, int id_tipo_partida, int num_partida, String comentario, Date fecha, boolean eliminado, float monto) {
-        super(id, id_ciclo, id_tipo_partida, num_partida, comentario, fecha, eliminado);
+    public dtoPartida(int id, int id_ciclo, int id_tipo_partida, int num_partida, String comentario, Date fecha, boolean eliminado, float monto, int folio) {
+        super(id, id_ciclo, id_tipo_partida, num_partida, comentario, fecha, eliminado, folio);
         this.monto = monto;
     }
 

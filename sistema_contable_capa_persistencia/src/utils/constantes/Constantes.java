@@ -152,4 +152,44 @@ public class Constantes {
     public static boolean validarPorcentaje(int key) {
         return (key >= 48 && key <= 57) || key == 46;
     }
+    
+    // tipos de Formulas
+    public static ArrayList<dtoLista> listaTiposFormulaEstadoResultado() {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        dtoLista op1 = new dtoLista("Estado de Resultado", "Estado de Resultado");
+        dtoLista op2 = new dtoLista("Estado de Costo de Producción", "Estado de Costo de Producción");
+        dtoLista op3 = new dtoLista("Estado de Costo de Venta", "Estado de Costo de Venta");
+        lista.add(op1);
+        lista.add(op2);
+        lista.add(op3);
+        return lista;
+    }
+    
+    // tipos de Formulas
+    public static ArrayList<dtoLista> listaSignos() {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        dtoLista op1 = new dtoLista("(+)", "(+)");
+        dtoLista op2 = new dtoLista("(-)", "(-)");
+        dtoLista op3 = new dtoLista("(=)", "(=)");
+        lista.add(op1);
+        lista.add(op2);
+        lista.add(op3);
+        return lista;
+    }
+    
+    // tipos de Formulas
+    public static ArrayList<dtoLista> listaTiposCampoEspecialEstadoResultado() {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        dtoLista op1 = new dtoLista("0", "Ninguno");
+        dtoLista op2 = new dtoLista("1", "Reserva Legal");
+        dtoLista op3 = new dtoLista("2", "Impuesto Sobre Renta");
+        dtoLista op4 = new dtoLista("3", "Saldo Inicial");
+        dtoLista op5 = new dtoLista("4", "Valor Ingresado");
+        lista.add(op1);
+        lista.add(op2);
+        lista.add(op3);
+        lista.add(op4);
+        lista.add(op5);
+        return lista;
+    }
 }

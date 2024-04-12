@@ -76,6 +76,7 @@ public class daoPartida {
                 }
                 partida.setFecha(fechaPartida);
                 partida.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
+                partida.setFolio(rs.getInt("folio"));
                 lista.add(partida);
             }
             
@@ -144,6 +145,7 @@ public class daoPartida {
                 }
                 partida.setFecha(fechaPartida);
                 partida.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
+                partida.setFolio(rs.getInt("folio"));
                 lista.add(partida);
             }
             
@@ -160,7 +162,7 @@ public class daoPartida {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
                   INSERT INTO partida     
-                  VALUES(null, ?, ?, ?, ?, ?, ?)
+                  VALUES(null, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, partida.getId_ciclo());
@@ -169,6 +171,7 @@ public class daoPartida {
             ps.setString(4, partida.getComentario());
             ps.setString(5, sdfString.format(partida.getFecha()));
             ps.setInt(6, 0);
+            ps.setInt(7, partida.getFolio());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             id = -1;
@@ -203,7 +206,8 @@ public class daoPartida {
                         id_tipo_partida=?,
                         num_partida=?,
                         comentario=?,
-                        fecha=?
+                        fecha=?,
+                        folio=?
                     WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
@@ -212,7 +216,8 @@ public class daoPartida {
             ps.setInt(3, partida.getNum_partida());
             ps.setString(4, partida.getComentario());
             ps.setString(5, sdfString.format(partida.getFecha()));
-            ps.setInt(6, partida.getId());
+            ps.setInt(6, partida.getFolio());
+            ps.setInt(7, partida.getId());
             ps.executeUpdate();
             
             // procedemos a guardar o actualizar los detalles de partida

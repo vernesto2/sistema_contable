@@ -20,11 +20,12 @@ public class Partida {
     String comentario;
     Date fecha;
     boolean eliminado;
+    int folio;
     
     ArrayList<PartidaDetalle> listaPartidaDetalles;
     ArrayList<PartidaDetalle> listaPartidaDetallesEliminados;
 
-    public Partida(int id, int id_ciclo, int id_tipo_partida, int num_partida, String comentario, Date fecha, boolean eliminado) {
+    public Partida(int id, int id_ciclo, int id_tipo_partida, int num_partida, String comentario, Date fecha, boolean eliminado, int folio) {
         this.id = id;
         this.id_ciclo = id_ciclo;
         this.id_tipo_partida = id_tipo_partida;
@@ -32,6 +33,7 @@ public class Partida {
         this.comentario = comentario;
         this.fecha = fecha;
         this.eliminado = eliminado;
+        this.folio = folio;
     }
     
     public Partida() {
@@ -42,6 +44,7 @@ public class Partida {
         this.comentario = "";
         this.fecha = new Date();
         this.eliminado = false;
+        this.folio = 0;
         
         this.listaPartidaDetalles = new ArrayList<>();
         this.listaPartidaDetallesEliminados = new ArrayList<>();
@@ -101,6 +104,14 @@ public class Partida {
 
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
+    }
+
+    public int getFolio() {
+        return folio;
+    }
+
+    public void setFolio(int folio) {
+        this.folio = folio;
     }
 
     public ArrayList<PartidaDetalle> getListaPartidaDetalles() {

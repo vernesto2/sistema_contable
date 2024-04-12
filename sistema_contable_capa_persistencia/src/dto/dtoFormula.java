@@ -27,12 +27,12 @@ public class dtoFormula implements Comparator<dtoFormula>{
         Formula f2 = dto2.formula;
 
         if (f1.getPosicion() != f2.getPosicion()) {
-            return Integer.compare(f1.getPosicion(), f2.getPosicion());
+            return Double.compare(f1.getPosicion(), f2.getPosicion());
         } else if (f1.getId_formula() != -1 && f1.getId_formula() == f2.getId_formula()) {
             // Si los dos tienen el mismo id_formula, entonces f1 debería estar debajo de f2
             return 1;
         } else {
-            return Integer.compare(f1.getId(), f2.getId());
+            return Double.compare(f1.getId(), f2.getId());
         }
     }
 

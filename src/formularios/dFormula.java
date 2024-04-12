@@ -11,13 +11,14 @@ import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.Formula;
 import modelo.TipoCatalogo;
 import rojeru_san.efectos.ValoresEnum;
 import servicios.ServicioFormula;
 import sesion.Sesion;
 import utils.Render;
+import utils.UtileriaVista;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -66,7 +67,7 @@ public class dFormula extends javax.swing.JDialog {
     }
 
     public void setModelFormula() {
-        String[] cabecera = {"Posición", "Signo", "Nombre","Tipo Formula","Formula Padre","Editar","Eliminar"};
+        String[] cabecera = {"Posición", "Signo", "Nombre","Tipo Formula","Formula Padre","Editar","Eliminar","Sub-Formula"};
         dtm.setColumnIdentifiers(cabecera);
         tblFormula.setModel(dtm);
         Render rr = new Render();
@@ -77,12 +78,16 @@ public class dFormula extends javax.swing.JDialog {
     public void setDatosFormula() {
         RSMaterialComponent.RSButtonCustomIcon btn1 = new RSMaterialComponent.RSButtonCustomIcon();
         RSMaterialComponent.RSButtonCustomIcon btn2 = new RSMaterialComponent.RSButtonCustomIcon();
+        RSMaterialComponent.RSButtonCustomIcon btn3 = new RSMaterialComponent.RSButtonCustomIcon();
         btn1.setIcons(ValoresEnum.ICONS.EDIT);
         Cursor cur = new Cursor(Cursor.HAND_CURSOR);
         btn1.setCursor(cur);
         btn2.setIcons(ValoresEnum.ICONS.DELETE);
         btn2.setColorIcon(Color.RED);
         btn2.setCursor(cur);
+        btn3.setIcons(ValoresEnum.ICONS.PLUS_ONE);
+        btn3.setColorIcon(Color.green);
+        btn3.setCursor(cur);
         this.limiparTablaFormula();
         Object[] datos = new Object[dtm.getColumnCount()];
         // ordenamos el listado antes de mostrar
@@ -96,6 +101,7 @@ public class dFormula extends javax.swing.JDialog {
             datos[4] = detalle.getFormulaPadre().getNombre();
             datos[5] = btn1;
             datos[6] = btn2;
+            datos[7] = btn3;
             dtm.addRow(datos);
         }
         tblFormula.setModel(dtm);
@@ -107,6 +113,7 @@ public class dFormula extends javax.swing.JDialog {
         tblFormula.getColumnModel().getColumn(4).setPreferredWidth(300);
         tblFormula.getColumnModel().getColumn(5).setPreferredWidth(90);
         tblFormula.getColumnModel().getColumn(6).setPreferredWidth(90);
+        tblFormula.getColumnModel().getColumn(7).setPreferredWidth(90);
     }
     
     public void limiparTablaFormula() {
@@ -203,6 +210,11 @@ public class dFormula extends javax.swing.JDialog {
         btnAgregarDetallePartida.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnAgregarDetallePartida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ADD);
         btnAgregarDetallePartida.setSizeIcon(18.0F);
+        btnAgregarDetallePartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarDetallePartidaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Total de registros: ");
@@ -288,11 +300,40 @@ public class dFormula extends javax.swing.JDialog {
         int row = tblFormula.getSelectedRow();
         int column = tblFormula.getSelectedColumn();
         if (column == 5) {
-           
+            
+            dFormFormula d = new dFormFormula(null, true, sesion, this.listaFormula.get(row), this.tipoCatalogo, new dtoFormula());
+            d.setVisible(true);
+            // validamos si realizo alguna accion para actualizar el listado o no
+            if (d.isRealizoAccion()) {
+                JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
+                this.obtenerListaFormula();
+                this.setDatosFormula();
+            }
+            
         } else if (column == 6) {
             
+        } else if (column == 7) {
+            dFormFormula d = new dFormFormula(null, true, sesion, new dtoFormula(), this.tipoCatalogo, this.listaFormula.get(row));
+            d.setVisible(true);
+            // validamos si realizo alguna accion para actualizar el listado o no
+            if (d.isRealizoAccion()) {
+                JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
+                this.obtenerListaFormula();
+                this.setDatosFormula();
+            }
         }
     }//GEN-LAST:event_tblFormulaMouseClicked
+
+    private void btnAgregarDetallePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetallePartidaActionPerformed
+        dFormFormula d = new dFormFormula(null, true, sesion, new dtoFormula(), this.tipoCatalogo, new dtoFormula());
+        d.setVisible(true);
+        // validamos si realizo alguna accion para actualizar el listado o no
+        if (d.isRealizoAccion()) {
+            JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
+            this.obtenerListaFormula();
+            this.setDatosFormula();
+        }
+    }//GEN-LAST:event_btnAgregarDetallePartidaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnAgregarDetallePartida;
