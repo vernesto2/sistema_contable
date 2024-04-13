@@ -195,7 +195,7 @@ order by p.fecha asc]]>
 						<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
 					</textField>
 					<textField>
-						<reportElement x="70" y="0" width="250" height="18" uuid="72715efd-26af-4a99-82c1-c5eb655abf46"/>
+						<reportElement x="70" y="0" width="250" height="19" uuid="72715efd-26af-4a99-82c1-c5eb655abf46"/>
 						<box>
 							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -371,7 +371,7 @@ order by p.fecha asc]]>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="70" y="0" width="249" height="18" backcolor="#DBDBDB" uuid="39f4ec12-4af6-4e1b-9798-d56ece7db5a7"/>
+				<reportElement mode="Opaque" x="70" y="0" width="250" height="18" backcolor="#DBDBDB" uuid="39f4ec12-4af6-4e1b-9798-d56ece7db5a7"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -421,7 +421,7 @@ order by p.fecha asc]]>
 			<frame>
 				<reportElement x="0" y="0" width="560" height="19" uuid="581bc324-f001-4abe-8d96-22d1ec2637a6"/>
 				<textField>
-					<reportElement x="70" y="0" width="250" height="18" uuid="40df4896-7606-469b-bf1f-0516ea7799b0">
+					<reportElement x="70" y="0" width="250" height="19" uuid="40df4896-7606-469b-bf1f-0516ea7799b0">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="473e562a-da07-4e29-8569-bc892694b7f3"/>
 					</reportElement>
 					<box>
@@ -447,7 +447,7 @@ order by p.fecha asc]]>
 					<textFieldExpression><![CDATA[$F{parcial} == 0 ? "" : NumberFormat.getCurrencyInstance(Locale.US).format($F{parcial})]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="400" y="0" width="80" height="18" uuid="7be8e6d5-22fb-462d-8dc3-b3d52601d866">
+					<reportElement x="400" y="0" width="80" height="19" uuid="7be8e6d5-22fb-462d-8dc3-b3d52601d866">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3fe1a11f-dea4-4dbb-a97a-40832932ac75"/>
 					</reportElement>
 					<box>
@@ -460,7 +460,7 @@ order by p.fecha asc]]>
 					<textFieldExpression><![CDATA[$F{debe} == 0 ? "" : NumberFormat.getCurrencyInstance(Locale.US).format($F{debe})]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="480" y="2" width="80" height="16" uuid="224efbc4-3bc0-468d-bc27-3ea457f88579">
+					<reportElement x="480" y="0" width="80" height="18" uuid="224efbc4-3bc0-468d-bc27-3ea457f88579">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="edf319e3-2c95-4465-89b3-d1dada4daf75"/>
 					</reportElement>
 					<box>
@@ -500,7 +500,7 @@ order by p.fecha asc]]>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="70" y="0" width="249" height="18" backcolor="#DBDBDB" uuid="5ac2f0dc-e4de-40a2-b986-3b27f30f9127"/>
+				<reportElement mode="Opaque" x="70" y="0" width="250" height="18" backcolor="#DBDBDB" uuid="5ac2f0dc-e4de-40a2-b986-3b27f30f9127"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
