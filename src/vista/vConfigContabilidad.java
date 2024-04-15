@@ -282,7 +282,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             datos[1] = cuenta.getCodigo();
             datos[2] = cuenta.getEs_restado() == 0 ? "" : "R";
             datos[3] = cuenta.getNombre();
-            datos[4] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": "ACREEDOR";
+            datos[4] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": cuenta.getTipo_saldo().equals("A") ? "ACREEDOR" : "-";
             datos[5] = cuenta.getIngresos();
             datos[6] = cuenta.getEgresos();
             datos[7] = btn1;
