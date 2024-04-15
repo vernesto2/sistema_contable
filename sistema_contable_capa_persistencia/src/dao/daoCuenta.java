@@ -339,11 +339,9 @@ group by length(ci.codigo)
 with cte_balanza_comprobacion as (
   select c.id, pd.folio_mayor, c.codigo, c.nombre, 
   case 
-  when tipo_saldo = 'D' and es_restado = false then debe - haber
-  when tipo_saldo = 'D' and es_restado = true then haber - debe
-  when tipo_saldo = 'A' and es_restado = false then haber - debe
-  when tipo_saldo = 'A' and es_restado = true then debe - haber
-  else 0 
+    when tipo_saldo = 'D' then debe - haber
+    when tipo_saldo = 'A' then haber - debe
+    else 0 
   end
   as saldo_inicial, 
   row_number() over (PARTITION by c.id order by p.fecha asc, p.id asc) as row_number
@@ -362,15 +360,13 @@ inner join (
   select c.id, 
   sum(
       case
-    when tipo_saldo = 'D' and es_restado = false then debe - haber
-    when tipo_saldo = 'D' and es_restado = true then haber - debe 
+        when tipo_saldo = 'D' then debe - haber
 	else 0
     end
   ) as saldo_deudor, 
   sum(
       case
-    when tipo_saldo = 'A' and es_restado = false then haber - debe
-    when tipo_saldo = 'A' and es_restado = true then debe - haber
+        when tipo_saldo = 'A' then haber - debe
 	else 0
       end
   ) as saldo_acreedor

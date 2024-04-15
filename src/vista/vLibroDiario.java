@@ -423,7 +423,7 @@ public class vLibroDiario extends javax.swing.JPanel {
 
     private void verReporteLibroDiario() {
         try (
-                InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-libro-diario.jrxml");
+                InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-libro-diario-3.jrxml");
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))
                 ) {
             Map<String, Object> params = new HashMap<String, Object>();

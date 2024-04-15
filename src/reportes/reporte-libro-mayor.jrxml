@@ -75,10 +75,8 @@
   pd.haber,
   sum( 
 case 
-	when tipo_saldo = 'D' and es_restado = false then debe - haber
-	when tipo_saldo = 'D' and es_restado = true then haber - debe
-	when tipo_saldo = 'A' and es_restado = false then haber - debe
-	when tipo_saldo = 'A' and es_restado = true then debe - haber
+	when tipo_saldo = 'D' then debe - haber
+	when tipo_saldo = 'A' then haber - debe
 	else 0
 end 
   ) over ( order by pd.id ) as saldo
