@@ -7,6 +7,7 @@ package formularios;
 import dto.dtoFormula;
 import dto.dtoLista;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import modelo.TipoCatalogo;
 import servicios.ServicioFormula;
@@ -97,18 +98,68 @@ public class dFormFormula extends javax.swing.JDialog {
                 this.txtPosicion.setText("");
             } else if (this.formulaDtoModel.getFormula().getId() > 0 && this.formulaDtoModel.getFormula().getId_formula() < 0) {
                 this.lblPosicion.setText("");
-                this.txtPosicion.setText(String.valueOf(this.formulaDtoModel.getFormula().getPosicion()));
+                // usar solo valores enteros xq no tendra hijos
+                int posicion = (int)this.formulaDtoModel.getFormula().getPosicion();
+                this.txtPosicion.setText(String.valueOf(posicion));
             } else if (this.formulaDtoModel.getFormula().getId() < 0 && this.formulaDtoModel.getFormula().getId_formula() > 0) {
-                this.lblPosicion.setText(String.valueOf(this.formulaDtoModel.getFormulaPadre().getPosicion()));
-                this.txtPosicion.setText("");
+                // tenemos q partir la posicion del padre dependiendo de que sea .0 
+                // se debe quitar el 0 de lo contrario debe mostrar todo
+                String valorPosPadre = String.valueOf(this.formulaDtoModel.getFormulaPadre().getPosicion());
+                //validamos si el padre no tiene ".0" porque entonces tenemos que convertirlo a entero
+                if (valorPosPadre.contains(".0")) {
+                    int posicionPadreInt = (int)this.formulaDtoModel.getFormulaPadre().getPosicion();
+                    valorPosPadre = String.valueOf(posicionPadreInt);
+                }
+                String valorPosHijo = String.valueOf(this.formulaDtoModel.getFormula().getPosicion());
+                // si tenemos el valor en texto podemos validar que tiene despues del .
+                try {
+                    String[] valorDecimal = valorPosHijo.split(Pattern.quote(valorPosPadre));
+                    String v1 = valorDecimal[0] != null ? valorDecimal[0] : "";
+                    String v2 = valorDecimal[1] != null ? valorDecimal[1] : "";
+                    
+                    this.lblPosicion.setText(valorPosPadre);
+                    this.txtPosicion.setText(v2);
+                } catch (Exception e) {
+                }
             } else {
-                this.lblPosicion.setText(String.valueOf(this.formulaDtoModel.getFormulaPadre().getPosicion()));
-                this.txtPosicion.setText(String.valueOf(this.formulaDtoModel.getFormula().getPosicion()));
+                // tenemos q partir la posicion del padre dependiendo de que sea .0 
+                // se debe quitar el 0 de lo contrario debe mostrar todo
+                String valorPosPadre = String.valueOf(this.formulaDtoModel.getFormulaPadre().getPosicion());
+                //validamos si el padre no tiene ".0" porque entonces tenemos que convertirlo a entero
+                if (valorPosPadre.contains(".0")) {
+                    int posicionPadreInt = (int)this.formulaDtoModel.getFormulaPadre().getPosicion();
+                    valorPosPadre = String.valueOf(posicionPadreInt + ".");
+                }
+                String valorPosHijo = String.valueOf(this.formulaDtoModel.getFormula().getPosicion());
+                // si tenemos el valor en texto podemos validar que tiene despues del .
+                try {
+                    String[] valorDecimal = valorPosHijo.split(Pattern.quote(valorPosPadre));
+                    String v1 = valorDecimal[0] != null ? valorDecimal[0] : "";
+                    String v2 = valorDecimal[1] != null ? valorDecimal[1] : "";
+                    
+                    this.lblPosicion.setText(valorPosPadre);
+                    this.txtPosicion.setText(v2);
+                } catch (Exception e) {
+                }
+                
             }
             
             // pasos para nueva sub-formula
         } else {
-        
+            // tenemos q partir la posicion del padre dependiendo de que sea .0 
+            // se debe quitar el 0 de lo contrario debe mostrar todo
+            String valorPos = String.valueOf(this.formulaPadre.getFormula().getPosicion());
+            // si tenemos el valor en texto podemos validar que tiene despues del .
+            try {
+                String[] valorDecimal = valorPos.split(Pattern.quote("."));
+                String v1 = valorDecimal[0] != null ? valorDecimal[0] : "";
+                String v2 = valorDecimal[1] != null ? valorDecimal[1] : "";
+                String v2Fin = v2.equals("0") ? "" : v2;
+
+                this.lblPosicion.setText(v1 + "." +v2Fin);
+                this.txtPosicion.setText("");
+            } catch (Exception e) {
+            }
         }
         // varificamos si es nuevo detalle de formula y si no depende de otra
         
@@ -514,15 +565,8 @@ public class dFormFormula extends javax.swing.JDialog {
             if (this.txtPosicion.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No se ha ingresado una posición", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (this.formulaDtoModel.getFormula().getId_formula() > 0) {
-                    double posicionPadre = Double.parseDouble(this.lblPosicion.getText());
-                    int posicion = Integer.parseInt(this.txtPosicion.getText());
-                    double posicionAux = Double.parseDouble(posicionPadre + "" + posicion);
-                    this.formulaDtoModel.getFormula().setPosicion(posicionAux);
-                } else {
-                    double posicionAux = Double.parseDouble(this.txtPosicion.getText() + ".0");
-                    this.formulaDtoModel.getFormula().setPosicion(posicionAux);
-                }
+                String posicionFinal = this.lblPosicion.getText() + this.txtPosicion.getText();
+                this.formulaDtoModel.getFormula().setPosicion(Double.parseDouble(posicionFinal));
             }
             
         } catch (Exception e) {
