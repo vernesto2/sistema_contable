@@ -120,6 +120,33 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="Table 5_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 5_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
 	<subDataset name="Dataset1" uuid="39a8139c-2d39-46ea-8ee9-27dd8f7b0afc">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
@@ -127,6 +154,8 @@
 		<parameter name="param_fecha" class="java.lang.String"/>
 		<parameter name="param_num_partida" class="java.lang.Integer"/>
 		<parameter name="param_comentario" class="java.lang.String"/>
+		<parameter name="param_formateador_moneda" class="java.text.DecimalFormat"/>
+		<parameter name="param_formateador_fecha" class="java.text.SimpleDateFormat"/>
 		<queryString language="SQL">
 			<![CDATA[select 
 	pd.id, 
@@ -184,12 +213,6 @@ and pd.id_partida =   $P{param_id_partida}]]>
 			<property name="com.jaspersoft.studio.field.label" value="haber"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida_detalle"/>
 		</field>
-		<variable name="var_total_debe" class="java.lang.Double" calculation="Sum">
-			<variableExpression><![CDATA[$F{debe}]]></variableExpression>
-		</variable>
-		<variable name="var_total_haber" class="java.lang.Double" calculation="Sum">
-			<variableExpression><![CDATA[$F{haber}]]></variableExpression>
-		</variable>
 	</subDataset>
 	<parameter name="param_id_ciclo" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[21]]></defaultValueExpression>
@@ -211,6 +234,12 @@ and pd.id_partida =   $P{param_id_partida}]]>
 	</parameter>
 	<parameter name="param_hasta" class="java.util.Date">
 		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_formateador_moneda" class="java.text.DecimalFormat" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new java.text.DecimalFormat("#,##0.00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_formateador_fecha" class="java.text.SimpleDateFormat" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd")]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT p.*,
@@ -252,7 +281,7 @@ WHERE
 		<property name="com.jaspersoft.studio.field.label" value="comentario"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="partida"/>
 	</field>
-	<field name="fecha" class="java.lang.Object">
+	<field name="fecha" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="fecha"/>
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="partida"/>
@@ -266,7 +295,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="118" splitType="Stretch">
+		<band height="138" splitType="Stretch">
 			<frame>
 				<reportElement x="0" y="0" width="550" height="98" uuid="3c89de71-398d-47e7-8967-f2182804783d"/>
 				<textField>
@@ -300,7 +329,15 @@ WHERE
 			<textField>
 				<reportElement x="0" y="98" width="550" height="20" uuid="968e410a-50ac-4d91-8c4d-f4bad7b7a2ed"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["Del "+$P{param_desde}+" al "+$P{param_desde}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{param_desde}]]></textFieldExpression>
+				<patternExpression><![CDATA["dd/MM/yyyy"]]></patternExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="118" width="550" height="20" uuid="4a0b761b-ca26-4ebe-b44f-ab78084c3b05"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Expresado en dólares de los Estados Unidos"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -314,19 +351,16 @@ WHERE
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="29"/>
-	</columnHeader>
-	<detail>
-		<band height="45" splitType="Prevent">
+		<band height="15">
 			<componentElement>
-				<reportElement key="" x="0" y="0" width="560" height="45" uuid="b1e8a6ad-4415-4864-a3d2-57236e45b13c">
+				<reportElement key="" x="0" y="0" width="560" height="15" uuid="6b6655a5-1209-46b9-8ee3-d8e403bb7793">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
-					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 4_TH"/>
-					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 4_CH"/>
-					<property name="com.jaspersoft.studio.table.style.detail" value="Table 4_TD"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 5_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 5_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 5_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Dataset1" uuid="3675a03c-b2f4-4ad3-8321-613812f6c202">
+					<datasetRun subDataset="Dataset1" uuid="43842c0b-9910-4ea6-9d47-0a51b3c296f0">
 						<datasetParameter name="param_id_partida">
 							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
 						</datasetParameter>
@@ -338,6 +372,152 @@ WHERE
 						</datasetParameter>
 						<datasetParameter name="param_comentario">
 							<datasetParameterExpression><![CDATA[$F{comentario}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="59" uuid="9035d2e6-7c77-4468-b186-32aaeda36c4c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<box>
+								<topPen lineWidth="0.25"/>
+								<bottomPen lineWidth="0.25"/>
+								<rightPen lineWidth="0.25"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="59" height="15" uuid="225d5a3f-690c-4719-8df1-1e56d69b4581"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Fecha]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="51" uuid="542c10d4-1646-4ab5-90b8-9cf9b7238e20">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1"/>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="202" uuid="fb8b9d5f-26a9-48ac-961f-aea98dfc2523">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="202" height="15" uuid="c7667360-2394-4fcc-9af8-8d236b05d85d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Concepto]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="29" uuid="4d69e1ef-587c-40db-ba26-635dce38ed14">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="29" height="15" uuid="a8bcf192-f53f-45e8-881f-d0fa56343ce4"/>
+								<text><![CDATA[]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="149f204b-a04f-40e8-ab8a-434bff782785">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="15" uuid="8ae44080-febc-4f7b-b07b-cbe7e0374eee"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Parcial]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="71" uuid="9116127c-3766-4dba-8957-86b5992b5df1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="71" height="15" uuid="7e63983e-f1e2-45f7-973c-a25af5a9bd5f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Cargo]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="77" uuid="71798eb4-ec8c-4a65-83b9-7739c09c39a9">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="77" height="15" uuid="0202a496-e91c-4e90-b9bf-0bef94fc4e38"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Abono]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="45" splitType="Prevent">
+			<componentElement>
+				<reportElement key="" style="Table 2_TD" x="0" y="0" width="560" height="45" uuid="b1e8a6ad-4415-4864-a3d2-57236e45b13c">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 4_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 4_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 4_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="8a99e76a-02e2-4c88-9842-4cf4b21f79eb">
+						<datasetParameter name="param_id_partida">
+							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_fecha">
+							<datasetParameterExpression><![CDATA[$F{fecha}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_num_partida">
+							<datasetParameterExpression><![CDATA[$F{num_partida}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_comentario">
+							<datasetParameterExpression><![CDATA[$F{comentario}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_formateador_moneda">
+							<datasetParameterExpression><![CDATA[$P{param_formateador_moneda}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_formateador_fecha">
+							<datasetParameterExpression><![CDATA[$P{param_formateador_fecha}]]></datasetParameterExpression>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
@@ -355,15 +535,11 @@ WHERE
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="9"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$P{param_fecha}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$P{param_formateador_fecha}.parse($P{param_fecha})]]></textFieldExpression>
+								<patternExpression><![CDATA["dd/MM/yyyy"]]></patternExpression>
 							</textField>
 						</jr:tableHeader>
-						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="59" height="15" uuid="f944051d-62a9-48e2-ade8-9bcb085d19c8"/>
-								<text><![CDATA[Static Text]]></text>
-							</staticText>
-						</jr:tableFooter>
+						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1"/>
 						<jr:detailCell style="Table 4_TD" height="15">
 							<staticText>
 								<reportElement x="0" y="0" width="59" height="15" uuid="c1e6e86b-64ff-4b70-8800-2643e9ac66be"/>
@@ -373,18 +549,8 @@ WHERE
 					</jr:column>
 					<jr:column width="51" uuid="eb5d4ee3-059e-4019-bda6-12f145d9c8cc">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
-						<jr:tableHeader style="Table 4_TH" height="15" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="51" height="15" uuid="57bc7048-03b6-46b4-a82b-63f9d6fdc2d9"/>
-								<text><![CDATA[]]></text>
-							</staticText>
-						</jr:tableHeader>
-						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="51" height="15" uuid="0fa06fdc-8311-42b6-b165-008ff56e473a"/>
-								<text><![CDATA[Static Text]]></text>
-							</staticText>
-						</jr:tableFooter>
+						<jr:tableHeader style="Table 4_TH" height="15" rowSpan="1"/>
+						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1"/>
 						<jr:detailCell style="Table 4_TD" height="15">
 							<textField>
 								<reportElement x="0" y="0" width="51" height="15" uuid="47617244-f7ed-412a-bb02-0e1a414a62b3"/>
@@ -431,12 +597,7 @@ WHERE
 								<text><![CDATA[]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="29" height="15" uuid="930bd78c-56c7-4810-a78c-098cf169de49"/>
-								<text><![CDATA[Static Text]]></text>
-							</staticText>
-						</jr:tableFooter>
+						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1"/>
 						<jr:detailCell style="Table 4_TD" height="15">
 							<textField>
 								<reportElement x="0" y="0" width="29" height="15" uuid="66b55fc2-fa03-44d4-adfd-8eb5156cc146"/>
@@ -455,19 +616,14 @@ WHERE
 								<text><![CDATA[]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="70" height="15" uuid="4287aad2-f178-4abc-963a-67f69276701c"/>
-								<text><![CDATA[Static Text]]></text>
-							</staticText>
-						</jr:tableFooter>
+						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1"/>
 						<jr:detailCell style="Table 4_TD" height="15">
 							<textField>
 								<reportElement x="0" y="0" width="70" height="15" uuid="f097642b-9a5c-417c-9ecc-589ee68fdb3b"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="9"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{parcial} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{parcial} )]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{parcial} == 0 ? "" :  $P{param_formateador_moneda}.format($F{parcial} )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -479,19 +635,14 @@ WHERE
 								<text><![CDATA[]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="71" height="15" uuid="b8644ce5-5ffb-47ad-b0f2-9d11b02335ec"/>
-								<text><![CDATA[Static Text]]></text>
-							</staticText>
-						</jr:tableFooter>
+						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1"/>
 						<jr:detailCell style="Table 4_TD" height="15">
 							<textField>
 								<reportElement x="0" y="0" width="71" height="15" uuid="d804df37-0b72-4f97-a465-c883c1c79714"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="9"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{debe} == 0 ? "" : NumberFormat.getCurrencyInstance(Locale.US).format($F{debe})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{debe} == 0 ? "" : $P{param_formateador_moneda}.format($F{debe})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -503,19 +654,14 @@ WHERE
 								<text><![CDATA[]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="77" height="15" uuid="ff0c2716-8d8b-44c6-981a-ef2b76d65f6b"/>
-								<text><![CDATA[Static Text]]></text>
-							</staticText>
-						</jr:tableFooter>
+						<jr:tableFooter style="Table 4_TH" height="15" rowSpan="1"/>
 						<jr:detailCell style="Table 4_TD" height="15">
 							<textField>
 								<reportElement x="0" y="0" width="77" height="15" uuid="bafa01cb-57cf-4eb0-b5d5-d5dc7b115e03"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="9"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{haber} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format( $F{haber} )]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{haber} == 0 ? "" :  $P{param_formateador_moneda}.format( $F{haber} )]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -523,4 +669,131 @@ WHERE
 			</componentElement>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="15">
+			<componentElement>
+				<reportElement key="" x="0" y="0" width="560" height="15" uuid="cee3efd5-f925-4571-a6e3-0bb765e2957b">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 5_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 5_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 5_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="41f6d503-2dd9-46be-af41-39eb96739210">
+						<datasetParameter name="param_id_partida">
+							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_fecha">
+							<datasetParameterExpression><![CDATA[$F{fecha}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_num_partida">
+							<datasetParameterExpression><![CDATA[$F{num_partida}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_comentario">
+							<datasetParameterExpression><![CDATA[$F{comentario}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="59" uuid="79b8629f-f6d0-4974-8821-ccebea92265d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<box>
+								<topPen lineWidth="0.25"/>
+								<bottomPen lineWidth="0.25"/>
+								<rightPen lineWidth="0.25"/>
+							</box>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="51" uuid="586f9631-a2c3-4b43-b8d0-734287c17ab9">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1"/>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="202" uuid="49be4cca-3fa7-4b01-aac7-f144d1353260">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="202" height="15" uuid="32e8b33e-d891-4a58-8805-854c5a78849a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA["Pasar a folio No "+($V{PAGE_NUMBER}+1)]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="29" uuid="e2df9473-7d01-48be-9f6e-a72131d9f577">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="29" height="15" uuid="80098d29-5f94-449f-a6cb-1d76dd82bfab"/>
+								<text><![CDATA[]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="b76d4a97-d5cc-4fed-a159-793180b9032f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1"/>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="71" uuid="b340cef0-c682-4c91-b3c6-cd43562e7030">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="71" height="15" uuid="4d807029-d5b1-47da-9b60-68a942c5b442"/>
+								<textFieldExpression><![CDATA[""]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="77" uuid="fc406e5b-3c7f-42ff-acbc-5539be3caf23">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:tableHeader style="Table 5_TH" height="15" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="77" height="15" uuid="59311a95-5fd9-4412-9e5e-d3a134d0d28b"/>
+								<textFieldExpression><![CDATA[""]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 5_TH" height="0" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:tableFooter>
+						<jr:detailCell style="Table 5_TD" height="0">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnFooter>
 </jasperReport>
