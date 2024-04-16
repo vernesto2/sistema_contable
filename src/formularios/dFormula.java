@@ -91,7 +91,7 @@ public class dFormula extends javax.swing.JDialog {
         this.limiparTablaFormula();
         Object[] datos = new Object[dtm.getColumnCount()];
         // ordenamos el listado antes de mostrar
-        Collections.sort(listaFormula, new dtoFormula());
+        Collections.sort(listaFormula);
         
         for (dtoFormula detalle : this.listaFormula) {
             datos[0] = detalle.getFormula().getPosicion();
@@ -311,6 +311,20 @@ public class dFormula extends javax.swing.JDialog {
             }
             
         } else if (column == 6) {
+            
+            String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaFormula.get(row).getFormula().getNombre();
+            int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (opc == 0) {
+                RespuestaGeneral rg = _formula.eliminar(this.listaFormula.get(row).getFormula().getId());
+                if (rg.esExitosa()) {
+                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
+                    this.limiparTablaFormula();
+                    this.obtenerListaFormula();
+                    this.setDatosFormula();
+                } else {
+                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+                }
+            }
             
         } else if (column == 7) {
             dFormFormula d = new dFormFormula(null, true, sesion, new dtoFormula(), this.tipoCatalogo, this.listaFormula.get(row));

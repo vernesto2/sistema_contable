@@ -42,6 +42,7 @@ public class daoFormula {
                     select f.* 
                     from formula f 
                     where f.id_tipo_catalogo = ? and f.eliminado = 0
+                     order by cast(f.posicion as NUMERIC(16,2))
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, idTipoCatalogo);
@@ -55,7 +56,7 @@ public class daoFormula {
                 formulaAux.setSigno(rs.getString("signo"));
                 formulaAux.setNombre(rs.getString("nombre"));
                 formulaAux.setTipo_cuenta_especial(rs.getInt("tipo_cuenta_especial"));
-                formulaAux.setPosicion(rs.getDouble("posicion"));
+                formulaAux.setPosicion(rs.getString("posicion"));
                 formulaAux.setId_formula(rs.getInt("id_formula"));
                 formulaAux.setTipo_formula(rs.getString("tipo_formula"));
                 formulaAux.setEliminado(rs.getInt("eliminado"));
@@ -115,6 +116,7 @@ public class daoFormula {
                   select f.* 
                   from formula f 
                   where f.id_tipo_catalogo = ? and f.id = ? and f.eliminado = 0
+                  order by cast(f.posicion as NUMERIC(16,2))
                   """;
         
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
@@ -130,7 +132,7 @@ public class daoFormula {
                 formulaAux.setSigno(rs.getString("signo"));
                 formulaAux.setNombre(rs.getString("nombre"));
                 formulaAux.setTipo_cuenta_especial(rs.getInt("tipo_cuenta_especial"));
-                formulaAux.setPosicion(rs.getDouble("posicion"));
+                formulaAux.setPosicion(rs.getString("posicion"));
                 formulaAux.setId_formula(rs.getInt("id_formula"));
                 formulaAux.setTipo_formula(rs.getString("tipo_formula"));
                 formulaAux.setEliminado(rs.getInt("eliminado"));
@@ -160,7 +162,7 @@ public class daoFormula {
             ps.setString(3, formula.getSigno());
             ps.setString(4, formula.getNombre());
             ps.setInt(5, formula.getTipo_cuenta_especial());
-            ps.setDouble(6, formula.getPosicion());
+            ps.setString(6, formula.getPosicion());
             ps.setInt(7, formula.getId_formula());
             ps.setString(8, formula.getTipo_formula());
             ps.setInt(9, formula.getEliminado());
@@ -201,7 +203,7 @@ public class daoFormula {
             ps.setString(3, formula.getSigno());
             ps.setString(4, formula.getNombre());
             ps.setInt(5, formula.getTipo_cuenta_especial());
-            ps.setDouble(6, formula.getPosicion());
+            ps.setString(6, formula.getPosicion());
             ps.setInt(7, formula.getId_formula());
             ps.setString(8, formula.getTipo_formula());
             ps.setInt(9, formula.getId());
