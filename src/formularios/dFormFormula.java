@@ -80,7 +80,7 @@ public class dFormFormula extends javax.swing.JDialog {
     public void limpiarCuentaSeleccionada() {
         this.formulaDtoModel.getFormula().setId_cuenta(-1);
         this.formulaDtoModel.getFormula().setNombre("");
-        this.txtCuentaSeleccionada.setText("");
+        this.txtCuentaSeleccionada.setText("* CUENTA NO ESPECIFICADA *");
         this.txtNombre.setText("");
     }
     
@@ -99,17 +99,12 @@ public class dFormFormula extends javax.swing.JDialog {
             } else if (this.formulaDtoModel.getFormula().getId() > 0 && this.formulaDtoModel.getFormula().getId_formula() < 0) {
                 this.lblPosicion.setText("");
                 // usar solo valores enteros xq no tendra hijos
-                int posicion = (int)this.formulaDtoModel.getFormula().getPosicion();
-                this.txtPosicion.setText(String.valueOf(posicion));
+                //int posicion = (int)this.formulaDtoModel.getFormula().getPosicion();
+                this.txtPosicion.setText(this.formulaDtoModel.getFormula().getPosicion());
             } else if (this.formulaDtoModel.getFormula().getId() < 0 && this.formulaDtoModel.getFormula().getId_formula() > 0) {
                 // tenemos q partir la posicion del padre dependiendo de que sea .0 
                 // se debe quitar el 0 de lo contrario debe mostrar todo
-                String valorPosPadre = String.valueOf(this.formulaDtoModel.getFormulaPadre().getPosicion());
-                //validamos si el padre no tiene ".0" porque entonces tenemos que convertirlo a entero
-                if (valorPosPadre.contains(".0")) {
-                    int posicionPadreInt = (int)this.formulaDtoModel.getFormulaPadre().getPosicion();
-                    valorPosPadre = String.valueOf(posicionPadreInt);
-                }
+                String valorPosPadre = String.valueOf(this.formulaDtoModel.getFormulaPadre().getPosicion()) + ".";
                 String valorPosHijo = String.valueOf(this.formulaDtoModel.getFormula().getPosicion());
                 // si tenemos el valor en texto podemos validar que tiene despues del .
                 try {
@@ -124,12 +119,7 @@ public class dFormFormula extends javax.swing.JDialog {
             } else {
                 // tenemos q partir la posicion del padre dependiendo de que sea .0 
                 // se debe quitar el 0 de lo contrario debe mostrar todo
-                String valorPosPadre = String.valueOf(this.formulaDtoModel.getFormulaPadre().getPosicion());
-                //validamos si el padre no tiene ".0" porque entonces tenemos que convertirlo a entero
-                if (valorPosPadre.contains(".0")) {
-                    int posicionPadreInt = (int)this.formulaDtoModel.getFormulaPadre().getPosicion();
-                    valorPosPadre = String.valueOf(posicionPadreInt + ".");
-                }
+                String valorPosPadre = String.valueOf(this.formulaDtoModel.getFormulaPadre().getPosicion()) + ".";
                 String valorPosHijo = String.valueOf(this.formulaDtoModel.getFormula().getPosicion());
                 // si tenemos el valor en texto podemos validar que tiene despues del .
                 try {
@@ -146,20 +136,10 @@ public class dFormFormula extends javax.swing.JDialog {
             
             // pasos para nueva sub-formula
         } else {
-            // tenemos q partir la posicion del padre dependiendo de que sea .0 
-            // se debe quitar el 0 de lo contrario debe mostrar todo
-            String valorPos = String.valueOf(this.formulaPadre.getFormula().getPosicion());
-            // si tenemos el valor en texto podemos validar que tiene despues del .
-            try {
-                String[] valorDecimal = valorPos.split(Pattern.quote("."));
-                String v1 = valorDecimal[0] != null ? valorDecimal[0] : "";
-                String v2 = valorDecimal[1] != null ? valorDecimal[1] : "";
-                String v2Fin = v2.equals("0") ? "" : v2;
-
-                this.lblPosicion.setText(v1 + "." +v2Fin);
-                this.txtPosicion.setText("");
-            } catch (Exception e) {
-            }
+            // 
+            String valorPos = String.valueOf(this.formulaPadre.getFormula().getPosicion()) + ".";
+            this.lblPosicion.setText(valorPos);
+            this.txtPosicion.setText("");
         }
         // varificamos si es nuevo detalle de formula y si no depende de otra
         
@@ -169,7 +149,7 @@ public class dFormFormula extends javax.swing.JDialog {
         if (this.formulaDtoModel.getFormula().getId_cuenta() < 0) {
             this.txtCuentaSeleccionada.setText("* CUENTA NO ESPECIFICADA *");
         } else {
-            txtCuentaSeleccionada.setText(String.valueOf(this.formulaDtoModel.getFormula().getCuenta().getNombre()));
+            txtCuentaSeleccionada.setText(String.valueOf(this.formulaDtoModel.getFormula().getCuenta().getCodigo()+ " - " + this.formulaDtoModel.getFormula().getCuenta().getNombre()));
         }
         
         // PROCESO PARA SELECCION DE COMBOBOX (SIGNOS)
@@ -566,7 +546,7 @@ public class dFormFormula extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "No se ha ingresado una posición", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
             } else {
                 String posicionFinal = this.lblPosicion.getText() + this.txtPosicion.getText();
-                this.formulaDtoModel.getFormula().setPosicion(Double.parseDouble(posicionFinal));
+                this.formulaDtoModel.getFormula().setPosicion(posicionFinal);
             }
             
         } catch (Exception e) {
@@ -582,7 +562,7 @@ public class dFormFormula extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbCuentaEspecialItemStateChanged
 
     private void btnCancelarTipoCatalogo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTipoCatalogo1ActionPerformed
-        // TODO add your handling code here:
+        this.limpiarCuentaSeleccionada();
     }//GEN-LAST:event_btnCancelarTipoCatalogo1ActionPerformed
 
     private void cmbSignoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbSignoItemStateChanged
@@ -594,7 +574,16 @@ public class dFormFormula extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbTipoFormulaItemStateChanged
 
     private void btnCancelarTipoCatalogo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTipoCatalogo2ActionPerformed
-        // TODO add your handling code here:
+        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion);
+        d.setVisible(true);
+        // validamos si realizo alguna accion para actualizar el listado o no
+        if (d.getRealizoAccion()) {
+            //JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
+            this.formulaDtoModel.getFormula().setId_cuenta(d.getCuentaSeleccionada().getId());
+            this.formulaDtoModel.getFormula().setNombre(d.getCuentaSeleccionada().getNombre());
+            this.txtNombre.setText(d.getCuentaSeleccionada().getNombre());
+            this.txtCuentaSeleccionada.setText(d.getCuentaSeleccionada().getCodigo() + " - " + d.getCuentaSeleccionada().getNombre());
+        }
     }//GEN-LAST:event_btnCancelarTipoCatalogo2ActionPerformed
 
     private void txtPosicionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPosicionKeyTyped

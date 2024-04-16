@@ -16,7 +16,7 @@ public class Formula {
     String signo;
     String nombre;
     int tipo_cuenta_especial;
-    protected double posicion;
+    String posicion;
     int id_formula;
     String tipo_formula;
     int eliminado;
@@ -31,22 +31,12 @@ public class Formula {
         this.signo = "(+)";
         this.nombre = "";
         this.tipo_cuenta_especial = -1;
-        this.posicion = 0.0;
+        this.posicion = "";
         this.id_formula = -1;
         this.tipo_formula = "Estado de Resultado";
         this.tipoCatalogo = new TipoCatalogo();
         this.cuenta = new Cuenta();
         this.eliminado = 0;
-    }
-    
-    @Override
-    public String toString() {
-        return "Formula{" +
-                "id=" + id +
-                ", posicion=" + posicion +
-                ", id_formula=" + id_formula +
-                ", formulaPadre=" + id_formula +
-                '}';
     }
 
     public int getId() {
@@ -97,11 +87,11 @@ public class Formula {
         this.tipo_cuenta_especial = tipo_cuenta_especial;
     }
 
-    public double getPosicion() {
+    public String getPosicion() {
         return posicion;
     }
 
-    public void setPosicion(double posicion) {
+    public void setPosicion(String posicion) {
         this.posicion = posicion;
     }
 
@@ -144,5 +134,4 @@ public class Formula {
     public void setEliminado(int eliminado) {
         this.eliminado = eliminado;
     }
-    
 }

@@ -4,14 +4,13 @@
  */
 package dto;
 
-import java.util.Comparator;
 import modelo.Formula;
 
 /**
  *
  * @author vacev
  */
-public class dtoFormula implements Comparator<dtoFormula>{
+public class dtoFormula implements Comparable<dtoFormula>{
     
     Formula formula;
     Formula formulaPadre;
@@ -19,21 +18,6 @@ public class dtoFormula implements Comparator<dtoFormula>{
     public dtoFormula() {
         this.formula = new Formula();
         this.formulaPadre = new Formula();
-    }
-    
-    @Override
-    public int compare(dtoFormula dto1, dtoFormula dto2) {
-        Formula f1 = dto1.formula;
-        Formula f2 = dto2.formula;
-
-        if (f1.getPosicion() != f2.getPosicion()) {
-            return Double.compare(f1.getPosicion(), f2.getPosicion());
-        } else if (f1.getId_formula() != -1 && f1.getId_formula() == f2.getId_formula()) {
-            // Si los dos tienen el mismo id_formula, entonces f1 debería estar debajo de f2
-            return 1;
-        } else {
-            return Double.compare(f1.getId(), f2.getId());
-        }
     }
 
     public Formula getFormula() {
@@ -50,6 +34,29 @@ public class dtoFormula implements Comparator<dtoFormula>{
 
     public void setFormulaPadre(Formula formulaPadre) {
         this.formulaPadre = formulaPadre;
+    }
+
+    @Override
+    public int compareTo(dtoFormula other) {
+        return comparePositions(formula.getPosicion(), other.getFormula().getPosicion());
+    }
+
+    private int comparePositions(String position1, String position2) {
+        String[] parts1 = position1.split("\\.");
+        String[] parts2 = position2.split("\\.");
+
+        int minLength = Math.min(parts1.length, parts2.length);
+
+        for (int i = 0; i < minLength; i++) {
+            int part1 = Integer.parseInt(parts1[i]);
+            int part2 = Integer.parseInt(parts2[i]);
+
+            if (part1 != part2) {
+                return part1 - part2;
+            }
+        }
+
+        return parts1.length - parts2.length;
     }
     
     
