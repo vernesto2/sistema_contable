@@ -88,6 +88,7 @@ public class dPartidas extends javax.swing.JDialog {
         txtNumFolio.setText(String.valueOf(this.partidaModel.getFolio()));
         txtComentario.setText(this.partidaModel.getComentario());
         txtFecha.setDate(this.partidaModel.getFecha());
+        txtHora.setText(this.partidaModel.getHora());
         txtFecha.setFormatDate("dd-MM-yyyy");
         
         // PROCESO PARA SELECCION DE COMBOBOX
@@ -218,7 +219,7 @@ public class dPartidas extends javax.swing.JDialog {
         txtNumFolio = new RSMaterialComponent.RSTextFieldMaterial();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtNumFolio1 = new RSMaterialComponent.RSTextFieldMaterial();
+        txtHora = new RSMaterialComponent.RSTextFieldMaterial();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDetallePartida = new rojerusan.RSTableMetro();
@@ -373,15 +374,15 @@ public class dPartidas extends javax.swing.JDialog {
         jLabel5.setText("Hora:");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        txtNumFolio1.setForeground(new java.awt.Color(0, 0, 0));
-        txtNumFolio1.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtNumFolio1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtNumFolio1.setPhColor(new java.awt.Color(0, 0, 0));
-        txtNumFolio1.setPlaceholder("Hora");
-        txtNumFolio1.setSelectionColor(new java.awt.Color(0, 0, 0));
-        txtNumFolio1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtHora.setForeground(new java.awt.Color(0, 0, 0));
+        txtHora.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtHora.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtHora.setPhColor(new java.awt.Color(0, 0, 0));
+        txtHora.setPlaceholder("Hora");
+        txtHora.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtHora.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNumFolio1KeyTyped(evt);
+                txtHoraKeyTyped(evt);
             }
         });
 
@@ -401,7 +402,7 @@ public class dPartidas extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(txtNumFolio1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -431,7 +432,7 @@ public class dPartidas extends javax.swing.JDialog {
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNumFolio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -587,12 +588,16 @@ public class dPartidas extends javax.swing.JDialog {
         } else if (this.listaPartidaDetalles.isEmpty()) {
             JOptionPane.showConfirmDialog(this, "No se han ingresado detalles a la partida", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
             
+        } else if (this.txtHora.getText().isEmpty()) {
+            JOptionPane.showConfirmDialog(this, "No se han ingresado la hora", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
+            
         } else {
             this.partidaModel.setId_ciclo(this.sesion.configUsuario.getId_ciclo_contable());
             this.partidaModel.setId_tipo_partida(this.cmbTipoPartida.getSelectedIndex());
             this.partidaModel.setFecha(txtFecha.getDate());
             this.partidaModel.setComentario(txtComentario.getText());
-            this.partidaModel.setNum_partida(Integer.parseInt(txtNumPartida.getText()));
+            this.partidaModel.setHora(this.txtHora.getText());
+            //this.partidaModel.setNum_partida(Integer.parseInt(txtNumPartida.getText()));
             this.partidaModel.setFolio(Integer.parseInt(txtNumFolio.getText()));
 
             this.partidaModel.setListaPartidaDetalles(this.listaPartidaDetalles);
@@ -787,9 +792,9 @@ public class dPartidas extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtNumFolioKeyTyped
 
-    private void txtNumFolio1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumFolio1KeyTyped
+    private void txtHoraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHoraKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumFolio1KeyTyped
+    }//GEN-LAST:event_txtHoraKeyTyped
 
     public void actualizarMontosDetallesPartidas(ArrayList<PartidaDetalle> lista) {
         // comparamos el listado que viene con el listado que tenemos para saber si ya se tiene al padre en la tabla y no duplicar
@@ -960,8 +965,8 @@ public class dPartidas extends javax.swing.JDialog {
     private rojerusan.RSTableMetro tblDetallePartida;
     private javax.swing.JTextArea txtComentario;
     private newscomponents.RSDateChooser txtFecha;
+    private RSMaterialComponent.RSTextFieldMaterial txtHora;
     private RSMaterialComponent.RSTextFieldMaterial txtNumFolio;
-    private RSMaterialComponent.RSTextFieldMaterial txtNumFolio1;
     private RSMaterialComponent.RSTextFieldMaterial txtNumPartida;
     private javax.swing.JLabel txtTotalDebe;
     private javax.swing.JLabel txtTotalHaber;

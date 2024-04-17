@@ -16,16 +16,17 @@ public class Partida {
     int id;
     int id_ciclo;
     int id_tipo_partida;
-    int num_partida;
+    String num_partida;
     String comentario;
     Date fecha;
     boolean eliminado;
     int folio;
+    String hora;
     
     ArrayList<PartidaDetalle> listaPartidaDetalles;
     ArrayList<PartidaDetalle> listaPartidaDetallesEliminados;
 
-    public Partida(int id, int id_ciclo, int id_tipo_partida, int num_partida, String comentario, Date fecha, boolean eliminado, int folio) {
+    public Partida(int id, int id_ciclo, int id_tipo_partida, String num_partida, String comentario, Date fecha, boolean eliminado, int folio, String hora) {
         this.id = id;
         this.id_ciclo = id_ciclo;
         this.id_tipo_partida = id_tipo_partida;
@@ -34,17 +35,19 @@ public class Partida {
         this.fecha = fecha;
         this.eliminado = eliminado;
         this.folio = folio;
+        this.hora = hora;
     }
     
     public Partida() {
         this.id = -1;
         this.id_ciclo = -1;
         this.id_tipo_partida = -1;
-        this.num_partida = 0;
+        this.num_partida = "0";
         this.comentario = "";
         this.fecha = new Date();
         this.eliminado = false;
         this.folio = 0;
+        this.hora = "08:00";
         
         this.listaPartidaDetalles = new ArrayList<>();
         this.listaPartidaDetallesEliminados = new ArrayList<>();
@@ -74,11 +77,11 @@ public class Partida {
         this.id_tipo_partida = id_tipo_partida;
     }
 
-    public int getNum_partida() {
+    public String getNum_partida() {
         return num_partida;
     }
 
-    public void setNum_partida(int num_partida) {
+    public void setNum_partida(String num_partida) {
         this.num_partida = num_partida;
     }
 
@@ -112,6 +115,14 @@ public class Partida {
 
     public void setFolio(int folio) {
         this.folio = folio;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     public ArrayList<PartidaDetalle> getListaPartidaDetalles() {
