@@ -57,7 +57,8 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         // seteamos la informacion
         this.setModelCuentas();
         this.obtenerListadoCuentasPorTipoCatalogoCompleto();
-        this.obtenerListadoCuentasPorTipoCatalogo();       
+        this.obtenerListadoCuentasPorTipoCatalogo();
+        this.txtFM.setText("0");
     }
 
     public void setModelCuentas() {
