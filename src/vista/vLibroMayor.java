@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.text.NumberFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -184,10 +185,13 @@ public class vLibroMayor extends javax.swing.JPanel {
             //Currency currentyActual = Currency.getInstance(Locale.US);
             Locale locale = new Locale("es", "SV");
 
-            params.put("param_id_ciclo", sesion.configUsuario.getId_ciclo_contable());
             params.put("param_titulo_ciclo_contable", sesion.configUsuario.getNombre_ciclo_contable());
             params.put("param_nombre_completo", sesion.usuario.getPersona().nombreCompleto());
             params.put("param_usuario", sesion.usuario.getNombre());
+            
+            params.put("param_desde", sesion.configUsuario.getCicloContable().getDesde());
+            params.put("param_hasta", sesion.configUsuario.getCicloContable().getHasta());
+            params.put("param_fecha_generacion", new Date());
             
             Integer tipoCatalogo = sesion.configUsuario.getCicloContable().getTipoCatalogo().getId();
             params.put("param_id_tipo_catalogo", tipoCatalogo);
@@ -214,7 +218,9 @@ public class vLibroMayor extends javax.swing.JPanel {
             JRBeanCollectionDataSource param_cuentas_balanza = new JRBeanCollectionDataSource(listBeans);
             params.put("param_cuentas_balanza", param_cuentas_balanza);
 //            params.put("params_cuentas_balanza", listBeans);
+
             
+
             params.put(JRParameter.REPORT_LOCALE, locale);
             
             JasperPrint jp = JasperFillManager.fillReport(reporte, params, new JREmptyDataSource() );
@@ -243,6 +249,10 @@ public class vLibroMayor extends javax.swing.JPanel {
             params.put("param_titulo_ciclo_contable", sesion.configUsuario.getNombre_ciclo_contable());
             params.put("param_nombre_completo", sesion.usuario.getPersona().nombreCompleto());
             params.put("param_usuario", sesion.usuario.getNombre());
+            
+            params.put("param_desde", sesion.configUsuario.getCicloContable().getDesde());
+            params.put("param_hasta", sesion.configUsuario.getCicloContable().getHasta());
+            params.put("param_fecha_generacion", new Date());
             
             Integer tipoCatalogo = sesion.configUsuario.getCicloContable().getTipoCatalogo().getId();
             params.put("param_id_tipo_catalogo", tipoCatalogo);

@@ -64,6 +64,8 @@
 		<parameter name="param_id_cuenta" class="java.lang.Integer"/>
 		<parameter name="param_es_restado" class="java.lang.Integer"/>
 		<parameter name="param_tipo_saldo" class="java.lang.String"/>
+		<parameter name="param_formateador_moneda" class="java.text.DecimalFormat"/>
+		<parameter name="param_formateador_fecha" class="java.text.SimpleDateFormat"/>
 		<queryString>
 			<![CDATA[select 
   p.id, 
@@ -94,7 +96,7 @@ and pd.eliminado = false]]>
 			<property name="com.jaspersoft.studio.field.label" value="id"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida"/>
 		</field>
-		<field name="fecha" class="java.lang.Object">
+		<field name="fecha" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.name" value="fecha"/>
 			<property name="com.jaspersoft.studio.field.label" value="fecha"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida"/>
@@ -128,16 +130,46 @@ and pd.eliminado = false]]>
 			<property name="com.jaspersoft.studio.field.label" value="saldo"/>
 		</field>
 	</subDataset>
-	<parameter name="param_id_ciclo" class="java.lang.Integer"/>
-	<parameter name="param_titulo_ciclo_contable" class="java.lang.String"/>
-	<parameter name="param_nombre_completo" class="java.lang.String"/>
-	<parameter name="param_usuario" class="java.lang.String"/>
-	<parameter name="param_tamano_codigo" class="java.lang.Integer"/>
-	<parameter name="param_id_tipo_catalogo" class="java.lang.Integer"/>
+	<parameter name="param_id_ciclo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[21]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_partida" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$F{id}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_titulo_ciclo_contable" class="java.lang.String">
+		<defaultValueExpression><![CDATA["INAP S.A. de C.V"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_nombre_completo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Diego Palacios"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_usuario" class="java.lang.String">
+		<defaultValueExpression><![CDATA["PM15016"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_tamano_codigo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[4]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_tipo_catalogo" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
 	<parameter name="param_id_cuenta" class="java.lang.Integer" isForPrompting="false"/>
 	<parameter name="param_id_ciclo_tabla" class="java.lang.Short" isForPrompting="false"/>
 	<parameter name="param_tipo_saldo" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="param_es_restado" class="java.lang.Integer" isForPrompting="false"/>
+	<parameter name="param_desde" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_hasta" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_formateador_moneda" class="java.text.DecimalFormat" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new java.text.DecimalFormat("#,##0.00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_formateador_fecha" class="java.text.SimpleDateFormat" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_fecha_generacion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select 
 	c.id, 
@@ -220,34 +252,71 @@ order by pd.folio_mayor]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="103" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="558" height="30" uuid="11c5a924-bec6-4020-8200-298c594ee431"/>
-				<textElement textAlignment="Center"/>
-				<text><![CDATA[Instituto Nacional de Apastepeque]]></text>
-			</staticText>
+		<band height="168" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="20" width="558" height="19" uuid="388d71cf-93de-4555-b196-b0107ba7c9f6"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA["Alumno/a: "+ $P{param_nombre_completo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="-3" y="60" width="561" height="20" uuid="ae2785cd-8087-4bf3-986d-861807150a5a"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA["Ciclo contable: "+$P{param_titulo_ciclo_contable}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="1" y="39" width="558" height="19" uuid="02147939-f2ed-4ff2-87a8-c96ec05a07c5"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="0" y="39" width="550" height="19" uuid="49f8187a-d2d9-41b6-865c-9f5f4b367b4f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["NIE "+ $P{param_usuario}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-2" y="80" width="558" height="23" uuid="7804b290-48d5-444f-951a-076a9dd462ca"/>
-				<textElement textAlignment="Center">
+				<reportElement x="0" y="0" width="550" height="20" uuid="daa90c59-f5c8-4f86-96cd-8f2c287a36a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Instituto Nacional de Apastepeque]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="20" width="550" height="19" uuid="4ff7c1d6-c336-4c86-9883-68e17694cf04"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Alumno/a: "+ $P{param_nombre_completo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="58" width="550" height="20" uuid="6d1369c1-7c97-43eb-9108-1befd2aa7f2b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Empresa: "+$P{param_titulo_ciclo_contable}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="78" width="550" height="20" uuid="57eb355a-7797-48fb-b06c-817ed69757c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Libro mayor]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="0" y="118" width="550" height="20" uuid="c327b781-7e9f-4ef1-b002-9c45463a60ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Expresado en dólares de los Estados Unidos"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="98" width="68" height="20" uuid="47b85dea-5c43-4739-9f12-1549b3dd5d65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{param_desde}]]></textFieldExpression>
+				<patternExpression><![CDATA["dd/MM/yyyy"]]></patternExpression>
+			</textField>
+			<staticText>
+				<reportElement x="202" y="98" width="20" height="20" uuid="5c84e1c7-ffc5-4e7b-a119-6da626f5f54e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Del]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="98" width="10" height="20" uuid="c78826ba-79c2-4aa9-b39a-6bd6d93041c9"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[al]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="302" y="98" width="70" height="20" uuid="42a22a5c-5259-4804-b682-dc932d4f84b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{param_hasta}]]></textFieldExpression>
+				<patternExpression><![CDATA["dd/MM/yyyy"]]></patternExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="138" width="550" height="20" uuid="4f366186-c3c8-42d0-9fc6-fa339c77a55b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{param_fecha_generacion}]]></textFieldExpression>
+				<patternExpression><![CDATA["dd/MM/yyyy hh:mm"]]></patternExpression>
+			</textField>
 		</band>
 	</title>
 	<detail>
@@ -269,7 +338,7 @@ order by pd.folio_mayor]]>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
-					<datasetRun subDataset="Dataset1" uuid="2e9df49e-2ef5-40f2-afac-106ce6532bcb">
+					<datasetRun subDataset="Dataset1" uuid="3c465fc1-546d-4654-abb4-f908de74a844">
 						<datasetParameter name="param_id_cuenta">
 							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
 						</datasetParameter>
@@ -281,6 +350,12 @@ order by pd.folio_mayor]]>
 						</datasetParameter>
 						<datasetParameter name="param_tipo_saldo">
 							<datasetParameterExpression><![CDATA[$F{tipo_saldo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_formateador_moneda">
+							<datasetParameterExpression><![CDATA[$P{param_formateador_moneda}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_formateador_fecha">
+							<datasetParameterExpression><![CDATA[$P{param_formateador_fecha}]]></datasetParameterExpression>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
@@ -296,8 +371,9 @@ order by pd.folio_mayor]]>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="c0aa58b8-6b1e-4955-8a0a-2b4e261e87c4"/>
-								<textElement verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$P{param_formateador_fecha}.parse($F{fecha})]]></textFieldExpression>
+								<patternExpression><![CDATA["dd/MM/yyyy"]]></patternExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -350,7 +426,7 @@ order by pd.folio_mayor]]>
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="31b14657-e8b3-4746-aec2-4640e471f4c9"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{debe} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{debe})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{debe} == 0 ? "" :  $P{param_formateador_moneda}.format($F{debe})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -367,7 +443,7 @@ order by pd.folio_mayor]]>
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="01385578-13d0-4e55-9efe-307498c52fc2"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{haber} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{haber})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{haber} == 0 ? "" :  $P{param_formateador_moneda}.format($F{haber})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -384,7 +460,7 @@ order by pd.folio_mayor]]>
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="316c78b5-7f06-4aa2-8680-aaf088f4a52d"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{saldo} == 0 ? "" :  NumberFormat.getCurrencyInstance(Locale.US).format($F{saldo})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{saldo} == 0 ? "" :  $P{param_formateador_moneda}.format($F{saldo})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

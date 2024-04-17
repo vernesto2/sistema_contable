@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -441,7 +442,11 @@ public class vLibroDiario extends javax.swing.JPanel {
             params.put("param_titulo_ciclo_contable", sesion.configUsuario.getNombre_ciclo_contable());
             params.put("param_nombre_completo", sesion.usuario.getPersona().nombreCompleto());
             params.put("param_usuario", sesion.usuario.getNombre());
+            params.put("param_desde", sesion.configUsuario.getCicloContable().getDesde());
+            params.put("param_hasta", sesion.configUsuario.getCicloContable().getHasta());
+            params.put("param_fecha_generacion", new Date());
             params.put(JRParameter.REPORT_LOCALE, locale);
+            
             JasperPrint jp = JasperFillManager.fillReport(reporte, params, con);
             final boolean EXIT_ON_CLOSE = false;
             JasperViewer.viewReport(jp, EXIT_ON_CLOSE);
