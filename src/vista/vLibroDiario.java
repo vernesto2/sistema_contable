@@ -78,7 +78,7 @@ public class vLibroDiario extends javax.swing.JPanel {
     }
 
     public void setModelPartida() {
-        String[] cabecera = {"# Partida", "Folio", "Fecha", "Tipo de Partida", "Comentario", "Monto", "Editar", "Eliminar"};
+        String[] cabecera = {"# Partida", "Folio", "Fecha", "Hora", "Tipo de Partida", "Comentario", "Monto", "Editar", "Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblPartidas.setModel(dtm);
         tblPartidas.setDefaultRenderer(Object.class, new Render());
@@ -99,23 +99,25 @@ public class vLibroDiario extends javax.swing.JPanel {
             datos[0] = partida.getNum_partida();
             datos[1] = partida.getFolio();
             datos[2] = sdf.format(partida.getFecha());
-            datos[3] = this.listaTipoPartidas.get(partida.getId_tipo_partida()).getLabel();
-            datos[4] = partida.getComentario();
-            datos[5] = partida.getMonto();
-            datos[6] = btn1;
-            datos[7] = btn2;
+            datos[3] = partida.getHora();
+            datos[4] = this.listaTipoPartidas.get(partida.getId_tipo_partida()).getLabel();
+            datos[5] = partida.getComentario();
+            datos[6] = partida.getMonto();
+            datos[7] = btn1;
+            datos[8] = btn2;
             dtm.addRow(datos);
         }
         tblPartidas.setModel(dtm);
         tblPartidas.setAutoResizeMode(tblPartidas.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         tblPartidas.getColumnModel().getColumn(0).setPreferredWidth(30);
         tblPartidas.getColumnModel().getColumn(1).setPreferredWidth(30);
-        tblPartidas.getColumnModel().getColumn(2).setPreferredWidth(70);
-        tblPartidas.getColumnModel().getColumn(3).setPreferredWidth(70);
-        tblPartidas.getColumnModel().getColumn(4).setPreferredWidth(400);
-        tblPartidas.getColumnModel().getColumn(5).setPreferredWidth(100);
-        tblPartidas.getColumnModel().getColumn(6).setPreferredWidth(20);
+        tblPartidas.getColumnModel().getColumn(2).setPreferredWidth(40);
+        tblPartidas.getColumnModel().getColumn(3).setPreferredWidth(40);
+        tblPartidas.getColumnModel().getColumn(4).setPreferredWidth(70);
+        tblPartidas.getColumnModel().getColumn(5).setPreferredWidth(400);
+        tblPartidas.getColumnModel().getColumn(6).setPreferredWidth(100);
         tblPartidas.getColumnModel().getColumn(7).setPreferredWidth(20);
+        tblPartidas.getColumnModel().getColumn(8).setPreferredWidth(20);
     }
 
     public void obtenerListadoPartidas() {
@@ -339,12 +341,12 @@ public class vLibroDiario extends javax.swing.JPanel {
         // logica de acciones de botones
         int accion = tblPartidas.getSelectedColumn();
         int row = tblPartidas.getSelectedRow();
-        if (accion == 6) {
+        if (accion == 7) {
             // editar
             this.setearModeloCicloContable(row);
             this.abrirDialogPartida(partidaModel);
 
-        } else if (accion == 7) {
+        } else if (accion == 8) {
             // eliminar
             String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaPartidas.get(row).getComentario();
             int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -451,19 +453,9 @@ public class vLibroDiario extends javax.swing.JPanel {
     }
     private void btnNuevoCicloContable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoCicloContable1ActionPerformed
         // obtenemos el ultimo # de partida
-        RespuestaGeneral rg = _partida.obtenerUltimoNumPartida(this.sesion.configUsuario.getCicloContable().getId());
-        if (rg.esExitosa()) {
-            ArrayList<Partida> listaPartidaAux = (ArrayList<Partida>)rg.getDatos();
-            Partida partidaAux = new Partida();
-            if (listaPartidaAux.size() > 0) {
-                partidaAux = (Partida)listaPartidaAux.get(0);
-            } else {
-                partidaAux.setNum_partida(1);
-            }
-            this.abrirDialogPartida(partidaAux);
-        } else {
-            JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
-        }
+        Partida partidaAux = new Partida();
+        partidaAux.setNum_partida("-");
+        this.abrirDialogPartida(partidaAux);
     }//GEN-LAST:event_btnNuevoCicloContable1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

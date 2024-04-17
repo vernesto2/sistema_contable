@@ -40,20 +40,29 @@ public class daoPartida {
         ArrayList<dtoPartida> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
-                  select 
-                  	p.*
-                  	,pr.totalDebe as monto 
-                  from partida p
-                  inner join(
-                  	select 
-                            sum(pd.debe) totalDebe
-                            ,pd.id_partida 
+                  WITH partidas as (
+                    select 
+                            p.*
+                            ,pr.totalDebe as monto
+                            ,ROW_NUMBER () OVER ( 
+                                    ORDER BY cast(p.fecha as text), cast(p.hora as text) 
+                            ) num_partida
+                    from partida p
+                    inner join(
+                        select 
+                                sum(pd.debe) totalDebe
+                                ,pd.id_partida 
                         from partida_detalle pd 
                         where pd.eliminado = 0 
                         GROUP by pd.id_partida
-                  )pr on pr.id_partida = p.id 
-                  where p.eliminado = 0 and p.id_ciclo = ?
-                  order by p.num_partida
+                    )pr on pr.id_partida = p.id 
+                    where p.eliminado = 0 and p.id_ciclo = ?
+                    order by cast(p.fecha as text), cast(p.hora as text)
+                  )
+                  
+                  select 
+                  	p.*
+                  from partidas p
                   """;
         String newSql = sql.replaceAll("busqueda", busqueda);
         try (PreparedStatement ps = cx.getCx().prepareStatement(newSql)) {
@@ -64,9 +73,10 @@ public class daoPartida {
                 partida.setId(rs.getInt("id"));
                 partida.setId_ciclo(rs.getInt("id_ciclo"));
                 partida.setId_tipo_partida(rs.getInt("id_tipo_partida"));
-                partida.setNum_partida(rs.getInt("num_partida"));
+                partida.setNum_partida(rs.getString("num_partida"));
                 partida.setMonto(rs.getDouble("monto"));
                 partida.setComentario(rs.getString("comentario"));
+                partida.setHora(rs.getString("hora"));
                 String sFechaPartida = rs.getString("fecha");
                 Date fechaPartida = new Date();
                 try {
@@ -104,7 +114,7 @@ public class daoPartida {
                 partida.setId(-1);
                 partida.setId_ciclo(-1);
                 partida.setId_tipo_partida(-1);
-                partida.setNum_partida((rs.getInt("num_partida")) + 1);
+                partida.setNum_partida((rs.getString("num_partida")) + 1);
                 partida.setComentario("");
                 partida.setFecha(new Date());
                 partida.setEliminado(false);
@@ -134,8 +144,9 @@ public class daoPartida {
                 partida.setId(rs.getInt("id"));
                 partida.setId_ciclo(rs.getInt("id_ciclo"));
                 partida.setId_tipo_partida(rs.getInt("id_tipo_partida"));
-                partida.setNum_partida(rs.getInt("num_partida"));
+                partida.setNum_partida(rs.getString("num_partida"));
                 partida.setComentario(rs.getString("comentario"));
+                partida.setComentario(rs.getString("hora"));
                 String sFechaPartida = rs.getString("fecha");
                 Date fechaPartida = new Date();
                 try {
@@ -167,11 +178,12 @@ public class daoPartida {
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, partida.getId_ciclo());
             ps.setInt(2, partida.getId_tipo_partida());
-            ps.setInt(3, partida.getNum_partida());
-            ps.setString(4, partida.getComentario());
-            ps.setString(5, sdfString.format(partida.getFecha()));
-            ps.setInt(6, 0);
-            ps.setInt(7, partida.getFolio());
+            //ps.setInt(3, partida.getNum_partida());
+            ps.setString(3, partida.getComentario());
+            ps.setString(4, sdfString.format(partida.getFecha()));
+            ps.setInt(5, 0);
+            ps.setInt(6, partida.getFolio());
+            ps.setString(7, partida.getHora());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             id = -1;
@@ -204,19 +216,20 @@ public class daoPartida {
                     UPDATE partida SET 
                         id_ciclo=?,
                         id_tipo_partida=?,
-                        num_partida=?,
                         comentario=?,
                         fecha=?,
-                        folio=?
+                        folio=?,
+                        hora=?
                     WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, partida.getId_ciclo());
             ps.setInt(2, partida.getId_tipo_partida());
-            ps.setInt(3, partida.getNum_partida());
-            ps.setString(4, partida.getComentario());
-            ps.setString(5, sdfString.format(partida.getFecha()));
-            ps.setInt(6, partida.getFolio());
+            //ps.setInt(3, partida.getNum_partida());
+            ps.setString(3, partida.getComentario());
+            ps.setString(4, sdfString.format(partida.getFecha()));
+            ps.setInt(5, partida.getFolio());
+            ps.setString(6, partida.getHora());
             ps.setInt(7, partida.getId());
             ps.executeUpdate();
             
