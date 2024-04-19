@@ -563,7 +563,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnBalanzaComprobacion.isSelected()) {
             this.btnBalanzaComprobacion.setSelected(true);
-            new CambiaPanel(pnl, new vBalanzaComprobacion());
+            new CambiaPanel(pnl, new vBalanzaComprobacion(sesion));
         }
     }//GEN-LAST:event_btnBalanzaComprobacionActionPerformed
 

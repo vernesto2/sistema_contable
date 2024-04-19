@@ -82,7 +82,12 @@ case
 	else 0
 end 
   ) over ( order by pd.id ) as saldo
-from partida p
+from (
+	select pi.*, 
+	row_number() over ( order by pi.fecha || ' ' || pi.hora asc) as num_partida
+	from partida pi
+	where pi.id_ciclo =  $P{param_id_ciclo_tabla} 
+) p
 inner join partida_detalle pd on pd.id_partida = p.id
 inner join cuenta c on pd.id_cuenta = c.id and c.eliminado = false
 where 

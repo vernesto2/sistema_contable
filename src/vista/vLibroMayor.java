@@ -5,6 +5,7 @@
 package vista;
 
 import conexion.Conexion;
+import formularios.dSeleccionarCuentaFormula;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +20,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelo.Cuenta;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
@@ -46,6 +48,7 @@ public class vLibroMayor extends javax.swing.JPanel {
      */
     Sesion sesion;
     ServicioCuenta _cuenta;
+    Cuenta cuentaSeleccionada;
     public vLibroMayor(Sesion sesion) {
         initComponents();
         this.sesion = sesion;
@@ -62,15 +65,20 @@ public class vLibroMayor extends javax.swing.JPanel {
     private void initComponents() {
 
         btnVerLibroMayor = new RSMaterialComponent.RSButtonShapeIcon();
-        btnBalanza = new RSMaterialComponent.RSButtonShapeIcon();
         btnVerLibroMayor1 = new RSMaterialComponent.RSButtonShapeIcon();
         btnVerLibroMayor2 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnElegirCuenta = new RSMaterialComponent.RSButtonShapeIcon();
+        btnLimpiar = new RSMaterialComponent.RSButtonShapeIcon();
+        jLabel17 = new javax.swing.JLabel();
+        txtCuentaSeleccionada = new javax.swing.JLabel();
+        rSComboBoxMaterial1 = new RSMaterialComponent.RSComboBoxMaterial();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         btnVerLibroMayor.setBackground(new java.awt.Color(251, 205, 6));
-        btnVerLibroMayor.setText("Ver libro mayor partidas operativas");
+        btnVerLibroMayor.setText("Ver hasta partidas operativas");
+        btnVerLibroMayor.setAlignmentY(0.0F);
         btnVerLibroMayor.setBackgroundHover(new java.awt.Color(251, 174, 6));
         btnVerLibroMayor.setForegroundHover(new java.awt.Color(0, 0, 0));
         btnVerLibroMayor.setForegroundIcon(new java.awt.Color(0, 0, 0));
@@ -83,22 +91,8 @@ public class vLibroMayor extends javax.swing.JPanel {
             }
         });
 
-        btnBalanza.setBackground(new java.awt.Color(251, 205, 6));
-        btnBalanza.setText("Ver balanza de comprobacion");
-        btnBalanza.setBackgroundHover(new java.awt.Color(251, 174, 6));
-        btnBalanza.setForegroundHover(new java.awt.Color(0, 0, 0));
-        btnBalanza.setForegroundIcon(new java.awt.Color(0, 0, 0));
-        btnBalanza.setForegroundIconHover(new java.awt.Color(0, 0, 0));
-        btnBalanza.setForegroundText(new java.awt.Color(0, 0, 0));
-        btnBalanza.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.BOOK);
-        btnBalanza.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBalanzaActionPerformed(evt);
-            }
-        });
-
         btnVerLibroMayor1.setBackground(new java.awt.Color(251, 205, 6));
-        btnVerLibroMayor1.setText("Ver libro mayor partidas de ajuste");
+        btnVerLibroMayor1.setText("Ver hasta partidas de ajuste");
         btnVerLibroMayor1.setBackgroundHover(new java.awt.Color(251, 174, 6));
         btnVerLibroMayor1.setForegroundHover(new java.awt.Color(0, 0, 0));
         btnVerLibroMayor1.setForegroundIcon(new java.awt.Color(0, 0, 0));
@@ -112,7 +106,7 @@ public class vLibroMayor extends javax.swing.JPanel {
         });
 
         btnVerLibroMayor2.setBackground(new java.awt.Color(251, 205, 6));
-        btnVerLibroMayor2.setText("Ver libro mayor partidas de cierre");
+        btnVerLibroMayor2.setText("Ver hasta partidas de cierre");
         btnVerLibroMayor2.setBackgroundHover(new java.awt.Color(251, 174, 6));
         btnVerLibroMayor2.setForegroundHover(new java.awt.Color(0, 0, 0));
         btnVerLibroMayor2.setForegroundIcon(new java.awt.Color(0, 0, 0));
@@ -125,41 +119,99 @@ public class vLibroMayor extends javax.swing.JPanel {
             }
         });
 
+        btnElegirCuenta.setBackground(new java.awt.Color(0, 153, 0));
+        btnElegirCuenta.setText("ELEGIR CUENTA");
+        btnElegirCuenta.setToolTipText("SELECCIONAR CUENTA");
+        btnElegirCuenta.setBackgroundHover(new java.awt.Color(0, 178, 0));
+        btnElegirCuenta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnElegirCuenta.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnElegirCuenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnElegirCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
+        btnElegirCuenta.setSizeIcon(18.0F);
+        btnElegirCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElegirCuentaActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setBackground(new java.awt.Color(51, 102, 255));
+        btnLimpiar.setText("LIMPIAR");
+        btnLimpiar.setToolTipText("QUITAR LA CUENTA SELECCIONADA");
+        btnLimpiar.setBackgroundHover(new java.awt.Color(51, 153, 255));
+        btnLimpiar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnLimpiar.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnLimpiar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnLimpiar.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
+        btnLimpiar.setSizeIcon(18.0F);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel17.setText("Cuenta:");
+        jLabel17.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtCuentaSeleccionada.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtCuentaSeleccionada.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtCuentaSeleccionada.setText("* CUENTA NO ESPECIFICADA *");
+        txtCuentaSeleccionada.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVerLibroMayor, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                    .addComponent(btnVerLibroMayor1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBalanza, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVerLibroMayor2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(657, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rSComboBoxMaterial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(128, 128, 128))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnElegirCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnVerLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnVerLibroMayor1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnVerLibroMayor2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnVerLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnVerLibroMayor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(btnVerLibroMayor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnBalanza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(382, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnElegirCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rSComboBoxMaterial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVerLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerLibroMayor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerLibroMayor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerLibroMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerLibroMayorActionPerformed
         verLibroMayor();
     }//GEN-LAST:event_btnVerLibroMayorActionPerformed
-
-    private void btnBalanzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanzaActionPerformed
-        verBalanzaComprobacion();
-    }//GEN-LAST:event_btnBalanzaActionPerformed
 
     private void btnVerLibroMayor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerLibroMayor1ActionPerformed
         // TODO add your handling code here:
@@ -168,67 +220,27 @@ public class vLibroMayor extends javax.swing.JPanel {
     private void btnVerLibroMayor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerLibroMayor2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVerLibroMayor2ActionPerformed
-    
-    public void verBalanzaComprobacion() {
-        try (
-                InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-balanza-comprobacion.jrxml");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))
-                ){
-            Map<String, Object> params = new HashMap<String, Object>();
-            
-            Connection con;
-            JasperReport reporte;
-            Conexion cx = new Conexion(sesion.rutaConexion);
-            con = cx.conectar();
-            reporte = JasperCompileManager.compileReport(inputStream);
 
-            //Currency currentyActual = Currency.getInstance(Locale.US);
-            Locale locale = new Locale("es", "SV");
-
-            params.put("param_titulo_ciclo_contable", sesion.configUsuario.getNombre_ciclo_contable());
-            params.put("param_nombre_completo", sesion.usuario.getPersona().nombreCompleto());
-            params.put("param_usuario", sesion.usuario.getNombre());
-            
-            params.put("param_desde", sesion.configUsuario.getCicloContable().getDesde());
-            params.put("param_hasta", sesion.configUsuario.getCicloContable().getHasta());
-            params.put("param_fecha_generacion", new Date());
-            
-            Integer tipoCatalogo = sesion.configUsuario.getCicloContable().getTipoCatalogo().getId();
-            params.put("param_id_tipo_catalogo", tipoCatalogo);
-            
-            Integer nivelAMayorizar = sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar();
-            //nivel 0 es para cuando se puede cargar y abonar cualquier cuenta, no ay restriccion
-            //en este tipo además no hay parcial
-            if(nivelAMayorizar == 0) {
-                params.put("param_tamano_codigo", 0);
-            } else {
-                RespuestaGeneral rg = _cuenta.tamanoCodigoAMayorizar(tipoCatalogo);
-                Integer tamanoNivelAMayorizar = ( Integer) rg.getDatos();
-                if ( tamanoNivelAMayorizar == null) {
-                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
-                } else {
-                    params.put("param_tamano_codigo", 4);
-                }
-            }
-            Integer idCiclo = sesion.configUsuario.getCicloContable().getId();
-            List<CuentaBalanza> listBeans = (List<CuentaBalanza>) _cuenta
-                    .listarCuentaBalanzaComprobacion(tipoCatalogo, idCiclo)
-                    .getDatos();
-            
-            JRBeanCollectionDataSource param_cuentas_balanza = new JRBeanCollectionDataSource(listBeans);
-            params.put("param_cuentas_balanza", param_cuentas_balanza);
-//            params.put("params_cuentas_balanza", listBeans);
-
-            
-
-            params.put(JRParameter.REPORT_LOCALE, locale);
-            
-            JasperPrint jp = JasperFillManager.fillReport(reporte, params, new JREmptyDataSource() );
-            final boolean EXIT_ON_CLOSE = false;
-            JasperViewer.viewReport(jp, EXIT_ON_CLOSE);
-        } catch (IOException | JRException ex) {
-            Logger.getLogger(vLibroDiario.class.getName()).log(Level.SEVERE, null, ex);
+    private void btnElegirCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElegirCuentaActionPerformed
+        elegirCuenta();
+    }//GEN-LAST:event_btnElegirCuentaActionPerformed
+    private void elegirCuenta() {
+        dSeleccionarCuentaFormula dialogoCuentas = new dSeleccionarCuentaFormula(null, true, sesion);
+        dialogoCuentas.setVisible(true);
+        // validamos si realizo alguna accion para actualizar el listado o no
+        if (dialogoCuentas.getRealizoAccion()) {
+            cuentaSeleccionada = dialogoCuentas.getCuentaSeleccionada();
+            //JOptionPane.showMessageDialog(this, dialogoCuentas.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(dialogoCuentas.getRg()));
+            this.txtCuentaSeleccionada.setText(cuentaSeleccionada.getCodigo() + " - " + cuentaSeleccionada.getNombre());
         }
+    }
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        this.limpiarCuentaSeleccionada();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+    
+    private void limpiarCuentaSeleccionada() {
+        cuentaSeleccionada = null;
+        this.txtCuentaSeleccionada.setText("");
     }
     public void verLibroMayor() {
          try (
@@ -281,9 +293,13 @@ public class vLibroMayor extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RSMaterialComponent.RSButtonShapeIcon btnBalanza;
+    private RSMaterialComponent.RSButtonShapeIcon btnElegirCuenta;
+    private RSMaterialComponent.RSButtonShapeIcon btnLimpiar;
     private RSMaterialComponent.RSButtonShapeIcon btnVerLibroMayor;
     private RSMaterialComponent.RSButtonShapeIcon btnVerLibroMayor1;
     private RSMaterialComponent.RSButtonShapeIcon btnVerLibroMayor2;
+    private javax.swing.JLabel jLabel17;
+    private RSMaterialComponent.RSComboBoxMaterial rSComboBoxMaterial1;
+    private javax.swing.JLabel txtCuentaSeleccionada;
     // End of variables declaration//GEN-END:variables
 }

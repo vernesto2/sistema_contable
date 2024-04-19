@@ -255,17 +255,18 @@ and pd.id_partida =   $P{param_id_partida}]]>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT p.*,
-	 cast(CASE p.id_tipo_partida
-WHEN 0 THEN "Operativa"
-WHEN 1 THEN "De ajuste"
-WHEN 2 THEN "De cierre"
-ELSE "ERROR"
-END as text)
-	 AS tipo_partida
+	row_number() over ( order by fecha || ' ' || hora asc) as num_partida, 
+	 CASE p.id_tipo_partida
+		WHEN 0 THEN "Operativa"
+		WHEN 1 THEN "De ajuste"
+		WHEN 2 THEN "De cierre"
+		ELSE "ERROR"
+	END AS tipo_partida
 FROM partida as p
 WHERE 
 	 p.eliminado = false 
-	 AND p.id_ciclo = $P{param_id_ciclo}]]>
+	 AND p.id_ciclo = $P{param_id_ciclo}
+order by fecha || hora asc]]>
 	</queryString>
 	<field name="id" class="java.lang.Object">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
