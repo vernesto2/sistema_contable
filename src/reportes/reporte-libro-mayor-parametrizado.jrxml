@@ -81,7 +81,7 @@ case
 	when tipo_saldo = 'A' then haber - debe
 	else 0
 end 
-  ) over ( order by p.fecha || ' ' || p.hora asc ) as saldo
+  ) over ( order by pd.id ) as saldo
 from (
 	select pi.*, 
 	row_number() over ( order by pi.fecha || ' ' || pi.hora asc) as num_partida
@@ -175,6 +175,10 @@ and pd.eliminado = false]]>
 	<parameter name="param_fecha_generacion" class="java.util.Date">
 		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
 	</parameter>
+	<parameter name="param_mes" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_id_cuenta_mayorizar" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[select 
 	c.id, 
@@ -197,6 +201,7 @@ and p.eliminado = false
 and p.id_ciclo =  $P{param_id_ciclo} 
 and id_tipo_catalogo =  $P{param_id_tipo_catalogo} 
 and length(c.codigo) =  $P{param_tamano_codigo}
+and c.id =  $P{param_id_cuenta_mayorizar} 
 group by 
 	c.id, 
 	c.codigo, 
