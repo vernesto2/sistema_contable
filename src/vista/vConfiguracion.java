@@ -452,13 +452,12 @@ public class vConfiguracion extends javax.swing.JPanel {
         Persona persona = sesion.usuario.getPersona();
         persona.setNombres(txtNombres.getText().trim());
         persona.setApellidos(txtApellidos.getText().trim());
-        persona.setTipo(Constantes.TIPO_ALUMNO);
+        
+        persona.setTipo(sesion.usuario.getPersona().getTipo());
         persona.setCarnet(txtCarnet.getText().trim());
 
         sesion.usuario.setNombre(txtCarnet.getText().trim());
         sesion.usuario.setCorreo(txtCorreo.getText().trim());
-
-        
 
         sesion.usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
 
