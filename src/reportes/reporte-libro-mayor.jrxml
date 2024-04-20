@@ -81,7 +81,7 @@ case
 	when tipo_saldo = 'A' then haber - debe
 	else 0
 end 
-  ) over ( order by p.fecha || ' ' || p.hora asc ) as saldo
+  ) over ( order by p.num_partida asc ) as saldo
 from (
 	select pi.*, 
 	row_number() over ( order by pi.fecha || ' ' || pi.hora asc) as num_partida
@@ -89,9 +89,10 @@ from (
 	where pi.id_ciclo =  $P{param_id_ciclo_tabla} 
 ) p
 inner join partida_detalle pd on pd.id_partida = p.id
-inner join cuenta c on pd.id_cuenta = c.id and c.eliminado = false
+inner join cuenta c on pd.id_cuenta = c.id
 where 
-pd.id_cuenta =  $P{param_id_cuenta} 
+c.eliminado = false
+and pd.id_cuenta =  $P{param_id_cuenta} 
 and p.id_ciclo =  $P{param_id_ciclo_tabla} 
 and  p.eliminado = false 
 and pd.eliminado = false]]>
@@ -465,7 +466,7 @@ order by pd.folio_mayor]]>
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="316c78b5-7f06-4aa2-8680-aaf088f4a52d"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{saldo} == 0 ? "" :  $P{param_formateador_moneda}.format($F{saldo})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$P{param_formateador_moneda}.format($F{saldo})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
