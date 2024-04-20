@@ -4,7 +4,6 @@
  */
 package formularios;
 
-import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -51,7 +50,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
     public void iniciarVistaDialog() {
         this.setLocationRelativeTo(this);
         this.setResizable(false);
-        this.setTitle("AGREGAR DETALLE A PARTIDA");
+        this.setTitle("SELECCIONAR CUENTA DE CATALOGO: " + this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getTipo().toUpperCase());
         this.realizoAccion = false;
         // seteamos la informacion
         this.setModelCuentas();

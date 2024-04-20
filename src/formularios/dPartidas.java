@@ -85,7 +85,7 @@ public class dPartidas extends javax.swing.JDialog {
     
     public void setearData() {
         txtNumPartida.setText(String.valueOf(this.partidaModel.getNum_partida()));
-        txtNumFolio.setText(String.valueOf(this.partidaModel.getFolio()));
+        //txtNumFolio.setText(String.valueOf(this.partidaModel.getFolio()));
         txtComentario.setText(this.partidaModel.getComentario());
         txtFecha.setDate(this.partidaModel.getFecha());
         txtHora.setText(this.partidaModel.getHora());
@@ -216,8 +216,6 @@ public class dPartidas extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         cmbTipoPartida = new RSMaterialComponent.RSComboBoxMaterial();
         btnAgregarDetallePartida = new RSMaterialComponent.RSButtonShapeIcon();
-        txtNumFolio = new RSMaterialComponent.RSTextFieldMaterial();
-        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtHora = new RSMaterialComponent.RSTextFieldMaterial();
         jPanel3 = new javax.swing.JPanel();
@@ -352,23 +350,6 @@ public class dPartidas extends javax.swing.JDialog {
             }
         });
 
-        txtNumFolio.setForeground(new java.awt.Color(0, 0, 0));
-        txtNumFolio.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtNumFolio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtNumFolio.setPhColor(new java.awt.Color(0, 0, 0));
-        txtNumFolio.setPlaceholder("# Folio");
-        txtNumFolio.setSelectionColor(new java.awt.Color(0, 0, 0));
-        txtNumFolio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNumFolioKeyTyped(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("# Folio:");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Hora:");
@@ -412,16 +393,9 @@ public class dPartidas extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAgregarDetallePartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNumPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(txtNumFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNumPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -429,30 +403,25 @@ public class dPartidas extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmbTipoPartida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtNumPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNumFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAgregarDetallePartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnAgregarDetallePartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)))
                 .addGap(2, 2, 2))
         );
 
@@ -598,7 +567,7 @@ public class dPartidas extends javax.swing.JDialog {
             this.partidaModel.setComentario(txtComentario.getText());
             this.partidaModel.setHora(this.txtHora.getText());
             //this.partidaModel.setNum_partida(Integer.parseInt(txtNumPartida.getText()));
-            this.partidaModel.setFolio(Integer.parseInt(txtNumFolio.getText()));
+            //this.partidaModel.setFolio(Integer.parseInt(txtNumFolio.getText()));
 
             this.partidaModel.setListaPartidaDetalles(this.listaPartidaDetalles);
             this.partidaModel.setListaPartidaDetallesEliminados(this.listaPartidaDetallesEliminados);
@@ -786,12 +755,6 @@ public class dPartidas extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnAgregarDetallePartidaActionPerformed
 
-    private void txtNumFolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumFolioKeyTyped
-        if (!Constantes.validarNumeros(evt.getKeyChar())) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtNumFolioKeyTyped
-
     private void txtHoraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHoraKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHoraKeyTyped
@@ -951,7 +914,6 @@ public class dPartidas extends javax.swing.JDialog {
     private RSMaterialComponent.RSComboBoxMaterial cmbTipoPartida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -966,7 +928,6 @@ public class dPartidas extends javax.swing.JDialog {
     private javax.swing.JTextArea txtComentario;
     private newscomponents.RSDateChooser txtFecha;
     private RSMaterialComponent.RSTextFieldMaterial txtHora;
-    private RSMaterialComponent.RSTextFieldMaterial txtNumFolio;
     private RSMaterialComponent.RSTextFieldMaterial txtNumPartida;
     private javax.swing.JLabel txtTotalDebe;
     private javax.swing.JLabel txtTotalHaber;

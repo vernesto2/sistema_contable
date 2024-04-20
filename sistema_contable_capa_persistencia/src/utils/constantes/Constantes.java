@@ -180,7 +180,7 @@ public class Constantes {
     // tipos de Formulas
     public static ArrayList<dtoLista> listaTiposCampoEspecialEstadoResultado() {
         ArrayList<dtoLista> lista = new ArrayList<>();
-        dtoLista op1 = new dtoLista("0", "Ninguno");
+        dtoLista op1 = new dtoLista("0", "Saldo");
         dtoLista op2 = new dtoLista("1", "Reserva Legal");
         dtoLista op3 = new dtoLista("2", "Impuesto Sobre Renta");
         dtoLista op4 = new dtoLista("3", "Saldo Inicial");

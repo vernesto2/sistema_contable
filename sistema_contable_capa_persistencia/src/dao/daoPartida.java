@@ -62,9 +62,9 @@ public class daoPartida {
                   
                   select 
                   	p.*
-                  from partidas p
+                  from partidas p where p.comentario like '%paramBusqueda%'
                   """;
-        String newSql = sql.replaceAll("busqueda", busqueda);
+        String newSql = sql.replaceAll("paramBusqueda", busqueda);
         try (PreparedStatement ps = cx.getCx().prepareStatement(newSql)) {
             ps.setInt(1, idCicloContable);
             rs = ps.executeQuery();

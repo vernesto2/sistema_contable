@@ -90,6 +90,9 @@ public class dFormFormula extends javax.swing.JDialog {
         if (this.formulaDtoModel.getFormula().getId_formula() > 0) {
             this.lblFormula.setText("DEPENDE DE: " + this.formulaDtoModel.getFormulaPadre().getNombre().toUpperCase());
         }
+        if (this.formulaPadre.getFormula().getId()> 0) {
+            this.lblFormula.setText("DEPENDE DE: " + this.formulaPadre.getFormula().getNombre().toUpperCase());
+        }
         
         // pasos para editar formula
         if (this.formulaPadre.getFormula().getId() < 0) {
@@ -506,32 +509,37 @@ public class dFormFormula extends javax.swing.JDialog {
 
     private void btnGuardarTipoCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTipoCatalogoActionPerformed
         // setear info al modelo
-        this.setearModelo();
-        // guardamos la info
-        if (this.formulaDtoModel.getFormula().getId() < 0) {
-            RespuestaGeneral rg = _formula.insertar(this.formulaDtoModel.getFormula());
-            if (rg.esExitosa()) {
-                this.setRealizoAccion(true);
-                this.setRg(rg);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
-            }
+        boolean valido = this.setearModelo();
+        
+        if (valido) {
+            // guardamos la info
+            if (this.formulaDtoModel.getFormula().getId() < 0) {
+                RespuestaGeneral rg = _formula.insertar(this.formulaDtoModel.getFormula());
+                if (rg.esExitosa()) {
+                    this.setRealizoAccion(true);
+                    this.setRg(rg);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+                }
 
-            // verificamos si es NUEVO
-        } else {
-            RespuestaGeneral rg = _formula.editar(this.formulaDtoModel.getFormula());
-            if (rg.esExitosa()) {
-                this.setRealizoAccion(true);
-                this.setRg(rg);
-                this.dispose();
+                // verificamos si es NUEVO
             } else {
-                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+                RespuestaGeneral rg = _formula.editar(this.formulaDtoModel.getFormula());
+                if (rg.esExitosa()) {
+                    this.setRealizoAccion(true);
+                    this.setRg(rg);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+                }
             }
         }
+        
     }//GEN-LAST:event_btnGuardarTipoCatalogoActionPerformed
 
-    public void setearModelo() {
+    public boolean setearModelo() {
+        boolean valido = true;
         
         try {
             this.formulaDtoModel.getFormula().setId_tipo_catalogo(this.tipoCatalogo.getId());
@@ -543,6 +551,7 @@ public class dFormFormula extends javax.swing.JDialog {
             this.formulaDtoModel.getFormula().setNombre(this.txtNombre.getText());
             
             if (this.txtPosicion.getText().isEmpty()) {
+                valido = false;
                 JOptionPane.showMessageDialog(this, "No se ha ingresado una posición", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
             } else {
                 String posicionFinal = this.lblPosicion.getText() + this.txtPosicion.getText();
@@ -550,10 +559,11 @@ public class dFormFormula extends javax.swing.JDialog {
             }
             
         } catch (Exception e) {
+            valido = false;
             JOptionPane.showMessageDialog(this, "Por favor verifique que todos los campos han sido completados", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
         }
         
-        
+        return valido;
         //this.formulaDtoModel.getFormula().setPosicion();
     }
     
