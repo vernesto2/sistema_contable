@@ -159,6 +159,8 @@ public class vLibroMayor extends javax.swing.JPanel {
         txtCuentaSeleccionada.setText("* CUENTA NO ESPECIFICADA *");
         txtCuentaSeleccionada.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
+        rSComboBoxMaterial1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mes", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
