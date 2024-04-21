@@ -31,6 +31,7 @@ import reportes.CuentaBalanza;
 import servicios.ServicioCuenta;
 import sesion.Sesion;
 import utils.UtileriaVista;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -135,17 +136,23 @@ public class vBalanzaComprobacion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerBalanzaComprobacion1LibroMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerBalanzaComprobacion1LibroMayorActionPerformed
-        verBalanzaComprobacion();
+        verBalanzaComprobacion(
+                Integer.parseInt(Constantes.TIPO_PARTIDA_OPERATIVA.getValue())
+        );
     }//GEN-LAST:event_btnVerBalanzaComprobacion1LibroMayorActionPerformed
 
     private void btnVerBalanzaComprobacion1LibroMayor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerBalanzaComprobacion1LibroMayor2ActionPerformed
-        // TODO add your handling code here:
+        verBalanzaComprobacion(
+            Integer.parseInt(Constantes.TIPO_PARTIDA_AJUSTE.getValue())
+        );
     }//GEN-LAST:event_btnVerBalanzaComprobacion1LibroMayor2ActionPerformed
 
     private void btnVerBalanzaComprobacion1LibroMayor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerBalanzaComprobacion1LibroMayor3ActionPerformed
-        // TODO add your handling code here:
+        verBalanzaComprobacion(
+                Integer.parseInt(Constantes.TIPO_PARTIDA_CIERRE.getValue())
+        );
     }//GEN-LAST:event_btnVerBalanzaComprobacion1LibroMayor3ActionPerformed
-    public void verBalanzaComprobacion() {
+    public void verBalanzaComprobacion(int tipoPartida) {
         try (
                 InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-balanza-comprobacion.jrxml");
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))
@@ -188,7 +195,7 @@ public class vBalanzaComprobacion extends javax.swing.JPanel {
             }
             Integer idCiclo = sesion.configUsuario.getCicloContable().getId();
             List<CuentaBalanza> listBeans = (List<CuentaBalanza>) _cuenta
-                    .listarCuentaBalanzaComprobacion(tipoCatalogo, idCiclo)
+                    .listarCuentaBalanzaComprobacion(tipoCatalogo, idCiclo, tipoPartida)
                     .getDatos();
             
             JRBeanCollectionDataSource param_cuentas_balanza = new JRBeanCollectionDataSource(listBeans);

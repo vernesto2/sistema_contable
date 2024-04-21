@@ -332,7 +332,11 @@ group by length(ci.codigo)
             throw new IllegalStateException(mensaje);
         }
     }
-    public List<CuentaBalanza> listarCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo) throws SQLException {
+    
+    public List<CuentaBalanza> listarCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo, Integer tipoPartida, 
+            // cuando idCuenta = NULL, la consulta devuelve todas las cuentas de mayor que se han utilizado, caso contrario devuelve la cuenta específica
+            Integer idCuenta) 
+            throws SQLException {
         
         var sql = 
 """
@@ -344,7 +348,7 @@ with cte_balanza_comprobacion as (
     else 0 
   end
   as saldo_inicial, 
-  row_number() over (PARTITION by c.id order by p.fecha asc, p.id asc) as row_number
+  row_number() over (PARTITION by c.id order by p.fecha || ' ' || p.hora asc, p.id asc) as row_number
   from cuenta c 
   inner join partida_detalle pd on pd.id_cuenta = c.id and pd.parcial = 0
   inner join partida p on pd.id_partida = p.id
@@ -353,6 +357,9 @@ with cte_balanza_comprobacion as (
   and pd.eliminado = false
   and p.id_ciclo = ?
   and c.id_tipo_catalogo = ?
+  and (
+      ? is null or c.id = ?
+  )
 )
 select cbc.*, saldo_calculado.saldo_deudor, saldo_calculado.saldo_acreedor
 from cte_balanza_comprobacion cbc 
@@ -378,6 +385,10 @@ inner join (
     and pd.eliminado = false
     and p.id_ciclo = ?
     and c.id_tipo_catalogo = ?
+	and p.id_tipo_partida <= ?
+	and (
+      ? is null or c.id = ?
+    )
   group by c.id, c.codigo, c.nombre
 ) as saldo_calculado on saldo_calculado.id = cbc.id
 where row_number = 1
@@ -390,8 +401,17 @@ order by folio_mayor
         {
             ps.setObject(1, idCiclo);
             ps.setObject(2, idTipoCatalogo);
-            ps.setObject(3, idCiclo);
-            ps.setObject(4, idTipoCatalogo);
+            //idCuenta puede ser NULL, la consulta se encarga de manejar esos casos
+            ps.setObject(3, idCuenta);
+            //idCuenta puede ser NULL, la consulta se encarga de manejar esos casos
+            ps.setObject(4, idCuenta);
+            ps.setObject(5, idCiclo);
+            ps.setObject(6, idTipoCatalogo);
+            ps.setObject(7, tipoPartida);
+            //idCuenta puede ser NULL, la consulta se encarga de manejar esos casos
+            ps.setObject(8, idCuenta);
+            //idCuenta puede ser NULL, la consulta se encarga de manejar esos casos
+            ps.setObject(9, idCuenta);
             ResultSet rs = ps.executeQuery();
             //ps.setInt(1, id);
             

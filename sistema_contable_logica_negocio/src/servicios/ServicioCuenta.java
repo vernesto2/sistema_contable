@@ -101,10 +101,20 @@ public class ServicioCuenta {
         }
         
     }
-    public RespuestaGeneral listarCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo) {
+    public RespuestaGeneral listarCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo, Integer tipoPartida) {
         try {
             this.cx.conectar();
-            List<CuentaBalanza> listBeans = daoCuenta.listarCuentaBalanzaComprobacion(idTipoCatalogo, idCiclo);
+            List<CuentaBalanza> listBeans = daoCuenta.listarCuentaBalanzaComprobacion(idTipoCatalogo, idCiclo, tipoPartida, null);
+            this.cx.desconectar();
+            return RespuestaGeneral.asOk(null, listBeans);
+        } catch (Exception e) {
+            return RespuestaGeneral.asBadRequest(e.getMessage());
+        }
+    }
+    public RespuestaGeneral verCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo, Integer tipoPartida, Integer idCuenta) {
+        try {
+            this.cx.conectar();
+            List<CuentaBalanza> listBeans = daoCuenta.listarCuentaBalanzaComprobacion(idTipoCatalogo, idCiclo, tipoPartida, idCuenta);
             this.cx.desconectar();
             return RespuestaGeneral.asOk(null, listBeans);
         } catch (Exception e) {
