@@ -104,7 +104,10 @@ public class ServicioCuenta {
     public RespuestaGeneral listarCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo, Integer tipoPartida) {
         try {
             this.cx.conectar();
-            List<CuentaBalanza> listBeans = daoCuenta.listarCuentaBalanzaComprobacion(idTipoCatalogo, idCiclo, tipoPartida, null);
+            List<CuentaBalanza> listBeans = daoCuenta
+                    .listarCuentaBalanzaComprobacion(
+                            idTipoCatalogo, idCiclo, tipoPartida, null
+                    );
             this.cx.desconectar();
             return RespuestaGeneral.asOk(null, listBeans);
         } catch (Exception e) {
@@ -114,9 +117,16 @@ public class ServicioCuenta {
     public RespuestaGeneral verCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo, Integer tipoPartida, Integer idCuenta) {
         try {
             this.cx.conectar();
-            List<CuentaBalanza> listBeans = daoCuenta.listarCuentaBalanzaComprobacion(idTipoCatalogo, idCiclo, tipoPartida, idCuenta);
+            List<CuentaBalanza> listBeans = daoCuenta
+                    .listarCuentaBalanzaComprobacion(
+                            idTipoCatalogo, idCiclo, tipoPartida, idCuenta
+                    );
             this.cx.desconectar();
-            return RespuestaGeneral.asOk(null, listBeans);
+            if(listBeans.isEmpty()) {
+                return RespuestaGeneral.asNotFound(null, null);
+            } else {
+                return RespuestaGeneral.asOk(null, listBeans.get(0));
+            }
         } catch (Exception e) {
             return RespuestaGeneral.asBadRequest(e.getMessage());
         }

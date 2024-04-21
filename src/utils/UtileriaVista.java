@@ -1,6 +1,7 @@
 package utils;
 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.ConfiguracionUsuario;
@@ -96,5 +97,5 @@ public class UtileriaVista {
         vPrincipal.btnFlujoEfectivo.setEnabled(false);
         vPrincipal.btnCambiosPatrimonio.setEnabled(false);
     }
-    
+    public static final DecimalFormat FormateadorMoneda = new DecimalFormat("#,##0.00");
 }

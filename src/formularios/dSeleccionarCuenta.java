@@ -7,10 +7,12 @@ package formularios;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cuenta;
 import modelo.PartidaDetalle;
+import reportes.CuentaBalanza;
 import servicios.ServicioCuenta;
 import sesion.Sesion;
 import utils.Render;
@@ -154,6 +156,10 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         jLabel17 = new javax.swing.JLabel();
         txtFM = new RSMaterialComponent.RSTextFieldMaterial();
         jLabel18 = new javax.swing.JLabel();
+        totalCuentas1 = new javax.swing.JLabel();
+        totalCuentas2 = new javax.swing.JLabel();
+        lblSaldoDeudor = new javax.swing.JLabel();
+        lblSaldoAcreedor = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -225,12 +231,11 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -355,6 +360,22 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         jLabel18.setText("FM:");
         jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
+        totalCuentas1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        totalCuentas1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        totalCuentas1.setText("Saldo deudor:");
+
+        totalCuentas2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        totalCuentas2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        totalCuentas2.setText("Saldo acreedor:");
+
+        lblSaldoDeudor.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblSaldoDeudor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSaldoDeudor.setText("##,###.###.##");
+
+        lblSaldoAcreedor.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblSaldoAcreedor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSaldoAcreedor.setText("##,###,###,##");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -365,11 +386,6 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
@@ -378,7 +394,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+                                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -390,7 +406,24 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(totalCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(totalCuentas1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(totalCuentas2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(580, 580, 580)
+                                .addComponent(lblSaldoDeudor, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblSaldoAcreedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(11, 11, 11)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -413,12 +446,24 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(totalCuentas)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(totalCuentas2)
+                            .addComponent(totalCuentas1))))
+                .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(totalCuentas))
+                    .addComponent(lblSaldoAcreedor)
+                    .addComponent(lblSaldoDeudor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -566,7 +611,21 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             this.btnAbonar.setEnabled(false);
             this.btnCargar.setEnabled(false);
         }
+        Integer tipoCatalogo = sesion.configUsuario.getCicloContable().getTipoCatalogo().getId();
+        Integer idCiclo = sesion.configUsuario.getCicloContable().getId();
         
+        CuentaBalanza cuentaBalanza = ( CuentaBalanza ) _cuenta
+                .verCuentaBalanzaComprobacion(
+                    tipoCatalogo, idCiclo, Integer.parseInt(Constantes.TIPO_PARTIDA_CIERRE.getValue()), cuentaSeleccionada.getId()
+                )
+        .getDatos();
+        if(cuentaBalanza == null) {
+            lblSaldoAcreedor.setText("...");
+            lblSaldoDeudor.setText("...");
+        } else {
+            lblSaldoDeudor.setText(UtileriaVista.FormateadorMoneda.format(cuentaBalanza.getSaldoDeudor()));
+            lblSaldoAcreedor.setText(UtileriaVista.FormateadorMoneda.format(cuentaBalanza.getSaldoAcreedor()));
+        }
     }//GEN-LAST:event_tblCuentasMouseClicked
 
     private void tblCuentasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCuentasKeyTyped
@@ -640,8 +699,12 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblSaldoAcreedor;
+    private javax.swing.JLabel lblSaldoDeudor;
     private rojerusan.RSTableMetro tblCuentas;
     private javax.swing.JLabel totalCuentas;
+    private javax.swing.JLabel totalCuentas1;
+    private javax.swing.JLabel totalCuentas2;
     private javax.swing.JLabel txtCuentaSeleccionada;
     private RSMaterialComponent.RSTextFieldMaterial txtFM;
     private RSMaterialComponent.RSTextFieldMaterial txtMonto;
