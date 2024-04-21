@@ -5,6 +5,7 @@
 package vista;
 
 import conexion.Conexion;
+import dto.dtoLista;
 import formularios.dSeleccionarCuentaFormula;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +37,7 @@ import servicios.ServicioCuenta;
 import servicios.ServicioTipoCatalogo;
 import sesion.Sesion;
 import utils.UtileriaVista;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -54,7 +57,6 @@ public class vLibroMayor extends javax.swing.JPanel {
         this.sesion = sesion;
         this._cuenta = new ServicioCuenta(sesion.rutaConexion);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -207,20 +209,26 @@ public class vLibroMayor extends javax.swing.JPanel {
                     .addComponent(btnVerLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerLibroMayor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerLibroMayor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(453, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerLibroMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerLibroMayorActionPerformed
-        verLibroMayor();
+        verLibroMayor(
+            Integer.parseInt(Constantes.TIPO_PARTIDA_OPERATIVA.getValue())
+        );
     }//GEN-LAST:event_btnVerLibroMayorActionPerformed
 
     private void btnVerLibroMayor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerLibroMayor1ActionPerformed
-        // TODO add your handling code here:
+        verLibroMayor(
+            Integer.parseInt(Constantes.TIPO_PARTIDA_AJUSTE.getValue())
+        );
     }//GEN-LAST:event_btnVerLibroMayor1ActionPerformed
 
     private void btnVerLibroMayor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerLibroMayor2ActionPerformed
-        // TODO add your handling code here:
+        verLibroMayor(
+            Integer.parseInt(Constantes.TIPO_PARTIDA_CIERRE.getValue())
+        );
     }//GEN-LAST:event_btnVerLibroMayor2ActionPerformed
 
     private void btnElegirCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElegirCuentaActionPerformed
@@ -242,9 +250,9 @@ public class vLibroMayor extends javax.swing.JPanel {
     
     private void limpiarCuentaSeleccionada() {
         cuentaSeleccionada = null;
-        this.txtCuentaSeleccionada.setText("");
+        this.txtCuentaSeleccionada.setText("* CUENTA NO ESPECIFICADA *");
     }
-    public void verLibroMayor() {
+    public void verLibroMayor(int tipoPartida) {
          try (
                 InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-libro-mayor.jrxml");
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))
@@ -270,6 +278,13 @@ public class vLibroMayor extends javax.swing.JPanel {
             
             Integer tipoCatalogo = sesion.configUsuario.getCicloContable().getTipoCatalogo().getId();
             params.put("param_id_tipo_catalogo", tipoCatalogo);
+            
+
+            params.put("param_tipo_partida", tipoPartida);
+            params.put("param_id_cuenta_mayorizar", null);
+            if(cuentaSeleccionada != null) {
+                params.put("param_id_cuenta_mayorizar", cuentaSeleccionada.getId());
+            }
             
             Integer nivelAMayorizar = sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar();
             //nivel 0 es para cuando se puede cargar y abonar cualquier cuenta, no ay restriccion

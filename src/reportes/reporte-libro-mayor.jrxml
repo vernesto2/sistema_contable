@@ -66,6 +66,7 @@
 		<parameter name="param_tipo_saldo" class="java.lang.String"/>
 		<parameter name="param_formateador_moneda" class="java.text.DecimalFormat"/>
 		<parameter name="param_formateador_fecha" class="java.text.SimpleDateFormat"/>
+		<parameter name="param_tipo_partida" class="java.lang.Integer"/>
 		<queryString>
 			<![CDATA[select 
   p.id, 
@@ -95,7 +96,10 @@ c.eliminado = false
 and pd.id_cuenta =  $P{param_id_cuenta} 
 and p.id_ciclo =  $P{param_id_ciclo_tabla} 
 and  p.eliminado = false 
-and pd.eliminado = false]]>
+and pd.eliminado = false
+and (
+	p.id_tipo_partida <= $P{param_tipo_partida} 
+)]]>
 		</queryString>
 		<field name="id" class="java.lang.Object">
 			<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -176,6 +180,12 @@ and pd.eliminado = false]]>
 	<parameter name="param_fecha_generacion" class="java.util.Date">
 		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
 	</parameter>
+	<parameter name="param_id_cuenta_mayorizar" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[595]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_tipo_partida" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select 
 	c.id, 
@@ -198,6 +208,9 @@ and p.eliminado = false
 and p.id_ciclo =  $P{param_id_ciclo} 
 and id_tipo_catalogo =  $P{param_id_tipo_catalogo} 
 and length(c.codigo) =  $P{param_tamano_codigo}
+and (
+	 $P{param_id_cuenta_mayorizar} is null or c.id =  $P{param_id_cuenta_mayorizar} 
+)
 group by 
 	c.id, 
 	c.codigo, 
@@ -344,7 +357,7 @@ order by pd.folio_mayor]]>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
-					<datasetRun subDataset="Dataset1" uuid="3c465fc1-546d-4654-abb4-f908de74a844">
+					<datasetRun subDataset="Dataset1" uuid="ec2f845b-54f4-456d-892d-a8c08d8a23de">
 						<datasetParameter name="param_id_cuenta">
 							<datasetParameterExpression><![CDATA[$F{id}]]></datasetParameterExpression>
 						</datasetParameter>
@@ -362,6 +375,9 @@ order by pd.folio_mayor]]>
 						</datasetParameter>
 						<datasetParameter name="param_formateador_fecha">
 							<datasetParameterExpression><![CDATA[$P{param_formateador_fecha}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_tipo_partida">
+							<datasetParameterExpression><![CDATA[$P{param_tipo_partida}]]></datasetParameterExpression>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>

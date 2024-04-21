@@ -78,7 +78,7 @@
                   <Component id="btnVerLibroMayor1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVerLibroMayor2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="181" max="32767" attributes="0"/>
+              <EmptySpace pref="453" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

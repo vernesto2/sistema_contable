@@ -25,6 +25,10 @@ public class Constantes {
     public static int RESETEAR_CLAVE = 1;
     public static int NO_RESETEAR_CLAVE = 0;
     
+    public static final dtoLista TIPO_PARTIDA_OPERATIVA = new dtoLista("0", "OPERATIVA");
+    public static final dtoLista TIPO_PARTIDA_AJUSTE = new dtoLista("1", "AJUSTE");
+    public static final dtoLista TIPO_PARTIDA_CIERRE = new dtoLista("2", "CIERRE");
+    
     public static final String [] PREGUNTAS_SEGURIDAD = new String[] { 
         "Seleccione ...",
         "¿Cuál es el nombre de tu primera mascota?", 
@@ -34,18 +38,7 @@ public class Constantes {
     // logo en pantalla principal
     
     public static final int QUERY_SUCCESS = 1;
-    
-    // tipos de partidas disponibles en sistema
-    public static ArrayList<dtoLista> listaTiposPartidas() {
-        ArrayList<dtoLista> lista = new ArrayList<>();
-        dtoLista op1 = new dtoLista("0", "MOVIVIENTO");
-        dtoLista op2 = new dtoLista("1", "AJUSTE DE IVA");
-        dtoLista op3 = new dtoLista("2", "CIERRE");
-        lista.add(op1);
-        lista.add(op2);
-        lista.add(op3);
-        return lista;
-    }
+
     
     public static ArrayList<dtoLista> listaTiposSaldoCuentas() {
         ArrayList<dtoLista> lista = new ArrayList<>();
@@ -67,12 +60,9 @@ public class Constantes {
     
     public static ArrayList<dtoLista> listaTipoPartidas() {
         ArrayList<dtoLista> lista = new ArrayList<>();
-        dtoLista op1 = new dtoLista("0", "OPERATIVA");
-        dtoLista op2 = new dtoLista("1", "AJUSTE");
-        dtoLista op3 = new dtoLista("2", "CIERRE");
-        lista.add(op1);
-        lista.add(op2);
-        lista.add(op3);
+        lista.add(TIPO_PARTIDA_OPERATIVA);
+        lista.add(TIPO_PARTIDA_AJUSTE);
+        lista.add(TIPO_PARTIDA_CIERRE);
         return lista;
     }
     
