@@ -668,7 +668,7 @@ public class dPartidas extends javax.swing.JDialog {
                         
                     } else {
                         // buscamos todos los detalles que tienen ese padre junto a su padre y lo devolvemos en un listado
-                        this.buscarPadreYDetalles(this.listaPartidaDetalles.get(row).getCuentaMayor(), this.listaPartidaDetalles.get(row).getCuenta());
+                        this.buscarPadreYDetalles(this.listaPartidaDetalles.get(row), this.listaPartidaDetalles.get(row));
                     }
                     
                     this.actualizarMontosDeTabla();
@@ -688,12 +688,12 @@ public class dPartidas extends javax.swing.JDialog {
         return rowPadre;
     }
     
-    public void buscarPadreYDetalles(Cuenta cuentaPadre, Cuenta cuenta) {
+    public void buscarPadreYDetalles(PartidaDetalle cuentaPadre, PartidaDetalle cuenta) {
         ArrayList<PartidaDetalle> listaEliminar = new ArrayList<>();
         // buscamos las cuentas que tengan al mismo padre
         this.contador = 0;
         this.listaPartidaDetalles.forEach((t) -> {
-            if (t.getCuentaMayor().getId() == cuentaPadre.getId()) {
+            if (t.getCuentaMayor().getId() == cuentaPadre.getCuentaMayor().getId() && t.getTipo_cargo_abono() == cuentaPadre.getTipo_cargo_abono()) {
                 this.contador++;
             }
         });
@@ -701,19 +701,19 @@ public class dPartidas extends javax.swing.JDialog {
         if (this.contador <= 1) {
             // si solo tenemos 1 valor debemos eliminar el padre e hijo
             this.listaPartidaDetalles.forEach((t) -> {
-                if (t.getCuenta().getId() == cuenta.getId()) {
+                if (t.getCuenta().getId() == cuenta.getCuenta().getId() && t.getTipo_cargo_abono() == cuenta.getTipo_cargo_abono()) {
                     listaEliminar.add(t);
                 }
             });
             // primero buscamos al padre
             this.listaPartidaDetalles.forEach((t) -> {
-                if (t.getCuenta().getId() == cuentaPadre.getId()) {
+                if (t.getCuenta().getId() == cuentaPadre.getCuentaMayor().getId() && t.getTipo_cargo_abono() == cuentaPadre.getTipo_cargo_abono()) {
                     listaEliminar.add(t);
                 }
             });
         } else {
             this.listaPartidaDetalles.forEach((t) -> {
-                if (t.getCuenta().getId() == cuenta.getId()) {
+                if (t.getCuenta().getId() == cuenta.getCuenta().getId() && t.getTipo_cargo_abono() == cuenta.getTipo_cargo_abono()) {
                     listaEliminar.add(t);
                 }
             });
@@ -727,7 +727,7 @@ public class dPartidas extends javax.swing.JDialog {
         this.listaPartidaDetalles.forEach((t) -> {
             this.banderaAgregar = true;
             lista.forEach((t1) -> {
-                if (t.getCuenta().getId() == t1.getCuenta().getId()) {
+                if (t.getCuenta().getId() == t1.getCuenta().getId() && t.getTipo_cargo_abono() == t1.getTipo_cargo_abono()) {
                     this.banderaAgregar = false;
                     if (t.getId() > 0) {
                         this.listaPartidaDetallesEliminados.add(t);
