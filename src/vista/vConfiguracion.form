@@ -101,7 +101,7 @@
                                           </Group>
                                           <Component id="jLabel7" alignment="1" min="-2" pref="400" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="btnNuevoDocente" alignment="1" min="-2" pref="168" max="-2" attributes="0"/>
+                                      <Component id="btnNuevoDocente" alignment="1" min="-2" pref="188" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>

@@ -5,15 +5,12 @@
 package vista;
 
 import formularios.dCrearUsuario;
-import java.awt.Toolkit;
 import java.util.Arrays;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Persona;
 import modelo.Usuario;
-import servicios.ServicioConfiguracion;
 import servicios.ServicioUsuario;
 import sesion.Sesion;
 import utils.UtileriaVista;
@@ -267,7 +264,7 @@ public class vConfiguracion extends javax.swing.JPanel {
                                     .addComponent(txtRespuesta1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnNuevoDocente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnNuevoDocente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(743, 743, 743))
         );
         jPanel1Layout.setVerticalGroup(

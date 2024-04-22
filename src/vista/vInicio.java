@@ -143,7 +143,8 @@ public class vInicio extends javax.swing.JFrame {
         rSButtonShapeIcon9.setBackgroundHover(new java.awt.Color(33, 68, 86));
         rSButtonShapeIcon9.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
         rSButtonShapeIcon9.setHideActionText(true);
-        rSButtonShapeIcon9.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        rSButtonShapeIcon9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rSButtonShapeIcon9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         rSButtonShapeIcon9.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CLOSE);
         rSButtonShapeIcon9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

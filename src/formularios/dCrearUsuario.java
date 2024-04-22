@@ -4,10 +4,7 @@
  */
 package formularios;
 
-import java.awt.Dimension;
-import javax.swing.JDialog;
 import sesion.Sesion;
-import utils.constantes.CambiaPanel;
 import utils.constantes.Constantes;
 import vista.pCrearUsuario;
 
@@ -31,6 +28,7 @@ public class dCrearUsuario extends javax.swing.JDialog {
             this.setTitle("Crear alumno");
         } else throw new IllegalArgumentException("Tipo incorrecto");
         boolean esRestaurar = false;
+        this.setLocationRelativeTo(null);
         pCrearUsuario panel = new pCrearUsuario(
                         sesion, 
                         esRestaurar,
@@ -49,7 +47,7 @@ public class dCrearUsuario extends javax.swing.JDialog {
     }
     
     public void iniciarVistaDialog() {
-        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -64,7 +62,6 @@ public class dCrearUsuario extends javax.swing.JDialog {
         container = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(794, 527));
         setResizable(false);
 
         container.setLayout(new java.awt.BorderLayout());

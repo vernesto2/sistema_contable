@@ -5,12 +5,8 @@
 package vista;
 
 import formularios.dCrearUsuario;
-import java.awt.Color;
 import java.awt.Toolkit;
-import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.ConfiguracionUsuario;
@@ -119,7 +115,7 @@ public class vLogin extends javax.swing.JFrame {
         });
 
         btnIngresar.setBackground(new java.awt.Color(33, 58, 86));
-        btnIngresar.setText("INGRESAR");
+        btnIngresar.setText("Ingresar");
         btnIngresar.setBackgroundHover(new java.awt.Color(33, 68, 86));
         btnIngresar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnIngresar.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
@@ -131,7 +127,7 @@ public class vLogin extends javax.swing.JFrame {
         });
 
         btnCancelar.setBackground(new java.awt.Color(251, 205, 6));
-        btnCancelar.setText("CANCELAR");
+        btnCancelar.setText("Cancelar");
         btnCancelar.setBackgroundHover(new java.awt.Color(251, 174, 6));
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnCancelar.setForegroundHover(new java.awt.Color(0, 0, 0));
@@ -193,6 +189,7 @@ public class vLogin extends javax.swing.JFrame {
         btnCrearAlumno.setForegroundIconHover(new java.awt.Color(0, 0, 0));
         btnCrearAlumno.setForegroundText(new java.awt.Color(0, 0, 0));
         btnCrearAlumno.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnCrearAlumno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCrearAlumno.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.NEW_RELEASES);
         btnCrearAlumno.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         btnCrearAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -218,29 +215,32 @@ public class vLogin extends javax.swing.JFrame {
             .addGroup(rSPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rSPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(93, 93, 93)
-                        .addComponent(rSButtonShapeIcon9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(rSPanel1Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addComponent(btnOlvidoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(rSPanel1Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(btnCrearAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(rSPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblSePuedeCrearAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(rSPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(rSPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(96, 96, 96)
+                        .addComponent(rSButtonShapeIcon9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(rSPanel1Layout.createSequentialGroup()
+                .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rSPanel1Layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(btnOlvidoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(rSPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblSePuedeCrearAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(rSPanel1Layout.createSequentialGroup()
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(rSPanel1Layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addComponent(btnCrearAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         rSPanel1Layout.setVerticalGroup(
             rSPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

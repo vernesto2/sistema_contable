@@ -4,25 +4,11 @@
  */
 package vista;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.Arrays;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import modelo.Persona;
-import modelo.Usuario;
 import servicios.ServicioConfiguracion;
-import servicios.ServicioUsuario;
 import sesion.Sesion;
-import utils.UtileriaVista;
-import utils.constantes.CambiaPanel;
-import utils.constantes.CharArrayUtils;
 import utils.constantes.Constantes;
-import utils.constantes.RespuestaGeneral;
 
 /**
  *
@@ -65,6 +51,7 @@ public class vRestaurarConfiguracion extends javax.swing.JFrame {
     
     public void iniciarVista() {
         this.setLocationRelativeTo(null);
+        this.setTitle("Configuración inicial");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/utils/icon/user.png")));
 
