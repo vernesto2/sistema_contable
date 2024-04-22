@@ -4,12 +4,10 @@
  */
 package vista;
 
-import java.awt.Toolkit;
 import java.awt.Window;
 import java.util.Arrays;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Persona;
 import modelo.Usuario;
@@ -17,7 +15,6 @@ import servicios.ServicioConfiguracion;
 import servicios.ServicioUsuario;
 import sesion.Sesion;
 import utils.UtileriaVista;
-import utils.constantes.CambiaPanel;
 import utils.constantes.CharArrayUtils;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
@@ -44,6 +41,17 @@ public class pCrearUsuario extends javax.swing.JPanel {
         this.esRestaurar = esRestaurar;
         if(tipoUsuario == Constantes.TIPO_ALUMNO || tipoUsuario == Constantes.TIPO_DOCENTE) {
             this.tipoUsuario = tipoUsuario;
+            if (tipoUsuario == Constantes.TIPO_ALUMNO) {
+                this.lblDialog.setText("CREACIÓN DE USUARIO TIPO ALUMNO");
+            } else if (tipoUsuario == Constantes.TIPO_DOCENTE) {
+                if (this.esRestaurar) {
+                    this.lblDialog.setText("CREACIÓN DE USUARIO TIPO DOCENTE Y CONFIGURACIÓN INICIAL");
+                } else {
+                    this.lblDialog.setText("CREACIÓN DE USUARIO TIPO DOCENTE");
+                }
+            } else {
+                this.lblDialog.setText("CREACIÓN DE USUARIO TIPO DOCENTE Y CONFIGURACIÓN INICIAL");
+            }
         } else 
             throw new IllegalStateException("Tipo usuario incorrecto");
         this._configuracion = new ServicioConfiguracion();
@@ -79,82 +87,43 @@ public class pCrearUsuario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtNombres = new RSMaterialComponent.RSTextFieldMaterial();
-        txtApellidos = new RSMaterialComponent.RSTextFieldMaterial();
-        txtCarnet = new RSMaterialComponent.RSTextFieldMaterial();
-        txtClave = new RSMaterialComponent.RSPasswordMaterial();
-        txtRepetirClave = new RSMaterialComponent.RSPasswordMaterial();
-        txtCorreo = new RSMaterialComponent.RSTextFieldMaterial();
-        comboPreguntaRecuperacion1 = new RSMaterialComponent.RSComboBoxMaterial();
-        txtRespuesta1 = new RSMaterialComponent.RSTextFieldMaterial();
-        comboPreguntaRecuperacion2 = new RSMaterialComponent.RSComboBoxMaterial();
-        txtRespuesta2 = new RSMaterialComponent.RSTextFieldMaterial();
-        comboPreguntaRecuperacion3 = new RSMaterialComponent.RSComboBoxMaterial();
-        txtRespuesta3 = new RSMaterialComponent.RSTextFieldMaterial();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         btnCrearConfiguracion = new RSMaterialComponent.RSButtonShapeIcon();
         btnCancelar = new RSMaterialComponent.RSButtonShapeIcon();
+        jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        lblDialog = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        txtNombres = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel9 = new javax.swing.JLabel();
+        txtApellidos = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel10 = new javax.swing.JLabel();
+        txtCarnet = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel11 = new javax.swing.JLabel();
+        txtClave = new RSMaterialComponent.RSPasswordMaterial();
+        jLabel7 = new javax.swing.JLabel();
+        txtRepetirClave = new RSMaterialComponent.RSPasswordMaterial();
+        jLabel12 = new javax.swing.JLabel();
+        txtCorreo = new RSMaterialComponent.RSTextFieldMaterial();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        comboPreguntaRecuperacion1 = new RSMaterialComponent.RSComboBoxMaterial();
+        jLabel14 = new javax.swing.JLabel();
+        txtRespuesta1 = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel15 = new javax.swing.JLabel();
+        comboPreguntaRecuperacion2 = new RSMaterialComponent.RSComboBoxMaterial();
+        jLabel16 = new javax.swing.JLabel();
+        txtRespuesta2 = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel17 = new javax.swing.JLabel();
+        comboPreguntaRecuperacion3 = new RSMaterialComponent.RSComboBoxMaterial();
+        jLabel18 = new javax.swing.JLabel();
+        txtRespuesta3 = new RSMaterialComponent.RSTextFieldMaterial();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        txtNombres.setPlaceholder("Nombres");
-        txtNombres.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombresActionPerformed(evt);
-            }
-        });
-
-        txtApellidos.setPlaceholder("Apellidos");
-        txtApellidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidosActionPerformed(evt);
-            }
-        });
-
-        txtCarnet.setPlaceholder("Carnét");
-        txtCarnet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCarnetActionPerformed(evt);
-            }
-        });
-
-        txtClave.setPlaceholder("Clave de acceso");
-
-        txtRepetirClave.setPlaceholder("Repetir clave de acceso");
-
-        txtCorreo.setPlaceholder("Correo");
-        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCorreoActionPerformed(evt);
-            }
-        });
-
-        comboPreguntaRecuperacion1.setColorMaterial(new java.awt.Color(102, 102, 102));
-
-        txtRespuesta1.setForeground(new java.awt.Color(0, 0, 0));
-        txtRespuesta1.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtRespuesta1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtRespuesta1.setPhColor(new java.awt.Color(0, 0, 0));
-        txtRespuesta1.setPlaceholder("Digite la respuesta..");
-        txtRespuesta1.setSelectionColor(new java.awt.Color(0, 0, 0));
-
-        comboPreguntaRecuperacion2.setColorMaterial(new java.awt.Color(102, 102, 102));
-
-        txtRespuesta2.setForeground(new java.awt.Color(0, 0, 0));
-        txtRespuesta2.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtRespuesta2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtRespuesta2.setPhColor(new java.awt.Color(0, 0, 0));
-        txtRespuesta2.setPlaceholder("Digite la respuesta..");
-        txtRespuesta2.setSelectionColor(new java.awt.Color(0, 0, 0));
-
-        comboPreguntaRecuperacion3.setColorMaterial(new java.awt.Color(102, 102, 102));
-
-        txtRespuesta3.setForeground(new java.awt.Color(0, 0, 0));
-        txtRespuesta3.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtRespuesta3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtRespuesta3.setPhColor(new java.awt.Color(0, 0, 0));
-        txtRespuesta3.setPlaceholder("Digite la respuesta..");
-        txtRespuesta3.setSelectionColor(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         btnCrearConfiguracion.setBackground(new java.awt.Color(33, 58, 86));
         btnCrearConfiguracion.setText("Crear configuración");
@@ -171,7 +140,7 @@ public class pCrearUsuario extends javax.swing.JPanel {
         });
 
         btnCancelar.setBackground(new java.awt.Color(251, 205, 6));
-        btnCancelar.setText("CANCELAR");
+        btnCancelar.setText("Cancelar");
         btnCancelar.setBackgroundHover(new java.awt.Color(251, 174, 6));
         btnCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnCancelar.setForegroundHover(new java.awt.Color(0, 0, 0));
@@ -186,90 +155,370 @@ public class pCrearUsuario extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCrearConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrearConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/img/recuperacion.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/img/userNew.png"))); // NOI18N
         jLabel1.setToolTipText("");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel1.setIconTextGap(1);
+
+        lblDialog.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblDialog.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDialog.setText("CREACIÓN DE USUARIO");
+        lblDialog.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(lblDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(lblDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos Personales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Nombres:");
+        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtNombres.setForeground(new java.awt.Color(0, 0, 0));
+        txtNombres.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtNombres.setPhColor(new java.awt.Color(0, 0, 0));
+        txtNombres.setPlaceholder("Nombres");
+        txtNombres.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtNombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombresActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("Apellidos:");
+        jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtApellidos.setForeground(new java.awt.Color(0, 0, 0));
+        txtApellidos.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtApellidos.setPhColor(new java.awt.Color(0, 0, 0));
+        txtApellidos.setPlaceholder("Apellidos");
+        txtApellidos.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtApellidosActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Carnét:");
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtCarnet.setForeground(new java.awt.Color(0, 0, 0));
+        txtCarnet.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtCarnet.setPhColor(new java.awt.Color(0, 0, 0));
+        txtCarnet.setPlaceholder("Carnét");
+        txtCarnet.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtCarnet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCarnetActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Clave:");
+        jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtClave.setForeground(new java.awt.Color(0, 0, 0));
+        txtClave.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtClave.setPhColor(new java.awt.Color(0, 0, 0));
+        txtClave.setPlaceholder("Clave de acceso");
+        txtClave.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Repetir Clave:");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtRepetirClave.setForeground(new java.awt.Color(0, 0, 0));
+        txtRepetirClave.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtRepetirClave.setPhColor(new java.awt.Color(0, 0, 0));
+        txtRepetirClave.setPlaceholder("Repetir clave de acceso");
+        txtRepetirClave.setSelectionColor(new java.awt.Color(0, 0, 0));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("Correo:");
+        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtCorreo.setForeground(new java.awt.Color(0, 0, 0));
+        txtCorreo.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtCorreo.setPhColor(new java.awt.Color(0, 0, 0));
+        txtCorreo.setPlaceholder("Correo");
+        txtCorreo.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRepetirClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRepetirClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Preguntas de Seguridad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Pregunta 1:");
+        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        comboPreguntaRecuperacion1.setColorMaterial(new java.awt.Color(102, 102, 102));
+        comboPreguntaRecuperacion1.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel14.setText("Respuesta 1:");
+        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtRespuesta1.setForeground(new java.awt.Color(0, 0, 0));
+        txtRespuesta1.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtRespuesta1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtRespuesta1.setPhColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta1.setPlaceholder("Digite la respuesta..");
+        txtRespuesta1.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta1.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel15.setText("Pregunta 2:");
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        comboPreguntaRecuperacion2.setColorMaterial(new java.awt.Color(102, 102, 102));
+        comboPreguntaRecuperacion2.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel16.setText("Respuesta 2:");
+        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtRespuesta2.setForeground(new java.awt.Color(0, 0, 0));
+        txtRespuesta2.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtRespuesta2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtRespuesta2.setPhColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta2.setPlaceholder("Digite la respuesta..");
+        txtRespuesta2.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta2.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel17.setText("Pregunta 3:");
+        jLabel17.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        comboPreguntaRecuperacion3.setColorMaterial(new java.awt.Color(102, 102, 102));
+        comboPreguntaRecuperacion3.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+
+        jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel18.setText("Respuesta 3:");
+        jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtRespuesta3.setForeground(new java.awt.Color(0, 0, 0));
+        txtRespuesta3.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtRespuesta3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtRespuesta3.setPhColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta3.setPlaceholder("Digite la respuesta..");
+        txtRespuesta3.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtRespuesta3.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboPreguntaRecuperacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboPreguntaRecuperacion3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboPreguntaRecuperacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(comboPreguntaRecuperacion3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(2, 2, 2))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel1))
-                            .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboPreguntaRecuperacion2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtRespuesta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRepetirClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCrearConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtRespuesta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboPreguntaRecuperacion3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtRespuesta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(85, 85, 85))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(comboPreguntaRecuperacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRespuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboPreguntaRecuperacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtRepetirClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtRespuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboPreguntaRecuperacion3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRespuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCrearConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -290,58 +539,46 @@ public class pCrearUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnCrearConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearConfiguracionActionPerformed
-        char[] claveSinCifrar = txtClave.getPassword();
-        char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
+        
+        boolean valido = this.validar();
+        
+        if (valido) {
+            char[] claveSinCifrar = txtClave.getPassword();
+            char[] repetirClaveSinCifrar = txtRepetirClave.getPassword();
 
-        Persona persona = new Persona();
-        persona.setNombres(txtNombres.getText().trim());
-        persona.setApellidos(txtApellidos.getText().trim());
-        persona.setTipo(Constantes.TIPO_ALUMNO);
-        persona.setCarnet(txtCarnet.getText().trim());
+            Persona persona = new Persona();
+            persona.setNombres(txtNombres.getText().trim());
+            persona.setApellidos(txtApellidos.getText().trim());
+            persona.setTipo(Constantes.TIPO_ALUMNO);
+            persona.setCarnet(txtCarnet.getText().trim());
 
-        Usuario usuario = new Usuario();
-        usuario.setNombre(txtCarnet.getText().trim());
-        usuario.setCorreo(txtCorreo.getText().trim());
+            Usuario usuario = new Usuario();
+            usuario.setNombre(txtCarnet.getText().trim());
+            usuario.setCorreo(txtCorreo.getText().trim());
 
-        //la clave se cifra en el servicio
-        //usuario.setClave(null);
-        if (!Arrays.equals(claveSinCifrar, repetirClaveSinCifrar)) {
-            JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", JOptionPane.ERROR_MESSAGE);
-        }
-
-        usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
-
-        usuario.setPregunta1(comboPreguntaRecuperacion1.getSelectedIndex());
-        usuario.setRespuesta1(txtRespuesta1.getText().trim());
-        usuario.setPregunta2(comboPreguntaRecuperacion2.getSelectedIndex());
-        usuario.setRespuesta2(txtRespuesta2.getText().trim());
-        usuario.setPregunta3(comboPreguntaRecuperacion3.getSelectedIndex());
-        usuario.setRespuesta3(txtRespuesta3.getText().trim());
-
-        usuario.setPersona(persona);
-        if (esRestaurar) {
-            //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
-            int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo archivo basado en la versión inicial del sistema. \nEl nuevo archivo no contendrá ningun dato que usted haya ingresado incluyendo catálogos, partidas, etc.\nEl nuevo archivo contendrá docentes creados por defecto en la versión inicial\nEstará con el catálogo inicial, sin ninguna partida \n¿Esta seguro de continuar?",
-                    "¡Restaurar a versión inicial!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            //System.out.println(salida);
-            if (salida == 0) {
-                RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
-                if (resp.esExitosa()) {
-                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
-                    vInicio vistaInicio = new vInicio();
-                    vistaInicio.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
-                }
+            //la clave se cifra en el servicio
+            //usuario.setClave(null);
+            if (!Arrays.equals(claveSinCifrar, repetirClaveSinCifrar)) {
+                JOptionPane.showMessageDialog(this, "Las claves no coinciden", "Mensaje", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            if(tipoUsuario == Constantes.TIPO_ALUMNO) {
-                int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo alumno\nEl alumno pasará a ser propietario de este archivo y no se podrá cambiar\n¿Esta seguro de continuar?",
-                    "¡Crear alumno!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (salida == 0) {
-                    ServicioUsuario _usuario = new ServicioUsuario(sesion.rutaConexion);
 
-                    RespuestaGeneral resp = _usuario.crearAlumno(usuario, claveSinCifrar);
+            usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
+
+            usuario.setPregunta1(comboPreguntaRecuperacion1.getSelectedIndex());
+            usuario.setRespuesta1(txtRespuesta1.getText().trim());
+            usuario.setPregunta2(comboPreguntaRecuperacion2.getSelectedIndex());
+            usuario.setRespuesta2(txtRespuesta2.getText().trim());
+            usuario.setPregunta3(comboPreguntaRecuperacion3.getSelectedIndex());
+            usuario.setRespuesta3(txtRespuesta3.getText().trim());
+
+            usuario.setPersona(persona);
+            if (esRestaurar) {
+                //new utils.alertas.AlertError(this, true, "OCURRIO UN PROBLEM").setVisible(true);
+                int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo archivo basado en la versión inicial del sistema. \nEl nuevo archivo no contendrá ningun dato que usted haya ingresado incluyendo catálogos, partidas, etc.\nEl nuevo archivo contendrá docentes creados por defecto en la versión inicial\nEstará con el catálogo inicial, sin ninguna partida \n¿Esta seguro de continuar?",
+                        "¡Restaurar a versión inicial!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                //System.out.println(salida);
+                if (salida == 0) {
+                    RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
                     if (resp.esExitosa()) {
                         JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
                         vInicio vistaInicio = new vInicio();
@@ -350,28 +587,57 @@ public class pCrearUsuario extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
                     }
                 }
-            } else if (tipoUsuario == Constantes.TIPO_DOCENTE && sesion.esDocente()) {
-                int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo docente\n¿Esta seguro de continuar?",
-                    "¡Crear alumno!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (salida == 0) {
-                    ServicioUsuario _usuario = new ServicioUsuario(sesion.rutaConexion);
+            } else {
+                if(tipoUsuario == Constantes.TIPO_ALUMNO) {
+                    int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo alumno\nEl alumno pasará a ser propietario de este archivo y no se podrá cambiar\n¿Esta seguro de continuar?",
+                        "¡Crear alumno!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (salida == 0) {
+                        ServicioUsuario _usuario = new ServicioUsuario(sesion.rutaConexion);
 
-                    RespuestaGeneral resp = _usuario.crearDocente(usuario, claveSinCifrar);
-                    if (resp.esExitosa()) {
-                        JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
-                    } else {
-                        JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+                        RespuestaGeneral resp = _usuario.crearAlumno(usuario, claveSinCifrar);
+                        if (resp.esExitosa()) {
+                            JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
+                            vInicio vistaInicio = new vInicio();
+                            vistaInicio.setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+                        }
+                    }
+                } else if (tipoUsuario == Constantes.TIPO_DOCENTE && sesion.esDocente()) {
+                    int salida = JOptionPane.showConfirmDialog(this, "Está a punto de crear un nuevo docente\n¿Esta seguro de continuar?",
+                        "¡Crear alumno!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (salida == 0) {
+                        ServicioUsuario _usuario = new ServicioUsuario(sesion.rutaConexion);
+
+                        RespuestaGeneral resp = _usuario.crearDocente(usuario, claveSinCifrar);
+                        if (resp.esExitosa()) {
+                            JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
+                        } else {
+                            JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
+                        }
                     }
                 }
             }
-        }
 
-        //limpiar el array de char, en caso de volcado de memoria, no esté la clave
-        CharArrayUtils.limpiar(claveSinCifrar);
-        CharArrayUtils.limpiar(repetirClaveSinCifrar);
+            //limpiar el array de char, en caso de volcado de memoria, no esté la clave
+            CharArrayUtils.limpiar(claveSinCifrar);
+            CharArrayUtils.limpiar(repetirClaveSinCifrar);
+        
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe completar toda la información personal", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnCrearConfiguracionActionPerformed
 
-
+    public boolean validar() {
+        boolean valido = true;
+        
+        if (txtApellidos.getText().isEmpty() || txtNombres.getText().isEmpty() || txtCarnet.getText().isEmpty() || txtClave.getText().isEmpty() || txtRepetirClave.getText().isEmpty()) {
+            valido = false;
+        }
+        
+        return valido;
+    }
     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         if(esRestaurar) {
@@ -389,6 +655,24 @@ public class pCrearUsuario extends javax.swing.JPanel {
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion2;
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel lblDialog;
     private RSMaterialComponent.RSTextFieldMaterial txtApellidos;
     private RSMaterialComponent.RSTextFieldMaterial txtCarnet;
     private RSMaterialComponent.RSPasswordMaterial txtClave;
