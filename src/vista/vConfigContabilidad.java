@@ -893,20 +893,32 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             this.abrirDialogCicloContable(cicloContableModel);
             
         } else if (accion == 6) {
-            // eliminar
-            String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaCiclosContables.get(row).getTitulo();
-            int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (opc == 0) {
-                RespuestaGeneral rg = _cicloContable.eliminar(this.listaCiclosContables.get(row).getId());
-                if (rg.esExitosa()) {
-                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
-                    this.limpiarFormCicloContable();
-                    this.obtenerListadoCiclosContables();
-                } else {
-                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+            // verificar que el id a eliminar no es el id que tiene por defecto
+            if (this.sesion.configUsuario.getCicloContable().getId() == this.listaCiclosContables.get(row).getId()) {
+                JOptionPane.showMessageDialog(this, "No puede borrar el Ciclo Contable que tiene por defecto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
+            } else {
+                // eliminar
+                String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaCiclosContables.get(row).getTitulo();
+                int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (opc == 0) {
+                    RespuestaGeneral rg = _cicloContable.eliminar(this.listaCiclosContables.get(row).getId());
+                    if (rg.esExitosa()) {
+                        JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
+                        this.limpiarFormCicloContable();
+                        this.obtenerListadoCiclosContables();
+                        // actualizamos el perfil del usuario
+                        RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(sesion.usuario.getId());
+                        if (rg1.esExitosa()) {
+                            ArrayList<ConfiguracionUsuario> listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg1.getDatos();
+                            sesion.configUsuario = listaConfigUsuario.get(0);
+                            UtileriaVista.actualizarPerfil(sesion);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+                    }
                 }
             }
-
+            
         } else if (accion == 7) {
             // mostrar alerta indicando si esta seguro de ralizar la accion
             String texto = "¿Esta seguro de continuar?, Se cambiará el ciclo contable por defecto a:\n" + this.listaCiclosContables.get(row).getTitulo();
@@ -946,6 +958,13 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.getRealizoAccion()) {
             JOptionPane.showMessageDialog(this, d.getRG().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRG()));
+            // actualizamos el perfil del usuario
+            RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(sesion.usuario.getId());
+            if (rg1.esExitosa()) {
+                ArrayList<ConfiguracionUsuario> listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg1.getDatos();
+                sesion.configUsuario = listaConfigUsuario.get(0);
+                UtileriaVista.actualizarPerfil(sesion);
+            }
             this.obtenerListadoCiclosContables();
         }
     }
