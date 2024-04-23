@@ -10,6 +10,7 @@ package reportes;
  */
 public class CuentaBalanza {
     private Integer id;
+    private String tipoSaldo;
     private Integer folioMayor;
     private String nombre;
     private String codigo;
@@ -20,8 +21,9 @@ public class CuentaBalanza {
         
     }
 
-    public CuentaBalanza(Integer id, Integer folioMayor, String nombre, String codigo, Double saldoDeudor, Double saldoAcreedor) {
+    public CuentaBalanza(Integer id, String tipoSaldo, Integer folioMayor, String nombre, String codigo, Double saldoDeudor, Double saldoAcreedor) {
         this.id = id;
+        this.tipoSaldo = tipoSaldo;
         this.folioMayor = folioMayor;
         this.nombre = nombre;
         this.codigo = codigo;
@@ -29,12 +31,21 @@ public class CuentaBalanza {
         this.saldoAcreedor = saldoAcreedor;
     }
 
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getTipoSaldo() {
+        return tipoSaldo;
+    }
+
+    public void setTipoSaldo(String tipoSaldo) {
+        this.tipoSaldo = tipoSaldo;
     }
 
     public Integer getFolioMayor() {
@@ -76,4 +87,6 @@ public class CuentaBalanza {
     public void setSaldoAcreedor(Double saldoAcreedor) {
         this.saldoAcreedor = saldoAcreedor;
     }
+
+
 }

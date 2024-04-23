@@ -341,7 +341,7 @@ group by length(ci.codigo)
         var sql = 
 """
 with cte_balanza_comprobacion as (
-  select c.id, pd.folio_mayor, c.codigo, c.nombre, 
+  select c.id, pd.folio_mayor, c.codigo, c.nombre, c.tipo_saldo, 
   case 
     when tipo_saldo = 'D' then debe - haber
     when tipo_saldo = 'A' then haber - debe
@@ -389,7 +389,7 @@ inner join (
 	and (
       ? is null or c.id = ?
     )
-  group by c.id, c.codigo, c.nombre
+  group by c.id, c.codigo, c.nombre, c.tipo_saldo
 ) as saldo_calculado on saldo_calculado.id = cbc.id
 where row_number = 1
 order by folio_mayor
@@ -421,6 +421,8 @@ order by folio_mayor
                 item.setFolioMayor(rs.getObject("folio_mayor", Integer.class));
                 item.setCodigo(rs.getObject("codigo", String.class));
                 item.setNombre(rs.getObject("nombre", String.class));
+                item.setTipoSaldo(rs.getObject("tipo_saldo", String.class));
+                
                 Double val;
                 val = rs.getObject("saldo_deudor", Double.class);
                 item.setSaldoDeudor(val);

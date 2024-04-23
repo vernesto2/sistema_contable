@@ -38,14 +38,15 @@ public class Constantes {
     // logo en pantalla principal
     
     public static final int QUERY_SUCCESS = 1;
-
     
+    public static final dtoLista TIPO_SALDO_DEUDOR = new dtoLista("D", "DEUDOR");
+    public static final dtoLista TIPO_SALDO_ACREEDOR = new dtoLista("A", "ACREEDOR");
     public static ArrayList<dtoLista> listaTiposSaldoCuentas() {
         ArrayList<dtoLista> lista = new ArrayList<>();
-        dtoLista op1 = new dtoLista("D", "DEUDOR");
-        dtoLista op2 = new dtoLista("A", "ACREEDOR");
-        lista.add(op1);
-        lista.add(op2);
+        
+        lista.add(TIPO_SALDO_DEUDOR);
+        lista.add(TIPO_SALDO_ACREEDOR);
+        
         return lista;
     }
     
@@ -167,19 +168,20 @@ public class Constantes {
         return lista;
     }
     
-    // tipos de Formulas
+    public static final dtoLista TIPO_FORMULA_SALDO = new dtoLista("0", "Saldo");
+    public static final dtoLista TIPO_FORMULA_RESERVA_LEGAL = new dtoLista("1", "Reserva Legal");
+    public static final dtoLista TIPO_FORMULA_IMPUESTO_SOBRE_RENTA = new dtoLista("2", "Impuesto Sobre Renta");
+    public static final dtoLista TIPO_FORMULA_SALDO_INICIAL = new dtoLista("3", "Saldo Inicial");
+    public static final dtoLista TIPO_FORMULA_VALOR_INGRESADO = new dtoLista("4", "Valor Ingresado");
+    
+// tipos de Formulas
     public static ArrayList<dtoLista> listaTiposCampoEspecialEstadoResultado() {
         ArrayList<dtoLista> lista = new ArrayList<>();
-        dtoLista op1 = new dtoLista("0", "Saldo");
-        dtoLista op2 = new dtoLista("1", "Reserva Legal");
-        dtoLista op3 = new dtoLista("2", "Impuesto Sobre Renta");
-        dtoLista op4 = new dtoLista("3", "Saldo Inicial");
-        dtoLista op5 = new dtoLista("4", "Valor Ingresado");
-        lista.add(op1);
-        lista.add(op2);
-        lista.add(op3);
-        lista.add(op4);
-        lista.add(op5);
+        lista.add(TIPO_FORMULA_SALDO);
+        lista.add(TIPO_FORMULA_RESERVA_LEGAL);
+        lista.add(TIPO_FORMULA_IMPUESTO_SOBRE_RENTA);
+        lista.add(TIPO_FORMULA_SALDO_INICIAL);
+        lista.add(TIPO_FORMULA_VALOR_INGRESADO);
         return lista;
     }
 }
