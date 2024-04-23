@@ -6,6 +6,8 @@ package servicios;
 
 import conexion.Conexion;
 import dao.daoCuenta;
+import dto.dtoFormula;
+import java.util.ArrayList;
 import java.util.List;
 import modelo.Cuenta;
 import reportes.CuentaBalanza;
