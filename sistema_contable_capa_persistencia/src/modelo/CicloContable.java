@@ -24,6 +24,7 @@ public class CicloContable {
     Double monto_maximo_ventas;
     Double porcentaje_min;
     Double porcentaje_max;
+    int sin_libro_diario;
     
     TipoCatalogo tipoCatalogo = new TipoCatalogo();
     
@@ -39,6 +40,7 @@ public class CicloContable {
         this.monto_maximo_ventas = 50000.00;
         this.porcentaje_min = 25.00;
         this.porcentaje_max = 30.00;
+        this.sin_libro_diario = 0;
         
         this.tipoCatalogo = new TipoCatalogo();
     }
@@ -137,6 +139,14 @@ public class CicloContable {
 
     public void setPorcentaje_max(Double porcentaje_max) {
         this.porcentaje_max = porcentaje_max;
+    }
+
+    public int getSin_libro_diario() {
+        return sin_libro_diario;
+    }
+
+    public void setSin_libro_diario(int sin_libro_diario) {
+        this.sin_libro_diario = sin_libro_diario;
     }
     
 }

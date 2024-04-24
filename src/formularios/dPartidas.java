@@ -49,7 +49,7 @@ public class dPartidas extends javax.swing.JDialog {
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override 
         public boolean isCellEditable(int row, int column) { 
-            return false;
+            return true;
         }
     };
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

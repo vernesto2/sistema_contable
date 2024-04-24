@@ -60,7 +60,7 @@ public class vLibroDiario extends javax.swing.JPanel {
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
-            return false;
+            return true;
         }
     };
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -222,7 +222,7 @@ public class vLibroDiario extends javax.swing.JPanel {
         btnBuscarCicloContable.setBackgroundHover(new java.awt.Color(33, 68, 86));
         btnBuscarCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnBuscarCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnBuscarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnBuscarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEARCH);
         btnBuscarCicloContable.setSizeIcon(18.0F);
         btnBuscarCicloContable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

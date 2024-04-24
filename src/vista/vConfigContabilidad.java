@@ -62,7 +62,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override 
         public boolean isCellEditable(int row, int column) { 
-            return false;
+            return true;
         }
     };
             
@@ -83,7 +83,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                                    INICIO SECCION DE CICLO CONTABLE
         <------------------------------------------------------------------------------->  */  
     public void setModelCicloContable() {
-        String[] cabecera = {"Seleccioado","Titulo","Desde","Hasta","Catalogo", "Editar", "Eliminar", "Seleccionar"};
+        String[] cabecera = {"Seleccionado","Libro Diario","Titulo","Desde","Hasta","Catalogo", "Editar", "Eliminar", "Seleccionar","Saldos"};
         dtm.setColumnIdentifiers(cabecera);
         tblCicloContable.setModel(dtm);
         tblCicloContable.setDefaultRenderer(Object.class, new Render());
@@ -94,6 +94,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         RSMaterialComponent.RSButtonCustomIcon btn1 = new RSMaterialComponent.RSButtonCustomIcon();
         RSMaterialComponent.RSButtonCustomIcon btn2 = new RSMaterialComponent.RSButtonCustomIcon();
         RSMaterialComponent.RSButtonCustomIcon btn3 = new RSMaterialComponent.RSButtonCustomIcon();
+        RSMaterialComponent.RSButtonCustomIcon btn5 = new RSMaterialComponent.RSButtonCustomIcon();
         btn1.setIcons(ValoresEnum.ICONS.EDIT);
         Cursor cur = new Cursor(Cursor.HAND_CURSOR);
         btn1.setCursor(cur);
@@ -103,28 +104,36 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btn3.setIcons(ValoresEnum.ICONS.CHECK);
         btn3.setColorIcon(Color.GREEN);
         
+        btn5.setIcons(ValoresEnum.ICONS.MONETIZATION_ON);
+        btn5.setColorIcon(Color.ORANGE);
+        
+        
         Object[] datos = new Object[dtm.getColumnCount()];
         for (CicloContable ciclo : listaCiclosContables) {
             datos[0] = (ciclo.getId() == this.sesion.configUsuario.getCicloContable().getId() ? "Por defecto" : "-");
-            datos[1] = ciclo.getTitulo();
-            datos[2] = sdf.format(ciclo.getDesde());
-            datos[3] = sdf.format(ciclo.getHasta());
-            datos[4] = ciclo.getTipoCatalogo().getTipo();
-            datos[5] = btn1;
-            datos[6] = btn2;
-            datos[7] = btn3;
+            datos[1] = ciclo.getSin_libro_diario() == 0 ? "NO" : "SI";
+            datos[2] = ciclo.getTitulo();
+            datos[3] = sdf.format(ciclo.getDesde());
+            datos[4] = sdf.format(ciclo.getHasta());
+            datos[5] = ciclo.getTipoCatalogo().getTipo();
+            datos[6] = btn1;
+            datos[7] = btn2;
+            datos[8] = btn3;
+            datos[9] = ciclo.getSin_libro_diario() == 1 ? btn5 : "";
             dtm.addRow(datos);
         }
         tblCicloContable.setModel(dtm);
         tblCicloContable.setAutoResizeMode(tblCicloContable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        tblCicloContable.getColumnModel().getColumn(0).setPreferredWidth(60);
-        tblCicloContable.getColumnModel().getColumn(1).setPreferredWidth(320);
-        tblCicloContable.getColumnModel().getColumn(2).setPreferredWidth(20);
+        tblCicloContable.getColumnModel().getColumn(0).setPreferredWidth(40);
+        tblCicloContable.getColumnModel().getColumn(1).setPreferredWidth(40);
+        tblCicloContable.getColumnModel().getColumn(2).setPreferredWidth(320);
         tblCicloContable.getColumnModel().getColumn(3).setPreferredWidth(20);
-        tblCicloContable.getColumnModel().getColumn(4).setPreferredWidth(200);
-        tblCicloContable.getColumnModel().getColumn(5).setPreferredWidth(10);
+        tblCicloContable.getColumnModel().getColumn(4).setPreferredWidth(20);
+        tblCicloContable.getColumnModel().getColumn(5).setPreferredWidth(200);
         tblCicloContable.getColumnModel().getColumn(6).setPreferredWidth(10);
         tblCicloContable.getColumnModel().getColumn(7).setPreferredWidth(10);
+        tblCicloContable.getColumnModel().getColumn(8).setPreferredWidth(10);
+        tblCicloContable.getColumnModel().getColumn(9).setPreferredWidth(10);
     }
     
     public void obtenerListadoCiclosContables() {
@@ -442,7 +451,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btnBuscarCicloContable.setBackgroundHover(new java.awt.Color(33, 68, 86));
         btnBuscarCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnBuscarCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnBuscarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnBuscarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEARCH);
         btnBuscarCicloContable.setSizeIcon(18.0F);
         btnBuscarCicloContable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -585,7 +594,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btnGuardarTipoCatalogo1.setBackgroundHover(new java.awt.Color(33, 68, 86));
         btnGuardarTipoCatalogo1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardarTipoCatalogo1.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnGuardarTipoCatalogo1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnGuardarTipoCatalogo1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEARCH);
         btnGuardarTipoCatalogo1.setSizeIcon(18.0F);
         btnGuardarTipoCatalogo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -765,7 +774,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btnBuscarCuenta.setBackgroundHover(new java.awt.Color(33, 93, 86));
         btnBuscarCuenta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnBuscarCuenta.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnBuscarCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnBuscarCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEARCH);
         btnBuscarCuenta.setSizeIcon(18.0F);
         btnBuscarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -813,7 +822,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -887,12 +896,12 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         // logica de acciones de botones
         int accion = tblCicloContable.getSelectedColumn();
         int row = tblCicloContable.getSelectedRow();
-        if (accion == 5) {
+        if (accion == 6) {
             // editar
             this.setearModeloCicloContable(row);
             this.abrirDialogCicloContable(cicloContableModel);
             
-        } else if (accion == 6) {
+        } else if (accion == 7) {
             // verificar que el id a eliminar no es el id que tiene por defecto
             if (this.sesion.configUsuario.getCicloContable().getId() == this.listaCiclosContables.get(row).getId()) {
                 JOptionPane.showMessageDialog(this, "No puede borrar el Ciclo Contable que tiene por defecto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
@@ -919,7 +928,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                 }
             }
             
-        } else if (accion == 7) {
+        } else if (accion == 8) {
             // mostrar alerta indicando si esta seguro de ralizar la accion
             String texto = "¿Esta seguro de continuar?, Se cambiará el ciclo contable por defecto a:\n" + this.listaCiclosContables.get(row).getTitulo();
             int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

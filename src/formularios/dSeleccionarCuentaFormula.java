@@ -25,7 +25,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override 
         public boolean isCellEditable(int row, int column) { 
-            return false;
+            return true;
         }
     };
     boolean realizoAccion = false;   
@@ -223,7 +223,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         btnBuscarCuenta.setBackgroundHover(new java.awt.Color(33, 93, 86));
         btnBuscarCuenta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnBuscarCuenta.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnBuscarCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnBuscarCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEARCH);
         btnBuscarCuenta.setSizeIcon(18.0F);
         btnBuscarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

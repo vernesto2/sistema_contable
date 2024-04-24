@@ -69,6 +69,7 @@ public class daoCicloContable {
                 cicloContable.setMonto_maximo_ventas(rs.getDouble("monto_maximo_ventas"));
                 cicloContable.setPorcentaje_min(rs.getDouble("porcentaje_min"));
                 cicloContable.setPorcentaje_max(rs.getDouble("porcentaje_max"));
+                cicloContable.setSin_libro_diario(rs.getInt("sin_libro_diario"));
                 cicloContable.setTipoCatalogo(new TipoCatalogo());
                 if (cicloContable.getId_catalogo() > 0) {
                     RespuestaGeneral rg1 = _tipoCatalogo.ObtenerPorId(cicloContable.getId_catalogo());
@@ -121,6 +122,7 @@ public class daoCicloContable {
                 cicloContable.setMonto_maximo_ventas(rs.getDouble("monto_maximo_ventas"));
                 cicloContable.setPorcentaje_min(rs.getDouble("porcentaje_min"));
                 cicloContable.setPorcentaje_max(rs.getDouble("porcentaje_max"));
+                cicloContable.setSin_libro_diario(rs.getInt("sin_libro_diario"));
                 lista.add(cicloContable);
             }
             
@@ -165,6 +167,7 @@ public class daoCicloContable {
                 cicloContable.setMonto_maximo_ventas(rs.getDouble("monto_maximo_ventas"));
                 cicloContable.setPorcentaje_min(rs.getDouble("porcentaje_min"));
                 cicloContable.setPorcentaje_max(rs.getDouble("porcentaje_max"));
+                cicloContable.setSin_libro_diario(rs.getInt("sin_libro_diario"));
                 cicloContable.setTipoCatalogo(new TipoCatalogo());
                 if (cicloContable.getId_catalogo() > 0) {
                     RespuestaGeneral rg1 = _tipoCatalogo.ObtenerPorId(cicloContable.getId_catalogo());
@@ -189,7 +192,7 @@ public class daoCicloContable {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
                   INSERT INTO ciclo_contable     
-                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, ccontable.getId_catalogo());
@@ -202,6 +205,7 @@ public class daoCicloContable {
             ps.setDouble(8, ccontable.getPorcentaje_min());
             ps.setDouble(9, ccontable.getPorcentaje_max());
             ps.setInt(10, 0);
+            ps.setDouble(11, ccontable.getSin_libro_diario());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -234,6 +238,7 @@ public class daoCicloContable {
                         ,porcentaje_min=?
                         ,porcentaje_max=?
                         ,eliminado=?
+                        ,sin_libro_diario=?
                   WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
@@ -247,7 +252,8 @@ public class daoCicloContable {
             ps.setDouble(8, ccontable.getPorcentaje_min());
             ps.setDouble(9, ccontable.getPorcentaje_max());
             ps.setInt(10, ccontable.isEliminado() ? 1 : 0);
-            ps.setInt(11, ccontable.getId());
+            ps.setDouble(11, ccontable.getSin_libro_diario());
+            ps.setInt(12, ccontable.getId());
             ps.executeUpdate();
             
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, ccontable.getId());

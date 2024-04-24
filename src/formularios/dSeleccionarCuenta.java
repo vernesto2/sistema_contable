@@ -7,7 +7,6 @@ package formularios;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cuenta;
@@ -29,7 +28,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override 
         public boolean isCellEditable(int row, int column) { 
-            return false;
+            return true;
         }
     };
     boolean realizoAccion = false;   
@@ -256,7 +255,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         btnBuscarCuenta.setBackgroundHover(new java.awt.Color(33, 93, 86));
         btnBuscarCuenta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnBuscarCuenta.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnBuscarCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnBuscarCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SEARCH);
         btnBuscarCuenta.setSizeIcon(18.0F);
         btnBuscarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

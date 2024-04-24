@@ -70,7 +70,7 @@ public class UtileriaVista {
             } else {
                 vPrincipal.txtConfigCicloContable.setText(sesion.configUsuario.nombreCicloYCatalogo());
                 // verificamos los estados financieros habilitados segun el tipo de catalogo por defecto
-                vPrincipal.btnLibroDiario.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getLibro_diario() == 1 ? true : false);
+                vPrincipal.btnLibroDiario.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getLibro_diario() == 1 && sesion.configUsuario.getCicloContable().getSin_libro_diario() == 0 ? true : false);
                 vPrincipal.btnLibroMayor.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getLibro_mayor()== 1 ? true : false);
                 vPrincipal.btnBalanzaComprobacion.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getBalanza_comprobacion()== 1 ? true : false);
                 vPrincipal.btnEstadoResultado.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getEstado_resultado()== 1 ? true : false);
