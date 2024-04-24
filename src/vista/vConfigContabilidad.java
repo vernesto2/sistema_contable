@@ -8,6 +8,7 @@ import dto.dtoCuenta;
 import dto.dtoLista;
 import formularios.dCicloContable;
 import formularios.dCuentas;
+import formularios.dCuentasSaldos;
 import formularios.dFormula;
 import formularios.dTipoCatalogo;
 import java.awt.Color;
@@ -111,7 +112,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         Object[] datos = new Object[dtm.getColumnCount()];
         for (CicloContable ciclo : listaCiclosContables) {
             datos[0] = (ciclo.getId() == this.sesion.configUsuario.getCicloContable().getId() ? "Por defecto" : "-");
-            datos[1] = ciclo.getSin_libro_diario() == 0 ? "NO" : "SI";
+            datos[1] = ciclo.getSin_libro_diario() == 0 ? "SI" : "NO";
             datos[2] = ciclo.getTitulo();
             datos[3] = sdf.format(ciclo.getDesde());
             datos[4] = sdf.format(ciclo.getHasta());
@@ -291,7 +292,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             datos[1] = cuenta.getCodigo();
             datos[2] = cuenta.getEs_restado() == 0 ? "" : "R";
             datos[3] = cuenta.getNombre();
-            datos[4] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": cuenta.getTipo_saldo().equals("A") ? "ACREEDOR" : "-";
+            datos[4] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": cuenta.getTipo_saldo().equals("A") ? "ACREEDOR" : cuenta.getTipo_saldo().equals("T") ? "TRANSITORIA" : "-";
             datos[5] = cuenta.getIngresos();
             datos[6] = cuenta.getEgresos();
             datos[7] = btn1;
@@ -954,6 +955,25 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                 }
             }
             
+        } else if (accion == 9) {
+            if (this.listaCiclosContables.get(row).getSin_libro_diario() == 1) {
+                CicloContable cContable = this.listaCiclosContables.get(row);
+                cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
+                dCuentasSaldos d = new dCuentasSaldos(null, true, cContable, sesion);
+                d.setVisible(true);
+                // validamos si realizo alguna accion para actualizar el listado o no
+                if (d.getRealizoAccion()) {
+                    JOptionPane.showMessageDialog(this, d.getRG().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRG()));
+                    // actualizamos el perfil del usuario
+                    RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(sesion.usuario.getId());
+                    if (rg1.esExitosa()) {
+                        ArrayList<ConfiguracionUsuario> listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg1.getDatos();
+                        sesion.configUsuario = listaConfigUsuario.get(0);
+                        UtileriaVista.actualizarPerfil(sesion);
+                    }
+                    this.obtenerListadoCiclosContables();
+                }
+            }
         }
     }//GEN-LAST:event_tblCicloContableMouseClicked
 

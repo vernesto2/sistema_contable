@@ -103,7 +103,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             datos[2] = cuenta.getCodigo();
             datos[3] = cuenta.getEs_restado() == 0 ? "" : "R";
             datos[4] = cuenta.getNombre();
-            datos[5] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": cuenta.getTipo_saldo().equals("A") ? "ACREEDOR" : "-";
+            datos[5] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": cuenta.getTipo_saldo().equals("A") ? "ACREEDOR" : cuenta.getTipo_saldo().equals("T") ? "TRANSITORIA" : "-";
             datos[6] = cuenta.getIngresos();
             datos[7] = cuenta.getEgresos();
             dtm.addRow(datos);

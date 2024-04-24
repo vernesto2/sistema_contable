@@ -41,11 +41,13 @@ public class Constantes {
     
     public static final dtoLista TIPO_SALDO_DEUDOR = new dtoLista("D", "DEUDOR");
     public static final dtoLista TIPO_SALDO_ACREEDOR = new dtoLista("A", "ACREEDOR");
+    public static final dtoLista TIPO_SALDO_TRANSITORIA = new dtoLista("T", "TRANSITORIA");
     public static ArrayList<dtoLista> listaTiposSaldoCuentas() {
         ArrayList<dtoLista> lista = new ArrayList<>();
         
         lista.add(TIPO_SALDO_DEUDOR);
         lista.add(TIPO_SALDO_ACREEDOR);
+        lista.add(TIPO_SALDO_TRANSITORIA);
         
         return lista;
     }
