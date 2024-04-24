@@ -66,13 +66,12 @@ public class Constantes {
         lista.add(TIPO_PARTIDA_CIERRE);
         return lista;
     }
-    
+    public static final dtoLista SOCIEDAD_ANONIMA = new dtoLista("0", "SOCIEDAD ANONIMA S.A de C.V");
+    public static final dtoLista SOCIEDAD_DE_PERSONAS = new dtoLista("1", "SOCIEDAD DE PERSONA");
     public static ArrayList<dtoLista> listaTipoSociedad() {
         ArrayList<dtoLista> lista = new ArrayList<>();
-        dtoLista op1 = new dtoLista("0", "SOCIEDAD ANONIMA S.A de C.V");
-        dtoLista op2 = new dtoLista("1", "SOCIEDAD DE PERSONA");
-        lista.add(op1);
-        lista.add(op2);
+        lista.add(SOCIEDAD_ANONIMA);
+        lista.add(SOCIEDAD_DE_PERSONAS);
         return lista;
     }
     
@@ -156,32 +155,37 @@ public class Constantes {
         return lista;
     }
     
+    public static final dtoLista SIGNO_MAS = new dtoLista("(+)", "(+)");
+    public static final dtoLista SIGNO_MENOS = new dtoLista("(-)", "(-)");
+    public static final dtoLista SIGNO_IGUAL = new dtoLista("(=)", "(=)");
+    
     // tipos de Formulas
     public static ArrayList<dtoLista> listaSignos() {
         ArrayList<dtoLista> lista = new ArrayList<>();
-        dtoLista op1 = new dtoLista("(+)", "(+)");
-        dtoLista op2 = new dtoLista("(-)", "(-)");
-        dtoLista op3 = new dtoLista("(=)", "(=)");
-        lista.add(op1);
-        lista.add(op2);
-        lista.add(op3);
+        lista.add(SIGNO_MAS);
+        lista.add(SIGNO_MENOS);
+        lista.add(SIGNO_IGUAL);
         return lista;
     }
     
-    public static final dtoLista TIPO_FORMULA_SALDO = new dtoLista("0", "Saldo");
-    public static final dtoLista TIPO_FORMULA_RESERVA_LEGAL = new dtoLista("1", "Reserva Legal");
-    public static final dtoLista TIPO_FORMULA_IMPUESTO_SOBRE_RENTA = new dtoLista("2", "Impuesto Sobre Renta");
-    public static final dtoLista TIPO_FORMULA_SALDO_INICIAL = new dtoLista("3", "Saldo Inicial");
-    public static final dtoLista TIPO_FORMULA_VALOR_INGRESADO = new dtoLista("4", "Valor Ingresado");
-    
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_CALCULADO = new dtoLista("0", "Calculado ( con signo = )");
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES = new dtoLista("1", "Ventas totales");
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_SALDO_INICIAL = new dtoLista("2", "Saldo Inicial");
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_SALDO = new dtoLista("3", "Saldo final");
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO = new dtoLista("4", "Valor Ingresado");
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_RESERVA_LEGAL = new dtoLista("5", "Reserva Legal");
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_IMPUESTO_SOBRE_RENTA = new dtoLista("6", "Impuesto Sobre Renta");
+
 // tipos de Formulas
     public static ArrayList<dtoLista> listaTiposCampoEspecialEstadoResultado() {
         ArrayList<dtoLista> lista = new ArrayList<>();
-        lista.add(TIPO_FORMULA_SALDO);
-        lista.add(TIPO_FORMULA_RESERVA_LEGAL);
-        lista.add(TIPO_FORMULA_IMPUESTO_SOBRE_RENTA);
-        lista.add(TIPO_FORMULA_SALDO_INICIAL);
-        lista.add(TIPO_FORMULA_VALOR_INGRESADO);
+        lista.add(TIPO_CUENTA_ESPECIAL_CALCULADO);
+        lista.add(TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES);
+        lista.add(TIPO_CUENTA_ESPECIAL_SALDO_INICIAL);
+        lista.add(TIPO_CUENTA_ESPECIAL_SALDO);
+        lista.add(TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO);
+        lista.add(TIPO_CUENTA_ESPECIAL_RESERVA_LEGAL);
+        lista.add(TIPO_CUENTA_ESPECIAL_IMPUESTO_SOBRE_RENTA);
         return lista;
     }
 }

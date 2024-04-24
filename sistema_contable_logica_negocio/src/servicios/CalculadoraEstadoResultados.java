@@ -7,7 +7,9 @@ package servicios;
 import dto.dtoFormula;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jdk.jshell.spi.ExecutionControl;
 import modelo.CicloContable;
 import modelo.Formula;
@@ -25,9 +27,16 @@ public class CalculadoraEstadoResultados {
     List<ImpuestoSobreRenta> listaImpuestoSobreRenta;
     ArrayList<dtoFormula> listaFormula;
     ArrayList<CuentaBalanza> listaCuentaBalanza;
-    public CalculadoraEstadoResultados(ArrayList<dtoFormula> listaFormula, ArrayList<CuentaBalanza> listaCuentaBalanza, CicloContable cicloContable) {
+    Map<Integer, Double> valoresIngresados;
+    public CalculadoraEstadoResultados(
+            ArrayList<dtoFormula> listaFormula, 
+            ArrayList<CuentaBalanza> listaCuentaBalanza, 
+            Map<Integer, Double> valoresIngresados, 
+            CicloContable cicloContable
+    ) {
         this.listaFormula = listaFormula;
         this.listaCuentaBalanza = listaCuentaBalanza;
+        this.valoresIngresados = valoresIngresados;
         tipoSociedad = cicloContable.getTipo_sociedad();
         porcentajeReservaLegal = cicloContable.getPorcentaje_reserva_legal();
         this.listaImpuestoSobreRenta = new ArrayList<ImpuestoSobreRenta>();
@@ -62,34 +71,103 @@ public class CalculadoraEstadoResultados {
         return null;
     }
     
+    //sumarle o restarle al acumulado el valor actual de la formula
+    private Double operar(String signo, Double valorFormula, Double acumulado) {
+        if (signo.equals(Constantes.SIGNO_MAS.getValue())) {
+            acumulado += valorFormula;
+        } else if(signo.equals(Constantes.SIGNO_MENOS.getValue())) {
+            acumulado += valorFormula;
+        }
+        return acumulado;
+    }
     public void resolverFormula( ) {
         //obtener todos los elementos de la formula
         //obtener saldos inicial y saldo actual de las cuentas de la formula
         //iniciar a resolver la formula
-        
+        //validar si es necesario convertir la lista de formula en arbol para resolverlo mediante recursividad
+        //es altamente probable que sea necesario
         Double acumulado = new Double(0);
+        
+        List<ElementoFormulaResuelta> listaFormulaResuelta = new ArrayList<ElementoFormulaResuelta>();
         for (dtoFormula elemFormula : listaFormula) {
             Formula formula = elemFormula.getFormula();
-            Double valorFormula;
-            if (formula.getTipo_formula().equals(Constantes.TIPO_FORMULA_SALDO)) {
-                CuentaBalanza cuentaBalanza = buscarPorIdCuenta(formula.getId_cuenta());
+            Double valorFormula = new Double(0);
+            final String tipoCuentaEspecial = ""+formula.getTipo_cuenta_especial();
+            if( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_CALCULADO.getValue()) 
+                    && formula.getSigno().equals(Constantes.SIGNO_IGUAL)) {
+                //ver el acumulado al momento
+                valorFormula = acumulado;
+                //no cambia el acumulado, ya que no habia operaciones previas
+                //acumulado = valorFormula;
+            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO.getValue()) ) {
+                CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
                 if( cuentaBalanza == null ) {
                     throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
                 }
+                valorFormula = cuentaBalanza.saldo();
+                //sumar o restar según signo
+                acumulado = this.operar(formula.getSigno(), valorFormula, acumulado);
+            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO_INICIAL.getValue()) ) {
+                CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
+                if( cuentaBalanza == null ) {
+                    throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
+                }
+                valorFormula = cuentaBalanza.getSaldoInicial();
+                //sumar o restar según signo
+                acumulado = this.operar(formula.getSigno(), valorFormula, acumulado);
+            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES.getValue()) ) {
+                CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
+                if( cuentaBalanza == null ) {
+                    throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
+                }
+                valorFormula = cuentaBalanza.getSaldoInicial();
+                //sumar o restar según signo
+                acumulado = this.operar(formula.getSigno(), valorFormula, acumulado);
+            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO.getValue()) ) {
+                //...........
+                //...........
+                //...........
+                //...........
+                //...........
+            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_RESERVA_LEGAL.getValue()) ) {
+                Double utilidadAntesReservaLegal = acumulado;
+                valorFormula = utilidadAntesReservaLegal * ( porcentajeReservaLegal / 100 );
+                //sumar o restar según signo
+                acumulado = this.operar(formula.getSigno(), valorFormula, acumulado);
+            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_IMPUESTO_SOBRE_RENTA.getValue()) ) { 
+                //buscar la cuenta de ventas totales en la formula, luego traer su saldo final
+                Integer intTipoCuentaEspecial = Integer.parseInt(Constantes.TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES.getValue());
+                //buscar cual elemento de la formula tiene las ventas totales
+                Formula formulaVentas = buscarFormulaPorTipoCuenta(intTipoCuentaEspecial);
+                //obtener el saldo de la cuenta desde la balanza de comprobacion
+                CuentaBalanza cuentaBalanza = buscarCuentaPorId(formulaVentas.getId_cuenta());
+                Double ventasTotales = cuentaBalanza.saldo();
+                ImpuestoSobreRenta impuestoSobreRenta = determinarImpuestoSobreRenta(ventasTotales);
                 
-                if (cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_DEUDOR.getValue()) ) {
-                    valorFormula = cuentaBalanza.getSaldoDeudor();
-                } else if (cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_ACREEDOR.getValue()) ) {
-                    valorFormula = cuentaBalanza.getSaldoAcreedor();
-                } else throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no tiene un tipo saldo valido");
-            } else if (formula.getTipo_formula().equals(Constantes.TIPO_FORMULA_SALDO)) {
+                Double utilidadAntesDelImpuesto = acumulado;
+                valorFormula = impuestoSobreRenta.aplicar(ventasTotales, utilidadAntesDelImpuesto);
                 
+                acumulado = this.operar(formula.getSigno(), valorFormula, acumulado);
             }
+            ElementoFormulaResuelta elemFormulaResuelta = new ElementoFormulaResuelta();
+            
+            elemFormulaResuelta.setFormula(elemFormula.getFormula());
+            elemFormulaResuelta.setFormulaPadre(elemFormula.getFormulaPadre());
+            elemFormulaResuelta.setValor(valorFormula);
+            listaFormulaResuelta.add(elemFormulaResuelta);
         }
         //devolver datos que puede consumir el reporte
     }
-    
-    private CuentaBalanza buscarPorIdCuenta(Integer idCuenta) {
+    private Formula buscarFormulaPorTipoCuenta(Integer tipoCuentaEspecial) {
+        for (dtoFormula dtoFormula : listaFormula) {
+            Formula formula = dtoFormula.getFormula();
+            if(formula.getTipo_cuenta_especial() == tipoCuentaEspecial) {
+                return formula;
+            }
+        }
+        return null;
+    }
+    private CuentaBalanza buscarCuentaPorId(Integer idCuenta) {
         for (CuentaBalanza cuentaBalanza : listaCuentaBalanza) {
             if(cuentaBalanza.getId().equals(idCuenta)) {
                 return cuentaBalanza;

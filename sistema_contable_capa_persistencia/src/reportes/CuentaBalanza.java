@@ -4,33 +4,30 @@
  */
 package reportes;
 
+import utils.constantes.Constantes;
+
 /**
  *
  * @author student
  */
 public class CuentaBalanza {
+
     private Integer id;
     private String tipoSaldo;
     private Integer folioMayor;
     private String nombre;
     private String codigo;
+    
+    //note que solo dice saldo sin decir el tipo_saldo como deudor o acreedor, 
+    //ya que el saldo inicial solo se usa en la formula del estado de resultados
+    private Double saldoInicial;
+    
     private Double saldoDeudor;
     private Double saldoAcreedor;
-    
+
     public CuentaBalanza() {
-        
-    }
 
-    public CuentaBalanza(Integer id, String tipoSaldo, Integer folioMayor, String nombre, String codigo, Double saldoDeudor, Double saldoAcreedor) {
-        this.id = id;
-        this.tipoSaldo = tipoSaldo;
-        this.folioMayor = folioMayor;
-        this.nombre = nombre;
-        this.codigo = codigo;
-        this.saldoDeudor = saldoDeudor;
-        this.saldoAcreedor = saldoAcreedor;
     }
-
 
     public Integer getId() {
         return id;
@@ -72,6 +69,14 @@ public class CuentaBalanza {
         this.codigo = codigo;
     }
 
+    public Double getSaldoInicial() {
+        return saldoInicial;
+    }
+
+    public void setSaldoInicial(Double saldoInicial) {
+        this.saldoInicial = saldoInicial;
+    }
+
     public Double getSaldoDeudor() {
         return saldoDeudor;
     }
@@ -88,5 +93,13 @@ public class CuentaBalanza {
         this.saldoAcreedor = saldoAcreedor;
     }
 
-
+    public Double saldo() {
+        if (this.getTipoSaldo().equals(Constantes.TIPO_SALDO_DEUDOR.getValue())) {
+            return this.getSaldoDeudor();
+        } else if (this.getTipoSaldo().equals(Constantes.TIPO_SALDO_ACREEDOR.getValue())) {
+            return this.getSaldoAcreedor();
+        } else {
+            throw new IllegalStateException("Error: id cuenta (" + this.getId() + ") no tiene un tipo saldo valido");
+        }
+    }
 }
