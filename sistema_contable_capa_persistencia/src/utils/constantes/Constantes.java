@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Constantes {
     // ruta de configuracion de archivo de DB
     //final es para que no se pueda modificar ( variable = valor)
-    public static final String rutaConexion = "database/db.sqlite";
+    public static String rutaConexion = "database/db.sqlite";
     public static final String RUTA_ARCHIVO_SQL_INICIAL = "database/config_inicial.sql";
     // constantes para manejar el tipo de PERSONA
     public static int TIPO_DOCENTE = 1;
@@ -33,7 +33,12 @@ public class Constantes {
         "Seleccione ...",
         "¿Cuál es el nombre de tu primera mascota?", 
         "¿Cuál sería tu trabajo ideal?", 
-        "¿Qué actividad es la que más disfrutas hacer?" 
+        "¿Qué actividad es la que más disfrutas hacer?",
+        "¿Cuál es tu color favorito?",
+        "¿Cuál es el nombre de tu abuela?",
+        "¿Cuál es tu programa de tv favorito?",
+        "¿Cuál es tu comida favorita?",
+        "¿Cuál materia favorita?",
     };
     // logo en pantalla principal
     

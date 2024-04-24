@@ -6,20 +6,11 @@ package servicios;
 
 import conexion.Conexion;
 import dao.DaoUsuario;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import modelo.Persona;
 import modelo.Usuario;
 import utils.constantes.Constantes;
@@ -216,6 +207,34 @@ public class ServicioUsuario {
         } catch (InvalidKeySpecException ex) {
             Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
             return RespuestaGeneral.asBadRequest(ex.getMessage());
+        }
+    }
+    
+    public RespuestaGeneral recuperarUsuario(String carnet, String pregunta, String respuesta) {
+        try {
+            this.cx.conectar();
+            Usuario usuario = daoUsuario.validarUsuarioYRespuesta(carnet, pregunta, respuesta);
+            this.cx.desconectar();
+            if (usuario == null) {
+                return RespuestaGeneral.asNotFound("No se encontró el usuario o la repuesta digitada", null);
+            }
+            return RespuestaGeneral.asOk(null, usuario);
+        } catch (Exception ex) {
+            return RespuestaGeneral.asNotFound("No se encontró el usuario", null);
+        }
+    }
+    
+    public RespuestaGeneral actualizarClaveRecuperacion(Usuario usuario, char [] claveSinCifrarNueva) {
+        try {
+            this.cx.conectar();
+            Map<String, String> obj = cifrarClave(claveSinCifrarNueva, usuario.getSalt());
+            daoUsuario.actualizarClave(usuario, obj.get("clave"));
+            return RespuestaGeneral.asOk("Se actualizó exitosamente", null);
+        } catch (InvalidKeySpecException ex) {
+            Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return RespuestaGeneral.asBadRequest(ex.getMessage());
+        } finally {
+            this.cx.conectar();
         }
     }
 }

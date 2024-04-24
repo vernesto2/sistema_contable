@@ -581,8 +581,9 @@ public class pCrearUsuario extends javax.swing.JPanel {
                     RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
                     if (resp.esExitosa()) {
                         JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
-                        vInicio vistaInicio = new vInicio();
-                        vistaInicio.setVisible(true);
+                        vLogin login = new vLogin(this.sesion);
+                        login.setVisible(true);
+                        this.parentWindow.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
                     }
@@ -597,8 +598,9 @@ public class pCrearUsuario extends javax.swing.JPanel {
                         RespuestaGeneral resp = _usuario.crearAlumno(usuario, claveSinCifrar);
                         if (resp.esExitosa()) {
                             JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
-                            vInicio vistaInicio = new vInicio();
-                            vistaInicio.setVisible(true);
+                            vLogin login = new vLogin(this.sesion);
+                            login.setVisible(true);
+                            this.parentWindow.dispose();
                         } else {
                             JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
                         }
@@ -612,6 +614,9 @@ public class pCrearUsuario extends javax.swing.JPanel {
                         RespuestaGeneral resp = _usuario.crearDocente(usuario, claveSinCifrar);
                         if (resp.esExitosa()) {
                             JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
+                            vLogin login = new vLogin(this.sesion);
+                            login.setVisible(true);
+                            this.parentWindow.dispose();
                         } else {
                             JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
                         }
@@ -640,10 +645,14 @@ public class pCrearUsuario extends javax.swing.JPanel {
     }
     
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        if(esRestaurar) {
+        if (esRestaurar) {
             vInicio inicio = new vInicio();
             inicio.setVisible(true);
+        } else {
+            vLogin login = new vLogin(this.sesion);
+            login.setVisible(true);
         }
+        
         this.parentWindow.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 

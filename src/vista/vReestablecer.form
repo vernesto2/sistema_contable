@@ -148,7 +148,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="56" green="3a" red="21" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="REESTABLECER"/>
+            <Property name="text" type="java.lang.String" value="Restablecer"/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="56" green="44" red="21" type="rgb"/>
             </Property>
@@ -171,7 +171,7 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="6" green="cd" red="fb" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="CANCELAR"/>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
             <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="6" green="ae" red="fb" type="rgb"/>
             </Property>
@@ -230,7 +230,7 @@
             <Property name="phColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="placeholder" type="java.lang.String" value="Digite la contrase&#xf1;a.."/>
+            <Property name="placeholder" type="java.lang.String" value="Digite la nueva contrase&#xf1;a.."/>
             <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
@@ -277,7 +277,7 @@
             <Property name="phColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="placeholder" type="java.lang.String" value="Repetir la contrase&#xf1;a.."/>
+            <Property name="placeholder" type="java.lang.String" value="Repetir la nueva contrase&#xf1;a.."/>
             <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
@@ -309,6 +309,7 @@
               <Value id="RECT"/>
             </Property>
             <Property name="hideActionText" type="boolean" value="true"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
             <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
               <Value id="CLOSE"/>

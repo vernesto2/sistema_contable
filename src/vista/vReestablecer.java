@@ -6,6 +6,14 @@ package vista;
 
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.ConfiguracionUsuario;
+import modelo.Usuario;
+import servicios.ServicioUsuario;
+import sesion.Sesion;
+import utils.UtileriaVista;
+import utils.constantes.Constantes;
+import utils.constantes.RespuestaGeneral;
 
 /**
  *
@@ -17,9 +25,16 @@ public class vReestablecer extends javax.swing.JFrame {
      * Creates new form vReestablecer
      */
     public char pass;
+    Sesion sesion;
+    Usuario usuario = new Usuario();
+    ServicioUsuario _usuario;
     
-    public vReestablecer() {
+    public vReestablecer(Usuario usuario) {
         initComponents();
+        _usuario = new ServicioUsuario(Constantes.rutaConexion);
+        sesion = new Sesion(usuario, new ConfiguracionUsuario(), Constantes.rutaConexion);
+        this.usuario = usuario;
+        this.txtUsuario.setText(usuario.getNombre());
         this.iniciarVista();
     }
     
@@ -64,7 +79,7 @@ public class vReestablecer extends javax.swing.JFrame {
         txtUsuario.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         rSButtonShapeIcon15.setBackground(new java.awt.Color(33, 58, 86));
-        rSButtonShapeIcon15.setText("REESTABLECER");
+        rSButtonShapeIcon15.setText("Restablecer");
         rSButtonShapeIcon15.setBackgroundHover(new java.awt.Color(33, 68, 86));
         rSButtonShapeIcon15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         rSButtonShapeIcon15.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
@@ -76,7 +91,7 @@ public class vReestablecer extends javax.swing.JFrame {
         });
 
         rSButtonShapeIcon10.setBackground(new java.awt.Color(251, 205, 6));
-        rSButtonShapeIcon10.setText("CANCELAR");
+        rSButtonShapeIcon10.setText("Cancelar");
         rSButtonShapeIcon10.setBackgroundHover(new java.awt.Color(251, 174, 6));
         rSButtonShapeIcon10.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         rSButtonShapeIcon10.setForegroundHover(new java.awt.Color(0, 0, 0));
@@ -103,7 +118,7 @@ public class vReestablecer extends javax.swing.JFrame {
         txtClave.setDropMode(javax.swing.DropMode.INSERT);
         txtClave.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtClave.setPhColor(new java.awt.Color(0, 0, 0));
-        txtClave.setPlaceholder("Digite la contraseña..");
+        txtClave.setPlaceholder("Digite la nueva contraseña..");
         txtClave.setSelectionColor(new java.awt.Color(0, 0, 0));
         txtClave.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
 
@@ -124,7 +139,7 @@ public class vReestablecer extends javax.swing.JFrame {
         txtClave1.setDropMode(javax.swing.DropMode.INSERT);
         txtClave1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtClave1.setPhColor(new java.awt.Color(0, 0, 0));
-        txtClave1.setPlaceholder("Repetir la contraseña..");
+        txtClave1.setPlaceholder("Repetir la nueva contraseña..");
         txtClave1.setSelectionColor(new java.awt.Color(0, 0, 0));
         txtClave1.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
 
@@ -138,9 +153,9 @@ public class vReestablecer extends javax.swing.JFrame {
         rSButtonShapeIcon9.setBackgroundHover(new java.awt.Color(33, 68, 86));
         rSButtonShapeIcon9.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
         rSButtonShapeIcon9.setHideActionText(true);
+        rSButtonShapeIcon9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         rSButtonShapeIcon9.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         rSButtonShapeIcon9.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CLOSE);
-        rSButtonShapeIcon9.setMargin(new java.awt.Insets(0, 0, 0, 0));
         rSButtonShapeIcon9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonShapeIcon9ActionPerformed(evt);
@@ -219,9 +234,28 @@ public class vReestablecer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rSButtonShapeIcon15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon15ActionPerformed
-        vPrincipal principal = new vPrincipal();
-        principal.setVisible(true);
-        this.dispose();
+        
+        // ir a db a consultar si el usuario existe y si la pregunta hace mach con alguna respuesta configurada.
+        if (txtUsuario.getText().isEmpty() || txtClave.getText().isEmpty() || txtClave1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Complete toda la información", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
+        }
+        else {
+            if (txtClave.getText().equals(txtClave1.getText())) {
+                RespuestaGeneral rg = this._usuario.actualizarClaveRecuperacion(this.usuario, txtClave.getText().toCharArray());
+                if (rg.esExitosa()) {
+                    JOptionPane.showMessageDialog(this, "Clave Reseteada Correctamente,\nPor Favor Inicie Sesion con la nueva contraseña", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                    vLogin login = new vLogin(this.sesion);
+                    login.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(rg));
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "Mensaje", JOptionPane.WARNING_MESSAGE);
+            }
+            
+        }
+        
     }//GEN-LAST:event_rSButtonShapeIcon15ActionPerformed
 
     private void rSButtonShapeIcon10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonShapeIcon10ActionPerformed
@@ -250,37 +284,37 @@ public class vReestablecer extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(vReestablecer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(vReestablecer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(vReestablecer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(vReestablecer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new vReestablecer().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(vReestablecer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(vReestablecer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(vReestablecer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(vReestablecer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new vReestablecer().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private rojerusan.RSCheckBox checkBox;

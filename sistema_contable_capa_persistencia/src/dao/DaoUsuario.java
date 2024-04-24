@@ -265,4 +265,66 @@ select count(id) as encontrados from usuario where usuario.nombre = ?
             String mensaje = e.getMessage();
         }
     }
+    
+    public Usuario validarUsuarioYRespuesta(String carnet, String pregunta, String respuesta) {
+        Usuario usuario = null;
+        var sqlUsuario = """
+                       select 
+                            id_persona, nombres, apellidos, tipo, carnet, 
+                            usuario.id as id_usuario, nombre, correo, salt, clave, resetear_clave, 
+                            pregunta1, respuesta1,  pregunta2, respuesta2, pregunta3, respuesta3 
+                        	
+                        from usuario inner join persona on usuario.id_persona = persona.id
+                        where upper(usuario.nombre) = ? AND 
+                        (
+                            (pregunta1 = 'paramPregunta' and upper(respuesta1) = 'paramResp') or
+                            (pregunta2 = 'paramPregunta' and upper(respuesta2) = 'paramResp') or
+                            (pregunta3 = 'paramPregunta' and upper(respuesta3) = 'paramResp')
+                        )
+        """;
+        //este try es para que se cierre el PreparedStatement
+        String newSql = sqlUsuario.replaceAll("paramPregunta", pregunta);
+        String newSql1 = newSql.replaceAll("paramResp", respuesta);
+        try (
+                PreparedStatement psUsuario = cx.getCx().prepareStatement(newSql1);) {
+
+            psUsuario.setString(1, carnet);
+            //este try aniddado es para que se cierre el ResultSet
+            try (ResultSet rs = psUsuario.executeQuery();) {
+                Persona persona = null;
+                if (rs.getFetchSize() > 1) {
+                    throw new IllegalStateException("Error: se esperaba un resultado pero se obtuvieron más");
+                }
+                while (rs.next()) {
+                    persona = new Persona();
+                    persona.setId(rs.getInt("id_persona"));
+                    persona.setNombres(rs.getString("nombres"));
+                    persona.setApellidos(rs.getString("apellidos"));
+                    persona.setTipo(rs.getInt("tipo"));
+                    persona.setCarnet(rs.getString("carnet"));
+
+                    usuario = new Usuario();
+                    usuario.setPersona(persona);
+
+                    usuario.setId(rs.getInt("id_usuario"));
+                    usuario.setNombre(rs.getString("nombre"));
+                    usuario.setCorreo(rs.getString("correo"));
+                    usuario.setSalt(rs.getString("salt"));
+                    usuario.setClave(rs.getString("clave"));
+                    usuario.setResetear_clave(rs.getInt("resetear_clave"));
+                    usuario.setPregunta1(rs.getInt("pregunta1"));
+                    usuario.setRespuesta1(rs.getString("respuesta1"));
+                    usuario.setPregunta2(rs.getInt("pregunta2"));
+                    usuario.setRespuesta2(rs.getString("respuesta2"));
+                    usuario.setPregunta3(rs.getInt("pregunta3"));
+                    usuario.setRespuesta3(rs.getString("respuesta3"));
+                }
+                return usuario;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage();
+            return null;
+        }
+    }
 }

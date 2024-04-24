@@ -290,6 +290,7 @@ public class vInicio extends javax.swing.JFrame {
         try {
             if (archivo != null) {
                 String ruta = archivo.getCanonicalPath();
+                Constantes.rutaConexion = ruta;
                 this.lblRutaGlobal.setText(ruta);
                 System.out.println(ruta);
                 

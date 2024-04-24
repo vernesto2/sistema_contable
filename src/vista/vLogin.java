@@ -391,6 +391,7 @@ public class vLogin extends javax.swing.JFrame {
         //false hará que la vista intente crear alumno en vez de restaurar a la configuración inicial
         dCrearUsuario dialogo = new dCrearUsuario(this, true, sesion, Constantes.TIPO_ALUMNO);
         dialogo.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCrearAlumnoActionPerformed
 
     /**
