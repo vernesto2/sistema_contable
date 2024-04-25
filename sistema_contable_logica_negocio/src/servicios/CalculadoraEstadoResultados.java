@@ -71,33 +71,33 @@ public class CalculadoraEstadoResultados {
         return null;
     }
     
-    //sumarle o restarle al acumulado el valor actual de la formula
-    private Double operar(String signo, Double valorFormula, Double acumulado) {
-        if (signo.equals(Constantes.SIGNO_MAS.getValue())) {
-            acumulado += valorFormula;
-        } else if(signo.equals(Constantes.SIGNO_MENOS.getValue())) {
-            acumulado += valorFormula;
-        }
-        return acumulado;
+    
+    public Double resolverFormula() {
+        return resolverFormula(this.listaFormula);
     }
-    public void resolverFormula( ) {
+    public Double resolverFormula( List<dtoFormula> listaFormulaArbol ) {
         //obtener todos los elementos de la formula
         //obtener saldos inicial y saldo actual de las cuentas de la formula
         //iniciar a resolver la formula
         //validar si es necesario convertir la lista de formula en arbol para resolverlo mediante recursividad
         //es altamente probable que sea necesario
-        Double acumulado = new Double(0);
+        Double acumulado = Double.valueOf(0);
         
         List<ElementoFormulaResuelta> listaFormulaResuelta = new ArrayList<ElementoFormulaResuelta>();
-        for (dtoFormula elemFormula : listaFormula) {
+        for (dtoFormula elemFormula : listaFormulaArbol) {
             Formula formula = elemFormula.getFormula();
-            Double valorFormula = new Double(0);
+            Double valorFormula = Double.valueOf(0);
             final String tipoCuentaEspecial = ""+formula.getTipo_cuenta_especial();
-            if( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_CALCULADO.getValue()) 
+            
+            if(elemFormula.tieneHijas()) {
+                valorFormula = resolverFormula( elemFormula.getHijas() );
+                acumulado = elemFormula.operar(valorFormula, acumulado);
+            } else if( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_CALCULADO.getValue()) 
                     && formula.getSigno().equals(Constantes.SIGNO_IGUAL)) {
                 //ver el acumulado al momento
                 valorFormula = acumulado;
-                //no cambia el acumulado, ya que no habia operaciones previas
+                //no cambia el acumulado, ya que el valor calculado 
+                //se usa para reflejar el valor resultante de las operaciones anteriores
                 //acumulado = valorFormula;
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO.getValue()) ) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
@@ -106,7 +106,7 @@ public class CalculadoraEstadoResultados {
                 }
                 valorFormula = cuentaBalanza.saldo();
                 //sumar o restar según signo
-                acumulado = this.operar(formula.getSigno(), valorFormula, acumulado);
+                acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO_INICIAL.getValue()) ) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
                 if( cuentaBalanza == null ) {
@@ -114,7 +114,7 @@ public class CalculadoraEstadoResultados {
                 }
                 valorFormula = cuentaBalanza.getSaldoInicial();
                 //sumar o restar según signo
-                acumulado = this.operar(formula.getSigno(), valorFormula, acumulado);
+                acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES.getValue()) ) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
                 if( cuentaBalanza == null ) {
@@ -122,7 +122,7 @@ public class CalculadoraEstadoResultados {
                 }
                 valorFormula = cuentaBalanza.getSaldoInicial();
                 //sumar o restar según signo
-                acumulado = this.operar(formula.getSigno(), valorFormula, acumulado);
+                acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO.getValue()) ) {
                 //...........
                 //...........
@@ -133,7 +133,7 @@ public class CalculadoraEstadoResultados {
                 Double utilidadAntesReservaLegal = acumulado;
                 valorFormula = utilidadAntesReservaLegal * ( porcentajeReservaLegal / 100 );
                 //sumar o restar según signo
-                acumulado = this.operar(formula.getSigno(), valorFormula, acumulado);
+                acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_IMPUESTO_SOBRE_RENTA.getValue()) ) { 
                 //buscar la cuenta de ventas totales en la formula, luego traer su saldo final
                 Integer intTipoCuentaEspecial = Integer.parseInt(Constantes.TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES.getValue());
@@ -147,7 +147,7 @@ public class CalculadoraEstadoResultados {
                 Double utilidadAntesDelImpuesto = acumulado;
                 valorFormula = impuestoSobreRenta.aplicar(ventasTotales, utilidadAntesDelImpuesto);
                 
-                acumulado = this.operar(formula.getSigno(), valorFormula, acumulado);
+                acumulado = elemFormula.operar(valorFormula, acumulado);
             }
             ElementoFormulaResuelta elemFormulaResuelta = new ElementoFormulaResuelta();
             
@@ -156,8 +156,53 @@ public class CalculadoraEstadoResultados {
             elemFormulaResuelta.setValor(valorFormula);
             listaFormulaResuelta.add(elemFormulaResuelta);
         }
+        return acumulado;
         //devolver datos que puede consumir el reporte
     }
+/*
+agregarPadres(lista: any, expanded?: boolean): TreeNode {
+    let listaAux = {data: []}
+    lista.forEach(detalle => {
+      if (Number(detalle.idRelacion) == -1) {
+        listaAux.data.push({data: detalle, children: this.agregarHijos(lista, Number(detalle.id)), expanded: expanded == null ? false : expanded });
+      }
+    });
+    return listaAux;
+  }
+*/
+    public List<dtoFormula> agregarPadres(List<dtoFormula> lista) {
+        List<dtoFormula> listaAux = new ArrayList<dtoFormula>();
+        for (dtoFormula formula : lista) {
+            if (formula.getFormula().getId_formula() == -1) {
+                listaAux.add(new dtoFormula(formula.getFormula(), formula.getFormulaPadre(), agregarHijos(lista, formula.getFormula().getId())));
+            }
+        }
+
+        return listaAux;
+    }
+
+    public List<dtoFormula> agregarHijos(List<dtoFormula> listaHijos, Integer idFormula) {
+        List<dtoFormula> arbolHijos = new ArrayList<dtoFormula>();
+        for (dtoFormula formula : listaHijos) {
+            if (formula.getFormula().getId_formula() == idFormula && formula.getFormula().getId_formula() > 0) {
+                arbolHijos.add(new dtoFormula(formula.getFormula(), formula.getFormulaPadre(), agregarHijos(listaHijos, formula.getFormula().getId())));
+            }
+        }
+        return arbolHijos;
+    }
+    /*
+  agregarHijos(listaHijos: any, idPadre: number): TreeNode[] {
+    let arbolHijos: TreeNode[]=[];
+    listaHijos.forEach(detalle => {
+      if (Number(detalle.idRelacion) == idPadre && Number(detalle.idRelacion) > 0) {
+        arbolHijos.push({ data: detalle, children: this.agregarHijos(listaHijos, Number(detalle.id)), expanded: false });
+      }
+    });
+    return arbolHijos;
+  }
+*/
+
+
     private Formula buscarFormulaPorTipoCuenta(Integer tipoCuentaEspecial) {
         for (dtoFormula dtoFormula : listaFormula) {
             Formula formula = dtoFormula.getFormula();

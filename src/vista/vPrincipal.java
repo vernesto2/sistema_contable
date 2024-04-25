@@ -516,7 +516,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnEstadoResultado.isSelected()) {
             this.btnEstadoResultado.setSelected(true);
-            new CambiaPanel(pnl, new vLibroDiario(sesion));
+            new CambiaPanel(pnl, new vEstadoResultados(sesion));
         }
     }//GEN-LAST:event_btnEstadoResultadoActionPerformed
 

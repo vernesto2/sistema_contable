@@ -4,13 +4,13 @@
  */
 package formularios;
 
-
 import dto.dtoFormula;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.TipoCatalogo;
@@ -29,16 +29,16 @@ public class dFormula extends javax.swing.JDialog {
 
     RespuestaGeneral rg = new RespuestaGeneral();
     ServicioFormula _formula;
-    
+
     ArrayList<dtoFormula> listaFormula = new ArrayList<>();
     TipoCatalogo tipoCatalogo = new TipoCatalogo();
-    
+
     boolean realizoAccion = false;
     Sesion sesion;
-    
+
     DefaultTableModel dtm = new DefaultTableModel() {
-        @Override 
-        public boolean isCellEditable(int row, int column) { 
+        @Override
+        public boolean isCellEditable(int row, int column) {
             return true;
         }
     };
@@ -55,7 +55,7 @@ public class dFormula extends javax.swing.JDialog {
         this.tipoCatalogo = tipoCatalogo;
         this.iniciarVistaDialog();
     }
-    
+
     public void iniciarVistaDialog() {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -67,14 +67,14 @@ public class dFormula extends javax.swing.JDialog {
     }
 
     public void setModelFormula() {
-        String[] cabecera = {"Posición", "Signo", "Nombre","Tipo Formula","Formula Padre","Editar","Eliminar","Sub-Formula"};
+        String[] cabecera = {"Posición", "Signo", "Nombre", "Tipo Formula", "Formula Padre", "Editar", "Eliminar", "Sub-Formula"};
         dtm.setColumnIdentifiers(cabecera);
         tblFormula.setModel(dtm);
         Render rr = new Render();
         rr.setColumna(0);
         tblFormula.setDefaultRenderer(Object.class, rr);
     }
-    
+
     public void setDatosFormula() {
         RSMaterialComponent.RSButtonCustomIcon btn1 = new RSMaterialComponent.RSButtonCustomIcon();
         RSMaterialComponent.RSButtonCustomIcon btn2 = new RSMaterialComponent.RSButtonCustomIcon();
@@ -92,7 +92,7 @@ public class dFormula extends javax.swing.JDialog {
         Object[] datos = new Object[dtm.getColumnCount()];
         // ordenamos el listado antes de mostrar
         Collections.sort(listaFormula);
-        
+
         for (dtoFormula detalle : this.listaFormula) {
             datos[0] = detalle.getFormula().getPosicion();
             datos[1] = detalle.getFormula().getSigno();
@@ -115,31 +115,33 @@ public class dFormula extends javax.swing.JDialog {
         tblFormula.getColumnModel().getColumn(6).setPreferredWidth(90);
         tblFormula.getColumnModel().getColumn(7).setPreferredWidth(90);
     }
-    
+
     public void limiparTablaFormula() {
         for (int i = 0; i < tblFormula.getRowCount(); i++) {
             dtm.removeRow(i);
-            i-=1;
+            i -= 1;
         }
     }
-    
+
     public void obtenerListaFormula() {
         this.totalFormula.setText("0");
         RespuestaGeneral rgf = _formula.obtenerListaPorIdTipoCatalogo(this.tipoCatalogo.getId());
         if (rgf.esExitosa()) {
-            this.listaFormula = (ArrayList<dtoFormula>)rgf.getDatos();
+            this.listaFormula = (ArrayList<dtoFormula>) rgf.getDatos();
             this.totalFormula.setText(String.valueOf(this.listaFormula.size()));
-       }
+
+        }
     }
-    
+/*
+
     public boolean getRealizoAccion() {
         return realizoAccion;
     }
-    
+
     public RespuestaGeneral getRG() {
         return rg;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -294,13 +296,13 @@ public class dFormula extends javax.swing.JDialog {
     public void cerrar() {
         this.dispose();
     }
-    
-    
+
+
     private void tblFormulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFormulaMouseClicked
         int row = tblFormula.getSelectedRow();
         int column = tblFormula.getSelectedColumn();
         if (column == 5) {
-            
+
             dFormFormula d = new dFormFormula(null, true, sesion, this.listaFormula.get(row), this.tipoCatalogo, new dtoFormula());
             d.setVisible(true);
             // validamos si realizo alguna accion para actualizar el listado o no
@@ -309,9 +311,9 @@ public class dFormula extends javax.swing.JDialog {
                 this.obtenerListaFormula();
                 this.setDatosFormula();
             }
-            
+
         } else if (column == 6) {
-            
+
             String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaFormula.get(row).getFormula().getNombre();
             int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (opc == 0) {
@@ -325,7 +327,7 @@ public class dFormula extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
                 }
             }
-            
+
         } else if (column == 7) {
             dFormFormula d = new dFormFormula(null, true, sesion, new dtoFormula(), this.tipoCatalogo, this.listaFormula.get(row));
             d.setVisible(true);

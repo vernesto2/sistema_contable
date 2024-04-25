@@ -4,7 +4,9 @@
  */
 package dto;
 
+import java.util.List;
 import modelo.Formula;
+import utils.constantes.Constantes;
 
 /**
  *
@@ -14,6 +16,13 @@ public class dtoFormula implements Comparable<dtoFormula>{
     
     Formula formula;
     Formula formulaPadre;
+    List<dtoFormula> hijas;
+
+    public dtoFormula(Formula formula, Formula formulaPadre, List<dtoFormula> hijas) {
+        this.formula = formula;
+        this.formulaPadre = formulaPadre;
+        this.hijas = hijas;
+    }
 
     public dtoFormula() {
         this.formula = new Formula();
@@ -35,7 +44,32 @@ public class dtoFormula implements Comparable<dtoFormula>{
     public void setFormulaPadre(Formula formulaPadre) {
         this.formulaPadre = formulaPadre;
     }
+    public void agregarHija(dtoFormula hija) {
+        hijas.add(hija);
+    }
+   
+    public List<dtoFormula> getHijas() {
+        return hijas;
+    }
 
+    public void setHijas(List<dtoFormula> hijas) {
+        this.hijas = hijas;
+    }
+
+    public boolean tieneHijas() {
+        return hijas == null ? false : hijas.size() > 0;
+    }
+    
+    //sumarle o restarle al acumulado el valor actual de la formula
+    public Double operar(Double valorFormula, Double acumulado) {
+        if (this.formula.getSigno().equals(Constantes.SIGNO_MAS.getValue())) {
+            acumulado += valorFormula;
+        } else if(this.formula.getSigno().equals(Constantes.SIGNO_MENOS.getValue())) {
+            acumulado += valorFormula;
+        }
+        return acumulado;
+    }
+    
     @Override
     public int compareTo(dtoFormula other) {
         return comparePositions(formula.getPosicion(), other.getFormula().getPosicion());
