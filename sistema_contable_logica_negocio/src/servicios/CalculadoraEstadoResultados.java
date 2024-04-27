@@ -7,6 +7,7 @@ package servicios;
 import dto.dtoFormula;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,8 +54,16 @@ public class CalculadoraEstadoResultados {
         listaImpuestoSobreRenta.add(impuestoSobreRenta);
         
         //ordenar por la propiedad hasta
-        Collections.sort(listaImpuestoSobreRenta, (item1, item2) -> {
-            if(item2.hasta == null) {
+        Comparator<ImpuestoSobreRenta> comparador = (item1, item2) -> {
+            //si ambos son null, tienen el mismo orden
+            if(item1.hasta == null && item2.hasta == null) {
+                return 0;
+            }
+            //item1 es mayor
+            if(item1.hasta == null) {
+                return 1;
+            } //item2 es mayor
+            else if(item2.hasta == null) {
                 return 1;
             }
             if(item1.hasta < item2.hasta) {
@@ -62,8 +71,9 @@ public class CalculadoraEstadoResultados {
             } else if (item1.hasta > item2.hasta) {
                 return 1;
             } else return 0;
-        });
+        };
         
+        Collections.sort(listaImpuestoSobreRenta, comparador);
     }
     public ImpuestoSobreRenta determinarImpuestoSobreRenta(Double ventas) {
         for (ImpuestoSobreRenta impuestoSobreRenta : listaImpuestoSobreRenta) {
