@@ -34,7 +34,10 @@ public class CalculadoraEstadoResultados {
             Map<Integer, Double> valoresIngresados, 
             CicloContable cicloContable
     ) {
+        
         this.listaFormula = listaFormula;
+        Collections.sort(this.listaFormula);
+        
         this.listaCuentaBalanza = listaCuentaBalanza;
         this.valoresIngresados = valoresIngresados;
         tipoSociedad = cicloContable.getTipo_sociedad();
@@ -73,9 +76,16 @@ public class CalculadoraEstadoResultados {
     
     
     public Double resolverFormula() {
-        return resolverFormula(this.listaFormula);
+        List<ElementoFormulaResuelta> listaFormulaResuelta = new ArrayList<ElementoFormulaResuelta>();
+        Double utilidadPerdida = resolverFormula(this.listaFormula, listaFormulaResuelta);
+        System.out.println("#####");
+        for (ElementoFormulaResuelta elementoFormulaResuelta : listaFormulaResuelta) {
+            System.out.println(elementoFormulaResuelta.getFormula().getSigno()+ " "+ elementoFormulaResuelta.getFormula().getNombre()+" = " + elementoFormulaResuelta.getValor());
+        }
+        System.out.println("#####");
+        return utilidadPerdida;
     }
-    public Double resolverFormula( List<dtoFormula> listaFormulaArbol ) {
+    public Double resolverFormula( List<dtoFormula> listaFormulaArbol, List<ElementoFormulaResuelta> listaFormulaResuelta) {
         //obtener todos los elementos de la formula
         //obtener saldos inicial y saldo actual de las cuentas de la formula
         //iniciar a resolver la formula
@@ -83,14 +93,20 @@ public class CalculadoraEstadoResultados {
         //es altamente probable que sea necesario
         Double acumulado = Double.valueOf(0);
         
-        List<ElementoFormulaResuelta> listaFormulaResuelta = new ArrayList<ElementoFormulaResuelta>();
+        
         for (dtoFormula elemFormula : listaFormulaArbol) {
             Formula formula = elemFormula.getFormula();
             Double valorFormula = Double.valueOf(0);
             final String tipoCuentaEspecial = ""+formula.getTipo_cuenta_especial();
+            //en caso se entra en cuenta recursiva, se agrega primero el elemento actual ya que el elemento actual va primero, 
+            //y posteriormente se le setea el valor
+            ElementoFormulaResuelta elemFormulaResuelta = new ElementoFormulaResuelta();
+            elemFormulaResuelta.setFormula(elemFormula.getFormula());
+            elemFormulaResuelta.setFormulaPadre(elemFormula.getFormulaPadre());
+            listaFormulaResuelta.add(elemFormulaResuelta);
             
             if(elemFormula.tieneHijas()) {
-                valorFormula = resolverFormula( elemFormula.getHijas() );
+                valorFormula = resolverFormula( elemFormula.getHijas(), listaFormulaResuelta );
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_CALCULADO.getValue()) 
                     && formula.getSigno().equals(Constantes.SIGNO_IGUAL)) {
@@ -149,12 +165,9 @@ public class CalculadoraEstadoResultados {
                 
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             }
-            ElementoFormulaResuelta elemFormulaResuelta = new ElementoFormulaResuelta();
             
-            elemFormulaResuelta.setFormula(elemFormula.getFormula());
-            elemFormulaResuelta.setFormulaPadre(elemFormula.getFormulaPadre());
+            //y posteriormente se le setea el valor
             elemFormulaResuelta.setValor(valorFormula);
-            listaFormulaResuelta.add(elemFormulaResuelta);
         }
         return acumulado;
         //devolver datos que puede consumir el reporte

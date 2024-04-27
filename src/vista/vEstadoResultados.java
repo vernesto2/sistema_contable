@@ -6,7 +6,12 @@ package vista;
 
 import dto.dtoFormula;
 import java.util.ArrayList;
+import java.util.List;
 import modelo.Cuenta;
+import modelo.Formula;
+import modelo.TipoCatalogo;
+import reportes.CuentaBalanza;
+import servicios.CalculadoraEstadoResultados;
 import servicios.ServicioCuenta;
 import servicios.ServicioFormula;
 import sesion.Sesion;
@@ -108,11 +113,15 @@ public class vEstadoResultados extends javax.swing.JPanel {
         );
     }//GEN-LAST:event_btnVerEstadoResultados2ActionPerformed
     private void verEstadoResultados(Integer tipoPartida) {
-//        RespuestaGeneral rgf = _formula.obtenerListaPorIdTipoCatalogo(null);
-//        if (rgf.esExitosa()) {
-//            var listaFormula = (ArrayList<dtoFormula>) rgf.getDatos();
-//
-//        }
+        TipoCatalogo tipoCatalogo = sesion.configUsuario.getCicloContable().getTipoCatalogo();
+        ArrayList<dtoFormula> listaFormula = (ArrayList<dtoFormula>) _formula.obtenerListaPorIdTipoCatalogo(
+                tipoCatalogo.getId()
+        ).getDatos();
+        ArrayList<CuentaBalanza> listaCuentasBalanza = (ArrayList<CuentaBalanza>)_cuenta.listarCuentaBalanzaComprobacion(
+                tipoCatalogo.getId(), sesion.configUsuario.getCicloContable().getId(), tipoPartida
+        ).getDatos();
+        CalculadoraEstadoResultados calcEstadoResultados = new CalculadoraEstadoResultados(listaFormula, listaCuentasBalanza, null, sesion.configUsuario.getCicloContable());
+        Double utilidadPerdida = calcEstadoResultados.resolverFormula();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
