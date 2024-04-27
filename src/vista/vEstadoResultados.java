@@ -13,6 +13,7 @@ import modelo.TipoCatalogo;
 import reportes.CuentaBalanza;
 import servicios.CalculadoraEstadoResultados;
 import servicios.ServicioCuenta;
+import servicios.ServicioCuentaBalance;
 import servicios.ServicioFormula;
 import sesion.Sesion;
 import utils.constantes.Constantes;
@@ -31,12 +32,15 @@ public class vEstadoResultados extends javax.swing.JPanel {
     ServicioCuenta _cuenta;
     ServicioFormula _formula;
     Cuenta cuentaSeleccionada;
+    ServicioCuentaBalance _cuentaBalance;
     public vEstadoResultados(Sesion sesion) {
         initComponents();
         this.sesion = sesion;
         this._cuenta = new ServicioCuenta(sesion.rutaConexion);
         this._formula = new ServicioFormula(sesion.rutaConexion);
+        this._cuentaBalance = new ServicioCuentaBalance(sesion.rutaConexion);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,7 +122,7 @@ public class vEstadoResultados extends javax.swing.JPanel {
                 tipoCatalogo.getId()
         ).getDatos();
         ArrayList<CuentaBalanza> listaCuentasBalanza = (ArrayList<CuentaBalanza>)_cuenta.listarCuentaBalanzaComprobacion(
-                tipoCatalogo.getId(), sesion.configUsuario.getCicloContable().getId(), tipoPartida
+                sesion.configUsuario.getCicloContable(), tipoPartida
         ).getDatos();
         CalculadoraEstadoResultados calcEstadoResultados = new CalculadoraEstadoResultados(listaFormula, listaCuentasBalanza, null, sesion.configUsuario.getCicloContable());
         Double utilidadPerdida = calcEstadoResultados.resolverFormula();

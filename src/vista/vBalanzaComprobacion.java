@@ -195,7 +195,7 @@ public class vBalanzaComprobacion extends javax.swing.JPanel {
             }
             Integer idCiclo = sesion.configUsuario.getCicloContable().getId();
             List<CuentaBalanza> listBeans = (List<CuentaBalanza>) _cuenta
-                    .listarCuentaBalanzaComprobacion(tipoCatalogo, idCiclo, tipoPartida)
+                    .listarCuentaBalanzaComprobacion(sesion.configUsuario.getCicloContable(), tipoPartida)
                     .getDatos();
             
             JRBeanCollectionDataSource param_cuentas_balanza = new JRBeanCollectionDataSource(listBeans);

@@ -6,11 +6,16 @@ package servicios;
 
 import conexion.Conexion;
 import dao.daoCuenta;
+import dao.daoCuentaBalance;
 import dto.dtoFormula;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import modelo.CicloContable;
 import modelo.Cuenta;
+import modelo.CuentaBalance;
 import reportes.CuentaBalanza;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -20,10 +25,14 @@ import utils.constantes.RespuestaGeneral;
 public class ServicioCuenta {
     daoCuenta daoCuenta;
     Conexion cx;
+    ServicioCuentaBalance _cuentaBalance;
 
     public ServicioCuenta(String rutaConexion) {
         this.cx = new Conexion(rutaConexion);
         this.daoCuenta = new daoCuenta(this.cx);
+    }
+    public void setServicioCuentaBalanza (ServicioCuentaBalance _cuentaBalance) {
+        this._cuentaBalance = _cuentaBalance;
     }
     
     public RespuestaGeneral obtenerListaPorIdTipoCatalogo(int idTipoCatalogo, String busqueda) {
@@ -103,13 +112,45 @@ public class ServicioCuenta {
         }
         
     }
-    public RespuestaGeneral listarCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo, Integer tipoPartida) {
+    public RespuestaGeneral listarCuentaBalanzaComprobacion(CicloContable cicloContable, Integer tipoPartida) {
         try {
             this.cx.conectar();
-            List<CuentaBalanza> listBeans = daoCuenta
-                    .listarCuentaBalanzaComprobacion(
-                            idTipoCatalogo, idCiclo, tipoPartida, null
-                    );
+            List<CuentaBalanza> listBeans = null;
+            //si los saldos fueron ingresados directamente, se lee desde otra tabla
+            
+            if(cicloContable.getSin_libro_diario() == 1) {
+                 ArrayList<CuentaBalance> listaCuentaBalanza = (ArrayList<CuentaBalance>) _cuentaBalance
+                .obtenerListaPorIdCicloContable(
+                     cicloContable.getId(), 
+                     cicloContable.getTipoCatalogo().getId()
+                ).getDatos();
+                
+                listaCuentaBalanza.stream().map(item -> {
+                    CuentaBalanza cuentaBalanza = new CuentaBalanza();
+                    cuentaBalanza.setCodigo(item.getCuenta().getCodigo());
+                    cuentaBalanza.setFolioMayor(null);
+                    cuentaBalanza.setId(item.getCuenta().getId());
+                    cuentaBalanza.setNombre(item.getCuenta().getNombre());
+                    cuentaBalanza.setTipoSaldo(item.getCuenta().getTipo_saldo());
+                    
+                    if(cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_ACREEDOR.getValue())  ) {
+                        cuentaBalanza.setSaldoDeudor(item.getSaldo_final());
+                    } else if(cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_DEUDOR.getValue()) ) {
+                        cuentaBalanza.setSaldoAcreedor(item.getSaldo_final());
+                    }
+                    cuentaBalanza.setSaldoInicial(item.getSaldo_inicial());
+                    return cuentaBalanza;
+                }).collect(Collectors.toList());
+            } 
+            //si tiene partidas sacar los saldos de la balanza de comprobacion
+            else {
+                listBeans = daoCuenta
+                 .listarCuentaBalanzaComprobacion(
+                            cicloContable.getTipoCatalogo().getId(), cicloContable.getId(), tipoPartida, null
+                 );
+            }
+            
+            
             this.cx.desconectar();
             return RespuestaGeneral.asOk(null, listBeans);
         } catch (Exception e) {

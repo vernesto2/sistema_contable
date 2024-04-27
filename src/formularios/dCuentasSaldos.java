@@ -63,7 +63,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
         this.setTitle("SALDOS PARA: " + this.cicloContable.getTitulo().toUpperCase());
         this.realizoAccion = false;
         this.setModelFormula();
-        this.obtenerListaFormula();
+        this.obtenerListaCuentaSaldo();
         this.setDatosFormula();
     }
 
@@ -113,7 +113,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
         }
     }
     
-    public void obtenerListaFormula() {
+    public void obtenerListaCuentaSaldo() {
         this.totalCuentasSaldos.setText("0");
         RespuestaGeneral rgf = _cBalance.obtenerListaPorIdCicloContable(this.cicloContable.getId(), this.cicloContable.getId_catalogo());
         if (rgf.esExitosa()) {
@@ -302,7 +302,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
                 if (rg.esExitosa()) {
                     JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
                     this.limiparTablaFormula();
-                    this.obtenerListaFormula();
+                    this.obtenerListaCuentaSaldo();
                     this.setDatosFormula();
                 } else {
                     JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
@@ -322,7 +322,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.isRealizoAccion()) {
             JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
-            this.obtenerListaFormula();
+            this.obtenerListaCuentaSaldo();
             this.setDatosFormula();
         }
     }
