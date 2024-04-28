@@ -85,14 +85,14 @@ public class CalculadoraEstadoResultados {
     }
     
     
-    public Double resolverFormula() {
+    public List<ElementoFormulaReporte> resolverFormula() {
         List<dtoFormula> arbolFormula = this.agregarPadres(listaFormula);
-        List<ElementoFormulaResuelta> listaFormulaResuelta = new ArrayList<ElementoFormulaResuelta>();
-        Double utilidadPerdida = resolverFormula(arbolFormula, listaFormulaResuelta);
-        
-        return utilidadPerdida;
+        List<ElementoFormulaReporte> listaFormulaResuelta = new ArrayList<ElementoFormulaReporte>();
+        int nivel = 1;
+        Double utilidadPerdida = resolverFormula(arbolFormula, listaFormulaResuelta, nivel);
+        return listaFormulaResuelta;
     }
-    private Double resolverFormula( List<dtoFormula> listaFormulaArbol, List<ElementoFormulaResuelta> listaFormulaResuelta) {
+    private Double resolverFormula( List<dtoFormula> listaFormulaArbol, List<ElementoFormulaReporte> listaFormulaResuelta, int nivel) {
         //obtener todos los elementos de la formula
         //obtener saldos inicial y saldo actual de las cuentas de la formula
         //iniciar a resolver la formula
@@ -107,13 +107,13 @@ public class CalculadoraEstadoResultados {
             final String tipoCuentaEspecial = ""+formula.getTipo_cuenta_especial();
             //en caso se entra en cuenta recursiva, se agrega primero el elemento actual ya que el elemento actual va primero, 
             //y posteriormente se le setea el valor
-            ElementoFormulaResuelta elemFormulaResuelta = new ElementoFormulaResuelta();
+            ElementoFormulaReporte elemFormulaResuelta = new ElementoFormulaReporte();
             elemFormulaResuelta.setFormula(elemFormula.getFormula());
             elemFormulaResuelta.setFormulaPadre(elemFormula.getFormulaPadre());
             listaFormulaResuelta.add(elemFormulaResuelta);
             
             if(elemFormula.tieneHijas()) {
-                valorFormula = resolverFormula( elemFormula.getHijas(), listaFormulaResuelta );
+                valorFormula = resolverFormula( elemFormula.getHijas(), listaFormulaResuelta, nivel + 1);
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_CALCULADO.getValue()) 
                     && formula.getSigno().equals(Constantes.SIGNO_IGUAL.getValue())) {
@@ -174,8 +174,8 @@ public class CalculadoraEstadoResultados {
             }
             
             //y posteriormente se le setea el valor
-            elemFormulaResuelta.setValor(valorFormula);
-            System.out.println(elemFormulaResuelta.getFormula().getSigno()+ " "+ elemFormulaResuelta.getFormula().getNombre()+" = " + elemFormulaResuelta.getValor());
+            elemFormulaResuelta.setValor(valorFormula, nivel);
+            System.out.println(elemFormulaResuelta.getFormula().getSigno()+ " "+ elemFormulaResuelta.getFormula().getNombre()+" = " + elemFormulaResuelta.getValor1());
         }
         return acumulado;
         //devolver datos que puede consumir el reporte

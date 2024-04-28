@@ -12,6 +12,7 @@ import modelo.Formula;
 import modelo.TipoCatalogo;
 import reportes.CuentaBalanza;
 import servicios.CalculadoraEstadoResultados;
+import servicios.ElementoFormulaReporte;
 import servicios.ServicioCuenta;
 import servicios.ServicioCuentaBalance;
 import servicios.ServicioFormula;
@@ -127,8 +128,9 @@ public class vEstadoResultados extends javax.swing.JPanel {
         ArrayList<CuentaBalanza> listaCuentasBalanza = (ArrayList<CuentaBalanza>)_cuenta.listarCuentaBalanzaComprobacion(
                 sesion.configUsuario.getCicloContable(), tipoPartida
         ).getDatos();
+
         CalculadoraEstadoResultados calcEstadoResultados = new CalculadoraEstadoResultados(listaFormula, listaCuentasBalanza, null, sesion.configUsuario.getCicloContable());
-        Double utilidadPerdida = calcEstadoResultados.resolverFormula();
+        List<ElementoFormulaReporte> listElementoReporte = calcEstadoResultados.resolverFormula();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
