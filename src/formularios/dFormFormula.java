@@ -230,7 +230,7 @@ public class dFormFormula extends javax.swing.JDialog {
         lblFormula = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         cmbTipoFormula = new RSMaterialComponent.RSComboBoxMaterial();
-        btnCancelarTipoCatalogo2 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnElegirCuenta = new RSMaterialComponent.RSButtonShapeIcon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -390,18 +390,18 @@ public class dFormFormula extends javax.swing.JDialog {
             }
         });
 
-        btnCancelarTipoCatalogo2.setBackground(new java.awt.Color(0, 153, 0));
-        btnCancelarTipoCatalogo2.setText("ELEGIR CUENTA");
-        btnCancelarTipoCatalogo2.setToolTipText("SELECCIONAR CUENTA");
-        btnCancelarTipoCatalogo2.setBackgroundHover(new java.awt.Color(0, 178, 0));
-        btnCancelarTipoCatalogo2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnCancelarTipoCatalogo2.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnCancelarTipoCatalogo2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnCancelarTipoCatalogo2.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
-        btnCancelarTipoCatalogo2.setSizeIcon(18.0F);
-        btnCancelarTipoCatalogo2.addActionListener(new java.awt.event.ActionListener() {
+        btnElegirCuenta.setBackground(new java.awt.Color(0, 153, 0));
+        btnElegirCuenta.setText("ELEGIR CUENTA");
+        btnElegirCuenta.setToolTipText("SELECCIONAR CUENTA");
+        btnElegirCuenta.setBackgroundHover(new java.awt.Color(0, 178, 0));
+        btnElegirCuenta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnElegirCuenta.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnElegirCuenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnElegirCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CANCEL);
+        btnElegirCuenta.setSizeIcon(18.0F);
+        btnElegirCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarTipoCatalogo2ActionPerformed(evt);
+                btnElegirCuentaActionPerformed(evt);
             }
         });
 
@@ -446,7 +446,7 @@ public class dFormFormula extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(130, 130, 130)
-                .addComponent(btnCancelarTipoCatalogo2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnElegirCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelarTipoCatalogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -464,7 +464,7 @@ public class dFormFormula extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarTipoCatalogo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelarTipoCatalogo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnElegirCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -583,8 +583,8 @@ public class dFormFormula extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTipoFormulaItemStateChanged
 
-    private void btnCancelarTipoCatalogo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTipoCatalogo2ActionPerformed
-        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion);
+    private void btnElegirCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElegirCuentaActionPerformed
+        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion, this.tipoCatalogo);
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.getRealizoAccion()) {
@@ -594,7 +594,7 @@ public class dFormFormula extends javax.swing.JDialog {
             this.txtNombre.setText(d.getCuentaSeleccionada().getNombre());
             this.txtCuentaSeleccionada.setText(d.getCuentaSeleccionada().getCodigo() + " - " + d.getCuentaSeleccionada().getNombre());
         }
-    }//GEN-LAST:event_btnCancelarTipoCatalogo2ActionPerformed
+    }//GEN-LAST:event_btnElegirCuentaActionPerformed
 
     private void txtPosicionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPosicionKeyTyped
         if (!Constantes.validarNumeros(evt.getKeyChar())) {
@@ -647,7 +647,7 @@ public class dFormFormula extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo;
     private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo1;
-    private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo2;
+    private RSMaterialComponent.RSButtonShapeIcon btnElegirCuenta;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo;
     private RSMaterialComponent.RSComboBoxMaterial cmbCuentaEspecial;
     private RSMaterialComponent.RSComboBoxMaterial cmbSigno;

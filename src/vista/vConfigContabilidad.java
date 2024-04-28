@@ -959,7 +959,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             if (this.listaCiclosContables.get(row).getSin_libro_diario() == 1) {
                 CicloContable cContable = this.listaCiclosContables.get(row);
                 cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
-                dCuentasSaldos d = new dCuentasSaldos(null, true, cContable, sesion);
+                dCuentasSaldos d = new dCuentasSaldos(null, true, cContable, sesion, cContable.getTipoCatalogo());
                 d.setVisible(true);
                 // validamos si realizo alguna accion para actualizar el listado o no
                 if (d.getRealizoAccion()) {

@@ -97,7 +97,7 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="btnCancelarTipoCatalogo2" min="-2" pref="185" max="-2" attributes="0"/>
+                  <Component id="btnElegirCuenta" min="-2" pref="185" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnCancelarTipoCatalogo1" min="-2" pref="185" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -118,7 +118,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnCancelarTipoCatalogo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnCancelarTipoCatalogo2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnElegirCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -442,7 +442,7 @@
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbTipoFormulaItemStateChanged"/>
           </Events>
         </Component>
-        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnCancelarTipoCatalogo2">
+        <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnElegirCuenta">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="99" red="0" type="rgb"/>
@@ -465,7 +465,7 @@
             <Property name="sizeIcon" type="float" value="18.0"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarTipoCatalogo2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnElegirCuentaActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

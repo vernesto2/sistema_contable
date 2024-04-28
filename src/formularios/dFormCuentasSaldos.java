@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import modelo.CicloContable;
 import modelo.Cuenta;
 import modelo.CuentaBalance;
+import modelo.TipoCatalogo;
 import servicios.ServicioCuentaBalance;
 import sesion.Sesion;
 import utils.UtileriaVista;
@@ -29,10 +30,11 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
     boolean realizoAccion = false;
     Sesion sesion;
     ServicioCuentaBalance _cBalance;
+    TipoCatalogo tipoCatalogo = new TipoCatalogo();
     
     RespuestaGeneral rg = new RespuestaGeneral();
     
-    public dFormCuentasSaldos(java.awt.Frame parent, boolean modal, Sesion sesion, CuentaBalance cBalance, CicloContable cicloContable) {
+    public dFormCuentasSaldos(java.awt.Frame parent, boolean modal, Sesion sesion, CuentaBalance cBalance, CicloContable cicloContable, TipoCatalogo tipoCatalogo) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
@@ -41,6 +43,7 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
         this.cicloContable = cicloContable;
         this.cicloContable.setId_catalogo(cicloContable.getId_catalogo());
         this.cBalanceModel.setCicloContable(this.cicloContable);
+        this.tipoCatalogo = tipoCatalogo;
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle(this.cBalanceModel.getId() > 0 ? "MODIFICAR SALDO" : "NUEVO SALDO");
@@ -65,7 +68,7 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
         }
         this.txtSaldoInicial.setText(String.valueOf(this.cBalanceModel.getSaldo_inicial() == 0 ? "" : this.cBalanceModel.getSaldo_inicial()));
         this.txtSaldoFinal.setText(String.valueOf(this.cBalanceModel.getSaldo_final()));
-        
+        this.txtFolio.setText(String.valueOf(this.cBalanceModel.getFolio_mayor()));
     }
 
     public boolean isRealizoAccion() {
@@ -105,6 +108,8 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
         btnCancelarTipoCatalogo2 = new RSMaterialComponent.RSButtonShapeIcon();
         jLabel18 = new javax.swing.JLabel();
         txtSaldoFinal = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel19 = new javax.swing.JLabel();
+        txtFolio = new RSMaterialComponent.RSTextFieldMaterial();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -238,6 +243,23 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
             }
         });
 
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel19.setText("Folio Mayor: *");
+        jLabel19.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtFolio.setForeground(new java.awt.Color(0, 0, 0));
+        txtFolio.setColorMaterial(new java.awt.Color(0, 0, 0));
+        txtFolio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtFolio.setPhColor(new java.awt.Color(0, 0, 0));
+        txtFolio.setPlaceholder("Digite el folio mayor");
+        txtFolio.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtFolio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFolioKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -252,14 +274,17 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelarTipoCatalogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtFolio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtSaldoFinal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                                 .addComponent(txtSaldoInicial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -283,7 +308,11 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSaldoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -358,6 +387,13 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
                 this.cBalanceModel.setSaldo_final(Double.parseDouble(this.txtSaldoFinal.getText()));
             }
             
+            if (this.txtFolio.getText().isEmpty()) {
+                valido = false;
+                JOptionPane.showMessageDialog(this, "No se ha digitado el folio mayor", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
+            } else {
+                this.cBalanceModel.setFolio_mayor(Integer.parseInt(this.txtFolio.getText()));
+            }
+            
         } catch (Exception e) {
             valido = false;
             JOptionPane.showMessageDialog(this, "Por favor verifique que todos los campos han sido completados", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
@@ -372,7 +408,7 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarTipoCatalogo1ActionPerformed
 
     private void btnCancelarTipoCatalogo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTipoCatalogo2ActionPerformed
-        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion);
+        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion, this.tipoCatalogo);
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.getRealizoAccion()) {
@@ -393,6 +429,12 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtSaldoFinalKeyTyped
+
+    private void txtFolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFolioKeyTyped
+        if (!Constantes.validarNumeros(evt.getKeyChar())) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFolioKeyTyped
 
     /**
      * @param args the command line arguments
@@ -444,9 +486,11 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel txtCuentaSeleccionada;
+    private RSMaterialComponent.RSTextFieldMaterial txtFolio;
     private RSMaterialComponent.RSTextFieldMaterial txtSaldoFinal;
     private RSMaterialComponent.RSTextFieldMaterial txtSaldoInicial;
     // End of variables declaration//GEN-END:variables

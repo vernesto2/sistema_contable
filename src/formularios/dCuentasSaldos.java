@@ -12,9 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.CicloContable;
 import modelo.CuentaBalance;
+import modelo.TipoCatalogo;
 import rojeru_san.efectos.ValoresEnum;
 import servicios.ServicioCuentaBalance;
-import servicios.ServicioFormula;
 import sesion.Sesion;
 import utils.Render;
 import utils.UtileriaVista;
@@ -35,6 +35,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     
     boolean realizoAccion = false;
     Sesion sesion;
+    TipoCatalogo tipoCatalogo = new TipoCatalogo();
     
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override 
@@ -47,11 +48,12 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     /**
      * Creates new form dTipoCatalogo
      */
-    public dCuentasSaldos(java.awt.Frame parent, boolean modal, CicloContable cicloContable, Sesion sesion) {
+    public dCuentasSaldos(java.awt.Frame parent, boolean modal, CicloContable cicloContable, Sesion sesion, TipoCatalogo tipoCatalogo) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
         _cBalance = new ServicioCuentaBalance(sesion.rutaConexion);
+        this.tipoCatalogo = tipoCatalogo;
         this.cicloContable = cicloContable;
         this.cicloContable.setId_catalogo(cicloContable.getId_catalogo());
         this.iniciarVistaDialog();
@@ -68,7 +70,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     }
 
     public void setModelFormula() {
-        String[] cabecera = {"Cuenta", "Saldo Inicial", "Saldo Final","Editar","Eliminar"};
+        String[] cabecera = {"Codigo", "Concepto", "Saldo Inicial", "Saldo Final", "Folio Mayor","Editar","Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblCuentasSaldos.setModel(dtm);
         Render rr = new Render();
@@ -90,20 +92,24 @@ public class dCuentasSaldos extends javax.swing.JDialog {
         // ordenamos el listado antes de mostrar
         
         for (CuentaBalance detalle : this.listaCuentaBalance) {
-            datos[0] = detalle.getCuenta().getNombre();
-            datos[1] = String.valueOf(detalle.getSaldo_inicial());
-            datos[2] = String.valueOf(detalle.getSaldo_final());
-            datos[3] = btn1;
-            datos[4] = btn2;
+            datos[0] = detalle.getCuenta().getCodigo();
+            datos[1] = detalle.getCuenta().getNombre();
+            datos[2] = String.valueOf(detalle.getSaldo_inicial());
+            datos[3] = String.valueOf(detalle.getSaldo_final());
+            datos[4] = String.valueOf(detalle.getFolio_mayor());
+            datos[5] = btn1;
+            datos[6] = btn2;
             dtm.addRow(datos);
         }
         tblCuentasSaldos.setModel(dtm);
         tblCuentasSaldos.setAutoResizeMode(tblCuentasSaldos.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        tblCuentasSaldos.getColumnModel().getColumn(0).setPreferredWidth(300);
-        tblCuentasSaldos.getColumnModel().getColumn(1).setPreferredWidth(60);
+        tblCuentasSaldos.getColumnModel().getColumn(0).setPreferredWidth(60);
+        tblCuentasSaldos.getColumnModel().getColumn(1).setPreferredWidth(300);
         tblCuentasSaldos.getColumnModel().getColumn(2).setPreferredWidth(60);
-        tblCuentasSaldos.getColumnModel().getColumn(3).setPreferredWidth(90);
-        tblCuentasSaldos.getColumnModel().getColumn(4).setPreferredWidth(90);
+        tblCuentasSaldos.getColumnModel().getColumn(3).setPreferredWidth(60);
+        tblCuentasSaldos.getColumnModel().getColumn(4).setPreferredWidth(60);
+        tblCuentasSaldos.getColumnModel().getColumn(5).setPreferredWidth(90);
+        tblCuentasSaldos.getColumnModel().getColumn(6).setPreferredWidth(90);
     }
     
     public void limiparTablaFormula() {
@@ -289,11 +295,11 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     private void tblCuentasSaldosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCuentasSaldosMouseClicked
         int row = tblCuentasSaldos.getSelectedRow();
         int column = tblCuentasSaldos.getSelectedColumn();
-        if (column == 3) {
+        if (column == 5) {
             
             this.abrirDialogCuentasSaldos(this.listaCuentaBalance.get(row));
             
-        } else if (column == 4) {
+        } else if (column == 6) {
             
             String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaCuentaBalance.get(row).getCuenta().getNombre();
             int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -317,7 +323,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAgregarDetallePartidaActionPerformed
 
     public void abrirDialogCuentasSaldos (CuentaBalance cuentaBalance) {
-        dFormCuentasSaldos d = new dFormCuentasSaldos(null, true, sesion, cuentaBalance, this.cicloContable);
+        dFormCuentasSaldos d = new dFormCuentasSaldos(null, true, sesion, cuentaBalance, this.cicloContable, this.tipoCatalogo);
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.isRealizoAccion()) {

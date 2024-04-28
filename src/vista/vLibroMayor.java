@@ -5,36 +5,28 @@
 package vista;
 
 import conexion.Conexion;
-import dto.dtoLista;
 import formularios.dSeleccionarCuentaFormula;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Cuenta;
-import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
-import reportes.CuentaBalanza;
 import servicios.ServicioCuenta;
-import servicios.ServicioTipoCatalogo;
 import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
@@ -235,7 +227,7 @@ public class vLibroMayor extends javax.swing.JPanel {
         elegirCuenta();
     }//GEN-LAST:event_btnElegirCuentaActionPerformed
     private void elegirCuenta() {
-        dSeleccionarCuentaFormula dialogoCuentas = new dSeleccionarCuentaFormula(null, true, sesion);
+        dSeleccionarCuentaFormula dialogoCuentas = new dSeleccionarCuentaFormula(null, true, sesion, this.sesion.configUsuario.getCicloContable().getTipoCatalogo());
         dialogoCuentas.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (dialogoCuentas.getRealizoAccion()) {

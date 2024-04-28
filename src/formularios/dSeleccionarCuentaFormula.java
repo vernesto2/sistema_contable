@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cuenta;
 import modelo.PartidaDetalle;
+import modelo.TipoCatalogo;
 import servicios.ServicioCuenta;
 import sesion.Sesion;
 import utils.Render;
@@ -36,21 +37,23 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
     ArrayList<PartidaDetalle> listaDetallePartida = new ArrayList<>();
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     Sesion sesion;
+    TipoCatalogo tipoCatalogo = new TipoCatalogo();
     /**
      * Creates new form dSeleccionarCuenta
      */
-    public dSeleccionarCuentaFormula(java.awt.Frame parent, boolean modal, Sesion sesion) {
+    public dSeleccionarCuentaFormula(java.awt.Frame parent, boolean modal, Sesion sesion, TipoCatalogo tipoCatalogo) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
         this._cuenta = new ServicioCuenta(sesion.rutaConexion);
+        this.tipoCatalogo = tipoCatalogo;
         this.iniciarVistaDialog();
     }
     
     public void iniciarVistaDialog() {
         this.setLocationRelativeTo(this);
         this.setResizable(false);
-        this.setTitle("SELECCIONAR CUENTA DE CATALOGO: " + this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getTipo().toUpperCase());
+        this.setTitle("SELECCIONAR CUENTA DE CATALOGO: " + this.tipoCatalogo.getTipo().toUpperCase());
         this.realizoAccion = false;
         // seteamos la informacion
         this.setModelCuentas();
@@ -70,7 +73,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         this.listaCuentas = new ArrayList<>();
         tblCuentas.clearSelection();
         this.limiparTablaCuentas();
-        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId(), this.txtQueryBusqueda.getText());
+        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
         this.totalCuentas.setText("0");
         if (rg.esExitosa()) {
             this.listaCuentas = (ArrayList<Cuenta>)rg.getDatos();
@@ -83,7 +86,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
     
     public void obtenerListadoCuentasPorTipoCatalogoCompleto() {
         this.listaCuentasCompleta = new ArrayList<>();
-        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId(), this.txtQueryBusqueda.getText());
+        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
         if (rg.esExitosa()) {
             this.listaCuentasCompleta = (ArrayList<Cuenta>)rg.getDatos();
         } else {

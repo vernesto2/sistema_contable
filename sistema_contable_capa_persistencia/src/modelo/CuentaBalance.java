@@ -17,6 +17,7 @@ public class CuentaBalance {
     int id_cuenta;
     double saldo_inicial;
     double saldo_final;
+    int folio_mayor;
     
     CicloContable cicloContable;
     Cuenta cuenta;
@@ -27,6 +28,7 @@ public class CuentaBalance {
         this.id_cuenta = -1;
         this.saldo_inicial = 0.0;
         this.saldo_final = 0.0;
+        this.folio_mayor = 0;
         
         this.cicloContable = new CicloContable();
         this.cuenta = new dtoCuenta();
@@ -86,6 +88,14 @@ public class CuentaBalance {
 
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
+    }
+
+    public int getFolio_mayor() {
+        return folio_mayor;
+    }
+
+    public void setFolio_mayor(int folio_mayor) {
+        this.folio_mayor = folio_mayor;
     }
     
 }

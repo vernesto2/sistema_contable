@@ -49,6 +49,7 @@ public class daoCuentaBalance {
                 cBalance.setId_cuenta(rs.getInt("id_cuenta"));
                 cBalance.setSaldo_inicial(rs.getDouble("saldo_inicial"));
                 cBalance.setSaldo_final(rs.getDouble("saldo_final"));
+                cBalance.setFolio_mayor(rs.getInt("folio_mayor"));
                 
                 if (cBalance.getId_cuenta() > 0) {
                     RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cBalance.getId_cuenta(), idTipoCatalogo);
@@ -93,6 +94,7 @@ public class daoCuentaBalance {
                 cBalance.setId_cuenta(rs.getInt("id_cuenta"));
                 cBalance.setSaldo_inicial(rs.getDouble("saldo_inicial"));
                 cBalance.setSaldo_final(rs.getDouble("saldo_final"));
+                cBalance.setFolio_mayor(rs.getInt("folio_mayor"));
                 
                 if (cBalance.getId_cuenta() > 0) {
                     RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cBalance.getId_cuenta(), idTipoCatalogo);
@@ -138,6 +140,7 @@ public class daoCuentaBalance {
                 cBalance.setId_cuenta(rs.getInt("id_cuenta"));
                 cBalance.setSaldo_inicial(rs.getDouble("saldo_inicial"));
                 cBalance.setSaldo_final(rs.getDouble("saldo_final"));
+                cBalance.setFolio_mayor(rs.getInt("folio_mayor"));
                 lista.add(cBalance);
             }
             
@@ -154,13 +157,14 @@ public class daoCuentaBalance {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
                   INSERT INTO cuenta_balance     
-                  VALUES(null, ?, ?, ?, ?)
+                  VALUES(null, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, cBalance.getId_ciclo_contable());
             ps.setInt(2, cBalance.getId_cuenta());
             ps.setDouble(3, cBalance.getSaldo_inicial());
             ps.setDouble(4, cBalance.getSaldo_final());
+            ps.setInt(5, cBalance.getFolio_mayor());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             int id = -1;
@@ -185,7 +189,8 @@ public class daoCuentaBalance {
                         id_ciclo_contable=?,
                         id_cuenta=?,
                         saldo_inicial=?,
-                        saldo_final=?
+                        saldo_final=?,
+                        folio_mayor=?
                     WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
@@ -193,7 +198,8 @@ public class daoCuentaBalance {
             ps.setInt(2, cBalance.getId_cuenta());
             ps.setDouble(3, cBalance.getSaldo_inicial());
             ps.setDouble(4, cBalance.getSaldo_final());
-            ps.setInt(5, cBalance.getId());
+            ps.setInt(5, cBalance.getFolio_mayor());
+            ps.setInt(6, cBalance.getId());
             ps.executeUpdate();
             
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, cBalance.getId());
