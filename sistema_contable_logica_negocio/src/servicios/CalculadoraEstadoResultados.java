@@ -86,16 +86,13 @@ public class CalculadoraEstadoResultados {
     
     
     public Double resolverFormula() {
+        List<dtoFormula> arbolFormula = this.agregarPadres(listaFormula);
         List<ElementoFormulaResuelta> listaFormulaResuelta = new ArrayList<ElementoFormulaResuelta>();
-        Double utilidadPerdida = resolverFormula(this.listaFormula, listaFormulaResuelta);
-        System.out.println("#####");
-        for (ElementoFormulaResuelta elementoFormulaResuelta : listaFormulaResuelta) {
-            System.out.println(elementoFormulaResuelta.getFormula().getSigno()+ " "+ elementoFormulaResuelta.getFormula().getNombre()+" = " + elementoFormulaResuelta.getValor());
-        }
-        System.out.println("#####");
+        Double utilidadPerdida = resolverFormula(arbolFormula, listaFormulaResuelta);
+        
         return utilidadPerdida;
     }
-    public Double resolverFormula( List<dtoFormula> listaFormulaArbol, List<ElementoFormulaResuelta> listaFormulaResuelta) {
+    private Double resolverFormula( List<dtoFormula> listaFormulaArbol, List<ElementoFormulaResuelta> listaFormulaResuelta) {
         //obtener todos los elementos de la formula
         //obtener saldos inicial y saldo actual de las cuentas de la formula
         //iniciar a resolver la formula
@@ -119,7 +116,7 @@ public class CalculadoraEstadoResultados {
                 valorFormula = resolverFormula( elemFormula.getHijas(), listaFormulaResuelta );
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_CALCULADO.getValue()) 
-                    && formula.getSigno().equals(Constantes.SIGNO_IGUAL)) {
+                    && formula.getSigno().equals(Constantes.SIGNO_IGUAL.getValue())) {
                 //ver el acumulado al momento
                 valorFormula = acumulado;
                 //no cambia el acumulado, ya que el valor calculado 
@@ -146,7 +143,7 @@ public class CalculadoraEstadoResultados {
                 if( cuentaBalanza == null ) {
                     throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
                 }
-                valorFormula = cuentaBalanza.getSaldoInicial();
+                valorFormula = cuentaBalanza.saldo();
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO.getValue()) ) {
@@ -178,6 +175,7 @@ public class CalculadoraEstadoResultados {
             
             //y posteriormente se le setea el valor
             elemFormulaResuelta.setValor(valorFormula);
+            System.out.println(elemFormulaResuelta.getFormula().getSigno()+ " "+ elemFormulaResuelta.getFormula().getNombre()+" = " + elemFormulaResuelta.getValor());
         }
         return acumulado;
         //devolver datos que puede consumir el reporte
@@ -193,7 +191,7 @@ agregarPadres(lista: any, expanded?: boolean): TreeNode {
     return listaAux;
   }
 */
-    public List<dtoFormula> agregarPadres(List<dtoFormula> lista) {
+    private List<dtoFormula> agregarPadres(List<dtoFormula> lista) {
         List<dtoFormula> listaAux = new ArrayList<dtoFormula>();
         for (dtoFormula formula : lista) {
             if (formula.getFormula().getId_formula() == -1) {

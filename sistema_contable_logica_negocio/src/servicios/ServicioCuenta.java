@@ -125,7 +125,7 @@ public class ServicioCuenta {
                      cicloContable.getTipoCatalogo().getId()
                 ).getDatos();
                 
-                listaCuentaBalanza.stream().map(item -> {
+                listBeans = listaCuentaBalanza.stream().map(item -> {
                     CuentaBalanza cuentaBalanza = new CuentaBalanza();
                     cuentaBalanza.setCodigo(item.getCuenta().getCodigo());
                     cuentaBalanza.setFolioMayor(null);
@@ -134,9 +134,9 @@ public class ServicioCuenta {
                     cuentaBalanza.setTipoSaldo(item.getCuenta().getTipo_saldo());
                     
                     if(cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_ACREEDOR.getValue())  ) {
-                        cuentaBalanza.setSaldoDeudor(item.getSaldo_final());
-                    } else if(cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_DEUDOR.getValue()) ) {
                         cuentaBalanza.setSaldoAcreedor(item.getSaldo_final());
+                    } else if(cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_DEUDOR.getValue()) ) {
+                        cuentaBalanza.setSaldoDeudor(item.getSaldo_final());
                     }
                     cuentaBalanza.setSaldoInicial(item.getSaldo_inicial());
                     return cuentaBalanza;

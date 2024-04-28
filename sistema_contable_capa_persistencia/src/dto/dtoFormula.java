@@ -65,7 +65,7 @@ public class dtoFormula implements Comparable<dtoFormula>{
         if (this.formula.getSigno().equals(Constantes.SIGNO_MAS.getValue())) {
             acumulado += valorFormula;
         } else if(this.formula.getSigno().equals(Constantes.SIGNO_MENOS.getValue())) {
-            acumulado += valorFormula;
+            acumulado -= valorFormula;
         }
         return acumulado;
     }

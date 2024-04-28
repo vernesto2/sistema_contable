@@ -121,6 +121,9 @@ public class vEstadoResultados extends javax.swing.JPanel {
         ArrayList<dtoFormula> listaFormula = (ArrayList<dtoFormula>) _formula.obtenerListaPorIdTipoCatalogo(
                 tipoCatalogo.getId()
         ).getDatos();
+        
+        _cuenta.setServicioCuentaBalanza(_cuentaBalance);;
+        
         ArrayList<CuentaBalanza> listaCuentasBalanza = (ArrayList<CuentaBalanza>)_cuenta.listarCuentaBalanzaComprobacion(
                 sesion.configUsuario.getCicloContable(), tipoPartida
         ).getDatos();
