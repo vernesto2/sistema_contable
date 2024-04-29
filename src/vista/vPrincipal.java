@@ -15,13 +15,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Usuario;
-import necesario.RSFileChooser;
 import utils.constantes.CambiaPanel;
 
 import servicios.ServicioUsuario;
 import sesion.Sesion;
 import utils.UtileriaVista;
-import utils.constantes.Constantes;
 
 /**
  *
@@ -540,7 +538,7 @@ public class vPrincipal extends javax.swing.JFrame {
         this.seleccionarBoton();
         if (!this.btnConfigUsuario.isSelected()) {
             this.btnConfigUsuario.setSelected(true);
-            new CambiaPanel(pnl, new vConfiguracion(sesion, _usuario));
+            new CambiaPanel(pnl, new vConfiguracion(this.sesion, _usuario));
         }
     }//GEN-LAST:event_btnConfigUsuarioActionPerformed
 

@@ -195,4 +195,22 @@ public class Constantes {
         lista.add(TIPO_CUENTA_ESPECIAL_IMPUESTO_SOBRE_RENTA);
         return lista;
     }
+    
+    // tipos de Formulas
+    public static ArrayList<dtoLista> listaAvatars() {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        dtoLista op1 = new dtoLista("/utils/avatar/avatar1.png", "Hombre 1");
+        dtoLista op2 = new dtoLista("/utils/avatar/avatar2.png", "Hombre 2");
+        dtoLista op3 = new dtoLista("/utils/avatar/avatar3.png", "Hombre 3");
+        dtoLista op4 = new dtoLista("/utils/avatar/avatar4.png", "Mujer 1");
+        dtoLista op5 = new dtoLista("/utils/avatar/avatar5.png", "Mujer 2");
+        dtoLista op6 = new dtoLista("/utils/avatar/avatar6.png", "Mujer 3");
+        lista.add(op1);
+        lista.add(op2);
+        lista.add(op3);
+        lista.add(op4);
+        lista.add(op5);
+        lista.add(op6);
+        return lista;
+    }
 }

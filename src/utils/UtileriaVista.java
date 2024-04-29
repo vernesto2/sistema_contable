@@ -3,6 +3,8 @@ package utils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.ConfiguracionUsuario;
 import modelo.Usuario;
@@ -81,7 +83,6 @@ public class UtileriaVista {
             int color = sesion.configUsuario.getCicloContable().getTipoCatalogo().getColor();
             vPrincipal.txtConfigCicloContable.setForeground(Constantes.devolverColor(color));
             vPrincipal.txtNombreUsuario.setText(sesion.usuario.getPersona().nombreCompleto());
-            
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo recuperar la configuración de usuario", "Mensaje", UtileriaVista.devolverCodigoMensaje(rg));
             return;

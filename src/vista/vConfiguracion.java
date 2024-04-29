@@ -4,11 +4,14 @@
  */
 package vista;
 
+import dto.dtoLista;
 import formularios.dCrearUsuario;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.ConfiguracionUsuario;
 import modelo.Persona;
@@ -36,13 +39,19 @@ public class vConfiguracion extends javax.swing.JPanel {
     public char pass1;
     public char pass2;
     ServicioConfigUsuario _configUsuario;
+    ArrayList<dtoLista> listaAvatars = new ArrayList<>();
+    ConfiguracionUsuario configUsuarioModel;
+    int i = 0;
     
     public vConfiguracion(Sesion sesion, ServicioUsuario _usuario) {
         initComponents();
+        imgAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource(sesion.configUsuario.getAvatar())));
         this.sesion = sesion;
         this._usuario = _usuario;
         _configUsuario = new ServicioConfigUsuario(sesion.rutaConexion);
+        this.configUsuarioModel = sesion.configUsuario;
         this.iniciarVista();
+        this.setearCombos();
         this.rellenarDatosUsuario(sesion.usuario);
     }
     
@@ -62,6 +71,26 @@ public class vConfiguracion extends javax.swing.JPanel {
         this.comboPreguntaRecuperacion3.setModel(modeloPreguntasRecuperacion3);
         
     }
+    
+    public void setearCombos() {
+        this.listaAvatars = Constantes.listaAvatars();
+        cmbAvatar.removeAllItems();
+        for (dtoLista item : this.listaAvatars) {
+            cmbAvatar.addItem(item.getLabel());
+        }
+        
+        // setear opcion por defecto
+        this.i = 0;
+        this.listaAvatars.forEach((t) -> {
+            if (this.configUsuarioModel.getAvatar().equals(t.getValue())) {
+                this.cmbAvatar.setSelectedIndex(i);
+            }
+            this.i++;
+        });
+        
+        
+    }
+    
     public void rellenarDatosUsuario(Usuario usuario) {
         Persona persona = sesion.usuario.getPersona();
         
@@ -135,6 +164,15 @@ public class vConfiguracion extends javax.swing.JPanel {
         lblDialog2 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         btnActualizarClave = new RSMaterialComponent.RSButtonShapeIcon();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        imgAvatar = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        cmbAvatar = new RSMaterialComponent.RSComboBoxMaterial();
+        jPanel14 = new javax.swing.JPanel();
+        lblAvatar = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        btnActualizarClave1 = new RSMaterialComponent.RSButtonShapeIcon();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -689,6 +727,134 @@ public class vConfiguracion extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Clave de acceso", jPanel2);
 
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+
+        imgAvatar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imgAvatar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/avatar/avatar1.png"))); // NOI18N
+        imgAvatar.setToolTipText("Ver Dashboard");
+        imgAvatar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgAvatar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        imgAvatar.setIconTextGap(1);
+        imgAvatar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgAvatarMouseClicked(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Avatar:");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        cmbAvatar.setColorMaterial(new java.awt.Color(102, 102, 102));
+        cmbAvatar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbAvatarItemStateChanged(evt);
+            }
+        });
+
+        lblAvatar.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblAvatar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAvatar.setText("EDICIÓN DE AVATAR DE USUARIO");
+        lblAvatar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel14Layout.createSequentialGroup()
+                    .addGap(216, 216, 216)
+                    .addComponent(lblAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                    .addGap(217, 217, 217)))
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 116, Short.MAX_VALUE)
+            .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel14Layout.createSequentialGroup()
+                    .addGap(19, 19, 19)
+                    .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(19, Short.MAX_VALUE)))
+        );
+
+        btnActualizarClave1.setBackground(new java.awt.Color(33, 58, 86));
+        btnActualizarClave1.setText("Actualizar Avatar");
+        btnActualizarClave1.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnActualizarClave1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnActualizarClave1.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnActualizarClave1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnActualizarClave1.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
+        btnActualizarClave1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarClave1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnActualizarClave1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(btnActualizarClave1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(238, 238, 238)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(imgAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(224, 224, 224))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)))
+                .addGap(190, 190, 190))
+            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76)
+                .addComponent(imgAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Cambiar avatar", jPanel9);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -823,15 +989,43 @@ public class vConfiguracion extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_checkMostrarClaveActionPerformed
 
+    private void imgAvatarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgAvatarMouseClicked
+        
+    }//GEN-LAST:event_imgAvatarMouseClicked
+
+    private void cmbAvatarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAvatarItemStateChanged
+        int row = this.cmbAvatar.getSelectedIndex();
+        if (row > -1 && !this.listaAvatars.isEmpty()) {
+            Icon img = new ImageIcon(getClass().getResource(this.listaAvatars.get(row).getValue()));
+            this.imgAvatar.setIcon(img);
+        }
+    }//GEN-LAST:event_cmbAvatarItemStateChanged
+
+    private void btnActualizarClave1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarClave1ActionPerformed
+        int row = this.cmbAvatar.getSelectedIndex();
+        this.configUsuarioModel.setAvatar(this.listaAvatars.get(row).getValue());
+        RespuestaGeneral rg = _configUsuario.editar(this.configUsuarioModel);
+        if (rg.esExitosa()) {
+            this.sesion.configUsuario.setAvatar(this.configUsuarioModel.getAvatar());
+            JOptionPane.showMessageDialog(this, rg.getMensaje(), "MENSAJE", UtileriaVista.devolverCodigoMensaje(rg));
+            Icon img = new ImageIcon(getClass().getResource(sesion.configUsuario.getAvatar()));
+            vPrincipal.imagenPrincipal.setIcon(img);
+        }
+        
+    }//GEN-LAST:event_btnActualizarClave1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnActualizar;
     private RSMaterialComponent.RSButtonShapeIcon btnActualizarClave;
+    private RSMaterialComponent.RSButtonShapeIcon btnActualizarClave1;
     private RSMaterialComponent.RSButtonShapeIcon btnNuevoDocente;
     private rojerusan.RSCheckBox checkMostrarClave;
+    private RSMaterialComponent.RSComboBoxMaterial cmbAvatar;
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion1;
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion2;
     private RSMaterialComponent.RSComboBoxMaterial comboPreguntaRecuperacion3;
+    public static javax.swing.JLabel imgAvatar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -845,12 +1039,16 @@ public class vConfiguracion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -858,8 +1056,10 @@ public class vConfiguracion extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblAvatar;
     private javax.swing.JLabel lblDialog;
     private javax.swing.JLabel lblDialog2;
     private RSMaterialComponent.RSTextFieldMaterial txtApellidos;
