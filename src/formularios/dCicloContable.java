@@ -370,7 +370,7 @@ public class dCicloContable extends javax.swing.JDialog {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Sin Libro Diario: *");
+        jLabel10.setText("Registro de Saldos: *");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         checkSinLibroDiario.setForeground(new java.awt.Color(0, 0, 0));

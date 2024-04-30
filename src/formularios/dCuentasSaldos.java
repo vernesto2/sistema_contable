@@ -70,7 +70,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     }
 
     public void setModelFormula() {
-        String[] cabecera = {"Codigo", "Concepto", "Saldo Inicial", "Saldo Final", "Folio Mayor","Editar","Eliminar"};
+        String[] cabecera = {"Codigo", "Concepto", "Saldo Inicial", "Folio Mayor","Editar","Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblCuentasSaldos.setModel(dtm);
         Render rr = new Render();
@@ -95,10 +95,10 @@ public class dCuentasSaldos extends javax.swing.JDialog {
             datos[0] = detalle.getCuenta().getCodigo();
             datos[1] = detalle.getCuenta().getNombre();
             datos[2] = String.valueOf(detalle.getSaldo_inicial());
-            datos[3] = String.valueOf(detalle.getSaldo_final());
-            datos[4] = String.valueOf(detalle.getFolio_mayor());
-            datos[5] = btn1;
-            datos[6] = btn2;
+            //datos[3] = String.valueOf(detalle.getSaldo_final());
+            datos[3] = String.valueOf(detalle.getFolio_mayor());
+            datos[4] = btn1;
+            datos[5] = btn2;
             dtm.addRow(datos);
         }
         tblCuentasSaldos.setModel(dtm);
@@ -107,9 +107,8 @@ public class dCuentasSaldos extends javax.swing.JDialog {
         tblCuentasSaldos.getColumnModel().getColumn(1).setPreferredWidth(300);
         tblCuentasSaldos.getColumnModel().getColumn(2).setPreferredWidth(60);
         tblCuentasSaldos.getColumnModel().getColumn(3).setPreferredWidth(60);
-        tblCuentasSaldos.getColumnModel().getColumn(4).setPreferredWidth(60);
+        tblCuentasSaldos.getColumnModel().getColumn(4).setPreferredWidth(90);
         tblCuentasSaldos.getColumnModel().getColumn(5).setPreferredWidth(90);
-        tblCuentasSaldos.getColumnModel().getColumn(6).setPreferredWidth(90);
     }
     
     public void limiparTablaFormula() {
@@ -295,11 +294,11 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     private void tblCuentasSaldosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCuentasSaldosMouseClicked
         int row = tblCuentasSaldos.getSelectedRow();
         int column = tblCuentasSaldos.getSelectedColumn();
-        if (column == 5) {
+        if (column == 4) {
             
             this.abrirDialogCuentasSaldos(this.listaCuentaBalance.get(row));
             
-        } else if (column == 6) {
+        } else if (column == 5) {
             
             String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaCuentaBalance.get(row).getCuenta().getNombre();
             int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

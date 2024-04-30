@@ -84,7 +84,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                                    INICIO SECCION DE CICLO CONTABLE
         <------------------------------------------------------------------------------->  */  
     public void setModelCicloContable() {
-        String[] cabecera = {"Seleccionado","Libro Diario","Titulo","Desde","Hasta","Catalogo", "Editar", "Eliminar", "Seleccionar","Saldos"};
+        String[] cabecera = {"Seleccionado","Registro Saldos","Titulo","Desde","Hasta","Catalogo", "Editar", "Eliminar", "Seleccionar","Saldos"};
         dtm.setColumnIdentifiers(cabecera);
         tblCicloContable.setModel(dtm);
         tblCicloContable.setDefaultRenderer(Object.class, new Render());
@@ -112,7 +112,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         Object[] datos = new Object[dtm.getColumnCount()];
         for (CicloContable ciclo : listaCiclosContables) {
             datos[0] = (ciclo.getId() == this.sesion.configUsuario.getCicloContable().getId() ? "Por defecto" : "-");
-            datos[1] = ciclo.getSin_libro_diario() == 0 ? "SI" : "NO";
+            datos[1] = ciclo.getSin_libro_diario() == 1 ? "SI" : "NO";
             datos[2] = ciclo.getTitulo();
             datos[3] = sdf.format(ciclo.getDesde());
             datos[4] = sdf.format(ciclo.getHasta());
