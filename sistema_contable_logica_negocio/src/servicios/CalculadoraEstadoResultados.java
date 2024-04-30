@@ -107,10 +107,14 @@ public class CalculadoraEstadoResultados {
             final String tipoCuentaEspecial = ""+formula.getTipo_cuenta_especial();
             //en caso se entra en cuenta recursiva, se agrega primero el elemento actual ya que el elemento actual va primero, 
             //y posteriormente se le setea el valor
-            ElementoFormulaReporte elemFormulaResuelta = new ElementoFormulaReporte();
-            elemFormulaResuelta.setFormula(elemFormula.getFormula());
-            elemFormulaResuelta.setFormulaPadre(elemFormula.getFormulaPadre());
-            listaFormulaResuelta.add(elemFormulaResuelta);
+            ElementoFormulaReporte elemFormulaReporte = new ElementoFormulaReporte();
+            
+            elemFormulaReporte.setId(formula.getCuenta().getId());
+            elemFormulaReporte.setCodigo(formula.getCuenta().getCodigo());
+            elemFormulaReporte.setNombre(formula.getNombre());
+            elemFormulaReporte.setSigno(formula.getSigno());
+            
+            listaFormulaResuelta.add(elemFormulaReporte);
             
             if(elemFormula.tieneHijas()) {
                 valorFormula = resolverFormula( elemFormula.getHijas(), listaFormulaResuelta, nivel + 1);
@@ -125,17 +129,22 @@ public class CalculadoraEstadoResultados {
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO.getValue()) ) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
                 if( cuentaBalanza == null ) {
-                    throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
+                    //si no se encontro, asignarle 0
+                    valorFormula = Double.valueOf(0);
+                    //lanzar excepcion
+                    //throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
+                } else {
+                    valorFormula = cuentaBalanza.saldo();
                 }
-                valorFormula = cuentaBalanza.saldo();
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO_INICIAL.getValue()) ) {
-                CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
-                if( cuentaBalanza == null ) {
-                    throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
-                }
-                valorFormula = cuentaBalanza.getSaldoInicial();
+//                NO APLICA, SE DEBE QUITAR
+//                CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
+//                if( cuentaBalanza == null ) {
+//                    throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
+//                }
+//                valorFormula = cuentaBalanza.getSaldoInicial();
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES.getValue()) ) {
@@ -174,8 +183,8 @@ public class CalculadoraEstadoResultados {
             }
             
             //y posteriormente se le setea el valor
-            elemFormulaResuelta.setValor(valorFormula, nivel);
-            System.out.println(elemFormulaResuelta.getFormula().getSigno()+ " "+ elemFormulaResuelta.getFormula().getNombre()+" = " + elemFormulaResuelta.getValor1());
+            elemFormulaReporte.setValor(valorFormula, nivel);
+            System.out.println(elemFormulaReporte.getSigno()+ " "+ elemFormulaReporte.getNombre()+" = " + elemFormulaReporte.getValor());
         }
         return acumulado;
         //devolver datos que puede consumir el reporte

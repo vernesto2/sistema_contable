@@ -5,15 +5,53 @@
 package servicios;
 
 import dto.dtoFormula;
+import reportes.CuentaBalanza;
 
 /**
  *
  * @author student
  */
-public class ElementoFormulaReporte extends dtoFormula {
+public class ElementoFormulaReporte {
+    
+    private Integer id;
+    private String codigo;
+    private String nombre;
+    private String signo;
     private Double valor1;
     private Double valor2;
     private Double valor3;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getSigno() {
+        return signo;
+    }
+
+    public void setSigno(String signo) {
+        this.signo = signo;
+    }
 
     public Double getValor1() {
         return valor1;
@@ -38,10 +76,12 @@ public class ElementoFormulaReporte extends dtoFormula {
     public void setValor3(Double valor3) {
         this.valor3 = valor3;
     }
+
+    
     
     public void setValor(Double valor, int nivel) {
         if(nivel == 1) {
-            setValor1(valor1);
+            setValor1(valor);
         } else if(nivel == 2) {
             setValor3(valor);
         } else {
