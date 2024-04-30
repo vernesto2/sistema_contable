@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package servicios;
+package reportes;
 
 import dto.dtoFormula;
 import reportes.CuentaBalanza;
@@ -83,7 +83,7 @@ public class ElementoFormulaReporte {
         if(nivel == 1) {
             setValor1(valor);
         } else if(nivel == 2) {
-            setValor3(valor);
+            setValor2(valor);
         } else {
             setValor3(valor);
         }

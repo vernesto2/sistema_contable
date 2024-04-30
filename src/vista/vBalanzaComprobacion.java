@@ -176,8 +176,8 @@ public class vBalanzaComprobacion extends javax.swing.JPanel {
             params.put("param_hasta", sesion.configUsuario.getCicloContable().getHasta());
             params.put("param_fecha_generacion", new Date());
             
-            Integer tipoCatalogo = sesion.configUsuario.getCicloContable().getTipoCatalogo().getId();
-            params.put("param_id_tipo_catalogo", tipoCatalogo);
+            Integer idTipoCatalogo = sesion.configUsuario.getCicloContable().getTipoCatalogo().getId();
+            params.put("param_id_tipo_catalogo", idTipoCatalogo);
             
             Integer nivelAMayorizar = sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar();
             //nivel 0 es para cuando se puede cargar y abonar cualquier cuenta, no ay restriccion
@@ -185,7 +185,7 @@ public class vBalanzaComprobacion extends javax.swing.JPanel {
             if(nivelAMayorizar == 0) {
                 params.put("param_tamano_codigo", 0);
             } else {
-                RespuestaGeneral rg = _cuenta.tamanoCodigoAMayorizar(tipoCatalogo);
+                RespuestaGeneral rg = _cuenta.tamanoCodigoAMayorizar(idTipoCatalogo);
                 Integer tamanoNivelAMayorizar = ( Integer) rg.getDatos();
                 if ( tamanoNivelAMayorizar == null) {
                     JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));

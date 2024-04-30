@@ -18,7 +18,7 @@ import modelo.Cuenta;
 import modelo.Formula;
 import modelo.TipoCatalogo;
 import reportes.CuentaBalanza;
-import servicios.ElementoFormulaReporte;
+import reportes.ElementoFormulaReporte;
 import utils.constantes.Constantes;
 
 /**

@@ -15,6 +15,7 @@ import jdk.jshell.spi.ExecutionControl;
 import modelo.CicloContable;
 import modelo.Formula;
 import reportes.CuentaBalanza;
+import reportes.ElementoFormulaReporte;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
