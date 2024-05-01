@@ -78,7 +78,7 @@ public class CalculadoraEstadoResultados {
     }
     public ImpuestoSobreRenta determinarImpuestoSobreRenta(Double ventas) {
         for (ImpuestoSobreRenta impuestoSobreRenta : listaImpuestoSobreRenta) {
-            if(ventas <= impuestoSobreRenta.hasta || impuestoSobreRenta.hasta == null) {
+            if(impuestoSobreRenta.hasta == null || ventas <= impuestoSobreRenta.hasta) {
                 return impuestoSobreRenta;
             }
         }
@@ -137,15 +137,6 @@ public class CalculadoraEstadoResultados {
                 } else {
                     valorFormula = cuentaBalanza.saldo();
                 }
-                //sumar o restar según signo
-                acumulado = elemFormula.operar(valorFormula, acumulado);
-            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO_INICIAL.getValue()) ) {
-//                NO APLICA, SE DEBE QUITAR
-//                CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
-//                if( cuentaBalanza == null ) {
-//                    throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
-//                }
-//                valorFormula = cuentaBalanza.getSaldoInicial();
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES.getValue()) ) {
@@ -261,7 +252,7 @@ agregarPadres(lista: any, expanded?: boolean): TreeNode {
             this.porcentajeAAplicar = porcentajeAAplicar;
         }
         public Double aplicar(Double ventas, Double utilidadAntesImpuestoSobreRenta) {
-            if(ventas < hasta || hasta == null) {
+            if( hasta == null || ventas < hasta) {
                 return utilidadAntesImpuestoSobreRenta + (porcentajeAAplicar / 100);
             } else throw new IllegalStateException("");
         }

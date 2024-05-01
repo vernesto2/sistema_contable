@@ -136,7 +136,7 @@ public class ServicioCuenta {
                     if(cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_ACREEDOR.getValue())  ) {
                         cuentaBalanza.setSaldoAcreedor(item.getSaldo_inicial());
                     } else if(cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_DEUDOR.getValue()) ) {
-                        cuentaBalanza.setSaldoDeudor(item.getSaldo_final());
+                        cuentaBalanza.setSaldoDeudor(item.getSaldo_inicial());
                     }
                     return cuentaBalanza;
                 }).collect(Collectors.toList());
