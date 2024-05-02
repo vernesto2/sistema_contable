@@ -181,18 +181,16 @@ public class Constantes {
     
     public static final dtoLista TIPO_CUENTA_ESPECIAL_CALCULADO = new dtoLista("0", "Calculado ( con signo = )");
     public static final dtoLista TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES = new dtoLista("1", "Ventas totales");
-    public static final dtoLista TIPO_CUENTA_ESPECIAL_SALDO_INICIAL = new dtoLista("2", "Saldo Inicial");
-    public static final dtoLista TIPO_CUENTA_ESPECIAL_SALDO = new dtoLista("3", "Saldo final");
-    public static final dtoLista TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO = new dtoLista("4", "Valor Ingresado");
-    public static final dtoLista TIPO_CUENTA_ESPECIAL_RESERVA_LEGAL = new dtoLista("5", "Reserva Legal");
-    public static final dtoLista TIPO_CUENTA_ESPECIAL_IMPUESTO_SOBRE_RENTA = new dtoLista("6", "Impuesto Sobre Renta");
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_SALDO = new dtoLista("2", "Saldo");
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO = new dtoLista("3", "Valor Ingresado");
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_RESERVA_LEGAL = new dtoLista("4", "Reserva Legal");
+    public static final dtoLista TIPO_CUENTA_ESPECIAL_IMPUESTO_SOBRE_RENTA = new dtoLista("5", "Impuesto Sobre Renta");
 
 // tipos de Formulas
     public static ArrayList<dtoLista> listaTiposCampoEspecialEstadoResultado() {
         ArrayList<dtoLista> lista = new ArrayList<>();
         lista.add(TIPO_CUENTA_ESPECIAL_CALCULADO);
         lista.add(TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES);
-        lista.add(TIPO_CUENTA_ESPECIAL_SALDO_INICIAL);
         lista.add(TIPO_CUENTA_ESPECIAL_SALDO);
         lista.add(TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO);
         lista.add(TIPO_CUENTA_ESPECIAL_RESERVA_LEGAL);

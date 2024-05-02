@@ -13,16 +13,20 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import modelo.Cuenta;
 import modelo.Formula;
 import modelo.TipoCatalogo;
+import reportes.CuentaBalanza;
+import reportes.ElementoFormulaReporte;
+import utils.constantes.Constantes;
 
 /**
  *
  * @author vacev
  */
 public class daoFormula {
-    
+
     SimpleDateFormat sdfString = new SimpleDateFormat("yyyy-MM-dd");
     Conexion cx;
     daoCuenta _daoCuenta;
@@ -33,7 +37,7 @@ public class daoFormula {
         this._daoCuenta = new daoCuenta(cx);
         this._daoTipoCatalogo = new daoTipoCatalogo(cx);
     }
-    
+
     public RespuestaGeneral Listar(int idTipoCatalogo) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<dtoFormula> lista = new ArrayList<>();
@@ -60,54 +64,54 @@ public class daoFormula {
                 formulaAux.setId_formula(rs.getInt("id_formula"));
                 formulaAux.setTipo_formula(rs.getString("tipo_formula"));
                 formulaAux.setEliminado(rs.getInt("eliminado"));
-                
+
                 // obtenemos la cuenta para que vaya tipado
                 formulaAux.setCuenta(new Cuenta());
                 if (formulaAux.getId_cuenta() > 0) {
                     RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(formulaAux.getId_cuenta(), idTipoCatalogo);
                     if (rgc.esExitosa()) {
-                        ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>)rgc.getDatos();
+                        ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) rgc.getDatos();
                         if (!listaCuenta.isEmpty()) {
                             formulaAux.setCuenta(listaCuenta.get(0));
-                        }   
+                        }
                     }
                 }
-                
+
                 // obtenemos la formula papa para que vaya tipado
                 formula.setFormulaPadre(new Formula());
                 if (formulaAux.getId_formula() > 0) {
                     RespuestaGeneral rgf = ObtenerPorId(formulaAux.getId_formula(), idTipoCatalogo);
                     if (rgf.esExitosa()) {
-                        ArrayList<dtoFormula> listaFormula = (ArrayList<dtoFormula>)rgf.getDatos();
+                        ArrayList<dtoFormula> listaFormula = (ArrayList<dtoFormula>) rgf.getDatos();
                         if (!listaFormula.isEmpty()) {
                             formula.setFormulaPadre(listaFormula.get(0).getFormula());
-                        }   
+                        }
                     }
                 }
-                
+
                 // obtenemos el tipo de catalogo papa para que vaya tipado
                 formulaAux.setTipoCatalogo(new TipoCatalogo());
                 RespuestaGeneral rgt = _daoTipoCatalogo.ObtenerPorId(idTipoCatalogo);
                 if (rgt.esExitosa()) {
-                    ArrayList<TipoCatalogo> listaTipoCatalogo = (ArrayList<TipoCatalogo>)rgt.getDatos();
+                    ArrayList<TipoCatalogo> listaTipoCatalogo = (ArrayList<TipoCatalogo>) rgt.getDatos();
                     if (!listaTipoCatalogo.isEmpty()) {
                         formulaAux.setTipoCatalogo(listaTipoCatalogo.get(0));
-                    }   
+                    }
                 }
                 formula.setFormula(formulaAux);
-                
+
                 lista.add(formula);
             }
-            
+
             return rg.asOk("", lista);
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
             String mensaje = e.getMessage().toString();
             return rg.asServerError(mensaje);
         }
     }
-    
+
     public RespuestaGeneral ObtenerPorId(int id, int idTipoCatalogo) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<dtoFormula> lista = new ArrayList<>();
@@ -118,7 +122,7 @@ public class daoFormula {
                   where f.id_tipo_catalogo = ? and f.id = ? and f.eliminado = 0
                   order by cast(f.posicion as NUMERIC(16,2))
                   """;
-        
+
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, idTipoCatalogo);
             ps.setInt(2, id);
@@ -140,16 +144,16 @@ public class daoFormula {
                 formula.setFormulaPadre(new Formula());
                 lista.add(formula);
             }
-            
+
             return rg.asOk("", lista);
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
             String mensaje = e.getMessage().toString();
             return rg.asServerError(mensaje);
         }
     }
-    
+
     public RespuestaGeneral insertar(Formula formula) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
@@ -169,19 +173,19 @@ public class daoFormula {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             int id = -1;
-            if(rs.next()){
+            if (rs.next()) {
                 id = rs.getInt(1);
             }
-            
+
             return rg.asCreated(RespuestaGeneral.GUARDADO_CORRECTAMENTE, id);
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
             String mensaje = e.getMessage().toString();
             return rg.asServerError(mensaje);
         }
     }
-    
+
     public RespuestaGeneral editar(Formula formula) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ResultSet rs = null;
@@ -208,16 +212,16 @@ public class daoFormula {
             ps.setString(8, formula.getTipo_formula());
             ps.setInt(9, formula.getId());
             ps.executeUpdate();
-            
+
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, formula.getId());
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
             String mensaje = e.getMessage().toString();
             return rg.asServerError(mensaje);
         }
     }
-    
+
     public RespuestaGeneral eliminar(int id) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
@@ -227,14 +231,42 @@ public class daoFormula {
             ps.setInt(1, 1);
             ps.setInt(2, id);
             ps.executeUpdate();
-            
+
             return rg.asOk(RespuestaGeneral.ELIMINADO_CORRECTAMENTE, ps);
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
             String mensaje = e.getMessage().toString();
             return rg.asServerError(mensaje);
         }
     }
-    
+
+    public static List<ElementoFormulaReporte> generarEstadoResultados() {
+        List<ElementoFormulaReporte> listaEstadoResultados = new ArrayList<ElementoFormulaReporte>();
+        ElementoFormulaReporte cuentaBalanza = new ElementoFormulaReporte();
+        cuentaBalanza.setCodigo("01");
+        cuentaBalanza.setId(1);
+        cuentaBalanza.setNombre("Ventas totales");
+
+        cuentaBalanza.setValor(Double.valueOf(12300400), 1);
+        listaEstadoResultados.add(cuentaBalanza);
+
+        ElementoFormulaReporte cuentaBalanza2 = new ElementoFormulaReporte();
+        cuentaBalanza2.setCodigo("01");
+        cuentaBalanza2.setId(2);
+        cuentaBalanza2.setNombre("rebajas sobre ventas");
+
+        cuentaBalanza2.setValor(Double.valueOf(12300400), 2);
+        listaEstadoResultados.add(cuentaBalanza2);
+
+        ElementoFormulaReporte cuentaBalanza3 = new ElementoFormulaReporte();
+        cuentaBalanza3.setCodigo("01");
+        cuentaBalanza3.setId(3);
+        cuentaBalanza3.setNombre("ventas netas");
+
+        cuentaBalanza3.setValor(Double.valueOf(12300400), 4);
+        listaEstadoResultados.add(cuentaBalanza3);
+
+        return listaEstadoResultados;
+    }
 }
