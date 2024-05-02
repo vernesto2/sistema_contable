@@ -38,15 +38,19 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     Sesion sesion;
     TipoCatalogo tipoCatalogo = new TipoCatalogo();
+    boolean cuentasDeNivelAMayorizar = false;
+    int nivelMayorizar = 0;
     /**
      * Creates new form dSeleccionarCuenta
      */
-    public dSeleccionarCuentaFormula(java.awt.Frame parent, boolean modal, Sesion sesion, TipoCatalogo tipoCatalogo) {
+    public dSeleccionarCuentaFormula(java.awt.Frame parent, boolean modal, Sesion sesion, TipoCatalogo tipoCatalogo, boolean cuentasDeNivelAMayorizar, int nivelMayorizar) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
         this._cuenta = new ServicioCuenta(sesion.rutaConexion);
         this.tipoCatalogo = tipoCatalogo;
+        this.cuentasDeNivelAMayorizar = cuentasDeNivelAMayorizar;
+        this.nivelMayorizar = nivelMayorizar;
         this.iniciarVistaDialog();
     }
     
@@ -73,7 +77,12 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         this.listaCuentas = new ArrayList<>();
         tblCuentas.clearSelection();
         this.limiparTablaCuentas();
-        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
+        RespuestaGeneral rg;
+        if (this.cuentasDeNivelAMayorizar) {
+            rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralNivelAMayorizar(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText(), nivelMayorizar);
+        } else {
+            rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
+        }
         this.totalCuentas.setText("0");
         if (rg.esExitosa()) {
             this.listaCuentas = (ArrayList<Cuenta>)rg.getDatos();
@@ -86,7 +95,12 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
     
     public void obtenerListadoCuentasPorTipoCatalogoCompleto() {
         this.listaCuentasCompleta = new ArrayList<>();
-        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
+        RespuestaGeneral rg;
+        if (this.cuentasDeNivelAMayorizar) {
+            rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralNivelAMayorizar(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText(), nivelMayorizar);
+        } else {
+            rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
+        }
         if (rg.esExitosa()) {
             this.listaCuentasCompleta = (ArrayList<Cuenta>)rg.getDatos();
         } else {
@@ -240,7 +254,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         btnLimpiarBusquedaCuenta.setBackgroundHover(new java.awt.Color(112, 113, 116));
         btnLimpiarBusquedaCuenta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnLimpiarBusquedaCuenta.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnLimpiarBusquedaCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnLimpiarBusquedaCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CLEAR);
         btnLimpiarBusquedaCuenta.setSizeIcon(18.0F);
         btnLimpiarBusquedaCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

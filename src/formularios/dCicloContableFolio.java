@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.CicloContable;
-import modelo.CuentaBalance;
+import modelo.CicloContableFolio;
 import modelo.TipoCatalogo;
 import rojeru_san.efectos.ValoresEnum;
-import servicios.ServicioCuentaBalance;
+import servicios.ServicioCicloContableFolio;
 import sesion.Sesion;
 import utils.Render;
 import utils.UtileriaVista;
@@ -24,12 +24,12 @@ import utils.constantes.RespuestaGeneral;
  *
  * @author vacev
  */
-public class dCuentasSaldos extends javax.swing.JDialog {
+public class dCicloContableFolio extends javax.swing.JDialog {
 
     RespuestaGeneral rg = new RespuestaGeneral();
-    ServicioCuentaBalance _cBalance;
+    ServicioCicloContableFolio _cicloFolio;
     
-    ArrayList<CuentaBalance> listaCuentaBalance = new ArrayList<>();
+    ArrayList<CicloContableFolio> listaCicloContableFolio = new ArrayList<>();
     CicloContable cicloContable = new CicloContable();
     //TipoCatalogo tipoCatalogo = new TipoCatalogo();
     
@@ -48,11 +48,11 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     /**
      * Creates new form dTipoCatalogo
      */
-    public dCuentasSaldos(java.awt.Frame parent, boolean modal, CicloContable cicloContable, Sesion sesion, TipoCatalogo tipoCatalogo) {
+    public dCicloContableFolio(java.awt.Frame parent, boolean modal, CicloContable cicloContable, Sesion sesion, TipoCatalogo tipoCatalogo) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
-        _cBalance = new ServicioCuentaBalance(sesion.rutaConexion);
+        _cicloFolio = new ServicioCicloContableFolio(sesion.rutaConexion);
         this.tipoCatalogo = tipoCatalogo;
         this.cicloContable = cicloContable;
         this.cicloContable.setId_catalogo(cicloContable.getId_catalogo());
@@ -62,7 +62,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     public void iniciarVistaDialog() {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setTitle("SALDOS PARA: " + this.cicloContable.getTitulo().toUpperCase());
+        this.setTitle("CUENTAS Y FOLIOS PARA: " + this.cicloContable.getTitulo().toUpperCase());
         this.realizoAccion = false;
         this.setModelFormula();
         this.obtenerListaCuentaSaldo();
@@ -70,7 +70,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     }
 
     public void setModelFormula() {
-        String[] cabecera = {"Codigo", "Concepto", "Saldo Inicial", "Folio Mayor","Editar","Eliminar"};
+        String[] cabecera = {"Codigo", "Concepto", "Folio Mayor","Editar","Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblCuentasSaldos.setModel(dtm);
         Render rr = new Render();
@@ -91,24 +91,23 @@ public class dCuentasSaldos extends javax.swing.JDialog {
         Object[] datos = new Object[dtm.getColumnCount()];
         // ordenamos el listado antes de mostrar
         
-        for (CuentaBalance detalle : this.listaCuentaBalance) {
+        for (CicloContableFolio detalle : this.listaCicloContableFolio) {
             datos[0] = detalle.getCuenta().getCodigo();
             datos[1] = detalle.getCuenta().getNombre();
-            datos[2] = String.valueOf(detalle.getSaldo_inicial());
+            //datos[2] = String.valueOf(detalle.getSaldo_inicial());
             //datos[3] = String.valueOf(detalle.getSaldo_final());
-            datos[3] = String.valueOf(detalle.getFolio_mayor());
-            datos[4] = btn1;
-            datos[5] = btn2;
+            datos[2] = String.valueOf(detalle.getFolio_mayor());
+            datos[3] = btn1;
+            datos[4] = btn2;
             dtm.addRow(datos);
         }
         tblCuentasSaldos.setModel(dtm);
         tblCuentasSaldos.setAutoResizeMode(tblCuentasSaldos.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        tblCuentasSaldos.getColumnModel().getColumn(0).setPreferredWidth(60);
+        tblCuentasSaldos.getColumnModel().getColumn(0).setPreferredWidth(90);
         tblCuentasSaldos.getColumnModel().getColumn(1).setPreferredWidth(300);
         tblCuentasSaldos.getColumnModel().getColumn(2).setPreferredWidth(60);
         tblCuentasSaldos.getColumnModel().getColumn(3).setPreferredWidth(60);
-        tblCuentasSaldos.getColumnModel().getColumn(4).setPreferredWidth(90);
-        tblCuentasSaldos.getColumnModel().getColumn(5).setPreferredWidth(90);
+        tblCuentasSaldos.getColumnModel().getColumn(4).setPreferredWidth(60);
     }
     
     public void limiparTablaFormula() {
@@ -120,10 +119,10 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     
     public void obtenerListaCuentaSaldo() {
         this.totalCuentasSaldos.setText("0");
-        RespuestaGeneral rgf = _cBalance.obtenerListaPorIdCicloContable(this.cicloContable.getId(), this.cicloContable.getId_catalogo());
+        RespuestaGeneral rgf = _cicloFolio.obtenerListaPorIdCicloContable(this.cicloContable.getId(), this.cicloContable.getId_catalogo());
         if (rgf.esExitosa()) {
-            this.listaCuentaBalance = (ArrayList<CuentaBalance>)rgf.getDatos();
-            this.totalCuentasSaldos.setText(String.valueOf(this.listaCuentaBalance.size()));
+            this.listaCicloContableFolio = (ArrayList<CicloContableFolio>)rgf.getDatos();
+            this.totalCuentasSaldos.setText(String.valueOf(this.listaCicloContableFolio.size()));
        }
     }
     
@@ -163,7 +162,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Detalles de Cuentas y Saldos   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Detalles de Cuentas y Folios   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         tblCuentasSaldos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -196,7 +195,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tblCuentasSaldos);
 
         btnAgregarDetallePartida.setBackground(new java.awt.Color(0, 153, 0));
-        btnAgregarDetallePartida.setText("AGREGAR NUEVO SALDO");
+        btnAgregarDetallePartida.setText("AGREGAR NUEVA CUENTA Y FOLIO");
         btnAgregarDetallePartida.setToolTipText("AGREGAR DETALLE");
         btnAgregarDetallePartida.setBackgroundHover(new java.awt.Color(0, 178, 0));
         btnAgregarDetallePartida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -226,13 +225,13 @@ public class dCuentasSaldos extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1019, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAgregarDetallePartida, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(totalCuentasSaldos, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregarDetallePartida, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -294,16 +293,16 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     private void tblCuentasSaldosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCuentasSaldosMouseClicked
         int row = tblCuentasSaldos.getSelectedRow();
         int column = tblCuentasSaldos.getSelectedColumn();
-        if (column == 4) {
+        if (column == 3) {
             
-            this.abrirDialogCuentasSaldos(this.listaCuentaBalance.get(row));
+            this.abrirDialogCuentasSaldos(this.listaCicloContableFolio.get(row));
             
-        } else if (column == 5) {
+        } else if (column == 4) {
             
-            String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaCuentaBalance.get(row).getCuenta().getNombre();
+            String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaCicloContableFolio.get(row).getCuenta().getNombre();
             int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (opc == 0) {
-                RespuestaGeneral rg = _cBalance.eliminar(this.listaCuentaBalance.get(row).getId());
+                RespuestaGeneral rg = _cicloFolio.eliminar(this.listaCicloContableFolio.get(row).getId());
                 if (rg.esExitosa()) {
                     JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
                     this.limiparTablaFormula();
@@ -318,11 +317,11 @@ public class dCuentasSaldos extends javax.swing.JDialog {
     }//GEN-LAST:event_tblCuentasSaldosMouseClicked
 
     private void btnAgregarDetallePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetallePartidaActionPerformed
-        this.abrirDialogCuentasSaldos(new CuentaBalance());
+        this.abrirDialogCuentasSaldos(new CicloContableFolio());
     }//GEN-LAST:event_btnAgregarDetallePartidaActionPerformed
 
-    public void abrirDialogCuentasSaldos (CuentaBalance cuentaBalance) {
-        dFormCuentasSaldos d = new dFormCuentasSaldos(null, true, sesion, cuentaBalance, this.cicloContable, this.tipoCatalogo);
+    public void abrirDialogCuentasSaldos (CicloContableFolio cicloFolio) {
+        dFormCicloContableFolio d = new dFormCicloContableFolio(null, true, sesion, cicloFolio, this.cicloContable, this.tipoCatalogo);
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.isRealizoAccion()) {

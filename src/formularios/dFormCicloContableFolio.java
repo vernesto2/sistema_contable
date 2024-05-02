@@ -7,9 +7,9 @@ package formularios;
 import javax.swing.JOptionPane;
 import modelo.CicloContable;
 import modelo.Cuenta;
-import modelo.CuentaBalance;
+import modelo.CicloContableFolio;
 import modelo.TipoCatalogo;
-import servicios.ServicioCuentaBalance;
+import servicios.ServicioCicloContableFolio;
 import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
@@ -19,57 +19,57 @@ import utils.constantes.RespuestaGeneral;
  *
  * @author vacev
  */
-public class dFormCuentasSaldos extends javax.swing.JDialog {
+public class dFormCicloContableFolio extends javax.swing.JDialog {
 
     /**
      * Creates new form dFormFormula
      */
     
-    CuentaBalance cBalanceModel = new CuentaBalance();
+    CicloContableFolio cicloFolio = new CicloContableFolio();
     CicloContable cicloContable = new CicloContable();
     boolean realizoAccion = false;
     Sesion sesion;
-    ServicioCuentaBalance _cBalance;
+    ServicioCicloContableFolio _cBalance;
     TipoCatalogo tipoCatalogo = new TipoCatalogo();
     
     RespuestaGeneral rg = new RespuestaGeneral();
     
-    public dFormCuentasSaldos(java.awt.Frame parent, boolean modal, Sesion sesion, CuentaBalance cBalance, CicloContable cicloContable, TipoCatalogo tipoCatalogo) {
+    public dFormCicloContableFolio(java.awt.Frame parent, boolean modal, Sesion sesion, CicloContableFolio cBalance, CicloContable cicloContable, TipoCatalogo tipoCatalogo) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
-        this._cBalance = new ServicioCuentaBalance(sesion.rutaConexion);
-        this.cBalanceModel = cBalance;
+        this._cBalance = new ServicioCicloContableFolio(sesion.rutaConexion);
+        this.cicloFolio = cBalance;
         this.cicloContable = cicloContable;
         this.cicloContable.setId_catalogo(cicloContable.getId_catalogo());
-        this.cBalanceModel.setCicloContable(this.cicloContable);
+        this.cicloFolio.setCicloContable(this.cicloContable);
         this.tipoCatalogo = tipoCatalogo;
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setTitle(this.cBalanceModel.getId() > 0 ? "MODIFICAR SALDO" : "NUEVO SALDO");
+        this.setTitle(this.cicloFolio.getId() > 0 ? "MODIFICAR CUENTA O FOLIO" : "NUEVO CUENTA Y FOLIO");
         this.setearData();
     }
     
     public void limpiarCuentaSeleccionada() {
-        this.cBalanceModel.setId_cuenta(-1);
-        this.cBalanceModel.setCuenta(new Cuenta());
+        this.cicloFolio.setId_cuenta(-1);
+        this.cicloFolio.setCuenta(new Cuenta());
         this.txtCuentaSeleccionada.setText("* CUENTA NO ESPECIFICADA *");
-        this.txtSaldoInicial.setText("");
+        //this.txtSaldoInicial.setText("");
     }
     
     public void setearData() {
-        this.cBalanceModel.setId_ciclo_contable(this.cicloContable.getId());
-        if (this.cBalanceModel.getId() < 0) {
-            this.cBalanceModel.setId_cuenta(-1);
-            this.cBalanceModel.setCuenta(new Cuenta());
+        this.cicloFolio.setId_ciclo_contable(this.cicloContable.getId());
+        if (this.cicloFolio.getId() < 0) {
+            this.cicloFolio.setId_cuenta(-1);
+            this.cicloFolio.setCuenta(new Cuenta());
             this.txtCuentaSeleccionada.setText("* CUENTA NO ESPECIFICADA *");
         } else {
-            this.txtCuentaSeleccionada.setText(this.cBalanceModel.getCuenta().getCodigo() + " - " + this.cBalanceModel.getCuenta().getNombre().toUpperCase());
+            this.txtCuentaSeleccionada.setText(this.cicloFolio.getCuenta().getCodigo() + " - " + this.cicloFolio.getCuenta().getNombre().toUpperCase());
         }
-        //this.txtSaldoInicial.setText(String.valueOf(this.cBalanceModel.getSaldo_inicial() == 0 ? "" : this.cBalanceModel.getSaldo_inicial()));
-        this.txtSaldoInicial.setText(String.valueOf(this.cBalanceModel.getSaldo_inicial()));
-        //this.txtSaldoFinal.setText(String.valueOf(this.cBalanceModel.getSaldo_final()));
-        this.txtFolio.setText(String.valueOf(this.cBalanceModel.getFolio_mayor()));
+        //this.txtSaldoInicial.setText(String.valueOf(this.cicloFolio.getSaldo_inicial() == 0 ? "" : this.cicloFolio.getSaldo_inicial()));
+        //this.txtSaldoInicial.setText(String.valueOf(this.cicloFolio.getSaldo_inicial()));
+        //this.txtSaldoFinal.setText(String.valueOf(this.cicloFolio.getSaldo_final()));
+        this.txtFolio.setText(String.valueOf(this.cicloFolio.getFolio_mayor()));
     }
 
     public boolean isRealizoAccion() {
@@ -101,8 +101,6 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         btnCancelarTipoCatalogo = new RSMaterialComponent.RSButtonShapeIcon();
         btnGuardarTipoCatalogo = new RSMaterialComponent.RSButtonShapeIcon();
-        txtSaldoInicial = new RSMaterialComponent.RSTextFieldMaterial();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         btnCancelarTipoCatalogo1 = new RSMaterialComponent.RSButtonShapeIcon();
         txtCuentaSeleccionada = new javax.swing.JLabel();
@@ -167,23 +165,6 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
                     .addComponent(btnGuardarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        txtSaldoInicial.setForeground(new java.awt.Color(0, 0, 0));
-        txtSaldoInicial.setColorMaterial(new java.awt.Color(0, 0, 0));
-        txtSaldoInicial.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        txtSaldoInicial.setPhColor(new java.awt.Color(0, 0, 0));
-        txtSaldoInicial.setPlaceholder("Digite el saldo inicial");
-        txtSaldoInicial.setSelectionColor(new java.awt.Color(0, 0, 0));
-        txtSaldoInicial.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSaldoInicialKeyTyped(evt);
-            }
-        });
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel16.setText("Saldo Inicial: *");
-        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -256,13 +237,9 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelarTipoCatalogo1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSaldoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -282,13 +259,9 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
                     .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSaldoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -316,8 +289,8 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
         
         if (valido) {
             // guardamos la info
-            if (this.cBalanceModel.getId() < 0) {
-                RespuestaGeneral rg = _cBalance.insertar(this.cBalanceModel);
+            if (this.cicloFolio.getId() < 0) {
+                RespuestaGeneral rg = _cBalance.insertar(this.cicloFolio);
                 if (rg.esExitosa()) {
                     this.setRealizoAccion(true);
                     this.setRg(rg);
@@ -328,7 +301,7 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
 
                 // verificamos si es NUEVO
             } else {
-                RespuestaGeneral rg = _cBalance.editar(this.cBalanceModel);
+                RespuestaGeneral rg = _cBalance.editar(this.cicloFolio);
                 if (rg.esExitosa()) {
                     this.setRealizoAccion(true);
                     this.setRg(rg);
@@ -345,30 +318,30 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
         boolean valido = true;
         
         try {
-            if (this.cBalanceModel.getId_cuenta() < 0) {
+            if (this.cicloFolio.getId_cuenta() < 0) {
                 valido = false;
                 JOptionPane.showMessageDialog(this, "No se ha seleccionado una cuenta", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
             }
             
-            if (this.txtSaldoInicial.getText().isEmpty()) {
-//                this.cBalanceModel.setSaldo_inicial(0.0);
-                JOptionPane.showMessageDialog(this, "No se ha digitado el saldo inicial", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
-            } else {
-                this.cBalanceModel.setSaldo_inicial(Double.parseDouble(this.txtSaldoInicial.getText()));
-            }
+//            if (this.txtSaldoInicial.getText().isEmpty()) {
+////                this.cicloFolio.setSaldo_inicial(0.0);
+//                JOptionPane.showMessageDialog(this, "No se ha digitado el saldo inicial", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
+//            } else {
+//                this.cicloFolio.setSaldo_inicial(Double.parseDouble(this.txtSaldoInicial.getText()));
+//            }
             
 //            if (this.txtSaldoFinal.getText().isEmpty()) {
 //                valido = false;
 //                JOptionPane.showMessageDialog(this, "No se ha digitado el saldo final", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
 //            } else {
-//                this.cBalanceModel.setSaldo_final(Double.parseDouble(this.txtSaldoFinal.getText()));
+//                this.cicloFolio.setSaldo_final(Double.parseDouble(this.txtSaldoFinal.getText()));
 //            }
             
             if (this.txtFolio.getText().isEmpty()) {
                 valido = false;
                 JOptionPane.showMessageDialog(this, "No se ha digitado el folio mayor", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
             } else {
-                this.cBalanceModel.setFolio_mayor(Integer.parseInt(this.txtFolio.getText()));
+                this.cicloFolio.setFolio_mayor(Integer.parseInt(this.txtFolio.getText()));
             }
             
         } catch (Exception e) {
@@ -377,7 +350,7 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
         }
         
         return valido;
-        //this.cBalanceModel.getFormula().setPosicion();
+        //this.cicloFolio.getFormula().setPosicion();
     }
     
     private void btnCancelarTipoCatalogo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTipoCatalogo1ActionPerformed
@@ -385,21 +358,15 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarTipoCatalogo1ActionPerformed
 
     private void btnCancelarTipoCatalogo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTipoCatalogo2ActionPerformed
-        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion, this.tipoCatalogo);
+        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion, this.tipoCatalogo, true, this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar());
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.getRealizoAccion()) {
             //JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
-            this.cBalanceModel.setId_cuenta(d.getCuentaSeleccionada().getId());
+            this.cicloFolio.setId_cuenta(d.getCuentaSeleccionada().getId());
             this.txtCuentaSeleccionada.setText(d.getCuentaSeleccionada().getCodigo() + " - " + d.getCuentaSeleccionada().getNombre());
         }
     }//GEN-LAST:event_btnCancelarTipoCatalogo2ActionPerformed
-
-    private void txtSaldoInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaldoInicialKeyTyped
-        if (!Constantes.validarPorcentaje(evt.getKeyChar())) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtSaldoInicialKeyTyped
 
     private void txtFolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFolioKeyTyped
         if (!Constantes.validarNumeros(evt.getKeyChar())) {
@@ -454,13 +421,11 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
     private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo1;
     private RSMaterialComponent.RSButtonShapeIcon btnCancelarTipoCatalogo2;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel txtCuentaSeleccionada;
     private RSMaterialComponent.RSTextFieldMaterial txtFolio;
-    private RSMaterialComponent.RSTextFieldMaterial txtSaldoInicial;
     // End of variables declaration//GEN-END:variables
 }

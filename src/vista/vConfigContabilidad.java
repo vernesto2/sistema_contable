@@ -7,6 +7,7 @@ package vista;
 import dto.dtoCuenta;
 import dto.dtoLista;
 import formularios.dCicloContable;
+import formularios.dCicloContableFolio;
 import formularios.dCuentas;
 import formularios.dCuentasSaldos;
 import formularios.dFormula;
@@ -95,6 +96,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         RSMaterialComponent.RSButtonCustomIcon btn1 = new RSMaterialComponent.RSButtonCustomIcon();
         RSMaterialComponent.RSButtonCustomIcon btn2 = new RSMaterialComponent.RSButtonCustomIcon();
         RSMaterialComponent.RSButtonCustomIcon btn3 = new RSMaterialComponent.RSButtonCustomIcon();
+        RSMaterialComponent.RSButtonCustomIcon btn4 = new RSMaterialComponent.RSButtonCustomIcon();
         RSMaterialComponent.RSButtonCustomIcon btn5 = new RSMaterialComponent.RSButtonCustomIcon();
         btn1.setIcons(ValoresEnum.ICONS.EDIT);
         Cursor cur = new Cursor(Cursor.HAND_CURSOR);
@@ -104,7 +106,8 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btn2.setCursor(cur);
         btn3.setIcons(ValoresEnum.ICONS.CHECK);
         btn3.setColorIcon(Color.GREEN);
-        
+        btn4.setIcons(ValoresEnum.ICONS.MONETIZATION_ON);
+        btn4.setColorIcon(Color.BLUE);
         btn5.setIcons(ValoresEnum.ICONS.MONETIZATION_ON);
         btn5.setColorIcon(Color.ORANGE);
         
@@ -120,16 +123,16 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             datos[6] = btn1;
             datos[7] = btn2;
             datos[8] = btn3;
-            datos[9] = ciclo.getSin_libro_diario() == 1 ? btn5 : "";
+            datos[9] = ciclo.getSin_libro_diario() == 1 ? btn5 : btn4;
             dtm.addRow(datos);
         }
         tblCicloContable.setModel(dtm);
         tblCicloContable.setAutoResizeMode(tblCicloContable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         tblCicloContable.getColumnModel().getColumn(0).setPreferredWidth(40);
         tblCicloContable.getColumnModel().getColumn(1).setPreferredWidth(40);
-        tblCicloContable.getColumnModel().getColumn(2).setPreferredWidth(320);
-        tblCicloContable.getColumnModel().getColumn(3).setPreferredWidth(20);
-        tblCicloContable.getColumnModel().getColumn(4).setPreferredWidth(20);
+        tblCicloContable.getColumnModel().getColumn(2).setPreferredWidth(300);
+        tblCicloContable.getColumnModel().getColumn(3).setPreferredWidth(30);
+        tblCicloContable.getColumnModel().getColumn(4).setPreferredWidth(30);
         tblCicloContable.getColumnModel().getColumn(5).setPreferredWidth(200);
         tblCicloContable.getColumnModel().getColumn(6).setPreferredWidth(10);
         tblCicloContable.getColumnModel().getColumn(7).setPreferredWidth(10);
@@ -173,7 +176,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         <------------------------------------------------------------------------------->  */  
     public void setModelTipoCatalogo() {
 //        String[] cabecera = {"Tipo", "Color", "Libro diario", "Libro mayor", "Balanza comprobacion", "Estado resultado", "Balance general", "Flujo de efectivo", "Cambios en patrimonio", "Editar", "Eliminar"};
-        String[] cabecera = {"Tipo", "Editar", "Eliminar", "Formula"};
+        String[] cabecera = {"Tipo","Nivel a Mayorizar", "Editar", "Eliminar", "Formula"};
         dtm.setColumnIdentifiers(cabecera);
         tblTipoCatalogo.setModel(dtm);
         tblTipoCatalogo.setDefaultRenderer(Object.class, new Render());
@@ -196,6 +199,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btn3.setCursor(cur);
         for (TipoCatalogo tipo : listaTiposCatalogos) {
             datos[0] = tipo.getTipo();
+            datos[1] = tipo.getNivel_mayorizar();
 //            datos[1] = "";
 //            datos[2] = tipo.getLibro_diario() == 1 ? "SI" : "NO";
 //            datos[3] = tipo.getLibro_mayor()== 1 ? "SI" : "NO";
@@ -204,14 +208,15 @@ public class vConfigContabilidad extends javax.swing.JPanel {
 //            datos[6] = tipo.getBalance_general()== 1 ? "SI" : "NO";
 //            datos[7] = tipo.getFlujo_efectivo()== 1 ? "SI" : "NO";
 //            datos[8] = tipo.getCambios_patrimonio()== 1 ? "SI" : "NO";
-            datos[1] = btn1;
-            datos[2] = btn2;
-            datos[3] = btn3;
+            datos[2] = btn1;
+            datos[3] = btn2;
+            datos[4] = btn3;
             dtm.addRow(datos);
         }
         tblTipoCatalogo.setModel(dtm);
         tblTipoCatalogo.setAutoResizeMode(tblTipoCatalogo.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        tblTipoCatalogo.getColumnModel().getColumn(0).setPreferredWidth(420);
+        tblTipoCatalogo.getColumnModel().getColumn(0).setPreferredWidth(520);
+        tblTipoCatalogo.getColumnModel().getColumn(1).setPreferredWidth(70);
 //        tblTipoCatalogo.getColumnModel().getColumn(1).setPreferredWidth(10);
 //        tblTipoCatalogo.getColumnModel().getColumn(2).setPreferredWidth(10);
 //        tblTipoCatalogo.getColumnModel().getColumn(3).setPreferredWidth(10);
@@ -220,8 +225,9 @@ public class vConfigContabilidad extends javax.swing.JPanel {
 //        tblTipoCatalogo.getColumnModel().getColumn(6).setPreferredWidth(10);
 //        tblTipoCatalogo.getColumnModel().getColumn(7).setPreferredWidth(10);
 //        tblTipoCatalogo.getColumnModel().getColumn(8).setPreferredWidth(10);
-        tblTipoCatalogo.getColumnModel().getColumn(1).setPreferredWidth(10);
         tblTipoCatalogo.getColumnModel().getColumn(2).setPreferredWidth(10);
+        tblTipoCatalogo.getColumnModel().getColumn(3).setPreferredWidth(10);
+        tblTipoCatalogo.getColumnModel().getColumn(4).setPreferredWidth(10);
     }
     
     public void obtenerListadoTipoCatalogo() {
@@ -962,17 +968,22 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                 dCuentasSaldos d = new dCuentasSaldos(null, true, cContable, sesion, cContable.getTipoCatalogo());
                 d.setVisible(true);
                 // validamos si realizo alguna accion para actualizar el listado o no
-                if (d.getRealizoAccion()) {
-                    JOptionPane.showMessageDialog(this, d.getRG().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRG()));
-                    // actualizamos el perfil del usuario
-                    RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(sesion.usuario.getId());
-                    if (rg1.esExitosa()) {
-                        ArrayList<ConfiguracionUsuario> listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg1.getDatos();
-                        sesion.configUsuario = listaConfigUsuario.get(0);
-                        UtileriaVista.actualizarPerfil(sesion);
-                    }
-                    this.obtenerListadoCiclosContables();
-                }
+//                if (d.getRealizoAccion()) {
+//                    JOptionPane.showMessageDialog(this, d.getRG().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRG()));
+//                    // actualizamos el perfil del usuario
+//                    RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(sesion.usuario.getId());
+//                    if (rg1.esExitosa()) {
+//                        ArrayList<ConfiguracionUsuario> listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg1.getDatos();
+//                        sesion.configUsuario = listaConfigUsuario.get(0);
+//                        UtileriaVista.actualizarPerfil(sesion);
+//                    }
+//                    this.obtenerListadoCiclosContables();
+//                }
+            } else {
+                CicloContable cContable = this.listaCiclosContables.get(row);
+                cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
+                dCicloContableFolio d = new dCicloContableFolio(null, true, cContable, sesion, cContable.getTipoCatalogo());
+                d.setVisible(true);
             }
         }
     }//GEN-LAST:event_tblCicloContableMouseClicked
@@ -1005,11 +1016,11 @@ public class vConfigContabilidad extends javax.swing.JPanel {
     private void tblTipoCatalogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoCatalogoMouseClicked
         int accion = tblTipoCatalogo.getSelectedColumn();
         int row = tblTipoCatalogo.getSelectedRow();
-        if (accion == 1) {
+        if (accion == 2) {
             // este es editar
             this.abrirDialogTipoCatalogo(this.listaTiposCatalogos.get(row));
             
-        } else if (accion == 2) {
+        } else if (accion == 3) {
             // este es eliminar
             //String texto = "¿Esta seguro de continuar?, Se eliminará el registro: " + this.txtTipoCatalogo.getText();
             String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaTiposCatalogos.get(row).getTipo();
@@ -1024,7 +1035,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
                 }
             }
-        } else if (accion == 3) {
+        } else if (accion == 4) {
             dFormula d = new dFormula(null, true, this.listaTiposCatalogos.get(row), sesion);
             d.setVisible(true);
         }

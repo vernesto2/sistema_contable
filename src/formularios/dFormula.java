@@ -5,12 +5,14 @@
 package formularios;
 
 import dto.dtoFormula;
+import dto.dtoLista;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.TipoCatalogo;
 import rojeru_san.efectos.ValoresEnum;
@@ -18,6 +20,7 @@ import servicios.ServicioFormula;
 import sesion.Sesion;
 import utils.Render;
 import utils.UtileriaVista;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -66,7 +69,7 @@ public class dFormula extends javax.swing.JDialog {
     }
 
     public void setModelFormula() {
-        String[] cabecera = {"Posición", "Signo", "Nombre", "Tipo Formula", "Formula Padre", "Editar", "Eliminar", "Sub-Formula"};
+        String[] cabecera = {"Posición", "Signo", "Codigo", "Nombre", "Tipo Formula", "Formula Padre", "Cuenta Especial", "Editar", "Eliminar", "Sub-Formula"};
         dtm.setColumnIdentifiers(cabecera);
         tblFormula.setModel(dtm);
         Render rr = new Render();
@@ -95,24 +98,29 @@ public class dFormula extends javax.swing.JDialog {
         for (dtoFormula detalle : this.listaFormula) {
             datos[0] = detalle.getFormula().getPosicion();
             datos[1] = detalle.getFormula().getSigno();
-            datos[2] = detalle.getFormula().getNombre();
-            datos[3] = detalle.getFormula().getTipo_formula();
-            datos[4] = detalle.getFormulaPadre().getNombre();
-            datos[5] = btn1;
-            datos[6] = btn2;
-            datos[7] = btn3;
+            datos[2] = detalle.getFormula().getCuenta().getCodigo();
+            datos[3] = detalle.getFormula().getNombre();
+            datos[4] = detalle.getFormula().getTipo_formula();
+            datos[5] = detalle.getFormulaPadre().getNombre();
+            datos[6] = Constantes.devolverCuentaEspecial(detalle.getFormula().getTipo_cuenta_especial());
+            datos[7] = btn1;
+            datos[8] = btn2;
+            datos[9] = btn3;
             dtm.addRow(datos);
         }
         tblFormula.setModel(dtm);
-        tblFormula.setAutoResizeMode(tblFormula.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        tblFormula.getColumnModel().getColumn(0).setPreferredWidth(60);
+        tblFormula.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        //tblFormula.setAutoResizeMode(tblFormula.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
+        tblFormula.getColumnModel().getColumn(0).setPreferredWidth(70);
         tblFormula.getColumnModel().getColumn(1).setPreferredWidth(60);
-        tblFormula.getColumnModel().getColumn(2).setPreferredWidth(300);
-        tblFormula.getColumnModel().getColumn(3).setPreferredWidth(100);
-        tblFormula.getColumnModel().getColumn(4).setPreferredWidth(300);
-        tblFormula.getColumnModel().getColumn(5).setPreferredWidth(90);
-        tblFormula.getColumnModel().getColumn(6).setPreferredWidth(90);
-        tblFormula.getColumnModel().getColumn(7).setPreferredWidth(90);
+        tblFormula.getColumnModel().getColumn(2).setPreferredWidth(90);
+        tblFormula.getColumnModel().getColumn(3).setPreferredWidth(300);
+        tblFormula.getColumnModel().getColumn(4).setPreferredWidth(160);
+        tblFormula.getColumnModel().getColumn(5).setPreferredWidth(280);
+        tblFormula.getColumnModel().getColumn(6).setPreferredWidth(120);
+        tblFormula.getColumnModel().getColumn(7).setPreferredWidth(60);
+        tblFormula.getColumnModel().getColumn(8).setPreferredWidth(60);
+        tblFormula.getColumnModel().getColumn(9).setPreferredWidth(80);
     }
 
     public void limiparTablaFormula() {
@@ -230,7 +238,7 @@ public class dFormula extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1019, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1119, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAgregarDetallePartida, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -300,7 +308,7 @@ public class dFormula extends javax.swing.JDialog {
     private void tblFormulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFormulaMouseClicked
         int row = tblFormula.getSelectedRow();
         int column = tblFormula.getSelectedColumn();
-        if (column == 5) {
+        if (column == 7) {
 
             dFormFormula d = new dFormFormula(null, true, sesion, this.listaFormula.get(row), this.tipoCatalogo, new dtoFormula());
             d.setVisible(true);
@@ -311,7 +319,7 @@ public class dFormula extends javax.swing.JDialog {
                 this.setDatosFormula();
             }
 
-        } else if (column == 6) {
+        } else if (column == 8) {
 
             String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaFormula.get(row).getFormula().getNombre();
             int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -327,7 +335,7 @@ public class dFormula extends javax.swing.JDialog {
                 }
             }
 
-        } else if (column == 7) {
+        } else if (column == 9) {
             dFormFormula d = new dFormFormula(null, true, sesion, new dtoFormula(), this.tipoCatalogo, this.listaFormula.get(row));
             d.setVisible(true);
             // validamos si realizo alguna accion para actualizar el listado o no

@@ -10,24 +10,22 @@ import dto.dtoCuenta;
  *
  * @author vacev
  */
-public class CuentaBalance {
+public class CicloContableFolio {
     
     int id;
     int id_ciclo_contable;
     int id_cuenta;
-    double saldo_inicial;
-    double saldo_final;
+    double saldo;
     int folio_mayor;
     
     CicloContable cicloContable;
     Cuenta cuenta;
 
-    public CuentaBalance() {
+    public CicloContableFolio() {
         this.id = -1;
         this.id_ciclo_contable = -1;
         this.id_cuenta = -1;
-        this.saldo_inicial = 0.0;
-        this.saldo_final = 0.0;
+        this.saldo = 0.0;
         this.folio_mayor = 0;
         
         this.cicloContable = new CicloContable();
@@ -58,20 +56,12 @@ public class CuentaBalance {
         this.id_cuenta = id_cuenta;
     }
 
-    public double getSaldo_inicial() {
-        return saldo_inicial;
+    public double getSaldo() {
+        return saldo;
     }
 
-    public void setSaldo_inicial(double saldo_inicial) {
-        this.saldo_inicial = saldo_inicial;
-    }
-
-    public double getSaldo_final() {
-        return saldo_final;
-    }
-
-    public void setSaldo_final(double saldo_final) {
-        this.saldo_final = saldo_final;
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
 
     public CicloContable getCicloContable() {

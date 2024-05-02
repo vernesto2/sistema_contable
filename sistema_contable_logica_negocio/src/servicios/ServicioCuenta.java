@@ -6,8 +6,6 @@ package servicios;
 
 import conexion.Conexion;
 import dao.daoCuenta;
-import dao.daoCuentaBalance;
-import dto.dtoFormula;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +43,13 @@ public class ServicioCuenta {
     public RespuestaGeneral obtenerListaPorIdTipoCatalogoGeneral(int idTipoCatalogo, String busqueda) {
         this.cx.conectar();
         RespuestaGeneral rs = this.daoCuenta.ListarCatalogo(idTipoCatalogo, busqueda);
+        this.cx.desconectar(); 
+        return rs;
+    }
+    
+    public RespuestaGeneral obtenerListaPorIdTipoCatalogoGeneralNivelAMayorizar(int idTipoCatalogo, String busqueda, int nivelMayorizar) {
+        this.cx.conectar();
+        RespuestaGeneral rs = this.daoCuenta.ListarCatalogoNivelMayorizar(idTipoCatalogo, busqueda, nivelMayorizar);
         this.cx.desconectar(); 
         return rs;
     }

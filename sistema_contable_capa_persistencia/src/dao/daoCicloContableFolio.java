@@ -13,55 +13,54 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import modelo.Cuenta;
-import modelo.CuentaBalance;
+import modelo.CicloContableFolio;
 
 /**
  *
  * @author vacev
  */
-public class daoCuentaBalance {
+public class daoCicloContableFolio {
     
     SimpleDateFormat sdfString = new SimpleDateFormat("yyyy-MM-dd");
     Conexion cx;
     daoCuenta _daoCuenta;
 
-    public daoCuentaBalance(Conexion cx) {
+    public daoCicloContableFolio(Conexion cx) {
         this.cx = cx;
         this._daoCuenta = new daoCuenta(cx);
     }
     
     public RespuestaGeneral Listar(int idCicloContable, int idTipoCatalogo) {
         RespuestaGeneral rg = new RespuestaGeneral();
-        ArrayList<CuentaBalance> lista = new ArrayList<>();
+        ArrayList<CicloContableFolio> lista = new ArrayList<>();
         ResultSet rs = null;
         String sql = """
                     select cb.* 
-                    from cuenta_balance cb 
+                    from ciclo_contable_folios cb 
                     where cb.id_ciclo_contable = ? 
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, idCicloContable);
             rs = ps.executeQuery();
             while (rs.next()) {
-                CuentaBalance cBalance = new CuentaBalance();
-                cBalance.setId(rs.getInt("id"));
-                cBalance.setId_ciclo_contable(rs.getInt("id_ciclo_contable"));
-                cBalance.setId_cuenta(rs.getInt("id_cuenta"));
-                cBalance.setSaldo_inicial(rs.getDouble("saldo_inicial"));
-                cBalance.setSaldo_final(rs.getDouble("saldo_final"));
-                cBalance.setFolio_mayor(rs.getInt("folio_mayor"));
+                CicloContableFolio cicloFolio = new CicloContableFolio();
+                cicloFolio.setId(rs.getInt("id"));
+                cicloFolio.setId_ciclo_contable(rs.getInt("id_ciclo_contable"));
+                cicloFolio.setId_cuenta(rs.getInt("id_cuenta"));
+                //cicloFolio.setSaldo(rs.getDouble("saldo"));
+                cicloFolio.setFolio_mayor(rs.getInt("folio_mayor"));
                 
-                if (cBalance.getId_cuenta() > 0) {
-                    RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cBalance.getId_cuenta(), idTipoCatalogo);
+                if (cicloFolio.getId_cuenta() > 0) {
+                    RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cicloFolio.getId_cuenta(), idTipoCatalogo);
                     if (rgc.esExitosa()) {
                         ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>)rgc.getDatos();
                         if (!listaCuenta.isEmpty()) {
-                            cBalance.setCuenta(listaCuenta.get(0));
+                            cicloFolio.setCuenta(listaCuenta.get(0));
                         }   
                     }
                 }
                 
-                lista.add(cBalance);
+                lista.add(cicloFolio);
             }
             
             return rg.asOk("", lista);
@@ -75,11 +74,11 @@ public class daoCuentaBalance {
     
     public RespuestaGeneral ObtenerPorId(int id, int idCicloContable, int idTipoCatalogo) {
         RespuestaGeneral rg = new RespuestaGeneral();
-        ArrayList<CuentaBalance> lista = new ArrayList<>();
+        ArrayList<CicloContableFolio> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
                     select cb.* 
-                    from cuenta_balance cb 
+                    from ciclo_contable_folios cb 
                     where cb.id_ciclo_contable = ? and cb.id = ?
                   """;
         
@@ -88,25 +87,24 @@ public class daoCuentaBalance {
             ps.setInt(2, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                CuentaBalance cBalance = new CuentaBalance();
-                cBalance.setId(rs.getInt("id"));
-                cBalance.setId_ciclo_contable(rs.getInt("id_ciclo_contable"));
-                cBalance.setId_cuenta(rs.getInt("id_cuenta"));
-                cBalance.setSaldo_inicial(rs.getDouble("saldo_inicial"));
-                cBalance.setSaldo_final(rs.getDouble("saldo_final"));
-                cBalance.setFolio_mayor(rs.getInt("folio_mayor"));
+                CicloContableFolio cicloFolio = new CicloContableFolio();
+                cicloFolio.setId(rs.getInt("id"));
+                cicloFolio.setId_ciclo_contable(rs.getInt("id_ciclo_contable"));
+                cicloFolio.setId_cuenta(rs.getInt("id_cuenta"));
+                //cicloFolio.setSaldo(rs.getDouble("saldo"));
+                cicloFolio.setFolio_mayor(rs.getInt("folio_mayor"));
                 
-                if (cBalance.getId_cuenta() > 0) {
-                    RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cBalance.getId_cuenta(), idTipoCatalogo);
+                if (cicloFolio.getId_cuenta() > 0) {
+                    RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cicloFolio.getId_cuenta(), idTipoCatalogo);
                     if (rgc.esExitosa()) {
                         ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>)rgc.getDatos();
                         if (!listaCuenta.isEmpty()) {
-                            cBalance.setCuenta(listaCuenta.get(0));
+                            cicloFolio.setCuenta(listaCuenta.get(0));
                         }   
                     }
                 }
                 
-                lista.add(cBalance);
+                lista.add(cicloFolio);
             }
             
             return rg.asOk("", lista);
@@ -120,11 +118,11 @@ public class daoCuentaBalance {
     
     public RespuestaGeneral buscarIdCuentaPorCicloContable(int id, int idCuenta, int idCicloContable) {
         RespuestaGeneral rg = new RespuestaGeneral();
-        ArrayList<CuentaBalance> lista = new ArrayList<>();
+        ArrayList<CicloContableFolio> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
                     select cb.* 
-                    from cuenta_balance cb 
+                    from ciclo_contable_folios cb 
                     where cb.id_ciclo_contable = ? and cb.id_cuenta = ? and cb.id != ?
                   """;
         
@@ -134,14 +132,13 @@ public class daoCuentaBalance {
             ps.setInt(3, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                CuentaBalance cBalance = new CuentaBalance();
-                cBalance.setId(rs.getInt("id"));
-                cBalance.setId_ciclo_contable(rs.getInt("id_ciclo_contable"));
-                cBalance.setId_cuenta(rs.getInt("id_cuenta"));
-                cBalance.setSaldo_inicial(rs.getDouble("saldo_inicial"));
-                cBalance.setSaldo_final(rs.getDouble("saldo_final"));
-                cBalance.setFolio_mayor(rs.getInt("folio_mayor"));
-                lista.add(cBalance);
+                CicloContableFolio cicloFolio = new CicloContableFolio();
+                cicloFolio.setId(rs.getInt("id"));
+                cicloFolio.setId_ciclo_contable(rs.getInt("id_ciclo_contable"));
+                cicloFolio.setId_cuenta(rs.getInt("id_cuenta"));
+                //cicloFolio.setSaldo(rs.getDouble("saldo"));
+                cicloFolio.setFolio_mayor(rs.getInt("folio_mayor"));
+                lista.add(cicloFolio);
             }
             
             return rg.asOk("", lista);
@@ -153,18 +150,16 @@ public class daoCuentaBalance {
         }
     }
     
-    public RespuestaGeneral insertar(CuentaBalance cBalance) {
+    public RespuestaGeneral insertar(CicloContableFolio cicloFolio) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
-                  INSERT INTO cuenta_balance     
-                  VALUES(null, ?, ?, ?, ?, ?)
+                  INSERT INTO ciclo_contable_folios     
+                  VALUES(null, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
-            ps.setInt(1, cBalance.getId_ciclo_contable());
-            ps.setInt(2, cBalance.getId_cuenta());
-            ps.setDouble(3, cBalance.getSaldo_inicial());
-            ps.setDouble(4, cBalance.getSaldo_final());
-            ps.setInt(5, cBalance.getFolio_mayor());
+            ps.setInt(1, cicloFolio.getId_ciclo_contable());
+            ps.setInt(2, cicloFolio.getId_cuenta());
+            ps.setInt(3, cicloFolio.getFolio_mayor());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             int id = -1;
@@ -181,28 +176,53 @@ public class daoCuentaBalance {
         }
     }
     
-    public RespuestaGeneral editar(CuentaBalance cBalance) {
+    public RespuestaGeneral editar(CicloContableFolio cicloFolio) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ResultSet rs = null;
         var sql = """
-                    UPDATE cuenta_balance SET 
+                    UPDATE ciclo_contable_folios SET 
                         id_ciclo_contable=?,
                         id_cuenta=?,
-                        saldo_inicial=?,
-                        saldo_final=?,
                         folio_mayor=?
                     WHERE id=?
+                  
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
-            ps.setInt(1, cBalance.getId_ciclo_contable());
-            ps.setInt(2, cBalance.getId_cuenta());
-            ps.setDouble(3, cBalance.getSaldo_inicial());
-            ps.setDouble(4, cBalance.getSaldo_final());
-            ps.setInt(5, cBalance.getFolio_mayor());
-            ps.setInt(6, cBalance.getId());
+            ps.setInt(1, cicloFolio.getId_ciclo_contable());
+            ps.setInt(2, cicloFolio.getId_cuenta());
+            ps.setInt(3, cicloFolio.getFolio_mayor());
+            ps.setInt(4, cicloFolio.getId());
             ps.executeUpdate();
             
-            return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, cBalance.getId());
+            return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, cicloFolio.getId());
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asServerError(mensaje);
+        }
+    }
+    
+    public RespuestaGeneral editarDetallesPartidas(CicloContableFolio cicloFolio) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        ResultSet rs = null;
+        var sql = """
+                    UPDATE partida_detalle SET
+                        folio_mayor=? 
+                    WHERE id in (
+                        select pd.id from partida p
+                        left join partida_detalle pd on p.id = pd.id_partida
+                        where p.id_ciclo = ? and pd.id_cuenta = ?
+                    )
+                        
+                  """;
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, cicloFolio.getFolio_mayor());
+            ps.setInt(2, cicloFolio.getId_ciclo_contable());
+            ps.setInt(3, cicloFolio.getId_cuenta());
+            ps.executeUpdate();
+            
+            return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, cicloFolio.getId());
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -214,7 +234,7 @@ public class daoCuentaBalance {
     public RespuestaGeneral eliminar(int id) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
-                    DELETE FROM cuenta_balance WHERE id=?
+                    DELETE FROM ciclo_contable_folios WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, id);

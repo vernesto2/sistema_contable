@@ -156,9 +156,13 @@ public class Constantes {
         dtoLista op1 = new dtoLista("Estado de Resultado", "Estado de Resultado");
         dtoLista op2 = new dtoLista("Estado de Costo de Producción", "Estado de Costo de Producción");
         dtoLista op3 = new dtoLista("Estado de Costo de Venta", "Estado de Costo de Venta");
+        dtoLista op4 = new dtoLista("Estado de Materia Prima Consumida", "Estado de Materia Prima Consumida");
+        dtoLista op5 = new dtoLista("Estado de Material Directo Consumido", "Estado de Material Directo Consumido");
         lista.add(op1);
         lista.add(op2);
         lista.add(op3);
+        lista.add(op4);
+        lista.add(op5);
         return lista;
     }
     
@@ -195,6 +199,12 @@ public class Constantes {
         lista.add(TIPO_CUENTA_ESPECIAL_IMPUESTO_SOBRE_RENTA);
         return lista;
     }
+    
+    public static String devolverCuentaEspecial(int value) {
+        ArrayList<dtoLista> listaCuentaEspecial = new ArrayList<>();
+        listaCuentaEspecial = listaTiposCampoEspecialEstadoResultado();
+        return listaCuentaEspecial.get(value).getLabel();
+    } 
     
     // tipos de Formulas
     public static ArrayList<dtoLista> listaAvatars() {
