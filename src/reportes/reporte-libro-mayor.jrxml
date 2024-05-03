@@ -68,38 +68,68 @@
 		<parameter name="param_formateador_fecha" class="java.text.SimpleDateFormat"/>
 		<parameter name="param_tipo_partida" class="java.lang.Integer"/>
 		<queryString>
-			<![CDATA[select 
-  p.id, 
-  fecha, 
-  p.id_tipo_partida, 
-  comentario, 
-  p.num_partida || " / " || pd.folio_mayor as num_partida_fm, 
-  pd.debe, 
-  pd.haber,
-  sum( 
-case 
-	when tipo_saldo = 'D' then debe - haber
-	when tipo_saldo = 'A' then haber - debe
-	else 0
-end 
-  ) over ( order by p.num_partida asc ) as saldo
+			<![CDATA[select mayorizacion_cuenta.*, 
+sum( 
+	case 
+	  when tipo_saldo = 'D' then debe - haber
+	  when tipo_saldo = 'A' then haber - debe
+	  else 0
+	end 
+) over ( order by num_partida asc ) as saldo
 from (
-	select pi.*, 
-	row_number() over ( order by pi.fecha || ' ' || pi.hora asc) as num_partida
-	from partida pi
-	where pi.id_ciclo =  $P{param_id_ciclo_tabla} 
-) p
-inner join partida_detalle pd on pd.id_partida = p.id
-inner join cuenta c on pd.id_cuenta = c.id
-where 
-c.eliminado = false
-and pd.id_cuenta =  $P{param_id_cuenta} 
-and p.id_ciclo =  $P{param_id_ciclo_tabla} 
-and  p.eliminado = false 
-and pd.eliminado = false
-and (
-	p.id_tipo_partida <= $P{param_tipo_partida} 
-)]]>
+		select 
+		0 as id, 
+		tipo_saldo, 
+		null as fecha, 
+		null as id_tipo_partida,
+		"#SALDO ASIGNADO MANUALMENTE#" as comentario, 
+		0 as num_partida, 
+		case tipo_saldo
+			when 'D' then saldo_inicial
+			when 'A' then 0
+			else 0 end 
+		as debe, 
+		case tipo_saldo
+			when 'D' then 0
+			when 'A' then saldo_inicial
+			else 0 end 
+		as haber
+		from cuenta_balance cb 
+		inner join cuenta c on cb.id_cuenta = c.id
+		where 
+		c.eliminado = false
+		and cb.id_cuenta = $P{param_id_cuenta} 
+		and cb.id_ciclo_contable = $P{param_id_ciclo_tabla} 
+	union
+		select 
+		  p.id, 
+		  tipo_saldo, 
+		  fecha, 
+		  p.id_tipo_partida, 
+		  comentario, 
+		  p.num_partida, 
+		  pd.debe, 
+		  pd.haber
+		from (
+		  select pi.*, 
+		  row_number() over ( order by pi.fecha ||  ' ' || pi.hora asc) as num_partida
+		  from partida pi
+		  where pi.id_ciclo = $P{param_id_ciclo_tabla} 
+		) p
+		inner join partida_detalle pd on pd.id_partida = p.id
+		inner join cuenta c on pd.id_cuenta = c.id
+		where 
+		c.eliminado = false
+		and pd.id_cuenta = $P{param_id_cuenta} 
+		and p.id_ciclo = $P{param_id_ciclo_tabla} 
+		and p.eliminado = false 
+		and pd.eliminado = false
+		and (
+		  p.id_tipo_partida <= $P{param_tipo_partida} 
+		)
+) mayorizacion_cuenta
+
+]]>
 		</queryString>
 		<field name="id" class="java.lang.Object">
 			<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -121,7 +151,7 @@ and (
 			<property name="com.jaspersoft.studio.field.label" value="comentario"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="partida"/>
 		</field>
-		<field name="num_partida_fm" class="java.lang.Object">
+		<field name="num_partida" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.name" value="num_partida_fm"/>
 			<property name="com.jaspersoft.studio.field.label" value="num_partida_fm"/>
 		</field>
@@ -188,6 +218,27 @@ and (
 	</parameter>
 	<queryString>
 		<![CDATA[select 
+	c.id, 
+	cb.folio_mayor, 
+	c.codigo, 
+	c.id_tipo_catalogo, 
+	c.nombre, 
+	c.tipo_saldo, 
+	c.ingresos, 
+	c.egresos, 
+	c.es_restado
+from cuenta c
+inner join cuenta_balance cb on cb.id_cuenta = c.id
+where 
+c.eliminado = false
+and cb.id_ciclo_contable =  $P{param_id_ciclo} 
+and id_tipo_catalogo =   $P{param_id_tipo_catalogo} 
+and length(c.codigo) =  $P{param_tamano_codigo}
+and (
+	 $P{param_id_cuenta_mayorizar} is null or c.id =  $P{param_id_cuenta_mayorizar} 
+)
+UNION
+select 
 	c.id, 
 	pd.folio_mayor, 
 	c.codigo, 
@@ -422,14 +473,14 @@ order by pd.folio_mayor]]>
 							<staticText>
 								<reportElement x="0" y="0" width="50" height="30" uuid="3e4af51a-0ecf-440d-b541-9516c30a43c2"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[#Partida / folio]]></text>
+								<text><![CDATA[#Partida]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
 							<textField>
 								<reportElement x="0" y="0" width="50" height="30" uuid="431ab410-c848-4aae-99f1-865b33c26673"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{num_partida_fm}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{num_partida}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
