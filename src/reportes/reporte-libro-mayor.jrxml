@@ -445,7 +445,7 @@ order by pd.folio_mayor]]>
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="c0aa58b8-6b1e-4955-8a0a-2b4e261e87c4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$P{param_formateador_fecha}.parse($F{fecha})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[ $F{fecha} == null ? "" :  $P{param_formateador_fecha}.parse($F{fecha})]]></textFieldExpression>
 								<patternExpression><![CDATA["dd/MM/yyyy"]]></patternExpression>
 							</textField>
 						</jr:detailCell>
