@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cuenta;
 import modelo.PartidaDetalle;
-import modelo.TipoCatalogo;
 import reportes.CuentaBalanza;
 import servicios.ServicioCuenta;
 import sesion.Sesion;

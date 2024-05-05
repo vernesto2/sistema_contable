@@ -78,7 +78,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         tblCuentas.clearSelection();
         this.limiparTablaCuentas();
         RespuestaGeneral rg;
-        if (this.cuentasDeNivelAMayorizar) {
+        if (this.cuentasDeNivelAMayorizar && this.nivelMayorizar > 0) {
             rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralNivelAMayorizar(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText(), nivelMayorizar);
         } else {
             rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
@@ -96,7 +96,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
     public void obtenerListadoCuentasPorTipoCatalogoCompleto() {
         this.listaCuentasCompleta = new ArrayList<>();
         RespuestaGeneral rg;
-        if (this.cuentasDeNivelAMayorizar) {
+        if (this.cuentasDeNivelAMayorizar && this.nivelMayorizar > 0) {
             rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralNivelAMayorizar(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText(), nivelMayorizar);
         } else {
             rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
