@@ -413,7 +413,7 @@ group by length(ci.codigo)
         var sql = 
 """
 with cte_balanza_comprobacion as (
-  select c.id, pd.folio_mayor, c.codigo, c.nombre, c.tipo_saldo, 
+  select c.id, ccf.folio_mayor, c.codigo, c.nombre, c.tipo_saldo, 
   case 
     when tipo_saldo = 'D' then debe - haber
     when tipo_saldo = 'A' then haber - debe
@@ -422,8 +422,9 @@ with cte_balanza_comprobacion as (
   as saldo_inicial, 
   row_number() over (PARTITION by c.id order by p.fecha || ' ' || p.hora asc, p.id asc) as row_number
   from cuenta c 
-  inner join partida_detalle pd on pd.id_cuenta = c.id and pd.parcial = 0
-  inner join partida p on pd.id_partida = p.id
+  inner join vw_cargo_abono pd on pd.id_cuenta = c.id and pd.parcial = 0
+  left join partida p on pd.id_partida = p.id
+  left join ciclo_contable_folios ccf on ccf.id_ciclo_contable = p.id_ciclo
   where c.eliminado = false 
   and p.eliminado = false
   and pd.eliminado = false
@@ -450,8 +451,8 @@ inner join (
       end
   ) as saldo_acreedor
   from cuenta c 
-    inner join partida_detalle pd on pd.id_cuenta = c.id
-    inner join partida p on pd.id_partida = p.id
+    inner join vw_cargo_abono pd on pd.id_cuenta = c.id
+    left join partida p on pd.id_partida = p.id
     where c.eliminado = false 
     and p.eliminado = false
     and pd.eliminado = false
