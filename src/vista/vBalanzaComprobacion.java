@@ -29,6 +29,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 import reportes.CuentaBalanza;
 import servicios.ServicioCuenta;
+import servicios.ServicioCuentaBalance;
 import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
@@ -45,10 +46,13 @@ public class vBalanzaComprobacion extends javax.swing.JPanel {
      */
     Sesion sesion;
     ServicioCuenta _cuenta;
+    ServicioCuentaBalance _cuentaBalance;
     public vBalanzaComprobacion(Sesion sesion) {
         initComponents();
         this.sesion = sesion;
         this._cuenta = new ServicioCuenta(sesion.rutaConexion);
+        this._cuentaBalance = new ServicioCuentaBalance(sesion.rutaConexion);
+        this._cuenta.setServicioCuentaBalanza(_cuentaBalance);
     }
 
 

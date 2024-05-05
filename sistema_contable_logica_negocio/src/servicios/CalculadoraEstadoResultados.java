@@ -127,6 +127,18 @@ public class CalculadoraEstadoResultados {
                 //no cambia el acumulado, ya que el valor calculado 
                 //se usa para reflejar el valor resultante de las operaciones anteriores
                 //acumulado = valorFormula;
+            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO_INICIAL.getValue()) ) {
+                CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
+                if( cuentaBalanza == null ) {
+                    //si no se encontro, asignarle 0
+                    valorFormula = Double.valueOf(0);
+                    //lanzar excepcion
+                    //throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
+                } else {
+                    valorFormula = cuentaBalanza.saldo();
+                }
+                //sumar o restar según signo
+                acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO.getValue()) ) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
                 if( cuentaBalanza == null ) {

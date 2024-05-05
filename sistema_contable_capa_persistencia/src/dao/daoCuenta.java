@@ -495,7 +495,7 @@ order by folio_mayor
                 item.setCodigo(rs.getObject("codigo", String.class));
                 item.setNombre(rs.getObject("nombre", String.class));
                 item.setTipoSaldo(rs.getObject("tipo_saldo", String.class));
-                
+                item.setSaldoInicial(rs.getObject("saldo_inicial", Double.class));
                 Double val;
                 val = rs.getObject("saldo_deudor", Double.class);
                 item.setSaldoDeudor(val);

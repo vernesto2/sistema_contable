@@ -17,6 +17,7 @@ public class CuentaBalanza {
     private Integer folioMayor;
     private String nombre;
     private String codigo;
+    private Double saldoInicial;
     private Double saldoDeudor;
     private Double saldoAcreedor;
 
@@ -64,6 +65,14 @@ public class CuentaBalanza {
         this.codigo = codigo;
     }
 
+    public Double getSaldoInicial() {
+        return saldoInicial;
+    }
+
+    public void setSaldoInicial(Double saldoInicial) {
+        this.saldoInicial = saldoInicial;
+    }
+
     public Double getSaldoDeudor() {
         return saldoDeudor;
     }
@@ -79,7 +88,8 @@ public class CuentaBalanza {
     public void setSaldoAcreedor(Double saldoAcreedor) {
         this.saldoAcreedor = saldoAcreedor;
     }
-    
+
+
     public Double saldo() {
         if (this.getTipoSaldo().equals(Constantes.TIPO_SALDO_DEUDOR.getValue())) {
             return this.getSaldoDeudor();
