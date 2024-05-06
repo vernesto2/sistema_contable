@@ -22,8 +22,10 @@ public class Cuenta {
     boolean eliminado;
     int disponible;
     int es_restado;
+    int folio_mayor;
+    int id_ciclo_folio;
 
-    public Cuenta(int id, int id_tipo_catalogo, String codigo, String ref, String nombre, int nivel, String tipo_saldo, String ingresos, String egresos, boolean eliminado, int disponible, int es_restado) {
+    public Cuenta(int id, int id_tipo_catalogo, String codigo, String ref, String nombre, int nivel, String tipo_saldo, String ingresos, String egresos, boolean eliminado, int disponible, int es_restado, int folio_mayor, int id_ciclo_folio) {
         this.id = id;
         this.id_tipo_catalogo = id_tipo_catalogo;
         this.codigo = codigo;
@@ -36,6 +38,8 @@ public class Cuenta {
         this.eliminado = eliminado;
         this.disponible = disponible;
         this.es_restado = es_restado;
+        this.folio_mayor = folio_mayor;
+        this.id_ciclo_folio = id_ciclo_folio;
     }
     
     @Override
@@ -69,6 +73,8 @@ public class Cuenta {
         this.eliminado = false;
         this.disponible = 0;
         this.es_restado = 0;
+        this.folio_mayor = 0;
+        this.id_ciclo_folio = 0;
     }
 
     public int getId() {
@@ -165,6 +171,22 @@ public class Cuenta {
 
     public void setEs_restado(int es_restado) {
         this.es_restado = es_restado;
+    }
+
+    public int getFolio_mayor() {
+        return folio_mayor;
+    }
+
+    public void setFolio_mayor(int folio_mayor) {
+        this.folio_mayor = folio_mayor;
+    }
+
+    public int getId_ciclo_folio() {
+        return id_ciclo_folio;
+    }
+
+    public void setId_ciclo_folio(int id_ciclo_folio) {
+        this.id_ciclo_folio = id_ciclo_folio;
     }
 
 }

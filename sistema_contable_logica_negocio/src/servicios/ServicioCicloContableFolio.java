@@ -40,13 +40,13 @@ public class ServicioCicloContableFolio {
     public RespuestaGeneral insertar(CicloContableFolio cBalance) {
         RespuestaGeneral rs = RespuestaGeneral.asBadRequest("");
         this.cx.conectar();
-        RespuestaGeneral rs1 = this.daoCicloContableFolio.buscarIdCuentaPorCicloContable(cBalance.getId(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable());
+        RespuestaGeneral rs1 = this.daoCicloContableFolio.buscarIdCuentaPorCicloContable(cBalance.getId(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable(), cBalance.getFolio_mayor());
         if (rs1.esExitosa()) {
             ArrayList<CicloContableFolio> lista = (ArrayList<CicloContableFolio>) rs1.getDatos();
             if (lista.isEmpty()) {
                 rs = this.daoCicloContableFolio.insertar(cBalance);
             } else {
-                rs.setMensaje("La cuenta ya esta registrada con folio");
+                rs.setMensaje("La Cuenta o Folio ya esta registrada");
             }
         }
         
@@ -57,14 +57,16 @@ public class ServicioCicloContableFolio {
     public RespuestaGeneral editar(CicloContableFolio cBalance) {
         RespuestaGeneral rs = RespuestaGeneral.asBadRequest("");
         this.cx.conectar();
-        RespuestaGeneral rs1 = this.daoCicloContableFolio.buscarIdCuentaPorCicloContable(cBalance.getId(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable());
+        RespuestaGeneral rs1 = this.daoCicloContableFolio.buscarIdCuentaPorCicloContable(cBalance.getId(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable(), cBalance.getFolio_mayor());
         if (rs1.esExitosa()) {
             ArrayList<CicloContableFolio> lista = (ArrayList<CicloContableFolio>) rs1.getDatos();
             if (lista.isEmpty()) {
                 rs = this.daoCicloContableFolio.editar(cBalance);
-                this.daoCicloContableFolio.editarDetallesPartidas(cBalance);
+                if (rs.esExitosa()) {
+                    this.daoCicloContableFolio.editarDetallesPartidas(cBalance);
+                }
             } else {
-                rs.setMensaje("La cuenta ya esta registrada con saldo");
+                rs.setMensaje("La Cuenta o Folio ya esta registrada");
             }
         }
         this.cx.desconectar();

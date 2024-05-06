@@ -51,6 +51,13 @@ public class ServicioCuenta {
         this.cx.desconectar();
         return rs;
     }
+    
+    public RespuestaGeneral obtenerListaPorIdTipoCatalogoGeneralCicloContable(int idTipoCatalogo, String busqueda, int cicloContable) {
+        this.cx.conectar();
+        RespuestaGeneral rs = this.daoCuenta.ListarCatalogoCicloContable(idTipoCatalogo, busqueda, cicloContable);
+        this.cx.desconectar();
+        return rs;
+    }
 
     public RespuestaGeneral obtenerListaPorIdTipoCatalogoGeneralNivelAMayorizar(int idTipoCatalogo, String busqueda, int nivelMayorizar) {
         this.cx.conectar();

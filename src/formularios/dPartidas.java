@@ -618,14 +618,17 @@ public class dPartidas extends javax.swing.JDialog {
                 }
                 // buscamos la cuenta padre que tiene el FM
                 int montoFM = 0;
+                Cuenta cuentaAux = new Cuenta();
                 if (this.listaPartidaDetalles.get(row).getCuentaMayor().getId() > 0) {
                     this.rowPadre = this.devolverRowPadre(this.listaPartidaDetalles.get(row).getCuentaMayor());
                     montoFM = this.listaPartidaDetalles.get(this.rowPadre).getFolio_mayor();
+                    cuentaAux = this.listaPartidaDetalles.get(this.rowPadre).getCuenta();
                 } else {
                     montoFM = this.listaPartidaDetalles.get(row).getFolio_mayor();
+                    cuentaAux = this.listaPartidaDetalles.get(row).getCuenta();
                 }
                 
-                dModificarMonto d = new dModificarMonto(null, true, sesion, monto, montoFM);
+                dModificarMonto d = new dModificarMonto(null, true, sesion, monto, montoFM, cuentaAux);
                 d.setAlwaysOnTop(true);
                 d.setVisible(true);
                 // validamos si realizo alguna accion para actualizar el listado o no

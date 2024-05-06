@@ -5,8 +5,13 @@
 package formularios;
 
 import javax.swing.JOptionPane;
+import modelo.CicloContableFolio;
+import modelo.Cuenta;
+import servicios.ServicioCicloContableFolio;
 import sesion.Sesion;
+import utils.UtileriaVista;
 import utils.constantes.Constantes;
+import utils.constantes.RespuestaGeneral;
 
 /**
  *
@@ -18,15 +23,19 @@ public class dModificarMonto extends javax.swing.JDialog {
     boolean realizoAccion = false;
     double montoIngresado = 0;
     int montoFM = 0;
+    Cuenta cuenta = new Cuenta();
+    ServicioCicloContableFolio _cicloFolio;
     /**
      * Creates new form dModificarMonto
      */
-    public dModificarMonto(java.awt.Frame parent, boolean modal, Sesion sesion, double monto, int montoFM) {
+    public dModificarMonto(java.awt.Frame parent, boolean modal, Sesion sesion, double monto, int montoFM, Cuenta cuenta) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
+        this._cicloFolio = new ServicioCicloContableFolio(this.sesion.rutaConexion);
         this.txtMonto.setText(String.valueOf(monto));
         this.txtFM.setText(String.valueOf(montoFM));
+        this.cuenta = cuenta;
         this.iniciarVistaDialog();
     }
     
@@ -208,16 +217,35 @@ public class dModificarMonto extends javax.swing.JDialog {
             } if (txtFM.getText().trim().equals("") || txtFM.getText().contains("..")) {
                 JOptionPane.showMessageDialog(this, "No ha ingresado el FM", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
             } else {
-                montoIngresado = Double.parseDouble(txtMonto.getText());
-                montoFM = Integer.parseInt(txtFM.getText());
-                this.realizoAccion = true;
-                this.cerrar();
+                if (this.guardarFolioMayor()) {
+                    montoIngresado = Double.parseDouble(txtMonto.getText());
+                    montoFM = Integer.parseInt(txtFM.getText());
+                    this.realizoAccion = true;
+                    this.cerrar();
+                }
+                
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ingrese un monto correcto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnCargarActionPerformed
 
+    public boolean guardarFolioMayor() {
+        CicloContableFolio cicloFolioModel = new CicloContableFolio();
+        cicloFolioModel.setId_ciclo_contable(this.sesion.configUsuario.getCicloContable().getId());
+        cicloFolioModel.setId(this.cuenta.getId_ciclo_folio());
+        cicloFolioModel.setId_cuenta(this.cuenta.getId());
+        cicloFolioModel.setFolio_mayor(Integer.parseInt(this.txtFM.getText()));
+        RespuestaGeneral rg = _cicloFolio.editar(cicloFolioModel);
+        if (rg.esExitosa()) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+            return false;
+        }
+        
+    }
+    
     public boolean isRealizoAccion() {
         return realizoAccion;
     }

@@ -30,7 +30,7 @@ public class daoPartidaDetalle {
         this.daoCuenta = new daoCuenta(this.cx);
     }
     
-    public RespuestaGeneral ObtenerPorIdPartida(int idPartida, int idTipoCatalogo) {
+    public RespuestaGeneral ObtenerPorIdPartida(int idPartida, int idTipoCatalogo, int idCicloContable) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<PartidaDetalle> lista = new ArrayList<>();
         ResultSet rs = null;
@@ -53,7 +53,7 @@ public class daoPartidaDetalle {
                 
                 // obtenemos la cuenta para que vaya tipado
                 pDetalle.setCuenta(new Cuenta());
-                RespuestaGeneral rgc = daoCuenta.ObtenerPorId(pDetalle.getId_cuenta(), idTipoCatalogo);
+                RespuestaGeneral rgc = daoCuenta.ObtenerPorIdYCicloContable(pDetalle.getId_cuenta(), idTipoCatalogo, idCicloContable);
                 if (rgc.esExitosa()) {
                     ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>)rgc.getDatos();
                     if (!listaCuenta.isEmpty()) {

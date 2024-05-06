@@ -81,9 +81,9 @@ public class ServicioPartida {
         return rg;
     }
     
-    public RespuestaGeneral obtenerDetallesPorIdPartida(int idPartida, int idTipoCatalogo) {
+    public RespuestaGeneral obtenerDetallesPorIdPartida(int idPartida, int idTipoCatalogo, int idCicloContable) {
         this.cx.conectar();
-        RespuestaGeneral rs = this.daoPartidaDetalle.ObtenerPorIdPartida(idPartida, idTipoCatalogo);
+        RespuestaGeneral rs = this.daoPartidaDetalle.ObtenerPorIdPartida(idPartida, idTipoCatalogo, idCicloContable);
         this.cx.desconectar(); 
         return rs;
     }

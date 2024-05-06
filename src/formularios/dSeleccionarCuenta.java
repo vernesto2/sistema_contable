@@ -9,9 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.CicloContableFolio;
 import modelo.Cuenta;
 import modelo.PartidaDetalle;
 import reportes.CuentaBalanza;
+import servicios.ServicioCicloContableFolio;
 import servicios.ServicioCuenta;
 import sesion.Sesion;
 import utils.Render;
@@ -33,9 +35,11 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     };
     boolean realizoAccion = false;   
     ServicioCuenta _cuenta;
+    ServicioCicloContableFolio _cicloFolio;
     ArrayList<Cuenta> listaCuentas = new ArrayList<>();
     ArrayList<Cuenta> listaCuentasCompleta = new ArrayList<>();
     Cuenta cuentaSeleccionada = new Cuenta();
+    Cuenta cuentaSeleccionadaPadre = new Cuenta();
     ArrayList<PartidaDetalle> listaDetallePartida = new ArrayList<>();
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     Sesion sesion;
@@ -47,6 +51,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         initComponents();
         this.sesion = sesion;
         this._cuenta = new ServicioCuenta(sesion.rutaConexion);
+        this._cicloFolio = new ServicioCicloContableFolio(sesion.rutaConexion);
         this.iniciarVistaDialog();
     }
     
@@ -63,7 +68,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     }
 
     public void setModelCuentas() {
-        String[] cabecera = {"Disponible", "Nivel", "Codigo", "", "Concepto", "Tipo Saldo", "Ingresos", "Egresos"};
+        String[] cabecera = {"Disponible", "Nivel", "FM", "Codigo", "", "Concepto", "Tipo Saldo", "Ingresos", "Egresos"};
         dtm.setColumnIdentifiers(cabecera);
         tblCuentas.setModel(dtm);
         tblCuentas.setDefaultRenderer(Object.class, new Render());
@@ -73,7 +78,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         this.listaCuentas = new ArrayList<>();
         tblCuentas.clearSelection();
         this.limiparTablaCuentas();
-        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId(), this.txtQueryBusqueda.getText());
+        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralCicloContable(this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId(), this.txtQueryBusqueda.getText(), this.sesion.configUsuario.getCicloContable().getId());
         this.totalCuentas.setText("0");
         if (rg.esExitosa()) {
             this.listaCuentas = (ArrayList<Cuenta>)rg.getDatos();
@@ -86,7 +91,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     
     public void obtenerListadoCuentasPorTipoCatalogoCompleto() {
         this.listaCuentasCompleta = new ArrayList<>();
-        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId(), this.txtQueryBusqueda.getText());
+        RespuestaGeneral rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralCicloContable(this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId(), this.txtQueryBusqueda.getText(), this.sesion.configUsuario.getCicloContable().getId());
         if (rg.esExitosa()) {
             this.listaCuentasCompleta = (ArrayList<Cuenta>)rg.getDatos();
         } else {
@@ -100,24 +105,26 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             String disponible = cuenta.getDisponible() == 1 ? "Si" : "No";
             datos[0] = disponible;
             datos[1] = cuenta.getNivel();
-            datos[2] = cuenta.getCodigo();
-            datos[3] = cuenta.getEs_restado() == 0 ? "" : "R";
-            datos[4] = cuenta.getNombre();
-            datos[5] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": cuenta.getTipo_saldo().equals("A") ? "ACREEDOR" : cuenta.getTipo_saldo().equals("T") ? "TRANSITORIA" : "-";
-            datos[6] = cuenta.getIngresos();
-            datos[7] = cuenta.getEgresos();
+            datos[2] = cuenta.getFolio_mayor() == 0 ? "" : cuenta.getFolio_mayor();
+            datos[3] = cuenta.getCodigo();
+            datos[4] = cuenta.getEs_restado() == 0 ? "" : "R";
+            datos[5] = cuenta.getNombre();
+            datos[6] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": cuenta.getTipo_saldo().equals("A") ? "ACREEDOR" : cuenta.getTipo_saldo().equals("T") ? "TRANSITORIA" : "-";
+            datos[7] = cuenta.getIngresos();
+            datos[8] = cuenta.getEgresos();
             dtm.addRow(datos);
         }
         tblCuentas.setModel(dtm);
         tblCuentas.setAutoResizeMode(tblCuentas.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         tblCuentas.getColumnModel().getColumn(0).setPreferredWidth(90);
         tblCuentas.getColumnModel().getColumn(1).setPreferredWidth(60);
-        tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(120);
-        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(25);
-        tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(425);
-        tblCuentas.getColumnModel().getColumn(5).setPreferredWidth(90);
-        tblCuentas.getColumnModel().getColumn(6).setPreferredWidth(100);
+        tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(60);
+        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(25);
+        tblCuentas.getColumnModel().getColumn(5).setPreferredWidth(425);
+        tblCuentas.getColumnModel().getColumn(6).setPreferredWidth(90);
         tblCuentas.getColumnModel().getColumn(7).setPreferredWidth(100);
+        tblCuentas.getColumnModel().getColumn(8).setPreferredWidth(100);
        
     }
 
@@ -230,11 +237,12 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarTipoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAbonar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnCargar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -356,7 +364,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel18.setText("FM:");
+        jLabel18.setText("Folio Mayor:");
         jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         totalCuentas1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -383,31 +391,39 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(7, 7, 7)
+                                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblSaldoDeudor, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblSaldoAcreedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -415,15 +431,8 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(totalCuentas1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(totalCuentas2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(580, 580, 580)
-                                .addComponent(lblSaldoDeudor, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblSaldoAcreedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(11, 11, 11)))
-                .addContainerGap())
+                                .addComponent(totalCuentas2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(23, 23, 23))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,34 +444,26 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                     .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(totalCuentas)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(totalCuentas2)
-                            .addComponent(totalCuentas1))))
-                .addGap(13, 13, 13)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(totalCuentas2)
+                    .addComponent(totalCuentas1)
+                    .addComponent(jLabel1)
+                    .addComponent(totalCuentas))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSaldoAcreedor)
                     .addComponent(lblSaldoDeudor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -487,14 +488,16 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         // proceso para seleccionar cuenta y su cuenta padre
         try {
             if (txtMonto.getText().trim().equals("") || txtMonto.getText().contains("..")) {
-                JOptionPane.showMessageDialog(this, "No ha ingresado un monto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
-            } else if (txtFM.getText().trim().equals("") || txtFM.getText().contains("..")) {
+                JOptionPane.showMessageDialog(this, "No ha ingresado un monto valido", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
+            } else if (txtFM.getText().trim().equals("") || txtFM.getText().contains("..") || txtFM.getText().trim().equals("0") ) {
                 JOptionPane.showMessageDialog(this, "No ha ingresado un FM", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
             }  else {
-                double valor = Double.parseDouble(txtMonto.getText());
-                this.realizoAccion = true;
-                this.buscarCuentaPadre(Constantes.TIPO_ABONO);
-                this.cerrar();
+                if (this.guardarFolioMayor()) {
+                    double valor = Double.parseDouble(txtMonto.getText());
+                    this.realizoAccion = true;
+                    this.buscarCuentaPadre(Constantes.TIPO_ABONO);
+                    this.cerrar();
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ingrese un monto correcto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
@@ -505,18 +508,40 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         this.dispose();
     }
     
+    public boolean guardarFolioMayor() {
+        if (!this.txtFM.isEnabled()) {
+            return true;
+        } else {
+            CicloContableFolio cicloFolioModel = new CicloContableFolio();
+            cicloFolioModel.setId_ciclo_contable(this.sesion.configUsuario.getCicloContable().getId());
+            cicloFolioModel.setId_cuenta(this.cuentaSeleccionadaPadre.getId());
+            cicloFolioModel.setFolio_mayor(Integer.parseInt(this.txtFM.getText()));
+            RespuestaGeneral rg = _cicloFolio.insertar(cicloFolioModel);
+            if (rg.esExitosa()) {
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+                return false;
+            }
+        }
+        
+    }
+    
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
         // proceso para seleccionar cuenta y su cuenta padre
         try {
             if (txtMonto.getText().trim().equals("") || txtMonto.getText().contains("..")) {
                 JOptionPane.showMessageDialog(this, "No ha ingresado un monto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
-            } else if (txtFM.getText().trim().equals("") || txtFM.getText().contains("..")) {
-                JOptionPane.showMessageDialog(this, "No ha ingresado un FM", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
+            } else if (txtFM.getText().trim().equals("") || txtFM.getText().contains("..") || txtFM.getText().trim().equals("0") ) {
+                JOptionPane.showMessageDialog(this, "No ha ingresado un FM valido", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
             } else {
-                double valor = Double.parseDouble(txtMonto.getText());
-                this.realizoAccion = true;
-                this.buscarCuentaPadre(Constantes.TIPO_CARGO);
-                this.cerrar();
+                if (this.guardarFolioMayor()) {
+                    double valor = Double.parseDouble(txtMonto.getText());
+                    this.realizoAccion = true;
+                    this.buscarCuentaPadre(Constantes.TIPO_CARGO);
+                    this.cerrar();
+                }
+                
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ingrese un monto correcto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
@@ -603,6 +628,12 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             this.btnAbonar.setEnabled((this.cuentaSeleccionada.getId() > 0));
             this.btnCargar.setEnabled((this.cuentaSeleccionada.getId() > 0));
             this.txtCuentaSeleccionada.setForeground(Color.black);
+            
+            // se verificara con un metodo si existe un folio mayor de su cuenta de nivel a mayorizar
+            // en caso de que no exista el sistema debe registrarlo y si existe se debe recuperar y bloquear el 
+            // campo para que no se pueda editar
+            this.setearFolioMayorCuentaSeleccionada(this.cuentaSeleccionada);
+            
         } else {
             String tituloCuenta = "*CUENTA NO VALIDA*";
             this.txtCuentaSeleccionada.setText(tituloCuenta);
@@ -627,6 +658,44 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tblCuentasMouseClicked
 
+    public void setearFolioMayorCuentaSeleccionada(Cuenta cuentaSeleccionada) {
+        // verificamos el nivel a mayorizar porque si es 0 solamente obtenemos el folio de la cuenta
+        if (this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar() > 0) {
+            // obtenemos el codigo de la cuenta de mayor para obtener el folio mayor en caso de que no exista
+            int cantidadCodigo = 0;
+            for (Cuenta cuenta : this.listaCuentasCompleta) {
+                if (cuenta.getNivel() == this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar()) {
+                    cantidadCodigo = cuenta.getCodigo().length();
+                    break;
+                }
+            }
+            String codigoMayor = this.cuentaSeleccionada.getCodigo().substring(0, cantidadCodigo);
+            this.listaCuentasCompleta.forEach((t) -> {
+                if (t.getCodigo().equals(codigoMayor)) {
+                    if (t.getFolio_mayor() == 0) {
+                        this.txtFM.setEnabled(true);
+                        this.txtFM.setText("");
+                    } else {
+                        this.txtFM.setEnabled(false);
+                        this.txtFM.setText(String.valueOf(t.getFolio_mayor()));
+                    }
+                    this.cuentaSeleccionadaPadre = t;
+                }
+            });
+            
+        } else {
+            if (this.cuentaSeleccionada.getFolio_mayor() == 0) {
+                this.txtFM.setEnabled(true);
+                this.txtFM.setText("0");
+            } else {
+                this.txtFM.setEnabled(false);
+                this.txtFM.setText(String.valueOf(this.cuentaSeleccionada.getFolio_mayor()));
+            }
+            this.cuentaSeleccionadaPadre = cuentaSeleccionada;
+        }
+        
+    }
+    
     private void tblCuentasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblCuentasKeyTyped
         
     }//GEN-LAST:event_tblCuentasKeyTyped

@@ -366,7 +366,7 @@ public class vLibroDiario extends javax.swing.JPanel {
 
     public void setearModeloCicloContable(int row) {
         this.partidaModel = this.listaPartidas.get(row);
-        RespuestaGeneral rg = _partida.obtenerDetallesPorIdPartida(this.partidaModel.getId(), this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId());
+        RespuestaGeneral rg = _partida.obtenerDetallesPorIdPartida(this.partidaModel.getId(), this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId(), this.sesion.configUsuario.getCicloContable().getId());
         if (rg.esExitosa()) {
             ArrayList<PartidaDetalle> lista = (ArrayList<PartidaDetalle>)rg.getDatos();
             // del listado tendremos que buscar si tienen padre las cuentas cargadas o abonadas

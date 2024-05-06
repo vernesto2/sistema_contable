@@ -118,20 +118,21 @@ public class daoCuentaBalance {
         }
     }
     
-    public RespuestaGeneral buscarIdCuentaPorCicloContable(int id, int idCuenta, int idCicloContable) {
+    public RespuestaGeneral buscarIdCuentaPorCicloContable(int id, int idCuenta, int idCicloContable, int folio) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<CuentaBalance> lista = new ArrayList<>();
         ResultSet rs = null;
         var sql = """
                     select cb.* 
                     from cuenta_balance cb 
-                    where cb.id_ciclo_contable = ? and cb.id_cuenta = ? and cb.id != ?
+                    where cb.id_ciclo_contable = ? and (cb.id_cuenta = ? or cb.folio_mayor = ?) and cb.id != ?
                   """;
         
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, idCicloContable);
             ps.setInt(2, idCuenta);
-            ps.setInt(3, id);
+            ps.setInt(3, folio);
+            ps.setInt(4, id);
             rs = ps.executeQuery();
             while (rs.next()) {
                 CuentaBalance cBalance = new CuentaBalance();
