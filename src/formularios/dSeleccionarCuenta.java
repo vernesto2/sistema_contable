@@ -403,7 +403,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                                        .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -415,7 +415,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -572,7 +572,6 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             if (encontroPadre) {
                 pDetallePadre.setTipo_cargo_abono(tipoAccion);
                 pDetallePadre.setId_cuenta(cuentaPadre.getId());
-                pDetallePadre.setFolio_mayor(Integer.parseInt(txtFM.getText()));
                 pDetallePadre.setCuenta(cuentaPadre);
                 //pDetallePadre.setParcial(BigDecimal.valueOf(Double.parseDouble(txtMonto.getText())));
                 listaDetallePartida.add(pDetallePadre);
@@ -594,10 +593,8 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             pDetalle.setParcial(Double.parseDouble(txtMonto.getText()));
         } else if (!encontroPadre && Constantes.TIPO_CARGO == tipoAccion) {
             pDetalle.setDebe(Double.parseDouble(txtMonto.getText()));
-            pDetalle.setFolio_mayor(Integer.parseInt(txtFM.getText()));
         } else if (!encontroPadre && Constantes.TIPO_ABONO == tipoAccion) {
             pDetalle.setHaber(Double.parseDouble(txtMonto.getText()));
-            pDetalle.setFolio_mayor(Integer.parseInt(txtFM.getText()));
         }
         listaDetallePartida.add(pDetalle);
     }

@@ -25,6 +25,7 @@ public class dModificarMonto extends javax.swing.JDialog {
     int montoFM = 0;
     Cuenta cuenta = new Cuenta();
     ServicioCicloContableFolio _cicloFolio;
+    int id_ciclo_contable_folio = 0;
     /**
      * Creates new form dModificarMonto
      */
@@ -214,8 +215,8 @@ public class dModificarMonto extends javax.swing.JDialog {
         try {
             if (txtMonto.getText().trim().equals("") || txtMonto.getText().contains("..")) {
                 JOptionPane.showMessageDialog(this, "No ha ingresado un monto", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
-            } if (txtFM.getText().trim().equals("") || txtFM.getText().contains("..")) {
-                JOptionPane.showMessageDialog(this, "No ha ingresado el FM", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
+            } if (txtFM.getText().trim().equals("") || txtFM.getText().contains("..") || txtFM.getText().trim().equals("0")) {
+                JOptionPane.showMessageDialog(this, "No ha ingresado el FM valido", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
             } else {
                 if (this.guardarFolioMayor()) {
                     montoIngresado = Double.parseDouble(txtMonto.getText());
@@ -236,8 +237,14 @@ public class dModificarMonto extends javax.swing.JDialog {
         cicloFolioModel.setId(this.cuenta.getId_ciclo_folio());
         cicloFolioModel.setId_cuenta(this.cuenta.getId());
         cicloFolioModel.setFolio_mayor(Integer.parseInt(this.txtFM.getText()));
-        RespuestaGeneral rg = _cicloFolio.editar(cicloFolioModel);
+        RespuestaGeneral rg;
+        if (this.cuenta.getId_ciclo_folio() > 0) {
+            rg = _cicloFolio.editar(cicloFolioModel);
+        } else {
+            rg = _cicloFolio.insertar(cicloFolioModel);
+        }
         if (rg.esExitosa()) {
+            this.id_ciclo_contable_folio = (int)rg.getDatos();
             return true;
         } else {
             JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
@@ -256,6 +263,14 @@ public class dModificarMonto extends javax.swing.JDialog {
 
     public int getMontoFM() {
         return montoFM;
+    }
+
+    public int getId_ciclo_contable_folio() {
+        return id_ciclo_contable_folio;
+    }
+
+    public void setId_ciclo_contable_folio(int id_ciclo_contable_folio) {
+        this.id_ciclo_contable_folio = id_ciclo_contable_folio;
     }
     
     private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped

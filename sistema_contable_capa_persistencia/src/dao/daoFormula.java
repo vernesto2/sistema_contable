@@ -17,9 +17,7 @@ import java.util.List;
 import modelo.Cuenta;
 import modelo.Formula;
 import modelo.TipoCatalogo;
-import reportes.CuentaBalanza;
 import reportes.ElementoFormulaReporte;
-import utils.constantes.Constantes;
 
 /**
  *

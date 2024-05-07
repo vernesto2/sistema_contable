@@ -49,7 +49,6 @@ public class daoPartidaDetalle {
                 pDetalle.setDebe(rs.getDouble("debe"));
                 pDetalle.setHaber(rs.getDouble("haber"));
                 pDetalle.setTipo_cargo_abono(rs.getInt("tipo_cargo_abono"));
-                pDetalle.setFolio_mayor(rs.getInt("folio_mayor"));
                 
                 // obtenemos la cuenta para que vaya tipado
                 pDetalle.setCuenta(new Cuenta());
@@ -76,7 +75,7 @@ public class daoPartidaDetalle {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
                   INSERT INTO partida_detalle     
-                  VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?)
+                  VALUES(null, ?, ?, ?, ?, ?, ?, ?)
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, pDetalle.getId_partida());
@@ -86,7 +85,6 @@ public class daoPartidaDetalle {
             ps.setDouble(5, pDetalle.getHaber());
             ps.setInt(6, pDetalle.getTipo_cargo_abono());
             ps.setInt(7, 0);
-            ps.setInt(8, pDetalle.getFolio_mayor());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             int id = -1;
@@ -113,8 +111,7 @@ public class daoPartidaDetalle {
                         parcial=?,
                         debe=?,
                         haber=?,
-                        tipo_cargo_abono=?,
-                        folio_mayor=?
+                        tipo_cargo_abono=?
                     WHERE id=?
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
@@ -124,8 +121,7 @@ public class daoPartidaDetalle {
             ps.setDouble(4, pDetalle.getDebe());
             ps.setDouble(5, pDetalle.getHaber());
             ps.setInt(6, pDetalle.getTipo_cargo_abono());
-            ps.setInt(7, pDetalle.getFolio_mayor());
-            ps.setInt(8, pDetalle.getId());
+            ps.setInt(7, pDetalle.getId());
             ps.executeUpdate();
             
             return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, pDetalle.getId());
