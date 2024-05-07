@@ -138,7 +138,7 @@ public class dPartidas extends javax.swing.JDialog {
             datos[1] = detalle.getCuenta().getCodigo();
             datos[2] = detalle.getCuenta().getEs_restado() == 0 ? "" : "R";
             datos[3] = detalle.getCuenta().getNombre();
-            datos[4] = detalle.getFolio_mayor();
+            datos[4] = detalle.getCuenta().getFolio_mayor() == 0 ? "" : detalle.getCuenta().getFolio_mayor();
             datos[5] = detalle.getParcial() == 0 ? "" : detalle.getParcial();
             datos[6] = detalle.getDebe() == 0 ? "" : detalle.getDebe();
             datos[7] = detalle.getHaber() == 0 ? "" : detalle.getHaber();
@@ -621,10 +621,10 @@ public class dPartidas extends javax.swing.JDialog {
                 Cuenta cuentaAux = new Cuenta();
                 if (this.listaPartidaDetalles.get(row).getCuentaMayor().getId() > 0) {
                     this.rowPadre = this.devolverRowPadre(this.listaPartidaDetalles.get(row).getCuentaMayor());
-                    montoFM = this.listaPartidaDetalles.get(this.rowPadre).getFolio_mayor();
+                    montoFM = this.listaPartidaDetalles.get(this.rowPadre).getCuenta().getFolio_mayor();
                     cuentaAux = this.listaPartidaDetalles.get(this.rowPadre).getCuenta();
                 } else {
-                    montoFM = this.listaPartidaDetalles.get(row).getFolio_mayor();
+                    montoFM = this.listaPartidaDetalles.get(row).getCuenta().getFolio_mayor();
                     cuentaAux = this.listaPartidaDetalles.get(row).getCuenta();
                 }
                 
@@ -641,12 +641,21 @@ public class dPartidas extends javax.swing.JDialog {
                     } else if (this.listaPartidaDetalles.get(row).getParcial() == 0 && this.listaPartidaDetalles.get(row).getDebe()== 0) {
                         this.listaPartidaDetalles.get(row).setHaber(d.getMontoIngresado());
                     }
-                    // actializamos el FM
+                    // actualizamos el FM
+                    Cuenta cuentaAuxFm = new Cuenta();
                     if (this.listaPartidaDetalles.get(row).getCuentaMayor().getId() > 0) {
-                        this.listaPartidaDetalles.get(this.rowPadre).setFolio_mayor(d.getMontoFM());
+                        this.listaPartidaDetalles.get(this.rowPadre).getCuenta().setId_ciclo_folio(d.getId_ciclo_contable_folio());
+                        this.listaPartidaDetalles.get(this.rowPadre).getCuenta().setFolio_mayor(d.getMontoFM());
+                        cuentaAuxFm = this.listaPartidaDetalles.get(this.rowPadre).getCuenta();
                     } else {
-                        this.listaPartidaDetalles.get(row).setFolio_mayor(d.getMontoFM());
+                        this.listaPartidaDetalles.get(row).getCuenta().setId_ciclo_folio(d.getId_ciclo_contable_folio());
+                        this.listaPartidaDetalles.get(row).getCuenta().setFolio_mayor(d.getMontoFM());
+                        cuentaAuxFm = this.listaPartidaDetalles.get(row).getCuenta();
                     }
+                    // actualizamos el FM en caso de que se repita varias veces la cuenta a mayorizar
+                    this.actualizarFMDetalles(d.getMontoFM(), cuentaAuxFm);
+                    
+                    // se procede a actualizar la tabla y los acumulados
                     this.actualizarMontosDeTabla();
                     this.setDatosPartidaDetalle();
                 }
@@ -680,6 +689,15 @@ public class dPartidas extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tblDetallePartidaMouseClicked
 
+    public void actualizarFMDetalles(int fm, Cuenta cuenta) {
+        this.listaPartidaDetalles.forEach((t) -> {
+            if (cuenta.getId() == t.getCuenta().getId()) {
+                t.getCuenta().setFolio_mayor(fm);
+            }
+        });
+        
+    }
+    
     public int devolverRowPadre(Cuenta cuenta) {
         int rowPadre = -1;
         for (int i = 0; i < this.listaPartidaDetalles.size(); i++) {

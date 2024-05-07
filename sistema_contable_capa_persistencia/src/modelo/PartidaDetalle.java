@@ -18,7 +18,6 @@ public class PartidaDetalle implements Comparable<PartidaDetalle>{
     double haber;
     public int tipo_cargo_abono;
     boolean eliminado;
-    int folio_mayor;
     
     public Cuenta cuenta;
     Cuenta cuentaMayor;
@@ -32,7 +31,6 @@ public class PartidaDetalle implements Comparable<PartidaDetalle>{
         this.haber = 0.0;
         this.tipo_cargo_abono = 1;
         this.eliminado = false;
-        this.folio_mayor = 0;
         
         this.cuenta = new Cuenta();
         this.cuentaMayor = new Cuenta();
@@ -118,14 +116,6 @@ public class PartidaDetalle implements Comparable<PartidaDetalle>{
         this.cuentaMayor = cuentaMayor;
     }
 
-    public int getFolio_mayor() {
-        return folio_mayor;
-    }
-
-    public void setFolio_mayor(int folio_mayor) {
-        this.folio_mayor = folio_mayor;
-    }
-    
     @Override
     public String toString() {
         return "PartidaDetalle{" +
@@ -137,7 +127,6 @@ public class PartidaDetalle implements Comparable<PartidaDetalle>{
                 ", haber=" + haber +
                 ", tipo_cargo_abono=" + tipo_cargo_abono +
                 ", eliminado=" + eliminado +
-                ", folio_mayor=" + folio_mayor +
                 ", cuenta=" + cuenta +
                 '}';
     }

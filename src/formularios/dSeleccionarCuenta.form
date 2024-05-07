@@ -61,7 +61,7 @@
                                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="txtQueryBusqueda" pref="648" max="32767" attributes="0"/>
+                                          <Component id="txtQueryBusqueda" max="32767" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="btnBuscarCuenta" min="-2" pref="111" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
@@ -74,7 +74,7 @@
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="txtFM" min="-2" pref="115" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="txtCuentaSeleccionada" max="32767" attributes="0"/>
+                                          <Component id="txtCuentaSeleccionada" min="-2" pref="453" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
