@@ -9,6 +9,7 @@ import dto.dtoLista;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import modelo.CicloContable;
 import modelo.TipoCatalogo;
 import servicios.ServicioFormula;
 import sesion.Sesion;
@@ -584,7 +585,7 @@ public class dFormFormula extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbTipoFormulaItemStateChanged
 
     private void btnElegirCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElegirCuentaActionPerformed
-        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion, this.tipoCatalogo, false, 0);
+        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion, this.tipoCatalogo, false, 0, new CicloContable());
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.getRealizoAccion()) {

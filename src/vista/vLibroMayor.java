@@ -227,7 +227,7 @@ public class vLibroMayor extends javax.swing.JPanel {
         elegirCuenta();
     }//GEN-LAST:event_btnElegirCuentaActionPerformed
     private void elegirCuenta() {
-        dSeleccionarCuentaFormula dialogoCuentas = new dSeleccionarCuentaFormula(null, true, sesion, this.sesion.configUsuario.getCicloContable().getTipoCatalogo(), false, 0);
+        dSeleccionarCuentaFormula dialogoCuentas = new dSeleccionarCuentaFormula(null, true, sesion, this.sesion.configUsuario.getCicloContable().getTipoCatalogo(), false, 0, this.sesion.configUsuario.getCicloContable());
         dialogoCuentas.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (dialogoCuentas.getRealizoAccion()) {

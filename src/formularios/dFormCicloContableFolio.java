@@ -358,7 +358,7 @@ public class dFormCicloContableFolio extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelarTipoCatalogo1ActionPerformed
 
     private void btnCancelarTipoCatalogo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTipoCatalogo2ActionPerformed
-        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion, this.tipoCatalogo, true, this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar());
+        dSeleccionarCuentaFormula d = new dSeleccionarCuentaFormula(null, true, sesion, this.tipoCatalogo, true, this.tipoCatalogo.getNivel_mayorizar(), this.cicloContable);
         d.setVisible(true);
         // validamos si realizo alguna accion para actualizar el listado o no
         if (d.getRealizoAccion()) {

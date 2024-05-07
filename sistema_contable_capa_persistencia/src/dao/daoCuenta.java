@@ -222,7 +222,7 @@ public class daoCuenta {
         }
     }
     
-    public RespuestaGeneral ListarCatalogoNivelMayorizar(int idTipoCatalogo, String busqueda, int nivelMayorizar) {
+    public RespuestaGeneral ListarCatalogoNivelMayorizar(int idTipoCatalogo, String busqueda, int nivelMayorizar, int cicloContable) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<Cuenta> lista = new ArrayList<>();
         ResultSet rs = null;
@@ -259,14 +259,18 @@ public class daoCuenta {
                             when ct.disponible_1 = 1 and ct.disponible_2 = 0 then 1
                             when ct.disponible_1 = 1 and ct.nivel_sig is null then 1
                   	end as disponible
+                        ,ccf.folio_mayor
+                        ,ccf.id as id_ciclo_folio
                   from catalogo ct
+                  left join ciclo_contable_folios ccf on ct.id = ccf.id_cuenta and ccf.id_ciclo_contable = pCicloContable
                   WHERE (ct.nombre like '%paramBusqueda%' or ct.codigo like '%paramBusqueda%')
                     AND ct.nivel = paramNivel
                   """;
         String newSql = sql.replaceAll("paramBusqueda", busqueda);
         String newSql1 = newSql.replaceAll("paramIdCatalogo", String.valueOf(idTipoCatalogo));
         String newSql2 = newSql1.replaceAll("paramNivel", String.valueOf(nivelMayorizar));
-        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql2)) {
+        String newSql3 = newSql2.replaceAll("pCicloContable", String.valueOf(cicloContable));
+        try (PreparedStatement ps = cx.getCx().prepareStatement(newSql3)) {
             //ps.setInt(1, idTipoCatalogo);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -283,6 +287,8 @@ public class daoCuenta {
                 cuenta.setEliminado(rs.getInt("eliminado") == 0 ? false : true);
                 cuenta.setDisponible(rs.getInt("disponible"));
                 cuenta.setEs_restado(rs.getInt("es_restado"));
+                cuenta.setFolio_mayor(rs.getInt("folio_mayor"));
+                cuenta.setId_ciclo_folio(rs.getInt("id_ciclo_folio"));
                 lista.add(cuenta);
             }
             

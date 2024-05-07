@@ -967,18 +967,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                 cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
                 dCuentasSaldos d = new dCuentasSaldos(null, true, cContable, sesion, cContable.getTipoCatalogo());
                 d.setVisible(true);
-                // validamos si realizo alguna accion para actualizar el listado o no
-//                if (d.getRealizoAccion()) {
-//                    JOptionPane.showMessageDialog(this, d.getRG().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRG()));
-//                    // actualizamos el perfil del usuario
-//                    RespuestaGeneral rg1 = _configUsuario.obtenerPorIdUsuario(sesion.usuario.getId());
-//                    if (rg1.esExitosa()) {
-//                        ArrayList<ConfiguracionUsuario> listaConfigUsuario = (ArrayList<ConfiguracionUsuario>)rg1.getDatos();
-//                        sesion.configUsuario = listaConfigUsuario.get(0);
-//                        UtileriaVista.actualizarPerfil(sesion);
-//                    }
-//                    this.obtenerListadoCiclosContables();
-//                }
+
             } else {
                 CicloContable cContable = this.listaCiclosContables.get(row);
                 cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());

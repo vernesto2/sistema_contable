@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.CicloContable;
 import modelo.Cuenta;
 import modelo.PartidaDetalle;
 import modelo.TipoCatalogo;
@@ -40,10 +41,11 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
     TipoCatalogo tipoCatalogo = new TipoCatalogo();
     boolean cuentasDeNivelAMayorizar = false;
     int nivelMayorizar = 0;
+    CicloContable cicloContable = new CicloContable();
     /**
      * Creates new form dSeleccionarCuenta
      */
-    public dSeleccionarCuentaFormula(java.awt.Frame parent, boolean modal, Sesion sesion, TipoCatalogo tipoCatalogo, boolean cuentasDeNivelAMayorizar, int nivelMayorizar) {
+    public dSeleccionarCuentaFormula(java.awt.Frame parent, boolean modal, Sesion sesion, TipoCatalogo tipoCatalogo, boolean cuentasDeNivelAMayorizar, int nivelMayorizar, CicloContable cicloContable) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
@@ -51,6 +53,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         this.tipoCatalogo = tipoCatalogo;
         this.cuentasDeNivelAMayorizar = cuentasDeNivelAMayorizar;
         this.nivelMayorizar = nivelMayorizar;
+        this.cicloContable = cicloContable;
         this.iniciarVistaDialog();
     }
     
@@ -67,7 +70,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
 
     public void setModelCuentas() {
         //String[] cabecera = {"Disponible", "Nivel", "Codigo", "", "Concepto", "Tipo Saldo", "Ingresos", "Egresos"};
-        String[] cabecera = {"Nivel", "Codigo", "", "Concepto", "Tipo Saldo", "Ingresos", "Egresos"};
+        String[] cabecera = {"Nivel", "Codigo", "FM", "", "Concepto", "Tipo Saldo", "Ingresos", "Egresos"};
         dtm.setColumnIdentifiers(cabecera);
         tblCuentas.setModel(dtm);
         tblCuentas.setDefaultRenderer(Object.class, new Render());
@@ -79,9 +82,13 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         this.limiparTablaCuentas();
         RespuestaGeneral rg;
         if (this.cuentasDeNivelAMayorizar && this.nivelMayorizar > 0) {
-            rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralNivelAMayorizar(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText(), nivelMayorizar);
+            rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralNivelAMayorizar(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText(), nivelMayorizar, this.cicloContable.getId());
         } else {
-            rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
+            if (this.cicloContable.getId() > 0) {
+                rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralCicloContable(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText(), this.cicloContable.getId());
+            } else {
+                rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
+            }
         }
         this.totalCuentas.setText("0");
         if (rg.esExitosa()) {
@@ -97,9 +104,13 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         this.listaCuentasCompleta = new ArrayList<>();
         RespuestaGeneral rg;
         if (this.cuentasDeNivelAMayorizar && this.nivelMayorizar > 0) {
-            rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralNivelAMayorizar(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText(), nivelMayorizar);
+            rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralNivelAMayorizar(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText(), nivelMayorizar, this.cicloContable.getId());
         } else {
-            rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
+            if (this.cicloContable.getId() > 0) {
+                rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneralCicloContable(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText(), this.cicloContable.getId());
+            } else {
+                rg = _cuenta.obtenerListaPorIdTipoCatalogoGeneral(this.tipoCatalogo.getId(), this.txtQueryBusqueda.getText());
+            }
         }
         if (rg.esExitosa()) {
             this.listaCuentasCompleta = (ArrayList<Cuenta>)rg.getDatos();
@@ -115,11 +126,12 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
             //datos[0] = disponible;
             datos[0] = cuenta.getNivel();
             datos[1] = cuenta.getCodigo();
-            datos[2] = cuenta.getEs_restado() == 0 ? "" : "R";
-            datos[3] = cuenta.getNombre();
-            datos[4] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": cuenta.getTipo_saldo().equals("A") ? "ACREEDOR" : cuenta.getTipo_saldo().equals("T") ? "TRANSITORIA" : "-";
-            datos[5] = cuenta.getIngresos();
-            datos[6] = cuenta.getEgresos();
+            datos[2] = cuenta.getFolio_mayor() == 0 ? "" : cuenta.getFolio_mayor();
+            datos[3] = cuenta.getEs_restado() == 0 ? "" : "R";
+            datos[4] = cuenta.getNombre();
+            datos[5] = cuenta.getTipo_saldo().equals("D") ? "DEUDOR": cuenta.getTipo_saldo().equals("A") ? "ACREEDOR" : cuenta.getTipo_saldo().equals("T") ? "TRANSITORIA" : "-";
+            datos[6] = cuenta.getIngresos();
+            datos[7] = cuenta.getEgresos();
             dtm.addRow(datos);
         }
         tblCuentas.setModel(dtm);
@@ -127,10 +139,11 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         tblCuentas.getColumnModel().getColumn(0).setPreferredWidth(90);
         tblCuentas.getColumnModel().getColumn(1).setPreferredWidth(120);
         tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(25);
-        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(425);
-        tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(90);
-        tblCuentas.getColumnModel().getColumn(5).setPreferredWidth(100);
+        tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(25);
+        tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(425);
+        tblCuentas.getColumnModel().getColumn(5).setPreferredWidth(90);
         tblCuentas.getColumnModel().getColumn(6).setPreferredWidth(100);
+        tblCuentas.getColumnModel().getColumn(7).setPreferredWidth(100);
        
     }
 
@@ -320,20 +333,20 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE))
+                            .addComponent(txtQueryBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -348,7 +361,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
