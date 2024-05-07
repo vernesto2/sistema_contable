@@ -165,14 +165,16 @@
 	pd.id_partida as id_partida, 
 	c.codigo, 
 	c.nombre as cuenta, 
-	folio_mayor, 
+	ccf.folio_mayor, 
 	parcial, 
 	debe, 
 	haber, 
 	tipo_cargo_abono
 	
 from partida_detalle pd
+inner join partida p on p.id = pd.id_partida
 inner join cuenta c on c.id = pd.id_cuenta
+left join ciclo_contable_folios ccf on ccf.id_cuenta = c.id and ccf.id_ciclo_contable = p.id_ciclo
 where pd.eliminado = false and c.eliminado = false
 and pd.id_partida =   $P{param_id_partida}]]>
 		</queryString>

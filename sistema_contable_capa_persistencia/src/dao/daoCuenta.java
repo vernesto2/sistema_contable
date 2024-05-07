@@ -655,6 +655,9 @@ order by folio_mayor
                 CuentaBalanza item = new CuentaBalanza();
                 item.setId(rs.getObject("id", Integer.class));
                 item.setFolioMayor(rs.getObject("folio_mayor", Integer.class));
+                if(rs.wasNull()) {
+                    item.setFolioMayor(null);
+                }
                 item.setCodigo(rs.getObject("codigo", String.class));
                 item.setNombre(rs.getObject("nombre", String.class));
                 item.setTipoSaldo(rs.getObject("tipo_saldo", String.class));

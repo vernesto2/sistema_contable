@@ -127,9 +127,7 @@ from (
 		and (
 		  p.id_tipo_partida <= $P{param_tipo_partida} 
 		)
-) mayorizacion_cuenta
-
-]]>
+) mayorizacion_cuenta]]>
 		</queryString>
 		<field name="id" class="java.lang.Object">
 			<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -217,9 +215,10 @@ from (
 		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select 
+		<![CDATA[with cte_cuentas as (
+select 
 	c.id, 
-	cb.folio_mayor, 
+	ccf.folio_mayor, 
 	c.codigo, 
 	c.id_tipo_catalogo, 
 	c.nombre, 
@@ -229,6 +228,7 @@ from (
 	c.es_restado
 from cuenta c
 inner join cuenta_balance cb on cb.id_cuenta = c.id
+left join ciclo_contable_folios ccf on ccf.id_cuenta = c.id and ccf.id_ciclo_contable = cb.id_ciclo_contable
 where 
 c.eliminado = false
 and cb.id_ciclo_contable =  $P{param_id_ciclo} 
@@ -240,7 +240,7 @@ and (
 UNION
 select 
 	c.id, 
-	pd.folio_mayor, 
+	ccf.folio_mayor, 
 	c.codigo, 
 	c.id_tipo_catalogo, 
 	c.nombre, 
@@ -252,6 +252,7 @@ select
 from cuenta c
 inner join partida_detalle pd on pd.id_cuenta = c.id
 inner join partida p on p.id = pd.id_partida
+left join ciclo_contable_folios ccf on ccf.id_cuenta = c.id and ccf.id_ciclo_contable = p.id_ciclo
 where 
 c.eliminado = false
 and pd.eliminado = false
@@ -271,7 +272,9 @@ group by
 	c.ingresos, 
 	c.egresos, 
 	c.es_restado
-order by pd.folio_mayor]]>
+)
+select * from cte_cuentas
+order by folio_mayor]]>
 	</queryString>
 	<field name="id" class="java.lang.Object">
 		<property name="com.jaspersoft.studio.field.name" value="id"/>
@@ -445,7 +448,7 @@ order by pd.folio_mayor]]>
 							<textField>
 								<reportElement x="0" y="0" width="70" height="30" uuid="c0aa58b8-6b1e-4955-8a0a-2b4e261e87c4"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[ $F{fecha} == null ? "" :  $P{param_formateador_fecha}.parse($F{fecha})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{fecha} == null ? "" :  $P{param_formateador_fecha}.parse($F{fecha})]]></textFieldExpression>
 								<patternExpression><![CDATA["dd/MM/yyyy"]]></patternExpression>
 							</textField>
 						</jr:detailCell>
