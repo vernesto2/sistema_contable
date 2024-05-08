@@ -3,6 +3,7 @@
 create view vw_cargo_abono as 
 select 
 	0 as id_partida,
+	cb.id_ciclo_contable, 
 	cb.id_cuenta, 
 	case tipo_saldo
 		when 'D' then saldo_inicial
@@ -20,9 +21,10 @@ select
 	inner join cuenta c on cb.id_cuenta = c.id
 UNION
 select 
-	pdi.id_partida, pdi.id_cuenta, pdi.debe, pdi.haber, pdi.parcial, pdi.eliminado
+	pdi.id_partida, p.id_ciclo, pdi.id_cuenta, pdi.debe, pdi.haber, pdi.parcial, pdi.eliminado	
 from partida_detalle pdi
-
+inner join partida p on pdi.id_partida = p.id and p.id_ciclo = 
+;
 
 select * from vw_cargo_abono;
 
@@ -37,8 +39,8 @@ with cte_balanza_comprobacion as (
   row_number() over (PARTITION by c.id order by p.fecha || ' ' || p.hora asc, p.id asc) as row_number
   from cuenta c 
   inner join vw_cargo_abono pd on pd.id_cuenta = c.id and pd.parcial = 0
-  left join partida p on pd.id_partida = p.id
-  left join ciclo_contable_folios ccf on ccf.id_ciclo_contable = p.id_ciclo
+  left join partida p on pd.id_partida = p.id and pd.id_ciclo_contable = p.id_ciclo
+  left join ciclo_contable_folios ccf on ccf.id_ciclo_contable = pd.id_ciclo_contable and ccf.id_cuenta = c.id
   where c.eliminado = false 
   and p.eliminado = false
   and pd.eliminado = false
@@ -66,14 +68,14 @@ inner join (
   ) as saldo_acreedor
   from cuenta c 
     inner join vw_cargo_abono pd on pd.id_cuenta = c.id
-    left join partida p on pd.id_partida = p.id
+    left join partida p on pd.id_partida = p.id and pd.id_ciclo_contable = p.id_ciclo
     where c.eliminado = false 
     and p.eliminado = false
     and pd.eliminado = false
     and p.id_ciclo = 21
     and c.id_tipo_catalogo = 1
-	and p.id_tipo_partida <= 1
-	and (
+    and p.id_tipo_partida <= 1
+    and (
       null is null or c.id = null
     )
   group by c.id, c.codigo, c.nombre, c.tipo_saldo

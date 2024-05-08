@@ -676,8 +676,8 @@ with cte_balanza_comprobacion as (
   row_number() over (PARTITION by c.id order by p.fecha || ' ' || p.hora asc, p.id asc) as row_number
   from cuenta c 
   inner join vw_cargo_abono pd on pd.id_cuenta = c.id and pd.parcial = 0
-  left join partida p on pd.id_partida = p.id
-  left join ciclo_contable_folios ccf on ccf.id_ciclo_contable = p.id_ciclo
+  left join partida p on pd.id_partida = p.id and pd.id_ciclo_contable = p.id_ciclo
+  left join ciclo_contable_folios ccf on ccf.id_ciclo_contable = pd.id_ciclo_contable and ccf.id_cuenta = c.id
   where c.eliminado = false 
   and p.eliminado = false
   and pd.eliminado = false
@@ -705,14 +705,14 @@ inner join (
   ) as saldo_acreedor
   from cuenta c 
     inner join vw_cargo_abono pd on pd.id_cuenta = c.id
-    left join partida p on pd.id_partida = p.id
+    left join partida p on pd.id_partida = p.id and pd.id_ciclo_contable = p.id_ciclo
     where c.eliminado = false 
     and p.eliminado = false
     and pd.eliminado = false
     and p.id_ciclo = ?
     and c.id_tipo_catalogo = ?
-	and p.id_tipo_partida <= ?
-	and (
+    and p.id_tipo_partida <= ?
+    and (
       ? is null or c.id = ?
     )
   group by c.id, c.codigo, c.nombre, c.tipo_saldo
@@ -743,8 +743,10 @@ order by folio_mayor
             
             while (rs.next()) {
                 CuentaBalanza item = new CuentaBalanza();
-                item.setId(rs.getObject("id", Integer.class));
-                item.setFolioMayor(rs.getObject("folio_mayor", Integer.class));
+                item.setId(rs.getObject("id", Integer.class));;
+                item.setFolioMayor( 
+                        rs.getObject("folio_mayor", Long.class).intValue() 
+                );
                 if(rs.wasNull()) {
                     item.setFolioMayor(null);
                 }
