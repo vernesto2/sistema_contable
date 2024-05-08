@@ -745,7 +745,7 @@ order by folio_mayor
                 CuentaBalanza item = new CuentaBalanza();
                 item.setId(rs.getObject("id", Integer.class));;
                 item.setFolioMayor( 
-                        rs.getObject("folio_mayor", Long.class).intValue() 
+                        rs.getInt("folio_mayor")
                 );
                 if(rs.wasNull()) {
                     item.setFolioMayor(null);
