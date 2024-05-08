@@ -40,7 +40,7 @@ public class ServicioCuentaBalance {
     public RespuestaGeneral insertar(CuentaBalance cBalance) {
         RespuestaGeneral rs = RespuestaGeneral.asBadRequest("");
         this.cx.conectar();
-        RespuestaGeneral rs1 = this.daoCuentaBalance.buscarIdCuentaPorCicloContable(cBalance.getId(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable(), cBalance.getFolio_mayor());
+        RespuestaGeneral rs1 = this.daoCuentaBalance.buscarIdCuentaPorCicloContable(cBalance.getId(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable(), cBalance.getCuenta().getFolio_mayor());
         if (rs1.esExitosa()) {
             ArrayList<CuentaBalance> lista = (ArrayList<CuentaBalance>) rs1.getDatos();
             if (lista.isEmpty()) {
@@ -57,7 +57,7 @@ public class ServicioCuentaBalance {
     public RespuestaGeneral editar(CuentaBalance cBalance) {
         RespuestaGeneral rs = RespuestaGeneral.asBadRequest("");
         this.cx.conectar();
-        RespuestaGeneral rs1 = this.daoCuentaBalance.buscarIdCuentaPorCicloContable(cBalance.getId(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable(), cBalance.getFolio_mayor());
+        RespuestaGeneral rs1 = this.daoCuentaBalance.buscarIdCuentaPorCicloContable(cBalance.getId(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable(), cBalance.getCuenta().getFolio_mayor());
         if (rs1.esExitosa()) {
             ArrayList<CuentaBalance> lista = (ArrayList<CuentaBalance>) rs1.getDatos();
             if (lista.isEmpty()) {

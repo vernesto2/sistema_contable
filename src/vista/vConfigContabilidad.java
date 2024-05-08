@@ -85,7 +85,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
                                    INICIO SECCION DE CICLO CONTABLE
         <------------------------------------------------------------------------------->  */  
     public void setModelCicloContable() {
-        String[] cabecera = {"Seleccionado","Registro Saldos","Titulo","Desde","Hasta","Catalogo", "Editar", "Eliminar", "Seleccionar","Saldos"};
+        String[] cabecera = {"Seleccionado","Registro Saldos","Titulo","Desde","Hasta","Catalogo", "Editar", "Eliminar", "Seleccionar","Folio", "Saldos"};
         dtm.setColumnIdentifiers(cabecera);
         tblCicloContable.setModel(dtm);
         tblCicloContable.setDefaultRenderer(Object.class, new Render());
@@ -123,7 +123,8 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             datos[6] = btn1;
             datos[7] = btn2;
             datos[8] = btn3;
-            datos[9] = ciclo.getSin_libro_diario() == 1 ? btn5 : btn4;
+            datos[9] = btn4;
+            datos[10] = ciclo.getSin_libro_diario() == 1 ? btn5 : "";
             dtm.addRow(datos);
         }
         tblCicloContable.setModel(dtm);
@@ -138,6 +139,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         tblCicloContable.getColumnModel().getColumn(7).setPreferredWidth(10);
         tblCicloContable.getColumnModel().getColumn(8).setPreferredWidth(10);
         tblCicloContable.getColumnModel().getColumn(9).setPreferredWidth(10);
+        tblCicloContable.getColumnModel().getColumn(10).setPreferredWidth(10);
     }
     
     public void obtenerListadoCiclosContables() {
@@ -200,14 +202,6 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         for (TipoCatalogo tipo : listaTiposCatalogos) {
             datos[0] = tipo.getTipo();
             datos[1] = tipo.getNivel_mayorizar();
-//            datos[1] = "";
-//            datos[2] = tipo.getLibro_diario() == 1 ? "SI" : "NO";
-//            datos[3] = tipo.getLibro_mayor()== 1 ? "SI" : "NO";
-//            datos[4] = tipo.getBalanza_comprobacion()== 1 ? "SI" : "NO";
-//            datos[5] = tipo.getEstado_resultado()== 1 ? "SI" : "NO";
-//            datos[6] = tipo.getBalance_general()== 1 ? "SI" : "NO";
-//            datos[7] = tipo.getFlujo_efectivo()== 1 ? "SI" : "NO";
-//            datos[8] = tipo.getCambios_patrimonio()== 1 ? "SI" : "NO";
             datos[2] = btn1;
             datos[3] = btn2;
             datos[4] = btn3;
@@ -217,14 +211,6 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         tblTipoCatalogo.setAutoResizeMode(tblTipoCatalogo.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         tblTipoCatalogo.getColumnModel().getColumn(0).setPreferredWidth(520);
         tblTipoCatalogo.getColumnModel().getColumn(1).setPreferredWidth(70);
-//        tblTipoCatalogo.getColumnModel().getColumn(1).setPreferredWidth(10);
-//        tblTipoCatalogo.getColumnModel().getColumn(2).setPreferredWidth(10);
-//        tblTipoCatalogo.getColumnModel().getColumn(3).setPreferredWidth(10);
-//        tblTipoCatalogo.getColumnModel().getColumn(4).setPreferredWidth(10);
-//        tblTipoCatalogo.getColumnModel().getColumn(5).setPreferredWidth(10);
-//        tblTipoCatalogo.getColumnModel().getColumn(6).setPreferredWidth(10);
-//        tblTipoCatalogo.getColumnModel().getColumn(7).setPreferredWidth(10);
-//        tblTipoCatalogo.getColumnModel().getColumn(8).setPreferredWidth(10);
         tblTipoCatalogo.getColumnModel().getColumn(2).setPreferredWidth(10);
         tblTipoCatalogo.getColumnModel().getColumn(3).setPreferredWidth(10);
         tblTipoCatalogo.getColumnModel().getColumn(4).setPreferredWidth(10);
@@ -962,18 +948,15 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             }
             
         } else if (accion == 9) {
-            if (this.listaCiclosContables.get(row).getSin_libro_diario() == 1) {
-                CicloContable cContable = this.listaCiclosContables.get(row);
-                cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
-                dCuentasSaldos d = new dCuentasSaldos(null, true, cContable, sesion, cContable.getTipoCatalogo());
-                d.setVisible(true);
-
-            } else {
-                CicloContable cContable = this.listaCiclosContables.get(row);
-                cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
-                dCicloContableFolio d = new dCicloContableFolio(null, true, cContable, sesion, cContable.getTipoCatalogo());
-                d.setVisible(true);
-            }
+            CicloContable cContable = this.listaCiclosContables.get(row);
+            cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
+            dCicloContableFolio d = new dCicloContableFolio(null, true, cContable, sesion, cContable.getTipoCatalogo());
+            d.setVisible(true);
+        } else if (accion == 10) {
+            CicloContable cContable = this.listaCiclosContables.get(row);
+            cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
+            dCuentasSaldos d = new dCuentasSaldos(null, true, cContable, sesion, cContable.getTipoCatalogo());
+            d.setVisible(true);
         }
     }//GEN-LAST:event_tblCicloContableMouseClicked
 

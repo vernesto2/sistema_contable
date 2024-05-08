@@ -6,11 +6,8 @@ package servicios;
 
 import conexion.Conexion;
 import dao.daoCuenta;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import modelo.CicloContable;
 import modelo.Cuenta;
@@ -68,7 +65,7 @@ public class ServicioCuenta {
 
     public RespuestaGeneral obtenerPorId(int id, int idTipoCatalogo) {
         this.cx.conectar();
-        RespuestaGeneral rs = this.daoCuenta.ObtenerPorId(id, idTipoCatalogo);
+        RespuestaGeneral rs = this.daoCuenta.ObtenerPorId(id, idTipoCatalogo, -1);
         this.cx.desconectar();
         return rs;
     }

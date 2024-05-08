@@ -69,7 +69,7 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
         //this.txtSaldoInicial.setText(String.valueOf(this.cBalanceModel.getSaldo_inicial() == 0 ? "" : this.cBalanceModel.getSaldo_inicial()));
         this.txtSaldoInicial.setText(String.valueOf(this.cBalanceModel.getSaldo_inicial()));
         //this.txtSaldoFinal.setText(String.valueOf(this.cBalanceModel.getSaldo_final()));
-        this.txtFolio.setText(String.valueOf(this.cBalanceModel.getFolio_mayor()));
+        this.txtFolio.setText(String.valueOf(this.cBalanceModel.getCuenta().getFolio_mayor()));
     }
 
     public boolean isRealizoAccion() {
@@ -364,11 +364,11 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
 //                this.cBalanceModel.setSaldo_final(Double.parseDouble(this.txtSaldoFinal.getText()));
 //            }
             
-            if (this.txtFolio.getText().isEmpty()) {
+            if (this.txtFolio.getText().isEmpty() || this.txtFolio.getText().trim().equals("0")) {
                 valido = false;
                 JOptionPane.showMessageDialog(this, "No se ha digitado el folio mayor", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
             } else {
-                this.cBalanceModel.setFolio_mayor(Integer.parseInt(this.txtFolio.getText()));
+                this.cBalanceModel.setFolio(Integer.parseInt(this.txtFolio.getText()));
             }
             
         } catch (Exception e) {

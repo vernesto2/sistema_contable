@@ -35,8 +35,9 @@ public class daoCicloContableFolio {
         ArrayList<CicloContableFolio> lista = new ArrayList<>();
         ResultSet rs = null;
         String sql = """
-                    select cb.* 
+                    select cb.*, c.id as id_cuenta_balance 
                     from ciclo_contable_folios cb 
+                    left join cuenta_balance c on c.id_ciclo_contable = cb.id_ciclo_contable
                     where cb.id_ciclo_contable = ? 
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
@@ -49,9 +50,10 @@ public class daoCicloContableFolio {
                 cicloFolio.setId_cuenta(rs.getInt("id_cuenta"));
                 //cicloFolio.setSaldo(rs.getDouble("saldo"));
                 cicloFolio.setFolio_mayor(rs.getInt("folio_mayor"));
+                cicloFolio.setId_cuenta_balance(rs.getInt("id_cuenta_balance"));
                 
                 if (cicloFolio.getId_cuenta() > 0) {
-                    RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cicloFolio.getId_cuenta(), idTipoCatalogo);
+                    RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cicloFolio.getId_cuenta(), idTipoCatalogo, cicloFolio.getId_ciclo_contable());
                     if (rgc.esExitosa()) {
                         ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>)rgc.getDatos();
                         if (!listaCuenta.isEmpty()) {
@@ -95,7 +97,7 @@ public class daoCicloContableFolio {
                 cicloFolio.setFolio_mayor(rs.getInt("folio_mayor"));
                 
                 if (cicloFolio.getId_cuenta() > 0) {
-                    RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cicloFolio.getId_cuenta(), idTipoCatalogo);
+                    RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cicloFolio.getId_cuenta(), idTipoCatalogo, cicloFolio.getId_ciclo_contable());
                     if (rgc.esExitosa()) {
                         ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>)rgc.getDatos();
                         if (!listaCuenta.isEmpty()) {

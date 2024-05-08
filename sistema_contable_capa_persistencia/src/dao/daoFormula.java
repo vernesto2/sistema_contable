@@ -66,7 +66,7 @@ public class daoFormula {
                 // obtenemos la cuenta para que vaya tipado
                 formulaAux.setCuenta(new Cuenta());
                 if (formulaAux.getId_cuenta() > 0) {
-                    RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(formulaAux.getId_cuenta(), idTipoCatalogo);
+                    RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(formulaAux.getId_cuenta(), idTipoCatalogo, -1);
                     if (rgc.esExitosa()) {
                         ArrayList<Cuenta> listaCuenta = (ArrayList<Cuenta>) rgc.getDatos();
                         if (!listaCuenta.isEmpty()) {

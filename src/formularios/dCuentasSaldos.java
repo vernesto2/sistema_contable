@@ -96,7 +96,7 @@ public class dCuentasSaldos extends javax.swing.JDialog {
             datos[1] = detalle.getCuenta().getNombre();
             datos[2] = String.valueOf(detalle.getSaldo_inicial());
             //datos[3] = String.valueOf(detalle.getSaldo_final());
-            datos[3] = String.valueOf(detalle.getFolio_mayor());
+            datos[3] = String.valueOf(detalle.getCuenta().getFolio_mayor());
             datos[4] = btn1;
             datos[5] = btn2;
             dtm.addRow(datos);

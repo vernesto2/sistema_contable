@@ -10,6 +10,7 @@ import modelo.Cuenta;
 import modelo.CicloContableFolio;
 import modelo.TipoCatalogo;
 import servicios.ServicioCicloContableFolio;
+import servicios.ServicioCuentaBalance;
 import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
@@ -30,16 +31,18 @@ public class dFormCicloContableFolio extends javax.swing.JDialog {
     boolean realizoAccion = false;
     Sesion sesion;
     ServicioCicloContableFolio _cBalance;
+    ServicioCuentaBalance _balance;
     TipoCatalogo tipoCatalogo = new TipoCatalogo();
-    
+    Cuenta cuentaAux = new Cuenta();
     RespuestaGeneral rg = new RespuestaGeneral();
     
     public dFormCicloContableFolio(java.awt.Frame parent, boolean modal, Sesion sesion, CicloContableFolio cBalance, CicloContable cicloContable, TipoCatalogo tipoCatalogo) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
-        this._cBalance = new ServicioCicloContableFolio(sesion.rutaConexion);
         this.cicloFolio = cBalance;
+        this._cBalance = new ServicioCicloContableFolio(sesion.rutaConexion);
+        this._balance = new ServicioCuentaBalance(sesion.rutaConexion);
         this.cicloContable = cicloContable;
         this.cicloContable.setId_catalogo(cicloContable.getId_catalogo());
         this.cicloFolio.setCicloContable(this.cicloContable);
@@ -323,21 +326,7 @@ public class dFormCicloContableFolio extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "No se ha seleccionado una cuenta", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
             }
             
-//            if (this.txtSaldoInicial.getText().isEmpty()) {
-////                this.cicloFolio.setSaldo_inicial(0.0);
-//                JOptionPane.showMessageDialog(this, "No se ha digitado el saldo inicial", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
-//            } else {
-//                this.cicloFolio.setSaldo_inicial(Double.parseDouble(this.txtSaldoInicial.getText()));
-//            }
-            
-//            if (this.txtSaldoFinal.getText().isEmpty()) {
-//                valido = false;
-//                JOptionPane.showMessageDialog(this, "No se ha digitado el saldo final", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
-//            } else {
-//                this.cicloFolio.setSaldo_final(Double.parseDouble(this.txtSaldoFinal.getText()));
-//            }
-            
-            if (this.txtFolio.getText().isEmpty()) {
+            if (this.txtFolio.getText().isEmpty() || this.txtFolio.getText().trim().equals("0")) {
                 valido = false;
                 JOptionPane.showMessageDialog(this, "No se ha digitado el folio mayor", "¡Alerta!", JOptionPane.WARNING_MESSAGE);
             } else {
@@ -365,6 +354,8 @@ public class dFormCicloContableFolio extends javax.swing.JDialog {
             //JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
             this.cicloFolio.setId_cuenta(d.getCuentaSeleccionada().getId());
             this.txtCuentaSeleccionada.setText(d.getCuentaSeleccionada().getCodigo() + " - " + d.getCuentaSeleccionada().getNombre());
+            this.cuentaAux = d.getCuentaSeleccionada();
+            this.txtFolio.setText(String.valueOf(this.cuentaAux.getFolio_mayor()));
         }
     }//GEN-LAST:event_btnCancelarTipoCatalogo2ActionPerformed
 

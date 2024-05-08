@@ -6,8 +6,10 @@ package servicios;
 
 import conexion.Conexion;
 import dao.daoCicloContableFolio;
+import dao.daoCuentaBalance;
 import java.util.ArrayList;
 import modelo.CicloContableFolio;
+import modelo.CuentaBalance;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -16,11 +18,13 @@ import utils.constantes.RespuestaGeneral;
  */
 public class ServicioCicloContableFolio {
     daoCicloContableFolio daoCicloContableFolio;
+    daoCuentaBalance daoCuentaBalance;
     Conexion cx;
 
     public ServicioCicloContableFolio(String rutaConexion) {
         this.cx = new Conexion(rutaConexion);
         this.daoCicloContableFolio = new daoCicloContableFolio(this.cx);
+        this.daoCuentaBalance = new daoCuentaBalance(this.cx);
     }
     
     public RespuestaGeneral obtenerListaPorIdCicloContable(int idCicloContable, int idTipoCatalogo) {
@@ -45,6 +49,10 @@ public class ServicioCicloContableFolio {
             ArrayList<CicloContableFolio> lista = (ArrayList<CicloContableFolio>) rs1.getDatos();
             if (lista.isEmpty()) {
                 rs = this.daoCicloContableFolio.insertar(cBalance);
+                CuentaBalance c = new CuentaBalance();
+                c.setId_ciclo_contable(cBalance.getId_ciclo_contable());
+                c.setId_cuenta(cBalance.getId_cuenta());
+                RespuestaGeneral rg1 = this.daoCuentaBalance.insertar(c);
             } else {
                 rs.setMensaje("La Cuenta o Folio ya esta registrada");
             }
@@ -62,9 +70,11 @@ public class ServicioCicloContableFolio {
             ArrayList<CicloContableFolio> lista = (ArrayList<CicloContableFolio>) rs1.getDatos();
             if (lista.isEmpty()) {
                 rs = this.daoCicloContableFolio.editar(cBalance);
-                if (rs.esExitosa()) {
-                    this.daoCicloContableFolio.editarDetallesPartidas(cBalance);
-                }
+                CuentaBalance c = new CuentaBalance();
+                c.setId(cBalance.getId_cuenta_balance());
+                c.setId_ciclo_contable(cBalance.getId_ciclo_contable());
+                c.setId_cuenta(cBalance.getId_cuenta());
+                RespuestaGeneral rg1 = this.daoCuentaBalance.editar(c);
             } else {
                 rs.setMensaje("La Cuenta o Folio ya esta registrada");
             }

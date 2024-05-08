@@ -138,7 +138,7 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         tblCuentas.setAutoResizeMode(tblCuentas.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         tblCuentas.getColumnModel().getColumn(0).setPreferredWidth(90);
         tblCuentas.getColumnModel().getColumn(1).setPreferredWidth(120);
-        tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(25);
+        tblCuentas.getColumnModel().getColumn(2).setPreferredWidth(40);
         tblCuentas.getColumnModel().getColumn(3).setPreferredWidth(25);
         tblCuentas.getColumnModel().getColumn(4).setPreferredWidth(425);
         tblCuentas.getColumnModel().getColumn(5).setPreferredWidth(90);
@@ -415,15 +415,6 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         this.btnSeleccionarCuenta.setEnabled(true);
         String tituloCuenta = this.cuentaSeleccionada.getCodigo() + " - " + this.cuentaSeleccionada.getNombre();
         this.txtCuentaSeleccionada.setText(tituloCuenta);
-//        if (this.cuentaSeleccionada.getDisponible() == 1) {
-//            String tituloCuenta = this.cuentaSeleccionada.getCodigo() + " - " + this.cuentaSeleccionada.getNombre();
-//            this.txtCuentaSeleccionada.setText(tituloCuenta);
-//            this.txtCuentaSeleccionada.setForeground(Color.black);
-//        } else {
-//            String tituloCuenta = "*CUENTA NO VALIDA*";
-//            this.txtCuentaSeleccionada.setText(tituloCuenta);
-//            this.txtCuentaSeleccionada.setForeground(Color.red);
-//        }
         
     }//GEN-LAST:event_tblCuentasMouseClicked
 
