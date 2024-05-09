@@ -37,7 +37,7 @@ public class daoCuentaBalance {
         String sql = """
                     select cb.*, f.id as id_ciclo_folio
                     from cuenta_balance cb 
-                    left join ciclo_contable_folios f on f.id_ciclo_contable = cb.id_ciclo_contable
+                    left join ciclo_contable_folios f on f.id_ciclo_contable = cb.id_ciclo_contable and cb.id_cuenta = f.id_cuenta
                     where cb.id_ciclo_contable = ? 
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {

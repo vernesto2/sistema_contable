@@ -35,9 +35,8 @@ public class daoCicloContableFolio {
         ArrayList<CicloContableFolio> lista = new ArrayList<>();
         ResultSet rs = null;
         String sql = """
-                    select cb.*, c.id as id_cuenta_balance 
+                    select cb.*
                     from ciclo_contable_folios cb 
-                    left join cuenta_balance c on c.id_ciclo_contable = cb.id_ciclo_contable
                     where cb.id_ciclo_contable = ? 
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
@@ -50,7 +49,6 @@ public class daoCicloContableFolio {
                 cicloFolio.setId_cuenta(rs.getInt("id_cuenta"));
                 //cicloFolio.setSaldo(rs.getDouble("saldo"));
                 cicloFolio.setFolio_mayor(rs.getInt("folio_mayor"));
-                cicloFolio.setId_cuenta_balance(rs.getInt("id_cuenta_balance"));
                 
                 if (cicloFolio.getId_cuenta() > 0) {
                     RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cicloFolio.getId_cuenta(), idTipoCatalogo, cicloFolio.getId_ciclo_contable());
@@ -153,6 +151,41 @@ public class daoCicloContableFolio {
         }
     }
     
+    public RespuestaGeneral buscarIdCuentaPorCicloContableSinId(int id, int idCuenta, int idCicloContable, int folio) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        ArrayList<CicloContableFolio> lista = new ArrayList<>();
+        ResultSet rs = null;
+        var sql = """
+                    select cb.* 
+                    from ciclo_contable_folios cb 
+                    where cb.id_ciclo_contable = ? and (cb.id_cuenta = ? or cb.folio_mayor = ?) and cb.id != ?
+                  """;
+        
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, idCicloContable);
+            ps.setInt(2, idCuenta);
+            ps.setInt(3, folio);
+            ps.setInt(4, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CicloContableFolio cicloFolio = new CicloContableFolio();
+                cicloFolio.setId(rs.getInt("id"));
+                cicloFolio.setId_ciclo_contable(rs.getInt("id_ciclo_contable"));
+                cicloFolio.setId_cuenta(rs.getInt("id_cuenta"));
+                //cicloFolio.setSaldo(rs.getDouble("saldo"));
+                cicloFolio.setFolio_mayor(rs.getInt("folio_mayor"));
+                lista.add(cicloFolio);
+            }
+            
+            return rg.asOk("", lista);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asServerError(mensaje);
+        }
+    }
+    
     public RespuestaGeneral insertar(CicloContableFolio cicloFolio) {
         RespuestaGeneral rg = new RespuestaGeneral();
         var sql = """
@@ -206,33 +239,33 @@ public class daoCicloContableFolio {
         }
     }
     
-    public RespuestaGeneral editarDetallesPartidas(CicloContableFolio cicloFolio) {
-        RespuestaGeneral rg = new RespuestaGeneral();
-        ResultSet rs = null;
-        var sql = """
-                    UPDATE partida_detalle SET
-                        folio_mayor=? 
-                    WHERE id in (
-                        select pd.id from partida p
-                        left join partida_detalle pd on p.id = pd.id_partida
-                        where p.id_ciclo = ? and pd.id_cuenta = ?
-                    )
-                        
-                  """;
-        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
-            ps.setInt(1, cicloFolio.getFolio_mayor());
-            ps.setInt(2, cicloFolio.getId_ciclo_contable());
-            ps.setInt(3, cicloFolio.getId_cuenta());
-            ps.executeUpdate();
-            
-            return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, cicloFolio.getId());
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            String mensaje = e.getMessage().toString();
-            return rg.asServerError(mensaje);
-        }
-    }
+//    public RespuestaGeneral editarDetallesPartidas(CicloContableFolio cicloFolio) {
+//        RespuestaGeneral rg = new RespuestaGeneral();
+//        ResultSet rs = null;
+//        var sql = """
+//                    UPDATE partida_detalle SET
+//                        folio_mayor=? 
+//                    WHERE id in (
+//                        select pd.id from partida p
+//                        left join partida_detalle pd on p.id = pd.id_partida
+//                        where p.id_ciclo = ? and pd.id_cuenta = ?
+//                    )
+//                        
+//                  """;
+//        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+//            ps.setInt(1, cicloFolio.getFolio_mayor());
+//            ps.setInt(2, cicloFolio.getId_ciclo_contable());
+//            ps.setInt(3, cicloFolio.getId_cuenta());
+//            ps.executeUpdate();
+//            
+//            return rg.asUpdated(RespuestaGeneral.ACTUALIZADO_CORRECTAMENTE, cicloFolio.getId());
+//            
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            String mensaje = e.getMessage().toString();
+//            return rg.asServerError(mensaje);
+//        }
+//    }
     
     public RespuestaGeneral eliminar(int id) {
         RespuestaGeneral rg = new RespuestaGeneral();

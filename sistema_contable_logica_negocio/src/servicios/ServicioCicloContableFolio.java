@@ -49,10 +49,10 @@ public class ServicioCicloContableFolio {
             ArrayList<CicloContableFolio> lista = (ArrayList<CicloContableFolio>) rs1.getDatos();
             if (lista.isEmpty()) {
                 rs = this.daoCicloContableFolio.insertar(cBalance);
-                CuentaBalance c = new CuentaBalance();
-                c.setId_ciclo_contable(cBalance.getId_ciclo_contable());
-                c.setId_cuenta(cBalance.getId_cuenta());
-                RespuestaGeneral rg1 = this.daoCuentaBalance.insertar(c);
+//                CuentaBalance c = new CuentaBalance();
+//                c.setId_ciclo_contable(cBalance.getId_ciclo_contable());
+//                c.setId_cuenta(cBalance.getId_cuenta());
+//                RespuestaGeneral rg1 = this.daoCuentaBalance.insertar(c);
             } else {
                 rs.setMensaje("La Cuenta o Folio ya esta registrada");
             }
@@ -70,11 +70,11 @@ public class ServicioCicloContableFolio {
             ArrayList<CicloContableFolio> lista = (ArrayList<CicloContableFolio>) rs1.getDatos();
             if (lista.isEmpty()) {
                 rs = this.daoCicloContableFolio.editar(cBalance);
-                CuentaBalance c = new CuentaBalance();
-                c.setId(cBalance.getId_cuenta_balance());
-                c.setId_ciclo_contable(cBalance.getId_ciclo_contable());
-                c.setId_cuenta(cBalance.getId_cuenta());
-                RespuestaGeneral rg1 = this.daoCuentaBalance.editar(c);
+//                CuentaBalance c = new CuentaBalance();
+//                c.setId(cBalance.getId_cuenta_balance());
+//                c.setId_ciclo_contable(cBalance.getId_ciclo_contable());
+//                c.setId_cuenta(cBalance.getId_cuenta());
+//                RespuestaGeneral rg1 = this.daoCuentaBalance.editar(c);
             } else {
                 rs.setMensaje("La Cuenta o Folio ya esta registrada");
             }

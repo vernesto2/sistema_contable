@@ -5,8 +5,10 @@
 package servicios;
 
 import conexion.Conexion;
+import dao.daoCicloContableFolio;
 import dao.daoCuentaBalance;
 import java.util.ArrayList;
+import modelo.CicloContableFolio;
 import modelo.CuentaBalance;
 import utils.constantes.RespuestaGeneral;
 
@@ -16,11 +18,13 @@ import utils.constantes.RespuestaGeneral;
  */
 public class ServicioCuentaBalance {
     daoCuentaBalance daoCuentaBalance;
+    daoCicloContableFolio daoCicloContableFolio;
     Conexion cx;
 
     public ServicioCuentaBalance(String rutaConexion) {
         this.cx = new Conexion(rutaConexion);
         this.daoCuentaBalance = new daoCuentaBalance(this.cx);
+        this.daoCicloContableFolio = new daoCicloContableFolio(this.cx);
     }
     
     public RespuestaGeneral obtenerListaPorIdCicloContable(int idCicloContable, int idTipoCatalogo) {
@@ -40,14 +44,33 @@ public class ServicioCuentaBalance {
     public RespuestaGeneral insertar(CuentaBalance cBalance) {
         RespuestaGeneral rs = RespuestaGeneral.asBadRequest("");
         this.cx.conectar();
-        RespuestaGeneral rs1 = this.daoCuentaBalance.buscarIdCuentaPorCicloContable(cBalance.getId(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable(), cBalance.getCuenta().getFolio_mayor());
+        // verificamos que si existe el ciclo_contable_folios y sino existe creamos
+        RespuestaGeneral rs1 = this.daoCicloContableFolio.buscarIdCuentaPorCicloContableSinId(cBalance.getId_ciclo_folio(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable(), cBalance.getFolio());
         if (rs1.esExitosa()) {
-            ArrayList<CuentaBalance> lista = (ArrayList<CuentaBalance>) rs1.getDatos();
-            if (lista.isEmpty()) {
-                rs = this.daoCuentaBalance.insertar(cBalance);
+            ArrayList<CicloContableFolio> listaFolios = (ArrayList<CicloContableFolio>) rs1.getDatos();
+            // si la lista viene vacia procedemos a guardar en cicloFolios
+            if (listaFolios.isEmpty()) {
+                CicloContableFolio cFolio = new CicloContableFolio();
+                cFolio.setId(cBalance.getId_ciclo_folio());
+                cFolio.setId_ciclo_contable(cBalance.getId_ciclo_contable());
+                cFolio.setId_cuenta(cBalance.getId_cuenta());
+                cFolio.setFolio_mayor(cBalance.getFolio());
+                RespuestaGeneral rs2;
+                if (cFolio.getId() > 0) {
+                    rs2 = this.daoCicloContableFolio.editar(cFolio);
+                } else {
+                    rs2 = this.daoCicloContableFolio.insertar(cFolio);
+                }
+                
+                // validamos si se guardo existosamente y procedemos a crear el detalle en cuanta_balance
+                if (rs2.esExitosa()) {
+                    rs = this.daoCuentaBalance.insertar(cBalance);
+                }
+                
             } else {
                 rs.setMensaje("La Cuenta o Folio ya esta registrada con saldo");
             }
+            
         }
         
         this.cx.desconectar();
@@ -57,14 +80,32 @@ public class ServicioCuentaBalance {
     public RespuestaGeneral editar(CuentaBalance cBalance) {
         RespuestaGeneral rs = RespuestaGeneral.asBadRequest("");
         this.cx.conectar();
-        RespuestaGeneral rs1 = this.daoCuentaBalance.buscarIdCuentaPorCicloContable(cBalance.getId(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable(), cBalance.getCuenta().getFolio_mayor());
+        // verificamos que si existe el ciclo_contable_folios y sino existe creamos
+        RespuestaGeneral rs1 = this.daoCicloContableFolio.buscarIdCuentaPorCicloContableSinId(cBalance.getId_ciclo_folio(), cBalance.getId_cuenta(), cBalance.getId_ciclo_contable(), cBalance.getFolio());
         if (rs1.esExitosa()) {
-            ArrayList<CuentaBalance> lista = (ArrayList<CuentaBalance>) rs1.getDatos();
-            if (lista.isEmpty()) {
-                rs = this.daoCuentaBalance.editar(cBalance);
+            ArrayList<CicloContableFolio> listaFolios = (ArrayList<CicloContableFolio>) rs1.getDatos();
+            // si la lista viene vacia procedemos a guardar en cicloFolios
+            if (listaFolios.isEmpty()) {
+                CicloContableFolio cFolio = new CicloContableFolio();
+                cFolio.setId(cBalance.getId_ciclo_folio());
+                cFolio.setId_ciclo_contable(cBalance.getId_ciclo_contable());
+                cFolio.setId_cuenta(cBalance.getId_cuenta());
+                cFolio.setFolio_mayor(cBalance.getFolio());
+                RespuestaGeneral rs2;
+                if (cFolio.getId() > 0) {
+                    rs2 = this.daoCicloContableFolio.editar(cFolio);
+                } else {
+                    rs2 = this.daoCicloContableFolio.insertar(cFolio);
+                }
+                // validamos si se guardo existosamente y procedemos a crear el detalle en cuanta_balance
+                if (rs2.esExitosa()) {
+                    rs = this.daoCuentaBalance.editar(cBalance);
+                }
+                
             } else {
                 rs.setMensaje("La Cuenta o Folio ya esta registrada con saldo");
             }
+            
         }
         this.cx.desconectar();
         return rs;

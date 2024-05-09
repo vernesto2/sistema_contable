@@ -953,10 +953,13 @@ public class vConfigContabilidad extends javax.swing.JPanel {
             dCicloContableFolio d = new dCicloContableFolio(null, true, cContable, sesion, cContable.getTipoCatalogo());
             d.setVisible(true);
         } else if (accion == 10) {
-            CicloContable cContable = this.listaCiclosContables.get(row);
-            cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
-            dCuentasSaldos d = new dCuentasSaldos(null, true, cContable, sesion, cContable.getTipoCatalogo());
-            d.setVisible(true);
+            if (this.listaCiclosContables.get(row).getSin_libro_diario() == 1) {
+                CicloContable cContable = this.listaCiclosContables.get(row);
+                cContable.setId_catalogo(this.listaCiclosContables.get(row).getId_catalogo());
+                dCuentasSaldos d = new dCuentasSaldos(null, true, cContable, sesion, cContable.getTipoCatalogo());
+                d.setVisible(true);
+            }
+            
         }
     }//GEN-LAST:event_tblCicloContableMouseClicked
 
