@@ -262,7 +262,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="110" height="30" uuid="db9acd06-08df-4253-8133-2f1d987613fe"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$P{param_formateador_moneda}.format($V{var_total_saldo_deudor})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$P{param_formateador_moneda}.format($V{var_total_saldo_deudor} == null ? 0 : $V{var_total_saldo_deudor})]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>
 						<jr:detailCell style="Table_TD" height="30">
@@ -286,7 +286,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="110" height="30" uuid="6159e116-1cfa-4c28-84f1-080670872233"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$P{param_formateador_moneda}.format($V{var_total_saldo_acreedor})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$P{param_formateador_moneda}.format($V{var_total_saldo_acreedor} == null ? 0 : $V{var_total_saldo_acreedor})]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>
 						<jr:detailCell style="Table_TD" height="30">

@@ -35,7 +35,7 @@ public class daoCuentaBalance {
         ArrayList<CuentaBalance> lista = new ArrayList<>();
         ResultSet rs = null;
         String sql = """
-                    select cb.*, f.id as id_ciclo_folio
+                    select cb.*, f.id as id_ciclo_folio, f.folio_mayor
                     from cuenta_balance cb 
                     left join ciclo_contable_folios f on f.id_ciclo_contable = cb.id_ciclo_contable and cb.id_cuenta = f.id_cuenta
                     where cb.id_ciclo_contable = ? 
@@ -51,6 +51,7 @@ public class daoCuentaBalance {
                 cBalance.setSaldo_inicial(rs.getDouble("saldo_inicial"));
                 cBalance.setSaldo_final(rs.getDouble("saldo_final"));
                 cBalance.setId_ciclo_folio(rs.getInt("id_ciclo_folio"));
+                cBalance.setFolio(rs.getInt("folio_mayor"));
                 
                 if (cBalance.getId_cuenta() > 0) {
                     RespuestaGeneral rgc = _daoCuenta.ObtenerPorId(cBalance.getId_cuenta(), idTipoCatalogo, cBalance.getId_ciclo_contable());

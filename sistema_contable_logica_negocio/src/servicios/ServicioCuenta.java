@@ -143,7 +143,7 @@ public class ServicioCuenta {
                 listBeans = listaCuentaBalanza.stream().map(item -> {
                     CuentaBalanza cuentaBalanza = new CuentaBalanza();
                     cuentaBalanza.setCodigo(item.getCuenta().getCodigo());
-                    cuentaBalanza.setFolioMayor(null);
+                    cuentaBalanza.setFolioMayor(item.getFolio());
                     cuentaBalanza.setId(item.getCuenta().getId());
                     cuentaBalanza.setNombre(item.getCuenta().getNombre());
                     cuentaBalanza.setTipoSaldo(item.getCuenta().getTipo_saldo());
