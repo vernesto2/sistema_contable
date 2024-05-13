@@ -151,4 +151,23 @@ public class daoPartidaDetalle {
             return rg.asServerError(mensaje);
         }
     }
+    
+    public RespuestaGeneral eliminarDetalles(int idPartida) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        var sql = """
+                    UPDATE partida_detalle SET eliminado=? WHERE id_partida=?
+                  """;
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, 1);
+            ps.setInt(2, idPartida);
+            ps.executeUpdate();
+            
+            return rg.asOk(RespuestaGeneral.ELIMINADO_CORRECTAMENTE, ps);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asServerError(mensaje);
+        }
+    }
 }

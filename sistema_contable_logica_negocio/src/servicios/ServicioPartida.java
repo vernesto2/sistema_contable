@@ -77,6 +77,7 @@ public class ServicioPartida {
     public RespuestaGeneral eliminar(int id) {
         this.cx.conectar();
         RespuestaGeneral rg = this.daoPartida.eliminar(id);
+        RespuestaGeneral rg1 = this.daoPartidaDetalle.eliminarDetalles(id);
         this.cx.desconectar();
         return rg;
     }
