@@ -39,6 +39,10 @@ public class daoCuentaBalance {
                     from cuenta_balance cb 
                     left join ciclo_contable_folios f on f.id_ciclo_contable = cb.id_ciclo_contable and cb.id_cuenta = f.id_cuenta
                     where cb.id_ciclo_contable = ? 
+                    order by case 
+                            when f.folio_mayor = null then 0
+                            else f.folio_mayor
+                            end ASC
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, idCicloContable);

@@ -38,6 +38,10 @@ public class daoCicloContableFolio {
                     select cb.*
                     from ciclo_contable_folios cb 
                     where cb.id_ciclo_contable = ? 
+                    order by case 
+                            when cb.folio_mayor = null then 0
+                            else cb.folio_mayor
+                            end ASC
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, idCicloContable);
