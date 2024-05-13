@@ -48,7 +48,7 @@ public class ServicioCuenta {
         this.cx.desconectar();
         return rs;
     }
-    
+
     public RespuestaGeneral obtenerListaPorIdTipoCatalogoGeneralCicloContable(int idTipoCatalogo, String busqueda, int cicloContable) {
         this.cx.conectar();
         RespuestaGeneral rs = this.daoCuenta.ListarCatalogoCicloContable(idTipoCatalogo, busqueda, cicloContable);
@@ -131,39 +131,12 @@ public class ServicioCuenta {
     public RespuestaGeneral listarCuentaBalanzaComprobacion(CicloContable cicloContable, Integer tipoPartida) {
         try {
             this.cx.conectar();
-            List<CuentaBalanza> listBeans = null;
+            List<CuentaBalanza> listBeans = daoCuenta
+                    .listarCuentaBalanzaComprobacion(
+                            cicloContable.getTipoCatalogo().getId(), cicloContable.getId(), tipoPartida, null
+                    );
 
-            if (cicloContable.getSin_libro_diario() == 1) {
-                ArrayList<CuentaBalance> listaCuentaBalanza = (ArrayList<CuentaBalance>) _cuentaBalance
-                        .obtenerListaPorIdCicloContable(
-                                cicloContable.getId(),
-                                cicloContable.getTipoCatalogo().getId()
-                        ).getDatos();
-
-                listBeans = listaCuentaBalanza.stream().map(item -> {
-                    CuentaBalanza cuentaBalanza = new CuentaBalanza();
-                    cuentaBalanza.setCodigo(item.getCuenta().getCodigo());
-                    cuentaBalanza.setFolioMayor(item.getFolio());
-                    cuentaBalanza.setId(item.getCuenta().getId());
-                    cuentaBalanza.setNombre(item.getCuenta().getNombre());
-                    cuentaBalanza.setTipoSaldo(item.getCuenta().getTipo_saldo());
-
-                    if (cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_ACREEDOR.getValue())) {
-                        cuentaBalanza.setSaldoAcreedor(item.getSaldo_inicial());
-                    } else if (cuentaBalanza.getTipoSaldo().equals(Constantes.TIPO_SALDO_DEUDOR.getValue())) {
-                        cuentaBalanza.setSaldoDeudor(item.getSaldo_inicial());
-                    }
-                    return cuentaBalanza;
-                }).collect(Collectors.toList());
-            } //si tiene partidas sacar los saldos de la balanza de comprobacion
-            else {
-                listBeans = daoCuenta
-                        .listarCuentaBalanzaComprobacion(
-                                cicloContable.getTipoCatalogo().getId(), cicloContable.getId(), tipoPartida, null
-                        );
-
-                this.cx.desconectar();
-            }
+            this.cx.desconectar();
             return RespuestaGeneral.asOk(null, listBeans);
         } catch (Exception e) {
             return RespuestaGeneral.asBadRequest(e.getMessage());

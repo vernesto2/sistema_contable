@@ -679,16 +679,16 @@ with cte_balanza_comprobacion as (
   left join partida p on pd.id_partida = p.id and pd.id_ciclo_contable = p.id_ciclo
   left join ciclo_contable_folios ccf on ccf.id_ciclo_contable = pd.id_ciclo_contable and ccf.id_cuenta = c.id
   where c.eliminado = false 
-  and p.eliminado = false
+  and ( pd.id_partida is null or p.eliminado = false )
   and pd.eliminado = false
-  and p.id_ciclo = ?
+  and pd.id_ciclo_contable = ?
   and c.id_tipo_catalogo = ?
   and (
       ? is null or c.id = ?
   )
 )
 select cbc.*, saldo_calculado.saldo_deudor, saldo_calculado.saldo_acreedor
-from cte_balanza_comprobacion cbc 
+from cte_balanza_comprobacion cbc
 inner join (
   select c.id, 
   sum(
@@ -705,13 +705,12 @@ inner join (
   ) as saldo_acreedor
   from cuenta c 
     inner join vw_cargo_abono pd on pd.id_cuenta = c.id
-    left join partida p on pd.id_partida = p.id and pd.id_ciclo_contable = p.id_ciclo
+    left join partida p on pd.id_partida = p.id and pd.id_ciclo_contable = p.id_ciclo and p.id_tipo_partida <= ?
     where c.eliminado = false 
-    and p.eliminado = false
+    and ( pd.id_partida is null or p.eliminado = false )
     and pd.eliminado = false
-    and p.id_ciclo = ?
+    and pd.id_ciclo_contable = ?
     and c.id_tipo_catalogo = ?
-    and p.id_tipo_partida <= ?
     and (
       ? is null or c.id = ?
     )
@@ -731,9 +730,9 @@ order by folio_mayor
             ps.setObject(3, idCuenta);
             //idCuenta puede ser NULL, la consulta se encarga de manejar esos casos
             ps.setObject(4, idCuenta);
-            ps.setObject(5, idCiclo);
-            ps.setObject(6, idTipoCatalogo);
-            ps.setObject(7, tipoPartida);
+            ps.setObject(5, tipoPartida);
+            ps.setObject(6, idCiclo);
+            ps.setObject(7, idTipoCatalogo);
             //idCuenta puede ser NULL, la consulta se encarga de manejar esos casos
             ps.setObject(8, idCuenta);
             //idCuenta puede ser NULL, la consulta se encarga de manejar esos casos

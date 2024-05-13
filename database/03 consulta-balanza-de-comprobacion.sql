@@ -1,8 +1,8 @@
 /*Vista para simplificar las consultas que recuperan los saldos de las cuentas*/
 
-create view vw_cargo_abono as 
+CREATE VIEW vw_cargo_abono as 
 select 
-	0 as id_partida,
+	null as id_partida,
 	cb.id_ciclo_contable, 
 	cb.id_cuenta, 
 	case tipo_saldo
@@ -21,10 +21,10 @@ select
 	inner join cuenta c on cb.id_cuenta = c.id
 UNION
 select 
-	pdi.id_partida, p.id_ciclo, pdi.id_cuenta, pdi.debe, pdi.haber, pdi.parcial, pdi.eliminado	
+	pdi.id_partida, p.id_ciclo, pdi.id_cuenta, pdi.debe, pdi.haber, pdi.parcial, pdi.eliminado
 from partida_detalle pdi
-inner join partida p on pdi.id_partida = p.id and p.id_ciclo = 
-;
+inner join partida p on pdi.id_partida = p.id
+
 
 select * from vw_cargo_abono;
 
@@ -42,16 +42,16 @@ with cte_balanza_comprobacion as (
   left join partida p on pd.id_partida = p.id and pd.id_ciclo_contable = p.id_ciclo
   left join ciclo_contable_folios ccf on ccf.id_ciclo_contable = pd.id_ciclo_contable and ccf.id_cuenta = c.id
   where c.eliminado = false 
-  and p.eliminado = false
+  and ( pd.id_partida is null or p.eliminado = false )
   and pd.eliminado = false
-  and p.id_ciclo = 21
+  and pd.id_ciclo_contable = 25
   and c.id_tipo_catalogo = 1
   and (
       null is null or c.id = null
   )
 )
 select cbc.*, saldo_calculado.saldo_deudor, saldo_calculado.saldo_acreedor
-from cte_balanza_comprobacion cbc 
+from cte_balanza_comprobacion cbc
 inner join (
   select c.id, 
   sum(
@@ -68,13 +68,12 @@ inner join (
   ) as saldo_acreedor
   from cuenta c 
     inner join vw_cargo_abono pd on pd.id_cuenta = c.id
-    left join partida p on pd.id_partida = p.id and pd.id_ciclo_contable = p.id_ciclo
+    left join partida p on pd.id_partida = p.id and pd.id_ciclo_contable = p.id_ciclo and p.id_tipo_partida <= 1
     where c.eliminado = false 
-    and p.eliminado = false
+    and ( pd.id_partida is null or p.eliminado = false )
     and pd.eliminado = false
-    and p.id_ciclo = 21
+    and pd.id_ciclo_contable = 25
     and c.id_tipo_catalogo = 1
-    and p.id_tipo_partida <= 1
     and (
       null is null or c.id = null
     )
@@ -82,3 +81,4 @@ inner join (
 ) as saldo_calculado on saldo_calculado.id = cbc.id
 where row_number = 1
 order by folio_mayor
+
