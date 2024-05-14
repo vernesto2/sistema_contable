@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Cuenta;
+import modelo.FormulaParametro;
 import modelo.TipoCatalogo;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -38,6 +39,7 @@ import reportes.ElementoFormulaReporte;
 import servicios.ServicioCuenta;
 import servicios.ServicioCuentaBalance;
 import servicios.ServicioFormula;
+import servicios.ServicioFormulaParametro;
 import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
@@ -55,6 +57,7 @@ public class vEstadoResultados extends javax.swing.JPanel {
     Sesion sesion;
     ServicioCuenta _cuenta;
     ServicioFormula _formula;
+    ServicioFormulaParametro _formulaParametro;
     Cuenta cuentaSeleccionada;
     ServicioCuentaBalance _cuentaBalance;
 
@@ -63,6 +66,7 @@ public class vEstadoResultados extends javax.swing.JPanel {
         this.sesion = sesion;
         this._cuenta = new ServicioCuenta(sesion.rutaConexion);
         this._formula = new ServicioFormula(sesion.rutaConexion);
+        this._formulaParametro = new ServicioFormulaParametro(sesion.rutaConexion);
         this._cuentaBalance = new ServicioCuentaBalance(sesion.rutaConexion);
     }
 
@@ -180,9 +184,15 @@ public class vEstadoResultados extends javax.swing.JPanel {
                 sesion.configUsuario.getCicloContable(), tipoPartida
         ).getDatos();
 
-        CalculadoraEstadoResultados calcEstadoResultados = new CalculadoraEstadoResultados(listaFormula, listaCuentasBalanza, null, sesion.configUsuario.getCicloContable());
+        ArrayList<FormulaParametro> listaParametros = null;
+        RespuestaGeneral rgFormulaParametro = this._formulaParametro.obtenerLista(this.sesion.configUsuario.getCicloContable().getId());
+        if (rgFormulaParametro.esExitosa()) {
+            //obtener la lista de parametros para construir el estado de resultados o cualquiera de sus estados relacionados
+            listaParametros = (ArrayList<FormulaParametro>)rgFormulaParametro.getDatos();
+        }
+        CalculadoraEstadoResultados calcEstadoResultados = new CalculadoraEstadoResultados(listaFormula, listaCuentasBalanza, listaParametros, sesion.configUsuario.getCicloContable());
         List<ElementoFormulaReporte> listElementoReporte = calcEstadoResultados.resolverFormula();
-
+        
         try (
                 InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-estado-resultados.jrxml"); BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             Map<String, Object> params = new HashMap<String, Object>();

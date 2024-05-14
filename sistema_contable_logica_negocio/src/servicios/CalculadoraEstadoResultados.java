@@ -14,6 +14,7 @@ import java.util.Map;
 import jdk.jshell.spi.ExecutionControl;
 import modelo.CicloContable;
 import modelo.Formula;
+import modelo.FormulaParametro;
 import reportes.CuentaBalanza;
 import reportes.ElementoFormulaReporte;
 import utils.constantes.Constantes;
@@ -29,11 +30,11 @@ public class CalculadoraEstadoResultados {
     List<ImpuestoSobreRenta> listaImpuestoSobreRenta;
     ArrayList<dtoFormula> listaFormula;
     ArrayList<CuentaBalanza> listaCuentaBalanza;
-    Map<Integer, Double> valoresIngresados;
+    ArrayList<FormulaParametro> listaParametros;
     public CalculadoraEstadoResultados(
             ArrayList<dtoFormula> listaFormula, 
             ArrayList<CuentaBalanza> listaCuentaBalanza, 
-            Map<Integer, Double> valoresIngresados, 
+            ArrayList<FormulaParametro> listaParametros, 
             CicloContable cicloContable
     ) {
         
@@ -41,7 +42,7 @@ public class CalculadoraEstadoResultados {
         Collections.sort(this.listaFormula);
         
         this.listaCuentaBalanza = listaCuentaBalanza;
-        this.valoresIngresados = valoresIngresados;
+        this.listaParametros = listaParametros;
         tipoSociedad = cicloContable.getTipo_sociedad();
         porcentajeReservaLegal = cicloContable.getPorcentaje_reserva_legal();
         this.listaImpuestoSobreRenta = new ArrayList<ImpuestoSobreRenta>();
@@ -160,11 +161,13 @@ public class CalculadoraEstadoResultados {
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO.getValue()) ) {
-                //...........
-                //...........
-                //...........
-                //...........
-                //...........
+                FormulaParametro formulaParametro = buscarFormulaParametroPorIdFormula(formula.getId());
+                if(formulaParametro == null) {
+                    valorFormula = Double.valueOf(0);
+                } else {
+                    valorFormula = formulaParametro.getValor();
+                }
+                acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_RESERVA_LEGAL.getValue()) ) {
                 Double utilidadAntesReservaLegal = acumulado;
                 valorFormula = utilidadAntesReservaLegal * ( porcentajeReservaLegal / 100 );
@@ -236,7 +239,15 @@ agregarPadres(lista: any, expanded?: boolean): TreeNode {
   }
 */
 
-
+    private FormulaParametro buscarFormulaParametroPorIdFormula(Integer idFormula) {
+        for (FormulaParametro formulaParametro : listaParametros) {
+            Formula formula = formulaParametro.getFormula();
+            if(formula.getId() == idFormula) {
+                return formulaParametro;
+            }
+        }
+        return null;
+    }
     private Formula buscarFormulaPorTipoCuenta(Integer tipoCuentaEspecial) {
         for (dtoFormula dtoFormula : listaFormula) {
             Formula formula = dtoFormula.getFormula();
