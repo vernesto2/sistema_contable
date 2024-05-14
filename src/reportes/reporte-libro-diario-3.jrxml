@@ -701,7 +701,7 @@ order by fecha || hora asc]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="9"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{folio_mayor} == 0 || $F{folio_mayor} == null ? "" : $F{folio_mayor}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[ $F{folio_mayor} == null || $F{folio_mayor} == 0 ? "" : $F{folio_mayor}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
