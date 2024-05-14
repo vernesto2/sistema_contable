@@ -78,12 +78,12 @@ sum(
 ) over ( order by num_partida asc ) as saldo
 from (
 		select 
-		0 as id, 
+		null as id, 
 		tipo_saldo, 
 		null as fecha, 
 		null as id_tipo_partida,
 		"#SALDO ASIGNADO MANUALMENTE#" as comentario, 
-		0 as num_partida, 
+		null as num_partida, 
 		case tipo_saldo
 			when 'D' then saldo_inicial
 			when 'A' then 0
@@ -483,7 +483,7 @@ order by folio_mayor]]>
 							<textField>
 								<reportElement x="0" y="0" width="50" height="30" uuid="431ab410-c848-4aae-99f1-865b33c26673"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{num_partida}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{num_partida} == null ? "" : $F{num_partida}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
