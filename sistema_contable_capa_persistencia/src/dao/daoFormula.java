@@ -151,6 +151,44 @@ public class daoFormula {
             return rg.asServerError(mensaje);
         }
     }
+    
+    public RespuestaGeneral ObtenerPorIdUnico(int id) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        ArrayList<Formula> lista = new ArrayList<>();
+        ResultSet rs = null;
+        var sql = """
+                  select f.* 
+                  from formula f 
+                  where f.id = ?
+                  """;
+
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Formula formulaAux = new Formula();
+                formulaAux.setId(rs.getInt("id"));
+                formulaAux.setId_tipo_catalogo(rs.getInt("id_tipo_catalogo"));
+                formulaAux.setId_cuenta(rs.getInt("id_cuenta"));
+                formulaAux.setSigno(rs.getString("signo"));
+                formulaAux.setNombre(rs.getString("nombre"));
+                formulaAux.setTipo_cuenta_especial(rs.getInt("tipo_cuenta_especial"));
+                formulaAux.setPosicion(rs.getString("posicion"));
+                formulaAux.setId_formula(rs.getInt("id_formula"));
+                formulaAux.setTipo_formula(rs.getString("tipo_formula"));
+                formulaAux.setEliminado(rs.getInt("eliminado"));
+                
+                lista.add(formulaAux);
+            }
+
+            return rg.asOk("", lista);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asServerError(mensaje);
+        }
+    }
 
     public RespuestaGeneral insertar(Formula formula) {
         RespuestaGeneral rg = new RespuestaGeneral();

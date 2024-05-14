@@ -4,36 +4,34 @@
  */
 package formularios;
 
-import dto.dtoFormula;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import modelo.TipoCatalogo;
+import modelo.CicloContable;
+import modelo.FormulaParametro;
 import rojeru_san.efectos.ValoresEnum;
 import servicios.ServicioFormula;
+import servicios.ServicioFormulaParametro;
 import sesion.Sesion;
 import utils.Render;
 import utils.UtileriaVista;
-import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
  *
  * @author vacev
  */
-public class dFormula extends javax.swing.JDialog {
+public class dFormulaParametro extends javax.swing.JDialog {
 
     RespuestaGeneral rg = new RespuestaGeneral();
-    ServicioFormula _formula;
+    ServicioFormulaParametro _formulaP;
 
-    ArrayList<dtoFormula> listaFormula = new ArrayList<>();
-    TipoCatalogo tipoCatalogo = new TipoCatalogo();
-
+    ArrayList<FormulaParametro> listaFormula = new ArrayList<>();
+    CicloContable cicloContable = new CicloContable();
     boolean realizoAccion = false;
     Sesion sesion;
 
@@ -48,27 +46,39 @@ public class dFormula extends javax.swing.JDialog {
     /**
      * Creates new form dTipoCatalogo
      */
-    public dFormula(java.awt.Frame parent, boolean modal, TipoCatalogo tipoCatalogo, Sesion sesion) {
+    public dFormulaParametro(java.awt.Frame parent, boolean modal, CicloContable cicloContable, Sesion sesion) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
-        _formula = new ServicioFormula(sesion.rutaConexion);
-        this.tipoCatalogo = tipoCatalogo;
+        _formulaP = new ServicioFormulaParametro(sesion.rutaConexion);
+        this.cicloContable = cicloContable;
         this.iniciarVistaDialog();
     }
 
     public void iniciarVistaDialog() {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setTitle("FORMULA PARA: " + this.tipoCatalogo.getTipo().toUpperCase());
+        this.setTitle("PARAMETROS PARA ESTADO RESULTADO DEL CICLO: " + this.cicloContable.getTitulo().toUpperCase());
         this.realizoAccion = false;
         this.setModelFormula();
         this.obtenerListaFormula();
         this.setDatosFormula();
     }
+    
+    public void obtenerListaFormula() {
+        this.totalFormula.setText("0");
+        RespuestaGeneral rg = this._formulaP.obtenerLista(this.cicloContable.getId());
+        if (rg.esExitosa()) {
+            ArrayList<FormulaParametro> listaAux = (ArrayList<FormulaParametro>)rg.getDatos();
+            if (!listaAux.isEmpty()) {
+                this.listaFormula = listaAux;
+                this.totalFormula.setText(String.valueOf(this.listaFormula.size()));
+            }
+        }
+    }
 
     public void setModelFormula() {
-        String[] cabecera = {"Posición", "Signo", "Codigo", "Nombre", "Tipo Formula", "Formula Padre", "Cuenta Especial", "Editar", "Eliminar", "Sub-Formula"};
+        String[] cabecera = {"Almacenado", "Nombre", "Valor", "Editar", "Eliminar"};
         dtm.setColumnIdentifiers(cabecera);
         tblFormula.setModel(dtm);
         Render rr = new Render();
@@ -91,35 +101,23 @@ public class dFormula extends javax.swing.JDialog {
         btn3.setCursor(cur);
         this.limiparTablaFormula();
         Object[] datos = new Object[dtm.getColumnCount()];
-        // ordenamos el listado antes de mostrar
-        Collections.sort(listaFormula);
 
-        for (dtoFormula detalle : this.listaFormula) {
-            datos[0] = detalle.getFormula().getPosicion();
-            datos[1] = detalle.getFormula().getSigno();
-            datos[2] = detalle.getFormula().getCuenta().getCodigo();
-            datos[3] = detalle.getFormula().getNombre();
-            datos[4] = detalle.getFormula().getTipo_formula();
-            datos[5] = detalle.getFormulaPadre().getNombre();
-            datos[6] = Constantes.devolverCuentaEspecial(detalle.getFormula().getTipo_cuenta_especial());
-            datos[7] = btn1;
-            datos[8] = btn2;
-            datos[9] = btn3;
+        for (FormulaParametro detalle : this.listaFormula) {
+            datos[0] = detalle.getId() > 0 ? "Si" : "No";
+            datos[1] = detalle.getFormula().getNombre();
+            datos[2] = detalle.getValor();
+            datos[3] = detalle.getEliminado() == 0 ? btn1 : "";
+            datos[4] = detalle.getEliminado() == 1 ? btn2 : "";
             dtm.addRow(datos);
         }
         tblFormula.setModel(dtm);
-        tblFormula.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tblFormula.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
         //tblFormula.setAutoResizeMode(tblFormula.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        tblFormula.getColumnModel().getColumn(0).setPreferredWidth(70);
-        tblFormula.getColumnModel().getColumn(1).setPreferredWidth(60);
-        tblFormula.getColumnModel().getColumn(2).setPreferredWidth(90);
-        tblFormula.getColumnModel().getColumn(3).setPreferredWidth(300);
-        tblFormula.getColumnModel().getColumn(4).setPreferredWidth(160);
-        tblFormula.getColumnModel().getColumn(5).setPreferredWidth(280);
-        tblFormula.getColumnModel().getColumn(6).setPreferredWidth(120);
-        tblFormula.getColumnModel().getColumn(7).setPreferredWidth(60);
-        tblFormula.getColumnModel().getColumn(8).setPreferredWidth(60);
-        tblFormula.getColumnModel().getColumn(9).setPreferredWidth(80);
+        tblFormula.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tblFormula.getColumnModel().getColumn(1).setPreferredWidth(200);
+        tblFormula.getColumnModel().getColumn(2).setPreferredWidth(150);
+        tblFormula.getColumnModel().getColumn(3).setPreferredWidth(80);
+        tblFormula.getColumnModel().getColumn(4).setPreferredWidth(80);
     }
 
     public void limiparTablaFormula() {
@@ -129,15 +127,6 @@ public class dFormula extends javax.swing.JDialog {
         }
     }
 
-    public void obtenerListaFormula() {
-        this.totalFormula.setText("0");
-        RespuestaGeneral rgf = _formula.obtenerListaPorIdTipoCatalogo(this.tipoCatalogo.getId());
-        if (rgf.esExitosa()) {
-            this.listaFormula = (ArrayList<dtoFormula>) rgf.getDatos();
-            this.totalFormula.setText(String.valueOf(this.listaFormula.size()));
-
-        }
-    }
 /*
 
     public boolean getRealizoAccion() {
@@ -162,7 +151,6 @@ public class dFormula extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblFormula = new rojerusan.RSTableMetro();
-        btnAgregarDetallePartida = new RSMaterialComponent.RSButtonShapeIcon();
         jLabel2 = new javax.swing.JLabel();
         totalFormula = new javax.swing.JLabel();
 
@@ -176,7 +164,7 @@ public class dFormula extends javax.swing.JDialog {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Detalles formula  ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Detalles   ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
 
         tblFormula.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -208,22 +196,6 @@ public class dFormula extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblFormula);
 
-        btnAgregarDetallePartida.setBackground(new java.awt.Color(0, 153, 0));
-        btnAgregarDetallePartida.setText("AGREGAR DETALLE FORMULA");
-        btnAgregarDetallePartida.setToolTipText("AGREGAR DETALLE");
-        btnAgregarDetallePartida.setBackgroundHover(new java.awt.Color(0, 178, 0));
-        btnAgregarDetallePartida.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnAgregarDetallePartida.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnAgregarDetallePartida.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnAgregarDetallePartida.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnAgregarDetallePartida.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ADD);
-        btnAgregarDetallePartida.setSizeIcon(18.0F);
-        btnAgregarDetallePartida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarDetallePartidaActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Total de registros: ");
 
@@ -234,26 +206,21 @@ public class dFormula extends javax.swing.JDialog {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1119, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAgregarDetallePartida, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 865, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(totalFormula, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(totalFormula, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(78, 78, 78))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(btnAgregarDetallePartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -265,9 +232,7 @@ public class dFormula extends javax.swing.JDialog {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 901, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +243,7 @@ public class dFormula extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +254,7 @@ public class dFormula extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,58 +272,37 @@ public class dFormula extends javax.swing.JDialog {
     private void tblFormulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblFormulaMouseClicked
         int row = tblFormula.getSelectedRow();
         int column = tblFormula.getSelectedColumn();
-        if (column == 7) {
-
-            dFormFormula d = new dFormFormula(null, true, sesion, this.listaFormula.get(row), this.tipoCatalogo, new dtoFormula());
-            d.setVisible(true);
-            // validamos si realizo alguna accion para actualizar el listado o no
-            if (d.isRealizoAccion()) {
-                JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
-                this.obtenerListaFormula();
-                this.setDatosFormula();
-            }
-
-        } else if (column == 8) {
-
-            String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaFormula.get(row).getFormula().getNombre();
-            int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (opc == 0) {
-                RespuestaGeneral rg = _formula.eliminar(this.listaFormula.get(row).getFormula().getId());
-                if (rg.esExitosa()) {
-                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
-                    this.limiparTablaFormula();
+        if (column == 3) {
+            if (this.listaFormula.get(row).getEliminado() == 0) {
+                // enviamos el valor al dialogo y luego se recupera para setearlo
+                dModificarMontoFormulaParametro d = new dModificarMontoFormulaParametro(null, true, sesion, this.listaFormula.get(row));
+                d.setVisible(true);
+                if (d.isRealizoAccion()) {
                     this.obtenerListaFormula();
                     this.setDatosFormula();
-                } else {
-                    JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
                 }
             }
-
-        } else if (column == 9) {
-            dFormFormula d = new dFormFormula(null, true, sesion, new dtoFormula(), this.tipoCatalogo, this.listaFormula.get(row));
-            d.setVisible(true);
-            // validamos si realizo alguna accion para actualizar el listado o no
-            if (d.isRealizoAccion()) {
-                JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
-                this.obtenerListaFormula();
-                this.setDatosFormula();
+            
+        } else if (column == 4) {
+            if (this.listaFormula.get(row).getEliminado() == 1) {
+                String texto = "¿Esta seguro de continuar?, Se eliminará el registro:\n" + this.listaFormula.get(row).getFormula().getNombre();
+                int opc = JOptionPane.showConfirmDialog(null, texto, "¡ALERTA!", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (opc == 0) {
+                    RespuestaGeneral rg = _formulaP.eliminar(this.listaFormula.get(row).getId());
+                    if (rg.esExitosa()) {
+                        JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
+                        this.limiparTablaFormula();
+                        this.obtenerListaFormula();
+                        this.setDatosFormula();
+                    } else {
+                        JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
+                    }
+                }
             }
         }
     }//GEN-LAST:event_tblFormulaMouseClicked
 
-    private void btnAgregarDetallePartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDetallePartidaActionPerformed
-        dFormFormula d = new dFormFormula(null, true, sesion, new dtoFormula(), this.tipoCatalogo, new dtoFormula());
-        d.setVisible(true);
-        // validamos si realizo alguna accion para actualizar el listado o no
-        if (d.isRealizoAccion()) {
-            JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
-            this.obtenerListaFormula();
-            this.setDatosFormula();
-        }
-    }//GEN-LAST:event_btnAgregarDetallePartidaActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private RSMaterialComponent.RSButtonShapeIcon btnAgregarDetallePartida;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

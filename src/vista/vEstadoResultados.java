@@ -6,6 +6,7 @@ package vista;
 
 import conexion.Conexion;
 import dto.dtoFormula;
+import formularios.dFormulaParametro;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +22,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Cuenta;
-import modelo.Formula;
 import modelo.TipoCatalogo;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -77,6 +77,7 @@ public class vEstadoResultados extends javax.swing.JPanel {
 
         btnVerEstadoResultados1 = new RSMaterialComponent.RSButtonShapeIcon();
         btnVerEstadoResultados2 = new RSMaterialComponent.RSButtonShapeIcon();
+        btnDatos = new RSMaterialComponent.RSButtonShapeIcon();
 
         btnVerEstadoResultados1.setBackground(new java.awt.Color(251, 205, 6));
         btnVerEstadoResultados1.setText("Ver hasta partidas de ajuste");
@@ -107,25 +108,44 @@ public class vEstadoResultados extends javax.swing.JPanel {
             }
         });
 
+        btnDatos.setBackground(new java.awt.Color(33, 58, 86));
+        btnDatos.setText("Agregar Datos");
+        btnDatos.setAlignmentY(0.0F);
+        btnDatos.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnDatos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnDatos.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnDatos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnDatos.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.BOOK);
+        btnDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDatosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnVerEstadoResultados1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVerEstadoResultados2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVerEstadoResultados1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVerEstadoResultados2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(btnDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVerEstadoResultados1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerEstadoResultados2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addGap(70, 70, 70))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,6 +160,14 @@ public class vEstadoResultados extends javax.swing.JPanel {
                 Integer.parseInt(Constantes.TIPO_PARTIDA_CIERRE.getValue())
         );
     }//GEN-LAST:event_btnVerEstadoResultados2ActionPerformed
+
+    private void btnDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatosActionPerformed
+        dFormulaParametro d = new dFormulaParametro(null, true, this.sesion.configUsuario.getCicloContable(), sesion);
+        d.setVisible(true);
+//        if (d.isRealizoAccion()) {
+//            JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
+//        }
+    }//GEN-LAST:event_btnDatosActionPerformed
     private void verEstadoResultados(Integer tipoPartida) {
         TipoCatalogo tipoCatalogo = sesion.configUsuario.getCicloContable().getTipoCatalogo();
         ArrayList<dtoFormula> listaFormula = (ArrayList<dtoFormula>) _formula.obtenerListaPorIdTipoCatalogo(
@@ -211,6 +239,7 @@ public class vEstadoResultados extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonShapeIcon btnDatos;
     private RSMaterialComponent.RSButtonShapeIcon btnVerEstadoResultados1;
     private RSMaterialComponent.RSButtonShapeIcon btnVerEstadoResultados2;
     // End of variables declaration//GEN-END:variables

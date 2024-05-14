@@ -16,24 +16,31 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnVerEstadoResultados1" min="-2" pref="261" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnVerEstadoResultados2" min="-2" pref="261" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnVerEstadoResultados1" min="-2" pref="261" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnVerEstadoResultados2" min="-2" pref="261" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnDatos" alignment="0" min="-2" pref="261" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="102" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnDatos" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="134" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnVerEstadoResultados1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVerEstadoResultados2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="246" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,6 +103,31 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerEstadoResultados2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnDatos">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="56" green="3a" red="21" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Agregar Datos"/>
+        <Property name="alignmentY" type="float" value="0.0"/>
+        <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="56" green="44" red="21" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial" size="14" style="1"/>
+        </Property>
+        <Property name="forma" type="RSMaterialComponent.RSButtonShapeIcon$FORMA" editor="org.netbeans.modules.form.editors.EnumEditor">
+          <Value id="ROUND"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
+          <Value id="BOOK"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDatosActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
