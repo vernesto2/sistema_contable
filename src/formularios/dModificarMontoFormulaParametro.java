@@ -5,9 +5,7 @@
 package formularios;
 
 import javax.swing.JOptionPane;
-import modelo.Cuenta;
 import modelo.FormulaParametro;
-import servicios.ServicioCicloContableFolio;
 import servicios.ServicioFormulaParametro;
 import sesion.Sesion;
 import utils.UtileriaVista;
@@ -185,7 +183,7 @@ public class dModificarMontoFormulaParametro extends javax.swing.JDialog {
     
     private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
         try {
-            if (txtMonto.getText().trim().equals("") || txtMonto.getText().contains("..") || txtMonto.getText().trim().equals("0")) {
+            if (txtMonto.getText().trim().equals("") || txtMonto.getText().contains("..")) {
                 JOptionPane.showMessageDialog(this, "No ha ingresado un monto valido", "¡ALERTA!", JOptionPane.WARNING_MESSAGE);
             } else {
                 // procedemos a guardar

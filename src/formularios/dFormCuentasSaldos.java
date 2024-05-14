@@ -392,6 +392,7 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
             //JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
             this.cBalanceModel.setId_cuenta(d.getCuentaSeleccionada().getId());
             this.cBalanceModel.setFolio(d.getCuentaSeleccionada().getFolio_mayor());
+            this.cBalanceModel.setId_ciclo_folio(d.getCuentaSeleccionada().getId_ciclo_folio());
             this.txtFolio.setText(String.valueOf(d.getCuentaSeleccionada().getFolio_mayor()));
             this.txtCuentaSeleccionada.setText(d.getCuentaSeleccionada().getCodigo() + " - " + d.getCuentaSeleccionada().getNombre());
         }
