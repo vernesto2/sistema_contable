@@ -6,6 +6,7 @@ package dao;
 
 import conexion.Conexion;
 import dto.dtoFormula;
+import dto.dtoLista;
 import utils.constantes.RespuestaGeneral;
 
 import java.sql.PreparedStatement;
@@ -107,6 +108,29 @@ public class daoFormula {
             e.printStackTrace();
             String mensaje = e.getMessage().toString();
             return rg.asServerError(mensaje);
+        }
+    }
+    
+    public List<dtoLista> obtenerListaTIpoFormulaPorTipoCatalogo(int idTipoCatalogo) throws SQLException {
+        ArrayList<dtoLista> lista = new ArrayList<>();
+        ResultSet rs = null;
+        String sql = """
+                    SELECT tipo_formula 
+                    from formula where id_tipo_catalogo = ?
+                    group by tipo_formula
+                  """;
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, idTipoCatalogo);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String tipoFormula = rs.getString("tipo_formula");
+                dtoLista dtoLista = new dtoLista(tipoFormula, tipoFormula);
+                lista.add(dtoLista);
+            }
+
+            return lista;
+        } catch (SQLException e) {
+            throw e;
         }
     }
 

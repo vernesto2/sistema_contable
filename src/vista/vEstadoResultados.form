@@ -19,14 +19,22 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnVerEstadoResultados1" min="-2" pref="261" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnVerEstadoResultados2" min="-2" pref="261" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="btnDatos" min="-2" pref="261" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="btnDatos" alignment="0" min="-2" pref="261" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnVerEstadoResultados1" min="-2" pref="261" max="-2" attributes="0"/>
+                          <Component id="jLabel1" pref="267" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cmbEstadoFormula" pref="279" max="32767" attributes="0"/>
+                          <Component id="btnVerEstadoResultados2" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace pref="102" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -35,7 +43,17 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnDatos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="134" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="cmbEstadoFormula" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnVerEstadoResultados1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnVerEstadoResultados2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -129,6 +147,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDatosActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="RSMaterialComponent.RSComboBoxMaterial" name="cmbEstadoFormula">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbEstadoFormulaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tipo de estado"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -25,112 +25,127 @@ import utils.constantes.RespuestaGeneral;
  * @author student
  */
 public class CalculadoraEstadoResultados {
+
     Integer tipoSociedad;
     Double porcentajeReservaLegal;
     List<ImpuestoSobreRenta> listaImpuestoSobreRenta;
     ArrayList<dtoFormula> listaFormula;
     ArrayList<CuentaBalanza> listaCuentaBalanza;
     ArrayList<FormulaParametro> listaParametros;
+
     public CalculadoraEstadoResultados(
-            ArrayList<dtoFormula> listaFormula, 
-            ArrayList<CuentaBalanza> listaCuentaBalanza, 
-            ArrayList<FormulaParametro> listaParametros, 
+            ArrayList<dtoFormula> listaFormula,
+            ArrayList<CuentaBalanza> listaCuentaBalanza,
+            ArrayList<FormulaParametro> listaParametros,
             CicloContable cicloContable
     ) {
-        
+
         this.listaFormula = listaFormula;
         Collections.sort(this.listaFormula);
-        
+
         this.listaCuentaBalanza = listaCuentaBalanza;
         this.listaParametros = listaParametros;
         tipoSociedad = cicloContable.getTipo_sociedad();
         porcentajeReservaLegal = cicloContable.getPorcentaje_reserva_legal();
         this.listaImpuestoSobreRenta = new ArrayList<ImpuestoSobreRenta>();
-        
+
         ImpuestoSobreRenta impuestoSobreRenta;
-        
+
         impuestoSobreRenta = new ImpuestoSobreRenta(cicloContable.getMonto_maximo_ventas(), cicloContable.getPorcentaje_min());
         listaImpuestoSobreRenta.add(impuestoSobreRenta);
-        
+
         impuestoSobreRenta = new ImpuestoSobreRenta(null, cicloContable.getPorcentaje_max());
         listaImpuestoSobreRenta.add(impuestoSobreRenta);
-        
+
         //ordenar por la propiedad hasta
         Comparator<ImpuestoSobreRenta> comparador = (item1, item2) -> {
             //si ambos son null, tienen el mismo orden
-            if(item1.hasta == null && item2.hasta == null) {
+            if (item1.hasta == null && item2.hasta == null) {
                 return 0;
             }
             //item1 es mayor
-            if(item1.hasta == null) {
+            if (item1.hasta == null) {
                 return 1;
             } //item2 es mayor
-            else if(item2.hasta == null) {
+            else if (item2.hasta == null) {
                 return 1;
             }
-            if(item1.hasta < item2.hasta) {
+            if (item1.hasta < item2.hasta) {
                 return -1;
             } else if (item1.hasta > item2.hasta) {
                 return 1;
-            } else return 0;
+            } else {
+                return 0;
+            }
         };
-        
+
         Collections.sort(listaImpuestoSobreRenta, comparador);
     }
+
     public ImpuestoSobreRenta determinarImpuestoSobreRenta(Double ventas) {
         for (ImpuestoSobreRenta impuestoSobreRenta : listaImpuestoSobreRenta) {
-            if(impuestoSobreRenta.hasta == null || ventas <= impuestoSobreRenta.hasta) {
+            if (impuestoSobreRenta.hasta == null || ventas <= impuestoSobreRenta.hasta) {
                 return impuestoSobreRenta;
             }
         }
         return null;
     }
-    
-    
-    public List<ElementoFormulaReporte> resolverFormula() {
+
+    public List<ElementoFormulaReporte> resolverFormula(String tipoFormula) {
         List<dtoFormula> arbolFormula = this.agregarPadres(listaFormula);
         List<ElementoFormulaReporte> listaFormulaResuelta = new ArrayList<ElementoFormulaReporte>();
-        int nivel = 1;
-        Double utilidadPerdida = resolverFormula(arbolFormula, listaFormulaResuelta, nivel);
+        int columnaReporte = 1;
+        Double utilidadPerdida = resolverFormula(arbolFormula, listaFormulaResuelta, tipoFormula, columnaReporte);
         return listaFormulaResuelta;
     }
-    private Double resolverFormula( List<dtoFormula> listaFormulaArbol, List<ElementoFormulaReporte> listaFormulaResuelta, int nivel) {
+
+    private Double resolverFormula(List<dtoFormula> listaFormulaArbol, List<ElementoFormulaReporte> listaFormulaResuelta, String tipoFormula, int columnaReporte) {
         //obtener todos los elementos de la formula
         //obtener saldos inicial y saldo actual de las cuentas de la formula
         //iniciar a resolver la formula
         //validar si es necesario convertir la lista de formula en arbol para resolverlo mediante recursividad
         //es altamente probable que sea necesario
         Double acumulado = Double.valueOf(0);
-        
-        
+
         for (dtoFormula elemFormula : listaFormulaArbol) {
             Formula formula = elemFormula.getFormula();
             Double valorFormula = Double.valueOf(0);
-            final String tipoCuentaEspecial = ""+formula.getTipo_cuenta_especial();
+            final String tipoCuentaEspecial = "" + formula.getTipo_cuenta_especial();
             //en caso se entra en cuenta recursiva, se agrega primero el elemento actual ya que el elemento actual va primero, 
             //y posteriormente se le setea el valor
-            ElementoFormulaReporte elemFormulaReporte = new ElementoFormulaReporte();
-            
-            elemFormulaReporte.setId(formula.getCuenta().getId());
-            elemFormulaReporte.setCodigo(formula.getCuenta().getCodigo());
-            elemFormulaReporte.setNombre(formula.getNombre());
-            elemFormulaReporte.setSigno(formula.getSigno());
-            
-            listaFormulaResuelta.add(elemFormulaReporte);
-            
-            if(elemFormula.tieneHijas()) {
-                valorFormula = resolverFormula( elemFormula.getHijas(), listaFormulaResuelta, nivel + 1);
+            ElementoFormulaReporte elemFormulaReporte = null;
+
+            //solo se agregan al reporte las partes de la formula según el tipo de formula 
+            //por ejemplo tipo estado de resultados 
+            //no tendrá elementos de formula hijas que sean de estado de costo de venta
+            if (formula.getTipo_formula().equals(tipoFormula)) {
+                elemFormulaReporte = null;
+                new ElementoFormulaReporte();
+                elemFormulaReporte.setId(formula.getCuenta().getId());
+                elemFormulaReporte.setCodigo(formula.getCuenta().getCodigo());
+                elemFormulaReporte.setNombre(formula.getNombre());
+                elemFormulaReporte.setSigno(formula.getSigno());
+
+                listaFormulaResuelta.add(elemFormulaReporte);
+            }
+
+            if (elemFormula.tieneHijas()) {
+                //si el tipo de formula es diferente, no se debe incrementar la columnaReporte, 
+                //ya que la columnaReporte se usa solamente para determinar en que columna del reporte se utiliza
+                valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte + 1);
+
+                valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte + 1);
                 acumulado = elemFormula.operar(valorFormula, acumulado);
-            } else if( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_CALCULADO.getValue()) 
+            } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_CALCULADO.getValue())
                     && formula.getSigno().equals(Constantes.SIGNO_IGUAL.getValue())) {
                 //ver el acumulado al momento
                 valorFormula = acumulado;
                 //no cambia el acumulado, ya que el valor calculado 
                 //se usa para reflejar el valor resultante de las operaciones anteriores
                 //acumulado = valorFormula;
-            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO_INICIAL.getValue()) ) {
+            } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO_INICIAL.getValue())) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
-                if( cuentaBalanza == null ) {
+                if (cuentaBalanza == null) {
                     //si no se encontro, asignarle 0
                     valorFormula = Double.valueOf(0);
                     //lanzar excepcion
@@ -140,9 +155,9 @@ public class CalculadoraEstadoResultados {
                 }
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
-            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO.getValue()) ) {
+            } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO.getValue())) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
-                if( cuentaBalanza == null ) {
+                if (cuentaBalanza == null) {
                     //si no se encontro, asignarle 0
                     valorFormula = Double.valueOf(0);
                     //lanzar excepcion
@@ -152,28 +167,28 @@ public class CalculadoraEstadoResultados {
                 }
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
-            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES.getValue()) ) {
+            } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES.getValue())) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
-                if( cuentaBalanza == null ) {
-                    throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
+                if (cuentaBalanza == null) {
+                    throw new IllegalStateException("Error: id cuenta (" + formula.getId_cuenta() + ") no se encontró la cuenta en la balanza de comprobación");
                 }
                 valorFormula = cuentaBalanza.saldo();
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
-            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO.getValue()) ) {
+            } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO.getValue())) {
                 FormulaParametro formulaParametro = buscarFormulaParametroPorIdFormula(formula.getId());
-                if(formulaParametro == null) {
+                if (formulaParametro == null) {
                     valorFormula = Double.valueOf(0);
                 } else {
                     valorFormula = formulaParametro.getValor();
                 }
                 acumulado = elemFormula.operar(valorFormula, acumulado);
-            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_RESERVA_LEGAL.getValue()) ) {
+            } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_RESERVA_LEGAL.getValue())) {
                 Double utilidadAntesReservaLegal = acumulado;
-                valorFormula = utilidadAntesReservaLegal * ( porcentajeReservaLegal / 100 );
+                valorFormula = utilidadAntesReservaLegal * (porcentajeReservaLegal / 100);
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
-            } else if ( tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_IMPUESTO_SOBRE_RENTA.getValue()) ) { 
+            } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_IMPUESTO_SOBRE_RENTA.getValue())) {
                 //buscar la cuenta de ventas totales en la formula, luego traer su saldo final
                 Integer intTipoCuentaEspecial = Integer.parseInt(Constantes.TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES.getValue());
                 //buscar cual elemento de la formula tiene las ventas totales
@@ -182,21 +197,24 @@ public class CalculadoraEstadoResultados {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formulaVentas.getId_cuenta());
                 Double ventasTotales = cuentaBalanza.saldo();
                 ImpuestoSobreRenta impuestoSobreRenta = determinarImpuestoSobreRenta(ventasTotales);
-                
+
                 Double utilidadAntesDelImpuesto = acumulado;
                 valorFormula = impuestoSobreRenta.aplicar(ventasTotales, utilidadAntesDelImpuesto);
-                
+
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             }
-            
+
             //y posteriormente se le setea el valor
-            elemFormulaReporte.setValor(valorFormula, nivel);
-            System.out.println(elemFormulaReporte.getSigno()+ " "+ elemFormulaReporte.getNombre()+" = " + elemFormulaReporte.getValor());
+            if (formula.getTipo_formula().equals(tipoFormula)) {
+                elemFormulaReporte.setValor(valorFormula, columnaReporte);
+            }
+            System.out.println(elemFormulaReporte.getSigno() + " " + elemFormulaReporte.getNombre() + " = " + elemFormulaReporte.getValor());
         }
         return acumulado;
         //devolver datos que puede consumir el reporte
     }
-/*
+
+    /*
 agregarPadres(lista: any, expanded?: boolean): TreeNode {
     let listaAux = {data: []}
     lista.forEach(detalle => {
@@ -206,7 +224,7 @@ agregarPadres(lista: any, expanded?: boolean): TreeNode {
     });
     return listaAux;
   }
-*/
+     */
     private List<dtoFormula> agregarPadres(List<dtoFormula> lista) {
         List<dtoFormula> listaAux = new ArrayList<dtoFormula>();
         for (dtoFormula formula : lista) {
@@ -227,6 +245,7 @@ agregarPadres(lista: any, expanded?: boolean): TreeNode {
         }
         return arbolHijos;
     }
+
     /*
   agregarHijos(listaHijos: any, idPadre: number): TreeNode[] {
     let arbolHijos: TreeNode[]=[];
@@ -237,36 +256,39 @@ agregarPadres(lista: any, expanded?: boolean): TreeNode {
     });
     return arbolHijos;
   }
-*/
+     */
 
     private FormulaParametro buscarFormulaParametroPorIdFormula(Integer idFormula) {
         for (FormulaParametro formulaParametro : listaParametros) {
             Formula formula = formulaParametro.getFormula();
-            if(formula.getId() == idFormula) {
+            if (formula.getId() == idFormula) {
                 return formulaParametro;
             }
         }
         return null;
     }
+
     private Formula buscarFormulaPorTipoCuenta(Integer tipoCuentaEspecial) {
         for (dtoFormula dtoFormula : listaFormula) {
             Formula formula = dtoFormula.getFormula();
-            if(formula.getTipo_cuenta_especial() == tipoCuentaEspecial) {
+            if (formula.getTipo_cuenta_especial() == tipoCuentaEspecial) {
                 return formula;
             }
         }
         return null;
     }
+
     private CuentaBalanza buscarCuentaPorId(Integer idCuenta) {
         for (CuentaBalanza cuentaBalanza : listaCuentaBalanza) {
-            if(cuentaBalanza.getId().equals(idCuenta)) {
+            if (cuentaBalanza.getId().equals(idCuenta)) {
                 return cuentaBalanza;
             }
         }
         return null;
     }
-    
+
     class ImpuestoSobreRenta {
+
         public Double hasta;
         public Double porcentajeAAplicar;
 
@@ -274,10 +296,13 @@ agregarPadres(lista: any, expanded?: boolean): TreeNode {
             this.hasta = hasta;
             this.porcentajeAAplicar = porcentajeAAplicar;
         }
+
         public Double aplicar(Double ventas, Double utilidadAntesImpuestoSobreRenta) {
-            if( hasta == null || ventas < hasta) {
+            if (hasta == null || ventas < hasta) {
                 return utilidadAntesImpuestoSobreRenta + (porcentajeAAplicar / 100);
-            } else throw new IllegalStateException("");
+            } else {
+                throw new IllegalStateException("");
+            }
         }
     }
 }

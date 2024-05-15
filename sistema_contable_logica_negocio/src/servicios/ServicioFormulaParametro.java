@@ -58,5 +58,4 @@ public class ServicioFormulaParametro {
         this.cx.desconectar();
         return rg;
     }
-    
 }

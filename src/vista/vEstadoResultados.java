@@ -6,6 +6,7 @@ package vista;
 
 import conexion.Conexion;
 import dto.dtoFormula;
+import dto.dtoLista;
 import formularios.dFormulaParametro;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,6 +69,22 @@ public class vEstadoResultados extends javax.swing.JPanel {
         this._formula = new ServicioFormula(sesion.rutaConexion);
         this._formulaParametro = new ServicioFormulaParametro(sesion.rutaConexion);
         this._cuentaBalance = new ServicioCuentaBalance(sesion.rutaConexion);
+        iniciarVista();
+    }
+
+    private void iniciarVista() {
+        ArrayList<dtoLista> listaTipoFormulaEstadoResultado = Constantes.listaTiposFormulaEstadoResultado();
+        cmbEstadoFormula.removeAllItems();
+        
+        RespuestaGeneral rg = _formula.obtenerListaTipoFormulaPorTipoCatalogo(sesion.configUsuario.getCicloContable().getTipoCatalogo().getId());
+        if (rg.esFallida()) {
+            JOptionPane.showMessageDialog(this, rg.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(rg));
+            return;
+        }
+        List<dtoLista> listaTipoFormula = (List<dtoLista>) rg.getDatos();
+        for (dtoLista dtoLista : listaTipoFormula) {
+            cmbEstadoFormula.addItem(dtoLista.getValue());
+        }
     }
 
     /**
@@ -82,6 +99,8 @@ public class vEstadoResultados extends javax.swing.JPanel {
         btnVerEstadoResultados1 = new RSMaterialComponent.RSButtonShapeIcon();
         btnVerEstadoResultados2 = new RSMaterialComponent.RSButtonShapeIcon();
         btnDatos = new RSMaterialComponent.RSButtonShapeIcon();
+        cmbEstadoFormula = new RSMaterialComponent.RSComboBoxMaterial();
+        jLabel1 = new javax.swing.JLabel();
 
         btnVerEstadoResultados1.setBackground(new java.awt.Color(251, 205, 6));
         btnVerEstadoResultados1.setText("Ver hasta partidas de ajuste");
@@ -126,6 +145,14 @@ public class vEstadoResultados extends javax.swing.JPanel {
             }
         });
 
+        cmbEstadoFormula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEstadoFormulaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Tipo de estado");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,18 +161,30 @@ public class vEstadoResultados extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVerEstadoResultados1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVerEstadoResultados1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVerEstadoResultados2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(102, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbEstadoFormula, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                            .addComponent(btnVerEstadoResultados2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cmbEstadoFormula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVerEstadoResultados1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerEstadoResultados2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -154,14 +193,18 @@ public class vEstadoResultados extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVerEstadoResultados1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEstadoResultados1ActionPerformed
+        String tipoFormula = (String) cmbEstadoFormula.getSelectedItem();
         verEstadoResultados(
-                Integer.parseInt(Constantes.TIPO_PARTIDA_AJUSTE.getValue())
+                Integer.parseInt(Constantes.TIPO_PARTIDA_AJUSTE.getValue()), 
+                tipoFormula
         );
     }//GEN-LAST:event_btnVerEstadoResultados1ActionPerformed
 
     private void btnVerEstadoResultados2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEstadoResultados2ActionPerformed
+        String tipoFormula = (String) cmbEstadoFormula.getSelectedItem();
         verEstadoResultados(
-                Integer.parseInt(Constantes.TIPO_PARTIDA_CIERRE.getValue())
+                Integer.parseInt(Constantes.TIPO_PARTIDA_CIERRE.getValue()), 
+                tipoFormula
         );
     }//GEN-LAST:event_btnVerEstadoResultados2ActionPerformed
 
@@ -172,7 +215,11 @@ public class vEstadoResultados extends javax.swing.JPanel {
 //            JOptionPane.showMessageDialog(this, d.getRg().getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(d.getRg()));
 //        }
     }//GEN-LAST:event_btnDatosActionPerformed
-    private void verEstadoResultados(Integer tipoPartida) {
+
+    private void cmbEstadoFormulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoFormulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbEstadoFormulaActionPerformed
+    private void verEstadoResultados(Integer tipoPartida, String tipoFormula) {
         TipoCatalogo tipoCatalogo = sesion.configUsuario.getCicloContable().getTipoCatalogo();
         ArrayList<dtoFormula> listaFormula = (ArrayList<dtoFormula>) _formula.obtenerListaPorIdTipoCatalogo(
                 tipoCatalogo.getId()
@@ -188,11 +235,11 @@ public class vEstadoResultados extends javax.swing.JPanel {
         RespuestaGeneral rgFormulaParametro = this._formulaParametro.obtenerLista(this.sesion.configUsuario.getCicloContable().getId());
         if (rgFormulaParametro.esExitosa()) {
             //obtener la lista de parametros para construir el estado de resultados o cualquiera de sus estados relacionados
-            listaParametros = (ArrayList<FormulaParametro>)rgFormulaParametro.getDatos();
+            listaParametros = (ArrayList<FormulaParametro>) rgFormulaParametro.getDatos();
         }
         CalculadoraEstadoResultados calcEstadoResultados = new CalculadoraEstadoResultados(listaFormula, listaCuentasBalanza, listaParametros, sesion.configUsuario.getCicloContable());
-        List<ElementoFormulaReporte> listElementoReporte = calcEstadoResultados.resolverFormula();
-        
+        List<ElementoFormulaReporte> listElementoReporte = calcEstadoResultados.resolverFormula(tipoFormula);
+
         try (
                 InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-estado-resultados.jrxml"); BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             Map<String, Object> params = new HashMap<String, Object>();
@@ -252,5 +299,7 @@ public class vEstadoResultados extends javax.swing.JPanel {
     private RSMaterialComponent.RSButtonShapeIcon btnDatos;
     private RSMaterialComponent.RSButtonShapeIcon btnVerEstadoResultados1;
     private RSMaterialComponent.RSButtonShapeIcon btnVerEstadoResultados2;
+    private RSMaterialComponent.RSComboBoxMaterial cmbEstadoFormula;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,11 @@ package servicios;
 
 import conexion.Conexion;
 import dao.daoFormula;
+import dto.dtoLista;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Formula;
 import utils.constantes.RespuestaGeneral;
 
@@ -71,4 +76,17 @@ public class ServicioFormula {
         return rg;
     }
     
+    public RespuestaGeneral obtenerListaTipoFormulaPorTipoCatalogo(Integer idTIpoCatalogo) {
+        this.cx.conectar();
+        RespuestaGeneral rg = null;
+        try {
+            List<dtoLista> lista = daoFormula.obtenerListaTIpoFormulaPorTipoCatalogo(idTIpoCatalogo);
+            rg = RespuestaGeneral.asOk(null, lista);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            rg = RespuestaGeneral.asBadRequest("Ocurrio un error: "+ex.getMessage(), null);
+        }
+        this.cx.desconectar();
+        return rg;
+    }
 }
