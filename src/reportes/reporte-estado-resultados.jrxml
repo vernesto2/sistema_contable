@@ -89,6 +89,7 @@
 	<parameter name="param_elem_estado_resultados" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" nestedType="reportes.CuentaBalanza">
 		<defaultValueExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ( dao.daoFormula.generarEstadoResultados() )]]></defaultValueExpression>
 	</parameter>
+	<parameter name="param_titulo_reporte" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -117,13 +118,6 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["Empresa: "+$P{param_titulo_ciclo_contable}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="0" y="78" width="550" height="20" uuid="9f001b6b-1e74-44ec-bcff-f39792e56cbc"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Estado de resultados]]></text>
-			</staticText>
 			<textField>
 				<reportElement x="0" y="118" width="550" height="20" uuid="a184eca5-6dcc-49cb-9daa-1695a5851e71"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -160,6 +154,13 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{param_fecha_generacion}]]></textFieldExpression>
 				<patternExpression><![CDATA["dd/MM/yyyy hh:mm"]]></patternExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="78" width="550" height="20" uuid="c00e9bc3-e85b-4145-8257-fbb92a244fdb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{param_titulo_reporte}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -211,8 +212,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="0335f0b7-c6bc-49d4-9695-75f293d6e23a"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{valor1} == null ? "" :  $P{param_formateador_moneda}.format($F{valor1})
-]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{valor1} == null ? "" :  $P{param_formateador_moneda}.format($F{valor1})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -224,8 +224,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="b10260e4-c966-487e-a586-73b049bed3c7"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{valor2} == null ? "" :  $P{param_formateador_moneda}.format($F{valor2})
-]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{valor2} == null ? "" :  $P{param_formateador_moneda}.format($F{valor2})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -237,8 +236,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="80" height="30" uuid="8dd807d0-3948-4e9d-8cf2-f7c996f3e360"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{valor3} == null ? "" :  $P{param_formateador_moneda}.format($F{valor3})
-]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{valor3} == null ? "" :  $P{param_formateador_moneda}.format($F{valor3})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

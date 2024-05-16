@@ -94,7 +94,7 @@ public class CalculadoraEstadoResultados {
     public List<ElementoFormulaReporte> resolverFormula(String tipoFormula) {
         List<dtoFormula> arbolFormula = this.agregarPadres(listaFormula);
         List<ElementoFormulaReporte> listaFormulaResuelta = new ArrayList<ElementoFormulaReporte>();
-        int columnaReporte = 0;
+        int columnaReporte = 1;
         Double utilidadPerdida = resolverFormula(arbolFormula, listaFormulaResuelta, tipoFormula, columnaReporte);
         return listaFormulaResuelta;
     }

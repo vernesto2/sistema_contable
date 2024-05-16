@@ -279,7 +279,9 @@ public class vEstadoResultados extends javax.swing.JPanel {
                 }
             }
             Integer idCiclo = sesion.configUsuario.getCicloContable().getId();
-
+            
+            params.put("param_titulo_reporte", tipoFormula);
+            
             JRBeanCollectionDataSource param_elem_estado_resultados = new JRBeanCollectionDataSource(listElementoReporte);
             params.put("param_elem_estado_resultados", param_elem_estado_resultados);
 //            params.put("params_cuentas_balanza", listBeans);
