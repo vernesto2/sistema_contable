@@ -94,7 +94,7 @@ public class CalculadoraEstadoResultados {
     public List<ElementoFormulaReporte> resolverFormula(String tipoFormula) {
         List<dtoFormula> arbolFormula = this.agregarPadres(listaFormula);
         List<ElementoFormulaReporte> listaFormulaResuelta = new ArrayList<ElementoFormulaReporte>();
-        int columnaReporte = 1;
+        int columnaReporte = 0;
         Double utilidadPerdida = resolverFormula(arbolFormula, listaFormulaResuelta, tipoFormula, columnaReporte);
         return listaFormulaResuelta;
     }
@@ -118,9 +118,9 @@ public class CalculadoraEstadoResultados {
             //solo se agregan al reporte las partes de la formula según el tipo de formula 
             //por ejemplo tipo estado de resultados 
             //no tendrá elementos de formula hijas que sean de estado de costo de venta
-            if (formula.getTipo_formula().equals(tipoFormula)) {
-                elemFormulaReporte = null;
-                new ElementoFormulaReporte();
+            boolean seAgregarAReporte = formula.getTipo_formula().equals(tipoFormula);
+            if (seAgregarAReporte) {
+                elemFormulaReporte = new ElementoFormulaReporte();
                 elemFormulaReporte.setId(formula.getCuenta().getId());
                 elemFormulaReporte.setCodigo(formula.getCuenta().getCodigo());
                 elemFormulaReporte.setNombre(formula.getNombre());
@@ -130,11 +130,12 @@ public class CalculadoraEstadoResultados {
             }
 
             if (elemFormula.tieneHijas()) {
-                //si el tipo de formula es diferente, no se debe incrementar la columnaReporte, 
-                //ya que la columnaReporte se usa solamente para determinar en que columna del reporte se utiliza
-                valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte + 1);
-
-                valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte + 1);
+                //si se agrega al reporte, los elementos hijos iran en la siguiente columna del reporte
+                if(seAgregarAReporte) {
+                    valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte + 1);
+                } else {
+                    valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte);
+                }
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_CALCULADO.getValue())
                     && formula.getSigno().equals(Constantes.SIGNO_IGUAL.getValue())) {
@@ -145,43 +146,22 @@ public class CalculadoraEstadoResultados {
                 //acumulado = valorFormula;
             } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO_INICIAL.getValue())) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
-                if (cuentaBalanza == null) {
-                    //si no se encontro, asignarle 0
-                    valorFormula = Double.valueOf(0);
-                    //lanzar excepcion
-                    //throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
-                } else {
-                    valorFormula = cuentaBalanza.saldo();
-                }
+                valorFormula = cuentaBalanza == null? Double.valueOf(0) : cuentaBalanza.saldo();
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_SALDO.getValue())) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
-                if (cuentaBalanza == null) {
-                    //si no se encontro, asignarle 0
-                    valorFormula = Double.valueOf(0);
-                    //lanzar excepcion
-                    //throw new IllegalStateException("Error: id cuenta ("+formula.getId_cuenta()+") no se encontró la cuenta en la balanza de comprobación");
-                } else {
-                    valorFormula = cuentaBalanza.saldo();
-                }
+                valorFormula = cuentaBalanza == null ? Double.valueOf(0) : cuentaBalanza.saldo();
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VENTAS_TOTALES.getValue())) {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formula.getId_cuenta());
-                if (cuentaBalanza == null) {
-                    throw new IllegalStateException("Error: id cuenta (" + formula.getId_cuenta() + ") no se encontró la cuenta en la balanza de comprobación");
-                }
-                valorFormula = cuentaBalanza.saldo();
+                valorFormula = cuentaBalanza == null ? Double.valueOf(0) : cuentaBalanza.saldo();
                 //sumar o restar según signo
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO.getValue())) {
                 FormulaParametro formulaParametro = buscarFormulaParametroPorIdFormula(formula.getId());
-                if (formulaParametro == null) {
-                    valorFormula = Double.valueOf(0);
-                } else {
-                    valorFormula = formulaParametro.getValor();
-                }
+                valorFormula = formulaParametro == null ? Double.valueOf(0) : formulaParametro.getValor();
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_RESERVA_LEGAL.getValue())) {
                 Double utilidadAntesReservaLegal = acumulado;
@@ -205,10 +185,10 @@ public class CalculadoraEstadoResultados {
             }
 
             //y posteriormente se le setea el valor
-            if (formula.getTipo_formula().equals(tipoFormula)) {
+            if (seAgregarAReporte) {
                 elemFormulaReporte.setValor(valorFormula, columnaReporte);
             }
-            System.out.println(elemFormulaReporte.getSigno() + " " + elemFormulaReporte.getNombre() + " = " + elemFormulaReporte.getValor());
+            System.out.println(formula.getSigno() + " " + formula.getNombre() + " = " + valorFormula);
         }
         return acumulado;
         //devolver datos que puede consumir el reporte
