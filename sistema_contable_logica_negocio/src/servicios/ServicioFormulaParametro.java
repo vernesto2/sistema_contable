@@ -22,9 +22,9 @@ public class ServicioFormulaParametro {
         this._daoFormulaParametro = new daoFormulaParametro(this.cx);
     }
     
-    public RespuestaGeneral obtenerLista(int idCicloContable) {
+    public RespuestaGeneral obtenerLista(int idCicloContable, int tipoCuentaEspecial) {
         this.cx.conectar();
-        RespuestaGeneral rs = this._daoFormulaParametro.Listar(idCicloContable);
+        RespuestaGeneral rs = this._daoFormulaParametro.Listar(idCicloContable, tipoCuentaEspecial);
         this.cx.desconectar(); 
         return rs;
     }

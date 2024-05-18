@@ -5,9 +5,18 @@
 package formularios;
 
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import modelo.CicloContableFolio;
 import modelo.Cuenta;
@@ -30,7 +39,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override 
         public boolean isCellEditable(int row, int column) { 
-            return true;
+            return false;
         }
     };
     boolean realizoAccion = false;   
@@ -125,7 +134,41 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         tblCuentas.getColumnModel().getColumn(6).setPreferredWidth(90);
         tblCuentas.getColumnModel().getColumn(7).setPreferredWidth(100);
         tblCuentas.getColumnModel().getColumn(8).setPreferredWidth(100);
+        
+        tblCuentas.setCellSelectionEnabled(true); // Permitir la selección de celdas individuales
+        tblCuentas.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        // Mapear la acción de copiar al atajo Ctrl+C
+        KeyStroke copyKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
+        tblCuentas.getInputMap(JComponent.WHEN_FOCUSED).put(copyKeyStroke, "copy");
+        tblCuentas.getActionMap().put("copy", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                copyTableToClipboard(tblCuentas);
+            }
+        });
        
+    }
+    
+    private static void copyTableToClipboard(JTable table) {
+        StringBuilder sb = new StringBuilder();
+        int numCols = table.getSelectedColumnCount();
+        int numRows = table.getSelectedRowCount();
+        int[] selectedRows = table.getSelectedRows();
+        int[] selectedCols = table.getSelectedColumns();
+
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                sb.append(table.getValueAt(selectedRows[i], selectedCols[j]));
+                if (j < numCols - 1) {
+                    sb.append("\t"); // Separar las celdas por tabuladores
+                }
+            }
+            sb.append("\n"); // Nueva línea para cada fila
+        }
+
+        StringSelection selection = new StringSelection(sb.toString());
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, selection);
     }
 
     public void limiparTablaCuentas() {

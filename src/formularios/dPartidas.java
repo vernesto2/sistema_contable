@@ -8,11 +8,20 @@ package formularios;
 import dto.dtoLista;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cuenta;
 import modelo.Partida;
@@ -49,7 +58,7 @@ public class dPartidas extends javax.swing.JDialog {
     DefaultTableModel dtm = new DefaultTableModel() {
         @Override 
         public boolean isCellEditable(int row, int column) { 
-            return true;
+            return false;
         }
     };
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -158,6 +167,40 @@ public class dPartidas extends javax.swing.JDialog {
         tblDetallePartida.getColumnModel().getColumn(7).setPreferredWidth(150);
         tblDetallePartida.getColumnModel().getColumn(8).setPreferredWidth(50);
         tblDetallePartida.getColumnModel().getColumn(9).setPreferredWidth(50);
+        
+        tblDetallePartida.setCellSelectionEnabled(true); // Permitir la selección de celdas individuales
+        tblDetallePartida.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+        // Mapear la acción de copiar al atajo Ctrl+C
+        KeyStroke copyKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
+        tblDetallePartida.getInputMap(JComponent.WHEN_FOCUSED).put(copyKeyStroke, "copy");
+        tblDetallePartida.getActionMap().put("copy", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                copyTableToClipboard(tblDetallePartida);
+            }
+        });
+    }
+    
+    private static void copyTableToClipboard(JTable table) {
+        StringBuilder sb = new StringBuilder();
+        int numCols = table.getSelectedColumnCount();
+        int numRows = table.getSelectedRowCount();
+        int[] selectedRows = table.getSelectedRows();
+        int[] selectedCols = table.getSelectedColumns();
+
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                sb.append(table.getValueAt(selectedRows[i], selectedCols[j]));
+                if (j < numCols - 1) {
+                    sb.append("\t"); // Separar las celdas por tabuladores
+                }
+            }
+            sb.append("\n"); // Nueva línea para cada fila
+        }
+
+        StringSelection selection = new StringSelection(sb.toString());
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, selection);
     }
     
     public void limiparTablaDetallePartida() {

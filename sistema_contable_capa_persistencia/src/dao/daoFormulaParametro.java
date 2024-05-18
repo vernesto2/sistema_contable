@@ -5,7 +5,6 @@
 package dao;
 
 import conexion.Conexion;
-import dto.dtoFormula;
 import utils.constantes.RespuestaGeneral;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -33,7 +32,7 @@ public class daoFormulaParametro {
         this._daoFormula = new daoFormula(cx);
     }
 
-    public RespuestaGeneral Listar(int idCicloContable) {
+    public RespuestaGeneral Listar(int idCicloContable, int tipoCuentaEspecial) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<FormulaParametro> lista = new ArrayList<>();
         ResultSet rs = null;
@@ -55,11 +54,12 @@ public class daoFormulaParametro {
                     	from formula f
                     	left join ciclo_contable cc on cc.id_catalogo = f.id_tipo_catalogo and cc.eliminado = 0
                     	left join formula_parametro fp on cc.id = fp.id_ciclo_contable and fp.id_formula = f.id
-                    	where cc.id = ? and f.tipo_cuenta_especial = 4
+                    	where cc.id = ? and f.tipo_cuenta_especial = ?
                     )tb where tb.id > 0 or tb.eliminado = 0
                   """;
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, idCicloContable);
+            ps.setInt(2, tipoCuentaEspecial);
             rs = ps.executeQuery();
             while (rs.next()) {
                 FormulaParametro formulaAux = new FormulaParametro();

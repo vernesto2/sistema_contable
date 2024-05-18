@@ -14,11 +14,11 @@ import javax.swing.table.DefaultTableModel;
 import modelo.CicloContable;
 import modelo.FormulaParametro;
 import rojeru_san.efectos.ValoresEnum;
-import servicios.ServicioFormula;
 import servicios.ServicioFormulaParametro;
 import sesion.Sesion;
 import utils.Render;
 import utils.UtileriaVista;
+import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
 /**
@@ -67,7 +67,7 @@ public class dFormulaParametro extends javax.swing.JDialog {
     
     public void obtenerListaFormula() {
         this.totalFormula.setText("0");
-        RespuestaGeneral rg = this._formulaP.obtenerLista(this.cicloContable.getId());
+        RespuestaGeneral rg = this._formulaP.obtenerLista(this.cicloContable.getId(), Integer.parseInt(Constantes.TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO.getValue()));
         if (rg.esExitosa()) {
             ArrayList<FormulaParametro> listaAux = (ArrayList<FormulaParametro>)rg.getDatos();
             if (!listaAux.isEmpty()) {

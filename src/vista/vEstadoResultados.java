@@ -232,7 +232,7 @@ public class vEstadoResultados extends javax.swing.JPanel {
         ).getDatos();
 
         ArrayList<FormulaParametro> listaParametros = null;
-        RespuestaGeneral rgFormulaParametro = this._formulaParametro.obtenerLista(this.sesion.configUsuario.getCicloContable().getId());
+        RespuestaGeneral rgFormulaParametro = this._formulaParametro.obtenerLista(this.sesion.configUsuario.getCicloContable().getId(), Integer.parseInt(Constantes.TIPO_CUENTA_ESPECIAL_VALOR_INGRESADO.getValue()));
         if (rgFormulaParametro.esExitosa()) {
             //obtener la lista de parametros para construir el estado de resultados o cualquiera de sus estados relacionados
             listaParametros = (ArrayList<FormulaParametro>) rgFormulaParametro.getDatos();
