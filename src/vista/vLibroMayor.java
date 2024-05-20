@@ -284,12 +284,12 @@ public class vLibroMayor extends javax.swing.JPanel {
             if(nivelAMayorizar == 0) {
                 params.put("param_tamano_codigo", 0);
             } else {
-                RespuestaGeneral rg = _cuenta.tamanoCodigoAMayorizar(tipoCatalogo);
+                RespuestaGeneral rg = _cuenta.tamanoCodigoAMayorizar(tipoCatalogo, nivelAMayorizar);
                 Integer tamanoNivelAMayorizar = ( Integer) rg.getDatos();
                 if ( tamanoNivelAMayorizar == null) {
                     JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
                 } else {
-                    params.put("param_tamano_codigo", 4);
+                    params.put("param_tamano_codigo", tamanoNivelAMayorizar);
                 }
             }
             

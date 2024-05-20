@@ -618,23 +618,28 @@ public class daoCuenta {
         }
     }
     
-    public Integer tamanoCodigoAMayorizar(Integer idTipoCaalogo) {
+    public Integer tamanoCodigoAMayorizar(Integer idTipoCaalogo, int nivelAMayorizar) {
         
         ArrayList<Cuenta> lista = new ArrayList<>();
         ResultSet rs = null;
         Integer tamanoCodigoAMayorizar = null;
         var sql = 
 """
-select length(ci.codigo) as length_codigo
-, row_number() over (order by length(ci.codigo)) as nivel
-from cuenta ci
-where ci.id_tipo_catalogo = ?
-and ci.eliminado = false
-group by length(ci.codigo) 
+with cte_nivel_cuenta as (
+    select length(ci.codigo) as length_codigo
+    , row_number() over (order by length(ci.codigo)) as nivel
+    from cuenta ci
+    where ci.id_tipo_catalogo = ?
+    and ci.eliminado = false
+    group by length(ci.codigo) 
+) 
+select * from cte_nivel_cuenta
+where nivel = ?
 """;
         
         try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
             ps.setInt(1, idTipoCaalogo);
+            ps.setInt(2, nivelAMayorizar);
             rs = ps.executeQuery();
             
             while (rs.next()) {
