@@ -14,7 +14,9 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import modelo.Cuenta;
 import reportes.CuentaBalanza;
 
@@ -757,6 +759,50 @@ order by folio_mayor
         }
     }
     
+    public List<Map<String, Object>> listarCuentaNivelParaBalanceGeneral(int idTipoCatalogo, int tamanoCodigoMayorizar) throws SQLException {
+        String sql = """
+ select c.*, nc.nivel as nivel, tc.tipo as catalogo
+ from cuenta c
+ left join tipo_catalogo tc on c.id_tipo_catalogo = tc.id
+ inner join ( 
+        select length(ci.codigo) as length_codigo, 
+        	row_number() over (order by length(ci.codigo)) as nivel
+        from cuenta ci 
+        where ci.id_tipo_catalogo = ? and ci.eliminado = 0 
+ 	group by length(ci.codigo)
+ ) as nc on nc.length_codigo = length(c.codigo) 
+ where c.id_tipo_catalogo = ? and c.eliminado = 0
+       and nc.length <= ?
+ order by cast(c.codigo as text)
+                     """;
+        
+        List<Map<String, Object>> lista = new ArrayList<Map<String, Object>>();
+        try (
+                PreparedStatement ps = cx.getCx().prepareStatement(sql);
+            ) 
+        {
+            ps.setObject(1, idTipoCatalogo);
+            ps.setObject(2, idTipoCatalogo);
+            ps.setObject(3, tamanoCodigoMayorizar);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Map<String, Object> item = new HashMap<String, Object>();
+                
+                item.put("id", rs.getInt("id"));
+                item.put("codgo", rs.getString("codigo"));
+                item.put("nivel", rs.getInt("nivel"));
+                item.put("nombre", rs.getString("nombre"));
+                
+                lista.add(item);
+            }
+            
+            return lista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
     
     public static Collection<CuentaBalanza> generarCuentasBalanzaComprobacion() {
         List<CuentaBalanza> coleccion = new ArrayList<CuentaBalanza>();

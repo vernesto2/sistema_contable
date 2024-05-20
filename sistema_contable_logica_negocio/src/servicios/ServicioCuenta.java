@@ -6,12 +6,18 @@ package servicios;
 
 import conexion.Conexion;
 import dao.daoCuenta;
+import dto.dtoFormula;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import modelo.CicloContable;
 import modelo.Cuenta;
 import modelo.CuentaBalance;
+import reportes.CuentaBalanceGeneral;
 import reportes.CuentaBalanza;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
@@ -143,7 +149,7 @@ public class ServicioCuenta {
         }
     }
 
-    public RespuestaGeneral verCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo, Integer tipoPartida, Integer idCuenta) {
+    public RespuestaGeneral listarCuentaBalanzaComprobacion(Integer idTipoCatalogo, Integer idCiclo, Integer tipoPartida, Integer idCuenta) {
         try {
             this.cx.conectar();
             List<CuentaBalanza> listBeans = daoCuenta
@@ -159,5 +165,121 @@ public class ServicioCuenta {
         } catch (Exception e) {
             return RespuestaGeneral.asBadRequest(e.getMessage());
         }
+    }
+
+    public RespuestaGeneral listarBalanceGeneral(CicloContable cicloContable) {
+        Integer idTipoCatalogo = cicloContable.getId_catalogo();
+        Integer idCicloContable = cicloContable.getId();
+        RespuestaGeneral rg = listarCuentaBalanzaComprobacion(
+                cicloContable,
+                Integer.parseInt(Constantes.TIPO_PARTIDA_CIERRE.getValue())
+        );
+
+        if (rg.esFallida()) {
+            return rg;
+        }
+
+        final int TAMANO_CODIGO_NIVEL_RAIZ = 1;
+
+        List<CuentaBalanza> listaCuentas = (List<CuentaBalanza>) rg.getDatos();
+
+        List<CuentaBalanza> listaActivo = listaCuentas.stream().filter(cuenta
+                -> cuenta.getCodigo().trim().startsWith(Constantes.CODIGO_ACTIVO)
+        ).collect(Collectors.toList());
+        List<CuentaBalanceGeneral> listaActivoBalance = agregarPadres(listaActivo, TAMANO_CODIGO_NIVEL_RAIZ);
+
+        List<CuentaBalanza> listaPasivo = listaCuentas.stream().filter(cuenta
+                -> cuenta.getCodigo().trim().startsWith(Constantes.CODIGO_PASIVO)
+        ).collect(Collectors.toList());
+        List<CuentaBalanceGeneral> listaPasivoBalance = agregarPadres(listaPasivo, TAMANO_CODIGO_NIVEL_RAIZ);
+
+        List<CuentaBalanza> listaPatrimonio = listaCuentas.stream().filter(cuenta
+                -> cuenta.getCodigo().trim().startsWith(Constantes.CODIGO_PATRIMONIO)
+        ).collect(Collectors.toList());
+        List<CuentaBalanceGeneral> listaPatrimonioBalance = agregarPadres(listaPatrimonio, TAMANO_CODIGO_NIVEL_RAIZ);
+        
+        //obtener la cuenta con el nivel que se usara en el reporte
+        
+        List<Map<String, Object>> listaCuentaNivel = null;
+        try {
+            listaCuentaNivel = daoCuenta
+                    .listarCuentaNivelParaBalanceGeneral(
+                            cicloContable.getTipoCatalogo().getId(),
+                            0
+                    );
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioCuenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        //asignar nivel que se usara en el reporte
+        for (CuentaBalanceGeneral item : listaActivoBalance) {
+            asignarNivel(item, listaCuentaNivel);
+        }
+
+        for (CuentaBalanceGeneral item : listaPasivoBalance) {
+            asignarNivel(item, listaCuentaNivel);
+        }
+        
+        for (CuentaBalanceGeneral item : listaPatrimonioBalance) {
+            asignarNivel(item, listaCuentaNivel);
+        }
+        
+        return null;
+    }
+
+    public CuentaBalanceGeneral convertirACuentaBalanceGeneral(CuentaBalanza item) {
+        CuentaBalanceGeneral hija = new CuentaBalanceGeneral();
+        hija.setCodigo(item.getCodigo());
+        hija.setFolioMayor(item.getFolioMayor());
+        hija.setId(item.getId());
+        hija.setNombre(item.getNombre());
+        hija.setSaldoAcreedor(item.getSaldoAcreedor());
+        hija.setSaldoDeudor(item.getSaldoDeudor());
+        hija.setSaldoInicial(item.getSaldoInicial());
+        hija.setTipoSaldo(item.getTipoSaldo());
+        return hija;
+    }
+
+    private void asignarNivel( CuentaBalanceGeneral cuenta, List<Map<String, Object>> listaCuentaNivel ) {
+        Map<String, Object> encontrada = buscarCuentaNivelPorId(cuenta.getId(), listaCuentaNivel);
+        if(encontrada != null) {
+            cuenta.setNivel((Integer) encontrada.get("nivel"));
+        }
+    }
+    
+    private Map<String, Object> buscarCuentaNivelPorId(int id, List<Map<String, Object>> listaCuentaNivel) {
+        for (Map<String, Object> item : listaCuentaNivel) {
+            if(item.get("id").equals(id)) {
+                
+                return item;
+            }
+        }
+        return null;
+    }
+    
+    private List<CuentaBalanceGeneral> agregarPadres(List<CuentaBalanza> lista, int tamanoCodigoNivelRaiz) {
+        List<CuentaBalanceGeneral> listaAux = new ArrayList<CuentaBalanceGeneral>();
+        for (CuentaBalanza item : lista) {
+            //identificar nodos raices
+            if (item.getCodigo().length() == tamanoCodigoNivelRaiz) {
+                CuentaBalanceGeneral hija = convertirACuentaBalanceGeneral(item);
+                hija.setSubCuentas(agregarHijos(lista, item.getId()));
+                listaAux.add(hija);
+            }
+        }
+        return listaAux;
+    }
+
+    public List<CuentaBalanceGeneral> agregarHijos(List<CuentaBalanza> listaHijos, Integer idPadre) {
+        List<CuentaBalanceGeneral> arbolHijos = new ArrayList<CuentaBalanceGeneral>();
+        for (CuentaBalanza item : listaHijos) {
+            if (item.getId() == idPadre && item.getId() > 0) {
+                CuentaBalanceGeneral hija = convertirACuentaBalanceGeneral(item);
+                hija.setSubCuentas(agregarHijos(listaHijos, item.getId()));
+                arbolHijos.add(hija);
+            }
+        }
+        return arbolHijos;
     }
 }

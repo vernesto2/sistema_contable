@@ -223,4 +223,8 @@ public class Constantes {
         lista.add(op6);
         return lista;
     }
+    
+    public static final String CODIGO_ACTIVO = "1";
+    public static final String CODIGO_PASIVO = "2";
+    public static final String CODIGO_PATRIMONIO = "3";
 }

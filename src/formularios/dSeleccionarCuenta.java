@@ -685,7 +685,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         Integer idCiclo = sesion.configUsuario.getCicloContable().getId();
         
         CuentaBalanza cuentaBalanza = ( CuentaBalanza ) _cuenta
-                .verCuentaBalanzaComprobacion(
+                .listarCuentaBalanzaComprobacion(
                     tipoCatalogo, idCiclo, Integer.parseInt(Constantes.TIPO_PARTIDA_CIERRE.getValue()), cuentaSeleccionada.getId()
                 )
         .getDatos();
