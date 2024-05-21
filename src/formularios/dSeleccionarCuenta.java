@@ -52,6 +52,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     ArrayList<PartidaDetalle> listaDetallePartida = new ArrayList<>();
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     Sesion sesion;
+    int folioGuardado = -1;
     /**
      * Creates new form dSeleccionarCuenta
      */
@@ -552,6 +553,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     }
     
     public boolean guardarFolioMayor() {
+        this.folioGuardado = -1;
         if (!this.txtFM.isEnabled()) {
             return true;
         } else {
@@ -561,6 +563,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             cicloFolioModel.setFolio_mayor(Integer.parseInt(this.txtFM.getText()));
             RespuestaGeneral rg = _cicloFolio.insertar(cicloFolioModel);
             if (rg.esExitosa()) {
+                this.folioGuardado = (int)rg.getDatos();
                 return true;
             } else {
                 JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
@@ -608,6 +611,8 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             for (Cuenta cuenta : this.listaCuentasCompleta) {
                 if (cuenta.getCodigo().equals(codigoPadre)) {
                     cuentaPadre = cuenta;
+                    cuentaPadre.setFolio_mayor(Integer.parseInt(this.txtFM.getText()));
+                    cuentaPadre.setId_ciclo_folio(this.folioGuardado);
                     encontroPadre = true;
                     break;
                 }
@@ -631,6 +636,10 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         pDetalle.setCuentaMayor(cuentaPadre);
         pDetalle.setTipo_cargo_abono(tipoAccion);
         pDetalle.setId_cuenta(this.cuentaSeleccionada.getId());
+        if (!encontroPadre) {
+            this.cuentaSeleccionada.setFolio_mayor(Integer.parseInt(this.txtFM.getText()));
+            this.cuentaSeleccionada.setId_ciclo_folio(this.folioGuardado);
+        }
         pDetalle.setCuenta(this.cuentaSeleccionada);
         if (encontroPadre) {
             pDetalle.setParcial(Double.parseDouble(txtMonto.getText()));

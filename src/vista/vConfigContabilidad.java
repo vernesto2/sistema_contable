@@ -822,7 +822,7 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btnLimpiarBusquedaCuenta.setBackgroundHover(new java.awt.Color(112, 113, 116));
         btnLimpiarBusquedaCuenta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnLimpiarBusquedaCuenta.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
-        btnLimpiarBusquedaCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.SAVE);
+        btnLimpiarBusquedaCuenta.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CLEAR);
         btnLimpiarBusquedaCuenta.setSizeIcon(18.0F);
         btnLimpiarBusquedaCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -91,16 +91,15 @@ public class vPrincipal extends javax.swing.JFrame {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 //confirmar al salir
-                if (JOptionPane.showConfirmDialog(ventana,
-                        "¿Realmente desea salir?", "Salir",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                int opt = JOptionPane.showConfirmDialog(ventana,"¿Realmente desea salir?", "Salir", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (opt == JOptionPane.YES_OPTION) {
                     if(esVentanaSecundaria == true) {
                         ventana.dispose();
                     } else {
                         System.exit(0);
                     }
-                    
+                } else {
+                    ventana.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 }
             }
         });
@@ -548,9 +547,7 @@ public class vPrincipal extends javax.swing.JFrame {
         //System.out.println(salida);
         if (salida == 0) {
 
-            vLogin login = new vLogin(
-                    new Sesion(null, null, sesion.rutaConexion)
-            );
+            vLogin login = new vLogin(new Sesion(null, null, sesion.rutaConexion));
             login.setVisible(true);
             this.dispose();
         }
