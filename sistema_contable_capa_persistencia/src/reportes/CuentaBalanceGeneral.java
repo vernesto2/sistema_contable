@@ -14,9 +14,14 @@ public class CuentaBalanceGeneral extends CuentaBalanza {
     private Integer nivel;
     private List<CuentaBalanceGeneral> subCuentas;
     
+    public boolean tieneSubcuentas() {
+        return subCuentas != null && subCuentas.size() > 0 ? true : false;
+    }
+    
     @Override
+    //tener en cuenta que las cuentas de saldo contrario al de la cuenta principal llevan valor restado
     public Double saldo() {
-        return null;
+        return getEsRestado() == false ? this.saldo() : - this.saldo();
     }
 
     public Integer getNivel() {

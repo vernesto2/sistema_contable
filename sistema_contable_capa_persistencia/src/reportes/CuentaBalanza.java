@@ -20,7 +20,8 @@ public class CuentaBalanza {
     private Double saldoInicial;
     private Double saldoDeudor;
     private Double saldoAcreedor;
-
+    private Boolean esRestado;
+    
     public CuentaBalanza() {
 
     }
@@ -89,9 +90,16 @@ public class CuentaBalanza {
         this.saldoAcreedor = saldoAcreedor;
     }
 
+    public Boolean getEsRestado() {
+        return esRestado;
+    }
 
+    public void setEsRestado(Boolean esRestado) {
+        this.esRestado = esRestado;
+    }
+    
     public Double saldo() {
-        if (this.getTipoSaldo().equals(Constantes.TIPO_SALDO_DEUDOR.getValue())) {
+        if (this.getTipoSaldo().equals(Constantes.TIPO_SALDO_DEUDOR.getValue())) {            
             return this.getSaldoDeudor();
         } else if (this.getTipoSaldo().equals(Constantes.TIPO_SALDO_ACREEDOR.getValue())) {
             return this.getSaldoAcreedor();

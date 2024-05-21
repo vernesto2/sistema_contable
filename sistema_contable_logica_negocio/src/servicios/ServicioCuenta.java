@@ -223,10 +223,30 @@ public class ServicioCuenta {
         for (CuentaBalanceGeneral item : listaPatrimonioBalance) {
             asignarNivel(item, listaCuentaNivel);
         }
-
+        
+        //calcular los valores para cuentas de nivel 1, 2, 3
+        CuentaBalanceGeneral cuentaActivo = listaActivoBalance.get(0);
+        CuentaBalanceGeneral cuentaPasivo = listaPasivoBalance.get(0);
+        CuentaBalanceGeneral cuentaPatrimonio = listaPatrimonioBalance.get(0);
+        
+        Double totalActivo = calcularSaldos(cuentaActivo, Integer.parseInt(Constantes.TIPO_SALDO_DEUDOR.getValue()));
+        Double totalPasivo = calcularSaldos(cuentaPasivo, Integer.parseInt(Constantes.TIPO_SALDO_ACREEDOR.getValue()));
+        Double totalPatrimonio = calcularSaldos(cuentaPatrimonio, Integer.parseInt(Constantes.TIPO_SALDO_ACREEDOR.getValue()));
+        
+        
         return null;
     }
-
+    private Double calcularSaldos(CuentaBalanceGeneral cuenta, int tipoSaldoCuentaRaiz) {
+        Double valor = Double.valueOf(0);
+        if(cuenta.tieneSubcuentas()) {
+            for (CuentaBalanceGeneral subCuenta : cuenta.getSubCuentas()) {
+                valor = valor + calcularSaldos(subCuenta, tipoSaldoCuentaRaiz);
+            }
+        } else {
+            valor = cuenta.saldo();
+        }
+        return valor;
+    }
     public CuentaBalanceGeneral convertirACuentaBalanceGeneral(CuentaBalanza item) {
         CuentaBalanceGeneral hija = new CuentaBalanceGeneral();
         hija.setCodigo(item.getCodigo());
@@ -246,7 +266,7 @@ public class ServicioCuenta {
             cuenta.setNivel((Integer) encontrada.get("nivel"));
         }
     }
-
+    //asignar el nivel a la cuenta especificada
     private Map<String, Object> buscarCuentaNivelPorId(int id, List<Map<String, Object>> listaCuentaNivel) {
         for (Map<String, Object> item : listaCuentaNivel) {
             if (item.get("id").equals(id)) {
