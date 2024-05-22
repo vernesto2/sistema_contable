@@ -267,15 +267,16 @@ public class vEstadoResultados extends javax.swing.JPanel {
             Integer nivelAMayorizar = sesion.configUsuario.getCicloContable().getTipoCatalogo().getNivel_mayorizar();
             //nivel 0 es para cuando se puede cargar y abonar cualquier cuenta, no ay restriccion
             //en este tipo además no hay parcial
+            Integer tamanoCodigoMayorizar = null;
             if (nivelAMayorizar == 0) {
                 params.put("param_tamano_codigo", 0);
             } else {
                 RespuestaGeneral rg = _cuenta.tamanoCodigoAMayorizar(idTipoCatalogo, nivelAMayorizar);
-                Integer tamanoNivelAMayorizar = (Integer) rg.getDatos();
-                if (tamanoNivelAMayorizar == null) {
+                tamanoCodigoMayorizar = (Integer) rg.getDatos();
+                if (tamanoCodigoMayorizar == null) {
                     JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
                 } else {
-                    params.put("param_tamano_codigo", tamanoNivelAMayorizar);
+                    params.put("param_tamano_codigo", tamanoCodigoMayorizar);
                 }
             }
             Integer idCiclo = sesion.configUsuario.getCicloContable().getId();

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte-balanza-comprobacion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3cc27fc7-b9c0-41c9-b619-650001d9b462">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="tabla-dataset" uuid="e3c37f26-9b14-4979-9751-e8fe168d717b">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter-sistema-contable.jrdax"/>
+		<parameter name="param_formateador_moneda" class="java.text.DecimalFormat" isForPrompting="false">
+			<defaultValueExpression><![CDATA[new java.text.DecimalFormat("#,##0.00")]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="codigo" class="java.lang.String">
+			<fieldDescription><![CDATA[codigo]]></fieldDescription>
+		</field>
+		<field name="signo" class="java.lang.String">
+			<fieldDescription><![CDATA[signo]]></fieldDescription>
+		</field>
+		<field name="valor" class="java.lang.Double">
+			<fieldDescription><![CDATA[valor]]></fieldDescription>
+		</field>
+		<field name="valor1" class="java.lang.Double">
+			<fieldDescription><![CDATA[valor1]]></fieldDescription>
+		</field>
+		<field name="valor3" class="java.lang.Double">
+			<fieldDescription><![CDATA[valor3]]></fieldDescription>
+		</field>
+		<field name="id" class="java.lang.Integer">
+			<fieldDescription><![CDATA[id]]></fieldDescription>
+		</field>
+		<field name="valor2" class="java.lang.Double">
+			<fieldDescription><![CDATA[valor2]]></fieldDescription>
+		</field>
+		<field name="nombre" class="java.lang.String">
+			<fieldDescription><![CDATA[nombre]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="param_titulo_ciclo_contable" class="java.lang.String">
+		<defaultValueExpression><![CDATA["INAP S.A. de C.V"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_nombre_completo" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Diego Palacios"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_usuario" class="java.lang.String">
+		<defaultValueExpression><![CDATA["PM15016"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_desde" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_hasta" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_formateador_moneda" class="java.text.DecimalFormat" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new java.text.DecimalFormat("#,##0.00")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_formateador_fecha" class="java.text.SimpleDateFormat" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_fecha_generacion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new java.util.Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_elem_balance_general" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" nestedType="reportes.CuentaBalanza">
+		<defaultValueExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ( dao.daoFormula.generarEstadoResultados() )]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="158" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="39" width="550" height="19" uuid="38ed4269-5c49-45ad-8945-a34c224bb29d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["NIE "+ $P{param_usuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="20" uuid="b77d85f2-9375-4977-8caa-9bd2a247995d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Instituto Nacional de Apastepeque]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="20" width="550" height="19" uuid="d2b9946e-3961-4eac-b1c0-47497d49acc8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Alumno/a: "+ $P{param_nombre_completo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="58" width="550" height="20" uuid="f2306e62-fbb8-4791-83bd-53d1e3504140"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Empresa: "+$P{param_titulo_ciclo_contable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="118" width="550" height="20" uuid="a184eca5-6dcc-49cb-9daa-1695a5851e71"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Expresado en dólares de los Estados Unidos"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="98" width="68" height="20" uuid="1519b794-ac0c-4c9c-930c-16fd2beabfa6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{param_desde}]]></textFieldExpression>
+				<patternExpression><![CDATA["dd/MM/yyyy"]]></patternExpression>
+			</textField>
+			<staticText>
+				<reportElement x="202" y="98" width="20" height="20" uuid="93dfd2e1-b806-4ad7-a4eb-13ddf8675e32"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Del]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="292" y="98" width="10" height="20" uuid="1fdac794-4762-4851-8442-866904cf9f9f"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[al]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="302" y="98" width="70" height="20" uuid="ad5be7a5-4c92-40e7-93ef-a42d7d25ca52"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{param_hasta}]]></textFieldExpression>
+				<patternExpression><![CDATA["dd/MM/yyyy"]]></patternExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="138" width="550" height="20" uuid="7ae1c8e4-88df-4b56-8322-c8d3a81ccede"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{param_fecha_generacion}]]></textFieldExpression>
+				<patternExpression><![CDATA["dd/MM/yyyy hh:mm"]]></patternExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="78" width="550" height="20" uuid="0a7b4226-61cd-4d68-8ee6-f922bdb7989b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance general]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="97" splitType="Stretch">
+			<componentElement>
+				<reportElement x="1" y="0" width="550" height="90" uuid="e14d3ce3-98a2-42af-a1d0-85eaf3c7c75c">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tabla-dataset" uuid="37d60510-16ee-4534-84cb-b36558c781c1">
+						<datasetParameter name="param_formateador_moneda">
+							<datasetParameterExpression><![CDATA[$P{param_formateador_moneda}]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[$P{param_elem_balance_general}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="30" uuid="e2e6a749-6c26-42de-8fab-fcc4a7c498e7">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="30" height="30" uuid="8180b66f-71a7-4fc0-902b-515d8530da86"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{signo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="290" uuid="a6e3179a-5132-43ef-9314-12058c04b65f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="290" height="30" uuid="ae881f25-1782-4372-a309-5adb9b192825"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="38aa2d70-f6ef-44ba-ac2d-1332972b3c76">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="0335f0b7-c6bc-49d4-9695-75f293d6e23a"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valor1} == null ? "" :  $P{param_formateador_moneda}.format($F{valor1})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="6bd6da4c-b573-4ac5-b8b2-e302c9bfd585">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="b10260e4-c966-487e-a586-73b049bed3c7"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valor2} == null ? "" :  $P{param_formateador_moneda}.format($F{valor2})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="d2cf7a4b-d39e-4809-9a2f-ce859e47640b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="8dd807d0-3948-4e9d-8cf2-f7c996f3e360"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{valor3} == null ? "" :  $P{param_formateador_moneda}.format($F{valor3})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="19" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+</jasperReport>

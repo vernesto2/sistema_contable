@@ -203,11 +203,13 @@ public class ServicioCuenta {
         //obtener la cuenta con el nivel que se usara en el reporte
         List<Map<String, Object>> listaCuentaNivel = null;
         try {
+            this.cx.conectar();
             listaCuentaNivel = daoCuenta
                     .listarCuentaNivelParaBalanceGeneral(
                             cicloContable.getTipoCatalogo().getId(),
                             tamanoCodigoMayorizar
                     );
+            this.cx.desconectar();
         } catch (SQLException ex) {
             Logger.getLogger(ServicioCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }

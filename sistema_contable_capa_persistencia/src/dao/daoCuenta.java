@@ -777,7 +777,7 @@ order by folio_mayor
  	group by length(ci.codigo)
  ) as nc on nc.length_codigo = length(c.codigo) 
  where c.id_tipo_catalogo = ? and c.eliminado = 0
-       and nc.length <= ?
+       and nc.length_codigo <= ?
  order by cast(c.codigo as text)
                      """;
         
