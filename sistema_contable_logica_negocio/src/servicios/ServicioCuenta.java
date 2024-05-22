@@ -20,6 +20,7 @@ import modelo.Cuenta;
 import modelo.CuentaBalance;
 import reportes.CuentaBalanceGeneral;
 import reportes.CuentaBalanza;
+import reportes.ElementoFormulaReporte;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
 
@@ -223,30 +224,51 @@ public class ServicioCuenta {
         for (CuentaBalanceGeneral item : listaPatrimonioBalance) {
             asignarNivel(item, listaCuentaNivel);
         }
-        
-        //calcular los valores para cuentas de nivel 1, 2, 3
+
+        //calcular los valores para cuentas de nivel 1 y 2, poner en negativo las cuentas que llevan la R (restado)
         CuentaBalanceGeneral cuentaActivo = listaActivoBalance.get(0);
         CuentaBalanceGeneral cuentaPasivo = listaPasivoBalance.get(0);
         CuentaBalanceGeneral cuentaPatrimonio = listaPatrimonioBalance.get(0);
+        final int COLUMNA_REPORTE = 1;
         
-        Double totalActivo = calcularSaldos(cuentaActivo, Integer.parseInt(Constantes.TIPO_SALDO_DEUDOR.getValue()));
-        Double totalPasivo = calcularSaldos(cuentaPasivo, Integer.parseInt(Constantes.TIPO_SALDO_ACREEDOR.getValue()));
-        Double totalPatrimonio = calcularSaldos(cuentaPatrimonio, Integer.parseInt(Constantes.TIPO_SALDO_ACREEDOR.getValue()));
+        List<ElementoFormulaReporte> listaCuentasBalanceGeneral = new ArrayList<ElementoFormulaReporte>();
         
-        
-        return null;
+        Double totalActivo = calcularSaldos(cuentaActivo, listaCuentasBalanceGeneral, COLUMNA_REPORTE);
+        Double totalPasivo = calcularSaldos(cuentaPasivo, listaCuentasBalanceGeneral, COLUMNA_REPORTE);
+        Double totalPatrimonio = calcularSaldos(cuentaPatrimonio, listaCuentasBalanceGeneral, COLUMNA_REPORTE);
+
+        return RespuestaGeneral.asOk(null, listaCuentasBalanceGeneral);
     }
-    private Double calcularSaldos(CuentaBalanceGeneral cuenta, int tipoSaldoCuentaRaiz) {
+
+    private Double calcularSaldos(CuentaBalanceGeneral cuenta, List<ElementoFormulaReporte> listaElementos, int colmnaReporte) {
         Double valor = Double.valueOf(0);
-        if(cuenta.tieneSubcuentas()) {
+        
+        ElementoFormulaReporte elemento = cuentaBalanceGeneralAElementoReporteFormula(cuenta, colmnaReporte);
+        listaElementos.add(elemento);
+        
+        if (cuenta.tieneSubcuentas()) {
             for (CuentaBalanceGeneral subCuenta : cuenta.getSubCuentas()) {
-                valor = valor + calcularSaldos(subCuenta, tipoSaldoCuentaRaiz);
+                valor = valor + calcularSaldos(subCuenta, listaElementos , colmnaReporte + 1);
             }
+            //establecer el saldo al valor calculado
+            cuenta.saldo(valor);
         } else {
             valor = cuenta.saldo();
         }
         return valor;
     }
+    
+    private ElementoFormulaReporte cuentaBalanceGeneralAElementoReporteFormula(CuentaBalanceGeneral cuenta, int columna) {
+        ElementoFormulaReporte elemento = new ElementoFormulaReporte();
+
+        elemento.setCodigo(cuenta.getCodigo());
+        elemento.setId(cuenta.getId());
+        elemento.setNombre(cuenta.getNombre());
+        elemento.setValor(cuenta.saldo(), columna);
+        
+        return elemento;
+    }
+
     public CuentaBalanceGeneral convertirACuentaBalanceGeneral(CuentaBalanza item) {
         CuentaBalanceGeneral hija = new CuentaBalanceGeneral();
         hija.setCodigo(item.getCodigo());
@@ -266,6 +288,7 @@ public class ServicioCuenta {
             cuenta.setNivel((Integer) encontrada.get("nivel"));
         }
     }
+
     //asignar el nivel a la cuenta especificada
     private Map<String, Object> buscarCuentaNivelPorId(int id, List<Map<String, Object>> listaCuentaNivel) {
         for (Map<String, Object> item : listaCuentaNivel) {

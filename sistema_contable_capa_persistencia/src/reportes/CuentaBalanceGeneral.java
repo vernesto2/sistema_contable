@@ -5,6 +5,7 @@
 package reportes;
 
 import java.util.List;
+import utils.constantes.Constantes;
 
 /**
  *
@@ -24,6 +25,14 @@ public class CuentaBalanceGeneral extends CuentaBalanza {
         return getEsRestado() == false ? this.saldo() : - this.saldo();
     }
 
+    public void saldo(Double saldo) {
+        if(getTipoSaldo() == Constantes.TIPO_SALDO_DEUDOR.getValue()) {
+            setSaldoDeudor(saldo);
+        } else if(getTipoSaldo() == Constantes.TIPO_SALDO_ACREEDOR.getValue()) {
+            setSaldoAcreedor(saldo);
+        }
+    }
+    
     public Integer getNivel() {
         return nivel;
     }
