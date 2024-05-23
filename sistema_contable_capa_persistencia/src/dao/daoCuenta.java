@@ -795,10 +795,11 @@ order by folio_mayor
                 Map<String, Object> item = new HashMap<String, Object>();
                 
                 item.put("id", rs.getInt("id"));
-                item.put("codgo", rs.getString("codigo"));
+                item.put("codigo", rs.getString("codigo"));
                 item.put("nivel", rs.getInt("nivel"));
                 item.put("nombre", rs.getString("nombre"));
-                
+                item.put("tipo_saldo", rs.getString("tipo_saldo"));
+                item.put("es_restado", rs.getBoolean("es_restado"));
                 lista.add(item);
             }
             

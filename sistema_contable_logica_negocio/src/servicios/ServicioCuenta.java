@@ -181,10 +181,41 @@ public class ServicioCuenta {
             return rgListaCuenta;
         }
 
+        
+        
+        //obtener la cuenta con el nivel que se usara en el reporte
+        List<Map<String, Object>> listaCuentaNivel = null;
+        try {
+            this.cx.conectar();
+            listaCuentaNivel = daoCuenta
+                    .listarCuentaNivelParaBalanceGeneral(
+                            cicloContable.getTipoCatalogo().getId(),
+                            tamanoCodigoMayorizar
+                    );
+            this.cx.desconectar();
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicioCuenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //estas cuentas son parte del balance general, pero no tienen saldo establecido ya que se va a calcular
+        List<CuentaBalanza> listaCuentasAAgregar = listaCuentaNivel
+                .stream()
+                .filter(item -> ((String) item.get("codigo")).length() < tamanoCodigoMayorizar)
+                .map(item -> {
+                    CuentaBalanza cuenta = new CuentaBalanza();
+                    cuenta.setId( (Integer) item.get("id"));
+                    cuenta.setCodigo((String) item.get("codigo"));
+                    cuenta.setNombre((String) item.get("nombre"));
+                    cuenta.setTipoSaldo((String) item.get("tipo_saldo"));
+                    cuenta.setEsRestado((Boolean) item.get("es_restado"));
+                    return cuenta;
+                })
+                .collect(Collectors.toList());
+        
         final int TAMANO_CODIGO_NIVEL_RAIZ = 1;
-
         List<CuentaBalanza> listaCuentas = (List<CuentaBalanza>) rgListaCuenta.getDatos();
-
+        
+        listaCuentas.addAll(listaCuentasAAgregar);
+        
         List<CuentaBalanza> listaActivo = listaCuentas.stream().filter(cuenta
                 -> cuenta.getCodigo().trim().startsWith(Constantes.CODIGO_ACTIVO)
         ).collect(Collectors.toList());
@@ -200,19 +231,7 @@ public class ServicioCuenta {
         ).collect(Collectors.toList());
         List<CuentaBalanceGeneral> listaPatrimonioBalance = agregarPadres(listaPatrimonio, TAMANO_CODIGO_NIVEL_RAIZ);
 
-        //obtener la cuenta con el nivel que se usara en el reporte
-        List<Map<String, Object>> listaCuentaNivel = null;
-        try {
-            this.cx.conectar();
-            listaCuentaNivel = daoCuenta
-                    .listarCuentaNivelParaBalanceGeneral(
-                            cicloContable.getTipoCatalogo().getId(),
-                            tamanoCodigoMayorizar
-                    );
-            this.cx.desconectar();
-        } catch (SQLException ex) {
-            Logger.getLogger(ServicioCuenta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
 
         //asignar nivel que se usara en el reporte
         for (CuentaBalanceGeneral item : listaActivoBalance) {
