@@ -325,23 +325,29 @@ public class ServicioCuenta {
         List<CuentaBalanceGeneral> listaAux = new ArrayList<CuentaBalanceGeneral>();
         for (CuentaBalanza item : lista) {
             //identificar nodos raices
+            System.out.print("comparando "+item.getCodigo()+" - "+item.getNombre());
             if (item.getCodigo().length() == tamanoCodigoNivelRaiz) {
+                System.out.println(" OK padres ");
                 CuentaBalanceGeneral hija = convertirACuentaBalanceGeneral(item);
-                hija.setSubCuentas(agregarHijos(lista, item.getId()));
+                hija.setSubCuentas(agregarHijos(lista, item.getCodigo()));
                 listaAux.add(hija);
             }
+            System.out.println("");
         }
         return listaAux;
     }
 
-    public List<CuentaBalanceGeneral> agregarHijos(List<CuentaBalanza> listaHijos, Integer idPadre) {
+    public List<CuentaBalanceGeneral> agregarHijos(List<CuentaBalanza> listaHijos, String codigoPadre) {
         List<CuentaBalanceGeneral> arbolHijos = new ArrayList<CuentaBalanceGeneral>();
         for (CuentaBalanza item : listaHijos) {
-            if (item.getId() == idPadre && item.getId() > 0) {
+            System.out.print("comparando "+"codigoPadre: "+codigoPadre+" codigoHija: "+item.getCodigo()+" - "+item.getNombre());
+            if (item.getCodigo().startsWith(codigoPadre) && item.getCodigo().length() > codigoPadre.length()) {
+                System.out.println(" OK hijas");
                 CuentaBalanceGeneral hija = convertirACuentaBalanceGeneral(item);
-                hija.setSubCuentas(agregarHijos(listaHijos, item.getId()));
+                hija.setSubCuentas(agregarHijos(listaHijos, item.getCodigo()));
                 arbolHijos.add(hija);
             }
+            System.out.println("");
         }
         return arbolHijos;
     }
