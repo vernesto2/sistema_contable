@@ -181,8 +181,6 @@ public class ServicioCuenta {
             return rgListaCuenta;
         }
 
-        
-        
         //obtener la cuenta con el nivel que se usara en el reporte
         List<Map<String, Object>> listaCuentaNivel = null;
         try {
@@ -202,7 +200,7 @@ public class ServicioCuenta {
                 .filter(item -> ((String) item.get("codigo")).length() < tamanoCodigoMayorizar)
                 .map(item -> {
                     CuentaBalanza cuenta = new CuentaBalanza();
-                    cuenta.setId( (Integer) item.get("id"));
+                    cuenta.setId((Integer) item.get("id"));
                     cuenta.setCodigo((String) item.get("codigo"));
                     cuenta.setNombre((String) item.get("nombre"));
                     cuenta.setTipoSaldo((String) item.get("tipo_saldo"));
@@ -210,50 +208,46 @@ public class ServicioCuenta {
                     return cuenta;
                 })
                 .collect(Collectors.toList());
-        
+
         final int TAMANO_CODIGO_NIVEL_RAIZ = 1;
-        List<CuentaBalanza> listaCuentas = (List<CuentaBalanza>) rgListaCuenta.getDatos();
-        
-        listaCuentas.addAll(listaCuentasAAgregar);
-        
-        List<CuentaBalanza> listaActivo = listaCuentas.stream().filter(cuenta
-                -> cuenta.getCodigo().trim().startsWith(Constantes.CODIGO_ACTIVO)
-        ).collect(Collectors.toList());
-        List<CuentaBalanceGeneral> listaActivoBalance = agregarPadres(listaActivo, TAMANO_CODIGO_NIVEL_RAIZ);
+        List<CuentaBalanza> listaCuentasTemp = (List<CuentaBalanza>) rgListaCuenta.getDatos();
+        listaCuentasTemp.addAll(listaCuentasAAgregar);
 
-        List<CuentaBalanza> listaPasivo = listaCuentas.stream().filter(cuenta
-                -> cuenta.getCodigo().trim().startsWith(Constantes.CODIGO_PASIVO)
-        ).collect(Collectors.toList());
-        List<CuentaBalanceGeneral> listaPasivoBalance = agregarPadres(listaPasivo, TAMANO_CODIGO_NIVEL_RAIZ);
-
-        List<CuentaBalanza> listaPatrimonio = listaCuentas.stream().filter(cuenta
-                -> cuenta.getCodigo().trim().startsWith(Constantes.CODIGO_PATRIMONIO)
-        ).collect(Collectors.toList());
-        List<CuentaBalanceGeneral> listaPatrimonioBalance = agregarPadres(listaPatrimonio, TAMANO_CODIGO_NIVEL_RAIZ);
-
-        
+        List<CuentaBalanceGeneral> listaCuentas = listaCuentasTemp.stream()
+                .map(item -> convertirACuentaBalanceGeneral(item)
+                )
+                .collect(Collectors.toList());
 
         //asignar nivel que se usara en el reporte
-        for (CuentaBalanceGeneral item : listaActivoBalance) {
-            asignarNivel(item, listaCuentaNivel);
+        for (CuentaBalanceGeneral item : listaCuentas) {
+            asignarCamposRequeridos(item, listaCuentaNivel);
         }
 
-        for (CuentaBalanceGeneral item : listaPasivoBalance) {
-            asignarNivel(item, listaCuentaNivel);
-        }
+        List<CuentaBalanceGeneral> listaActivo = listaCuentas.stream().filter(cuenta
+                -> cuenta.getCodigo().trim().startsWith(Constantes.CODIGO_ACTIVO)
+        )
+                .collect(Collectors.toList());
+        List<CuentaBalanceGeneral> listaActivoBalance = agregarPadres(listaActivo, TAMANO_CODIGO_NIVEL_RAIZ);
 
-        for (CuentaBalanceGeneral item : listaPatrimonioBalance) {
-            asignarNivel(item, listaCuentaNivel);
-        }
+        List<CuentaBalanceGeneral> listaPasivo = listaCuentas.stream()
+                .filter(cuenta -> cuenta.getCodigo().trim().startsWith(Constantes.CODIGO_PASIVO)
+                ).collect(Collectors.toList());
+        List<CuentaBalanceGeneral> listaPasivoBalance = agregarPadres(listaPasivo, TAMANO_CODIGO_NIVEL_RAIZ);
+
+        List<CuentaBalanceGeneral> listaPatrimonio = listaCuentas.stream().filter(cuenta
+                -> cuenta.getCodigo().trim().startsWith(Constantes.CODIGO_PATRIMONIO)
+        )
+                .collect(Collectors.toList());
+        List<CuentaBalanceGeneral> listaPatrimonioBalance = agregarPadres(listaPatrimonio, TAMANO_CODIGO_NIVEL_RAIZ);
 
         //calcular los valores para cuentas de nivel 1 y 2, poner en negativo las cuentas que llevan la R (restado)
         CuentaBalanceGeneral cuentaActivo = listaActivoBalance.get(0);
         CuentaBalanceGeneral cuentaPasivo = listaPasivoBalance.get(0);
         CuentaBalanceGeneral cuentaPatrimonio = listaPatrimonioBalance.get(0);
         final int COLUMNA_REPORTE = 1;
-        
+
         List<ElementoFormulaReporte> listaCuentasBalanceGeneral = new ArrayList<ElementoFormulaReporte>();
-        
+
         Double totalActivo = calcularSaldos(cuentaActivo, listaCuentasBalanceGeneral, COLUMNA_REPORTE);
         Double totalPasivo = calcularSaldos(cuentaPasivo, listaCuentasBalanceGeneral, COLUMNA_REPORTE);
         Double totalPatrimonio = calcularSaldos(cuentaPatrimonio, listaCuentasBalanceGeneral, COLUMNA_REPORTE);
@@ -263,13 +257,13 @@ public class ServicioCuenta {
 
     private Double calcularSaldos(CuentaBalanceGeneral cuenta, List<ElementoFormulaReporte> listaElementos, int colmnaReporte) {
         Double valor = Double.valueOf(0);
-        
+
         ElementoFormulaReporte elemento = cuentaBalanceGeneralAElementoReporteFormula(cuenta, colmnaReporte);
         listaElementos.add(elemento);
-        
+
         if (cuenta.tieneSubcuentas()) {
             for (CuentaBalanceGeneral subCuenta : cuenta.getSubCuentas()) {
-                valor = valor + calcularSaldos(subCuenta, listaElementos , colmnaReporte + 1);
+                valor = valor + calcularSaldos(subCuenta, listaElementos, colmnaReporte + 1);
             }
             //establecer el saldo al valor calculado
             cuenta.saldo(valor);
@@ -278,7 +272,7 @@ public class ServicioCuenta {
         }
         return valor;
     }
-    
+
     private ElementoFormulaReporte cuentaBalanceGeneralAElementoReporteFormula(CuentaBalanceGeneral cuenta, int columna) {
         ElementoFormulaReporte elemento = new ElementoFormulaReporte();
 
@@ -286,7 +280,7 @@ public class ServicioCuenta {
         elemento.setId(cuenta.getId());
         elemento.setNombre(cuenta.getNombre());
         elemento.setValor(cuenta.saldo(), columna);
-        
+
         return elemento;
     }
 
@@ -303,10 +297,11 @@ public class ServicioCuenta {
         return hija;
     }
 
-    private void asignarNivel(CuentaBalanceGeneral cuenta, List<Map<String, Object>> listaCuentaNivel) {
+    private void asignarCamposRequeridos(CuentaBalanceGeneral cuenta, List<Map<String, Object>> listaCuentaNivel) {
         Map<String, Object> encontrada = buscarCuentaNivelPorId(cuenta.getId(), listaCuentaNivel);
         if (encontrada != null) {
             cuenta.setNivel((Integer) encontrada.get("nivel"));
+            cuenta.setEsRestado((Boolean) encontrada.get("es_restado"));
         }
     }
 
@@ -321,31 +316,33 @@ public class ServicioCuenta {
         return null;
     }
 
-    private List<CuentaBalanceGeneral> agregarPadres(List<CuentaBalanza> lista, int tamanoCodigoNivelRaiz) {
+    private List<CuentaBalanceGeneral> agregarPadres(List<CuentaBalanceGeneral> lista, int tamanoCodigoNivelRaiz) {
         List<CuentaBalanceGeneral> listaAux = new ArrayList<CuentaBalanceGeneral>();
-        for (CuentaBalanza item : lista) {
+        for (CuentaBalanceGeneral item : lista) {
             //identificar nodos raices
-            System.out.print("comparando "+item.getCodigo()+" - "+item.getNombre());
+            System.out.print("comparando " + item.getCodigo() + " - " + item.getNombre());
             if (item.getCodigo().length() == tamanoCodigoNivelRaiz) {
                 System.out.println(" OK padres ");
-                CuentaBalanceGeneral hija = convertirACuentaBalanceGeneral(item);
-                hija.setSubCuentas(agregarHijos(lista, item.getCodigo()));
-                listaAux.add(hija);
+                item.setSubCuentas(agregarHijos(lista, item.getCodigo(), item.getNivel()));
+                listaAux.add(item);
             }
             System.out.println("");
         }
         return listaAux;
     }
 
-    public List<CuentaBalanceGeneral> agregarHijos(List<CuentaBalanza> listaHijos, String codigoPadre) {
+    public List<CuentaBalanceGeneral> agregarHijos(List<CuentaBalanceGeneral> listaCuentas, String codigoPadre, int nivelPadre) {
         List<CuentaBalanceGeneral> arbolHijos = new ArrayList<CuentaBalanceGeneral>();
-        for (CuentaBalanza item : listaHijos) {
-            System.out.print("comparando "+"codigoPadre: "+codigoPadre+" codigoHija: "+item.getCodigo()+" - "+item.getNombre());
-            if (item.getCodigo().startsWith(codigoPadre) && item.getCodigo().length() > codigoPadre.length()) {
+        for (CuentaBalanceGeneral item : listaCuentas) {
+            System.out.print("comparando " + "codigoPadre: " + codigoPadre + " codigoHija: " + item.getCodigo() + " - " + item.getNombre());
+            //es cuenta hija solo si: 
+            //el nivel de la cuenta actual es = nivel de la padre + 1, 
+            //y el codigo actual inicia con el codigo padre, 
+            //y si el tamano del codigo actual > tamano del codigo del padre
+            if (item.getNivel() == (nivelPadre + 1) && item.getCodigo().startsWith(codigoPadre) && item.getCodigo().length() > codigoPadre.length()) {
                 System.out.println(" OK hijas");
-                CuentaBalanceGeneral hija = convertirACuentaBalanceGeneral(item);
-                hija.setSubCuentas(agregarHijos(listaHijos, item.getCodigo()));
-                arbolHijos.add(hija);
+                item.setSubCuentas(agregarHijos(listaCuentas, item.getCodigo(), item.getNivel()));
+                arbolHijos.add(item);
             }
             System.out.println("");
         }
