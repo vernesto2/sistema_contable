@@ -564,8 +564,8 @@ public class vPrincipal extends javax.swing.JFrame {
 
     private void btnBalanceGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalanceGeneralActionPerformed
         this.seleccionarBoton();
-        if (!this.btnEstadoResultado.isSelected()) {
-            this.btnEstadoResultado.setSelected(true);
+        if (!this.btnBalanceGeneral.isSelected()) {
+            this.btnBalanceGeneral.setSelected(true);
             new CambiaPanel(pnl, new vBalanceGeneral(sesion));
         }
     }//GEN-LAST:event_btnBalanceGeneralActionPerformed

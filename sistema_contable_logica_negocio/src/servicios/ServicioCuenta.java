@@ -268,7 +268,8 @@ public class ServicioCuenta {
             //establecer el saldo al valor calculado
             cuenta.saldo(valor);
         } else {
-            valor = cuenta.saldo();
+            valor = cuenta.saldo() == null ? 0 : cuenta.saldo();
+            elemento.setValor(valor, colmnaReporte);
         }
         return valor;
     }
@@ -279,8 +280,9 @@ public class ServicioCuenta {
         elemento.setCodigo(cuenta.getCodigo());
         elemento.setId(cuenta.getId());
         elemento.setNombre(cuenta.getNombre());
-        elemento.setValor(cuenta.saldo(), columna);
-
+        if(cuenta.saldo() != null) {
+            elemento.setValor(cuenta.saldo(), columna);
+        }
         return elemento;
     }
 

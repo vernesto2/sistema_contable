@@ -120,7 +120,7 @@ public class vBalanceGeneral extends javax.swing.JPanel {
         ArrayList<FormulaParametro> listaParametros = null;
         
         try (
-                InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-estado-resultados.jrxml"); BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                InputStream inputStream = getClass().getResourceAsStream("/reportes/reporte-balance-general.jrxml"); BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             Map<String, Object> params = new HashMap<String, Object>();
 
             Connection con;
@@ -165,6 +165,7 @@ public class vBalanceGeneral extends javax.swing.JPanel {
             
             JRBeanCollectionDataSource param_elem_balance_general = new JRBeanCollectionDataSource(listElementoReporte);
             params.put("param_elem_balance_general", param_elem_balance_general);
+            
 //            params.put("params_cuentas_balanza", listBeans);
 
             params.put(JRParameter.REPORT_LOCALE, locale);

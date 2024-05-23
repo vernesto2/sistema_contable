@@ -22,6 +22,9 @@ public class CuentaBalanceGeneral extends CuentaBalanza {
     @Override
     //tener en cuenta que las cuentas de saldo contrario al de la cuenta principal llevan valor restado
     public Double saldo() {
+        if(super.saldo() == null) {
+            return null;
+        }
         return getEsRestado() == false ? super.saldo() : - super.saldo();
     }
 
