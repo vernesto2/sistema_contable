@@ -210,7 +210,9 @@ public class ServicioCuenta {
                 .collect(Collectors.toList());
 
         final int TAMANO_CODIGO_NIVEL_RAIZ = 1;
-        List<CuentaBalanza> listaCuentasTemp = (List<CuentaBalanza>) rgListaCuenta.getDatos();
+        List<CuentaBalanza> listaCuentasTemp = ((List<CuentaBalanza>) rgListaCuenta.getDatos()).stream()
+                .filter(item -> item.saldo() != null && item.saldo() != 0)
+                .collect(Collectors.toList());
         listaCuentasTemp.addAll(listaCuentasAAgregar);
 
         List<CuentaBalanceGeneral> listaCuentas = listaCuentasTemp.stream()
@@ -281,7 +283,7 @@ public class ServicioCuenta {
         elemento.setCodigo(cuenta.getCodigo());
         elemento.setId(cuenta.getId());
         elemento.setNombre(cuenta.getNombre());
-        if(cuenta.saldo() != null) {
+        if (cuenta.saldo() != null) {
             elemento.setValor(cuenta.saldo(), columna);
         }
         return elemento;
@@ -323,9 +325,9 @@ public class ServicioCuenta {
         List<CuentaBalanceGeneral> listaAux = new ArrayList<CuentaBalanceGeneral>();
         for (CuentaBalanceGeneral item : lista) {
             //identificar nodos raices
-            System.out.print("comparando " + item.getCodigo() + " - " + item.getNombre());
+            //System.out.print("comparando " + item.getCodigo() + " - " + item.getNombre());
             if (item.getCodigo().length() == tamanoCodigoNivelRaiz) {
-                System.out.println(" OK padres ");
+                //System.out.println(" OK padres ");
                 item.setSubCuentas(agregarHijos(lista, item.getCodigo(), item.getNivel()));
                 listaAux.add(item);
             }
@@ -337,13 +339,13 @@ public class ServicioCuenta {
     public List<CuentaBalanceGeneral> agregarHijos(List<CuentaBalanceGeneral> listaCuentas, String codigoPadre, int nivelPadre) {
         List<CuentaBalanceGeneral> arbolHijos = new ArrayList<CuentaBalanceGeneral>();
         for (CuentaBalanceGeneral item : listaCuentas) {
-            System.out.print("comparando " + "codigoPadre: " + codigoPadre + " codigoHija: " + item.getCodigo() + " - " + item.getNombre());
+            //System.out.print("comparando " + "codigoPadre: " + codigoPadre + " codigoHija: " + item.getCodigo() + " - " + item.getNombre());
             //es cuenta hija solo si: 
             //el nivel de la cuenta actual es = nivel de la padre + 1, 
             //y el codigo actual inicia con el codigo padre, 
             //y si el tamano del codigo actual > tamano del codigo del padre
             if (item.getNivel() == (nivelPadre + 1) && item.getCodigo().startsWith(codigoPadre) && item.getCodigo().length() > codigoPadre.length()) {
-                System.out.println(" OK hijas");
+                //System.out.println(" OK hijas");
                 item.setSubCuentas(agregarHijos(listaCuentas, item.getCodigo(), item.getNivel()));
                 arbolHijos.add(item);
             }
