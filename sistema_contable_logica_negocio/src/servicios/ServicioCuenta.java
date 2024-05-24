@@ -244,7 +244,7 @@ public class ServicioCuenta {
         CuentaBalanceGeneral cuentaActivo = listaActivoBalance.get(0);
         CuentaBalanceGeneral cuentaPasivo = listaPasivoBalance.get(0);
         CuentaBalanceGeneral cuentaPatrimonio = listaPatrimonioBalance.get(0);
-        final int COLUMNA_REPORTE = 1;
+        final int COLUMNA_REPORTE = 3;
 
         List<ElementoFormulaReporte> listaCuentasBalanceGeneral = new ArrayList<ElementoFormulaReporte>();
 
@@ -263,10 +263,11 @@ public class ServicioCuenta {
 
         if (cuenta.tieneSubcuentas()) {
             for (CuentaBalanceGeneral subCuenta : cuenta.getSubCuentas()) {
-                valor = valor + calcularSaldos(subCuenta, listaElementos, colmnaReporte + 1);
+                valor = valor + calcularSaldos(subCuenta, listaElementos, colmnaReporte - 1);
             }
             //establecer el saldo al valor calculado
             cuenta.saldo(valor);
+            elemento.setValor(valor, colmnaReporte);
         } else {
             valor = cuenta.saldo() == null ? 0 : cuenta.saldo();
             elemento.setValor(valor, colmnaReporte);

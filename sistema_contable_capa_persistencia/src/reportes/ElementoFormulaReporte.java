@@ -80,7 +80,7 @@ public class ElementoFormulaReporte {
     
     
     public void setValor(Double valor, int nivel) {
-        if(nivel == 1) {
+        if(nivel <= 1) {
             setValor1(valor);
         } else if(nivel == 2) {
             setValor2(valor);
