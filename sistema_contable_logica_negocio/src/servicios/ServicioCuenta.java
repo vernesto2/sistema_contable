@@ -253,33 +253,42 @@ public class ServicioCuenta {
         Double totalActivo = calcularSaldos(cuentaActivo, listaCuentasBalanceGeneral, COLUMNA_REPORTE);
         Double totalPasivo = calcularSaldos(cuentaPasivo, listaCuentasBalanceGeneral, COLUMNA_REPORTE);
         Double totalPatrimonio = calcularSaldos(cuentaPatrimonio, listaCuentasBalanceGeneral, COLUMNA_REPORTE);
-
+        
+        ElementoFormulaReporte totalPasivoMasPatrimonio = new ElementoFormulaReporte();
+        totalPasivoMasPatrimonio.setNombre("TOTAL PASIVO + PATRIMONIO");
+        totalPasivoMasPatrimonio.setValor3(totalPasivo + totalPatrimonio);
+        totalPasivoMasPatrimonio.setSigno(Constantes.SIGNO_IGUAL.getValue());
+        listaCuentasBalanceGeneral.add(totalPasivoMasPatrimonio);
+        
         return RespuestaGeneral.asOk(null, listaCuentasBalanceGeneral);
     }
 
-    private Double calcularSaldos(CuentaBalanceGeneral cuenta, List<ElementoFormulaReporte> listaElementos, int colmnaReporte) {
+    private Double calcularSaldos(CuentaBalanceGeneral cuenta, List<ElementoFormulaReporte> listaElementos, int columnaReporte) {
         Double valor = Double.valueOf(0);
 
-        ElementoFormulaReporte elemento = cuentaBalanceGeneralAElementoReporteFormula(cuenta, colmnaReporte);
+        ElementoFormulaReporte elemento = cuentaBalanceGeneralAElementoReporteFormula(cuenta, columnaReporte);
         listaElementos.add(elemento);
 
         if (cuenta.tieneSubcuentas()) {
             for (CuentaBalanceGeneral subCuenta : cuenta.getSubCuentas()) {
-                valor = valor + calcularSaldos(subCuenta, listaElementos, colmnaReporte - 1);
+                valor = valor + calcularSaldos(subCuenta, listaElementos, columnaReporte - 1);
             }
             //establecer el saldo al valor calculado
             cuenta.saldo(valor);
-            elemento.setValor(valor, colmnaReporte);
+            elemento.setValor(valor, columnaReporte);
         } else {
             valor = cuenta.saldo() == null ? 0 : cuenta.saldo();
-            elemento.setValor(valor, colmnaReporte);
+            elemento.setValor(valor, columnaReporte);
+        }
+        if(columnaReporte > 1) {
+            //el signo = hace que en el reporte la cuenta aparezca en negrita
+            elemento.setSigno(Constantes.SIGNO_IGUAL.getValue());
         }
         return valor;
     }
 
     private ElementoFormulaReporte cuentaBalanceGeneralAElementoReporteFormula(CuentaBalanceGeneral cuenta, int columna) {
         ElementoFormulaReporte elemento = new ElementoFormulaReporte();
-
         elemento.setCodigo(cuenta.getCodigo());
         elemento.setId(cuenta.getId());
         elemento.setNombre(cuenta.getNombre());

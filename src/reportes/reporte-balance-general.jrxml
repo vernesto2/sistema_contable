@@ -29,6 +29,12 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="Style-negrita" isBold="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{signo}.equals("(=)")]]></conditionExpression>
+			<style isBlankWhenNull="false" isBold="true"/>
+		</conditionalStyle>
+	</style>
 	<subDataset name="tabla-dataset" uuid="e3c37f26-9b14-4979-9751-e8fe168d717b">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter-sistema-contable.jrdax"/>
 		<parameter name="param_formateador_moneda" class="java.text.DecimalFormat" isForPrompting="false">
@@ -183,7 +189,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="290" height="30" uuid="ae881f25-1782-4372-a309-5adb9b192825"/>
+								<reportElement style="Style-negrita" x="0" y="0" width="290" height="30" uuid="ae881f25-1782-4372-a309-5adb9b192825"/>
 								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 							</textField>
@@ -193,7 +199,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="80" height="30" uuid="0335f0b7-c6bc-49d4-9695-75f293d6e23a"/>
+								<reportElement style="Style-negrita" x="0" y="0" width="80" height="30" uuid="0335f0b7-c6bc-49d4-9695-75f293d6e23a"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{valor1} == null ? "" :  $P{param_formateador_moneda}.format($F{valor1})]]></textFieldExpression>
 							</textField>
@@ -203,7 +209,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="80" height="30" uuid="b10260e4-c966-487e-a586-73b049bed3c7"/>
+								<reportElement style="Style-negrita" x="0" y="0" width="80" height="30" uuid="b10260e4-c966-487e-a586-73b049bed3c7"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{valor2} == null ? "" :  $P{param_formateador_moneda}.format($F{valor2})]]></textFieldExpression>
 							</textField>
@@ -213,7 +219,7 @@
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="80" height="30" uuid="8dd807d0-3948-4e9d-8cf2-f7c996f3e360"/>
+								<reportElement style="Style-negrita" x="0" y="0" width="80" height="30" uuid="8dd807d0-3948-4e9d-8cf2-f7c996f3e360"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{valor3} == null ? "" :  $P{param_formateador_moneda}.format($F{valor3})]]></textFieldExpression>
 							</textField>
