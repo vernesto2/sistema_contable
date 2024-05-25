@@ -147,6 +147,14 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="Style-sangria-condicional">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{haber} != 0]]></conditionExpression>
+			<style>
+				<paragraph leftIndent="20"/>
+			</style>
+		</conditionalStyle>
+	</style>
 	<subDataset name="Dataset1" uuid="39a8139c-2d39-46ea-8ee9-27dd8f7b0afc">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
@@ -701,7 +709,7 @@ order by fecha || hora asc]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="9"/>
 								</textElement>
-								<textFieldExpression><![CDATA[ $F{folio_mayor} == null || $F{folio_mayor} == 0 ? "" : $F{folio_mayor}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{folio_mayor} == null || $F{folio_mayor} == 0 ? "" : $F{folio_mayor}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

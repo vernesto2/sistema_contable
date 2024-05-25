@@ -30,6 +30,14 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<style name="Style-sanria-condicional">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{haber} != 0]]></conditionExpression>
+			<style>
+				<paragraph leftIndent="10"/>
+			</style>
+		</conditionalStyle>
+	</style>
 	<subDataset name="Dataset1" uuid="39a8139c-2d39-46ea-8ee9-27dd8f7b0afc">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
@@ -259,7 +267,7 @@ WHERE
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="210" height="30" uuid="75071f7e-8c85-4c66-808b-958569e8b1e8"/>
+								<reportElement style="Style-sanria-condicional" x="0" y="0" width="210" height="30" uuid="75071f7e-8c85-4c66-808b-958569e8b1e8"/>
 								<textElement verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{cuenta}]]></textFieldExpression>
 							</textField>
@@ -279,7 +287,7 @@ WHERE
 							<textField>
 								<reportElement x="0" y="0" width="40" height="30" uuid="66b55fc2-fa03-44d4-adfd-8eb5156cc146"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{folio_mayor} == 0 ? "" : $F{folio_mayor}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{folio_mayor} == null || $F{folio_mayor} == 0  ? "" : $F{folio_mayor}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

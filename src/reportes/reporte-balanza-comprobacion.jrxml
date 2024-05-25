@@ -209,7 +209,7 @@
 							<textField>
 								<reportElement x="0" y="0" width="40" height="30" uuid="014e5523-4a5c-4e82-aa49-560bb0e157e8"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{folioMayor}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{folioMayor} == null || $F{folioMayor} == 0 ? "" : $F{folioMayor}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

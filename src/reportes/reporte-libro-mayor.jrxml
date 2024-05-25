@@ -233,7 +233,7 @@ where
 c.eliminado = false
 and cb.id_ciclo_contable =  $P{param_id_ciclo} 
 and id_tipo_catalogo =   $P{param_id_tipo_catalogo} 
-and length(c.codigo) =  $P{param_tamano_codigo}
+and ( $P{param_tamano_codigo} == 0 or length(c.codigo) =  $P{param_tamano_codigo} ) 
 and (
 	 $P{param_id_cuenta_mayorizar} is null or c.id =  $P{param_id_cuenta_mayorizar} 
 )
@@ -259,7 +259,7 @@ and pd.eliminado = false
 and p.eliminado = false
 and p.id_ciclo =  $P{param_id_ciclo} 
 and id_tipo_catalogo =  $P{param_id_tipo_catalogo} 
-and length(c.codigo) =  $P{param_tamano_codigo}
+and ( $P{param_tamano_codigo} == 0 or length(c.codigo) =  $P{param_tamano_codigo} ) 
 and (
 	 $P{param_id_cuenta_mayorizar} is null or c.id =  $P{param_id_cuenta_mayorizar} 
 )
@@ -549,7 +549,7 @@ order by folio_mayor]]>
 			<textField>
 				<reportElement x="410" y="22" width="140" height="18" uuid="dae62c8d-b235-4339-ba67-eb0b95e88296"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["Folio mayor: "+ $F{folio_mayor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Folio mayor: "+ ($F{folio_mayor} ==  null ? "" : $F{folio_mayor})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

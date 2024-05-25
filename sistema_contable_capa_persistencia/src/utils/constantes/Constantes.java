@@ -153,7 +153,7 @@ public class Constantes {
     // tipos de Formulas
     public static ArrayList<dtoLista> listaTiposFormulaEstadoResultado() {
         ArrayList<dtoLista> lista = new ArrayList<>();
-        dtoLista op1 = new dtoLista("Estado de Resultado", "Estado de Resultado");
+        dtoLista op1 = new dtoLista("Estado de Resultados", "Estado de Resultados");
         dtoLista op2 = new dtoLista("Estado de Costo de Producción", "Estado de Costo de Producción");
         dtoLista op3 = new dtoLista("Estado de Costo de Venta", "Estado de Costo de Venta");
         dtoLista op4 = new dtoLista("Estado de Materia Prima Consumida", "Estado de Materia Prima Consumida");
