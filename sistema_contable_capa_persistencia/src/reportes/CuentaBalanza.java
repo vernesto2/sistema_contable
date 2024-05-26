@@ -104,7 +104,16 @@ public class CuentaBalanza {
         } else if (this.getTipoSaldo().equals(Constantes.TIPO_SALDO_ACREEDOR.getValue())) {
             return this.getSaldoAcreedor();
         } else {
-            throw new IllegalStateException("Error: id cuenta (" + this.getId() + ") no tiene un tipo saldo valido");
+            Double __saldoDeudor = this.getSaldoDeudor() == null ? Double.valueOf(0) : this.getSaldoDeudor();
+            Double __saldoAcreedor = this.getSaldoAcreedor() == null ? Double.valueOf(0) : this.getSaldoAcreedor();
+            if ( __saldoDeudor > __saldoAcreedor ) {
+                return __saldoDeudor - __saldoAcreedor;
+            } else if ( __saldoAcreedor < __saldoDeudor ) {
+                return __saldoAcreedor - __saldoDeudor;
+            } else {
+                return Double.valueOf(0);
+            }
+            //throw new IllegalStateException("Error: id cuenta (" + this.getId() + ") no tiene un tipo saldo valido");
         }
     }
 }
