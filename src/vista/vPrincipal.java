@@ -142,8 +142,6 @@ public class vPrincipal extends javax.swing.JFrame {
         txtNombreUsuario = new javax.swing.JLabel();
         btnBalanzaComprobacion = new RSMaterialComponent.RSButtonShapeIcon();
         btnBalanceGeneral = new RSMaterialComponent.RSButtonShapeIcon();
-        btnFlujoEfectivo = new RSMaterialComponent.RSButtonShapeIcon();
-        btnCambiosPatrimonio = new RSMaterialComponent.RSButtonShapeIcon();
         btnCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
         topbar = new javax.swing.JPanel();
         txtConfigCicloContable = new javax.swing.JLabel();
@@ -267,32 +265,6 @@ public class vPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnFlujoEfectivo.setBackground(new java.awt.Color(73, 120, 248));
-        btnFlujoEfectivo.setText("Estado de flujo de efectivo");
-        btnFlujoEfectivo.setToolTipText("Estado de flujo de efectivo");
-        btnFlujoEfectivo.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        btnFlujoEfectivo.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.ATTACH_MONEY);
-        btnFlujoEfectivo.setSizeIcon(25.0F);
-        btnFlujoEfectivo.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        btnFlujoEfectivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFlujoEfectivoActionPerformed(evt);
-            }
-        });
-
-        btnCambiosPatrimonio.setBackground(new java.awt.Color(73, 120, 248));
-        btnCambiosPatrimonio.setText("Estado de cambios en el patrimonio");
-        btnCambiosPatrimonio.setToolTipText("Estado de cambios en el patrimonio");
-        btnCambiosPatrimonio.setBackgroundHover(new java.awt.Color(73, 65, 248));
-        btnCambiosPatrimonio.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.CACHED);
-        btnCambiosPatrimonio.setSizeIcon(25.0F);
-        btnCambiosPatrimonio.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
-        btnCambiosPatrimonio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCambiosPatrimonioActionPerformed(evt);
-            }
-        });
-
         btnCicloContable.setBackground(new java.awt.Color(73, 120, 248));
         btnCicloContable.setText("Config. contabilidad");
         btnCicloContable.setToolTipText("Configuración de contabilidad (Ciclos contables, Catalogos, etc.)");
@@ -330,8 +302,6 @@ public class vPrincipal extends javax.swing.JFrame {
                     .addComponent(btnLibroMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBalanceGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFlujoEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCambiosPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -356,11 +326,7 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addComponent(btnEstadoResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBalanceGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnFlujoEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCambiosPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addComponent(btnCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConfigUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -502,8 +468,8 @@ public class vPrincipal extends javax.swing.JFrame {
         this.btnBalanzaComprobacion.setSelected(false);
         this.btnEstadoResultado.setSelected(false);
         this.btnBalanceGeneral.setSelected(false);
-        this.btnFlujoEfectivo.setSelected(false);
-        this.btnCambiosPatrimonio.setSelected(false);
+//        this.btnFlujoEfectivo.setSelected(false);
+//        this.btnCambiosPatrimonio.setSelected(false);
         this.btnCicloContable.setSelected(false);
         this.btnConfigUsuario.setSelected(false);
 
@@ -569,14 +535,6 @@ public class vPrincipal extends javax.swing.JFrame {
             new CambiaPanel(pnl, new vBalanceGeneral(sesion));
         }
     }//GEN-LAST:event_btnBalanceGeneralActionPerformed
-
-    private void btnFlujoEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlujoEfectivoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFlujoEfectivoActionPerformed
-
-    private void btnCambiosPatrimonioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiosPatrimonioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCambiosPatrimonioActionPerformed
 
     private void btnCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCicloContableActionPerformed
         this.seleccionarBoton();
@@ -688,12 +646,10 @@ public class vPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static RSMaterialComponent.RSButtonShapeIcon btnBalanceGeneral;
     public static RSMaterialComponent.RSButtonShapeIcon btnBalanzaComprobacion;
-    public static RSMaterialComponent.RSButtonShapeIcon btnCambiosPatrimonio;
     private RSMaterialComponent.RSButtonShapeIcon btnCerrarSesion;
     private RSMaterialComponent.RSButtonShapeIcon btnCicloContable;
     private RSMaterialComponent.RSButtonShapeIcon btnConfigUsuario;
     public static RSMaterialComponent.RSButtonShapeIcon btnEstadoResultado;
-    public static RSMaterialComponent.RSButtonShapeIcon btnFlujoEfectivo;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable2;
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarCicloContable3;
     public static RSMaterialComponent.RSButtonShapeIcon btnLibroDiario;

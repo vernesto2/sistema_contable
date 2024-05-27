@@ -3,11 +3,8 @@ package utils;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import modelo.ConfiguracionUsuario;
-import modelo.Usuario;
 import servicios.ServicioConfigUsuario;
 import sesion.Sesion;
 import utils.constantes.Constantes;
@@ -65,8 +62,8 @@ public class UtileriaVista {
             vPrincipal.btnBalanzaComprobacion.setEnabled(false);
             vPrincipal.btnEstadoResultado.setEnabled(false);
             vPrincipal.btnBalanceGeneral.setEnabled(false);
-            vPrincipal.btnFlujoEfectivo.setEnabled(false);
-            vPrincipal.btnCambiosPatrimonio.setEnabled(false);
+//            vPrincipal.btnFlujoEfectivo.setEnabled(false);
+//            vPrincipal.btnCambiosPatrimonio.setEnabled(false);
             if (sesion.configUsuario.getId_ciclo_contable() == -1) {
                 vPrincipal.txtConfigCicloContable.setText("NO SE HA SELECCIONADO NINGUN CICLO CONTABLE");
             } else {
@@ -78,8 +75,8 @@ public class UtileriaVista {
                 vPrincipal.btnBalanzaComprobacion.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getBalanza_comprobacion()== 1 ? true : false);
                 vPrincipal.btnEstadoResultado.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getEstado_resultado()== 1 ? true : false);
                 vPrincipal.btnBalanceGeneral.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getBalance_general()== 1 ? true : false);
-                vPrincipal.btnFlujoEfectivo.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getFlujo_efectivo()== 1 ? true : false);
-                vPrincipal.btnCambiosPatrimonio.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getCambios_patrimonio()== 1 ? true : false);
+//                vPrincipal.btnFlujoEfectivo.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getFlujo_efectivo()== 1 ? true : false);
+//                vPrincipal.btnCambiosPatrimonio.setEnabled(sesion.configUsuario.getCicloContable().getTipoCatalogo().getCambios_patrimonio()== 1 ? true : false);
             }
             int color = sesion.configUsuario.getCicloContable().getTipoCatalogo().getColor();
             vPrincipal.txtConfigCicloContable.setForeground(Constantes.devolverColor(color));
@@ -96,8 +93,8 @@ public class UtileriaVista {
         vPrincipal.btnBalanzaComprobacion.setEnabled(false);
         vPrincipal.btnEstadoResultado.setEnabled(false);
         vPrincipal.btnBalanceGeneral.setEnabled(false);
-        vPrincipal.btnFlujoEfectivo.setEnabled(false);
-        vPrincipal.btnCambiosPatrimonio.setEnabled(false);
+//        vPrincipal.btnFlujoEfectivo.setEnabled(false);
+//        vPrincipal.btnCambiosPatrimonio.setEnabled(false);
     }
     public static final DecimalFormat FormateadorMoneda = new DecimalFormat("#,##0.00");
 }

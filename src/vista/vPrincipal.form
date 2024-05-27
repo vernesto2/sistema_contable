@@ -116,8 +116,6 @@
                           <Component id="btnLibroMayor" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnBalanzaComprobacion" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnBalanceGeneral" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnFlujoEfectivo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnCambiosPatrimonio" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCicloContable" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -145,11 +143,7 @@
                       <Component id="btnEstadoResultado" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnBalanceGeneral" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnFlujoEfectivo" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnCambiosPatrimonio" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                      <EmptySpace pref="122" max="32767" attributes="0"/>
                       <Component id="btnCicloContable" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnConfigUsuario" min="-2" pref="36" max="-2" attributes="0"/>
@@ -302,7 +296,7 @@
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Ver Dashboard"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="iconTextGap" type="int" value="1"/>
@@ -370,56 +364,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBalanceGeneralActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-              </AuxValues>
-            </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnFlujoEfectivo">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f8" green="78" red="49" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Estado de flujo de efectivo"/>
-                <Property name="toolTipText" type="java.lang.String" value="Estado de flujo de efectivo"/>
-                <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f8" green="41" red="49" type="rgb"/>
-                </Property>
-                <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
-                  <Value id="ATTACH_MONEY"/>
-                </Property>
-                <Property name="sizeIcon" type="float" value="25.0"/>
-                <Property name="themeTooltip" type="necesario.Global$THEMETOOLTIP" editor="org.netbeans.modules.form.editors.EnumEditor">
-                  <Value id="LIGHT"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFlujoEfectivoActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-              </AuxValues>
-            </Component>
-            <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnCambiosPatrimonio">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f8" green="78" red="49" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Estado de cambios en el patrimonio"/>
-                <Property name="toolTipText" type="java.lang.String" value="Estado de cambios en el patrimonio"/>
-                <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f8" green="41" red="49" type="rgb"/>
-                </Property>
-                <Property name="icons" type="rojeru_san.efectos.ValoresEnum$ICONS" editor="org.netbeans.modules.form.editors.EnumEditor">
-                  <Value id="CACHED"/>
-                </Property>
-                <Property name="sizeIcon" type="float" value="25.0"/>
-                <Property name="themeTooltip" type="necesario.Global$THEMETOOLTIP" editor="org.netbeans.modules.form.editors.EnumEditor">
-                  <Value id="LIGHT"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCambiosPatrimonioActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>

@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -97,7 +98,17 @@ public class dPartidas extends javax.swing.JDialog {
         //txtNumFolio.setText(String.valueOf(this.partidaModel.getFolio()));
         txtComentario.setText(this.partidaModel.getComentario());
         txtFecha.setDate(this.partidaModel.getFecha());
-        txtHora.setText(this.partidaModel.getHora());
+        if (this.partidaModel.getId() > 0) {
+            txtHora.setText(this.partidaModel.getHora());
+        } else {
+            Date fecha = new Date();
+            String hora = String.valueOf(fecha.getHours());
+            String min = String.valueOf(fecha.getMinutes());
+            String horaMas = Integer.parseInt(hora) < 10 ? "0" + hora : hora;
+            String minMas = Integer.parseInt(min) < 10 ? "0" + min : min;
+            txtHora.setText(horaMas + ":" + minMas);
+        }
+        
         txtFecha.setFormatDate("dd-MM-yyyy");
         
         // PROCESO PARA SELECCION DE COMBOBOX
