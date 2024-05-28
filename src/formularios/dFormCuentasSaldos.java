@@ -4,11 +4,14 @@
  */
 package formularios;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.CicloContable;
+import modelo.CicloContableFolio;
 import modelo.Cuenta;
 import modelo.CuentaBalance;
 import modelo.TipoCatalogo;
+import servicios.ServicioCicloContableFolio;
 import servicios.ServicioCuentaBalance;
 import sesion.Sesion;
 import utils.UtileriaVista;
@@ -33,12 +36,14 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
     TipoCatalogo tipoCatalogo = new TipoCatalogo();
     
     RespuestaGeneral rg = new RespuestaGeneral();
+    ServicioCicloContableFolio _cicloFolio;
     
     public dFormCuentasSaldos(java.awt.Frame parent, boolean modal, Sesion sesion, CuentaBalance cBalance, CicloContable cicloContable, TipoCatalogo tipoCatalogo) {
         super(parent, modal);
         initComponents();
         this.sesion = sesion;
         this._cBalance = new ServicioCuentaBalance(sesion.rutaConexion);
+        this._cicloFolio = new ServicioCicloContableFolio(this.sesion.rutaConexion);
         this.cBalanceModel = cBalance;
         this.cicloContable = cicloContable;
         this.cicloContable.setId_catalogo(cicloContable.getId_catalogo());
@@ -48,6 +53,20 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
         this.setResizable(false);
         this.setTitle(this.cBalanceModel.getId() > 0 ? "MODIFICAR SALDO" : "NUEVO SALDO");
         this.setearData();
+        this.obtenerUltimoFolio();
+    }
+    
+    public void obtenerUltimoFolio() {
+        RespuestaGeneral rg = this._cicloFolio.ObtenerUltimoFolioPorCicloContable(this.cicloContable.getId(), this.tipoCatalogo.getId());
+        if (rg.esExitosa()) {
+            ArrayList<CicloContableFolio> listaAux = new ArrayList<>();
+            listaAux = (ArrayList<CicloContableFolio>)rg.getDatos();
+            if (listaAux.isEmpty()) {
+                this.txtUltimoFolio.setText("-");
+            } else {
+                this.txtUltimoFolio.setText(String.valueOf(listaAux.get(0).getFolio_mayor()));
+            }
+        }
     }
     
     public void limpiarCuentaSeleccionada() {
@@ -109,6 +128,8 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
         btnCancelarTipoCatalogo2 = new RSMaterialComponent.RSButtonShapeIcon();
         jLabel19 = new javax.swing.JLabel();
         txtFolio = new RSMaterialComponent.RSTextFieldMaterial();
+        jLabel20 = new javax.swing.JLabel();
+        txtUltimoFolio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -242,6 +263,17 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
             }
         });
 
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel20.setText("Último FM:");
+        jLabel20.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        txtUltimoFolio.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtUltimoFolio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtUltimoFolio.setText("FOLIO");
+        txtUltimoFolio.setToolTipText("ULTIMO FOLIO INGRESADO");
+        txtUltimoFolio.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -264,9 +296,13 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
                             .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSaldoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUltimoFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -288,7 +324,11 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUltimoFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -460,10 +500,12 @@ public class dFormCuentasSaldos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel txtCuentaSeleccionada;
     private RSMaterialComponent.RSTextFieldMaterial txtFolio;
     private RSMaterialComponent.RSTextFieldMaterial txtSaldoInicial;
+    private javax.swing.JLabel txtUltimoFolio;
     // End of variables declaration//GEN-END:variables
 }

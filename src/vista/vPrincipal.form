@@ -408,10 +408,10 @@
                       <Component id="btnGuardarCicloContable2" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnGuardarCicloContable3" min="-2" pref="37" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                      <Component id="btnSeleccionarArchivoAlumno" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtConfigCicloContable" pref="707" max="32767" attributes="0"/>
+                      <Component id="btnSeleccionarArchivoAlumno" min="-2" pref="37" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Component id="txtConfigCicloContable" pref="713" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -482,7 +482,7 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="3a" red="21" type="rgb"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Ver Dashboard"/>
+                <Property name="toolTipText" type="java.lang.String" value="VER INICIO"/>
                 <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="54" red="21" type="rgb"/>
                 </Property>
@@ -511,7 +511,7 @@
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="3a" red="21" type="rgb"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Abrir archivo"/>
+                <Property name="toolTipText" type="java.lang.String" value="ABRIR OTRO ARCHIVO"/>
                 <Property name="backgroundHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="54" red="21" type="rgb"/>
                 </Property>

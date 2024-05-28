@@ -13,7 +13,6 @@ import sesion.Sesion;
 import utils.UtileriaVista;
 import utils.constantes.Constantes;
 import utils.constantes.RespuestaGeneral;
-import vista.vConfigContabilidad;
 
 /**
  *
@@ -49,8 +48,8 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         chBalanzaComprobacion.setSelected((this.tipoCatalogoModel.getBalanza_comprobacion()== 1));
         chEstadoResultado.setSelected((this.tipoCatalogoModel.getEstado_resultado()== 1));
         chBalanceGeneral.setSelected((this.tipoCatalogoModel.getBalance_general()== 1));
-        chFlujoEfectivo.setSelected((this.tipoCatalogoModel.getFlujo_efectivo()== 1));
-        chCambiosPatromonio.setSelected((this.tipoCatalogoModel.getCambios_patrimonio()== 1));
+//        chFlujoEfectivo.setSelected((this.tipoCatalogoModel.getFlujo_efectivo()== 1));
+//        chCambiosPatromonio.setSelected((this.tipoCatalogoModel.getCambios_patrimonio()== 1));
         txtNivelMayorizar.setText(String.valueOf(this.tipoCatalogoModel.getNivel_mayorizar()));
         
         int iCmb = 0, i = 0;
@@ -118,8 +117,6 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         chBalanzaComprobacion = new rojerusan.RSCheckBox();
         chEstadoResultado = new rojerusan.RSCheckBox();
         chBalanceGeneral = new rojerusan.RSCheckBox();
-        chFlujoEfectivo = new rojerusan.RSCheckBox();
-        chCambiosPatromonio = new rojerusan.RSCheckBox();
         jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtNivelMayorizar = new RSMaterialComponent.RSTextFieldMaterial();
@@ -238,18 +235,6 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         chBalanceGeneral.setColorUnCheck(new java.awt.Color(0, 0, 0));
         chBalanceGeneral.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
 
-        chFlujoEfectivo.setForeground(new java.awt.Color(0, 0, 0));
-        chFlujoEfectivo.setText("Flujo de efectivo");
-        chFlujoEfectivo.setColorCheck(new java.awt.Color(33, 58, 86));
-        chFlujoEfectivo.setColorUnCheck(new java.awt.Color(0, 0, 0));
-        chFlujoEfectivo.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-
-        chCambiosPatromonio.setForeground(new java.awt.Color(0, 0, 0));
-        chCambiosPatromonio.setText("Cambios en el patrimonio");
-        chCambiosPatromonio.setColorCheck(new java.awt.Color(33, 58, 86));
-        chCambiosPatromonio.setColorUnCheck(new java.awt.Color(0, 0, 0));
-        chCambiosPatromonio.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -263,13 +248,11 @@ public class dTipoCatalogo extends javax.swing.JDialog {
                             .addComponent(chBalanzaComprobacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chEstadoResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chEstadoResultado, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
                             .addComponent(chLibroMayor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(chBalanceGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(chFlujoEfectivo, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
-                    .addComponent(chCambiosPatromonio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -284,11 +267,7 @@ public class dTipoCatalogo extends javax.swing.JDialog {
                     .addComponent(chBalanzaComprobacion, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chEstadoResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chBalanceGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chFlujoEfectivo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(chCambiosPatromonio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(chBalanceGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -350,13 +329,15 @@ public class dTipoCatalogo extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNivelMayorizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -390,8 +371,8 @@ public class dTipoCatalogo extends javax.swing.JDialog {
         this.tipoCatalogoModel.setBalanza_comprobacion(this.chBalanzaComprobacion.isSelected() ? 1 : 0);
         this.tipoCatalogoModel.setEstado_resultado(this.chEstadoResultado.isSelected() ? 1 : 0);
         this.tipoCatalogoModel.setBalance_general(this.chBalanceGeneral.isSelected() ? 1 : 0);
-        this.tipoCatalogoModel.setFlujo_efectivo(this.chFlujoEfectivo.isSelected() ? 1 : 0);
-        this.tipoCatalogoModel.setCambios_patrimonio(this.chCambiosPatromonio.isSelected() ? 1 : 0);
+//        this.tipoCatalogoModel.setFlujo_efectivo(this.chFlujoEfectivo.isSelected() ? 1 : 0);
+//        this.tipoCatalogoModel.setCambios_patrimonio(this.chCambiosPatromonio.isSelected() ? 1 : 0);
         this.tipoCatalogoModel.setNivel_mayorizar(Integer.parseInt(txtNivelMayorizar.getText()));
     }
     
@@ -492,9 +473,7 @@ public class dTipoCatalogo extends javax.swing.JDialog {
     private RSMaterialComponent.RSButtonShapeIcon btnGuardarTipoCatalogo;
     private rojerusan.RSCheckBox chBalanceGeneral;
     private rojerusan.RSCheckBox chBalanzaComprobacion;
-    private rojerusan.RSCheckBox chCambiosPatromonio;
     private rojerusan.RSCheckBox chEstadoResultado;
-    private rojerusan.RSCheckBox chFlujoEfectivo;
     private rojerusan.RSCheckBox chLibroDiario;
     private rojerusan.RSCheckBox chLibroMayor;
     private RSMaterialComponent.RSComboBoxMaterial cmbColor;

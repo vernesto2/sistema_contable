@@ -99,6 +99,9 @@ public class dFormulaParametro extends javax.swing.JDialog {
         btn3.setIcons(ValoresEnum.ICONS.PLUS_ONE);
         btn3.setColorIcon(Color.green);
         btn3.setCursor(cur);
+        btn1.setToolTipText("EDITAR REGISTRO");
+        btn2.setToolTipText("ELIMINAR REGISTRO");
+        btn1.setToolTipText("AGREGAR SUB-FORMULA");
         this.limiparTablaFormula();
         Object[] datos = new Object[dtm.getColumnCount()];
 

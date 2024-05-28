@@ -144,6 +144,8 @@ public class dPartidas extends javax.swing.JDialog {
         btn2.setIcons(ValoresEnum.ICONS.DELETE);
         btn2.setColorIcon(Color.RED);
         btn2.setCursor(cur);
+        btn1.setToolTipText("EDITAR REGISTRO");
+        btn2.setToolTipText("ELIMINAR REGISTRO");
         this.limiparTablaDetallePartida();
         Object[] datos = new Object[dtm.getColumnCount()];
         for (PartidaDetalle detalle : this.listaPartidaDetalles) {

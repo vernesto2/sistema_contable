@@ -34,6 +34,13 @@ public class ServicioCicloContableFolio {
         return rs;
     }
     
+    public RespuestaGeneral ObtenerUltimoFolioPorCicloContable(int idCicloContable, int idTipoCatalogo) {
+        this.cx.conectar();
+        RespuestaGeneral rs = this.daoCicloContableFolio.ObtenerUltimoFolioPorCicloContable(idCicloContable, idTipoCatalogo);
+        this.cx.desconectar(); 
+        return rs;
+    }
+    
     public RespuestaGeneral obtenerPorId(int id, int idCicloContable, int idTipoCatalogo) {
         this.cx.conectar();
         RespuestaGeneral rs = this.daoCicloContableFolio.ObtenerPorId(id, idCicloContable, idTipoCatalogo);

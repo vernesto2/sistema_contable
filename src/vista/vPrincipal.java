@@ -359,7 +359,7 @@ public class vPrincipal extends javax.swing.JFrame {
         });
 
         btnGuardarCicloContable3.setBackground(new java.awt.Color(33, 58, 86));
-        btnGuardarCicloContable3.setToolTipText("Ver Dashboard");
+        btnGuardarCicloContable3.setToolTipText("VER INICIO");
         btnGuardarCicloContable3.setBackgroundHover(new java.awt.Color(33, 84, 86));
         btnGuardarCicloContable3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnGuardarCicloContable3.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
@@ -375,7 +375,7 @@ public class vPrincipal extends javax.swing.JFrame {
         });
 
         btnSeleccionarArchivoAlumno.setBackground(new java.awt.Color(33, 58, 86));
-        btnSeleccionarArchivoAlumno.setToolTipText("Abrir archivo");
+        btnSeleccionarArchivoAlumno.setToolTipText("ABRIR OTRO ARCHIVO");
         btnSeleccionarArchivoAlumno.setBackgroundHover(new java.awt.Color(33, 84, 86));
         btnSeleccionarArchivoAlumno.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnSeleccionarArchivoAlumno.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.RECT);
@@ -399,10 +399,10 @@ public class vPrincipal extends javax.swing.JFrame {
                 .addComponent(btnGuardarCicloContable2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardarCicloContable3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
-                .addComponent(btnSeleccionarArchivoAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                .addComponent(btnSeleccionarArchivoAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(txtConfigCicloContable, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
                 .addContainerGap())
         );
         topbarLayout.setVerticalGroup(

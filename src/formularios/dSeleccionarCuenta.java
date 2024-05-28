@@ -74,7 +74,21 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         this.setModelCuentas();
         this.obtenerListadoCuentasPorTipoCatalogoCompleto();
         this.obtenerListadoCuentasPorTipoCatalogo();
+        this.obtenerUltimoFolio();
         this.txtFM.setText("0");
+    }
+    
+    public void obtenerUltimoFolio() {
+        RespuestaGeneral rg = this._cicloFolio.ObtenerUltimoFolioPorCicloContable(this.sesion.configUsuario.getCicloContable().getId(), this.sesion.configUsuario.getCicloContable().getTipoCatalogo().getId());
+        if (rg.esExitosa()) {
+            ArrayList<CicloContableFolio> listaAux = new ArrayList<>();
+            listaAux = (ArrayList<CicloContableFolio>)rg.getDatos();
+            if (listaAux.isEmpty()) {
+                this.txtUltimoFolio.setText("-");
+            } else {
+                this.txtUltimoFolio.setText(String.valueOf(listaAux.get(0).getFolio_mayor()));
+            }
+        }
     }
 
     public void setModelCuentas() {
@@ -210,6 +224,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         totalCuentas2 = new javax.swing.JLabel();
         lblSaldoDeudor = new javax.swing.JLabel();
         lblSaldoAcreedor = new javax.swing.JLabel();
+        txtUltimoFolio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -300,6 +315,11 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         txtQueryBusqueda.setPhColor(new java.awt.Color(0, 0, 0));
         txtQueryBusqueda.setPlaceholder("Busqueda por codigo o concepto");
         txtQueryBusqueda.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtQueryBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtQueryBusquedaKeyPressed(evt);
+            }
+        });
 
         btnBuscarCuenta.setBackground(new java.awt.Color(33, 58, 86));
         btnBuscarCuenta.setText("BUSCAR");
@@ -408,7 +428,8 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel18.setText("Folio Mayor:");
+        jLabel18.setText("FM:");
+        jLabel18.setToolTipText("FOLIO MAYOR");
         jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         totalCuentas1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -426,6 +447,13 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         lblSaldoAcreedor.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         lblSaldoAcreedor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblSaldoAcreedor.setText("##,###,###,##");
+
+        txtUltimoFolio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtUltimoFolio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtUltimoFolio.setText("FOLIO");
+        txtUltimoFolio.setToolTipText("ULTIMO FOLIO INGRESADO");
+        txtUltimoFolio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtUltimoFolio.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -453,12 +481,14 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(btnLimpiarBusquedaCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtUltimoFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtCuentaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -493,7 +523,8 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUltimoFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -612,6 +643,9 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                 if (cuenta.getCodigo().equals(codigoPadre)) {
                     cuentaPadre = cuenta;
                     cuentaPadre.setFolio_mayor(Integer.parseInt(this.txtFM.getText()));
+                    if (cuenta.getFolio_mayor() > 0) {
+                        this.folioGuardado = cuenta.getFolio_mayor();
+                    }
                     cuentaPadre.setId_ciclo_folio(this.folioGuardado);
                     encontroPadre = true;
                     break;
@@ -638,7 +672,10 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         pDetalle.setId_cuenta(this.cuentaSeleccionada.getId());
         if (!encontroPadre) {
             this.cuentaSeleccionada.setFolio_mayor(Integer.parseInt(this.txtFM.getText()));
-            this.cuentaSeleccionada.setId_ciclo_folio(this.folioGuardado);
+            if (this.cuentaSeleccionada.getId_ciclo_folio() < 0) {
+                this.cuentaSeleccionada.setId_ciclo_folio(this.folioGuardado);
+            }
+            
         }
         pDetalle.setCuenta(this.cuentaSeleccionada);
         if (encontroPadre) {
@@ -761,6 +798,12 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtFMKeyTyped
 
+    private void txtQueryBusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQueryBusquedaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.obtenerListadoCuentasPorTipoCatalogo();
+        }
+    }//GEN-LAST:event_txtQueryBusquedaKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -826,5 +869,6 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
     private RSMaterialComponent.RSTextFieldMaterial txtFM;
     private RSMaterialComponent.RSTextFieldMaterial txtMonto;
     private RSMaterialComponent.RSTextFieldMaterial txtQueryBusqueda;
+    private javax.swing.JLabel txtUltimoFolio;
     // End of variables declaration//GEN-END:variables
 }

@@ -68,12 +68,14 @@
                                           <Component id="btnLimpiarBusquedaCuenta" min="-2" pref="103" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Component id="txtMonto" min="-2" pref="190" max="-2" attributes="0"/>
+                                          <Component id="txtMonto" min="-2" pref="189" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jLabel18" min="-2" pref="105" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="txtFM" min="-2" pref="115" max="-2" attributes="0"/>
+                                          <Component id="jLabel18" min="-2" pref="45" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtFM" min="-2" pref="103" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txtUltimoFolio" min="-2" pref="68" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="txtCuentaSeleccionada" min="-2" pref="453" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -122,6 +124,7 @@
                       <Component id="jLabel17" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="jLabel18" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="txtFM" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtUltimoFolio" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane3" min="-2" pref="303" max="-2" attributes="0"/>
@@ -297,6 +300,9 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtQueryBusquedaKeyPressed"/>
+          </Events>
         </Component>
         <Component class="RSMaterialComponent.RSButtonShapeIcon" name="btnBuscarCuenta">
           <Properties>
@@ -500,7 +506,8 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="Folio Mayor:"/>
+            <Property name="text" type="java.lang.String" value="FM:"/>
+            <Property name="toolTipText" type="java.lang.String" value="FOLIO MAYOR"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
@@ -538,6 +545,22 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="text" type="java.lang.String" value="##,###,###,##"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="txtUltimoFolio">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial" size="12" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="FOLIO"/>
+            <Property name="toolTipText" type="java.lang.String" value="ULTIMO FOLIO INGRESADO"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder/>
+              </Border>
+            </Property>
+            <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
       </SubComponents>

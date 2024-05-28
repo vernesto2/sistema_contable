@@ -76,6 +76,42 @@ public class daoCicloContableFolio {
         }
     }
     
+    public RespuestaGeneral ObtenerUltimoFolioPorCicloContable(int idCicloContable, int idTipoCatalogo) {
+        RespuestaGeneral rg = new RespuestaGeneral();
+        ArrayList<CicloContableFolio> lista = new ArrayList<>();
+        ResultSet rs = null;
+        String sql = """
+                    select cb.*
+                    from ciclo_contable_folios cb 
+                    where cb.id_ciclo_contable = ? 
+                    order by case 
+                            when cb.folio_mayor = null then 0
+                            else cb.folio_mayor
+                            end DESC
+                     LIMIT 1
+                  """;
+        try (PreparedStatement ps = cx.getCx().prepareStatement(sql)) {
+            ps.setInt(1, idCicloContable);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CicloContableFolio cicloFolio = new CicloContableFolio();
+                cicloFolio.setId(rs.getInt("id"));
+                cicloFolio.setId_ciclo_contable(rs.getInt("id_ciclo_contable"));
+                cicloFolio.setId_cuenta(rs.getInt("id_cuenta"));
+                cicloFolio.setFolio_mayor(rs.getInt("folio_mayor"));
+                
+                lista.add(cicloFolio);
+            }
+            
+            return rg.asOk("", lista);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String mensaje = e.getMessage().toString();
+            return rg.asServerError(mensaje);
+        }
+    }
+    
     public RespuestaGeneral ObtenerPorId(int id, int idCicloContable, int idTipoCatalogo) {
         RespuestaGeneral rg = new RespuestaGeneral();
         ArrayList<CicloContableFolio> lista = new ArrayList<>();

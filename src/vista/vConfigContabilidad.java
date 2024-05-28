@@ -119,7 +119,11 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btn4.setColorIcon(Color.BLUE);
         btn5.setIcons(ValoresEnum.ICONS.MONETIZATION_ON);
         btn5.setColorIcon(Color.ORANGE);
-        
+        btn1.setToolTipText("EDITAR REGISTRO");
+        btn2.setToolTipText("ELIMINAR REGISTRO");
+        btn3.setToolTipText("SELECCIONAR CICLO CONTABLE POR DEFECTO");
+        btn4.setToolTipText("REGISTRO DE FOLIOS Y CUENTAS");
+        btn5.setToolTipText("REGISTRO DE SALDOS, FOLIOS Y CUENTAS");
         
         Object[] datos = new Object[dtm.getColumnCount()];
         for (CicloContable ciclo : listaCiclosContables) {
@@ -242,6 +246,11 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btn3.setIcons(ValoresEnum.ICONS.LIST);
         btn3.setColorIcon(Color.GREEN);
         btn3.setCursor(cur);
+        
+        btn1.setToolTipText("EDITAR REGISTRO");
+        btn2.setToolTipText("ELIMINAR REGISTRO");
+        btn3.setToolTipText("VER FORMULA");
+        
         for (TipoCatalogo tipo : listaTiposCatalogos) {
             datos[0] = tipo.getTipo();
             datos[1] = tipo.getNivel_mayorizar();
@@ -333,6 +342,8 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         btn2.setIcons(ValoresEnum.ICONS.DELETE);
         btn2.setColorIcon(Color.RED);
         btn2.setCursor(cur);
+        btn1.setToolTipText("EDITAR REGISTRO");
+        btn2.setToolTipText("ELIMINAR REGISTRO");
         
         Object[] datos = new Object[dtm.getColumnCount()];
         for (dtoCuenta cuenta : listaCuentas) {
@@ -506,6 +517,11 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         txtBusquedaCicloContable.setPhColor(new java.awt.Color(0, 0, 0));
         txtBusquedaCicloContable.setPlaceholder("Buscar ciclo contable");
         txtBusquedaCicloContable.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtBusquedaCicloContable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBusquedaCicloContableKeyPressed(evt);
+            }
+        });
 
         btnBuscarCicloContable.setBackground(new java.awt.Color(33, 58, 86));
         btnBuscarCicloContable.setText("BUSCAR");
@@ -675,6 +691,11 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         txtBusquedaTipoCatalogo.setPhColor(new java.awt.Color(0, 0, 0));
         txtBusquedaTipoCatalogo.setPlaceholder("Buscar por el tipo");
         txtBusquedaTipoCatalogo.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtBusquedaTipoCatalogo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBusquedaTipoCatalogoKeyPressed(evt);
+            }
+        });
 
         btnGuardarTipoCatalogo2.setBackground(new java.awt.Color(0, 153, 0));
         btnGuardarTipoCatalogo2.setText("NUEVO");
@@ -810,6 +831,11 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         txtQueryBusqueda.setPhColor(new java.awt.Color(0, 0, 0));
         txtQueryBusqueda.setPlaceholder("Busqueda por codigo o concepto");
         txtQueryBusqueda.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtQueryBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtQueryBusquedaKeyPressed(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -1197,6 +1223,24 @@ public class vConfigContabilidad extends javax.swing.JPanel {
         c.setId_tipo_catalogo(listaCmbTipoCatalogo.get(cmbTipoCatalogo2.getSelectedIndex()).getId());
         this.abrirDialogCuentas(c, tituloCatalogo);
     }//GEN-LAST:event_btnGuardarTipoCatalogo4ActionPerformed
+
+    private void txtBusquedaCicloContableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaCicloContableKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.obtenerListadoCiclosContables();
+        }
+    }//GEN-LAST:event_txtBusquedaCicloContableKeyPressed
+
+    private void txtBusquedaTipoCatalogoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaTipoCatalogoKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.obtenerListadoTipoCatalogo();
+        }
+    }//GEN-LAST:event_txtBusquedaTipoCatalogoKeyPressed
+
+    private void txtQueryBusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQueryBusquedaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.obtenerListadoCuentasPorTipoCatalogo();
+        }
+    }//GEN-LAST:event_txtQueryBusquedaKeyPressed
 
     public void seleccionarOpcionCmbTipoCatalogo2() {
         int i = cmbTipoCatalogo2.getSelectedIndex();

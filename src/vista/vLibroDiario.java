@@ -103,6 +103,8 @@ public class vLibroDiario extends javax.swing.JPanel {
         btn2.setIcons(ValoresEnum.ICONS.DELETE);
         btn2.setColorIcon(Color.RED);
         btn2.setCursor(cur);
+        btn1.setToolTipText("EDITAR REGISTRO");
+        btn2.setToolTipText("ELIMINAR REGISTRO");
 
         Object[] datos = new Object[dtm.getColumnCount()];
         for (dtoPartida partida : listaPartidas) {
@@ -258,6 +260,11 @@ public class vLibroDiario extends javax.swing.JPanel {
         txtBusquedaPartidas.setPhColor(new java.awt.Color(0, 0, 0));
         txtBusquedaPartidas.setPlaceholder("Buscar por número de partida");
         txtBusquedaPartidas.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtBusquedaPartidas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBusquedaPartidasKeyPressed(evt);
+            }
+        });
 
         btnBuscarCicloContable.setBackground(new java.awt.Color(33, 58, 86));
         btnBuscarCicloContable.setText("BUSCAR");
@@ -505,6 +512,12 @@ public class vLibroDiario extends javax.swing.JPanel {
         partidaAux.setNum_partida("-");
         this.abrirDialogPartida(partidaAux);
     }//GEN-LAST:event_btnNuevoCicloContable1ActionPerformed
+
+    private void txtBusquedaPartidasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaPartidasKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.obtenerListadoPartidas();
+        }
+    }//GEN-LAST:event_txtBusquedaPartidasKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private RSMaterialComponent.RSButtonShapeIcon btnBuscarCicloContable;

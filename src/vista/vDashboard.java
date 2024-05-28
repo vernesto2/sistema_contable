@@ -4,6 +4,8 @@
  */
 package vista;
 
+import formularios.dMostrarInfo;
+
 /**
  *
  * @author vacev
@@ -29,16 +31,8 @@ public class vDashboard extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         imagenPrincipal = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
+        btnBuscarCicloContable = new RSMaterialComponent.RSButtonShapeIcon();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -53,42 +47,24 @@ public class vDashboard extends javax.swing.JPanel {
         imagenPrincipal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         imagenPrincipal.setIconTextGap(1);
 
-        jTextPane1.setEditable(false);
-        jTextPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jTextPane1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextPane1.setText("Bienvenido al Sistema Contable para Docentes, una innovadora herramienta diseñada para facilitar la enseñanza de la contabilidad en instituciones de nivel medio. Este sistema ha sido creado específicamente para apoyar a los docentes en la tarea de impartir conocimientos contables de manera eficiente y efectiva, proporcionando una plataforma interactiva y amigable que mejora la experiencia de aprendizaje de los estudiantes.");
-        jTextPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane2.setViewportView(jTextPane1);
-
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Version: 1.0.0");
 
-        jTextPane2.setEditable(false);
-        jTextPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jTextPane2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextPane2.setText("Este proyecto es el resultado del esfuerzo y dedicación de Diego Antonio Palacios Menjívar y Víctor Ernesto Acevedo Cornejo, dos estudiantes de la carrera de Ingeniería de Sistemas Informáticos de la Universidad de El Salvador. Como parte de su servicio social, Víctor y Diego se han comprometido a contribuir al desarrollo educativo del país, poniendo a disposición de los docentes una herramienta que no solo facilita la enseñanza, sino que también fomenta el interés y la comprensión de la contabilidad entre los estudiantes.");
-        jTextPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane3.setViewportView(jTextPane2);
-
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("Acerca de:");
-
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText("Autores:");
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText("Características:");
-
-        jTextPane3.setEditable(false);
-        jTextPane3.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jTextPane3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextPane3.setText("Interfaz amigable: Diseñada pensando en la facilidad de uso para que tanto docentes como estudiantes puedan interactuar con el sistema sin dificultades. Recursos educativos: Incluye una amplia gama de materiales didácticos y ejercicios prácticos que refuerzan el aprendizaje de los conceptos contables. Gestión eficiente: Permite a los docentes llevar un registro detallado del progreso de sus estudiantes y evaluar su desempeño de manera efectiva.");
-        jTextPane3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane4.setViewportView(jTextPane3);
+        btnBuscarCicloContable.setBackground(new java.awt.Color(33, 58, 86));
+        btnBuscarCicloContable.setText("INFORMACIÓN");
+        btnBuscarCicloContable.setToolTipText("MAS INFORMACIÓN");
+        btnBuscarCicloContable.setBackgroundHover(new java.awt.Color(33, 68, 86));
+        btnBuscarCicloContable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnBuscarCicloContable.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
+        btnBuscarCicloContable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnBuscarCicloContable.setIcons(rojeru_san.efectos.ValoresEnum.ICONS.HELP);
+        btnBuscarCicloContable.setSizeIcon(18.0F);
+        btnBuscarCicloContable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarCicloContableActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -102,15 +78,14 @@ public class vDashboard extends javax.swing.JPanel {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(imagenPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(118, 118, 118)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -123,18 +98,8 @@ public class vDashboard extends javax.swing.JPanel {
                         .addGap(14, 14, 14))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66)
+                        .addComponent(btnBuscarCicloContable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jLabel3)
                 .addContainerGap())
@@ -152,20 +117,17 @@ public class vDashboard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscarCicloContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCicloContableActionPerformed
+        dMostrarInfo d = new dMostrarInfo(null, true, "PRUEBA TEXTO", "ACERCA DE");
+        d.setVisible(true);
+    }//GEN-LAST:event_btnBuscarCicloContableActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private RSMaterialComponent.RSButtonShapeIcon btnBuscarCicloContable;
     public static javax.swing.JLabel imagenPrincipal;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
     // End of variables declaration//GEN-END:variables
 }

@@ -109,6 +109,7 @@ public class vInicio extends javax.swing.JFrame {
         btnIniciarSesion.setText("INICIAR SESION");
         btnIniciarSesion.setToolTipText("");
         btnIniciarSesion.setBackgroundHover(new java.awt.Color(73, 65, 248));
+        btnIniciarSesion.setEnabled(false);
         btnIniciarSesion.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnIniciarSesion.setForma(RSMaterialComponent.RSButtonShapeIcon.FORMA.ROUND);
         btnIniciarSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -319,6 +320,7 @@ public class vInicio extends javax.swing.JFrame {
     public void probarConexion() {
         if (this.archivoCorrecto) {
             JOptionPane.showMessageDialog(this, "¡Conexión correcta!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            this.btnIniciarSesion.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(this, "¡Conexión incorrecta!", "Alerta", JOptionPane.ERROR_MESSAGE);
         }

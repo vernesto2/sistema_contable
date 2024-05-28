@@ -289,6 +289,11 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         txtQueryBusqueda.setPhColor(new java.awt.Color(0, 0, 0));
         txtQueryBusqueda.setPlaceholder("Busqueda por codigo o concepto");
         txtQueryBusqueda.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtQueryBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtQueryBusquedaKeyPressed(evt);
+            }
+        });
 
         btnBuscarCuenta.setBackground(new java.awt.Color(33, 58, 86));
         btnBuscarCuenta.setText("BUSCAR");
@@ -475,6 +480,12 @@ public class dSeleccionarCuentaFormula extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_btnSeleccionarCuentaActionPerformed
+
+    private void txtQueryBusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQueryBusquedaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.obtenerListadoCuentasPorTipoCatalogo();
+        }
+    }//GEN-LAST:event_txtQueryBusquedaKeyPressed
 
     
     
