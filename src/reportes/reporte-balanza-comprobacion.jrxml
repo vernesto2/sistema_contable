@@ -177,26 +177,8 @@
 						</datasetParameter>
 						<dataSourceExpression><![CDATA[$P{param_cuentas_balanza}]]></dataSourceExpression>
 					</datasetRun>
-					<jr:column width="40" uuid="b1b1ecb1-8368-4807-b788-810b2f1f96d1">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="40" height="30" uuid="7c85781a-7ec0-4132-bf34-d7f4ca64defa"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[Id]]></text>
-							</staticText>
-						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
-						<jr:detailCell style="Table_TD" height="30">
-							<textField>
-								<reportElement x="0" y="0" width="40" height="30" uuid="06108fbc-2bf6-48ee-a5de-3fd13d22f82c"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
 					<jr:column width="40" uuid="9d15876e-42f7-48d6-9d41-c95bd6a0d7a7">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="40" height="30" uuid="1f9d830f-ab88-4efe-8868-3525624e7a9e"/>
@@ -214,7 +196,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="60" uuid="a2e7a76e-1de5-4dca-abfb-4a9180985c88">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="60" height="30" uuid="85cb3762-d2f8-4dd6-890c-f946a152c3a6"/>
@@ -231,11 +213,11 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="170" uuid="e2122d78-f63b-4f2a-95a5-583ed16f325e">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+					<jr:column width="200" uuid="e2122d78-f63b-4f2a-95a5-583ed16f325e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="170" height="30" uuid="881e0752-99f6-46e5-afc2-6de702fec436"/>
+								<reportElement x="0" y="0" width="200" height="30" uuid="881e0752-99f6-46e5-afc2-6de702fec436"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Cuenta]]></text>
 							</staticText>
@@ -243,55 +225,55 @@
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="170" height="30" uuid="3130db19-d317-484a-9e12-9622eff93fcf"/>
+								<reportElement x="0" y="0" width="200" height="30" uuid="3130db19-d317-484a-9e12-9622eff93fcf"/>
 								<textElement verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="110" uuid="b70c6467-7a03-4a97-ae62-b259726dcd15">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+					<jr:column width="130" uuid="b70c6467-7a03-4a97-ae62-b259726dcd15">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="110" height="30" uuid="7c6f5518-aaa8-49cb-b9d0-042c7d4188bc"/>
+								<reportElement x="0" y="0" width="130" height="30" uuid="7c6f5518-aaa8-49cb-b9d0-042c7d4188bc"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Saldo deudor]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="110" height="30" uuid="db9acd06-08df-4253-8133-2f1d987613fe"/>
+								<reportElement x="0" y="0" width="130" height="30" uuid="db9acd06-08df-4253-8133-2f1d987613fe"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$P{param_formateador_moneda}.format($V{var_total_saldo_deudor} == null ? 0 : $V{var_total_saldo_deudor})]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="110" height="30" uuid="b6b68166-9fd0-49c8-9f60-ff7ded09045b"/>
+								<reportElement x="0" y="0" width="130" height="30" uuid="b6b68166-9fd0-49c8-9f60-ff7ded09045b"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{saldoDeudor} == 0 ? "" :  $P{param_formateador_moneda}.format($F{saldoDeudor})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="110" uuid="0295f5c7-f8cd-48e5-810d-21be9a215c50">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+					<jr:column width="130" uuid="0295f5c7-f8cd-48e5-810d-21be9a215c50">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="110" height="30" uuid="3957b913-786d-4926-ba5f-f71d1da4591e"/>
+								<reportElement x="0" y="0" width="130" height="30" uuid="3957b913-786d-4926-ba5f-f71d1da4591e"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<text><![CDATA[Saldo acreedor]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
 							<textField>
-								<reportElement x="0" y="0" width="110" height="30" uuid="6159e116-1cfa-4c28-84f1-080670872233"/>
+								<reportElement x="0" y="0" width="130" height="30" uuid="6159e116-1cfa-4c28-84f1-080670872233"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$P{param_formateador_moneda}.format($V{var_total_saldo_acreedor} == null ? 0 : $V{var_total_saldo_acreedor})]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField>
-								<reportElement x="0" y="0" width="110" height="30" uuid="054a6c47-aa04-4334-a720-d3caa778b4a0"/>
+								<reportElement x="0" y="0" width="130" height="30" uuid="054a6c47-aa04-4334-a720-d3caa778b4a0"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{saldoAcreedor} == 0 ? "" :  $P{param_formateador_moneda}.format($F{saldoAcreedor})]]></textFieldExpression>
 							</textField>

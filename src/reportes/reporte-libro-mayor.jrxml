@@ -395,13 +395,8 @@ order by folio_mayor]]>
 	<detail>
 		<band height="132" splitType="Stretch">
 			<textField>
-				<reportElement x="1" y="0" width="369" height="20" uuid="554bc3dc-1127-4203-a704-45c4830f9461"/>
-				<textFieldExpression><![CDATA["Cuenta: " + $F{nombre}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="410" y="0" width="140" height="20" uuid="0305cd59-a92f-48bd-aced-0fa75b60ac36"/>
-				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["Código: " + $F{codigo}]]></textFieldExpression>
+				<reportElement x="2" y="20" width="339" height="20" uuid="554bc3dc-1127-4203-a704-45c4830f9461"/>
+				<textFieldExpression><![CDATA["Cuenta:   "+  $F{codigo} + " "+ $F{nombre}]]></textFieldExpression>
 			</textField>
 			<componentElement>
 				<reportElement style="Table_TH" x="2" y="40" width="550" height="80" uuid="69a703b1-3370-44c4-90d4-e4793767fe06">
@@ -476,7 +471,7 @@ order by folio_mayor]]>
 							<staticText>
 								<reportElement x="0" y="0" width="50" height="30" uuid="3e4af51a-0ecf-440d-b541-9516c30a43c2"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<text><![CDATA[#Partida]]></text>
+								<text><![CDATA[# Partida]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="30">
@@ -543,11 +538,7 @@ order by folio_mayor]]>
 				</jr:table>
 			</componentElement>
 			<textField>
-				<reportElement x="2" y="20" width="100" height="20" uuid="0f3d87fe-5f2c-43d6-b312-33fb4ee08902"/>
-				<textFieldExpression><![CDATA["Id cuenta: "+$F{id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="410" y="22" width="140" height="18" uuid="dae62c8d-b235-4339-ba67-eb0b95e88296"/>
+				<reportElement x="412" y="22" width="140" height="18" uuid="dae62c8d-b235-4339-ba67-eb0b95e88296"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Folio mayor: "+ ($F{folio_mayor} ==  null ? "" : $F{folio_mayor})]]></textFieldExpression>
 			</textField>

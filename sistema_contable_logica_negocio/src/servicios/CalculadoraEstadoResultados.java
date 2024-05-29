@@ -94,7 +94,7 @@ public class CalculadoraEstadoResultados {
     public List<ElementoFormulaReporte> resolverFormula(String tipoFormula) {
         List<dtoFormula> arbolFormula = this.agregarPadres(listaFormula);
         List<ElementoFormulaReporte> listaFormulaResuelta = new ArrayList<ElementoFormulaReporte>();
-        int columnaReporte = 1;
+        int columnaReporte = 3;
         Double utilidadPerdida = resolverFormula(arbolFormula, listaFormulaResuelta, tipoFormula, columnaReporte);
         return listaFormulaResuelta;
     }
@@ -132,7 +132,7 @@ public class CalculadoraEstadoResultados {
             if (elemFormula.tieneHijas()) {
                 //si se agrega al reporte, los elementos hijos iran en la siguiente columna del reporte
                 if(seAgregarAReporte) {
-                    valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte + 1);
+                    valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte - 1);
                 } else {
                     valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte);
                 }
