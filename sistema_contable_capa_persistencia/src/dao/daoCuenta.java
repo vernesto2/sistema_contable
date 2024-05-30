@@ -186,8 +186,10 @@ public class daoCuenta {
                   	end as disponible
                   	,ccf.folio_mayor
                         ,ccf.id as id_ciclo_folio
+                        ,cb.id as id_cuenta_balance
                   from catalogo ct
                   left join ciclo_contable_folios ccf on ct.id = ccf.id_cuenta and ccf.id_ciclo_contable = paramIdCicloContable
+                  left join cuenta_balance cb on ct.id = cb.id_cuenta and cb.id_ciclo_contable = pCicloContable
                   WHERE (ct.nombre like '%paramBusqueda%' or ct.codigo like '%paramBusqueda%')
                   """;
         String newSql = sql.replaceAll("paramBusqueda", busqueda);
@@ -212,6 +214,7 @@ public class daoCuenta {
                 cuenta.setEs_restado(rs.getInt("es_restado"));
                 cuenta.setFolio_mayor(rs.getInt("folio_mayor"));
                 cuenta.setId_ciclo_folio(rs.getInt("id_ciclo_folio"));
+                cuenta.setId_cuenta_balance(rs.getInt("id_cuenta_balance"));
                 lista.add(cuenta);
             }
             
@@ -263,8 +266,10 @@ public class daoCuenta {
                   	end as disponible
                         ,ccf.folio_mayor
                         ,ccf.id as id_ciclo_folio
+                        ,cb.id as id_cuenta_balance
                   from catalogo ct
                   left join ciclo_contable_folios ccf on ct.id = ccf.id_cuenta and ccf.id_ciclo_contable = pCicloContable
+                  left join cuenta_balance cb on ct.id = cb.id_cuenta and cb.id_ciclo_contable = pCicloContable
                   WHERE (ct.nombre like '%paramBusqueda%' or ct.codigo like '%paramBusqueda%')
                     AND ct.nivel = paramNivel
                   """;
@@ -291,6 +296,7 @@ public class daoCuenta {
                 cuenta.setEs_restado(rs.getInt("es_restado"));
                 cuenta.setFolio_mayor(rs.getInt("folio_mayor"));
                 cuenta.setId_ciclo_folio(rs.getInt("id_ciclo_folio"));
+                cuenta.setId_cuenta_balance(rs.getInt("id_cuenta_balance"));
                 lista.add(cuenta);
             }
             

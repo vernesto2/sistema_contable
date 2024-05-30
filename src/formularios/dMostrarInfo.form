@@ -49,19 +49,11 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jScrollPane1" pref="735" max="32767" attributes="0"/>
-              <Component id="txtLabel" alignment="0" max="32767" attributes="0"/>
-              <Component id="jCTextField1" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="txtLabel" min="-2" pref="86" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jCTextField1" pref="163" max="32767" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jScrollPane1" alignment="1" pref="374" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -102,16 +94,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="txtLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel1"/>
-          </Properties>
-        </Component>
-        <Component class="app.bolivia.swing.JCTextField" name="jCTextField1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jCTextField1"/>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

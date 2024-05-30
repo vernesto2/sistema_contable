@@ -4,19 +4,6 @@
  */
 package formularios;
 
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
-import javax.swing.JOptionPane;
-import javax.swing.border.Border;
-import modelo.CicloContableFolio;
-import modelo.Cuenta;
-import servicios.ServicioCicloContableFolio;
-import sesion.Sesion;
-import utils.UtileriaVista;
-import utils.constantes.Constantes;
-import utils.constantes.RespuestaGeneral;
-
 /**
  *
  * @author vacev
@@ -30,7 +17,6 @@ public class dMostrarInfo extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.txtInfo.setText(texto);
-        this.txtLabel.setText(texto);
         this.setLocationRelativeTo(this);
         this.setResizable(false);
         this.setTitle(titulo);
@@ -49,8 +35,6 @@ public class dMostrarInfo extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtInfo = new javax.swing.JTextArea();
-        txtLabel = new javax.swing.JLabel();
-        jCTextField1 = new app.bolivia.swing.JCTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,26 +56,15 @@ public class dMostrarInfo extends javax.swing.JDialog {
         txtInfo.setMargin(new java.awt.Insets(9, 9, 9, 9));
         jScrollPane1.setViewportView(txtInfo);
 
-        txtLabel.setText("jLabel1");
-
-        jCTextField1.setText("jCTextField1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
-            .addComponent(txtLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jCTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(txtLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,10 +130,8 @@ public class dMostrarInfo extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private app.bolivia.swing.JCTextField jCTextField1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtInfo;
-    private javax.swing.JLabel txtLabel;
     // End of variables declaration//GEN-END:variables
 }
