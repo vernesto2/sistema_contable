@@ -189,7 +189,7 @@ public class daoCuenta {
                         ,cb.id as id_cuenta_balance
                   from catalogo ct
                   left join ciclo_contable_folios ccf on ct.id = ccf.id_cuenta and ccf.id_ciclo_contable = paramIdCicloContable
-                  left join cuenta_balance cb on ct.id = cb.id_cuenta and cb.id_ciclo_contable = pCicloContable
+                  left join cuenta_balance cb on ct.id = cb.id_cuenta and cb.id_ciclo_contable = paramIdCicloContable
                   WHERE (ct.nombre like '%paramBusqueda%' or ct.codigo like '%paramBusqueda%')
                   """;
         String newSql = sql.replaceAll("paramBusqueda", busqueda);

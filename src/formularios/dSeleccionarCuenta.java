@@ -643,8 +643,8 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
                 if (cuenta.getCodigo().equals(codigoPadre)) {
                     cuentaPadre = cuenta;
                     cuentaPadre.setFolio_mayor(Integer.parseInt(this.txtFM.getText()));
-                    if (cuenta.getFolio_mayor() > 0) {
-                        this.folioGuardado = cuenta.getFolio_mayor();
+                    if (cuenta.getId_ciclo_folio() > 0) {
+                        this.folioGuardado = cuenta.getId_ciclo_folio();
                     }
                     cuentaPadre.setId_ciclo_folio(this.folioGuardado);
                     encontroPadre = true;
