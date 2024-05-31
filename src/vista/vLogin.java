@@ -43,8 +43,8 @@ public class vLogin extends javax.swing.JFrame {
         this.setTitle("LOGIN");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/utils/icon/login.png")));
-        this.txtUsuario.setText("ac14072");
-        this.txtClave.setText("1234");
+//        this.txtUsuario.setText("ac14072");
+//        this.txtClave.setText("1234");
         
         RespuestaGeneral resp = _usuario.sePuedeCrearAlumno();
         if(resp.esExitosa()) {
