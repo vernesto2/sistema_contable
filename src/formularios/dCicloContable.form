@@ -57,7 +57,7 @@
                       <Component id="jLabel10" max="32767" attributes="0"/>
                       <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabel8" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jLabel7" alignment="1" pref="156" max="32767" attributes="0"/>
+                      <Component id="jLabel7" alignment="1" pref="0" max="32767" attributes="0"/>
                       <Component id="jLabel6" alignment="1" max="32767" attributes="0"/>
                       <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
@@ -459,7 +459,7 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="% Min&#xed;mo: *"/>
+            <Property name="text" type="java.lang.String" value="% aplicar si las ventas son inferiores: *"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
@@ -492,7 +492,7 @@
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="4"/>
-            <Property name="text" type="java.lang.String" value="% Maximo: *"/>
+            <Property name="text" type="java.lang.String" value="% aplicar si las ventas superan: *"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
           </Properties>
         </Component>
