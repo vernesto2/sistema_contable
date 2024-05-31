@@ -7,7 +7,6 @@ package conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import utils.constantes.Constantes;
 
 /**
  *
@@ -15,11 +14,13 @@ import utils.constantes.Constantes;
  */
 public class Conexion {
         
-    Connection cx = null;
+    Connection cx;
     String rutaConexion;
+    
     public Conexion(String rutaConexion) {
         this.rutaConexion = rutaConexion;
     }
+    
     public Connection conectar() {
         return conectar(this.rutaConexion);
     }
@@ -50,7 +51,7 @@ public class Conexion {
     
     public void desconectar() {
         try {
-            cx.close();
+            this.cx.close();
             System.out.println("Desconectado!");
         } catch (SQLException e) {
             e.printStackTrace();

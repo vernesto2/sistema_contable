@@ -43,14 +43,18 @@ public class pCrearUsuario extends javax.swing.JPanel {
             this.tipoUsuario = tipoUsuario;
             if (tipoUsuario == Constantes.TIPO_ALUMNO) {
                 this.lblDialog.setText("CREACIÓN DE USUARIO TIPO ALUMNO");
+                this.btnCrearConfiguracion.setText("Crear alumno");
             } else if (tipoUsuario == Constantes.TIPO_DOCENTE) {
                 if (this.esRestaurar) {
                     this.lblDialog.setText("CREACIÓN DE USUARIO TIPO DOCENTE Y CONFIGURACIÓN INICIAL");
+                    this.btnCrearConfiguracion.setText("Crear configuración");
                 } else {
                     this.lblDialog.setText("CREACIÓN DE USUARIO TIPO DOCENTE");
+                    this.btnCrearConfiguracion.setText("Crear docente");
                 }
             } else {
                 this.lblDialog.setText("CREACIÓN DE USUARIO TIPO DOCENTE Y CONFIGURACIÓN INICIAL");
+                this.btnCrearConfiguracion.setText("Crear configuración");
             }
         } else 
             throw new IllegalStateException("Tipo usuario incorrecto");
@@ -67,11 +71,6 @@ public class pCrearUsuario extends javax.swing.JPanel {
         this.comboPreguntaRecuperacion1.setModel(modeloPreguntasRecuperacion1);
         this.comboPreguntaRecuperacion2.setModel(modeloPreguntasRecuperacion2);
         this.comboPreguntaRecuperacion3.setModel(modeloPreguntasRecuperacion3);
-        if (esRestaurar) {
-            btnCrearConfiguracion.setText("Crear configuración");
-        } else {
-            btnCrearConfiguracion.setText("Crear alumno");
-        }
     }
 
     public pCrearUsuario() {
@@ -489,25 +488,23 @@ public class pCrearUsuario extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(2, 2, 2))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -549,7 +546,7 @@ public class pCrearUsuario extends javax.swing.JPanel {
             Persona persona = new Persona();
             persona.setNombres(txtNombres.getText().trim());
             persona.setApellidos(txtApellidos.getText().trim());
-            persona.setTipo(Constantes.TIPO_ALUMNO);
+            persona.setTipo(this.tipoUsuario);
             persona.setCarnet(txtCarnet.getText().trim());
 
             Usuario usuario = new Usuario();

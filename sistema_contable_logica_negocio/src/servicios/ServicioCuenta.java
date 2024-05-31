@@ -6,7 +6,6 @@ package servicios;
 
 import conexion.Conexion;
 import dao.daoCuenta;
-import dto.dtoFormula;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +13,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import javax.swing.JOptionPane;
 import modelo.CicloContable;
 import modelo.Cuenta;
-import modelo.CuentaBalance;
 import reportes.CuentaBalanceGeneral;
 import reportes.CuentaBalanza;
 import reportes.ElementoFormulaReporte;

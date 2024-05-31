@@ -26,7 +26,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="1087" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="1062" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="pnlBase" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -34,7 +34,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="720" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="667" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="pnlBase" alignment="0" max="32767" attributes="0"/>
           </Group>
@@ -134,19 +134,19 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="rSLabelHora1" min="-2" pref="19" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnLibroDiario" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnLibroDiario" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnLibroMayor" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnLibroMayor" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnBalanzaComprobacion" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnBalanzaComprobacion" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEstadoResultado" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnEstadoResultado" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnBalanceGeneral" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace pref="122" max="32767" attributes="0"/>
-                      <Component id="btnCicloContable" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnBalanceGeneral" min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace pref="99" max="32767" attributes="0"/>
+                      <Component id="btnCicloContable" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnConfigUsuario" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="btnConfigUsuario" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnCerrarSesion" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -411,7 +411,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSeleccionarArchivoAlumno" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                      <Component id="txtConfigCicloContable" pref="713" max="32767" attributes="0"/>
+                      <Component id="txtConfigCicloContable" pref="688" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

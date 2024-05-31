@@ -27,11 +27,10 @@ public class ServicioUsuario {
     Conexion cx;
 
     public ServicioUsuario(String rutaConexion) {
-        setRutaConexion(rutaConexion);
+        this.cx = new Conexion(rutaConexion);
+        this.daoUsuario = new DaoUsuario(this.cx);
     }
-    public ServicioUsuario() {
-
-    }
+    
     public void setRutaConexion(String rutaConexion) {
         this.cx = new Conexion(rutaConexion);
         this.daoUsuario = new DaoUsuario(this.cx);
@@ -72,14 +71,13 @@ public class ServicioUsuario {
             usuario.setSalt(obj.get("salt"));
             usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
             
-            this.cx.desconectar();
+            this.cx.conectar();
             daoUsuario.insertar(usuario);
+            this.cx.desconectar();
             return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
         } catch (Exception e) {
-            return RespuestaGeneral.asBadRequest(e.getMessage());
-        }
-        finally {
             this.cx.desconectar();
+            return RespuestaGeneral.asBadRequest(e.getMessage());
         }
     }
     
@@ -88,13 +86,13 @@ public class ServicioUsuario {
             this.cx.conectar();
             int contarAlumnos = daoUsuario.contarAlumnos();
             if(contarAlumnos != 0) {
+                this.cx.desconectar();
                 return RespuestaGeneral.asBadRequest("Esta base de datos no soporta más alumnos");
             }
             return RespuestaGeneral.asOk("Esta base de datos si soporta 1 alumno", null);
         } catch (Exception e) {
-            return RespuestaGeneral.asServerError(e.getMessage());
-        } finally {
             this.cx.desconectar();
+            return RespuestaGeneral.asServerError(e.getMessage());
         }
         
     }
@@ -122,11 +120,11 @@ public class ServicioUsuario {
             usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
             this.cx.conectar();
             daoUsuario.insertar(usuario);
+            this.cx.desconectar();
             return RespuestaGeneral.asOk("Se guardó correctamente", usuario);
         } catch (Exception e) {
-            return RespuestaGeneral.asBadRequest(e.getMessage());
-        } finally {
             this.cx.desconectar();
+            return RespuestaGeneral.asBadRequest(e.getMessage());
         }
     }
     
@@ -139,11 +137,11 @@ public class ServicioUsuario {
             }
             usuario.setResetear_clave(Constantes.NO_RESETEAR_CLAVE);
             daoUsuario.actualizar(usuario);
+            this.cx.desconectar();
             return RespuestaGeneral.asUpdated("Se actualizó correctamente", usuario);
         } catch (Exception e) {
-            return RespuestaGeneral.asBadRequest(e.getMessage());
-        } finally {
             this.cx.desconectar();
+            return RespuestaGeneral.asBadRequest(e.getMessage());
         }
     }
     
@@ -157,12 +155,12 @@ public class ServicioUsuario {
             }
             Map<String, String> obj = cifrarClave(claveSinCifrarNueva, usuario.getSalt());
             daoUsuario.actualizarClave(usuario, obj.get("clave"));
+            this.cx.desconectar();
             return RespuestaGeneral.asOk("Se actualizó exitosamente", null);
         } catch (InvalidKeySpecException ex) {
             Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            this.cx.desconectar();
             return RespuestaGeneral.asBadRequest(ex.getMessage());
-        } finally {
-            this.cx.conectar();
         }
     }
     
@@ -229,12 +227,12 @@ public class ServicioUsuario {
             this.cx.conectar();
             Map<String, String> obj = cifrarClave(claveSinCifrarNueva, usuario.getSalt());
             daoUsuario.actualizarClave(usuario, obj.get("clave"));
+            this.cx.conectar();
             return RespuestaGeneral.asOk("Se actualizó exitosamente", null);
         } catch (InvalidKeySpecException ex) {
             Logger.getLogger(ServicioUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            return RespuestaGeneral.asBadRequest(ex.getMessage());
-        } finally {
             this.cx.conectar();
+            return RespuestaGeneral.asBadRequest(ex.getMessage());
         }
     }
 }
