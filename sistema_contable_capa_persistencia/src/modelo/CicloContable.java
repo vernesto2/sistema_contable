@@ -37,7 +37,7 @@ public class CicloContable {
         this.porcentaje_reserva_legal = 7.0;
         this.hasta = new Date();
         this.eliminado = false;
-        this.monto_maximo_ventas = 50000.00;
+        this.monto_maximo_ventas = 150000.00;
         this.porcentaje_min = 25.00;
         this.porcentaje_max = 30.00;
         this.sin_libro_diario = 0;
