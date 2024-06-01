@@ -595,6 +595,7 @@ public class dSeleccionarCuenta extends javax.swing.JDialog {
             RespuestaGeneral rg = _cicloFolio.insertar(cicloFolioModel);
             if (rg.esExitosa()) {
                 this.folioGuardado = (int)rg.getDatos();
+                this.cuentaSeleccionada.setId_ciclo_folio(this.folioGuardado);
                 return true;
             } else {
                 JOptionPane.showMessageDialog(this, rg.getMensaje(), "¡ALERTA!", UtileriaVista.devolverCodigoMensaje(rg));
