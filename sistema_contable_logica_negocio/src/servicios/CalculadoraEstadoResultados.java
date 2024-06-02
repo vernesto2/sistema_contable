@@ -95,11 +95,11 @@ public class CalculadoraEstadoResultados {
         List<dtoFormula> arbolFormula = this.agregarPadres(listaFormula);
         List<ElementoFormulaReporte> listaFormulaResuelta = new ArrayList<ElementoFormulaReporte>();
         int columnaReporte = 3;
-        Double utilidadPerdida = resolverFormula(arbolFormula, listaFormulaResuelta, tipoFormula, columnaReporte);
+        Double utilidadPerdida = resolverFormula(arbolFormula, listaFormulaResuelta, tipoFormula, Double.valueOf(0), columnaReporte);
         return listaFormulaResuelta;
     }
 
-    private Double resolverFormula(List<dtoFormula> listaFormulaArbol, List<ElementoFormulaReporte> listaFormulaResuelta, String tipoFormula, int columnaReporte) {
+    private Double resolverFormula(List<dtoFormula> listaFormulaArbol, List<ElementoFormulaReporte> listaFormulaResuelta, String tipoFormula, Double acumuladoPadreActual, int columnaReporte) {
         //obtener todos los elementos de la formula
         //obtener saldos inicial y saldo actual de las cuentas de la formula
         //iniciar a resolver la formula
@@ -132,9 +132,9 @@ public class CalculadoraEstadoResultados {
             if (elemFormula.tieneHijas()) {
                 //si se agrega al reporte, los elementos hijos iran en la siguiente columna del reporte
                 if(seAgregarAReporte) {
-                    valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte - 1);
+                    valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, acumulado, columnaReporte - 1);
                 } else {
-                    valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, columnaReporte);
+                    valorFormula = resolverFormula(elemFormula.getHijas(), listaFormulaResuelta, tipoFormula, acumulado, columnaReporte);
                 }
                 acumulado = elemFormula.operar(valorFormula, acumulado);
             } else if (tipoCuentaEspecial.equals(Constantes.TIPO_CUENTA_ESPECIAL_CALCULADO.getValue())
@@ -177,8 +177,13 @@ public class CalculadoraEstadoResultados {
                 CuentaBalanza cuentaBalanza = buscarCuentaPorId(formulaVentas.getId_cuenta());
                 Double ventasTotales = cuentaBalanza.saldo();
                 ImpuestoSobreRenta impuestoSobreRenta = determinarImpuestoSobreRenta(ventasTotales);
-
-                Double utilidadAntesDelImpuesto = acumulado;
+                
+                //NOTA no se usa el acumulado ya que al resolver subformulas, se vuelve a poner en cero
+                //en cambio el acumuladoPadreActual es el que viene desde la formula padre de la actual
+                //ESTE CODIGO FALLARA SI ESTA CUENTA ESTA EN MAS DE UN NIVEL DE PROFUNDIDAD, 
+                //YA QUE EL ACUMULADO SOLO SE PASA DESDE LA FORMULA PADRE A LA ACTUAL
+                
+                Double utilidadAntesDelImpuesto = acumuladoPadreActual;
                 valorFormula = impuestoSobreRenta.aplicar(ventasTotales, utilidadAntesDelImpuesto);
 
                 acumulado = elemFormula.operar(valorFormula, acumulado);
@@ -279,7 +284,7 @@ agregarPadres(lista: any, expanded?: boolean): TreeNode {
 
         public Double aplicar(Double ventas, Double utilidadAntesImpuestoSobreRenta) {
             if (hasta == null || ventas < hasta) {
-                return utilidadAntesImpuestoSobreRenta + (porcentajeAAplicar / 100);
+                return utilidadAntesImpuestoSobreRenta * (porcentajeAAplicar / 100);
             } else {
                 throw new IllegalStateException("");
             }
