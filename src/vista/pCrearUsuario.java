@@ -579,8 +579,8 @@ public class pCrearUsuario extends javax.swing.JPanel {
                     RespuestaGeneral resp = this._configuracion.crear(usuario, claveSinCifrar);
                     if (resp.esExitosa()) {
                         JOptionPane.showMessageDialog(this, resp.getMensaje(), "INFORMACIÓN", UtileriaVista.devolverCodigoMensaje(resp));
-                        vLogin login = new vLogin(this.sesion);
-                        login.setVisible(true);
+                        vInicio ini = new vInicio();
+                        ini.setVisible(true);
                         this.parentWindow.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, resp.getMensaje(), "Mensaje", UtileriaVista.devolverCodigoMensaje(resp));
