@@ -66,7 +66,7 @@ public class dMostrarInfo extends javax.swing.JDialog {
         jTextPane2.setEditable(false);
         jTextPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jTextPane2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTextPane2.setText("Autores Diego Palacios y Victor Acevedo, estudiantes de la carrera de Ingeniería de Sistemas Informáticos de la Universidad de El Salvador.  Supervisado por las licenciadas: Margarita Reyes, Nohemy Gavidia y Rosa Elena del Instituto Nacional de Apastepeque (INAP)");
+        jTextPane2.setText("Autores Diego Palacios y Victor Acevedo, estudiantes de la carrera de Ingeniería de Sistemas Informáticos de la Universidad de El Salvador.  Supervisado por las licenciadas: Margarita Reyes, Noemí Gavidia y Rosa Elena del Instituto Nacional de Apastepeque (INAP)");
         jTextPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane3.setViewportView(jTextPane2);
 
@@ -99,15 +99,9 @@ public class dMostrarInfo extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
-                            .addContainerGap())
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
-                            .addContainerGap())))
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE))
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(

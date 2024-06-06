@@ -245,14 +245,15 @@ public class pCrearUsuario extends javax.swing.JPanel {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel10.setText("Carnét:");
+        jLabel10.setText("Usuario/NIE:");
         jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         txtCarnet.setForeground(new java.awt.Color(0, 0, 0));
         txtCarnet.setColorMaterial(new java.awt.Color(0, 0, 0));
         txtCarnet.setPhColor(new java.awt.Color(0, 0, 0));
-        txtCarnet.setPlaceholder("Carnét");
+        txtCarnet.setPlaceholder("Usuario/NIE");
         txtCarnet.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtCarnet.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         txtCarnet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCarnetActionPerformed(evt);

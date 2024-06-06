@@ -358,7 +358,7 @@ public class vConfiguracion extends javax.swing.JPanel {
         txtCarnet.setColorMaterial(new java.awt.Color(0, 0, 0));
         txtCarnet.setEnabled(false);
         txtCarnet.setPhColor(new java.awt.Color(0, 0, 0));
-        txtCarnet.setPlaceholder("Carnét");
+        txtCarnet.setPlaceholder("Usuario/NIE");
         txtCarnet.setSelectionColor(new java.awt.Color(0, 0, 0));
         txtCarnet.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
         txtCarnet.addActionListener(new java.awt.event.ActionListener() {
@@ -381,7 +381,7 @@ public class vConfiguracion extends javax.swing.JPanel {
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel19.setText("Carnét:");
+        jLabel19.setText("Usuario/NIE:");
         jLabel19.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

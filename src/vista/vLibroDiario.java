@@ -258,7 +258,7 @@ public class vLibroDiario extends javax.swing.JPanel {
         txtBusquedaPartidas.setColorMaterial(new java.awt.Color(0, 0, 0));
         txtBusquedaPartidas.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         txtBusquedaPartidas.setPhColor(new java.awt.Color(0, 0, 0));
-        txtBusquedaPartidas.setPlaceholder("Buscar por número de partida");
+        txtBusquedaPartidas.setPlaceholder("Buscar por comentario");
         txtBusquedaPartidas.setSelectionColor(new java.awt.Color(0, 0, 0));
         txtBusquedaPartidas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

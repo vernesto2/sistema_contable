@@ -158,6 +158,9 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtUsuarioKeyPressed"/>
+          </Events>
         </Component>
         <Component class="RSMaterialComponent.RSPasswordMaterial" name="txtClave">
           <Properties>
@@ -185,6 +188,9 @@
               <Value id="LIGHT"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtClaveKeyPressed"/>
+          </Events>
         </Component>
         <Component class="rojerusan.RSCheckBox" name="checkMostrarClave">
           <Properties>

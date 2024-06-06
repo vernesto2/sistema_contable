@@ -6,6 +6,7 @@ package vista;
 
 import formularios.dCrearUsuario;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -92,6 +93,11 @@ public class vLogin extends javax.swing.JFrame {
         txtUsuario.setPhColor(new java.awt.Color(0, 0, 0));
         txtUsuario.setPlaceholder("Digite el usuario..");
         txtUsuario.setSelectionColor(new java.awt.Color(0, 0, 0));
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
+        });
 
         txtClave.setForeground(new java.awt.Color(0, 0, 0));
         txtClave.setActionCommand("<Not Set>");
@@ -102,6 +108,11 @@ public class vLogin extends javax.swing.JFrame {
         txtClave.setPlaceholder("Digite la contraseña..");
         txtClave.setSelectionColor(new java.awt.Color(0, 0, 0));
         txtClave.setThemeTooltip(necesario.Global.THEMETOOLTIP.LIGHT);
+        txtClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtClaveKeyPressed(evt);
+            }
+        });
 
         checkMostrarClave.setForeground(new java.awt.Color(0, 0, 0));
         checkMostrarClave.setText("Mostrar Contraseña");
@@ -287,7 +298,11 @@ public class vLogin extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
 
-        String carnet = txtUsuario.getText();
+        this.login();
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+   public void login() {
+       String carnet = txtUsuario.getText();
         char[] clave = txtClave.getPassword();
         
         RespuestaGeneral rgUsuario = _usuario.obtenerPorCarnet(carnet);
@@ -322,8 +337,8 @@ public class vLogin extends javax.swing.JFrame {
             principal.setVisible(true);
             this.dispose();
         }
-    }//GEN-LAST:event_btnIngresarActionPerformed
-
+   } 
+    
     public ConfiguracionUsuario setearInfoConfiguracionGeneralUsuario(Usuario usuario) {
         
         ServicioConfigUsuario _configUsuario = new ServicioConfigUsuario(sesion.rutaConexion);
@@ -393,6 +408,18 @@ public class vLogin extends javax.swing.JFrame {
         dialogo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCrearAlumnoActionPerformed
+
+    private void txtClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.login();
+        }
+    }//GEN-LAST:event_txtClaveKeyPressed
+
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.login();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyPressed
 
     /**
      * @param args the command line arguments

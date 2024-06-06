@@ -469,7 +469,7 @@
                         <Property name="phColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
-                        <Property name="placeholder" type="java.lang.String" value="Carn&#xe9;t"/>
+                        <Property name="placeholder" type="java.lang.String" value="Usuario/NIE"/>
                         <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="0" type="rgb"/>
                         </Property>
@@ -510,7 +510,7 @@
                           <Font name="Segoe UI" size="14" style="1"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="4"/>
-                        <Property name="text" type="java.lang.String" value="Carn&#xe9;t:"/>
+                        <Property name="text" type="java.lang.String" value="Usuario/NIE:"/>
                         <Property name="horizontalTextPosition" type="int" value="2"/>
                       </Properties>
                     </Component>
