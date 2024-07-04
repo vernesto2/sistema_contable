@@ -131,7 +131,7 @@
                 <Property name="text" type="java.lang.String" value="Sistema Contable Multi-Cat&#xe1;logo para docentes y estudiantes es una herramienta tecnol&#xf3;gica dise&#xf1;ada para facilitar el aprendizaje de la contabilidad en educaci&#xf3;n media. Este sistema ha sido creado espec&#xed;ficamente para apoyar a docentes y estudiantes en la ense&#xf1;anza-aprendizaje del ciclo contable, proporcionando una aplicaci&#xf3;n interactiva y amigable que mejora la experiencia de aprendizaje de los estudiantes, disminuyendo los errores de c&#xe1;lculo que ocurren al hacerlo a cuaderno. &#xa;&#xa;Versi&#xf3;n: 1.0&#xa;&#xa;Liberado en: junio de 2024"/>
                 <Property name="autoscrolls" type="boolean" value="false"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Default Cursor"/>
+                  <Color id="Cursor Por defecto"/>
                 </Property>
               </Properties>
             </Component>
@@ -164,9 +164,9 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Autores Diego Palacios y Victor Acevedo, estudiantes de la carrera de Ingenier&#xed;a de Sistemas Inform&#xe1;ticos de la Universidad de El Salvador.  Supervisado por las licenciadas: Margarita Reyes, Noem&#xed; Gavidia y Rosa Elena del Instituto Nacional de Apastepeque (INAP)"/>
+                <Property name="text" type="java.lang.String" value="Autores Diego Palacios y Victor Acevedo, estudiantes de la carrera de Ingenier&#xed;a de Sistemas Inform&#xe1;ticos de la Universidad de El Salvador.  &#xa;&#xa;Supervisado por las licenciadas: Margarita Reyes, Noem&#xed; Gavidia y Rosa Elena Melendez del Instituto Nacional de Apastepeque (INAP)"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Default Cursor"/>
+                  <Color id="Cursor Por defecto"/>
                 </Property>
               </Properties>
             </Component>
@@ -201,7 +201,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="    &#x2022; Gesti&#xf3;n de cat&#xe1;logos (ingrese diferentes cat&#xe1;logos o use uno existente, agregue o quite cuentas)&#xa;    &#x2022; Gesti&#xf3;n de ciclos contables (cree su ejercicio ciclo contable con el cat&#xe1;logo de su elecci&#xf3;n)&#xa;    &#x2022; Gesti&#xf3;n de partidas (ingrese sus partidas y corrija cuando desee)&#xa;    &#x2022; Vista de libro diario&#xa;    &#x2022; Vista de libro mayor&#xa;    &#x2022; Vista de balance de comprobaci&#xf3;n&#xa;    &#x2022; Gesti&#xf3;n de f&#xf3;rmula de estado de resultados (configure la f&#xf3;rmula de estado de resultados seg&#xfa;n el cat&#xe1;logo)&#xa;    &#x2022; Asignaci&#xf3;n directa de saldos (asigne directamente saldo a las cuentas sin tener que ingresar un libro diario desde cero)&#xa;    &#x2022; Vista de estado de resultados &#xa;    &#x2022; Vista de balance general&#xa;    &#x2022; Ingreso de partidas de cierre&#xa;    &#x2022; Funcional sin conexi&#xf3;n a internet"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Default Cursor"/>
+                  <Color id="Cursor Por defecto"/>
                 </Property>
               </Properties>
             </Component>

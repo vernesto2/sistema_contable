@@ -52,6 +52,32 @@ public class ServicioConfiguracion {
         String fileName = "database/db-" + strFechaHoraActual + ".sqlite";
         try (Connection connection = conectar(fileName)) {
             ejecutarSQL(connection, sql);
+            ejecutarSQL(connection, """
+CREATE VIEW vw_cargo_abono as 
+select 
+	null as id_partida,
+	cb.id_ciclo_contable, 
+	cb.id_cuenta, 
+	case tipo_saldo
+		when 'D' then saldo_inicial
+		when 'A' then 0
+		else 0 end 
+	as debe, 
+	case tipo_saldo
+		when 'D' then 0
+		when 'A' then saldo_inicial
+		else 0 end 
+	as haber, 
+	0 as parcial, 
+    0 as eliminado
+	from cuenta_balance cb 
+	inner join cuenta c on cb.id_cuenta = c.id
+UNION
+select 
+	pdi.id_partida, p.id_ciclo, pdi.id_cuenta, pdi.debe, pdi.haber, pdi.parcial, pdi.eliminado
+from partida_detalle pdi
+inner join partida p on pdi.id_partida = p.id;      
+                                    """);
             return fileName;
         } catch (SQLException ex) {
             throw ex;
